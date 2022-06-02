@@ -1,0 +1,248 @@
+\newcommand{\derives}{\overset{*}{\Rightarrow}}
+\newcommand{\lderives}{\overset{lm*}{\Rightarrow}}
+\newcommand{\rderives}{\overset{rm*}{\Rightarrow}}
+\section{Context Free Grammars}
+\begin{definition}[Context-Free Grammar]
+    A \textit{context-free grammar} is a 4-tuple $(N, T, P, S)$ where 
+    \begin{enumerate}
+        \item $N$ is a finite set of \textit{non-terminals}
+        \item $T$ is a finite set of \textit{terminals}
+        \item $P$ is a finite set of \textit{production rules} with each rule being a non-terminal followed by an arrow and a string of both non-terminals and terminals
+        \item $S\in N$ is the start variable
+    \end{enumerate}
+\end{definition}
+
+Consider the following grammar:
+\begin{equation*}
+    G = (\{A, B\}, \{0, 1\}, P, A)
+\end{equation*}
+where the production rules are given by
+\begin{align*}
+    A &\rightarrow 0A1\\
+    A &\rightarrow B\\
+    B &\rightarrow \#
+\end{align*}
+
+Note that the above rules may be written more compactly in the following form
+\begin{align*}
+    A &\rightarrow 0A1\mid B\\
+    B &\rightarrow\#
+\end{align*}
+
+We use a grammar to generate a string over $N\cup T$. The sequence of substitutions to obtain a string is called a \textit{derivation}. For example, the following is a valid derivation of $000\#111$ in the grammar $G$
+\begin{equation*}
+    A\Rightarrow 0A1\Rightarrow 00A11\Rightarrow 000A111\Rightarrow 000B111\Rightarrow 000\#111
+\end{equation*}
+
+\begin{definition}[Yields, Derives, Language]
+    If $u,v,w\in(N\cup T)^*$ and $A\rightarrow w$ is a rule of the grammar, we say that $uAv$ \textit{yields} $uwv$, written $uAv\Rightarrow uwv$. Similarly, we say $u$ \textit{derives} $v$, written $u\derives v$ if $u = v$ or if a sequence $u_1,\ldots,u_k$ exists for $k\ge0$ and 
+    \begin{equation*}
+        u\Rightarrow u_1\Rightarrow\cdots\Rightarrow u_k\Rightarrow v
+    \end{equation*}
+    The \textit{language of the grammar} is formally given by 
+    \begin{equation*}
+        \{w\in T^*\mid S\derives w\}
+    \end{equation*}
+    For any $A\in N$, if $A\derives\alpha$ where $\alpha\in (N\cup T)^*$, then we say $\alpha$ is a \textit{word} of $A$.
+\end{definition}
+
+\begin{example}
+    Show that the language $L = \{a^nb^n\mid n\ge0\}$, over the alphabet $\Sigma=\{a,b\}$ is context-free.
+\end{example}
+\begin{proof}
+    Consider the context-free grammar described by 
+    \begin{equation*}
+        G = (\{S\}, \Sigma, P, S)
+    \end{equation*}
+    where the production rules are:
+    \begin{equation*}
+        S\rightarrow aSb\mid\varepsilon
+    \end{equation*}
+    Trivially note that $\mathcal{L}(G) = L$ and we are done.
+\end{proof}
+
+\begin{example}
+    Show that all regular languages are context-free languages.
+\end{example}
+\begin{proof}
+    Let $L$ be a regular language and $A = (Q, \Sigma, \delta, q_0, F)$ be a DFA recognizing $L$. And let $Q = \{q_0,\ldots,q_n\}$ where $n\ge 0$. For each $q_i\in Q$, introduce a non-terminal $R_i$ and let the set of terminals be $\Sigma$. The start variable is $R_0$. Finally, add in the production rules $R_i\rightarrow aR_j$ for each $a\in\Sigma$ whenever $\delta(q_i, a) = q_j$ and the production rules $R_i\rightarrow\varepsilon$ whenever $q_i\in F$.
+\end{proof}
+
+One may note that at each step of a derivation in a context-free grammar, we may be presented with many choices, since there may be more than one non-terminal in the string at that stage. These choices can be made predictable by imposing certain rules, such as:
+\begin{description}
+    \item[Leftmost derivation] Always expand the leftmost non-terminal. These are denoted by $\overset{lm}{\Rightarrow}$ and $\lderives$
+    \item[Rightmost derivation] Always expand the rightmost non-terminal. These are denoted by $\overset{rm}{\Rightarrow}$ and $\rderives$
+\end{description}
+
+\subsection{Ambiguity}
+\begin{definition}[Parse Tree]
+    For a grammar $G = (N, T, P, S)$, a \textit{parse tree} for $G$ is a labelled tree with the following conditions:
+    \begin{itemize}
+        \item leaf label is $X\in N\cup T\cup\{\varepsilon\}$. If $X = \varepsilon$, the leaf has no siblings 
+        \item internal node label is $A\in N$
+        \item if an internal node label is $A\in N$ and its children are $X_1,\ldots, X_n$ from left to right, then $A\rightarrow X_1\ldots X_n\in P$
+    \end{itemize}
+    The \textit{yield} of a parse tree is the word formed by all the leaves from left to right.
+\end{definition}
+
+\begin{definition}
+    A string $w$ is said to be derived \textit{ambiguously} in a context-free grammar $G$ if it has two or more different leftmost derivations. Grammar $G$ is said to be \textit{ambiguous} if it generates some string ambiguously.
+\end{definition}
+
+Sometimes when we have an ambiguous grammar, we can find an unambiguous grammar that generates the same language. Some context-free languages however, can be generated only by ambiguous grammars. Such languages are called \textit{inherently ambiguous}.
+
+\begin{example}
+    Show that the language $\{a^ib^jc^k\mid i = j \vee j = k\}$ is inherently ambiguous.
+\end{example}
+% TODO: Add in formal proof.
+
+\subsection{Chomsky Normal Form}
+\begin{definition}
+    A context-free grammar is said to be in \textit{Chomsky normal form} if every rule is of the form 
+    \begin{align*}
+        A &\rightarrow BC\\
+        A &\rightarrow a
+    \end{align*}
+    where $a\in T$ and $A,B,C\in N$, except that $B$ and $C$ may not be the start variable. In addition, we permit the rule $S\rightarrow\varepsilon$ where $S$ is the start variable.
+\end{definition}
+
+\begin{theorem}
+    Any context-free language is generated by a context-free grammar in Chomsky normal form.
+\end{theorem}
+
+The proof of the above theorem will be by construction. We shall first add a new start variable (non-terminal). Then, we eliminate all $\varepsilon$-rules, of the form $A\rightarrow\varepsilon$ and all unit rules, of the form $A\rightarrow B$. In both cases, we patch up the grammar to be sure that it still generates the same language.
+
+\begin{proof}
+    Introduce a new start variable $S_0$ and the rule $S_0\rightarrow S$ where $S$ was the original start variable. This change will guarantee that the start variable does not occur on the right-hand side of a production rule.
+
+    Next, we take care of all $\varepsilon$-rules. We remove a rule of the form $A\rightarrow\varepsilon$ where $A$ is not the start variable. Then, for each rule of the form $R\rightarrow uAv$, add another rule $R\rightarrow uv$. Note that we do so for \textit{each} occurrence of an $A$. That means, the rule $R\rightarrow uAvAw$ causes us to add $R\rightarrow uvAw\mid uAvw\mid uvw$. If we have the rule $R\rightarrow A$, we add $R\rightarrow\varepsilon$ unless we had previously reoved the rule $R\rightarrow\varepsilon$.
+
+    Next, we handle all unit rules. We remove a unit rule $A\rightarrow B$. Then, whenever a rule $B\rightarrow u$ appears, we add the rule $A\rightarrow u$ unless this was a unit rule previously removed. ($u\in (N\cup T)^*$). We repeat these steps until we eliminate all unit rules.
+
+    Finally, we convert all remaining rules into the proper form. We replace each rule $A\rightarrow u_1\cdots u_k$ where $k\ge 3$ and each $u_i$ is a variable or a terminal symbol with the rules $A\rightarrow u_1A_1$ and so on up to $A_{k-2}\rightarrow u_{k-1}u_k$. The $A_i$'s are fresh variables. We may replace any terminal $u_i$ in the preceeding rule(s) with the new variable $U_i$ and add the rule $U_i\rightarrow u_i$.
+\end{proof}
+
+\section{Pushdown Automata}
+These are similar to non-deterministic finite automata but have an extra component called a \textit{stack}, which provides additional memory, thus making it more powerful than an NFA.
+
+\begin{definition}[Pushdown Automaton]
+    A \textit{pushdown automaton} is a 6-tuple $(Q,\Sigma,\Gamma,\delta,q_0, F)$ where $Q$, $\Sigma$, $\Gamma$ and $F$ are all finite sets and 
+    \begin{enumerate}
+        \item $Q$ is the set of states 
+        \item $\Sigma$ is the input alphabet 
+        \item $\Gamma$ is the stack alphabet 
+        \item $\delta:Q\times\Sigma_\varepsilon\times\Gamma_\varepsilon\to 2^{Q\times\Gamma_\varepsilon}$ is thet transition function
+        \item $q_0\in Q$ is the start state 
+        \item $F\subseteq Q$ is the set of all accept states
+    \end{enumerate}
+\end{definition}
+
+This is best illustrated by an example. Let us construct a Pushdown Automaton accepting the language $\{0^n1^n\mid n\ge 0\}$. Indeed, consider the following state-transition diagram:
+\begin{center}
+    \begin{tikzpicture} [node distance = 1in]
+        \node(q0) [state, initial, accepting] {$q_0$};
+        \node(q1) [state, right = of q0] {$q_1$};
+        \node(q2) [state, below = of q1] {$q_2$};
+        \node(q3) [state, left = of q2, accepting] {$q_3$};
+
+        \path [-stealth, thick]
+        (q0) edge node[above] {$\varepsilon, \varepsilon\to\$$} (q1)
+        (q1) edge node[right] {$1, 0\to\varepsilon$} (q2)
+        (q1) edge [loop right] node {$0, \varepsilon\to0$} ()
+        (q2) edge node[below] {$\varepsilon, \$\to\varepsilon$} (q3)
+        (q2) edge [loop right] node {$1, 0\to\varepsilon$} ();
+    \end{tikzpicture}
+\end{center}
+
+\textit{Remark.} We may modify the definition of a pushdown automata by making it a 7-tuple, including a symbol $Z_0$, called the \textit{start of stack} symbol. This does not change the power of the automaton, since this behaviour can be simulated with the 6-tuple pushdown automaton as is seen above. Here, $\$$ plays the role of the start symbol.
+
+\subsection{Equivalence with CFGs}
+\begin{theorem}
+    A language is context-free if and only if some pushdown automaton recognizes it.
+\end{theorem}
+
+We shall prove both directions of the statement as two different lemmas.
+
+\begin{lemma}
+    If a language is context-free, then some pushdown automaton recognizes it.
+\end{lemma}
+
+We shall use a shorthand while drawing the automaton. The notation $(r,u)\in\delta(q,a,s)$ is used to mean that when $q$ is the state of the automaton, $a$ is the next input symbol and $s$ is the symbol on the top of the stack, the PDA may read the $a$ and pop the $s$, then push the string $u$ onto the stack and go on to the state $r$.
+
+\begin{center}
+    \begin{tikzpicture}
+        \node(q) [state] {$q$};
+        \node(r) [state, below = of q] {$r$};
+
+        \path [-stealth, thick]
+        (q) edge node[right] {$a, s\rightarrow xyz$}(r);
+    \end{tikzpicture}
+\end{center}
+is the same as 
+\begin{center}
+    \begin{tikzpicture}[node distance = 1in]
+        \node(q) [state] {$q$};
+        \node(q1) [state, right = of q] {$q_1$};
+        \node(q2) [state, below = of q1] {$q_2$};
+        \node(r) [state, left = of q2] {$r$};
+
+        \path [-stealth, thick]
+        (q) edge node[above] {$a,s\rightarrow z$} (q1)
+        (q1) edge node[right] {$\varepsilon,\varepsilon\rightarrow y$} (q2)
+        (q2) edge node[below] {$\varepsilon,\varepsilon\rightarrow x$} (r);
+    \end{tikzpicture}
+\end{center}
+Notice that the order of pushing the symbols onto the stack is reversed. That is, first $z$, then $y$ and finally $x$.
+
+The states of the automaton we wish to create are $Q = \{q_\text{start}, q_\text{loop}, q_\text{accept}\}\cup E$ where $E$ is the set of extra states that are needed for implementing the shorthand as shown above. We now examine 3 cases for constructing the automaton from the description of the grammar $G = (N, T, P, S)$. First, we initialize the stack to contain the symbols $\$S$ as $\delta(q_\text{start},\varepsilon,\varepsilon)=\{(q_\text{loop},S\$)\}$.
+\begin{enumerate}
+    \item Top of the stack is a non-terminal. Let 
+    \begin{equation*}
+        \delta(q_\text{loop},\varepsilon,A)=\{(q_\text{loop},w)\mid\text{where $A\rightarrow w\in R$}\}
+    \end{equation*}
+    \item Top of the stack is a terminal. Let 
+    \begin{equation*}
+        \delta(q_\text{loop},a,a) = \{(q_\text{loop},\varepsilon)\}
+    \end{equation*}
+    \item Top of the stack is the marker \$. Let
+    \begin{equation*}
+        \delta(q_\text{loop},\varepsilon,\$) = \{(q_\text{accept}, \varepsilon)\}
+    \end{equation*}
+\end{enumerate}
+This completes the proof of the lemma. We may now move on to proving the other direction.
+
+\begin{lemma}
+    If a pushdown automaton recognizes some language, then it is context free.
+\end{lemma}
+\begin{proof}
+    % TODO: Add in later
+\end{proof}
+
+\section{Pumping Lemma for CFLs}
+\begin{theorem}
+    If $A$ is a context-free language, then there is a number $p$, the pumping length where, if $s$ is any string in $A$ of length at least $p$, then $s$ may be divided into five pieces $s = uvxyz$ satisfying the conditions 
+    \begin{enumerate}
+        \item for each $i\ge 0$, $uv^ixy^iz\in A$
+        \item $|vy| > 0$ 
+        \item $|vxy|\le p$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    % TODO: Add in figure
+    Let $G = (N, T, P, S)$ be a CFG for the CFL $A$ and $b$ be the maximum number of symbols in the right hand side of a rule (suppose that $b\ge2$). Then, one may trivially note that any string of length atleast $b^h + 1$ must have a parse tree of height atleast $h + 1$.
+
+    Define $p = b^{|N| + 1}$. Then any string $s$ of length atleast $p$ would have a parse tree of height atleast $|N| + 1$. Let us consider the tree $\tau$ with minimum number of nodes, in which case, there exists a path in the tree from root to leaf, containing atleast $|N| + 1$ internal nodes. Consequently, some non-terminal $R$ appears more than once. Let $R$ be the non-terminal that repeats in the lowest $|N| + 1$ internal nodes. Then, we have a division for the string $s$ into $uvxyz$ as shown in the figure. It is then obvious that $uv^ixy^iz\in A$ for each $i\ge 0$. We need only show that conditions 2 and 3 hold.
+
+    Suppose both $v$ and $y$ were $\varepsilon$, then the parse tree obtained by substituting the smaller subtree for the larger would have fewer nodes than $\tau$, a contradiction. Next, we know that the upper occurrence of $R$ generates $vxy$ but since $R$ falls within the bottom $|N| + 1$ non-terminals, a tree of this height can generate a string of length at most $b^{|N| + 1} = p$, giving us that $|vxy|\le p$. This completes the proof.
+\end{proof}
+
+\begin{example}
+    Show that the language 
+    \begin{equation*}
+        B = \{a^nb^nc^n\mid n\ge0\}
+    \end{equation*}
+    over the alphabet $\Sigma = \{a, b, c\}$ is not context-free.
+\end{example}
+\begin{proof}
+    
+\end{proof}

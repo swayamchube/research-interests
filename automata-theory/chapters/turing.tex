@@ -1,0 +1,63 @@
+This section of the notes are taken from both ``Automata Theory and Computation'' by Dexter Kozen and ``Theory of Computation'' by Michael Sipser.
+
+\begin{definition}[Turing Machine]
+    A \textit{deterministic} one-tape Turing Machine is a 7-tuple 
+    \begin{equation*}
+        T = (Q,\Sigma,\Gamma,\delta,q_\text{start},q_\text{acc}, q_\text{rej})
+    \end{equation*}
+    \begin{itemize}
+        \item $Q$ is a finite set of states
+        \item $\Sigma$ is a finite set called the input alphabet with $\sqcup\notin\Sigma$
+        \item $\Gamma$ is a finite set called the tape alphabet. Such that $\Sigma\in\Gamma$ and $\sqcup\in\Gamma$.
+        \item $\delta:Q\times\Gamma\to Q\times\Gamma\times\{L,R\}$ is the transition function
+        \item $q_\text{start}$ is the start state 
+        \item $q_\text{acc}$ is the accept state 
+        \item $q_\text{rej}$ is the reject state such that $q_\text{rej}\neq q_\text{acc}$
+    \end{itemize}
+\end{definition}
+
+The \textit{only} halting states of a Turing Machine are $q_\text{acc}$ and $q_\text{rej}$. That is to say, unless the Turing Machine reaches either one of the two states, it may not halt at all. And, whenever a Turing Machine halts on an input, it either accepts it or rejects it. A Turing machine is said to be a \textit{decider} if it halts on all possible finite inputs.
+
+\begin{itemize}
+    \item The set of all finite strings over $\Sigma$ that a Turing machine accepts is said to be the language of the Turing machine 
+    \item A language is said to be \textit{recursively enumerable} if it is $\mathcal{L}(M)$ for some Turing macine $M$.
+    \item A language is said to be \textit{recursive} or \textit{decidable} if it is $\mathcal{L}(M)$ for some \textit{decider} $M$
+\end{itemize}
+
+A property $P$ is said to be \textit{decidable} if the set of all strings having property $P$ is a \textit{recursive} set. Similarly, $P$ is said to be \textit{semidecidable} if the set of strings having property $P$ is a \textit{recursively enumerable} set.
+
+\section{Equivalent Models}
+Turing Machines are a remarkably robust model of computation. There are several different flavors of Turing machines that are computationally equivalent.
+
+\subsection{Multi-tape Turing Machines}
+\subsection{Two-Way Infinite Tape}
+\subsection{Two Stacks}
+A machine with a two-way \textit{read-only} input head and two stacks is as powerful as a Turing machine. This is possible by storing the tape contents to the left of the head on one stack and the tape contents to the right of the head on the other. The motion of the head is simulated by popping a symbol off one stack and pushing it onto the other.
+
+\subsection{Counter Automata}
+A \textit{$k$-counter automaton} is a machine equipped with a two-way read-only input head and $k$ integer counters. Each counter can store an arbitrary non-negative integer. In each step, the automaton can independently increment or decrement its counters and test them for $0$ and can move its input head one cell in either direction. It \textit{cannot} write on the tape.
+
+We may simulate a stack using two counters. Suppose, without loss of generality that the the stack alphabet contains only two symbols, say $0$ and $1$. This is because we can encode finitely many stack symbols as binary numbes of fixed length, say $m$; then pushing or popping one stack symbol is simulated by pushing or popping $m$ binary digits. Then the contents of the stack can be regarded as a binary number whose least significant bit is on top of the stack. The simulation maintains this number in the first of the two counters and uses the second to effect the stack operations. To simulate pushing a $0$ onto the stack, we need to double the value in the first counter. This is done by entering a loop that repeatedly subtracts one from the first counter and adds two to the second until the first counter is $0$. We may then transfer the value back to the first counter. To push $1$, the operation is the same except the value of the second counter is incremented once at the end. Similarly, one can encode popping.
+
+Since a two-stack machine can simulate an arbitrary Turing machine, it follows that a 4-counter automaton can simulate an arbitrary Turing machine. However, it is possible to simulate a 4-counter automaton using a 2-counter automaton. When the 4-counter automaton has the value $i$, $j$, $k$, $l$ in its counters, the two-counter automaton will have the value $2^i3^j5^k7^l$ in its first counter. It uses its second counter to effect the counter operations of the four counter automaton. FOr exxample, if the four-counter automaton wanted to add one to $k$, then the two counter automaton would have to multiply the value in the first counter by $5$. This is done in the same way as above, adding $5$ to the second counter for every $1$ that we subtract from the first counter. Simulating a test for $0$ is equivalent to testing divisibility by 2, 3, 5 or 7; which is trivial using only 2 counters.
+
+It is important to note that the 1-counter automaton is not as powerful as an arbitrary Turing machine, although they can accept non-CFLs. For example, the set $\{a^nb^nc^n\mid n\ge0\}$ can be accepted by a one-counter automaton.
+
+\subsection{Enumeration Machines}
+Define an \textit{enumration machine} as follows. It has a finite control and two tapes, a read/write \textit{work tape} and a write-only \textit{output tape}. The work tape head can move in either direction and can read and write any element of $\Gamma$. The output tape head moves right one cell when it writes a symbol, and it can only write symbols in $\Sigma$. There is no input and no accept or reject state. In its start state, both tapes are blank. It moves according to its transition function like a Turing machine, occassionally writing symbols on the output tape as determined by the transition function. At some point it may enter a special \textit{enumeration state}, which is just a distinguished state of its finite control. When that happens, the string currently written on the output tape is said to be \textit{enumerated}. The output tape is then automatically erased and the output head moved back to the beginning of the tape, while the work tape is left intact, and the machine continues from that point. Note that it is possible for a string to be enumerated \textit{more than once}.
+
+We shall now show that Enumeration machines and Turing machines are equivalent in computational power:
+\begin{theorem}
+    The family of sets enumerated by enumeration machines is exactly the family of recursively enumerable sets. That is, a set is a language of some enumeration machine if and only if it is the language of some Turing machine.
+\end{theorem}
+\begin{proof}
+    We shall first show that given an enumeration machine $E$, we can construct a three-tape Turing machine $M$ such that $\mathcal{L}(M) = \mathcal{L}(E)$. We first copy $x$ to one of the three tapes. THen simulate $E$ using the other two tapes where one of them functions as $E$'s work tape and the other as its output tape. Then, for each string enumerated by $E$, $M$ compares this string to $x$ and accepts if they match.
+
+    To show the converse, we first enumerate $\Sigma*$ as $\{s_1, s_2,\ldots\}$. Then, for each $i\in\mathbb{N}$, we run $M$ for $i$ steps on each input $s_1,\ldots,s_i$. If any computations accept, print out the corresponding $s_j$. Thus, if $M$ accepts some string $s$, eventually it will appear on the list generated by $E$ and will be printed out at some instance, in fact, it would be printed out infinitely often.
+\end{proof}
+
+\begin{definition}[Algorithm]
+    An \textit{algorithm} is a Turing machine that halts for any input. That is, an algorithm is a \textit{decider}.
+\end{definition}
+
+Thus, a language is said to be recursive if and only if there is an algorithm for deciding it.

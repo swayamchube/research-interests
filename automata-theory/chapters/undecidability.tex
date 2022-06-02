@@ -1,0 +1,113 @@
+In this chapter we shall explore some decidable and undecidable languages. 
+
+\section{Decidabiity}
+
+\begin{proposition}
+    The language 
+    \begin{equation*}
+        A_\text{DFA} = \{\langle B, w\rangle\mid \text{$B$ is a DFA accepting $w$}\}
+    \end{equation*}
+    is \textit{decidable}.
+\end{proposition}
+\begin{proof}
+    The idea is simple, we simulate $B$ on input $w$. If the simulation ends in an accept state, accept. If not, reject. We may represent this computation using a two-tape Turing machine. The first tape keeps track of $B$'s state and the second keeps track of $B$'s current position on the input $w$.
+\end{proof}
+
+Similarly one can show that $A_\text{NFA}$ is decidable. The only tweak to make to the proof is to first convert the NFA into an equivalent DFA, which can be done using the subset construction.
+
+\begin{proposition}
+    The language 
+    \begin{equation*}
+        A_\text{CFG} = \{\langle G, w\rangle\mid\text{$G$ is a CFG that generates $w$}\}
+    \end{equation*}
+    is decidable.
+\end{proposition}
+
+The proof of this requires the following lemma:
+\begin{lemma}
+    Let $G$ be a grammar in Chomsky Normal Form. Then, for any $w\in\mathcal{L}(G)$, any derivation of $w$ has $2|w| - 1$ steps.
+\end{lemma}
+\begin{proof}
+    Recall that the production rules for a grammar in Chomsky Normal Form look like $A\rightarrow BC$ or $A\rightarrow a$ where $A,B,C$ are non-terminals and $a$ is a terminal. Then, at each step of the derivation, the length of the string may increase by atmost 1. We may then keep a track of the number of termminals and non-terminals. Let $n$ be the length of $w$. We begin in the configuration $(T, NT) = (0, 1)$ and finally end up in $(T, NT) = (n, 0)$. Note that for each $T$-derivation, the value of $T$ increases by $1$ but the length of the string remains the same while for an $NT$-derivation, the value of $NT$ increases by $1$ and so does the length of the word. Thus, we need exactly $n$ $T$-derivations and $n-1$ $NT$-derivations. This completes the proof.
+\end{proof}
+\begin{proof}[Proof of Proposition]
+    The algorithm is quite simple. We first convert $G$ to an equivalent grammar in Chomsky Normal Form. Then, list all derivations with $2n - 1$ steps (obviously finite), where $N$ is the length of $w$. If any of these derivations generate $w$, accept. If not, reject.
+\end{proof}
+
+Finally, we have:
+\begin{theorem}
+    Every context-free language is decidable.
+\end{theorem}
+\begin{proof}
+    We would be requiring the Turing machine that we designed in the previous problem, call it $S$. Let $A$ be a context-free language and $G$ be a CFG for $A$. Then, design a Turing machine $M_G$ that, on input $w$, runs $S$ on input $\langle G, w\rangle$. If this machine accepts, accept. If not, reject.
+\end{proof}
+
+\section{Undecidability}
+\begin{proposition}
+    Some languages are not Turing recognizable/recursively enumerable.
+\end{proposition}
+\begin{proof}
+    Since any Turing machine, $M$ can be encoded into a string $\langle M\rangle$, over a finite alphabet $\Sigma$, the number of Turing machines must be countable. But, the set of all possible languages is $\mathcal{P}(\Sigma^*)$ which is known to be uncountable due to \textit{Cantor's Diagonalization}. This finishes the proof.
+\end{proof}
+
+\begin{definition}[Universal Turing Machine]
+    A \textit{universal Turing machine} is one that takes as input the description of another Turing machine $M$ and a string $x$, to be given as input to $M$ and simulates the same. Then, the language of said universal Turing machine $U$ is 
+    \begin{equation*}
+        \mathcal{L}(U) := \{\langle M, x\rangle\mid x\in\mathcal{L}(M)\}
+    \end{equation*}
+\end{definition}
+
+Of course, the machine first checks its input $\langle M,x\rangle$ to make sure that $M$ is a valid encoding of a Turing machine and that $x$ is a valid encoding of a string over $M$'s input alphabet. If not, immediately rejects. Obviously, if $M$ accepts $x$, then the simulation would come to an end, if not, then the simulation may go on indefinitely. Thus, $U$ \textit{recognizes} $\mathcal{L}(U)$ but does not decide it.
+
+\begin{proposition}
+    The language
+    \begin{align*}
+        A_\text{TM} &= \{\langle M,x\rangle\mid x\in\mathcal{L}(M)\}
+    \end{align*}
+    is not recursive/decidable.
+\end{proposition}
+\begin{proof}
+    The proof follows the same spirit as \textit{Cantor's Diagonalization} for showing $|\mathbb{N}| < |\mathbb{R}|$. Suppose $A_\text{TM}$ is decidable and let $H$ be a decider for $A_\text{TM}$. Then, by definition:
+    \begin{equation*}
+        H(\langle M,w\rangle) = 
+        \begin{cases}
+            \text{accept} & \text{if $M$ accepts $w$}\\
+            \text{reject} & \text{if $M$ does not accept $w$}
+        \end{cases}
+    \end{equation*}
+    Let us now construct a Turing machine $D$ with $H$ as a subroutine. This machine takes as input the encoding of a Turing machine $M$ and runs $H$ on the input $\langle M, \langle M\rangle\rangle$ and outputs the opposite of what $H$ outputs. Recall that $H$ is a decider and must outupt something. Then, 
+    \begin{equation*}
+        D(\langle M\rangle) = 
+        \begin{cases}
+            \text{accept} & \text{if $M$ does not accept $\langle M\rangle$}\\
+            \text{reject} & \text{if $M$ accepts $\langle M\rangle$}
+        \end{cases}
+    \end{equation*}
+
+    But this would imply
+    \begin{equation*}
+        D(\langle D\rangle) = 
+        \begin{cases}
+            \text{accept} & \text{if $D$ does not accept $\langle D\rangle$}\\
+            \text{reject} & \text{if $D$ accepts $\langle D\rangle$}
+        \end{cases}
+    \end{equation*}
+    Which is an obvious contradiction.
+\end{proof}
+
+A language is said to be \textit{co-Turing recognizable} if it is the complement of a Turing-recognizable language.
+
+\begin{theorem}
+    A language is decidable if and only if it is Turing recognizible and co-Turing recognizable.
+\end{theorem}
+\begin{proof}
+    Suppose a language $A$ is decidable(recursive). Then, since the Turing machine $M$ for $A$ would halt on each input, we can trivially construct a Turing machine for $\overline{A}$ that simply outputs the negation of $M$ on said input.
+
+    Conversely, let $M_1$ and $M_2$ be the Turing machines recognizing $A$ and $\overline{A}$. We now construct a two-tape Turing machine $M$ that runs both $M_1$ and $M_2$ in parallel (on both the tapes) and continues until one of them accepts. Now, any string $w$ is either in $A$ or $\overline{A}$ and thus computation on either one of the tapes must terminate and thus $M$ is a decider for $A$. This completes the proof.
+\end{proof}
+\begin{corollary}
+    $\overline{A_\text{TM}}$ is not Turing-recognizable.
+\end{corollary}
+\begin{proof}
+    If it were then due to the previous theorem, $A_\text{TM}$ would be recursive, a contradiction.
+\end{proof}

@@ -1,0 +1,353 @@
+\section{Finite Automaton}
+
+\begin{definition}[DFA]
+    A \textit{deterministic finite automaton} is a 5-tuple $(Q, \Sigma, \delta, q_0, F)$ 
+    \begin{itemize}
+        \item $Q$: Finite set of states 
+        \item $\Sigma$: Finite set called \textit{alphabet}
+        \item $\delta: Q\times\Sigma\to Q$ is the \textit{Transition Function}
+        \item $q_0\in Q$: start state 
+        \item $F\subseteq Q$: set of accept/final states
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Language of a DFA]
+    An automaton $D$ \textit{accepts} a word $w\in\Sigma^*$ if the run of $w$ on $D$ ends in a final state. The \textit{language} of an automaton $\mathcal{L}(D)$ is the set of all words accepted by $D$.
+\end{definition}
+
+\begin{definition}[NFA]
+    A \textit{non-deterministic finite automaton} is a 5-tuple $(Q,\Sigma,\delta,q_0,F)$ where 
+    \begin{itemize}
+        \item $Q$: Finite set of states 
+        \item $\Sigma$: Finite set called \textit{alphabet}
+        \item $\delta: Q\times\Sigma_\varepsilon\to2^Q$ is the \textit{Transition Function}
+        \item $q_0\in Q$: start state 
+        \item $F\subseteq Q$: set of accept/final states
+    \end{itemize}
+\end{definition}
+
+Notice that we allow $\varepsilon$-transitions in the definition of an NFA. 
+
+\begin{definition}[Language of an NFA]
+    An NFA $N$ \textit{accepts} a word $w\in\Sigma^*$ if there is atleast one run of $w$ on $N$ which ends in a final state. The language of $N$, $\mathcal{L}(N)$ is the set of all words accepted by $N$.
+\end{definition}
+
+We say that two automatons, $A_1$ and $A_2$ are \textbf{equivalent} if and only if $\mathcal{L}(A_1) = \mathcal{L}(A_2)$.
+
+\begin{theorem}[Equivalence of NFA and DFA]
+    Every non-deterministic finite automaton has an equivalent deterministic finite automaton.
+\end{theorem}
+\begin{proof}
+    Let $N = (Q,\Sigma,\delta_N,q_0,F)$ and define a function $E:2^Q\to2^Q$ given by 
+    \begin{equation*}
+        E(R) = \{q\in Q\mid \text{$q$ can be reached from $R$ by travelling along 0 or more $\varepsilon$ transitions}\}
+    \end{equation*}
+
+    We may now construct a deterministic finite automaton $D = (2^Q, \Sigma, \delta', q_0', F')$ where
+    \begin{equation*}
+        F' = \{S\subseteq Q\mid S\cap F\ne\emptyset\}
+    \end{equation*}
+    $q_0' = E(\{q_0\})$ and 
+    \begin{equation*}
+        \delta'(R, a) = \{q\in Q\mid q\in E(\delta(r, a)) \text{ for some } r\in R\}
+    \end{equation*}
+
+    It isn't hard to showt that $\mathcal{L}(N) = \mathcal{L}(D)$.
+\end{proof}
+
+\begin{corollary}
+    A language is regular if and only if there is a non-deterministic finite automaton accepting it.
+\end{corollary}
+\begin{proof}
+    Since each DFA is an NFA, for each regular language, there is a non-deterministic finite automaton accepting it. Conversely, for any language accepted by a non-deterministic finite automaton, there is a deterministic finite automaton accepting it and is therefore regular.
+\end{proof}
+
+\subsection{Properties of Finite Automata}
+In this section, we shall discuss the closure properties of regular languages.
+\begin{proposition}
+    The class of regular languages is closed under the union operation. That is, if $L_1$ and $L_2$ are regular languages, then so is $L_1\cup L_2$.
+\end{proposition}
+
+\begin{proposition}
+    The class of regular languages is closed under the complement operation. That is, if $L$ is a regular language, then so is $\overline{L}$.
+\end{proposition}
+
+\begin{corollary}
+    The class of regular languages is closed under the union operation. That is, if $L_1$ and $L_2$ are regular languages, then so is $L_1\cup L_2$.
+\end{corollary}
+
+\begin{proposition}
+    The class of regular languages is closed under the concatenation operation. That is, if $L_1$ and $L_2$ are regular languages, then so is $L_1\circ L_2$.
+\end{proposition}
+
+\begin{proposition}
+    The class of regular languages is closed under the star operation. That is, if $L$ is a regular language, then so is $L^*$.
+\end{proposition}
+
+\section{Regular Expressions}
+\begin{definition}[Regular Expression]
+    $R$ is said to be a regular expression over the alphabet $\Sigma$, if $R$ is 
+    \begin{enumerate}
+        \item $a$ for some $a\in\Sigma$
+        \item $\varepsilon$ - The language containing only the empty string
+        \item $\emptyset$ - The empty language 
+        \item $R_1\cup R_2$ where $R_1$ and $R_2$ are regular expressions 
+        \item $R_1\circ R_2$ where $R_1$ and $R_2$ are regular expressions 
+        \item $R^*$ where $R$ is a regular expression
+    \end{enumerate}
+\end{definition}
+
+Sometimes, we may denote $RR^*$ with $R^+$. We denote the language of a regular expression using $\mathcal{L}(R)$.
+
+\subsection{Equivalence with Finite Automata}
+\begin{theorem}
+    A language is regular if and only if some regular expression describes it.
+\end{theorem}
+
+The proof of this theorem uses two lemmas.
+
+\begin{lemma}
+    If a language is described by a regular expression, then it is regular.
+\end{lemma}
+\begin{proof}
+    We shall give a constructive proof, by explicitly constructing the a non-deterministic finite automaton recognizing the language of the regular expression. We do this via an inductive method, by considering the six cases in the definition of a regular expression 
+    \begin{enumerate}
+        \item $R = a$ for some $a\in\Sigma$. Then, $\mathcal{L}(R) = \{a\}$ and the following NFA recognizes $\mathcal{L}(R)$
+        \begin{center}
+            \begin{tikzpicture}
+                \node(0) [state, initial] {};
+                \node(1) [state, accepting, right = of 0] {};
+
+                \path [-stealth, thick]
+                (0) edge node[above] {$a$} (1);
+            \end{tikzpicture}
+        \end{center}
+        \item $R = \varepsilon$. Then $\mathcal{L}(R) = \{\varepsilon\}$ and the following NFA recognizes $\mathcal{L}(R)$
+        \begin{center}
+            \begin{tikzpicture}
+                \node(0) [state, initial, accepting] { };
+            \end{tikzpicture}
+        \end{center}
+        \item $R = \emptyset$. Then $\mathcal{L}(R) = \emptyset$ and the following NFA recognizes $\mathcal{L}(R)$
+        \begin{center}
+            \begin{tikzpicture}
+                \node(0) [state, initial] { };
+            \end{tikzpicture}
+        \end{center}
+        \item $R = R_1\cup R_2$. The construction for this was discussed in the previous section.
+        \item $R = R_1\circ R_2$. The construction for this was discussed in the previous section.
+        \item $R = R_1^*$. The construction for this was discussed in the previous section.
+    \end{enumerate}
+
+    This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    If a language is regular, then there is a regular expression describing it.
+\end{lemma}
+
+\subsubsection*{Generalized NFAs}
+\begin{definition}[GNFA]
+    A \textit{generalized non-deterministic finite automaton} is a 5-tuple $(Q,\Sigma,\delta,q_\text{start}, q_\text{acc})$ where 
+    \begin{enumerate}
+        \item $Q$ is the finite set of states 
+        \item $\Sigma$ is the input alphabet 
+        \item $\delta: (Q-\{q_\text{acc}\})\times(Q-\{q_\text{start}\})\to\mathcal{R}$ is the transition function
+        \item $q_\text{start}$ is the start state and 
+        \item $q_\text{acc}$ is the accept state
+    \end{enumerate}
+\end{definition}
+
+In simpler terms:
+\begin{itemize}
+    \item The start state has transitions going to every other state but no arrow coming in from any other state 
+    \item There is only a single accept state, and it has arrows coming in from the other state but no arrows going to any other state. Furthermore, the accept state is not the same as the start state.
+    \item Except for the start and accept states, one arrow goes from every state to every other state and also from each state to itself.
+\end{itemize}
+
+We shall now prove the second lemma by first converting the regular language into a DFA, then the DFA into a GNFA and finally the GNFA into a regular expression 
+
+\subsubsection*{DFA to GNFA}
+This one's easy. Add a new start state with $\varepsilon$ transitions to the old start state and a new accept state with $\varepsilon$ transitions from all the old accept states. Finally, for each missing transition, add one, labelled with $\emptyset$.
+
+\subsubsection*{GNFA to Regular Expression}
+The idea here is to progressively construct a smaller GNFA at each step until one is left with a GNFA containing exactly two states, namely the start and the accept state. Then, the label of the edge joining them would be the Regular Expression equivalent to the language accepted by the GNFA.
+
+We do this by first randomly picking out a state that we plan to remove, say $q_\text{rem}$. Now, we need to change the labels between every two nodes, so as to maintain the language accepted by the GNFA. Let us consider $q_i$ and $q_j$ with the following transitions:
+\begin{center}
+    \begin{tikzpicture}
+        \node(qi) [state] {$q_i$};
+        \node(qrem) [state, below right = of qi] {$q_\text{rem}$};
+        \node(qj) [state, above right = of qrem] {$q_j$};
+        
+        \path [-stealth, thick]
+        (qi) edge [bend left] node [above] {$R_4$} (qj)
+        (qi) edge [bend right] node [left] {$R_1$} (qrem)
+        (qrem) edge [bend right] node [right] {$R_3$} (qj)
+        (qrem) edge [loop below] node {$R_2$}();
+    \end{tikzpicture}
+\end{center}
+
+The above is replaced by 
+\begin{center}
+    \begin{tikzpicture}[node distance = 4cm]
+        \node(qi) [state] {$q_i$};
+        \node(qj) [state, right = of qi] {$q_j$};
+
+        \path [-stealth, thick]
+        (qi) edge node [above] {$(R_1)(R_2^*)(R_3)\cup(R_4)$} (qj);
+    \end{tikzpicture}
+\end{center}
+
+This procedure may be written as a recursive algorithm. In the end, it should work.
+% TODO: Add algorithm description here
+
+\section{The Pumping Lemma}
+This is a technique that is most commonly used to show that a language is non-regular.
+\begin{theorem}[Pumping Lemma]
+    If $L$ is a regular language, then there is a number $p$, called the pumping length where if $s$ is any string in $L$ of length at least $p$, then $s$ may be divided into three pieces $s = xyz$ satisfying the following conditions: 
+    \begin{enumerate}
+        \item For each $i\ge 0$, $xy^iz\in L$
+        \item $|y|>0$
+        \item $|xy|\le p$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let $A = (Q,\Sigma,\delta,q_1,F)$ be a deterministic finite automaton recognizing $L$. Let $p = |Q|$, the number of states in $A$. If there are no strings in $L$ of length atleast $p$, we are trivially done. 
+
+    Let $s\in L$ have length $n\ge p$. Let us denote $q_i\in Q$ to be the state reached by the run of $s_1\ldots s_i$ on $A$. (Let us say, we begin with $q_0$) Then, the sequence $q_0,\ldots,q_n$ has size $n + 1$ which is strictly greater than $p$. Therefore, due to the Pigeon Hole Principle, there must exist indices $i$ and $j$ such that $i < j$ and $q_i = q_j$. Let us now define $x = s_1\ldots s_i$, y = $s_{i+1}\ldots s_j$ and $z = s_{j+1}\ldots s_n$. 
+
+    It isn't hard to see that $\hat{\delta}(q_i, y) = q_i$ and thus, $xy^iz\in L$ for all $i\ge 0$. It only remains to show that $|xy|\le p$ but this is trivial since there must be a repetition in the first $p + 1$ states in the run, giving us that $j\le p$. This completes the proof.
+\end{proof}
+
+It is important to keep in mind that the Pumping Lemma is not a regularity test, that is, a language satisfying the conditions of the lemma need not be regular.
+
+\begin{example}
+    Show that the language $L = \{a^nb^n\mid n\ge 0\}$ over the alphabet $\Sigma=\{a, b\}$ is not regular.
+\end{example}
+\begin{proof}
+    Assume $L$ is regular. Let $p$ be the pumping length of $L$. Consider the word $w = a^pb^p\in L$. We shall now take cases on the format of the substring $y$ of $w$ as dictated by the pumping lemma.  
+    \begin{enumerate}
+        \item \bfseries$y\in a^+$\normalfont. Then, it is obvious that $xz\notin L$
+        \item \bfseries$y\in b^+$\normalfont. Then, it is obvious that $xz\notin L$
+        \item \bfseries$y\in a^+b^+$\normalfont. Then, $y = a^ib^j$ for some $i, j > 0$. Then, the word $xy^2z$ is given by $a^pb^ja^ib^p\notin L$
+    \end{enumerate}
+    This derives a contradiction. Thus, $L$ is not regular.
+\end{proof}
+
+\begin{example}
+    Show that the language $L = \{ww\mid w\in\{0,1\}^*\}$ over the alphabet $\Sigma = \{0, 1\}$ is not regular.
+\end{example}
+\begin{proof}
+    Suppose $L$ is regular. Let $p$ be the pumping length of $L$. Consider the word $w = 0^p10^p1$. Then, $y$ must be a substring of $0^p$, due to the third condition of the lemma. Then, it is obvious that $xz\notin L$, deriving a contradiction.
+\end{proof}
+
+\section{Myhill-Nerode Theorem}
+These notes are taken from the 2019 offerring of the course \href{https://www.cse.iitb.ac.in/~akg/courses/2019-cs310}{CS310: Automata Theory} at IIT Bombay.
+\subsection{DFA Minimization}
+\begin{definition}[Equivalence of States]
+    Let $A = (Q,\Sigma,\delta,q_0,F)$ be a DFA. $p,q\in Q$ are said to be \textit{equivalent} if for each word $w$, $\hat{\delta}(p, w)\in F$ if and only if $\hat{\delta}(q,w)\in F$. States that are not equivalent are said to be \textit{distinguishable}.
+\end{definition}
+
+For a DFA $A = (Q,\Sigma,\delta,q_0,F)$ let $\mathcal{B}$ be the partition of equivalent states in $A$. We may then define the minimized DFA $A' = (\mathcal{B}, \Sigma,\delta',\mathcal{B}_0, \mathcal{B}_f)$ where 
+\begin{itemize}
+    \item For each $B,B'\subseteq\mathcal{B}$, $\delta'(B, a) = B'$ if there are $q\in B$ and $q'\in B'$ such that $\delta(q, a) = q'$.
+    \item $\mathcal{B}_f = \{B\subseteq\mathcal{B}\mid B\cap F\ne\emptyset\}$ 
+    \item $q_0\in\mathcal{B}_0$
+\end{itemize}
+
+\begin{proposition}
+    Let $A$ be a minimized DFA. Then, no DFA with fewer states than that of $A$ recognizes $\mathcal{L}(A)$.
+\end{proposition}
+\begin{proof}
+    Suppose there is a DFA $A'$ such that $A'$ has fewer states than $A$ and $\mathcal{L}(A) = \mathcal{L}(A')$. Then, by definition $q_0$, the initial state in $A$ is equivalent to $q_0'$, the initial state in $A'$. We shall show that for each $q\in A$, there is $q'\in A'$ such that $q\cong q'$. 
+
+    We know that all states of $A$ are reachable from its initial state, by construction. Then, there is a word $w\in\Sigma^*$ such that $\hat{\delta}(q_0, w) = q$. Let now, $q'\overset{\triangle}{=}\hat{\delta}'(q_0', w)$. If $q\not\cong q'$, then there is a word $\tilde{w}$ such that $\hat{\delta}(q, \tilde{w})\in F$ but $\hat{\delta}'(q',\tilde{w})\notin F'$ and thus, $\hat{\delta}(q_0, w\tilde{w})\in F$ but $\hat{\delta}'(q_0',w\tilde{w})\notin F'$, contradicting the fact that $q_0$ and $q_0'$ are equivalent.
+
+    But since $|A|>|A'|$, due to the Pigeon Hole Principle, there exist states $q_1,q_2\in Q$ that are equivalent to the same state $q'$ in $A$ and are therefore equivalent to one another. This contradicts the minimality of $A$, completing the proof.
+\end{proof}
+
+\subsection{Residual Languages}
+\begin{definition}[Residual Language]
+    Given a language $L\subseteq\Sigma^*$ and $w\in\Sigma^*$, the residual of $L$ with respect to $w$ is the language 
+    \begin{equation*}
+        L^w = \{u\in\Sigma^*\mid wu\in L\}
+    \end{equation*}
+    A language $L'\subseteq\Sigma^*$ is a residual of $L$ if $L' = L^w$ for at least one $w\in\Sigma^*$.
+\end{definition}
+
+\begin{definition}[Language of a State]
+    Let $A = (Q,\Sigma,\delta,q_0,F)$ be a DFA and $q\in Q$. The language recognized by $q$, denoted by $\mathcal{L}(A_q)$ is the language recognized by $A_q=(Q,\Sigma,\delta,q,F)$.
+\end{definition}
+
+\begin{proposition}
+    Let $A = (Q,\Sigma,\delta,q_0,F)$ be a DFA recognizing a language $L$ 
+    \begin{enumerate}
+        \item For each $w\in\Sigma^*$, there is a $q\in Q$ such that $\mathcal{L}(A_q) = L^w$ 
+        \item For each $q\in Q$ reachable from $q_0$, there is a $w\in\Sigma^*$ such that $\mathcal{L}(A_q)=L^w$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \hfill 
+    \begin{enumerate}
+        \item Let $q = \hat{\delta}(q_0, w)$ and $\widetilde{w}\in\mathcal{L}(A_q)$. Then, obviously, $w\widetilde{w}\in\mathcal{L}$ and therefore, $\widetilde{w}\in L^w$, giving us $\mathcal{L}(A_q)\subseteq L^w$. Conversely, for each $\widetilde{w}\in L^w$, we have that $w\widetilde{w}\in L$, equivalently, $\hat{\delta}(q_0,w\widetilde{w})\in F$, that is, $\hat{\delta}(q, \widetilde{w})\in F$, implying that $\widetilde{w}\in\mathcal{L}(A_q)$. This gives us $L^w\subseteq\mathcal{L}(A_q)$ and thus, $\mathcal{L}(A_q) = L^w$.
+        \item Let $w\in\Sigma*$ be such that $\hat{\delta}(q_0, w) = q$. We shall show that $\mathcal{L}(A_q) = L^w$. This proof is similar to the one in the previous case and is therefore omitted.
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}[Canonical Deterministic Automaton]
+    Let $L\subseteq\Sigma^*$ be a language. The canonical deterministic automaton for $L$ is $C_L = (Q_L,\Sigma,\delta_L,L,F_L)$ where 
+    \begin{itemize}
+        \item $Q_L$ is the set of residuals of $L$, that is, $Q_L = \{L^w\mid w\in\Sigma^*\}$
+        \item $\delta_L(K,a) = K^a$ for each $K\in Q_L$ and $a\in\Sigma$ 
+        \item $F_L=\{K\in Q_L\mid\varepsilon\in K\}$
+    \end{itemize}
+\end{definition}
+
+It is possible that $Q_L$ is infinite and therefore, the CDA need not always be a DFA. But obviously $Q_L\subseteq\Sigma^*$ and is countable. 
+
+\begin{example}
+    Consider the language $L$ given by the regular expression $L = aa^*b$, or equivalently $L = a^+b$. Construct the canonical deterministic automaton for $L$.
+\end{example}
+\begin{proof}
+    The residual languages are
+    \begin{itemize}
+        \item $L^\varepsilon = aa^*b$ 
+        \item $L^a = a^*b$ 
+        \item $L^{a^+b} = \varepsilon$
+        \item $L^{b} = \emptyset$
+    \end{itemize}
+
+    This gives us the following automaton 
+    % TODO: Make diagram
+    \begin{center}
+        \begin{tikzpicture}
+            \node(q0) [state, initial] {$q_0$};
+        \end{tikzpicture}
+    \end{center}
+\end{proof}
+
+\begin{proposition}
+    For a language $L$, $C_L=(Q_L,\Sigma,\delta_L,L,F_L)$ recognizes $L$.
+\end{proposition}
+\begin{proof}
+    Let $w\in\Sigma*$. We shall show by induction on the length of $w$ that $w\in L$ if and only if $w\in\mathcal{L}(C_L)$. The base case with $|w| = 0$, or equivalently, $w = \varepsilon$ is trivial. Let $w = ax$ where $a\in\Sigma$ and $x\in\Sigma*$. Then, $w\in\mathcal{L}(C_L)$ if and only if $x\in\mathcal{L}(C_{L^a})$ if and only if $x\in L^a$ if and only if $ax\in L$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    If $L$ is regular, then $C_L$ is the unique minimum DFA upto isomorphism that recognizes $L$.
+\end{proposition}
+\begin{proof}
+    Let $A = (Q,\Sigma,\delta,q_0,F)$ be a DFA that recognizes $L$. Consider the mapping $\phi:Q\to Q_L$ such that $\phi(q) = \mathcal{L}(A_q)$. Since this function is surjective, we must have that $|Q|\ge|Q_L|$. Therefore, $C_L$ is the minimal automaton for $L$.
+
+    Suppose $A$ is also minimal. We shall show that $A$ is isomorphic to $C_L$. Obviously $|Q| = |Q_L|$. And, for any $q\in Q$, $\delta(q, a) = q'$ if and only if $\mathcal{L}(A_{q'}) = \mathcal{L}(A_q)^a$ if and only if $\delta_L(\phi(q), a) = \phi(q')$. This establishes the isomorphism.
+\end{proof}
+
+\begin{theorem}[Myhill-Nerode Theorem]
+    A language $L\subseteq\Sigma^*$ is regular if and only if $L$ has finitely many residuals.
+\end{theorem}
+\begin{proof}
+    If $L$ is not regular, then there is no DFA recognizing it, and thus the canonical deterministic automaton for $L$ must be infinite, in other words, $L$ has infinitely many residuals. Conversely, if $L$ is regular, then there is a DFA recognizing it and thus, a minimal DFA recognizing it. Due to the previous theorem, this minimal DFA is isomorphic to the canonical deterministic automaton, implying that $|Q_L|$ is finite. This completes the proof.
+\end{proof}
+
+% TODO: Schutzenberger's Theorem
