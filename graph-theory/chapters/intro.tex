@@ -1,0 +1,412 @@
+\begin{definition}[Petersen Graph]
+    A simple graph whose vertices are the $2$-element subsets of $\{1,2,3,4,5\}$ and whose edges are the pairs of disjoint $2$-element subsets.
+\end{definition}
+
+\begin{definition}[Girth]
+    The \textit{girth} of a graph with a cycle is the length of its shortest cycle. A graph with no cycle has infinite girth.
+\end{definition}
+
+\begin{proposition}[Structure of the Petersen Graph]
+    \hfill 
+    \begin{enumerate}
+        \item The Petersen graph contains two disjoint $5$-cycles along with edges that pair up vertices on the two 5-cycles.
+        \item If two vertices in the Petersen graph are non-adjacent, then they have exactly one common neighbor 
+        \item The Petersen graph has girth 5
+        \item The Petersen graph has no cycle of length 7
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    \hfill 
+    \begin{enumerate}
+        \item 
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}[Odd Graph]
+    The vertices of the graph $O_k$ are the $k$-element subsets of $\{1,\ldots,2k + 1\}$. Two vertices are adjacent if and only if they are disjoint sets.
+\end{definition}
+
+\begin{proposition}
+    The girth of $O_k$ is 6 if $k\ge 3$, 5 for $k = 2$ and 3 for $k = 1$.
+\end{proposition}
+\begin{proof}
+    The proof is obvious for $k = 1$ and $k = 2$. Suppose now that $k\ge 3$. Obviously, we may not have a 3-cycle, since $3k > 2k + 1$. Let $u$ and $v$ be two non-adjacent vertices. Then $|u\cup v|\ge k + 1$. If there is a $w$ such that $u\cap w = \emptyset$ and $v\cap w = \emptyset$. Therefore, $w\subseteq\overline{u\cup v}$ but since $|\overline{u\cap v}|\le k$, we have that any two non-adjacent vertices may both be adjacent to atmost one vertex. This immediately implies that we may not have any 4-cycles.
+
+    Suppose $a\rightarrow b\rightarrow\cdots\rightarrow e\rightarrow a$ is a 5-cycle. Since $a$ and $c$ are non-adjacent and are both adjacent to $b$, $|a\cup c| = k + 1$ and thus, $|a\cap c| = k - 1$, similarly $|a\cap d| = k - 1$ along with $|c\cap d| = 0$, we must have $2k - 2 \le k$, which is absurd.
+
+    It only remains to show that we can construct a $6$-cycle. Let $A = \{2,\ldots,k\}$ and $B = \{k + 2,\ldots, 2k\}$. Then, the six vertices:
+    \begin{equation*}
+        A\cup\{1\}, B\cup\{k + 1\}, A\cup\{2k + 1\}, B\cup\{1\}, A\cup\{k + 1\}, B\cup\{2k + 1\}
+    \end{equation*}
+    form a cycle.
+\end{proof}
+
+\begin{proposition}
+    Let $G$ be a graph in which every vertex has degree at least $k$. Then, 
+    \begin{itemize}
+        \item if $G$ has girth 4, then it has at least $2k$ vertices 
+        \item if $G$ has girth 5, then it has at least $k^2 + 1$ vertices
+    \end{itemize}
+\end{proposition}
+
+\begin{definition}[Cut Vertex, Cut Edge]
+    A \textit{cut-edge} or \textit{cut-vertex} is an edge or vertex whose deletion increases the number of connected components.
+\end{definition}
+
+\begin{proposition}
+    Every simple graph has at least two vertices that are not cut-vertices.
+\end{proposition}
+\begin{proof}
+    Let $P$ be a maximal path in the graph with $u$ and $v$ as its endpoints. Then, $u$ and $v$ are not cut-vertices.
+\end{proof}
+
+\begin{proposition}
+    An edge is a cut edge if and only if it does not belong to any cycle.
+\end{proposition}
+
+Note that it is not necessary for a graph to have a cut-vertex. For example, $C_n$ does not have a single cut-vertex.
+
+\begin{theorem}[K\"onig]
+    A graph is bipartite if and only if it has no odd cycle.
+\end{theorem}
+\begin{proof}
+    If a graph has an odd cycle, it obviously cannot be bipartite. Conversely, let $H$ be a connected component of $G$. Let $u$ be any vertex in $H$. For each $v\in V(H)$, define $f(v)$ to be the distance of $v$ from $u$. Consider the two sets:
+    \begin{align*}
+        X = \{v\mid f(v) \text{ is even}\}\\
+        Y = \{v\mid f(v) \text{ is odd}\}
+    \end{align*}
+    It isn't hard to see that no two vertices in $X$ or $Y$ may have an edge between them. This gives us a bipartition.
+\end{proof}
+
+\begin{proposition}
+    Let $G$ be a graph. If $\delta(G)\ge k$, then $G$ contains a cycle of length at least $k + 1$ and a path of length at least $k$.
+\end{proposition}
+
+\begin{definition}[Eulerian Trail, Eulerian Circuit]
+    A \textit{trail} is a walk with no repeated edge. An \textit{Eulerain trail} is a trail containing all the edges. An \textit{Eulerain circuit} is a closed \textit{Eulerian trail}. A graph is said to be \textit{Eulerian} if it has a closed trail containing all edges.
+\end{definition}
+
+\begin{theorem}
+    A graph (not necessarily simple) $G$ is Eulerian if and only if it has at most one non-trivial component and its vertices all have even degree.
+\end{theorem}
+\begin{proof}
+    We shall first show that the existence of an Eulerian trail implies that each vertex has even degree. Indeed, moving along the trail, we pass through each vertex using an incoming edge and an outgoing edge, each of which is never repeated in the trail again, implying that each vertex must have even degree.o
+
+    The proof of the converse is by induction on $|E(G)|$. The base case(s) is(are) trivial. Suppose now that each vertex has even degree. Remove all vertices with zero degree to obtain a graph $G'$. All vertices in $G'$ have degree at least $2$ and therefore must contain a cycle $C$. Remove all edges in $C$ from $G'$ to obtain $G''$. $G''$ is a collection of some connected components, each of which satisfy the problem statement and therefore must contain an Eulerian circuit. We shall move along $C$ and each time we visit a new connected component, we move along the Eulerian circuit in said connected component and then continue along $C$. This finishes the proof.
+\end{proof}
+
+As a corollary, we obtain that every even-graph can be decomposed into disjoint cycles.
+
+\begin{lemma}
+    If $G$ is a simple graph such that for any two distinct vertices $u$ and $v$, if $\deg(u) + \deg(v)\ge n - 1$, then $G$ is connected.
+\end{lemma}
+
+\begin{theorem}[Mantel, 1907]
+    The maximum number of edges in an $n$-vertex triangle free simple graph is $\lfloor n^2/4\rfloor$
+\end{theorem}
+\begin{proof}
+    Let $u$ and $v$ be vertices connected by an edge in $G$. Then, we must have that $\deg(u) + \deg(v)\le n$, else there would exist a $w$ that is adjacent to both $u$ and $v$, forming a triangle. We now have 
+    \begin{equation*}
+        \sum_{u\in V(G)}\deg^2(u) = \sum_{\{u,v\}\in E(G)}\deg(u) + \deg(v) \le n|E(G)|
+    \end{equation*}
+    But, due to the Cauchy-Schwarz inequality, 
+    \begin{equation*}
+        \sum_{u\in V(G)}\deg^2(u) \ge \frac{4|E(G)|^2}{n}
+    \end{equation*}
+    This finishes the proof.
+\end{proof}
+
+\begin{theorem}[Tur\'an]
+    Let $G$ be an $n$-vertex $K_{r + 1}$-free graph. Then 
+    \begin{equation*}
+        E(G)\le\left(1 - \frac{1}{r}\right)\frac{n^2}{2}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Associate with each vertex a non-negative real number $x_i$ such that 
+    \begin{equation*}
+        \sum_{i=1}^nx_i = 1
+    \end{equation*}
+    We shall first attempt to maximize 
+    \begin{equation*}
+        \mathcal{L}(x_1,\ldots,x_n) = \sum_{\{i,j\}\in E(G)}x_ix_j
+    \end{equation*}
+    Suppose $i$ and $j$ are two vertices that are not connected by an edge with $x_ix_j > 0$. Then, the transformation $(x_i, x_j)\mapsto(x_i + x_j, 0)$ does not decrease the value of $\mathcal{L}$. We keep applying the transformation until we can no more. In the final configuration, only those vertices in a clique of size at most $r$ would have non-zero values. But then, due to the Cauchy-Schwarz inequality, 
+    \begin{equation*}
+        \mathcal{L} \le \frac{1}{2}\left(1 - \frac{1}{r}\right)
+    \end{equation*}
+
+    Since the value obtained above is maximal, we must have 
+    \begin{align*}
+        \frac{1}{2}\left(1 - \frac{1}{r}\right)&\ge\mathcal{L}\left(\frac{1}{n},\cdots,\frac{1}{n}\right)\\
+        &=\frac{|E(G)|}{n^2}
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}[Friendship Paradox]
+    In a simple graph, for a vertex $v$, let $a(v)$ denote the average degree of the neighbors of $v$, with $a(v) = 0$ if $\deg(v) = 0$. Then 
+    \begin{equation*}
+        \sum_{v\in V(G)}a(v)\ge\sum_{v\in V(G)}\deg(v)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{align*}
+        \sum_{v\in V(G)}a(v) &= \sum_{v\in V(G)}\frac{\sum_{u\in N(v)}\deg(u)}{\deg(v)}\\
+        &= \sum_{(u,v)\in E(G)}\left(\frac{\deg(u)}{\deg(v)} + \frac{\deg(v)}{\deg(u)}\right)\\
+        &\ge 2|E(G)|
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+
+\begin{definition}[Graphic Sequence]
+    A \textit{graphic sequence} is a list of nonnegative numbers that is the degree sequence of some simple graph.
+\end{definition}
+
+\begin{theorem}[Havel-Hakimi]
+    For $n > 1$, an integer list $d = (d_1,\ldots, d_n)$ with $d_1\ge\cdots\ge d_n$ is graphic if and only if the $n - 1$ element integer list $d' = (d_2-1,\ldots,d_{d_1 + 1} - 1,\ldots, d_n)$ is graphic.
+\end{theorem}
+\begin{proof}
+    Proving the converse is trivial. Suppose $d$ is graphic. Let $v_i$ be the vertex corresponding to the entry $d_i$ in the list. We shall show that there exists a simple graph $\widetilde{G}$ where the vertex $v_1$ is adjacent to the vertices $v_2,\ldots,v_{d_1 + 1}$. Let $G$ be any graph having the degree sequence $d$. Let $S$ be the set of neighbors of $v_1$ and $i$ be the smallest index such that $v_i\in\{v_2,\ldots,v_{d_1 +1}\}\backslash S$ and let $x\in S\backslash\{v_2,\ldots,v_{d_1 +1}\}$. Since $x$ corresponds to some $v_j$, we must have $j > i$ and thus, $\deg(v_i)\ge\deg(v_j)$, consequently, there must exist $y$ that is adjacent to $v_i$ but not to $x$. Perform a 2-switch by replacing the edges $(v_1,x), (v_i,y)$ by $(v_1,v_i), (x,y)$. Notice that this does not alter the degree of any vertex and decreases the cardinality of $\{v_2,\ldots,v_{d_1 + 1}\}\backslash S$ and hence, this process cannot continue indefinitely. At the end we are left with a graph $\widetilde{G}$ where $v_1$ is adjacent to $v_2,\ldots,v_{d_1 + 1}$. Deleting the vertex $v_1$ and all edges incident on it, we have the desired conclusion.
+\end{proof}
+
+\begin{definition}[Kernel]
+    A \textit{kernel} in a diagraph $D$ is a set $S\subseteq V(D)$ such that $S$ induces no edges and every vertex outside $S$ has a successor in $S$.
+\end{definition}
+
+\begin{theorem}[Richardson, 1953]
+    A digraph with no odd cycles has a kernel.
+\end{theorem}
+\begin{proof}
+    Let $D$ be such a digraph. We shall induct on the number of strongly connected components of $D$. For the base case, we assume that $D$ is strongly connected. Pick an arbitrary vertex $x\in D$ and let $S$ be the set of vertices with even distance to $x$. It is then obvious that every vertex with odd distance to $x$ has a successor in $S$. Now, suppose there exist $u,v\in S$ such that there is an edge $(u,v)$ in $D$. Let $P$ and $P'$ be $u-x$ and $v-x$ paths in $D$. Obviously, both must have even length. Consider the $u-x$ walk $Q$ obtained by adding the edge $uv$ to the beginning of $P$ and has odd length. By the construction of $S$, there is an even $x-u$ path $R$ which when joined with $Q$ results in an odd closed walk, which is absurd. Thus, $S$ is a kernel.
+
+    As for the induction step, consider the reduced DAG obtained by treating each strongly connected component as a vertex. Then, there exists a component $D'$ which only has incoming edges. By the induction hypothesis, $D'$ has a kernel, say $S'$. Consider the graph $D''$ obtained by deleting $D'$ and all predecessors of $S'$ from $D$. Due to the induction hypothesis, this has a kernel, say $S''$. Since $S''\subseteq D''$, there are no edges in $S''\cup S'$ and obviously, each vertex not in $S''\cup S'$ has a successor in it and is therefore a kernel.
+\end{proof}
+
+\begin{definition}[King]
+    In a digraph, a \textit{king} is a vertex from kwhich every vertex is reachable by a path of length at most 2.
+\end{definition}
+
+\begin{theorem}[Landau, 1953]
+    Every tournament has a king.
+\end{theorem}
+\begin{proof}
+    Let $D$ be a tournament and $x\in G$ have maximum out-degree. Suppose $x$ is not the king. Then, there is $y\in G$ that is not reachable from $x$ by a path of length at most 2. Since $D$ is a tournament, there is an edge $(y, x)$ and $(y,u)$ for each $u\in\mathcal{N}^+(x)$, implying that $\deg^+(y) > \deg^+(x)$, a contradiction.
+\end{proof}
+
+\begin{theorem}
+    A digraph has an Eulerian circuit if and only if $\deg^+(u) = \deg^-(u)$ for each vertex $u$.
+\end{theorem}
+\begin{proof}
+    Similar to the undirected case.
+\end{proof}
+
+\begin{definition}
+    Let $G$ be a graph. If $G$ has $u,v$-path, then the \textit{distance} of $v$ from $u$, denoted by $d(u,v)$ is the least length of a $u,v$-path. If there is no such path, $d(u, v)=\infty$. The \textit{diameter} $\operatorname{diam}(G)$ is $\max_{u,v\in V(G)}d(u,v)$. The \textit{eccentricity} of a vertex $u$, denoted by $\epsilon(u)$ is $\max_{v\in V(G)}d(u,v)$. The \textit{radius} of a graph $G$, written $\operatorname{rad}(G)$ is $\min_{u\in V(G)}\epsilon(u)$. The \textit{center} of $G$ is the subgraph induced by the vertices of minimum eccentricity.
+\end{definition}
+
+\begin{proposition}
+    If $G$ is a simple graph, then $\operatorname{diam}(G)\ge 3\Longrightarrow\operatorname{diam}(\overline{G})\le 3$.
+\end{proposition}
+
+\begin{theorem}[Jordan, 1869]
+    The center of a tree is a vertex or an edge.
+\end{theorem}
+\begin{proof}
+    We induct on $n$, the number of vertices in the tree. The base case $n\le 2$ is trivial. Suppose $T$ is a tree with $n \ge 3$ vertices. Delete all the leaves of $T$ to obtain $T'$. For any $u\in T$, $\epsilon(u)$ corresponds to the longest path from $u$ to any leaf, therefore, $\epsilon_{T'}(u) = \epsilon_T(u) - 1$. This maintains the center of the tree, thus completing the induction.
+\end{proof}
+
+\begin{definition}[Weiner Index]
+    The \textit{Weiner Index} of a graph $G$ is defined as 
+    \begin{equation*}
+        D(G) = \sum_{u,v\in V(G)}d(u, v)
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    Among trees with $n$ vertices, the Weiner index $D(T)$ is minimized by stars and maximized by paths, both uniquely.
+\end{theorem}
+\begin{proof}
+    A tree with $n$ vertices has $n - 1$ edges, that is, $n - 1$ pairs of vertices at distance $1$ and all other pairs have distance at least 2. Thus, $D(T)\ge (n - 1) + 2\binom{n - 1}{2} = (n - 1)^2$. We see that the star achieves this minimum. Let $T$ be another tree achieving this minimum and $x$ be a leaf in $T$. We know by characterization that all non-neighbors of $x$ must be at distance $2$ from it, implying that they must be neighbors of $x$'s neighbor (which is unique since $x$ is a leaf), therefore $T$ is a star.
+
+    We shall prove by induction on $n$ that $P_n$ is the only tree that maximizes $D(T)$. The base case $n = 1$ is trivial. Suppose $n > 1$ and $u$ be a leaf in $T$. Then, $D(T) = D(T - u) + \sum_{v\in T\backslash u} d(u, v)$. Consider the ordered multiset $S = \{d(u,v)\mid v\in T\backslash u\}$. Notice that if $i\in S$ with $i > 1$, then so does $i - 1$. This immediately implies that $\sum_{i\in S}i\le\sum_{i=1}^{n - 1}i = \binom{n}{2}$. The recursion immediately yields $D(T)\le\binom{n + 1}{3}$ and is maximized when the distances from $u$ to all the vertices in $T\backslash u$ are unique, which is possible if and only if $T\backslash u = P_{n - 1}$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    If $H$ is a subgraph of $G$, then $D(G)\le D(H)$. And as a result, for a connected graph $G$ on $n$ vertices, $D(G)\le D(P_n)$.
+\end{lemma}
+\begin{proof}
+    Let $T$ be a spanning tree of $G$. Then 
+    \begin{equation*}
+        D(G) \le D(T) \le D(P_n)
+    \end{equation*}
+\end{proof}
+
+\begin{definition}[Pr\"ufer Code]
+    Let $T$ be a vertex-labelled tree with labels from the set $S = \{1,\ldots,n\}$. The Pr\"ufer code for $T$, denoted by $f(T) = (a_1,\ldots,a_{n-2})$ is obtained through $n - 2$ iterations. In the $i$-th iteration, delete the least remaining leaf, and let $a_i$ be the \textit{neighbor} of this leaf.
+\end{definition}
+
+\begin{theorem}[Cayley, 1889]
+    For a set $S\subseteq\mathbb{N}$ of size $n$, there are $n^{n - 2}$ trees with vertex multiset $S$.
+\end{theorem}
+\begin{proof}
+    We shall show that there is a bijection between the labelled trees and Pr\"ufer codes. Obviously, each labelled tree corresponds to a unique Pr\"ufer code, we need only show the converse. We shall show this by induction on $n$. The base case $n = 2$ is trivial, since the Pr\"ufer code is an empty list. Suppose now that $n > 2$. While computing $f(T)=(a_1,\ldots,a_{n-2})$, we reduce each vertex to degree 1 and then possibly delete it. That means, each non-leaf vertex in $T$ appears in $f(T)$. Obviously, no leaf occurs in $f(T)$. This means, the first leaf deleted must be the smallest element $x$ of $S$ that is not in $f(T)$ and this deletion corresponds to $a_1$. Let $T'$ correspond to the unique (due to the induction hypothesis) tree for the Pr\"ufer code $(a_2,\ldots,a_{n-2})$ over the set $S\backslash\{x\}$. The tree $T$ may be recovered from $T'$ by attaching a leaf labelled $x$ to the vertex in $T'$ with label $a_1$. This establishes the bijection.
+\end{proof}
+
+\begin{corollary}
+    Given positive integers $d_1,\ldots,d_n$ summing up to $2n - 2$, there are exactly $\frac{(n-2)!}{\prod(d_i -1)!}$ trees with vertex set $\{1,\ldots,n\}$ such that vertex $i$ has degree $d_i$ for each $1\le i\le n$.
+\end{corollary}
+\begin{proof}
+    Let $T$ be a tree and $i$ be the label of a vertex in $T$. Then $i$ occurs $\deg_T(i) - 1$ times in the Pr\"ufer code of $T$. This finishes the problem.
+\end{proof}
+
+\begin{definition}[Edge Contraction]
+\end{definition}
+
+\begin{proposition}
+    Let $\tau(G)$ denote the number of spanning trees of $G$. If $e\in E(G)$ is not a loop, then $\tau(G) = \tau(G - e) + \tau(G\cdot e)$.
+\end{proposition}
+\begin{proof}
+    The spanning trees of $G$ that omit $e$ are precisely the spanning trees of $G\backslash e$. We shall now show that there are $\tau(G\cdot e)$ spanning trees for $G$ containing the edge $e$ by constructing a bijection. Indeed, for each spanning tree of $G$ containing $e$, we may contract the edge $e$ within that tree to obtain a spanning tree of $G\cdot e$ and vice versa by expanding the same edge $e$. This establishes the bijection.
+\end{proof}
+
+\begin{definition}
+    A \textit{matching} in a graph $G$ is a set of non-loop edges with no shared endpoints. The vertices incident to the edges of a matching $M$ are \textit{saturated} by $M$, while the others are \textit{unsaturated}. A \textit{perfect matching} is one that saturates all vertices. 
+
+    A \textit{maximal matching} is one that cannot be elarged by adding an edge. A \textit{maximum matching} is a matching of maximum size among all matchings in the graph.
+\end{definition}
+
+\begin{theorem}[Hall, 1935]
+    An $X,Y$-bigraph $G$ has a matching saturating $X$ if and only if $|\mathcal{N}(S)|\ge|S|$ for all $S\subseteq X$.
+\end{theorem}
+\begin{proof}
+    The forward direction is trivial. We shall prove the converse by induction on $|X|$. The base case with $|X| = 1$ is trivial. Suppose now that $|X| > 1$ and let $x\in X$ be any element and $y\in\mathcal{N}(\{x\})$. If for each $S\subseteq X\backslash\{x\}$, $|\mathcal{N}(S)\backslash\{y\}|\ge|S|$, then we are done due to the induction hypothesis. Suppose not, let $S\subseteq X\backslash\{x\}$ be such that $|\mathcal{N}(S)\backslash\{y\}| < |S|$, but since $\mathcal{N}(S)\ge|S|$, we must have that $|\mathcal{N}(S)| = |S|$. And since $|S| < |X|$, due to the induction hypothesis, there is an $S$-saturating matching between $S$ and $\mathcal{N}(S)$. Let $U\subseteq X\backslash S$. Then 
+    \begin{equation*}
+        |\mathcal{N}(U)| + |\mathcal{N}(S)|\ge|\mathcal{N}(U)\cup\mathcal{N}(S)|=|\mathcal{N}(U\cup S)|\ge|U| + |S|
+    \end{equation*}
+    implying that there is a perfect matching between $X\backslash S$ and $Y\backslash\mathcal{N}(S)$, which gives a perfect matching between $X$ and $Y$, completing the proof.
+\end{proof}
+\begin{corollary}
+    For $k > 0$, every $k$-regular bigraph has a perfect matching.
+\end{corollary}
+
+
+\begin{definition}
+    Given a matching $M$, an \textit{$M$-alternating path} is a path that alternates between edges in $M$ and edges not in $M$. An $M$-alternating path whose endpoints are unsaturated by $M$ is an \textit{$M$-augmenting path}.
+\end{definition}
+
+\begin{lemma}
+    Every component of the symmetric difference of two matchings is a path or an even cycle.
+\end{lemma}
+\begin{proof}
+    Let $M$ and $N$ be two matchings and $F = M\Delta N$. Then, each vertex may have at most one edge from $M$ and one from $N$ and therefore have degree less than or equal to $2$. This immediately implies the conclusion.
+\end{proof}
+
+\begin{theorem}[Berge, 1957]
+    A matching $M$ in a graph $G$ is a maximum matching in $G$ if and only if $G$ has no $M$-augmenting path.
+\end{theorem}
+\begin{proof}
+    We shall first show that if $M$ is not a maximum matching, then we can construct an $M$-augmenting path. Let $N$ be a matching such that $|N| > |M|$ and $F = M\Delta N$. Obviously, $F$ contains more edges from $N$ than from $M$. Recall that $F$ is a disjoint union of even cycles and paths. Each even cycle would contain equal edges from $M$ and $N$ but since $F$ has unequal number of both, there must exist a path that begins with an $N$-edge and ends with an $N$-edge. This is an $M$-augmenting path.
+
+    Conversely, if there is an $M$-augmenting path, say $P$, then the matching $M\Delta P$ is larger than $M$.
+\end{proof}
+
+The above theorem gives rise to the \textbf{Augmenting Path Algorithm}, which finds a maximum bipartite matching in time $\mathcal{O}(|E(G)||V(G)|)$. It is interesting to note that this algorithm is closely related to a special case of the Ford-Fulkerson algorithm.
+
+\begin{definition}[Vertex Cover]
+    A \textit{vertex cover} of a graph $G$ is a set $Q\subseteq V(G)$ that contains at least one end point of every edge. The vertices in $Q$ are said to \textit{cover} $E(G)$.
+\end{definition}
+
+\begin{lemma}
+    In a graph, any vertex cover is at least as large as the largest matching. Consequently, so is the minimum vertex cover.
+\end{lemma}
+\begin{proof}
+    Every edge in the matching must be covered.
+\end{proof}
+
+\begin{theorem}[K\"onig, Egerv\'ary]
+    In a bipartite graph, the size of the minimum vertex cover is equal to the size of the maximum matching.
+\end{theorem}
+\begin{proof}
+    Let $X, Y$ be the bipartition of said graph and $Q$ be the minimum vertex cover. Further, let $A = Q\cap X$ and $B = Q\cap Y$. We shall show that there exists a matching between $A$ and $G = Y\backslash B$ and between $B$ and $H = X\backslash A$, which would immediately imply the result. Let $S\subseteq A$, we shall show that $|\mathcal{N}(S)|\cap G\ge |S|$. Suppose not, then note that $Q\backslash S\cup\mathcal{N}(S)$ is a vertex cover with cardinality lesser than $Q$, contradicting minimality. This finishes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $Q$ be a minimum vertex cover and $M$ be any maximal matching. Then 
+    \begin{equation*}
+        |M|\le|Q|\le2|M|
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{definition}
+    For optimal sizes of sets, we use the following notation:
+    \begin{itemize}
+        \item $\alpha(G)$ - maximum size of independent set 
+        \item $\alpha'(G)$ - maximum size of matching 
+        \item $\beta(G)$ - minimum size of vertex cover 
+        \item $\beta'(G)$ - minimum size of edge cover
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Independent Set]
+    $S\subseteq V(G)$ is said to be an \textit{independent set} if $E(G[S])=\emptyset$
+\end{definition}
+
+\begin{lemma}
+    In a graph $G$, $S\subseteq V(G)$ is an empty set if and only if $\overline{S}$ is a vertex cover and hence, $\alpha(G) + \beta(G) = |V(G)|$.
+\end{lemma}
+\begin{proof}
+    If $S$ is an independent set, then any edge must have at least one endpoint in $\overline{S}$, therefore, $\overline{S}$ is a vertex cover.
+    Conversely, suppose $\overline{S}$ is a vertex cover, then, there may not be any edge in $\binom{S}{2}$, else $\overline{S}$ wouldn't be able to cover it. This finishes the proof.
+\end{proof}
+
+\begin{theorem}[Gallai, 1959]
+    If $G$ is a graph without isolated vertices, then $\alpha'(G) + \beta'(G) = |V(G)|$.
+\end{theorem}
+\begin{proof}
+    Let $M$ be a maximum matching in $G$. Consider the edge cover containing any one edge from each vertex not in $M$ along with all the edges in $M$, this has size $n - 2|M| + |M| = n - |M|$. Thus, $\beta'(G)\le n - \alpha'(G)$, which implies that $\alpha'(G) + \beta'(G)\le n$.
+
+    Let $L$ be a minimum edge cover. Let $e$ be an edge. If both end points of $e$ are covered by some other edges in $L$, then $L\backslash\{e\}$ is also an edge cover. Thus, $e\notin L$. Consider now the subgraph induced by the edges in $L$. These must be unions of disjoint stars. Let there be $k$ stars, then $|L| = n - k$. Further note that picking one edge from each star corresponds to a matching, giving us a matching of size $n - \beta'(G)$. This implies, $\alpha'(G) + \beta'(G)\ge n$, which completes the proof.
+\end{proof}
+\begin{corollary}
+    If $G$ is a bipartite graph with no isolated vertices, then $\alpha(G) = \beta'(G)$.
+\end{corollary}
+
+\begin{definition}
+    In a graph $G$, a set $S\subseteq V(G)$ is a \textit{dominating set} if every vertex not in $S$ has a neighbor in $S$. The \textit{domination number} $\gamma(G)$ is the minimum size of a dominating set in $G$.
+\end{definition}
+
+It is obvious that $\gamma(G)\le\beta(G)$. But there is no constant asymptotic relation between these two. Consider $K_n$, we have, $\gamma(K_n) = 1$ while $\beta(K_n) = n - 1$.
+
+\begin{theorem}[Arnautov, Payan]
+    Let $G$ be a graph on $n$ vertices with $\delta(G)\ge k$. Then $G$ has a dominating set of size at most $n\frac{1 + \ln(k + 1)}{k + 1}$.
+\end{theorem}
+\begin{proof}
+    Let $S\subset V(G)$ and $U$ be the set of vertices not dominated by $S$. Let us count the pairs $(u, d)$ where $u\in U$ and $d$ is dominated by $u$. Obviously the number of such pairs is at least $|U|(k + 1)$, since each vertex dominates at least $k + 1$ vertices (including itself). Now, counting $(d, u)$, where $d\in G\backslash S$ and $u\in U$ dominating $d$, we note that there must exist $y\in G\backslash S$ with at least $|U|(k + 1)/n$ vertices in $U$ dominating it. And thus, adding this to $S$, the size of $U$ decreases by a factor of $1 - \frac{k + 1}{n}$. Repeating this process $n\frac{\ln(k + 1)}{k + 1}$ times, the size of $U$ is at most 
+    \begin{equation*}
+        n\left(1 - \frac{k + 1}{n}\right)^{n\ln(k + 1)/(k + 1)} < \frac{n}{k + 1}
+    \end{equation*}
+    then picking these $\frac{n}{k + 1}$ vertices, we have a dominating set of size 
+    \begin{equation*}
+        n\frac{\ln(k + 1)}{k + 1} + \frac{n}{k + 1} = n\frac{1 + \ln(k + 1)}{k + 1}
+    \end{equation*}
+    This finishes the proof.
+\end{proof}
+
+\begin{definition}[Factor]
+    A \textit{factor} of a graph $G$ is a spanning subgraph of $G$. A \textit{$k$-factor} is a spanning $k$-regular subgraph. An \textit{odd component} of a graph is a component of odd order the number of odd components of $H$ is $o(H)$.
+\end{definition}
+
+It is important to note here that the existence of a 1-factor guarantees a perfect matching.
+
+\begin{theorem}[Tutte, 1947]
+    A graph $G$ has a $1$-factor if and only if $o(G-S)\le|S|$ for each $S\subseteq V(G)$.
+\end{theorem}
+\begin{proof}
+    \textbf{\textcolor{red}{TODO: Add in later}}
+\end{proof}
