@@ -1,0 +1,311 @@
+\section{Connected Spaces}
+\begin{definition}[Connected Space]
+    Let $X$ be a topological space. A \textit{separation} of $X$ is a pair $U$ and $V$ of disjoint nonempty open subsets of $X$ whose union is $X$. The space $X$ is said to be \textit{connected} if there does not exist a separation of $X$.
+\end{definition}
+
+The above definition can be restated as follows 
+\begin{quote}
+    A space $X$ is connected if and only if the only subsets of $X$ that are both open and closed in $X$ are the empty set and $X$ itself.
+\end{quote}
+It isn't hard to show the equivalence of the two statements.
+
+\begin{lemma}
+    If $Y$ is a subspace of $X$, a separation of $Y$ is a pair of disjoint nonempty sets $A$ and $B$ whose union is $Y$, neither of which contains a limit point of the other. The space $Y$ is connected if there exists no separation of $Y$.
+\end{lemma}
+\begin{proof}
+    Suppose $A$ and $B$ form a separation of $Y$, then $A$ is both open and closed in $Y$, as a result, $A = \overline{A\cap Y} = \overline{A}\cap Y$, which immediately implies $\overline{A}\cap B = \emptyset$ and vice versa.
+
+    Conversely, suppose $A$ and $B$ are disjoint nonempty sets whose union is $Y$, such that $\overline{A}\cap B = A\cap\overline{B} = \emptyset$. We may then conclude that $\overline{A}\cap Y = \emptyset$ and $\overline{B}\cap Y = B$. And thus, both $A$ and $B$ are closed in $Y$ and since $A = Y\backslash B$ and $B = Y\backslash A$, they are open in $Y$ as well and are therefore a separation of $Y$. This finishes the proof.
+\end{proof}
+
+\begin{lemma}
+    If the sets $C$ and $D$ form a separation of $X$ and $Y$ is a connected subspace of $X$, then $Y$ lies entirely within $C$ or entirely within $D$.
+\end{lemma}
+\begin{proof}
+    Since $C$ and $D$ form a separation of $X$, both $C$ and $D$ are open in $X$ and thus, $C\cap Y$ and $D\cap Y$ are both open in $Y$. If both are non-empty, then we have a separation for $Y$, contradicting the fact that it is connected.
+\end{proof}
+
+\begin{theorem}
+    The union of a collection of connected subspaces of $X$ that have a point in common is connected.
+\end{theorem}
+\begin{proof}
+    Let $\{A_\alpha\}$ be a collection of connected subspaces of $X$ and $p\in\bigcup_\alpha A_\alpha$. Let $Y = \bigcup_\alpha A_\alpha$. Suppose $Y = C\cup D$ is a separation. Then, due to the preceeding lemma, each of the $A_\alpha$ must lie in either $C$ or $D$, but since they have a point $p$ in common, they must all lie in $C$ or all in $D$, and as a result, either $C$ or $D$ must be empty, a contradiction.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a connected subspace of $X$. If $A\subseteq B\subseteq\overline{A}$, then $B$ is also connected.
+\end{theorem}
+\begin{proof}
+    Suppose $B = C\cup D$ is a separation of $B$. Then, without loss of generality, $A$ lies completely in $C$. Then, $\overline{A}\subseteq\overline{C}$. But due to a preceeding lemma, $\overline{C}$ and $D$ are disjoint. This implies, $B$ is contained entirely in $\overline{C}$ and may not intersect $D$, a contradiction.
+\end{proof}
+
+\begin{theorem}
+    The image of a connected space under a continuous map is connected.
+\end{theorem}
+\begin{proof}
+    Let $f:X\to Y$ be a continuous map and $Z = f(X)$. Suppose $Z = A\cup B$ is a separation of $Z$. Then, the sets $f^{-1}(A)$ and $f^{-1}(B)$ are open in $X$ and are non-empty, since $A$ and $B$ are both within the range of $f$, which is $Z$. This contradicts the fact that $X$ is connected.
+\end{proof}
+
+\begin{theorem}
+    A finite cartesian product of connected spaces is connected.
+\end{theorem}
+\begin{proof}
+    Straightforward induction.
+\end{proof}
+
+\begin{definition}[Linear Continuum]
+    A simply ordered set $L$ having more than one element is called a \textit{linear continuum} if the following hold:
+    \begin{enumerate}
+        \item $L$ has the least upper bound property 
+        \item If $x < y$, there exists $z$ such that $x < z < y$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    If $L$ is a linear continuum in the order topology, then $L$ is connected and so are intervals and rays in $L$.
+\end{theorem}
+\begin{proof}
+    We shall show that every convex subspace of $L$ is connected. Let $Y$ be a convex subspace of $L$ that is not connected and therefore has a separation $Y = A\cup B$. Choose $a\in A$ and $b\in B$ and let $A_0 = A\cap[a,b]$ and $B_0 = B\cap[a,b]$, each of which is open and nonempty in $[a,b]$ due to the subspace topology, which is the same as the order topology. Let $c = \sup A_0$, we know this exists because of the least upper bound property.
+\end{proof}
+
+\begin{theorem}[Intermediate Value Theorem]
+    Let $f:X\to Y$ be a continuous map, where $X$ is a connected space and $Y$ is an ordered set in the order topology. If $a$ and $b$ are two points of $X$ and if $r$ is a point of $Y$ lying between $f(a)$ and $f(b)$, then there exists a point $c$ of $X$ such that $f(c) = r$.
+\end{theorem}
+\begin{proof}
+    Consider the sets $A = f(X)\cap(-\infty, r)$ and $B = f(X)\cap(r,\infty)$, both of which are open in $f(X)$. Suppose there is no $c$ such that $f(c) = r$, then $f(X) = A\cup B$, both of which are non-empty because $f(a)\in A$ and $f(b)\in B$ and is therefore a separation, a contradiction to the fact that a continuous function maps connected spaces to connected spaces.
+\end{proof}
+
+\begin{definition}[Path, Path Connected]
+    Given points $x$ and $y$ of the space $X$, a \textit{path} in $X$ from $x$ to $y$ is a continuous map $f:[a,b]\to X$ of some closed interval in the real line into $X$, such that $f(a) = x$ and $f(b) = y$. A space $X$ is said to be \textit{path connected} if every pair of points of $X$ can be joined by a path in $X$.
+\end{definition}
+
+\section{Compact Spaces}
+\begin{definition}[Cover]
+    A collection $\mathscr{A}$ of subsets of a space $x$ is said to \textit{cover} $X$ or be a \textit{covering} of $X$ if the union of the elements of $\mathscr{A}$ is equal to $X$. It is called an \textit{open covering} of $X$ if its elements are open subsets of $X$.
+\end{definition}
+
+\begin{definition}[Compact]
+    A space $X$ is said to be compact if every open covering $\mathscr{A}$ of $X$ contains a finite subcollection that also covers $X$.
+\end{definition}
+
+This definition is extended to subspaces through the following lemma:
+\begin{lemma}
+    Let $Y$ be a subspace of $X$. Then $Y$ is compact if and only if every covering of $Y$ by sets open in $X$ contains a finite subcollection covering $Y$.
+\end{lemma}
+\begin{proof}
+    Suppose $Y$ is compact and $\{A_\alpha\}$ is a covering of $Y$ by sets open in $X$. Then, the collection $\{A_\alpha\cap Y\}$ is a covering of $Y$ by sets open in $Y$ and therefore has a finite subcollection $\{A_{\alpha_1}\cap Y,\ldots, A_{\alpha_n}\cap Y\}$ that covers $Y$. As a result, $\{A_{\alpha_1},\ldots,A_{\alpha_n}\}$ is a finite subcollection of open sets in $X$ that cover $Y$. The converse follows similarly.
+\end{proof}
+
+\begin{theorem}
+    Every closed subspace of a compact space is compact.
+\end{theorem}
+\begin{proof}
+    Let $Y$ be closed in a compact space $X$ and $\mathscr{A}$ be an open cover for $Y$. The collection $\mathscr{A}\cup\{X\backslash Y\}$ is an open cover for $X$ and therefore has a finite subcover, say $\mathscr{B}$. In which case, $\mathscr{B}\backslash\{X\backslash Y\}$ is a finite subcover for $Y$, implying that it is compact.
+\end{proof}
+
+\begin{theorem}
+    Every compact subspace of a Hausdorff space is closed.
+\end{theorem}
+\begin{proof}
+    Let $Y$ be a compact subspace of a Hausdorff space $X$. Let $x_0\in X\backslash Y$. Then, for each $y\in Y$, there exist disjoint open sets $U_y$ and $V_y$ such that $x_0\in U_y$ and $y\in V_y$. The collection $\mathscr{A} = \{V_y\mid y\in Y\}$ forms an open cover for $Y$ and thus, has a finite subcover, $\{V_{y_1},\ldots,V_{y_n}\}$. The corresponding open set $\bigcap_{i=1}^n U_{y_i}$ is open in $X$ and disjoint from each $V_{y_i}$ and thus, disjoint from $Y$. This implies that for each $x_0\in X\backslash Y$, there is an open set containing it, that is contained in $X\backslash Y$. This implies that $X\backslash Y$ is open and thus $Y$ is closed.
+\end{proof}
+
+\begin{theorem}
+    The image of a compact space under a continuous map is compact.
+\end{theorem}
+\begin{proof}
+    Let $f:X\to Y$ be continuous and $\mathscr{A}$ be an open cover for $f(X)$. Then $\mathscr{B} = \{f^{-1}(A)\mid A\in\mathscr{A}\}$ is an open cover for $X$ and therefore has a finite subcover, $\{f^{-1}(A_1),\ldots,f^{-1}(A_n)\}$. This immediately implies that the collection $\{A_1,\ldots,A_n\}$ is a finite subcover for $f(X)$ and thus $f(X)$ is compact.
+\end{proof}
+
+\begin{theorem}
+    Let $f:X\to Y$ be bijective and continuous. If $X$ is compact and $Y$ is Hausdorff, then $f$ is a homeomorphism.
+\end{theorem}
+\begin{proof}
+    Due to a preceeding theorem, $Y$ must be compact. Let $U$ be an open set in $X$. It suffices to show that $f(U)$ is open in $Y$. Since $X\backslash U$ is closed in $X$, due to a preceeding theorem, it must be compact, as a result, $Y\backslash f(U) = f(X\backslash U)$ must be compact and thus closed (since $Y$ is Hausdorff). Thus, $f(U)$ is open and $f$ is a homeomorphism.
+\end{proof}
+
+\begin{theorem}
+    The product of finitely many compact spaces is compact.
+\end{theorem}
+The following proof was taken from \href{https://math.stackexchange.com/a/980487}{here}.
+\begin{proof}
+    It suffices to show that the product of two compact sets is compact, since the theorem statement follows from induction. Let $X$ and $Y$ be compact spaces and $\mathscr{A}$ be an open cover for $X\times Y$. Then, for each point $(a,b)\in X\times Y$, there is an open set $A_{(a,b)}$ that contains it. Then, by definition, there is some basis element $U_{(a,b)}\times V_{(a,b)}$ that contains $(a,b)$. 
+
+    Let $a$ be fixed and vary $b$ over $Y$. The collection $\{V_{(a,b)}\}$ thus obtained is an open cover for $Y$ and thus has a finite subcover $\{V_{(a,b_1(a))},\ldots,V_{(a,b_n(a))}\}$. Let now, $U_a = \bigcup_{i=1}^n U_{(a,b_i(a))}$ which is an open set that contains $a$. The collection $\{U_a\}$ forms an open cover of $A$ and thus has a finite subcover $\{U_{a_1},\ldots,U_{a_m}\}$. It then follows that the collection $\{O_{(a_i, b_j(a_i))}\}$ where $1\le i\le m$ and $1\le j\le n$ forms a finite subcover for $X\times Y$, thus finishing the proof.
+\end{proof}
+
+\begin{definition}[Finite Intersection]
+    A collection $\mathscr{C}$ of subsets of $X$ is said to have the finite intersection property if for every finite subcollection $\{C_1,\ldots,C_n\}$, the intersection $\bigcap_{i=1}^n C_i$ is nonempty.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a topological space. Then $X$ is compact if and only if for every collection $\mathscr{C}$ of closed sets in $X$ having the finite intersection property, the intersection $\bigcap_{C\in\mathscr{C}} C$ of all the elements of $\mathscr{C}$ is nonempty.
+\end{theorem}
+\begin{proof}
+    Suppose $X$ is compact and $\mathscr{C}$ is a collection of closed sets in $X$ having the finite intersection property. Then, the collection $\mathscr{A} = \{X\backslash C\mid C\in\mathscr{C}\}$ consists of open sets such that no finite subcollection may cover $X$, due to the finite intersection property. And thus, $\bigcup_{A\in\mathscr{A}}\subsetneq X$, and equivalently, $\bigcap_{C\in\mathscr{C}}C\ne\emptyset$.
+
+    Conversely, let $\mathscr{A}$ be an open cover for $X$ and $\mathscr{C} = \{X\backslash A\mid A\in\mathscr{A}\}$. It is then obvious that $\bigcap_{C\in\mathscr{C}} C$ is empty and thus, $\mathscr{C}$ may not have the finite intersection property. As a result, there is a finite subcollection of $\mathscr{A}$ that covers $X$. This finishes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a simply ordered set having the least upper bound property. In the order topology, each closed interval in $X$ is compact.
+\end{theorem}
+\begin{proof}
+    \textbf{\textcolor{red}{TODO: Find a clean approach}}
+\end{proof}
+
+\begin{theorem}
+    A subspace $A$ of $\R^n$ is compact if and only if it is closed and is bounded in the Euclidean metric $d$ or the square metric $\rho$.
+\end{theorem}
+\begin{proof}
+    It suffices to use only the $\rho$-metric since 
+    \begin{equation*}
+        \rho(x,y)\le d(x,y)\le\sqrt{n}\rho(x,y)
+    \end{equation*}
+
+    Now, suppose $A$ is compact. The collection $\{B_\rho(0, m)\mid m\in\mathbb{N}\}$ is an open cover for $A$ and must contain a finite subcover. Let $B_\rho(0, M)$ be the largest ball in the subcover. Since all other balls are subsets of it, the set $A$ must be too. This implies boundedness.
+
+    Conversely, suppose $A$ is closed and bounded. Then there exists $N\in\N$ such that $\rho(x,y)\le N$ for all $x,y\in A$. Equivalently, $\rho(x,0)\le N$ for all $x\in A$. Thus, $A$ is a closed subset of the compact set $[-N, N]^n$ and thus is compact due to a preceeding theorem.
+\end{proof}
+
+\begin{theorem}[Extreme Value Theorem]
+    Let $f:X\to Y$ be continuous, where $Y$ is an ordered set in the order topology. If $X$ is compact, then there exist points $c$ and $d$ in $X$ such that $f(c)\le f(x)\le f(d)$ for every $x\in X$.
+\end{theorem}
+\begin{proof}
+    Since $f$ is continuous, $A = f(X)$ is compact. Suppose $A$ does not have a maximum element. Then, the collection 
+    \begin{equation*}
+        \mathscr{A} = \{(-\infty, a)\mid a\in A\}
+    \end{equation*}
+    is an open cover for $A$ and must have a finite subcover, say 
+    \begin{equation*}
+        \{(-\infty, a_1),\ldots,(-\infty, a_n)\}
+    \end{equation*}
+    Without loss of generality, let $a_n$ be the maximum out of all the $a_i$'s. Then, we note that $a_n$ is never covered by the subcollection, a contradiction. A similar argument may be applied for the minimum element.
+\end{proof}
+
+\begin{definition}
+    Let $(X,d)$ be a metric space and $A$ be a nonempty subset of $X$. For each $x\in X$, define the \textit{distance from $x$ to $A$} by 
+    \begin{equation*}
+        d(x, A) = \inf\{d(x,a)\mid a\in A\}
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}[Lebesgue Number Lemma]
+    Let $\mathscr{A}$ be an open covering of the metric space $(X,d)$. If $X$ is compact, there is a $\delta > 0$ such that for each subset of $X$ having diameter less than $\delta$, there exists an element of $\mathscr{A}$ containing it. The number $\delta$ is called a \textit{Lebesgue number} for the covering $\mathscr{A}$.
+\end{lemma}
+\begin{proof}
+    Let $\mathscr{A}$ be an open covering of $X$. If $X$ itself is an element of $A$ then any value of $\delta$ works. Suppose now that $X\notin\mathscr{A}$ and $\{A_1,\ldots,A_n\}$ be a finite subcollection of elements in $\mathscr{A}$ that cover $X$ and $C_i = X\backslash A_i$ for all $1\le i\le n$. Define the function 
+    \begin{equation*}
+        f(x) = \frac{1}{n}\sum_{i=1}^nd(x, C_i)
+    \end{equation*}
+    For any $x\in X$, not all of $d(x,C_i)$ may be $0$, since they cannot all share a point. Thus, $f(x) > 0$. Since $X$ is compact and $f$ is continuous, due to the extreme value theorem, we know that $f$ has a minimum value, say $\delta$. We shall show that $\delta$ is a Lebesgue number for $\mathscr{A}$.
+
+    Let $B$ be a subset of $X$ having diameter less than $\delta$. Let $x_0\in B$; then $B\subseteq B_d(x_0, \delta)$, further, since $f(x_0)\ge\delta$, we must have an index $m$ such that $d(x_0, C_m)\ge\delta$. Then, obviously, $B\cap C_m =\emptyset$ and consequently, $B\subseteq A_m$.
+\end{proof}
+
+\begin{definition}
+    Let $f:(X, d_X)\to (Y,d_Y)$ be a function. $f$ is said to be \textit{uniformly continuous} if given $\e > 0$, there is a $\delta > 0$ such that for every pair of points $x_0, x_1\in X$,
+    \begin{equation*}
+        d_X(x_0, x_1) < \delta\Longrightarrow d_Y(f(x_0), f(x_1)) < \e
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Uniform Continuity Theorem]
+    Let $f:(X, d_X)\to (Y, d_Y)$ be a continuous map such that the metric space $X$ is compact. Then $f$ is uniformly continuous.
+\end{theorem}
+\begin{proof}
+    Let $\e > 0$ be given. Consider the collection $\mathscr{B} = \{B_Y(y,\e/2)\mid y\in Y\}$ which is an open cover of $Y$ then $\mathscr{A} = \{f^{-1}(A)\mid A\in\mathscr{A}\}$ is an open cover of $X$ and thus has a finite subcover, $\{A_1,\ldots,A_n\}$. Let $\delta$ be the Lebesgue Number of $\mathscr{A}$. Then for any two points $x_0, x_1\in X$ with $d_X(x_0, x_1) < \delta$, the two point subset $\{x_0, x_1\}$ has diameter $\delta$ and is therefore contained in some $A_i$. As a result, $f(x_0), f(x_1)\in B_Y(y,\e/2)$ for some $y\in Y$. This immediately implies that $d_Y(f(x_0), f(x_1)) < \e$.
+\end{proof}
+
+\section{Limit Point Compactness}
+\begin{definition}[Limit Point Compact]
+    A space $X$ s said to be \textit{limit point compact} if every infinite subset of $X$ has a limit point.
+\end{definition}
+
+\begin{theorem}
+    Compactness implies limit point compactness.
+\end{theorem}
+\begin{proof}
+    Let $A$ be a set with no limit points. We shall show that $A$ is finite. We see that $A$ must be closed, since it trivially contains all its limit points. Since each $a\in A$ is not a limit point, we may choose an open set $U_a$ such that $U_a\cap A = \{a\}$. Then, the collection $\mathscr{U} = \{U_a\mid a\in A\}$ is an open cover for $A$, consequently, $\mathscr{U}\cup\{X\backslash A\}$ is an open cover for $X$ and has a finite subcover. Since the finite subcover can have only finitely many elements of $\mathscr{U}$, $A$ must be finite.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a topological space. If $(x_n)$ is a sequence of points of $X$, and if 
+    \begin{equation*}
+        n_1 < n_2 < \cdots
+    \end{equation*}
+    is an increasing sequece of positive integers, then the sequence $(x_{n_i})$ is called a \textit{subsequence} of $(x_n)$. The space $X$ is said to be \textit{sequentially compact} if every sequence of points of $X$ has a convergent subsequence.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a metrizable space. Then the following are equivalent 
+    \begin{enumerate}
+        \item $X$ is compact
+        \item $X$ is limit point compact
+        \item $X$ is sequentially compact
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We have already shown that $(1)\Longrightarrow(2)$. Let us first show that $(2)\Longrightarrow(3)$. Consider the set $A = \{x_n\mid n\in\N\}$. If $A$ is finite, then there is some $x\in A$ such that $x_i = x$ for infinitely many indices $i$. This immediately gives us a convergent subsequence. If $A$ is infinite, then there exists $x\in X$ that is a limit point of $A$. Then, for each $n\in\N$, choose $x_n\in B(x, 1/n)\cap A$. This sequence obviously converges to $x$ and we are done.
+
+    Finally, we show that $(3)\Longrightarrow(1)$. We first show that if $X$ is sequentially compact, then the Lebesgue number lemma holds. Suppose not. Let $\mathscr{A}$ be an open covering of $X$. Then for every positive integer $n$, there is a set $C_n$ of diameter less than $1/n$ that is not contained in any element of $\mathscr{A}$. Choose a point $x_n\in C_n$ for all positive integers $n$. Since $X$ is sequentially compact, there must exist a convergent subsequence $(x_{n_i})$ that converges to some point $a\in A$. Since $\mathscr{A}$ covers $X$, there is some $A\in\mathscr{A}$ such that $a\in A$. Choose $\e > 0$ such that $B(a, \e)\subseteq A$. For sufficiently large $i$, we have $1/n_i < \e/2$ and $d(x_{n_i}, a) < \e/2$, then the set $C_{n_i}$ lies in the $\e/2$ neighborhood of $x_{n_i}$ but since $x_{n_i}$ lies in the $\e/2$ neighborhood of $a$, $C_{n_i}$ lies in the $\e$ neighborhood of $a$, and thus $C_{n_i}\subseteq B(a,\e)\subseteq A$. 
+
+    Next, we show that if $X$ is sequentially compact, then for every $\e > 0$, there exists a finite covering of $X$ by open $\e$-balls. Suppose not. Let $x_1\in X$, then $B(x_1,\e)$ may not cover $X$ and thus, there is $x_2\in X\backslash B(x_1,\e)$. Keep choosing points in $X$ this way, that is:
+    \begin{equation*}
+        x_{n + 1}\in X\backslash\bigcup_{i=1}^n B(x_i, \e)
+    \end{equation*}
+    The sequence $(x_n)$ is infinite and $d(x_i, x_j)\ge\e$ whenever $i\ne j$. This obviously cannot have a convergent subsequence. A contradiction.
+
+    Coming back to the original proof. Let $\mathscr{A}$ be an open covering for $X$ with Lebesgue number $\delta$. Let $\e = \delta/3$. Consider the finite covering of $X$ with $\e$-balls. Each ball has a diameter of at most $2\delta/3$ and thus is contained in some element of $\mathscr{A}$. The collection of all such elements of $\mathscr{A}$ is a finite cover of $X$. Thus $X$ is compact. This finishes the proof.
+\end{proof}
+
+\section{Local Compactness}
+\begin{definition}[Local Compactness]
+    A space $X$ is said to be \textit{locally compact} at $x$ if there is some compact subspace $C$ of $X$ that contains a neighborhood of $x$. If $X$ is locally compact at each of its points, $X$ itself is said to be \textit{locally compact}.
+\end{definition}
+
+One notes that a compact space is automatically locally compact. Conversely, it is not necessary that a locally compact space is compact. For example, the real line $\R$ with the standard topology is locally compact but not compact.
+
+The space $\R^\omega$ is \textit{not} locally compact; none of its basis elements are contained in compact subspaces, since all basis elements are of the form 
+\begin{equation*}
+    (a_1, b_1)\times\cdots\times(a_n,b_n)\times\R\times\R\times\cdots
+\end{equation*}
+whose closure is obviously not compact.
+
+\begin{theorem}
+    Let $X$ be a space. Then $X$ is locally compact Hausdorff if and only if there exists a space $Y$ satisfying the following conditions:
+    \begin{enumerate}
+        \item $X$ is a subspace of $Y$ 
+        \item The set $Y\backslash X$ consists of a single point 
+        \item $Y$ is a compact Hausdorff space
+    \end{enumerate}
+    If $Y$ and $Y'$ are two spaces satisfying these conditions, then there is a homeomorphism of $Y$ with $Y'$ that equals the identity map on $X$.
+\end{theorem}
+\begin{proof}
+    We first show uniqueness. Let $Y$ and $Y'$ be two spaces satisfying these conditions. Define the function $h:Y\to Y'$ by letting $h$ map the single point $p$ of $Y\backslash X$ to the single point $q$ of $Y'\backslash X$ and letting $h$ equal the identity on $X$. Obviously, $h$ is a bijection. It suffices to show that $h$ maps open sets in $Y$ to open sets in $Y'$. Let $U$ be open in $Y$. If $U$ does not contain $p$, it is contained in $X$ and is open in $X$. Thus, $h(U) = U$ and is open in $X$. But since $X$ is open in $Y'$, $h(U)$ is open in $Y'$. Now, suppose $p\in U$. Then, $C = Y\backslash U$ is closed in $Y$ and is thus compact in $Y$. Since $C$ is contained in $X$, it is compact in $X$ and thus $h(C) = C$ is compact in $Y'$. Since $Y'$ is Hausdorff, $C$ is also closed in $Y'$ and thus $h(U) = Y'\backslash C$ is open in $Y'$. This establishes uniqueness.
+
+    Suppose now that $X$ is locally compact and Hausdorff. Let $Y = X\cup\{\infty\}$. The topology on $Y$ consists of the following sets:
+    \begin{enumerate}
+        \item all sets $U$ that are open in $X$
+        \item all sets of the form $Y\backslash C$ where $C$ is a compact subspace of $X$
+    \end{enumerate}
+    We shall first show that this forms a topology on $Y$. The intersection of any two sets must be in the topology. If both sets are of the form (1), then we are trivially done. If both are of the form (2), then we have $Y\backslash C_1\cap Y\backslash C_2 = Y\backslash(C_1\cup C_2)$ which is obviously of the form (2). Consider an intersection of the form $U\cap(Y\backslash C) = U\cap(X\backslash C)$. Since $X$ is Hausdorff and $C$ is compact in $X$, $C$ must also be closed in $X$ and thus $X\backslash C$ is open in $X$. Now, by induction it follows that finite intersections are also elements of the topology.
+
+    We now verify arbitrary unions. Obviously arbitrary unions of sets of type (1) form sets of type (1). Arbitrary unions of sets of type (2) are of the form 
+    \begin{equation*}
+        \bigcup\left(Y\backslash C_\alpha\right) = Y\backslash\bigcap C_\alpha = Y\backslash C
+    \end{equation*}
+    where $C$ is some open set in $X$ and is therefore of type (2). Finally, we need to verify the following:
+    \begin{equation*}
+        \left(\bigcup U_\alpha\right)\cup\left(\bigcup\left(Y\backslash C_\beta\right)\right) = U\cup\left(Y\backslash C\right) = Y\backslash(C\backslash U)
+    \end{equation*}
+    one notes that if $C$ is compact in $X$ and $U$ is open in $X$, then obviously $C\backslash U$ is compact in $X$ (the proof is Straightforward). Thus this is also of type (2). And the collection is indeed a topology.
+
+    We now show that $Y$ is compact Hausdorff. Let $x,y\in Y$. If both lie in $X$, then there exist disjoint open sets $U$, $V$ in $X$ that contain $x$ and $y$ respectively. Now suppose $x\in X$ and $y =\infty$. Consider a compact set $C$ in $X$ containing a neighborhood of $x$. Then $Y\backslash C$ contains $Y$ and is disjoint from said neighborhood of $X$ and thus $Y$ is Hausdorff. Next, suppose $\mathscr{A}$ is an open cover of $Y$. Then, it must contain an element of the form $Y\backslash C$ where $C$ is compact in $X$, since all the open sets in $Y$ of type (1) do not contain $\infty$. Since $\mathscr{A}$ covers $Y$, $\mathscr{A}\backslash\{Y\backslash C\}$ covers $C$ and therefore has a finite subcollection that covers $C$. This along with $Y\backslash C$ is a finite subcover for $Y$ and thus $Y$ is compact.
+
+    Finally, we show that if $X$ is a subspace of $Y$ satisfying all the conditions, then $X$ is locally compact Hausdorff. The fact that $X$ is Hausdorff follows from the fact that $Y$ is Hausdorff. Let $x\in X$. We shall show that $X$ is locally compact at $x$. Since $Y$ is Hausdorff, there exist disjoint open sets in $Y$ containing $x$ and $\infty$ respectively. The set $Y\backslash V$ is closed in $Y$, but since $Y$ is compact, $Y\backslash V$ is also compact in $Y$ and is a subset of $X$ that contains $U$. This implies local compactness and finishes the proof.
+\end{proof}
+
+\begin{definition}[Compactification]
+    If $Y$ is a compact Hausdorff space and $X$ is a proper subspace of $Y$ whose closure equals $Y$, then $Y$ is said to be a \textit{compactification} of $X$. If $Y\backslash X$ equals a single point, then $Y$ is called the \textit{one-point compactification} of $X$.
+\end{definition}
