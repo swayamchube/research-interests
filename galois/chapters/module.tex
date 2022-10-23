@@ -1,0 +1,36 @@
+\begin{definition}[Module]
+    Let $R$ be a ring. By a (left) module over $R$ or an $R$-module, one means an additive Abelian group $M$ together with a map $R\times M\to M$ satisfying the following conditions: 
+    \begin{enumerate}
+        \item If $1\in R$ is the unity element, then $1v = v$ for all $v\in M$
+        \item If $x\in R$ and $v,w\in M$, then $x(v + w) = xv + xw$ 
+        \item If $x,y\in R$ and $v\in M$, then $(x + y)v = xv + yv$ 
+        \item If $x,y\in R$ and $v\in M$, then $(xy)v = x(yv)$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Submodule]
+    Let $M$ be a module over $R$ and let $N$ be a subgroup of $M$. We say that $N$ is a submodule of $M$ if whenever $v\in N$ and $x\in R$, then $xv\in N$\footnote{From the above definition, it follows trivially that $N$ itself is a module over $R$}.
+\end{definition}
+
+Some examples of modules are: 
+\begin{enumerate}
+    \item Every vector space is a module over a field.
+    \item Let $M$ be a left ideal in a ring $R$. Then, $M$ is a left $R$-module
+    \item Let $M$ be an Abelian additive group. Let $\operatorname{End}(M)$ be the ring of all homomorphisms from $M$ to $M$, that is $\operatorname{Hom}(M, M)$. Let $R$ be a subring of $\operatorname{End}(M)$, then $M$ is an $R$-module, if we define $fv = f(v)\in M$.
+    \item Let $K$ be a field. Then, for all $n\in\N$, $K^n$ is a module over $M_n(K)$, the ring of all matrices with entries from $K$, with the obvious ring action.
+    \item Any Abelian group can be viewed as a $\Z$-module with the obvious action.
+\end{enumerate}
+
+\begin{definition}[Homomorphism]
+    Let $R$ be a ring and let $M$ and $M'$ be $R$-modules. By an $R$-linear map or a $R$-homomorphism $f:M\to M'$, one means a map such that for all $x\in R$ and $v,w\in $M, we have 
+    \begin{equation*}
+        f(xv) = xf(v) \qquad\text{and}\qquad f(v + w) = f(v) + f(w)
+    \end{equation*}
+    The set of all $R$-linear maps from $M$ to $M'$ are denoted by $\operatorname{Hom}_R(M,M')$. The set $\Hom_R(M,M)$ is denoted by $\End(M)$.
+
+    An $R$-isomorphism is an $R$-homomorphism that is bijective.
+\end{definition}
+
+\begin{proposition}
+    Let $M, M', M''$ be $R$-modules. If $f:M\to M'$ and $g:M'\to M''$ are $R$-linear maps, then the composite map $g\circ f$ is $R$-linear.
+\end{proposition}

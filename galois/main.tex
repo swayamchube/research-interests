@@ -6,7 +6,7 @@
 \usepackage{lipsum}
 \pagestyle{fancy}
 \fancyhf{}
-\rhead{Topology}
+\rhead{Field and Galois Theory}
 \lhead{Swayam Chube}
 \cfoot{\thepage}
 \renewcommand{\footrulewidth}{\headrulewidth}
@@ -95,20 +95,35 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\GF}{\operatorname{GF}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Gal}{\operatorname{Gal}}
 
-\title{General Topology}
+\title{Field and Galois Theory}
 \author{Swayam Chube}
 \date{\today}
 
 \begin{document}
     \maketitle
+    \begin{abstract}
+        I find myself struggling with Field Theory and especially Galois Theory. These are some notes that I took while attempting to overcome my inability to comprehend the same.
+    \end{abstract}
+
     \tableofcontents
-    \chapter{Topological Spaces}
-    \input{chapters/top-spaces}
 
-	\chapter{Connectedness and Compactness}
-	\input{chapters/conn-comp}
+	\part{Review}
+    \chapter{Rings}
+	\input{chapters/ring}
 
-	\chapter{Countability and Separation Axioms}
-	\input{chapters/count-sep}
+	\chapter{Fields}
+    \input{chapters/field}
+
+	%\chapter{Modules}
+	%\input{chapters/module}
+
+	\part{Galois Theory}
+	\chapter{Galois Theory}
+	\input{chapters/galois}
 \end{document}

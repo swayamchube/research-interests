@@ -669,3 +669,68 @@ A \textbf{metric space} is a metrizable space $X$ together with a specific metri
     \end{equation*}
     and thus, $f(y)\in V$. This finishes the proof.
 \end{proof}
+
+\section{Quotient Topology}
+
+\begin{definition}[Quotient Map]
+    Let $X$ and $Y$ be topological spaces and $p:X\to Y$ be a surjection. The map $p$ is said to be a \textit{quotient map} provided a subset $U$ of $Y$ is open in $Y$ if and only if $p^{-1}(U)$ is open in $X$.
+\end{definition}
+
+Obviously, $p$ must be continuous. One notes that this condition is stronger than continuity, and is often called \textbf{strong continuity}.
+
+\begin{lemma}
+    Let $X$ and $Y$ be topological spaces. Then $p:X\to Y$ is a quotient map if and only if it is surjective and for each $A\subseteq Y$, $p^{-1}(A)$ is closed in $X$ if and only if $A$ is closed in $Y$.
+\end{lemma}
+\begin{proof}
+    Follows from the fact that 
+    \begin{equation*}
+        p^{-1}(Y\backslash A) = X\backslash p^{-1}(A)
+    \end{equation*}
+    since $p$ is surjective.
+\end{proof}
+
+\begin{definition}[Open, Closed Map]
+    Let $X$ and $Y$ be topological spaces and $f:X\to Y$. Then $f$ is said to be an \textit{open map} if it maps open sets in $X$ to open sets in $Y$ and is said to be a \textit{closed map} if it maps closed sets in $X$ to closed sets in $Y$.
+\end{definition}
+
+It immediately follows that $p:X\to Y$ is a quotient map if $p$ is surjective, continuous and either open or closed.
+
+We say a subset $C$ of $X$ is saturated with respect to the surjective map $p:X\to Y$ if it equals the complete inverse image of a subset of $Y$. Formally, there exists $A\subseteq Y$ such that $C = p^{-1}(A)$.
+
+\begin{definition}[Quotient Topology]
+    Let $X$ be a topological space, $A$ a set and $p:X\to Y$ be a surjective map. Then there exists exactly one topology $\T$ on $A$ relative to which $p$ is a quotient map; it is called the \textit{quotient topology} induced by $p$.
+\end{definition}
+
+\begin{proposition}
+    The above defined topology $\T$ is indeed a topology and is unique.
+\end{proposition}
+\begin{proof}
+    We see that $U\in\T_Y$ if and only if $p^{-1}(U)\in\T_X$. And thus, $\T_Y$, if it exists, must be unique. We now show that the set 
+    \begin{equation*}
+        \T = \{U\subseteq Y\mid p^{-1}(U)\in\T_X\}
+    \end{equation*}
+    is a topology on $Y$. Let $J$ be an indexing set. Then, 
+    \begin{equation*}
+        p^{-1}\left(\bigcup_{\alpha\in J}U_\alpha\right) = \bigcup_{\alpha\in J}p^{-1}(U_\alpha)\in\T_X
+    \end{equation*}
+    this shows the property of arbitrary unions. Let $U_1, U_2\in\T$. Then, 
+    \begin{equation*}
+        p^{-1}(U_1\cap U_2) = p^{-1}(U_1)\cap p{^-1}(U_2)\in\T_X
+    \end{equation*}
+    and this finishes the proof.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a topological space, and let $X^*$ be a partition of $X$ into disjoint subsets whose union is $X$. Let $p:X\to X^*$ be the surjective map that carries each point of $X$ to the element of $X^*$ containing it. In the quotient topology induced by $p$, the space $X^*$ is called a \textit{quotient space} of $X$.
+\end{definition}
+
+\begin{theorem}
+    Let $p:X\to Y$ be a quotient map; let $A$ be a subspace of $X$ that is saturated with respect to $p$; let $q:A\to p(A)$ be the map obtained by restricting $p$
+    \begin{enumerate}
+        \item if $A$ is either open or closed in $X$, then $q$ is a quotient map 
+        \item if $p$ is either an open map or a closed map, then $q$ is a quotient map
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}

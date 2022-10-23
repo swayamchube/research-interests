@@ -1,0 +1,69 @@
+\begin{definition}[Galois Extension, Galois Group]
+    An algebraic extension $K$ of a field $k$ is called \textit{Galois} if it is normal and separable. The group of $k$-automorphisms of $K$ over $k$ is called the \textit{Galois Group} and is denoted by $\Gal(K/k)$.
+\end{definition}
+
+The fundamental theorem of Galois theory is the following: 
+\begin{theorem}[FTGT]
+    Let $K$ be a finite Galois extension of $k$, with Galois group $G$. There is a bijection between the set of subfields $E$ of $K$ containing $k$, and the set of subgroups $H$ of $G$, given by $E = K^H$. The field $E$ is Galois over $k$ if and only if $H$ is normal in $G$, and if that is the case, then the map $\sigma\mapsto\sigma\mid_E$ induces an isomorphism of $G/H$ onto the Galois group of $E$ over $k$.
+\end{theorem}
+
+\begin{theorem}
+    Let $K$ be a Galois extension of $k$. Let $G = \Gal(K/k)$. Then $k = K^G$. If $F$ is an intermediate field, $k\subseteq F\subseteq K$, then $K$ is Galois over $F$. The map $F\mapsto\Gal(K/F)$ from the set of intermediate fieldws into the set of subgroups of $G$ is injective.
+\end{theorem}
+\begin{proof}
+    Let $\alpha\in K^G$. Let $\sigma: k(\alpha)\to K^a$ be a $k$-embedding. We know that there is an extension of $\sigma$ to a $k$-embedding. Since $K/k$ is normal, $\sigma$ must be an automorphism of $K$ fixing $k$ and therefore, an element of $G$. This implies that $\sigma$ fixes $\alpha$. We have now shown that any embedding of $k(\alpha)$ in $K$ over $k$ must fix $\alpha$, therefore, $[k(\alpha):k]_s = 1$, but since $\alpha$ is separable over $k$, we must have $k(\alpha) = k$. Equivalently, $k = K^G$.
+
+
+    Since $K/k$ is normal, so is $K/F$. Similarly, since $K/k$ is separable, so is $K/F$, therefore, $K/F$ is Galois.
+
+    Suppose two fields $F$ and $F'$ map to the same group $H$, which is a subgroup of $G$. Then, due to the first part, $F = K^H = F'$, establishing injectivity.
+\end{proof}
+
+\begin{definition}[Associated, Belongs]
+    Let $K/k$ be a Galois extension. Then for any intermediate subfield, $k\subseteq F\subseteq K$, we define the subgroup $\Gal(K/F)$ to be \textit{associated} with $F$ and similarly, we say that a subgroup $H$ of $G$ \textit{belongs} to an intermediate field $F$ if $H = \Gal(K/F)$.
+\end{definition}
+
+\begin{lemma}
+    Let $E/k$ be algebraic separable. Suppose there is an integer $n\ge 1$ such that every element $\alpha\in E$ is of degree at most $n$ over $k$. Then $E$ is finite over $k$ and $[E:k]\le n$.
+\end{lemma}
+\begin{proof}
+    Let $\alpha\in E$ have maximal degree over $k$. We shall show that $k(\alpha) = E$. Suppose not, then there is $\beta\in E$ such that $\beta\notin k(\alpha)$. Then, due to the primitive element theorem, there is $\gamma\in E$ such that $k(\gamma) = k(\alpha,\beta)$. But we would then have that $[k(\gamma):k]\ge [k(\alpha,\beta):k] > [k(\alpha):k]$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Artin]
+    Let $K$ be a field and let $G$ be a group of automorphisms of $K$, of order $n$. Let $k = K^G$ be the fixed field. Then $K$ is a finite Galois extension of $k$ and its Galois group is $G$. Further, we have $[K:k] = n$.
+\end{theorem}
+\begin{proof}
+    Let $\alpha\in K$ and $\sigma_1,\ldots,\sigma_r$ be a maximal set of elements of $G$ such that $\sigma_1\alpha,\ldots,\sigma_r\alpha$ are distinct. Then, if $\tau\in G$, then $(\tau\sigma_1\alpha,\ldots,\tau\sigma_r\alpha)$ is a permutation of $(\sigma_1\alpha,\ldots,\sigma_r\alpha)$, lest we contradict the maximality of $r$. Hence, $\alpha$ is a root of 
+    \begin{equation*}
+        f(x) = \prod_{i = 1}^r(x - \sigma_i\alpha)
+    \end{equation*}
+    further, for any $\tau\in G$, $f^\tau = f$ due to our previous conclusion. As a result, $f(x)\in k[x]$. Furthermore, $f$ is separable. Now, since every element $\alpha\in K$ is a root of a separable polynomial of degree at most $n$ wit hcoefficients in $k$, we have that $K/k$ is finite separable extension of degree at most $k$ due to the previous lemma. Now, since the minimal polynomial for $\alpha$ also splits in $K$, $K/k$ is also normal and therefore Galois. Recall that the order of $\Gal(K/k)$ has order at most $[K:k]\le n$. This implies that $|G| = |\Gal(K/k)|$, equivalently, $G = \Gal(K/k)$.
+\end{proof}
+
+\begin{corollary}
+    Let $K$ be a inite Galois extension of $k$ and let $G$ be its Galois group. Then every subgroup of $G$ belongs to some subfield $F$ such that $k\subseteq F\subseteq K$.
+\end{corollary}
+\begin{proof}
+    Let $H$ be a subgroup of $G$ and let $F = K^H$. Due to Artin, $K/F$ is Galois with group $H$.
+\end{proof}
+
+\textbf{The discussion till now establishes the first half of the Fundamental Theorem of Galois Theory}.
+
+\begin{lemma}
+    Let $K/k$ be Galois and $\lambda: K\to K'$ be an isomorphism. Let $G = \Gal(K/k)$ and $G' = \Gal(\lambda K/\lambda k)$. Then, $G\cong G'$ under the mapping $\phi: \sigma\mapsto\lambda\sigma\lambda^{-1}$.
+\end{lemma}
+\begin{proof}
+    Obviously, $\phi$ is a group homomorphism but is also invertible and therefore, an isomorphism.
+\end{proof}
+
+\begin{theorem}
+    Let $K/k$ be Galois with group $G$. Let $F$ be a subfield, $k\subseteq F\subseteq K$, and let $H = \Gal(K/F)$. Then $F/k$ is normal (and therefore Galois) if and only if $H\unlhd G$. If $F/k$ is normal, then the restriction map $\sigma\mapsto\sigma\mid_F$ is an epimorphism of $G$ onto $\Gal(F/k)$, whose kernel is $H$. Therefore, $\Gal(F/k)\cong G/H$.
+\end{theorem}
+\begin{proof}
+    Suppose $F/k$ is normal (and therefore Galois) and $G' = \Gal(F/k)$. Then, the mapping $\theta: G\to G'$ given by $\sigma\mapsto\sigma\mid_F$. The kernel of this homomorphism is $H$ and therefore is normal in $G$. Furthermore, any element $\tau\in G'$ extends to an embedding of $K$ in $k^a$ which must be an automorphism of $K$, since $K/k$ is normal, as a result, the restriction map is surjective. This proves the first half of the first statement and the last statement.
+
+    Now suppose $F/k$ is not normal, then there is an embedding $\lambda$ of $F$ in $K$ over $k$ which is not an automorphism of $F$. But due to the Extension Theorem, we may extend this to an embedding of $K$ over $k$ in $k^a$, which would also be an automorphism of $K$ since $K/k$ is normal. But note that the Galois groups $\Gal(K/\lambda F)$ and $\Gal(K/F)$ are conjugate and belong to distinct subfields, hence cannot be equal. Therefore, $H$ is not normal in $G$.
+\end{proof}
+
+\textbf{This concludes the proof of the Fundamental Theorem of Galois Theory}.
