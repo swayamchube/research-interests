@@ -50,7 +50,11 @@ It isn't hard to show the equivalence of the two statements.
     A finite cartesian product of connected spaces is connected.
 \end{theorem}
 \begin{proof}
-    Straightforward induction.
+    It suffices to show the statement for the Cartesian Product of two connected spaces since the result in its generality follows due to induction. Let $X$ and $Y$ be connected topological spaces. Let $a\times b\in X\times Y$ be a ``base point''. Note that the sets $X\times b$ and $x\times Y$ are connected for all $x\in X$. Then, we have 
+    \begin{equation*}
+        X = \bigcup_{x\in X}\underbrace{\left(X\times b\right) \cup \left(x\times Y\right)}_{T_x}
+    \end{equation*}
+    Further, note that all the sets $T_x$ have the point $a\times b$ in common, as a result, their union is also connected.
 \end{proof}
 
 \begin{definition}[Linear Continuum]
@@ -219,7 +223,7 @@ The following proof was taken from \href{https://math.stackexchange.com/a/980487
 
 \section{Limit Point Compactness}
 \begin{definition}[Limit Point Compact]
-    A space $X$ s said to be \textit{limit point compact} if every infinite subset of $X$ has a limit point.
+    A space $X$ is said to be \textit{limit point compact} if every infinite subset of $X$ has a limit point.
 \end{definition}
 
 \begin{theorem}
@@ -229,7 +233,7 @@ The following proof was taken from \href{https://math.stackexchange.com/a/980487
     Let $A$ be a set with no limit points. We shall show that $A$ is finite. We see that $A$ must be closed, since it trivially contains all its limit points. Since each $a\in A$ is not a limit point, we may choose an open set $U_a$ such that $U_a\cap A = \{a\}$. Then, the collection $\mathscr{U} = \{U_a\mid a\in A\}$ is an open cover for $A$, consequently, $\mathscr{U}\cup\{X\backslash A\}$ is an open cover for $X$ and has a finite subcover. Since the finite subcover can have only finitely many elements of $\mathscr{U}$, $A$ must be finite.
 \end{proof}
 
-\begin{definition}
+\begin{definition}[Sequentially Compact]
     Let $X$ be a topological space. If $(x_n)$ is a sequence of points of $X$, and if 
     \begin{equation*}
         n_1 < n_2 < \cdots

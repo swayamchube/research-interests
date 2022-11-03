@@ -1,0 +1,43 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amsthm, amssymb, xcolor, geometry, mathrsfs, hyperref}
+
+\hypersetup{
+    colorlinks=true,
+}
+
+\title{Tutorials}
+\author{Swayam Chube\\ Problems By: Prof. Ronnie Sebastian}
+\date{Latest Update: \today}
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\e}{\epsilon}
+\newcommand{\diam}{\operatorname{diam}}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage 
+
+\section{Tutorial 1}
+\begin{enumerate}
+    \item Since $\emptyset,X\in\T_i$ for all $i$, they are also elements of $\T$. Let $\{A_\alpha\}$ be a collection of open subsets in $\T$. Then, for all $i\in I$, $\{A_\alpha\}\subseteq\T$, therefore $\bigcup_{\alpha} A_\alpha\in\T_i$ for all $i\in I$ and therefore is also an element of $\T$. Finally, let $\{A_1,\ldots,A_n\}$ be a finite collection of elements in $\T$, then by a similar argument, $\bigcup_{i = 1}^nA_i\in\T$ and therefore, $\T$ is a topology.
+
+    Let $X = \{a,b,c,d\}$, $\T_1 = \{\emptyset, \{a,b\}, \{c,d\}, X\}$ and $\T_2 = \{\emptyset, \{a,c\}, \{b,d\}, X\}$. But $\{a,b,c\}\notin\T_1\cup\T_2$, therefore, it is not a topology on $X$.
+
+    \item In the first case, existence is guaranteed by Zorn's lemma. As for uniqueness, suppose $\T_1$ and $\T_2$ are two such distinct topologies, then $\T_1\cap\T_2$ is properly contained in both $\T_1$ and $\T_2$ and also contains $\T_i$ for all $i\in I$, contradicting the minimality of $\T_1$ and $\T_2$ respectively.
+
+    The second case has been answered in the previous problem.
+
+    \item Trivial.
+    
+    \item 
+    \item 
+    \item 
+
+    \item Just consider $\bigcup_{x\in A}U_x$.
+\end{enumerate}
+\end{document}
