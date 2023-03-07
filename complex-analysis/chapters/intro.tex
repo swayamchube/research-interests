@@ -1,0 +1,311 @@
+\section{Preliminaries}
+
+\begin{definition}
+    Let $\{a_n\}$ be a real sequence. Define the limit superior and the limit inferior of a sequence to be 
+    \begin{align*}
+        \liminf_{n\to\infty} a_n &= \lim_{n\to\infty}\inf\{a_n,a_{n + 1},\ldots\}\\
+        \limsup_{n\to\infty} a_n &= \lim_{n\to\infty}\sup\{a_n,a_{n + 1},\ldots\}
+    \end{align*}
+\end{definition}
+
+\begin{proposition}
+    $\mathbb{C}$ is complete.
+\end{proposition}
+\begin{proof}
+    Let $\{z_n = x_n + \iota y_n\}$ be a Cauchy sequence in $\bbC$. For every $\varepsilon > 0$, there is $N\in\N$ such that for all $m,n\ge N$, $|z_n - z_m| <\varepsilon$, and thus, $|x_n - x_m| < \varepsilon$ and $|y_n - y_m| < \varepsilon$. Consequently, both the sequences $\{x_n\}$ and $\{y_n\}$ are Cauchy and converge and therefore, so does $\{z_n\}$.
+\end{proof}
+
+\section{Power Series}
+
+\begin{definition}[Power Series]
+    Let $a\in\bbC$. A power series about $a$ is an infinite series of the form $\sum\limits_{n = 0}^\infty a_n(z - a)^n$ where $\{a_n\}$ is an infinite sequence of complex numbers.
+\end{definition}
+
+\begin{example}
+    The power series $\sum\limits_{n = 0}^\infty z^n$ converges if $|z| < 1$ and diverges if $|z| > 1$.
+\end{example}
+\begin{proof}
+    Suppose $|z| < 1$. We shall show that the sequence of partial sums is Cauchy. Indeed, for $m\ge n$, we have 
+    \begin{equation*}
+        |z^n + \cdots + z^m| < |z|^n\frac{1}{1 - |z|}
+    \end{equation*}
+
+    On the other hand, if $|z| > 1$, we shall show that the sequence is not Cauchy. If $s_n$ denotes the $n$-th partial sum of the series, we note that 
+    \begin{equation*}
+        |s_{n + 1} - s_n| = |z|^{n + 1}
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    For a given power series $\sum\limits_{n = 0}^\infty a_n(z - a)^n$, define the number $R\in [0,\infty]$ by 
+    \begin{equation*}
+        \frac{1}{R} = \limsup_{n\to\infty}|a_n|^{1/n}
+    \end{equation*}
+    then 
+    \begin{enumerate}[label=(\alph*)]
+        \item if $|z - a| < R$, the series converges absolutely 
+        \item if $|z - a| > R$, the series diverges 
+        \item if $0 < r < R$, then the series converges uniformly on $\overline B(a, r)$
+    \end{enumerate}
+    This $R$ is known as the \textit{radius of convergence} of the power series.
+\end{theorem}
+\begin{proof}
+For simplicity, let $a = 0$ (this does not affect the correctness of the proof). 
+\begin{enumerate}[label=(\alph*)]
+    \item Since $|z| < R$, there is a real number $r$ such that $|z| < r < R$. Consequently, by definition, there is $N\in\N$ such that for all $n\ge N$, $|a_n|^{1/n} < \frac{1}{r}$. In other words, for all $n\ge N$, $|z|^n|a_n| < 1$. It is evident from here that the partial sums form a Cauchy sequence.
+
+    \item If $|z| > R$, there is a positive real number $r$ such that $|z| > r > R$, consequently, there is a subsequence $\{n_k\}$ such that $|a_{n_k}|^{1/n_k}r > 1$. If $A_n$ denotes the partial sums of the sequence, then $|A_{n_k} - A_{n_k - 1}| > 1$ and thus, the sequence is not Cauchy, and therefore, divergent.
+
+    \item There is a positive real number $\rho$ such that $r < \rho < R$ and a natural number $N$ such that for all $n\ge N$, $|a_n| < \frac{1}{\rho^n}$. Consequently, for all $z\in\overline B(0,r)$, $|a_nz^n| < \left(\frac{r}{\rho}\right)^n$ and we are done due to the Weierstrass $M$-test.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Mertens]\thlabel{thm:mertens-cauchy-product}
+    Let $\{a_n\}$, $\{b_n\}$ and $\{c_n\}$ be complex sequences such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\sum a_n$ converges absolutely and $\sum b_n$ converges
+        \item $\sum a_n = A$ and $\sum b_n = B$
+        \item $\{c_n\}$ is the Cauchy product of $\{a_n\}$ and $\{b_n\}$
+    \end{enumerate}
+    Then, $\sum c_n$ converges to $AB$.
+\end{theorem}
+\begin{proof}
+    Define $A_n$, $B_n$ and $C_n$ in the obvious way. Further, let $\beta_n = B_n - B$. Then, we have 
+    \begin{align*}
+        C_n &= \sum_{k = 0}^na_kB_{n - k}\\
+        &= \sum_{k = 0}^n a_k(B + \beta_{n - k})\\
+        &= BA_n + \sum_{k = 0}^n a_k\beta_{n - k}
+    \end{align*}
+
+    Let $\gamma_n = \sum\limits_{k = 0}^na_k\beta_{n - k}$. We shall show $\lim\limits_{n\to\infty}\gamma_n = 0$. Let $\varepsilon > 0$ be given. Let $\alpha = \sum\limits_{n = 0}^\infty |a_n|$ (since it is known that it converges absolutely). From $(b)$, we know that $\beta_n\to 0$, therefore, there is $N$ such that $|\beta_n| < \varepsilon/\alpha$ for all $n\ge N$. Consequently, we have 
+    \begin{align*}
+        |\gamma_n| &\le|\beta_0a_n + \cdots + \beta_Na_{n - N}| + |\beta_{N + 1}a_{n - N - 1} + \cdots + \beta_na_0|\\
+        &\le |\beta_0a_n + \cdots + \beta_Na_{n - N}| + \varepsilon\alpha
+    \end{align*}
+    Which immediately gives us 
+    \begin{equation*}
+        \limsup_{n\to\infty}|\gamma_n|\le\varepsilon\alpha
+    \end{equation*}
+    and since $\varepsilon$ was arbitrary, we have the desired conclusion.
+\end{proof}
+
+\section{Analytic Functions}
+
+\begin{definition}
+    If $G\subset\bbC$ is open, and $f: G\to\bbC$ then $f$ is \textit{differentiable} at a point $a\in G$ if 
+    \begin{equation*}
+        \lim_{h\to 0}\frac{f(a + h) - f(a)}{h}
+    \end{equation*}
+    exists. The value of this limit is denoted by $f'(a)$ and is called the \textit{derivative} of $f$ at $a$. If $f$ is differentiable at each point of $G$ we say that $f$ is differentiable on $G$. If $f'$ is continuous then we say that $f$ is \textit{continuously differentiable}.
+\end{definition}
+
+\begin{proposition}
+    If $f: G\to\bbC$ is differentiable at $a\in G$, then $f$ is continuous at $a$.
+\end{proposition}
+\begin{proof}
+    One line: 
+    \begin{equation*}
+        \lim_{z\to a}|f(z) - f(a)| = \lim_{z\to a}\frac{|f(z) - f(a)|}{|z - a|}|z - a| = \lim_{z\to a}\left|\frac{f(z) - f(a)}{z - a}\right|\lim_{z\to a}|z - a| = 0
+    \end{equation*}
+\end{proof}
+
+\begin{definition}[Analytic Function]
+    A function $f: G\to\bbC$ is \textit{analytic} if $f$ is continuously differentiable on $G$.
+\end{definition}
+
+\begin{theorem}[Chain Rule]
+    Let $f$ and $g$ be analytic on $G$ and $\Omega$ respectively and suppose $f(G)\subseteq\Omega$. Then $g\circ f$ is analytic on $G$ and 
+    \begin{equation*}
+        (g\circ f)'(z) = g'(f(z))f'(z)
+    \end{equation*}
+    for all $z\in G$.
+\end{theorem}
+\begin{proof}
+    Define the function $h\equiv g\circ f: G\to\bbC$. We shall show that the function $h$ is differentiable at every point $a\in G$ and that the derivative at $a$ equals $g'(f(a))f'(a)$. Notice that the latter implies analyticity. 
+
+    Let $z = f(a)$. Then, by definition, we have functions $u: G\to\bbC$ and $v: \Omega\to\bbC$ with $\lim\limits_{x\to a}u(x) = 0$ and $\lim\limits_{x\to z}v(z) = 0$ satisfying 
+    \begin{align*}
+        f(x) - f(a) &= (x - a)(f'(a) + u(x))\\
+        g(x) - g(z) &= (x - z)(g'(z) + v(x))
+    \end{align*}
+
+    Note that 
+    \begin{align*}
+        h(x) - h(a) &= g(f(x)) - g(f(a))\\
+        &= (f(x) - f(a))(g'(z) + v(f(x)))\\
+        &= (x - a)(f'(a) + u(x))(g'(z) + v(f(x)))
+    \end{align*}
+    Taking the limit gives the desired result.
+\end{proof}
+
+\begin{theorem}
+    Let $f(z) = \sum\limits_{n = 0}^\infty a_n(z - a)^n$ have radius of convergence $R > 0$. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item For each $k\ge 1$, the series 
+        \begin{equation*}\label{eq:derivative-power-series}
+            \sum_{n = k}^\infty n(n - 1)\cdots(n - k + 1)a_n(z - a)^{n - k}\tag{$\star$}
+        \end{equation*}
+        has radius of convergence $R$ 
+
+        \item The function $f$ is infinitely differentiable on $B(a, R)$ and furthermore, $f^{(k)}(z)$ is given by the series (\ref{eq:derivative-power-series}) for all $k\ge 1$ and $|z - a| < R$
+        
+        \item For $n\ge 0$, 
+        \begin{equation*}
+            a_n = \frac{1}{n!}f^{(n)}(a)
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+It suffices to prove the theorem for $a = 0$.
+\begin{enumerate}[label = (\alph*)]
+    \item We shall prove it for $k = 1$ since the general case would follow inductively. Since $\lim\limits_{n\to\infty}n^{1/(n - 1)} = 1$, it suffices to show that 
+    \begin{equation*}
+        \limsup_{n\to\infty} |a_n|^{1/n} = \limsup_{n\to\infty}|a_n|^{1/(n - 1)}
+    \end{equation*}
+    Note that we may write 
+    \begin{equation*}
+        f(z) = a_0 + z\underbrace{\sum_{n = 1}^\infty a_nz^{n - 1}}_{g(z)}
+    \end{equation*}
+
+    It is not hard to argue that both $f(z)$ and $g(z)$ have the same radius of convergence, and thus $\limsup |a_n|^{1/n} = \limsup |a_n|^{1/(n - 1)}$.
+
+    \item Again, we shall only show this for $k = 1$ since the general case would follow inductively. Define 
+    \begin{equation*}
+        s_n = \sum_{k = 0}^n a_kz^k\quad\text{and}\quad e_n = \sum_{k = n + 1}^\infty a_kz^k
+    \end{equation*}
+    Obviously, $f = s_n + e_n$ for all $n\in\N$. Let $g(z) := \sum\limits_{n = 1}^\infty na_nz^{n - 1}$.
+
+    Let $w\in B(0,R)$ and choose a positive real number $r$ such that $0 < |w| < r < R$. Let $\delta > 0$ be chosen such that $B(w, \delta)\subseteq B(0,r)$. Choose any $\varepsilon > 0$.
+
+    Then, we have 
+    \begin{equation*}
+        \frac{f(z) - f(w)}{z - w} - g(w) = \left(\frac{s_n(z) - s_n(w)}{z - w} - g(w)\right)+ \frac{e_n(z) - e_n(w)}{z - w}
+    \end{equation*}
+
+    Note that 
+    \begin{equation*}
+        \left|\frac{e_n(z) - e_n(w)}{z - w}\right|\le\sum_{k = n + 1}^\infty |z^{k - 1} + \cdots + w^{k - 1}|\le\sum_{k = n + 1}^\infty kr^{k - 1}
+    \end{equation*}
+
+    Since the series on the right is the trailing sum of a convergent series, there is $N_1\in\N$ such that for all $n\ge N_1$, $\sum\limits_{k = n + 1}^\infty kr^{k - 1} < \varepsilon/3$. 
+
+    Similarly, there is $N_2\in\N$ such that for all $n\ge N_2$, $|s_n'(w) - g(w)| < \varepsilon/3$. Finally, there is $\delta' > 0$ such that for all $z\in B(w,\delta')$, 
+    \begin{equation*}
+        \left|\frac{s_n(z) - s_n(w)}{z - w} - s_n'(w)\right| < \frac{\varepsilon}{3}
+    \end{equation*}
+
+    Putting these together, we see that for all $z\in B(w,\min\{\delta,\delta'\})$, and $n\ge\max\{N_1,N_2\}$
+    \begin{equation*}
+        \left|\frac{f(z) - f(w)}{z - w} - g(w)\right|\le\left|\frac{s_n(z) - s_n(w)}{z - w} - s_n'(w)\right| + |s_n'(w) - g(w)| + \left|\frac{e_n(z) - e_n(w)}{z - w}\right|\le\varepsilon
+    \end{equation*}
+    And we are done.
+
+    \item Straightforward.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    If the series $f(z) = \sum\limits_{n = 0}^\infty a_n(z - a)^n$ has radius of convergence $R > 0$ then $f(z)$ is analytic in $B(a, R)$.
+\end{corollary}
+
+\section{Cauchy Riemann Equations}
+
+Let $f: G\to\bbC$ be analytic and let $u(x,y) = \Re f(x + iy)$ and $v(x,y) = \Im f(x + iy)$. Then, we must have, for all $z\in G$, 
+\begin{equation*}
+    \lim_{h\to 0}\frac{f(z + h) - f(z)}{h} = \lim_{h\to 0}\frac{f(z + ih) - f(z)}{ih}
+\end{equation*}
+
+The analyticity of $f$ implies the differentiability of $u$ and $v$ and thus, the above equality is equivalent to
+\begin{equation*}
+    u_x + i v_x = f'(z) = \frac{1}{i}\left(u_y + iv_y\right)
+\end{equation*}
+or,
+\begin{equation*}\tag{\textbf{CR}}\label{eq:cauchy-riemann}
+    u_x = v_y \qquad\text{and}\qquad u_y + v_x = 0
+\end{equation*}
+
+Suppose $u$ and $v$ have continuous partial derivatives, in which case, recall that second order mixed derivatives exist and do not depend on the order of derivatives taken, that is, $u_{xy} = u_{yx}$ and $v_{xy} = v_{yx}$. 
+
+Straightforward algebraic manipulation would yield 
+\begin{equation*}
+    u_{xx} + u_{yy} = 0
+\end{equation*}
+
+In other words, $u$ and $v$ are harmonic conjugates.
+
+\begin{theorem}\thlabel{thm:converse-cauchy-riemann}
+    Let $G\subseteq\bbC$ and $u,v: G\to\R$ have continuous partial derivatives. Then $f: G\to\bbC$ defined by $f(z) = u(z) + iv(z)$ is analytic if and only if $u$ and $v$ satisfy (\ref{eq:cauchy-riemann}).
+\end{theorem}
+\begin{proof}
+    Suppose the functions $u$ and $v$ satisfy the hypothesis of the theorem. Let $z = x + iy$. We shall show that 
+    \begin{equation*}
+        \lim_{s + it\to 0}\frac{f(z + (s + it)) - f(z)}{s + it}
+    \end{equation*}
+    exists.
+
+    Define 
+    \begin{align*}
+        \varphi(s,t) = \left(u(x + s, y + t) - u(x,y)\right) - \left(u_x(x,y)s + u_y(x,y)t\right)\\
+        \psi(s,t) = \left(v(x + s, y + t) - v(x,y)\right) - \left(v_x(x,y)s + v_y(x,y)t\right)
+    \end{align*}
+
+    It is not hard to see, using \ref{eq:cauchy-riemann}, that 
+    \begin{equation*}
+        \varphi(s,t) + i\psi(s,t) = f(z + (s + it)) - f(z) - (s + it)(u_x(x,y) + iv_x(x,y))
+    \end{equation*}
+    and hence, it would suffice to show that 
+    \begin{equation*}
+        \lim_{s + it\to 0}\frac{\varphi(s,t) + i\psi(s,t)}{s + it} = 0
+    \end{equation*}
+
+    We have 
+    \begin{equation*}
+        u(x + s, y + t) - u(x,y) = u(x + s, y + t) - u(x, y + t) + u(x, y + t) - u(x,y)
+    \end{equation*}
+    Due to the Mean Value Theorem, there are real numbers $s_1$ and $t_1$ with $|s_1| < s$ and $|t_1| < t$ such that 
+    \begin{equation*}
+        u(x + s, y + t) - u(x,y) = u_x(x + s_1, y + t)s + u_y(x, y + t_1)t
+    \end{equation*}
+
+    Thus, 
+    \begin{equation*}
+        \varphi(s,t) = (u_x(x + s_1, y + t) - u_x(x,y))s + (u_y(x, y + t_1) - u_y(x,y))t
+    \end{equation*}
+    Using continuity, it is not hard to see that 
+    \begin{equation*}
+        \lim_{s + it\to 0}\frac{\varphi(s,t)}{s + it} = 0
+    \end{equation*}
+    and a similar result can be obtained for $\psi(s, t)$.
+
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $G$ be either the whole complex plane $\bbC$ or some open disk. If $u: G\to\R$ is a harmonic function then $u$ has a harmonic conjugate.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\section{Analytic Functions as Mappings}
+
+We shall suppose in this section that all paths are continuously differentiable.
+
+\begin{theorem}
+    If $f: G\to\bbC$ is analytic, then $f$ preserves angles at each point $z_0\in G$ where $f'(z_0)\ne 0$.
+\end{theorem}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
+Maps which preserve angles are known as \textbf{conformal maps}. Thus, if $f$ is analytic on $G\subseteq\bbC$ and $f'(z)\ne 0$ for all $z\in G$, it is conformal.
+
+\begin{definition}
+    A mapping of the form $S(z) = \dfrac{az + b}{cz + d}$ where $S:\bbC_\infty\to\bbC_\infty$ is called a \textit{linear fractional transformation}. If $a,b,c,d$ are such that $ad - bc\ne 0$, then $S(z)$ is called a M\"obius Transformation.
+\end{definition}
+
+A M\"obius Transformtion is invertible, where 
+\begin{equation*}
+    S^{-1}(z) = \frac{dz - b}{-cz + a}
+\end{equation*}

@@ -1,0 +1,50 @@
+\begin{definition}
+    A function $f$ has an \textit{isolated singularity} at a point $z = a$ if there is $R > 0$ such that $f$ is analytic on $0 < |z - a| < R$. The point $a$ is called a \textit{removable singularity} if there is an analytic function $g: B(a,R)\to\bbC$ such that $f(z) = g(z)$ for $0 < |z - a| < R$.
+\end{definition}
+
+\begin{theorem}
+    If $f$ has an isolated singularity at $a$, then the point $z = a$ is a removable singularity if and only if 
+    \begin{equation*}
+        \lim_{z\to a}(z - a)f(z) = 0
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    The forward direction is obvious. We shall show the reverse direction, that is, suppose $\lim\limits_{z\to a}(z - a)f(z) = 0$. There is $R > 0$ such that $f$ is analytic in $0 < |z - a| < R$. Now, define the function $g: B(a,R)\to\bbC$ such that $g(z) = (z - a)f(z)$. It is obvious that $g$ is continuous. It suffices to show that $g$ is analytic, since then, there would exist an analytic function $h$ such that $g(z) = (z - a)h(z)$, implying the desired conclusion.
+
+    To show that $g$ is analytic, we shall use Morera's Theorem. Let $T$ be a triangle in $B(a,R)$. Note that since this region is convex, it suffices to choose any three points $a,b,c$ in the interior and they would form a valid triangle. Let $\Delta$ denote the interior of $T$. If $a\notin\Delta$, then $T$ is nulhomotopic and due to \thref{thm:cauchy-version1}, the integral $\int_T g$ must be zero. 
+
+    Next, if $a$ is a vertex of the triangle, say $[a,b,c,a]$, then for any points $x$ and $y$ on the line segments $[a,b]$ and $[a,c]$, 
+    \begin{equation*}
+        \int_{[a,b,c,a]} g = \int_{[a,x,y]} g + \int_{[x,b,c,y]} g = \int_{[a,x,y]} g
+    \end{equation*}
+    where the last equality follows from \thref{thm:cauchy-version1}. Since $g$ is continuous, there is $r > 0$ such that for all $t\in B(a,r)$, $|g(t)| < \varepsilon$. And thus, $|\int_{[a,x,y]} g| < \varepsilon\ell$ where $\ell$ is the permieter of $T$. It is now obvious that the integral must be zero. 
+
+    Finally, suppose $a\in\Delta$ where $T = [b,c,d,b]$. The integral is now given by 
+    \begin{equation*}
+        \int_{[b,c,d,a]}g = \int_{[a,b,c,a]}g + \int_{[a,c,d,a]}g + \int_{[a,d,b,a]} g = 0
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{definition}[Pole, Essential Singularity]
+    If $z = a$ is an isolated singularity of $f$, then $a$ is a \textit{pole} of $f$ if $\lim\limits_{z\to a}|f(z)| = \infty$. If an isolated singularity is niether a pole nor a removable singularity, it is then called an \textit{essential singularity}.
+\end{definition}
+
+\begin{theorem}
+    Let $f: G\backslash\{a\}\to\bbC$ be analytic with a pole at $z = a$. Then there is an analytic function $g:G\to\bbC$ and a positive integer $m$ such that 
+    \begin{equation*}
+        f(z) = \frac{g(z)}{(z - a)^m}\quad\text{on $G\backslash\{a\}$}
+    \end{equation*}
+    and $g(a)\ne 0$.
+\end{theorem}
+\begin{proof}
+    Consider the analytic function $h:G\backslash\{a\}\to\bbC$ given by $h = \frac{1}{f}$. Then it is obvious that $\lim\limits_{z\to a}f(z) = 0$, as a result, $f$ has a removable singularity at $z = a$, and thus, there is an analytic function $\tilde h: G\to\bbC$ such that $h = \tilde h$ on $G$. Now, since $\tilde h(a) = 0$, there is a positive integer $m$ and an analytic function $g:G\to\bbC$ such that $\tilde h(z) = (z - a)^m g(z)$. As a result, we see that 
+    \begin{equation*}
+        f(z) = \frac{1}{(z - a)^m}\frac{1}{g(z)}
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    If $f$ has a pole at $z = a$, and $m$ is the smallest positive integer such that $f(z)(z - a)^m$ has a removable singularity at $z = a$, then $f$ is said to have a \textit{pole of order $m$} at $z = a$.
+\end{definition}

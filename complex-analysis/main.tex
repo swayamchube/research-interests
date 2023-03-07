@@ -1,0 +1,34 @@
+\documentclass{report}
+
+\usepackage{../swayam}
+
+% \newcommand{\bbC}{\mathbb{C}}
+\newcommand{\uint}{\overline\int}
+\newcommand{\lint}{\underline\int}
+\newcommand{\diam}{\operatorname{diam}}
+
+\title{Complex Analysis}
+\author{Swayam Chube}
+\date{\today}
+
+\begin{document}
+\maketitle 
+
+\begin{abstract}
+    The main reference for these notes is \cite{conway}, which I find much more readable than \cite{ahlfors}.
+\end{abstract}
+
+\tableofcontents
+
+\chapter{Introduction}
+\input{chapters/intro.tex}
+
+\chapter{Complex Integration}
+\input{chapters/integration.tex}
+
+\chapter{Singularities}
+\input{chapters/singularities.tex}
+
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}

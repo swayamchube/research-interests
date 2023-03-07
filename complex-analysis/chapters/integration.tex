@@ -1,0 +1,986 @@
+\section{Riemann Stieltjes Integral}
+The following definition is taken from \cite{babyrudin}
+
+\begin{definition}
+    Let $[a,b]$ be a given interval. By a partition $P$ of $[a,b]$ we mean a finite set of points $x_0,x_1,\ldots,x_n$ where 
+    \begin{equation*}
+        a = x_0\le x_1\le\cdots\le x_n = b
+    \end{equation*}
+    Let $\alpha: [a,b]\to\R$ be monotonically increasing. Corresponding to each partition $P$ of $[a,b]$, write 
+    \begin{equation*}
+        \Delta\alpha_i = \alpha(x_i) - \alpha(x_{i - 1})\quad\text{for $1\le i\le n$}
+    \end{equation*}
+    Let $f:[a,b]\to\R$ be bounded. For each partition $[x_{i - 1}, x_i]$, let 
+    \begin{equation*}
+        M_i = \sup_{x_{i - 1}\le x\le x_i}f(x)\qquad m_i = \sup_{x_{i - 1}\le x\le x_i} f(x)
+    \end{equation*}
+
+    Define 
+    \begin{equation*}
+        U(P,f,\alpha) = \sum_{i = 1}^n M_i\Delta\alpha_i\qquad L(P,f,\alpha) = \sum_{i = 1}^n m_i\Delta\alpha_i
+    \end{equation*}
+
+    and 
+    \begin{equation*}
+        \uint_a^b f~d\alpha = \inf_{\mathcal P}U(P,f,\alpha)\qquad\lint_a^bf~d\alpha = \sup_{P\in\mathcal P}L(P,f,\alpha)
+    \end{equation*}
+
+    If the above two values are equal, we say that $f$ is \textit{Riemann-Stieltjes integrable} with respect to $\alpha$ on $[a,b]$ and denote the common value as $\int_a^b f~d\alpha$.
+\end{definition}
+
+\begin{definition}
+    A function $\gamma: [a,b]\to\bbC$ for $[a,b]\subseteq\R$ is of \textit{bounded variation} if there is a constant $M > 0$ such that for any partition $P = \{a = t_0 < t_1 < \cdots < t_m = b\}$ of $[a,b]$ 
+    \begin{equation*}
+        v(\gamma, P) = \sum_{k = 1}^|\gamma(t_k) - \gamma(t_{k - 1})|\le M
+    \end{equation*}
+    The total variation of $\gamma$, $V(\gamma)$ is defined by 
+    \begin{equation*}
+        V(\gamma) = \sup_{P\in\mathcal P([a,b])} v(\gamma, P)
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    $\gamma:[a,b]\to\bbC$ is of bounded variation if and only if $\Re\gamma$ and $\Im\gamma$ are of bounded variation.
+\end{proposition}
+\begin{proof}
+    Follows from the following inequality: 
+    \begin{equation*}
+        \max\{|u(t_k) - u(t_{k - 1})|, |v(t_k) - v(t_{k - 1})|\}\le|\gamma(t_k) - \gamma(t_{k - 1})|\le|u(t_k) - u(t_{k - 1})| + |v(t_k) - v(t_{k - 1})|
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}
+    Let $\gamma:[a,b]\to\bbC$ be of bounded variation. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $P$ and $Q$ are partitions of $[a,b]$ with $Q$ a refinement of $P$, then $v(\gamma, P)\le v(\gamma, Q)$
+
+        \item If $\sigma: [a,b]\to\bbC$ is also of bounded variation and $\alpha,\beta\in\bbC$ then $\alpha\gamma + \beta\sigma$ is of bounded variation and $V(\alpha\gamma + \beta\sigma)\le |\alpha|V(\gamma) + |\beta|V(\sigma)$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\hfill 
+\begin{enumerate}
+    \item Let $[t_{i - 1}, t_i]$ be an interval in the partition of $P$. Let $y\in Q\backslash P$ such that $y\in [t_{i - 1}, t_i]$. Then, note that 
+    \begin{equation*}
+        |\gamma(t_i) - \gamma(t_{i - 1})|\le|\gamma(t_i) - \gamma(y)| + |\gamma(y) - \gamma(t_i)|
+    \end{equation*}
+    giving us the desired conclusion.
+
+    \item Similar to above, we have 
+    \begin{equation*}
+        |(\alpha\gamma + \beta\sigma)(t_i) - (\alpha\gamma + \beta\sigma)(t_{i - 1})|\le |\alpha||\gamma(t_i) - \gamma(t_{i - 1})| + |\beta||\sigma(t_i) - \sigma(t_{i - 1})|
+    \end{equation*}
+    Consequently, 
+    \begin{equation*}
+        v(\alpha\gamma + \beta\sigma, P)\le|\alpha|v(\gamma, P) + |\beta|v(\sigma, P)
+    \end{equation*}
+    The conclusion is obvious.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Smooth, Piecewise Smooth]
+    A path in a region $G\subseteq\bbC$ is a continuous function $\gamma: [a,b]\to G$ for some $[a,b,]\subseteq\R$. If $\gamma'(t)$ exists for each $t\in[a,b]$ and $\gamma':[a,b]\to\bbC$ is continuous, then $\gamma$ issaid to be \textit{smooth}. $\gamma$ Is said to be \textit{piecewise smooth} if there is a partition $a = t_0 < t_1 < \cdots < t_n = b$ of $[a,b]$ such that $\gamma$ is smooth on each subinterval $[t_{i - 1}, t_i]$ for $1\le i\le n$. 
+\end{definition}
+
+\begin{proposition}
+    If $\gamma: [a,b]\to\bbC$ is piecewise smooth then $\gamma$ is of bounded variation and 
+    \begin{equation*}
+        V(\gamma) = \int_a^b|\gamma'(t)|~dt
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    We shall prove the statement in the case when $\gamma$ is smooth on $[a,b]$. The general case follows from applying our proof to each piecewise smooth subinterval of $[a,b]$. 
+
+    Let $a = t_0 < t_1 < \cdots < t_m = b$ be a partition, denoted by $P$. Then, 
+    \begin{align*}
+        v(\gamma, P) &= \sum_{k = 1}^m |\gamma(t_k) - \gamma(t_{k - 1})|\\
+        &= \sum_{k = 1}^m\left|\int_{t_{k - 1}}^{t_k}\gamma'(t)~dt\right|\\
+        &\le\sum_{k = 1}^m\int_{t_{k - 1}}^{t_k}|\gamma'(t)|~dt\\
+        &=\int_a^b|\gamma'(t)|~dt
+    \end{align*}
+
+    First, this shows that $\gamma$ is of bounded variation and further, $V(\gamma)\le\int_a^b|\gamma'(t)|~dt$. We shall show the reverse inequality, which would prove the theorem. 
+
+    Let $\varepsilon > 0$. Since $\gamma'$ is continuous on $[a,b]$, it must be uniformly continuous, therefore, there is $\delta > 0$ such that whenever $|s - t| < \delta$, we have $|\gamma'(s) - \gamma'(t)| < \varepsilon$.
+
+    Let $a = t_0 < t_1 < \cdots < t_m = b$ be a partition with mesh smaller than $\delta$. Consequently, for all $1\le i\le m$, we have for all $t\in [t_{i - 1}, t_i]$,
+    \begin{equation*}
+        |\gamma'(t) - \gamma'(t_i)| < \varepsilon\Longrightarrow |\gamma'(t)| < |\gamma'(t_i)| + \varepsilon
+    \end{equation*}
+
+    Hence, 
+    \begin{align*}
+        \int_{t_{i - 1}}^{t_i}|\gamma'(t)|~dt &= |\gamma'(t_i)|\Delta t_i + \varepsilon\Delta t_i\\
+        &=\left|\int_{t_{i - 1}}^{t_i}\gamma'(t_i) - \gamma'(t) + \gamma'(t)~dt\right| + \varepsilon\Delta t_i\\
+        &\le\left|\int_{t_{i - 1}}^{t_i}\gamma'(t_i) - \gamma'(t)~dt\right| + \left|\int_{t_{i - 1}}^{t_i}\gamma'(t)~dt\right| + \varepsilon\Delta t_i\\
+        &\le\varepsilon\Delta t_i + |\gamma(t_i) - \gamma(t_{i - 1})| + \varepsilon\Delta t_i\\
+        &= \left|\gamma(t_i) - \gamma(t_{i - 1})\right| + 2\varepsilon\Delta t_i
+    \end{align*}
+
+    Adding together all these inequalities, we have 
+    \begin{equation*}
+        \int_a^b|\gamma'(t)|~dt\le v(\gamma, P) + 2\varepsilon(b - a)\le V(\gamma) + 2\varepsilon(b - a)
+    \end{equation*}
+
+    Since $\varepsilon$ was arbitrary, we have the desired conclusion.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:line-integral-exists}
+    Let $\gamma: [a,b]\to\bbC$ be of bounded variation and suppose that $f:[a,b]\to\bbC$ is continuous. Then there is a complex number $I$ such that for every $\varepsilon > 0$ there is a $\delta > 0$ such that when $P$ is a partition of $[a,b]$ with $\|P\| < \delta$, then 
+    \begin{equation*}
+        \left|I - \sum_{k = 1}^m f(\tau_k)(\gamma(t_k) - \gamma(t_{k - 1}))\right| < \varepsilon
+    \end{equation*}
+    for whatever choice of points $\tau_k\in[t_{k - 1}, t_k]$.
+\end{theorem}
+
+This number $I$ is called the \textit{integral of $f$ with respect to $\gamma$ over $[a,b]$} and is designated by 
+\begin{equation*}
+    I = \int f~d\gamma
+\end{equation*}
+
+We first need the following lemma due to Cantor: 
+\begin{lemma}[Cantor]\thlabel{lem:cantor-intersection}
+    Let $A_1,A_2,\ldots$ be a sequence of non-empty compact, closed subsets of a topological space $X$ such that $A_1\supseteq A_2\supseteq\cdots$. Then, 
+    \begin{equation*}
+        \bigcap_{k = 0}^\infty A_k\ne\varnothing
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Suppose $\bigcap\limits_{k = 0}^\infty A_k = \emptyset$. Define $B_i = X\backslash A_i$, then, $\{B_i\}$ forms an open cover for $A_1$, consequently, has a finite subcover, say $\{B_{n_1},\ldots,B_{n_k}\}$. Now, since 
+    \begin{equation*}
+        A_1\subseteq\bigcup_{i = 1}^kB_{n_i}\subseteq\bigcup_{j = 1}^{n_k}B_j
+    \end{equation*}
+
+    This immediately implies that 
+    \begin{equation*}
+        A_{n_k} = A\cap\bigcap_{i = 1}^{n_k}B_i = \varnothing
+    \end{equation*}
+    a contradiction.
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:line-integral-exists}]
+    Since $f$ is continuous, it must be uniformly continuous. Thus, we can find positive numbers $\delta_1 > \delta_2 > \cdots$ such that if $|s - t| < \delta_m$, then $|f(s) - f(t)| < \frac{1}{m}$. Let $\mathscr P_m$ denote the colletion of all partitions $P$ of $[a,b]$ with $\|P\| < \delta_m$. Note that we have $\mathscr P_1\supseteq\mathscr P_2\supseteq\cdots$. Finally define $F_m$ to be the closure of 
+    \begin{equation*}\label{eq:closure-of-this}
+        \left\{S(P) := \sum_{k = 1}^n f(\tau_k)(\gamma(t_k) - \gamma(t_{k - 1}))\mid P\in\mathscr P_m,~t_{k - 1}\le\tau_k\le t_k\right\} \tag{$\diamond$}
+    \end{equation*}
+    
+    We shall show that the following hold: 
+    \begin{equation*}
+        \begin{cases}
+            F_1\supseteq F_2\supseteq\cdots\\
+            \diam F_m\le\frac{2}{m}V(\gamma)
+        \end{cases}
+    \end{equation*}
+
+    The first sequence of containments follows trivially from the definition of $\mathscr P_m$. Recall that in a metric space, $\diam\overline{E} = \diam E$ for all $E\subseteq X$. With this in mind, it suffices to show that the diameter of the set (\ref{eq:closure-of-this}) is at most $\frac{2}{m}V(\gamma)$.
+
+    We shall show that if $P\in\mathscr P_m$ and $P\subseteq Q$ are partitions of $[a,b]$, then $|S(P) - S(Q)| < \frac{1}{m}V(\gamma)$.
+
+    Choose any interval $[t_{k - 1}, t_k]$ in the partition $P$ and let $Q$ refine it as 
+    \begin{equation*}
+        t_{k - 1} = s_0 < s_1 < \cdots < s_n = t_k
+    \end{equation*}
+    Let $\chi_1,\ldots,\chi_n$ be a tagging of the refinement. Then, 
+    \begin{align*}
+        &\left|f(\tau_k)\sum_{i = 1}^n\gamma(s_i) - \gamma(s_{i - 1}) - \sum_{i = 1}^n f(\chi_i)(\gamma(s_i) - \gamma(s_{i - 1}))\right|\\
+        &= \left|\sum_{i = 1}^n (f(\tau_k) - f(\chi_i))(\gamma(s_i) - \gamma(s_{i - 1}))\right|\\
+        &\le\frac{1}{m}\sum_{i = 1}^n|\gamma(s_i) - \gamma(s_{i - 1})|
+    \end{align*}
+
+    Adding together these inequalities for each subinterval $[t_{k - 1}, t_k]$, we have that $|S(P) - S(Q)|\le\frac{1}{m}V(\gamma)$.
+
+    Let $P,R\in\mathscr P_m$ and $Q$ be their common refinement. Then, we have 
+    \begin{equation*}
+        |S(P) - S(R)|\le|S(P) - S(Q)| + |S(Q) - S(R)|\le\frac{2}{m}V(\gamma)
+    \end{equation*}
+
+    From this it follows that $\diam F_m\le\frac{2}{m}V(\gamma)$. Now, since $\diam F_m\to 0$ as $m\to\infty$, it must be the case that $\bigcap\limits_{m = 1}^\infty F_m$ is a singleton set, containing a single complex number, say $I$.
+
+    Let $\varepsilon > 0$, choose $m > \frac{2}{\varepsilon}V(\gamma)$. Choose $\delta = \delta_m$. Since $I\in F_m$, it must be the case that $F_m\subseteq B(I,\varepsilon)$, giving us the desired conclusion.
+\end{proof}
+
+\begin{proposition}
+    Let $f,g: [a,b]\to\bbC$ be continuous functions and let $\gamma,\sigma: [a,b]\to\bbC$ be functions of bounded variation. Then for any scalars $\alpha$ and $\beta$, 
+    \begin{enumerate}
+        \item $\int_a^b \alpha f + \beta g~d\gamma = \alpha\int_a^b f~d\gamma + \beta\int_a^b g~d\gamma$
+        \item $\int_a^b f~d(\alpha\gamma + \beta\sigma) = \alpha\int_a^bf~d\gamma + \beta\int_a^b f~d\sigma$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}\thlabel{lem:line-integral-summation}
+    Let $\gamma: [a,b]\to\bbC$ be of bounded variation and let $f: [a,b]\to\bbC$ be continuous. If $a = t_0 < t_1 < \cdots < t_n = b$ then 
+    \begin{equation*}
+        \int_a^b f~d\gamma = \sum_{k = 1}^n\int_{t_{k - 1}}^{t_k}f~d\gamma
+    \end{equation*}
+\end{lemma}
+
+\begin{theorem}
+    If $\gamma$ is piecewise smooth and $f: [a,b]\to\bbC$ is continuous, then 
+    \begin{equation*}
+        \int_a^b f~d\gamma = \int_a^b f(t)\gamma'(t)~dt
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    It suffices to consider the case where $\gamma$ is smooth, since the general statement follows by applying our result to each piecewise smooth component and adding them up using \thref{lem:line-integral-summation}.
+
+    We have that $\gamma = u + iv$ is smooth where $u,v: [a,b]\to\R$; thus, both $u$ and $v$ must be smooth, furthermore, $\gamma' = u' + iv'$. As a result, it suffices to prove the theorem for $\gamma$ being real valued and smooth. We shall require the fact that is it real valued to apply the Mean Value Theorem.
+
+    Let $\varepsilon > 0$ and $\delta > 0$ be such that for any partition $P = \{a = t_0 < t_1 < \cdots < t_n = b\}$, 
+    \begin{align*}
+        \left|\int_a^b f~d\gamma - \sum_{k = 1}^n f(\tau_k)(\gamma(t_k) - \gamma(t_{k - 1}))\right| < \frac{\varepsilon}{2}\\
+        \left|\int_a^b f(t)\gamma'(t)~dt - \sum_{k = 1}^n f(\tau_k)\gamma'(\tau_k)(t_k - t_{k - 1})\right| < \frac{\varepsilon}{2}
+    \end{align*}
+    for any choice of $\tau_k\in [t_{k - 1}, t_k]$. Using the mean value theorem, choose $\tau_k$ such that 
+    \begin{equation*}
+        \gamma'(\tau_k) = \frac{\gamma(t_k) - \gamma(t_{k - 1})}{t_k -  t_{k - 1}}
+    \end{equation*}
+
+    Consequently, 
+    \begin{equation*}
+        \left|\int_a^b f~d\gamma - \int_a^b f(t)\gamma'(t)~dt\right| < \varepsilon
+    \end{equation*}
+    and we have the desired conclusion.
+\end{proof}
+
+\begin{definition}[Bounded Variation]
+    Let $\gamma: [a,b]\to\bbC$ be a path. The set $\{\gamma(t)\mid a\le t\le b\}$ is called the \textit{trace of $\gamma$} and is denoted by $\{\gamma\}$. The path $\gamma$ is said to be \textit{rectifiable} if it is of bounded variation.
+\end{definition}
+
+\begin{definition}[Line Integral]
+    If $\gamma: [a,b]\to\bbC$ is a rectifiable path and $f$ is a function defined and continuous on the trace of $\gamma$. Then, the line integral of $f$ along $\gamma$ is 
+    \begin{equation*}
+        \int_a^bf(\gamma(t))~d\gamma(t)
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    If $\gamma: [a,b]\to\bbC$ is a rectifiable path and $\varphi: [c,d]\to[a,b]$ is a continuous non-decreasing function with $\varphi(c) = a$ and $\varphi(d) = b$. Then, for any function $f$ continuous on $\{\gamma\}$, 
+    \begin{equation*}
+        \int_\gamma f = \int_{\gamma\circ\varphi} f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $\varepsilon > 0$. Then, there is a $\delta_1$ such that for all partitions $P = \{c = s_0 < s_1 < \cdots < s_n = d\}$ with $\|P\| < \delta$, and a tagging, $\sigma_k\in [s_{k - 1}, s_k]$, 
+    \begin{equation*}
+        \left|\int_{\gamma\circ\varphi}f - \sum_{k = 1}^nf(\gamma\circ\varphi(\sigma_k))(\gamma\circ\varphi(s_k) - \gamma\circ\varphi(s_{k - 1}))\right| < \frac{\varepsilon}{2}
+    \end{equation*}
+
+    furthermore, whenever $s,t\in [c,d]$ with $|s - t| < \delta_1$, $|\varphi(s) - \varphi(t)| < \delta_2$ (note that we can do this since the function $\varphi$ is uniformly continuous).
+
+    Choose $\delta_2 > 0$ such that if $P = \{a = t_0 < t_1 < \cdots < t_n = b\}$ with $\|P\| < \delta_2$ and a tagging $\tau_k\in[t_{k - 1} t_k]$, then 
+    \begin{equation*}
+        \left|\int_\gamma f - \sum_{k = 1}^nf(\gamma(\tau_k))(\gamma(t_k) - \gamma(t_{k - 1}))\right| < \frac{\varepsilon}{2}
+    \end{equation*}
+
+    Finally, let $\sigma_k = \varphi(\tau_k)$, then we have through a trivial manipulation that 
+    \begin{equation*}
+        \left|\int_\gamma f - \int_{\gamma\circ\varphi} f\right| < \varepsilon
+    \end{equation*}
+\end{proof}
+
+
+\begin{definition}
+    Let $\sigma: [c,d]\to\bbC$ and $\gamma[a,b]\to\bbC$ be rectifiable paths. The path $\sigma$ is \textit{equivalent} to $\gamma$ if there is a function $\varphi: [c,d]\to[a,b]$ which is continuous, strictly increasing, and with $\varphi(c) = a$ and $\varphi(d) = b$ such that $\sigma = \gamma\circ\varphi$.
+
+    A \textit{curve} is an equivalence class of paths. A trace of a curve is the trace of any one of its members. A curve is smooth (piecewise smooth) if and only if some one of its representatives is smooth (piecewise smooth).
+\end{definition}
+
+\begin{definition}
+    If $\gamma$ is a rectifiable curve then denote by $-\gamma: [-b, -a]\to\bbC$ the curve defined by $(-\gamma)(t) = \gamma(-t)$ for $-b\le t\le -a$. This may also be denoted by $\gamma^{-1}$ (although the former is more customary). For some $c\in\bbC$, let $\gamma + c: [a,b]\to\bbC$ denote the curve defined by $(\gamma + c)(t) = \gamma(t) + c$.
+\end{definition}
+
+\begin{definition}
+    Let $\gamma[a,b]\to\bbC$ be a rectifiable path and for $a\le t\le b$, let $|\gamma|(t)$ be $V(\gamma, [a,t])$. That is,
+    \begin{equation*}
+        |\gamma|(t) = \sup\left\{\sum_{k = 1}^n|\gamma(t_k) - \gamma(t_{k - 1})| : \{a = t_0 < t_1 < \cdots < t_n = t\}\text{ is a partition of $[a,t]$}\right\}
+    \end{equation*}
+
+    Define 
+    \begin{equation*}
+        \int_\gamma f~|dz| = \int_a^bf(\gamma(t))~d|\gamma|(t)
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Let $\gamma$ be a rectifiable curve and suppose that $f$ is a function continuous on $\{\gamma\}$. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\int_\gamma f = -\int_{-\gamma}f$
+        \item $\left|\int_\gamma f\right| \le \int_\gamma|f|~|dz|\le V(\gamma)\sup\{|f(z)|: z\in\{\gamma\}\}$
+        \item If $c\in C$, then $\int_\gamma f(z)~dz = \int_{\gamma + c} f(z - c)~dz$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    All follow from definitions.
+\end{proof}
+
+\begin{theorem}[Fundamental Theorem of Calculus for Line Integrals]\thlabel{thm:fundamental-calculus-line-integrals}
+    Let $G$ be open in $\bbC$ and let $\gamma$ be a rectifiable path in $G$ with initial and end points $\alpha$ and $\beta$ respectively. If $f: G\to\bbC$ is a continuous function with a primitive $F: G\to\bbC$, then 
+    \begin{equation*}
+        \int_\gamma f = F(\beta) - F(\alpha)
+    \end{equation*}
+\end{theorem}
+
+We would require the following lemma in order to prove the above theorem 
+
+\begin{lemma}\thlabel{lem:polygonal-path-approximation}
+    If $G$ is an open set in $\bbC$, $\gamma: [a,b]\to G$ is a rectifiable path, and $f: G\to\bbC$ is continuous then for every $\varepsilon > 0$ there is a polygonal path $\Gamma$ in $G$ such that $\Gamma(a) = \gamma(a)$, $\Gamma(b) = \gamma(b)$ and $|\int_\gamma f - \int_\Gamma f| < \varepsilon$.
+\end{lemma}
+\begin{proof}
+We shall divide the proof into two cases: 
+\begin{itemize}
+    \item \underline{Case I:} $G$ is an open disk, say $B(c, r)$
+
+    Since $\{\gamma\}$ is compact, there is $\rho > 0$ such that $\{\gamma\}\subseteq \overline B(c, \rho)\subseteq G$. Consequently, we shall proceed with the assumption that $G = \overline B(c,\rho)$. Therefore, $G$ is compact and $f$ is uniformly continuous on $G$.
+
+    Let $\varepsilon > 0$. Then, there is a $\delta_1$ such that whenever $|s - t| < \delta_1$, $|f(s) - f(t)| < \varepsilon$. Similarly, there is $\delta_2 > 0$ such that whenever $|s - t| < \delta_2$, $|\gamma(s) - \gamma(t)| < \delta_1$.
+
+    Furthermore, due to \thref{thm:line-integral-exists}, there is a mesh size, $\delta_3$ such that for any partition $P = \{a = t_0 < t_1 < \cdots < t_n = b\}$ with $\|P\| < \delta_3$, 
+    \begin{equation*}
+        \left|\int_\gamma f - \sum_{k = 1}^n f(\gamma(\tau_k))(\gamma(t_k) - \gamma(t_{k - 1}))\right|
+    \end{equation*}
+
+    Let $\delta = \min\{\delta_2, \delta_3\}$ and $P = \{a = t_0 < t_1 < \cdots < t_n = b\}$ be a partition of $[a,b]$ with $\|P\| < \delta$. Define the polygonal path $\Gamma$ by 
+    \begin{equation*}
+        \Gamma(t) = \frac{1}{t_k - t_{k - 1}}\left((t_k - t)\gamma(t_{k - 1}) + (t - t_{k - 1})\gamma(t_k)\right)
+    \end{equation*}
+    which is essentially the straight line joining the points $\gamma(t_{k - 1})$ and $\gamma(t_k)$.
+
+    First, note that 
+    \begin{equation*}
+        \int_\Gamma f = \sum_{k = 1}^n\frac{\gamma(t_{k}) - \gamma(t_{k - 1})}{t_k - t_{k - 1}}\int_{t_{k - 1}}^{t_k}f(\Gamma(t))~dt
+    \end{equation*}
+
+    Then, we have 
+    \begin{align*}
+        \left|\int_\gamma f - \int_\Gamma f\right|&\le\varepsilon + \left|\sum_{k = 1}^n f(\gamma(\tau_k))(\gamma(t_{k}) - \gamma(t_{k - 1})) - \sum_{k = 1}^n\frac{\gamma(t_{k}) - \gamma(t_{k - 1})}{t_k - t_{k - 1}}\int_{t_{k - 1}}^{t_k}f(\Gamma(t))~dt\right|\\
+        &\le\varepsilon + \left|\sum_{k = 1}^n\frac{\gamma(t_{k}) - \gamma(t_{k - 1})}{t_k - t_{k - 1}}\int_{t_{k - 1}}^{t_k}f(\gamma(t_k)) - f(\Gamma(t))~dt\right|\\
+        &\le\varepsilon + \sum_{k = 1}^n\frac{|\gamma(t_k) - \gamma(t_{k - 1})|}{t_k - t_{k - 1}}\left|\int_{t_{k - 1}}^{t_k}f(\gamma(t_k)) - f(\Gamma(t))~dt\right|\\
+        &\le\varepsilon + \varepsilon\sum_{k = 1}^n|\gamma(t_k) - \gamma(t_{k - 1})| \le\varepsilon (1 + V(\gamma))
+    \end{align*}
+
+    This completes the proof for the first case.
+
+    \item \underline{Case II:} $G$ is arbitrary
+
+    Since $\{\gamma\}$ is compact, there is $r > 0$ such that for all $z\in\gamma$, $B(z, r)\subseteq G$. Using uniform continuity, there is $\delta > 0$ such that $|\gamma(s) - \gamma(t)| < r$ whenever $|s - t| < \delta$. Let $P = \{a = t_0 < t_1 < \cdots < t_n = b\}$ be a partition with $\|P\| < \delta$. Define $\gamma_k: [t_{k - 1}, t_k]\to\bbC$. Note that $\{\gamma_k\}\subseteq B(\gamma(t_{k - 1}), r)$ and thus, we can apply Case I to obtain a polygonal path $\Gamma_k$ such that $|\int_{\gamma_k} f - \int_{\Gamma_k} f| < \varepsilon/n$. The conclusion is now obvious by pasting together all the $\Gamma_k$'s.
+\end{itemize}
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:fundamental-calculus-line-integrals}]
+Again, we divide the proof into two cases: 
+\begin{itemize}
+    \item \underline{Case I:} $\gamma:[a,b]\to\bbC$ is piecewise smooth.
+
+    Then, we trivially have 
+    \begin{equation*}
+        \int_a^b f(\gamma(t))\gamma'(t)~dt = \int_a^b F'(\gamma(t))\gamma'(t)~dt = \int_a^b (f\circ\gamma)'(t)~dt = F(\gamma(b)) - F(\gamma(a))
+    \end{equation*}
+
+    \item \underline{Case II:} General case
+
+    Recall that a polygonal path is piecewise smooth. That is, for any polygonal path $\Gamma$ that begins at $\gamma(a)$ and ends at $\gamma(b)$, $\int_\Gamma f = F(\gamma(b)) - F(\gamma(a))$. Since any rectifiable curve can be approximated by a polygonal path, we have a suitable $\Gamma$ for every $\varepsilon > 0$ such that 
+    \begin{equation*}
+        \left|\int_\gamma f - (F(\beta) - F(\alpha))\right| = \left|\int_\gamma f - \int_\Gamma f\right| < \varepsilon
+    \end{equation*}
+    giving us the desired conclusion.
+\end{itemize}
+\end{proof}
+
+\begin{corollary}
+    Let $G$, $\gamma$ and $f$ satisfy the same hypothesis as in \thref{thm:fundamental-calculus-line-integrals}. If $\gamma$ is a closed curve, then 
+    \begin{equation*}
+        \int_\gamma f = 0
+    \end{equation*}
+\end{corollary}
+
+Recall that the fundamental theorem of calculus in real analysis claimed that each continuous function had a primitive. This is untrue in complex analysis. Consider the function $f(z) = |z|^2$. That is, $f(x + iy) = x^2 + y^2$. Suppose this has a primitive, say $F = U + iV$. Then, using \ref{eq:cauchy-riemann}, we must have 
+\begin{equation*}
+    \frac{\partial U}{\partial x} = \frac{\partial V}{\partial y} = x^2 + y^2\qquad\text{and}\qquad\frac{\partial U}{\partial y} = \frac{\partial V}{\partial x} = 0
+\end{equation*}
+
+This implies that $U(x,y) = u(x)$ for some function $u$, but this gives 
+\begin{equation*}
+    u'(x) = x^2 + y^2
+\end{equation*}
+which is obviously not possible.
+
+\section{Power Series for Analytic Functions}
+
+\begin{theorem}[Leibniz's Rule]\thlabel{thm:leibniz-rule}
+    Let $\varphi: [a,b]\times[c,d]\to\bbC$ be a continuous function and define $g:[c,d]\to\bbC$ yb 
+    \begin{equation*}
+        g(t) = \int_a^b \varphi(s,t)~ds
+    \end{equation*}
+
+    Then $g$ is continuous. Moreover, if $\frac{\partial\varphi}{\partial t}$ exists and is a continuous function on $[a,b]\times[c,d]$ then $g$ is continuously differentiable and 
+    \begin{equation*}
+        g'(t) = \int_a^b\frac{\partial\varphi}{\partial t}(s,t)~ds
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We shall first show that $g$ is continuous. Since $\varphi$ is continuous, it is uniformly continuous on $[a,b]\times[c,d]$. Choose some $t_0\in [c,d]$. Then, there is a $\delta$ such that whenever $|(s,t) - (s',t')| < \delta$, $|\varphi(s,t) - \varphi(s',t')| < \varepsilon$. Consequently, whenever $|t - t_0| < \delta$, $|g(t) - g(t_0)| < (b - a)\varepsilon$. This implies continuity.
+
+    Fix a point $t_0\in [c,d]$ and choose any $\varepsilon > 0$. Further, denote $\frac{\partial\varphi}{\partial t}$ by $\varphi_2$, which is given to be continuous, and thus, is uniformly continuous on $[a,b]\times[c,d]$. Let $\delta > 0$ be such that whenever $|(s,t) - (s',t')| < \delta$, $|\varphi_2(s',t') - \varphi(s,t)| < \varepsilon$. That is, 
+    \begin{equation*}
+        |\varphi_2(s,t) - \varphi_2(s,t_0)| < \varepsilon
+    \end{equation*}
+    whenever $|t - t_0| < \delta$ and $a\le s\le b$. Therefore, we have 
+    \begin{equation*}
+        \left|\int_{t_0}^t\varphi_2(s,\tau) - \varphi_2(s,t_0)~d\tau\right| < \varepsilon|t - t_0|
+    \end{equation*}
+
+    Note that $\Phi(t) = \varphi(s,t) - t\varphi_2(s,t_0)$ is a primitive of $\varphi_2(s,t) - \varphi_2(s,t_0)$. Due to the fundamental theorem of calculus, we must have 
+    \begin{equation*}
+        \left|\varphi(s,t) - \varphi(s,t_0) - (t-t_0)\varphi_2(s,t_0)\right|\le\varepsilon|t - t_0|
+    \end{equation*}
+    for all $s\in [a,b]$ whenever $|t - t_0| < \delta$. This is equivalent to writing 
+    \begin{equation*}
+        -\varepsilon\ge\frac{\varphi(s,t) - \varphi(s, t_0)}{t - t_0} - \varphi_2(s,t_0)\le\varepsilon
+    \end{equation*}
+
+    Integrating both sides with respect to $s$, we have 
+    \begin{equation*}
+        \left|\frac{g(t) - g(t_0)}{t - t_0} - \int_a^b\varphi_2(s,t_0)~ds\right|\le\varepsilon(b - a)
+    \end{equation*}
+    This shows that $g$ is differentiable and 
+    \begin{equation*}
+        g'(t) = \int_a^b\varphi_2(s,t)~ds
+    \end{equation*}
+    Obviously the right hand side of the above equality is continuous and thus $g$ is continuously differentiable.
+\end{proof}
+
+\begin{example}
+    Let $z$ be a complex number with $|z| < 1$. Then, 
+    \begin{equation*}
+        \int_0^{2\pi}\frac{e^{is}}{e^{is} - z}~ds
+    \end{equation*}
+    and equivalently stated, if $\gamma:[0,2\pi]\to\bbC$ is a closed path given by $\gamma(t) = e^{it}$, then 
+    \begin{equation*}
+        \int_\gamma\frac{1}{x - z}~dx = 2\pi
+    \end{equation*}
+\end{example}
+\begin{proof}
+    Define the function 
+    \begin{equation*}
+        g(t) = \int_{0}^{2\pi}\frac{e^{is}}{e^{is} - tz}~ds
+    \end{equation*}
+    for $0\le t\le 1$. Note that in this region, the function 
+    \begin{equation*}
+        \varphi(s,t) = \frac{e^{is}}{e^{is} - tz}
+    \end{equation*}
+    is well defined, since $|e^{is}| = 1 > |tz|$.
+
+    Using \thref{thm:leibniz-rule}, we have 
+    \begin{equation*}
+        g'(t) = \int_0^{2\pi}\frac{ze^{is}}{\left(e^{is} - tz\right)^2}~ds
+    \end{equation*}
+
+    Consider the function 
+    \begin{equation*}
+        \Phi(s) = \frac{iz}{e^{is} - tz}
+    \end{equation*}
+
+    Notice that 
+    \begin{equation*}
+        \Phi'(s) = \frac{ze^{is}}{e^{is} - tz}
+    \end{equation*}
+
+    Then, using \thref{thm:fundamental-calculus-line-integrals}, $g'(t) = \Phi(2\pi) - \Phi(0) = 0$. Therefore, $g$ is constant. The conclusion follows from calculating $t = 0$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:average-along-circle}
+    Let $f: G\to\bbC$ be analytic and suppose $\overline B(a,r)\subseteq G$ where $r > 0$. If $\gamma(t) = a + re^{it}$, $0\le t\le 2\pi$, then 
+    \begin{equation*}
+        f(z) = \frac{1}{2\pi i}\int_\gamma\frac{f(w)}{w - z}~dw
+    \end{equation*}
+    for $|z - a| < r$.
+\end{proposition}
+\begin{proof}
+    It is not hard to see that without loss of generality we may suppose that $a = 0$ and $r = 1$. Then, we would like to show that 
+    \begin{equation*}
+        f(z) = \frac{1}{2\pi}\int_0^{2\pi}\frac{f(e^{is})e^{is}}{e^{is} - z}~ds
+    \end{equation*}
+    for $|z| < 1$. This is equivalent to showing 
+    \begin{equation*}
+        \int_0^{2\pi}\left(\frac{f(e^{is})e^{is}}{e^{is} - z} - f(z)\right)~ds = 0
+    \end{equation*}
+
+    Define the function 
+    \begin{equation*}
+        \varphi(s,t) = \frac{f(z + t(e^{is} - z))e^{is}}{e^{is} - z} - f(z)
+    \end{equation*}
+    and $g(t) = \int_0^{2\pi}\varphi(s,t)~ds$. We would like to show that $g(1) = 0$.
+
+    Note that the function $\varphi(s,t)$ is well defined and continuously differentiable on the interval $[0,2\pi]\times[0,1]$ (it is here that we use the fact that $|z| < 1$). Then, 
+    \begin{equation*}
+        g'(t) = \int_0^{2\pi}f(z + t(e^{is} - z))e^{is}~ds
+    \end{equation*}
+
+    Consider the function $\Phi(s) = \frac{1}{it}f(z + t(e^{is} - z))$. Trivially note that $\Phi'(s) = f(z + t(e^{is} - z))e^{is}$. Using the fundamental theorem of calculus, we have 
+    \begin{equation*}
+        g'(t) = \Phi(2\pi) - \Phi(0) = 0
+    \end{equation*}
+    Implying that $g$ is constant on $[0,1]$. Recall that we have already calculated 
+    \begin{equation*}
+        g(0) = \int_0^{2\pi}\frac{f(z)}{e^{is} - z} - f(z)~ds = 0
+    \end{equation*}
+
+    This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $\gamma$ be a rectifiable curve in $\mathbb C$ and suppose that $F_n$ and $F$ are continuous functions on $\{\gamma\}$ such that the sequence $\{F_n\}$ converges uniformly to $F$. Then 
+    \begin{equation*}
+        \int_\gamma F = \lim_{n\to\infty}\int_\gamma F_n
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $\varepsilon > 0$ be given. Then, there is a positive integer $N$ such that for all $n\ge N$, $|F_n - F|\le\varepsilon/V(\gamma)$. Then, we have (for all $n\ge N$)
+    \begin{align*}
+        \left|\int_\gamma F - F_n\right|\le\int_\gamma|F - F_n|~|dz|\le\varepsilon
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:analytic-power-series-exists}
+    Let $f$ be analytic in $B(a,R)$; then $f(z) = \sum\limits_{n = 0}^\infty a_n(z - a)^n$ for $|z - a| < R$, where $a_n = \frac{1}{n!}f^{(n)}(a)$ and this series has radius of convergence $\ge R$.
+\end{theorem}
+\begin{proof}
+    Let $z\in B(a,R)$. Choose $|z - a| < r < R$ and define $\gamma$ to be the circle $\partial B(a,r)$. Then, using \thref{prop:average-along-circle}, 
+    \begin{equation*}
+        f(z) = \frac{1}{2\pi i}\int_\gamma \frac{f(w)}{w - z}~dw
+    \end{equation*}
+
+    Now, note that
+    \begin{equation*}
+        \frac{1}{w - z} = \frac{1}{w - a}\cdot\frac{1}{1 - \frac{z - a}{w - a}} = \frac{1}{w - a}\sum_{k = 0}^\infty\left(\frac{z - a}{w - a}\right)^k
+    \end{equation*}
+
+    Since $w\in\{\gamma\}$, there must exist $M > 0$ such that $|f(w)| < M$ for all $w\in\{\gamma\}$ and thus 
+    \begin{equation*}
+        \frac{|f(w)||z - a|^n}{|w - a|^{n + 1}}\le\frac{M}{r}\left(\frac{|z - a|}{r}\right)^{n}
+    \end{equation*}
+
+    Due to the Weierstrass $M$-test, the power series converges uniformly for $w\in\{\gamma\}$.
+    And due to the Weierstrass $M$-test, the power series converges uniformly for $w\in\{\gamma\}$. Therefore, we may write 
+    \begin{align*}
+        f(z) &= \frac{1}{2\pi i}\int_\gamma\frac{f(w)}{w - z}\\
+        &= \frac{1}{2\pi i}\int_\gamma \frac{f(w)}{w - a}\sum_{k = 0}^\infty\left(\frac{z - a}{w - a}\right)\\
+        &= \sum_{k=0}^\infty\left[\frac{1}{2\pi i}\int_\gamma\frac{f(w)}{(w - a)^{n + 1}}~dw\right](z - a)^n
+    \end{align*}
+
+    Define 
+    \begin{equation*}
+        a_n = \frac{1}{2\pi i}\int_\gamma\frac{f(w)}{(w - a)^{n + 1}}~dw
+    \end{equation*}
+
+    Then, the power series $\sum_{n = 0}^\infty a_n(z - a)^n$ converges to $f(z)$ on $B(a,r)$. Consequently, $f$ is infinitely differentiable at $z$ and thus, 
+    \begin{equation*}
+        a_n = \frac{1}{n!}f^{(n)}(a)
+    \end{equation*}
+
+    Now, the characterization of $a_n$ is independent of $\gamma$ and therefore $r$. Consequently, this power series converges to $f(z)$ whenever $|z - a| < R$. Therefore, the radius of convergence must be at least $R$.
+\end{proof}
+
+\begin{corollary}
+    If $f: G\to\bbC$ is analytic adn $a\in G$. Then $f(z) = \sum\limits_{n = 0}^\infty a_n (z - a)^n$ for $|z - a| < R$ where $R = d(a,\partial G)$.
+\end{corollary}
+
+\begin{corollary}
+    If $f: G\to\bbC$ is analytic, then it is infinitely differentiable.
+\end{corollary}
+
+\begin{corollary}
+    If $f: G\to\bbC$ is analytic and $\overline B(a,r)\subseteq G$, then 
+    \begin{equation*}
+        f^{(n)}(a) = \frac{n!}{2\pi i}\int_\gamma\frac{f(w)}{(w - a)^{n + 1}}~dw
+    \end{equation*}
+    where $\gamma(t) = a + re^{it}$ for $t\in[0,2\pi]$.
+\end{corollary}
+
+\begin{proposition}[Cauchy's Estimate]\thlabel{prop:cauchy-estimate}
+    Let $f$ be analtic in $B(a,R)$ and suppose $f(z)\le m$ for all $z\in B(a,R)$. Then 
+    \begin{equation*}
+        |f^{(n)}(a)|\le\frac{n!M}{R^n}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $r < R$ and $\gamma(t) = a + re^{it}$ for $0\le t\le 2\pi$.
+    \begin{equation*}
+        |f^{(n)}(a)|\le\frac{n!}{2\pi}\left|\int_\gamma\frac{f(w)}{(w - a)^{n + 1}}~ds\right|\le\int_\gamma\left|\frac{f(w)}{(w - a)^{n + 1}}\right|~|dw|\le\frac{n!M}{r^n}
+    \end{equation*}
+
+    The result follows by letting $r\to R^{-}$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:integral-closed-curve-disk}
+    Let $f$ be analytic in the disk $B(a,R)$ and suppose that $\gamma$ is a closed rectifiable curve in $B(a,R)$. Then 
+    \begin{equation*}
+        \int_\gamma f = 0
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    It suffices to show that $f$ has a primitive on $B(a,R)$ whence, we would be done by \thref{thm:fundamental-calculus-line-integrals}. Due to \thref{thm:analytic-power-series-exists}, there is a power series representation for $f$, 
+    \begin{equation*}
+        f(z) = \sum_{n = 0}^\infty a_n(z - a)^n
+    \end{equation*}
+    for $z\in B(a,R)$.
+
+    Define the function 
+    \begin{equation*}
+        F(z) = \sum_{n = 0}^\infty\frac{a_n}{n + 1}(z - a)^{n + 1}
+    \end{equation*}
+
+    Notice that the radius of convergence of $F$ is equal to that of $f$ and $F' = f$. As a result, $F$ is a primitive for $f$ on $B(a,R)$.
+\end{proof}
+
+\section{Zeros of Analytic Functions}
+
+\begin{definition}[Entire Function]
+    An \textit{entire function} si a function which isd efined and analytic in the whole complex plane $\bbC$.
+\end{definition}
+
+We immediately obtain the following result: 
+\begin{proposition}
+    If $f$ is an entire function, then $f$ has a power series expansion with infinite radius of convergence.
+\end{proposition}
+
+\begin{lemma}
+    No non-constant polynomial is bounded. That is, if $p(z) = z^n + a_{n - 1}z^{n - 1} + \cdots + a_0\in\bbC[z]$. Then, $\lim\limits_{z\to\infty} p(z) = \infty$.
+\end{lemma}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{theorem}[Liouville]\thlabel{thm:liouville}
+    If $f$ is a bounded entire function, then $f$ is constant.
+\end{theorem}
+
+In the proof of Liouville's Theorem, we shall require the following lemma:
+\begin{lemma}
+    If $G$ is open and connected and $f: G\to\bbC$ is differentiable with $f'(z) = 0$ for all $z\in G$, then $f$ is constant on $G$.
+\end{lemma}
+\begin{proof}
+    Choose any $z_0\in G$ and let $\omega_0 = f(z_0)$. Define $A = f^{-1}(\{z_0\})$. Obviously, $A$ is closed in $G$. Choose $a\in A$ and $\varepsilon > 0$ such that $B(a,\varepsilon)\subseteq G$. Pick any $z\in B(a,\varepsilon)$ with $a\ne z$. Define $g(t) = f((1 - t)a + tz)$. Note that $g'(s) = f'((1-t)a + tz)(z - a) = 0$, consequently, $g$ is constant and therefore, $f(z) = g(1) = g(0) = \omega_0$. Therefore, $B(a,\varepsilon)\subseteq A$ and thus $A$ is open. This shows that $A$ must be equal to $G$, completing the proof.
+\end{proof}
+
+\begin{proof}[Prof of \thref{thm:liouville}]
+    Let $M > 0$ be such that $|f(z)|\le M$ for all $z\in\bbC$. Choose any $a\in A$. Then, for any $R > 0$, applying \thref{prop:cauchy-estimate}, we have 
+    \begin{equation*}
+        |f'(a)|\le\frac{M}{R}
+    \end{equation*}
+    Letting $R\to\infty$, we have $f'(a) = 0$ for all $a\in\bbC$. We are now done due to the preceeding lemma.
+\end{proof}
+
+We may now prove the fundamental theorem of algebra: 
+
+\begin{theorem}[Fundamental Theorem of Algebra]
+    If $p(z)$ is a non-constant polyomial then there is a complex number $a$ with $p(a) = 0$.
+\end{theorem}
+\begin{proof}
+    Suppose not. Then, $f(z) = \frac{1}{p(z)}$ is entire. Since $\lim\limits_{z\to\infty} p(z) = \infty$, $\lim\limits_{z\to\infty} f(z) = 0$. Therefore, there is $\varepsilon$ such that whenever $|z| > \varepsilon$, $|f(z)| < 1$. This immediately implies that $f$ is bounded on $\bbC$, consequently is constant. A contradiction.
+\end{proof}
+
+\begin{theorem}
+    Let $G\subseteq\bbC$ be a region, and $f: G\to\bbC$ be an analytic function. Then the following are equivalent 
+    \begin{enumerate}[label=(\alph*)]
+        \item $f\equiv 0$ 
+        \item there is a point $a\in G$ succh that $f^{(n)}(a) = 0$ for each $n\ge 0$ 
+        \item the set $f^{-1}(\{0\})$ has a limit point in $G$ 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+It is clear that $(a)\Longrightarrow(b)\wedge(c)$. We shall show that $(c)\Longrightarrow(b)$ and $(b)\Longrightarrow(a)$.
+\begin{itemize}
+\item $\underline{(c)\Longrightarrow(b)}:$ Let $a$ be a limit point of the set $f^{-1}(\{0\})$. We shall show that $f^{(n)}(a) = 0$ for all $n\in\N_0$. Let $n$ be the smallest integer $\ge 1$ such that $f^{(r)}(a) = 0$ for all $r < n$. Now, there is $R > 0$ such that $B(a,R)\subseteq G$, and thus there is a power series expansion around $a$ for all $z\in B(a,R)$, given by 
+\begin{equation*}
+    f(z) = \sum_{k = n}^\infty a_k(z - a)^k
+\end{equation*}
+Define the function
+\begin{equation*}
+    g(z) = \sum_{k = 0}^\infty a_{n + k}(z - a)^k
+\end{equation*}
+Then $g(a) = a_n\ne 0$. It is not hard to see that $g(z)$ is analytic in $B(a,R)$, as a result, there is some $0 < r < R$ such that $g(z)\ne 0$ for each $z\in B(a,r)$. But since $a$ is a limit point of the set $f^{-1}(\{0\})$, there is some $b\ne a$ in $f^{-1}(\{0\})\cap B(a,r)$, and we have $0 = f(b) = (b - a)^ng(b)$, a contradiction. This shows that no such $n\in\N$ can exist.
+
+\item $\underline{(c)\Longrightarrow(b)}:$ Let $A = \{z\in G\mid f^{(n)}(z) = 0,~\forall~n\in\N\}$. We shall show that $A$ is clopen in $G$. Indeed, let $a\in A$. Since $G$ is open, there is $R > 0$ such that $B(a,R)\subseteq G$. Let $b\in B(a,R)$. Note that $f$ has a power series expansion around $a$ that is valid for all $z\in B(a,R)$. Since $a\in A$, this power series expansion is identically zero, as a result, $f(b) = 0$ and $B(a,R)\subseteq A$ and $A$ is open.
+
+Next, let $\{z_k\}$ be a sequence of points in $A$ converging to $a\in G$. Then, using continuity of $f^{(n)}$, we conclude that $f^{(n)}(a) = \lim f^{(n)}(z_k) = 0$ and $A$ is closed. This completes the proof.
+\end{itemize}
+\end{proof}
+
+\begin{lemma}\thlabel{lem:subset-circle-constant}
+    Let $G\subseteq\bbC$ be a region and $f: G\to\bbC$ is analytic such that $f(G)$ is a subset of a circle. Then $f$ is constant.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[Maximum Modulus Theorem]
+    Let $G\subseteq\bbC$ be a region and $f: G\to\bbC$ be an analytic function such that there is $a\in G$ with $|f(a)|\ge|f(z)|$ for all $z\in G$. Then $f$ is constant on $G$.
+\end{theorem}
+\begin{proof}
+    Let $r > 0$ be such that $B(a,r)\subseteq G$ and let $\gamma$ be the curve given by $\gamma(t) = a + re^{it}$. Then, we have 
+    \begin{align*}
+        f(a) &= \frac{1}{2\pi i}\int_{\gamma}\frac{f(w)}{w - a}~dw\\
+        &= \frac{1}{2\pi}\int_{0}^{2\pi}{f(a + re^{it})}\\
+    \end{align*}
+    and equivalently, 
+    \begin{equation*}
+        |f(a)|\le\frac{1}{2\pi}\int_{0}^{2\pi}|f(a + re^{it})|~dt\le|f(a)|
+    \end{equation*}
+    As a result,
+    \begin{equation*}
+        \int_{0}^{2\pi}|f(a)| - |f(a + re^{it})|~dt = 0
+    \end{equation*}
+    since the integrand is a continuous nonnegative function of $t$, it must be identically zero. As a result, $f$ maps the ball $B(a,r)$ to the circle $|z| = |f(a)|$. Due to \thref{lem:subset-circle-constant}, $f$ is constant on $B(a,r)$. Since $B(a,r)$ has at least one limit point in $G$ (say $a$ for example), it must be constant on $G$.
+\end{proof}
+
+\section{Cauchy's Theorem}
+
+\begin{definition}[Homotopy for Closed Curves]
+    Let $G\subseteq\bbC$ and $\gamma_0,\gamma_1: [0,1]\to G$ be two closed rectifiable curves. Then $\gamma_0$ is \textit{homotopic} to $\gamma_1$ in $G$ if there is a continuous function $Gamma:[0,1]\times[0,1]\to G$ such that 
+    \begin{equation*}
+        \begin{cases}
+            \Gamma(s,0) = \gamma_0(s)\text{ and }\gamma(s,1) = \gamma_1(s) & 0\le s\le 1\\
+            \Gamma(0,t) = \Gamma(1,t) & 0\le t\le 1
+        \end{cases}
+    \end{equation*}
+
+    We denote this by $\gamma_0\simeq\gamma_1\pmod G$.
+\end{definition}
+
+\begin{lemma}
+    The relation $\simeq$ is an equivalence relation over the set of all closed curves in $G$.
+\end{lemma}
+\begin{proof}
+    Standard proof from Algebraic Topology.
+\end{proof}
+
+% TODO: Present Cauchy's Theorem
+
+\begin{theorem}[Cauchy]\thlabel{thm:cauchy-version1}
+    Let $G\subseteq\bbC$ be a region and $f: G\to\bbC$ be analytic. Let $\gamma_0$ and $\gamma_1$ be homotopic closed curves. Then 
+    \begin{equation*}
+        \int_{\gamma_0} f = \int_{\gamma_1} f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $\Gamma: I^2\to G$ be the homotopy taking $\gamma_0$ to $\gamma_1$. Since $I^2$ is compact, so is $\Gamma(I^2)$. Consequently, due to the Lebesgue Number Lemma, there is $r > 0$ such that for all $a\in\Gamma(I^2)$, $B(a,r)\subseteq G$. Using the uniform continuity of $\Gamma$, there is $\delta > 0$ such that whenever $|(s',t') - (s,t)| < \delta$, $|\Gamma(s',t') - \Gamma(s,t)| < r$. Choose $n\in\N$ such that $\sqrt{2}/n < \delta$. Finally, let $\gamma_t$ denote the curve $\Gamma(s,t)$ where $t$ is fixed and $0\le s\le 1$.
+
+    Let $Z_{i,j}$ denote the point $\Gamma\left(\frac{i}{n},\frac{j}{n}\right)$ and $Q_{i,j}$ denote the square $\left(\frac{i}{n}, \frac{j}{n}\right)\to\left(\frac{i+1}{n}, \frac{j}{n}\right)\to\left(\frac{i+1}{n}, \frac{j+1}{n}\right)\to\left(\frac{i}{n}, \frac{j+1}{n}\right)\to\left(\frac{i}{n}, \frac{j}{n}\right)$. We shall show that 
+    \begin{equation*}
+        \int_{\Gamma(Q_{i,j})} f = 0
+    \end{equation*}
+    which would imply the desired conclusion through a straightforward inductive process.
+
+    But since $|z_1 - z_2| < \sqrt{2}/n < \delta$ for all $z_1,z_2\in Q_{i,j}$, we can conclude that $\Gamma(Q_{i,j})\subseteq B\left(Z_{i,j}, r\right)$, whence we are done due to \thref{prop:integral-closed-curve-disk}.
+\end{proof}
+
+\begin{corollary}
+    Let $G\subseteq\bbC$ be a region and $\gamma$ a closed rectifiable curve in $G$ which is nulhomotopic. Then, 
+    \begin{equation*}
+        \int_\gamma f = 0
+    \end{equation*}
+    for every analytic function $f$ defined on $G$.
+\end{corollary}
+
+\begin{corollary}
+    Let $G\subseteq\bbC$ be a region and $\gamma_0,\gamma_1$ be path homotopic curves. Then, 
+    \begin{equation*}
+        \int_{\gamma_0} f = \int_{\gamma_1} f 
+    \end{equation*}
+    for every analytic function $f$ defined on $G$.
+\end{corollary}
+
+\begin{corollary}
+    If $G\subseteq\bbC$ is simply connected then $\int_\gamma f = 0$ for every closed rectifiable curve $\gamma\subseteq G$ and every analytic function $f: G\to\bbC$.
+\end{corollary}
+
+\begin{theorem}
+    If $G$ is simply connected and $f: G\to\bbC$ is analytic in $G$, then $f$ has a primitive in $G$.
+\end{theorem}
+\begin{proof}
+    Fix some basepoint $a\in G$ and for each $z\in G$, define $F: G\to\bbC$ as $F(z) = \int_{\gamma} f$. Due to the previous result, this function is well defined. We shall show that $F$ is a primitive for $f$ on $G$. Let $z_0\in G$. Since $G$ is open, there is $r > 0$ such that $\overline B(z_0,r)\subseteq G$. Note that this is a convex set centered at $z_0$, as a result, all line segments between two points are contained in it. Choose some $z\in B(z_0, r)$. Then, 
+    \begin{align*}
+        \frac{F(z) - F(z_0)}{z - z_0} - f(z_0) = \frac{1}{z - z_0}\int_{[z_0, z]}(f(w) - f(z_0))~dw\\
+        \Longrightarrow
+        \left|\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)\right|\le\left|\frac{1}{z - z_0}\right|\int_{[z_0, z]}\left|(f(w) - f(z_0))\right|~|dw|\\
+    \end{align*}
+    Let $\varepsilon > 0$ be given. Note that $\overline{B}(z_0,r)$ is compact in $G$ and thus, $f$ is uniformly continuous. As a result, there is a small enough $r > 0$ such that for all $z\in B(z_0,r)$, $|f(z) - f(z_0)| < \varepsilon$. And thus, 
+    \begin{equation*}
+        \left|\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)\right|\le\varepsilon
+    \end{equation*}
+    which implies the desired conclusion.
+\end{proof}
+
+\begin{theorem}[Morera]\thlabel{thm:morera}
+    Let $G\subseteq\bbC$ be an open set and $f: G\to\bbC$ be a continuous function. If for every triangular path $\Delta$ in $G$, the value of $\int_\Delta f = 0$, then $f$ is analytic over $G$.
+\end{theorem}
+\begin{proof}
+    Note that it suffices to show this in the case $G = B(a,R)$ for some $a\in\bbC$ and $R > 0$, since for every $a\in G$, there is an open ball containing it and showing the analyticity of $f$ every such ball would imply the analyticity of $f$ on $G$.
+
+    Let $[x,y]$ denote the straight line segment that begins at $x$ and ends at $y$. Define the function $F: G\to\bbC$ by 
+    \begin{equation*}
+        F(z) = \int_{[a,z]} f
+    \end{equation*}
+
+    We shall show that $F' = f$, which would imply the analyticity of $F$ and therefore that of $f$. Choose some $z_0\in G$. For any $z\in G$, we have 
+    \begin{equation*}
+        F(z) - F(z_0) = \int_{[a,z]}f - \int_{[a,z_0]}f = \int_{[z_0, z]}f
+    \end{equation*}
+
+    Then, 
+    \begin{equation*}
+        \frac{F(z) - F(z_0)}{z - z_0} - f(z_0) = \frac{1}{z - z_0}\int_{[z_0, z]} \left(f - f(z_0)\right)
+    \end{equation*}
+
+    Choose $r > 0$ such that $\overline B(z_0, r)\subseteq G$. Since $f$ is continuous on $G$, it is uniformly continuous on $\overline B(z_0, r)$. Let $\varepsilon > 0$ be given. There is $\delta > 0$ such that whenever $|z - z_0| < \delta$, $|f(z) - f(z_0)| < \varepsilon$. Consequently, for all such $z$, we have 
+    \begin{equation*}
+        \left|\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)\right|\le\frac{1}{|z - z_0|}\int_{[z_0,z]}\left|f(t) - f(z_0)\right|~|dt|\le\varepsilon
+    \end{equation*}
+
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}[Goursat]\thlabel{thm:goursat}
+    Let $G\subseteq\bbC$ be an open set and $f: G\to\bbC$ be differentiable. Then, $f$ is analytic over $G$.
+\end{theorem}
+\begin{proof}
+    Due to Morera's Theorem, it suffices to show that for every triangular path $\Delta = [a,b,c,a]\subseteq G$, the value $\int_\Delta f = 0$. 
+
+    We shall define a sequence of closed triangular regions $\Delta = \Delta^{(0)}\supseteq\Delta^{(1)}\supseteq\cdots$. Obviously, since each triangular region is closed and bounded, it must be compact.
+
+    Divide the triangle $\Delta^{(i)}$ into four congruent triangles using the midpoint of each side. Let the smaller triangles be denoted by $\Delta_1,\ldots,\Delta_4$. Define 
+    \begin{equation*}
+        j = \operatorname{argmax}_{j\in\{1,\ldots,4\}}\left|\int_{\Delta_j} f\right|\qquad\text{and}\qquad\Delta^{(i + 1)} = \Delta_j
+    \end{equation*}
+
+    We have 
+    \begin{equation*}
+        \begin{cases}
+            \left|\int_{\Delta^{(i)}}f\right|\le 4\left|\int_{\Delta^{(i+1)}}f\right|\\
+            2\diam\Delta^{(i + 1)} = \diam\Delta^{(i)}\\
+            2V(\Delta^{(i + 1)}) = V(\Delta^{(i)})
+        \end{cases}
+    \end{equation*}
+
+    Then, using \thref{lem:cantor-intersection}, $\bigcap\limits_{i = 0}^\infty\Delta^{(i)}$ is singleton, say $\{z_0\}$. Choose some $\varepsilon > 0$. Since $f$ is differentiable at $z_0$, there is $\delta > 0$ such that 
+    \begin{equation*}
+        \left|\frac{f(z) - f(z_0)}{z - z_0} - f'(z_0)\right| < \varepsilon
+    \end{equation*}
+    whenever $|z - z_0| < \delta$. Choose $n\in\N$ such that $\diam\Delta^{(n)} = \frac{1}{2^n}\diam\Delta < \delta$. Therefore, $\Delta^{(n)}\subseteq B(z_0,\delta)$. Then, we have 
+    \begin{equation*}
+        \int_{\Delta^{(n)}} f = \int_{\Delta^{(n)}} f(z) - f(z_0) - (z - z_0)f'(z_0)~dz
+    \end{equation*}
+
+    whence 
+    \begin{align*}
+        \left|\int_{\Delta^{(n)}} f\right| &= \left|\int_{\Delta^{(n)}} f(z) - f(z_0) - (z - z_0)f'(z_0)~dz\right|\\
+        &\le\int_{\Delta^{(n)}}|f(z) - f(z_0) - (z - z_0)f'(z_0)|~|dz|\\
+        &\le\int_{\Delta^{(n)}}\varepsilon|z - z_0|~|dz|\\
+        &\le\varepsilon\diam\Delta^{(n)}V(\Delta^{(n)})\\
+        &=\varepsilon(\diam\Delta) V(\Delta)\frac{1}{4^n}
+    \end{align*}
+
+    from which it follows that 
+    \begin{equation*}
+        \left|\int_{\Delta} f\right|\le 4^n\left|\int_{\Delta^{(n)}}f\right|\le\varepsilon(\diam\Delta) V(\Delta)
+    \end{equation*}
+
+    Since $\varepsilon$ was arbitrary, we have the desired conclusion.
+\end{proof}
+
+Due to \thref{thm:goursat}, we may redefine an analytic function in its more accepted definition.
+\begin{definition}[Analytic]
+    Let $G\subseteq\bbC$ be open. Then $f: G\to\bbC$ is said to be analytic if it is differentiable over $G$.
+\end{definition}
+
+\section{Winding Numbers}
+
+\begin{proposition}
+    If $\gamma: [0,1]\to\bbC$ is a closed rectifiable curve and $a\notin\{\gamma\}$, then 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_{\gamma}\frac{dz}{z - a}
+    \end{equation*}
+    is an integer.
+\end{proposition}
+\begin{proof}
+The proof is divided into two parts. First, we prove the statement of the proposition for all piecewise smooth curves. 
+
+\begin{itemize}
+\item \underline{Case I:} $\gamma$ is piecewise smooth\newline
+
+\item \underline{Case II:} $\gamma$ is an arbitrary rectifiable curve
+\end{itemize}
+\end{proof}
+
+\begin{definition}[Winding Number]
+    If $\gamma$ is a closed rectifiable curve in $\bbC$ then for $a\notin\{\gamma\}$, 
+    \begin{equation*}
+        n(\gamma, a) = \frac{1}{2\pi i}\int_\gamma\frac{1}{z - a}~dz
+    \end{equation*}
+    is called the \textit{winding number} of $\gamma$ around $a$.
+\end{definition}
+
+\begin{theorem}[Cauchy's Integral Formula]\thlabel{thm:cauchy-integral-formula}
+    Let $f: G\to\bbC$ be analytic and $\gamma\subseteq G$ be a nulhomotopic rectifiable closed contour. Then, for $a\notin\{\gamma\}$,
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_{\gamma}\frac{f(z)}{z - a} = n(\gamma;a)f(a)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Note that the function $f(z) - f(a)$ is analytic and has a zero at $z = a$, therefore, there is an analytic function $g: G\to\bbC$ such that $f(z) - f(a) = g(z)(z - a)$. From here, we have that 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma\frac{f(z) - f(a)}{z - a} = \frac{1}{2\pi i}\int_{\gamma}g(z) = 0
+    \end{equation*}
+    and therefore, 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_{\gamma}\frac{f(z)}{z - a} = \frac{1}{2\pi i}\int_{\gamma}\frac{f(a)}{z - a} = n(\gamma;a)f(a)
+    \end{equation*}
+    where the last equality follows from the definition of the winding number.
+\end{proof}
+
+\begin{lemma}
+    Let $G\subseteq\bbC$ be a region and $\gamma\subseteq G$ be a closed rectifiable contour and $\varphi: \{\gamma\}\to\bbC$ be continuous. For each positive integer $m$, let 
+    \begin{equation*}
+        F_m(z) = \int_{\gamma}\frac{\varphi(w)}{(w - z)^m}~dw
+    \end{equation*}
+    Then $F_m$ is analytic on $\bbC\backslash\{\gamma\}$. Furthermore, $F_m'(z) = mF_{m + 1}'(z)$.
+\end{lemma}
+\begin{proof}
+    Fix some $a\in\bbC\backslash\{\gamma\}$. Now, there is $R > 0$ such that $B(a,R)\subseteq\bbC\backslash\{\gamma\}$. Consider some $z\in B(a,R)$. Then, 
+    \begin{align*}
+        F_m(z) - F_m(a) &= \frac{1}{2\pi i}\int_{\gamma}\varphi(w)\left[\frac{1}{(w - z)^{m}} - \frac{1}{(w - a)^m}\right]~dw\\
+        &= \frac{1}{2\pi i}\int_\gamma\varphi(w)\left(\frac{1}{w - z} - \frac{1}{w - a}\right)\left(\sum_{k = 0}^{m - 1}\frac{1}{(w - z)^k(w - a)^{m - k - 1}}\right)~dw\\
+        &= \frac{z - a}{2\pi i}\int_\gamma\varphi(w)\left(\sum_{k = 1}^{m}\frac{1}{(w - z)^k(w - a)^{m - k}}\right)~dw\\
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[Extended Cauchy's Integral Formula]
+    Let $f: G\to\bbC$ be an analytic function and $\gamma\subseteq G$ be a closed contour of bounded variation. Then, for every $a\in G\backslash\{\gamma\}$, and every nonnegative integer $n$, 
+    \begin{equation*}
+        n(\gamma; a)f^{(n)}(a) = \frac{1}{2\pi i}\int_\gamma\frac{f(w)}{(w - a)^{n + 1}}~dw
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Follows from the above lemma.
+\end{proof}
+
+\section{The Open Mapping Theorem}
+
+\begin{theorem}
+    Let $G\subseteq\bbC$ be a region and $f: G\to\bbC$ be analytic having zeros $a_1,\ldots,a_n$ counting multiplicity in $G$. Then, for any closed curve $\gamma\subseteq G$, we have
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma\frac{f'(z)}{f(z)} = \sum_{k = 1}^n n(\gamma;a_k)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Recall that if $f$ has a zero at $z = a$, then there is an analytic function $g: G\to\bbC$ such that $f(z) = (z - a)g(z)$. Continuing this way, we have an analytic function $h: G\to\bbC$ such that $f(z) = \prod_{k = 1}^n (z - a) h(z)$. Then, 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_{\gamma}\frac{f'(z)}{f(z)} = \frac{1}{2\pi i}\int_{\gamma}\sum_{k = 1}^n\frac{1}{z - a_k} + \frac{h'(z)}{h(z)}
+    \end{equation*}
+    Since the function $h$ has no zeros in $G$, the function $h'/h$ is analytic on $G$ and therefore, the integral is $0$. The conclusion now follows.
+\end{proof}
