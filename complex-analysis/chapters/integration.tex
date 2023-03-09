@@ -971,7 +971,7 @@ The proof is divided into two parts. First, we prove the statement of the propos
 
 \section{The Open Mapping Theorem}
 
-\begin{theorem}
+\begin{theorem}\thlabel{thm:zeros-multiple-to-simple}
     Let $G\subseteq\bbC$ be a region and $f: G\to\bbC$ be analytic having zeros $a_1,\ldots,a_n$ counting multiplicity in $G$. Then, for any closed curve $\gamma\subseteq G$, we have
     \begin{equation*}
         \frac{1}{2\pi i}\int_\gamma\frac{f'(z)}{f(z)} = \sum_{k = 1}^n n(\gamma;a_k)
@@ -983,4 +983,19 @@ The proof is divided into two parts. First, we prove the statement of the propos
         \frac{1}{2\pi i}\int_{\gamma}\frac{f'(z)}{f(z)} = \frac{1}{2\pi i}\int_{\gamma}\sum_{k = 1}^n\frac{1}{z - a_k} + \frac{h'(z)}{h(z)}
     \end{equation*}
     Since the function $h$ has no zeros in $G$, the function $h'/h$ is analytic on $G$ and therefore, the integral is $0$. The conclusion now follows.
+\end{proof}
+
+\begin{lemma}
+    Let $f$ be analytic on $B(a,R)$ for some $R > 0$. If $f(z) - \alpha$ has a zero of order $m$ at $z = a$, then there is an $\varepsilon > 0$ and $\delta > 0$ such that for $0 < |\zeta - \alpha| < \delta$, the equation $f(z) = \zeta$ has exactly $m$ simple roots in $B(a,\varepsilon)$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+In particular, if $m\ge 1$, then for each $\zeta\in B(\alpha,\delta)$, there is a corresponding $\xi\in B(a,\varepsilon)$ such that $f(\xi) = \zeta$. Therefore, $B(\alpha,\delta)\subseteq f(B(a,\varepsilon))$. 
+
+\begin{theorem}[Open Mapping Theorem]
+    Let $G\subseteq\bbC$ be a region and $f: G\to\bbC$ be analytic. Let $U$ be open in $G$. Then $f(U)$ is open in $\bbC$.
+\end{theorem}
+\begin{proof}
+    Choose some $a\in U$. Then, there is some $R > 0$ such that $B(a,R)\subseteq U$. Due to \thref{thm:zeros-multiple-to-simple} and the remark following it, there is $\varepsilon > 0$ and $\delta > 0$ such that $B(f(a),\delta)\subseteq f(B(a,\varepsilon))$. The conclusion is immediate now.
 \end{proof}
