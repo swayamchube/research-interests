@@ -1,0 +1,259 @@
+\section{Introduction}
+Throughout this section, $R$ denotes a general ring which need not be commutative.
+
+\begin{definition}[Module]
+    A left $R$-module is an abelian group $(M,+)$ along with a ring action, that is, a ring homomorphism $\mu: R\to\End(M)$.
+\end{definition}
+
+Henceforth, unless specified otherwise, an \textit{$R$-module} refers to a \textit{left $R$-module}. Trivially note that $R$ is an $R$-module, so is any ideal in $R$ and so is every quotient ring $R/I$ where $I$ is an ideal in $R$. When $R$ is a field, an $R$-module is the same as a vector space.
+
+Every abelian group $G$ trivially forms a $\Z$-module. Using this and the forthcoming \textit{Structure Theorem for Finitely Generated Modules over a PID}, we obtain the \textit{Structure Theorem for Finitely Generated Abelian Groups}.
+
+\begin{definition}[Submodule]
+    Let $M$ be an $R$-module. An $R$-submodule of $M$ is a subgroup $N$ of $M$ which is closed under the action of $R$.
+\end{definition}
+
+\begin{proposition}[Submodule Criteria]
+    Let $M$ be an $R$-module. Then $\emptyset\subsetneq N\subseteq M$ is a submodule if and only if for all $x,y\in N$ and $r\in R$, $x + ry\in N$.
+\end{proposition}
+\begin{proof}
+    Straightforward definition pushing.
+\end{proof}
+
+\begin{definition}[Module Homomorphism]
+    Let $M, N$ be $R$-modules. A \textit{module homomorphism} is a group homomorphism $\phi: M\to N$ such that for all $x\in M$ and $r\in R$, $\phi(rx) = r\phi(x)$.
+\end{definition}
+
+In other words, a module homomorphism is simply an $R$-linear map. 
+
+\begin{proposition}[Homomorphism Criteria]
+    Let $M, N$ be $R$-modules. Then $\phi: M\to N$ is an $R$-module homomorphism if and only if for all $x,y\in M$ and $r\in R$, $\phi(x + ry) = \phi(x) + r\phi(y)$.
+\end{proposition}
+\begin{proof}
+    Straightforward definition pushing.
+\end{proof}
+
+It is not hard to see, using the above proposition and the submodule criteria that the image of an $R$-module under a homomorphism is a submodule.
+
+For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M$ to $N$ by $\Hom_R(M,N)$. When the choice of the ring $R$ is clear from the context, we shall denote this set by $\Hom(M,N)$.
+
+\begin{proposition}
+    Let $M,N$ be $R$-modules. Then $\Hom(M,N)$ forms an $R$-module.
+\end{proposition}
+\begin{proof}
+    It is obvious that $\Hom(M,N)$ has the structure of an abelian group. Define the natural action by $(rf)(x) = rf(x)$. It is not hard to see that this action is well defined.
+\end{proof}
+
+\begin{proposition}
+    Let $\phi: M\to N$ be an $R$-module homomorphism. Then, for every $R$-module $P$, there is an induced $R$-module homomorphism $\overline\phi:\Hom(N,P)\to\Hom(M,P)$ and an induced $R$-module homomorphism $\widetilde\phi:\Hom(P,M)\to\Hom(P,N)$. 
+    
+    Equivalently phrased, $\Hom(-,P)$ is a contravariant functor while $\Hom(P,-)$ is a covariant functor.
+\end{proposition}
+\begin{proof}
+    We shall prove only the first half of the assertion since the second half follows from a similar proof. Define $\overline\phi$ using the following commutative diagram: 
+    \begin{equation*}
+    \xymatrix {
+        M\ar[r]^{\phi}\ar@{.>}[rd]_{f\circ\phi} & N\ar[d]^f\\
+        & P
+    }
+    \end{equation*}
+    To see that this is indeed an $R$-module homomorphism, we need only verify that for all $f,g\in\Hom(N,P)$ and all $r\in R$, $(f + rg)\circ\phi = f\circ\phi + rg\circ\phi$ which is trivial to check.
+\end{proof}
+
+\begin{definition}[Kernel, Cokernel]
+    Let $\phi:M\to N$ be an $R$-module homomorphism. We define 
+    \begin{equation*}
+        \ker\phi = \{x\in M\mid\phi(x) = 0\}\qquad\coker\phi = N/\phi(M)
+    \end{equation*}
+\end{definition}
+
+For an $R$-module $M$, define the annihilator of $M$ in $R$ as 
+\begin{equation*}
+    \Ann(M) = \{r\in R\mid rx = 0~\forall x\in M\}
+\end{equation*}
+It is trivial to check that $\Ann(M)$ is a left ideal in $R$, and if $R$ were commutative, it would be an ideal.
+
+\section{Free Modules}
+Throughout this section, $R$ denotes a general ring which need not be commutative. The content of this section is taken from \cite{blyth}. 
+
+We define the free module using a universal property and then provide a construction for it. This should establish uniqueness.
+
+\begin{definition}
+    Let $S$ be a non-empty set. A \textit{free module on $S$} is an $R$-module $F$ together with a mapping $f: S\to F$ such that for every $R$-module $M$ and every set map $g: S\to M$, there is a unique $R$-module homomorphism $h: F\to M$ such that the following diagram commutes: 
+    \begin{equation*}
+    \xymatrix{
+        S\ar[r]^g\ar[d]_f & M\\
+        F\ar@{.>}[ru]_{\exists! h}
+    }
+    \end{equation*}
+\end{definition}
+
+\section{Finitely Generated Modules}
+
+\begin{definition}[Finitely Generated Module]
+    An $R$-module $M$ is said to be finitely generated if there is a finite subset $S$ of $M$ which generates $M$. That is, there is no proper submodule $N$ of $M$ containing $S$.
+\end{definition}
+
+\begin{proposition}
+    An $R$-module $M$ is finitely generated if $M$ is isomorphic to a quotient of $R^{\oplus n}$ for some positive integer $n$.
+\end{proposition}
+\begin{proof}
+    We shall only prove the forward direction since the converse is trivial to prove. Suppose $M$ is finitely generated. Then, it is generated by a finite subset $S = \{x_1,\ldots,x_m\}$. Define the $R$-module homomorphism $\phi:R^{\oplus n}\to M$ by $(r_1,\ldots,r_n)\mapsto r_1x_1 + \cdots + r_nx_n$. From the first isomorphism theorem, we have $M\cong R^{\oplus n}/\ker\phi$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:CH-type}
+    Let $M$ be a finitely generated $A$-module and $\mathfrak a$ an ideal of $A$. Let $\phi\in\End(M)$ such that $\phi(M)\subseteq\mathfrak aM$. Then, there are $a_0,\ldots,a_{n - 1}\in\mathfrak a$ such that 
+    \begin{equation*}
+        \phi^n + a_{n - 1}\phi^{n - 1} + \cdots + a_0 = 0
+    \end{equation*}
+    as an element of $\End(M)$, where $a_k$ is treated as the homomorphism $x\mapsto a_kx$ in $\End(M)$.
+\end{proposition}
+\begin{proof}
+    Let $\{x_1,\ldots,x_n\}$ be a generating set for $M$. Then, for all $1\le i\le n$, there are coefficients $\{a_{i1},\ldots,a_{in}\}$ in $\mathfrak a$ such that 
+    \begin{equation*}
+        \phi(x_i) = \sum_{j = 1}^n a_{ij}x_j
+    \end{equation*}
+    We may rewrite this as 
+    \begin{equation*}
+        \sum_{j = 1}^n(\phi\delta_{ij} - a_{ij})x_j = 0
+    \end{equation*}
+    Let $B$ denote the matrix $(\phi\delta_{ij} - a_{ij})_{1\le i,j\le n}$. Then, multiplying by $\operatorname{adj}(B)$, we see that $\det(B)(x_j) = 0$ for all $1\le j\le n$ where $\det(B)$ is viewed as an element in $\End(M)$ and thus, is the zero map in $\End(M)$. It is not hard to see that $\det(B)$ is in the required form.
+\end{proof}
+
+\begin{lemma}[Nakayama]
+    Let $M$ be a finitely generated module and $\mathfrak a\subseteq\mathfrak R$ be an ideal such that $M = \mathfrak aM$. Then, $M = 0$. 
+\end{lemma}
+\begin{proof}
+    Let $\phi = \mathbf{id}$ be the identity homomorphism in $\End(M)$. Using \thref{prop:CH-type}, there are coefficients $a_0,\ldots,a_{n - 1}\in\mathfrak a$ satisfying the statement of the proposition. As a result, $x = 1 + a_{n - 1} + \ldots + a_0$ is the zero endomorphism. But since $a_{n - 1} + \ldots + a_0\in\mathfrak a\subseteq\mathfrak R$, $x$ is a unit and hence, $M = 0$.
+\end{proof}
+
+\subsection*{Over a PID}
+Throughout this section, let $R$ denote a principal ideal domain. 
+
+\section{Exact Sequences}
+
+\begin{definition}
+    A sequence of module homomorphisms 
+    \begin{equation*}
+        M\stackrel{f}{\longrightarrow} N\stackrel{g}{\longrightarrow}P
+    \end{equation*}
+    is said to be exact at $N$ if $\im f = \ker g$. A short exact sequence is a sequence of module homomorphisms: 
+    \begin{equation*}
+        0\longrightarrow M\stackrel{f}{\longrightarrow} N\stackrel{g}{\longrightarrow} P\longrightarrow 0
+    \end{equation*}
+    which is exact at $M$, $N$ and $P$.
+\end{definition}
+
+It is not hard to see that the sequence in the definition is short exact if and only if $f$ is injective, $g$ is surjective and $\im f = \ker g$.
+
+\begin{theorem}
+    For all $R$-modules $X$, $\Hom(X,-)$ is a left exact functor. That is, $0\longrightarrow M\longrightarrow N\longrightarrow P$ is exact if and only if $0\longrightarrow\Hom(X,M)\longrightarrow\Hom(X,N)\longrightarrow\Hom(X,P)$ is exact.
+\end{theorem}
+\begin{proof}
+    Consider the following commutative diagram where the row is exact.
+    \begin{equation*}
+    \xymatrix{
+        & & X\ar[ld]_u\ar[d]^v& \\
+        0\ar[r] & M\ar[r]^f & N\ar[r]^g & P
+    }
+    \end{equation*}
+    Let $u\in\ker\overline f$. Since $f$ is injective, it is obvious that $u$ must be the trivail homomorphism. Next, we must show that $\im\overline f = \ker\overline g$. First, note that $\overline f\circ\overline g = \overline{f\circ g} = 0$ since $\Hom(X,-)$ is a covariant functor. Finally, suppose $v\in\ker\overline g$. Then, $g\circ v = 0$, consequently, $\im v\subseteq\im f$. Now, since $f$ is injective, $f^{-1}(\im v)$ is a submodule of $M$ and hence, the map $w: X\to M$ given by $x\mapsto f^{-1}(v(x))$ is well defined and $f\circ w = v$. 
+
+    For the converse, simply note that $\Hom(R,M)$ is isomorphic to $M$.
+\end{proof}
+
+\subsection*{Diagram Chasing}
+
+\section{Tensor Product}
+
+Throughout this section, $R$ denotes a general ring which need not be commutative.
+
+\begin{definition}[Bilinear Map]
+    Let $M, N, P$ be $R$-modules. A map $T: M\times N\to P$ is said to be bilinear if for each $x\in M$, the mapping $T_x: N\to P$ given by $y\mapsto T(x,y)$ is $R$-linear and for each $y\in N$, the mapping $T_y: M\to P$ given by $x\mapsto T(x,y)$ is $R$-linear.
+\end{definition}
+
+Fix two $R$-modules $M$ and $N$. Let $\mathscr C$ denote the category of bilinear maps $T: M\times N\to P$ where $P$ is any $R$-module. A morphism between two bilinear maps $f: M\times N\to P_1$ and $g: M\times N\to P_2$ in this category is a module homomorphism $\phi: P_1\to P_2$ such that the following diagram commutes: 
+\begin{equation*}
+\xymatrix {
+    M\times N\ar[r]^-f\ar[d]_g & P_1\ar@{.>}[ld]^\phi\\
+    P_2
+}
+\end{equation*}
+
+A universal object in $\mathscr C$ is called the tensor product of $M$ and $N$ and is denoted by $M\otimes N$. In other words, the tensor product is an initial object in the category $\mathscr C$.
+
+\begin{definition}[Universal Property of the Tensor Product]
+    Let $M,N,P$ be $R$-modules and $T: M\times N\to P$ be a bilinear map. Then, there is a unique $R$-module homomorphism $\phi: M\otimes N\to P$ such that the following diagram commutes: 
+    \begin{equation*}
+    \xymatrix {
+        M\times N\ar[r]^-T\ar[d]_\varphi & P\\
+        M\otimes N\ar@{.>}[ru]_{\exists!\phi}
+    }
+    \end{equation*}
+\end{definition}
+
+Of course, having the universal property would imply that the tensor product, if it exists, is unique upto a unique isomorphism. We shall now construct a tensor product of $M$ and $N$.
+
+\subsection*{Constructing the Tensor Product}
+
+Let $F$ be the free $R$-module on $M\times N$. Let us denote the basis elements of $F$ by $e_{(x,y)}$ where $x\in M$ and $y\in N$. Now, for all $x,x_1,x_2\in M$, $y,y_1,y_2\in N$ and $r\in R$, let $D$ denote the submodule generated by elements of the form: 
+\begin{align*}
+    &e_{(x_1 + x_2, y)} - e_{(x_1,y)} - e_{(x_2,y)}\\
+    &e_{(x,y_1 + y_2)} - e_{(x,y_1)} - e_{(x,y_2)}\\
+    &e_{(rx,y)} - re_{(x,y)}\\
+    &e_{(x,ry)} - re_{(x,y)}
+\end{align*}
+
+Let $G = F/D$ and let $\varphi: M\times N\to G$ be the composition of the following maps: 
+\begin{equation*}
+    M\times N\hookrightarrow F\twoheadrightarrow G
+\end{equation*}
+
+Let $T: M\times N\to P$ be a bilinear map. Consider the following commutative diagram: 
+
+\begin{equation*}
+\xymatrix {
+    M\times N\ar[r]^-T\ar@{^{(}->}_{\iota}[d] & P\\
+    F\ar[r]_{\pi}\ar@{.>}[ru]|{\exists! f} & G\ar@{.>}[u]_{\exists!\phi}
+}
+\end{equation*}
+
+To show that existence of $\phi$, we must show that $D\subseteq\ker f$, since we can then finish using the universal property of the kernel. But this is trivial to check and follows from the fact that $T$ is a bilinear map and completes the construction.
+
+\begin{mdframed}
+    Similarly, we define the tensor product for a finite sequence of $R$-modules $\{M_i\}_{i = 1}^n$. That is, given a multilinear map $T:\prod\limits_{i = 1}^n M_i\to P$, there is a unique $R$-module homomorphism $\phi$ such that the following diagram commutes: 
+    \begin{equation*}
+    \xymatrix{
+        M_1\times\cdots\times M_n\ar[r]^-T\ar[d]_\varphi & P\\
+        M_1\otimes\cdots\otimes M_n\ar@{.>}[ru]_-{\exists!\phi}
+    }
+    \end{equation*}
+\end{mdframed}
+
+\subsection*{Properties of Tensor Product}
+
+Given two modules $M$ and $N$ with the canonical map $\varphi: M\times N\to M\otimes N$, we denote by $m\otimes n$, the element $\varphi(m,n)$ in $M\otimes N$.
+
+\begin{proposition}
+    Let $M, N, P$ be $A$-modules. Then, 
+    \begin{enumerate}[label=(\alph*)]
+    \item $M\otimes N\cong N\otimes M$ 
+    \item $(M\otimes N)\otimes P\cong M\otimes(N\otimes P)\cong M\otimes N\otimes P$ 
+    \item $M\oplus N\otimes P\cong(M\otimes P)\oplus(N\otimes P)$ 
+    \item $A\otimes M\cong M$
+    \end{enumerate}
+    Further, in each case, the isomorphism is unique.
+\end{proposition}
+\begin{proof}
+In each case, it suffices to show that both modules have the same universal property, which would imply a unique isomorphism between the two modules.
+\begin{enumerate}[label=(\alph*)]
+\item Consider the map $T: M\times N\to N\times M$ given by $(m,n)\mapsto(n,m)$. Let $\varphi: M\times N\to M\otimes N$ and $\varphi': N\times M\to N\otimes M$ be the canonical morphisms. Consider now the following commutative diagram: 
+\begin{equation*}
+\xymatrix{
+    M\times N\ar[r]^-T_-\sim\ar[d]_\varphi & N\times M\ar[d]^{\varphi'}\\
+    M\otimes N\ar@<-.5ex>@{.>}[r]_-{\phi} & N\otimes M\ar@<-.5ex>@{.>}[l]_-{\phi'}
+}
+\end{equation*}
+Define the map $\phi(m\otimes n) = n\otimes m$ and $\phi'(n\otimes m) = m\otimes n$. It is not hard to see that $\phi$ and $\phi'$ make the diagram commute. Further, since $\varphi'\circ T$ is bilinear, $\phi$ is the unique morphism making the diagram commute and similarly for $\phi'$. Finally, since $\phi$ and $\phi'$ are  
+\end{enumerate}
+\end{proof}

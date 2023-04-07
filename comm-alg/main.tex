@@ -1,0 +1,46 @@
+\documentclass[12pt]{report}
+\usepackage{../swayam}
+
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coker}{\operatorname{coker}}
+
+\newcommand{\setItemNumber}[1]{\setcounter{enumi}{\numexpr#1-1\relax}}
+
+\title{Commutative Algebra}
+\author{Swayam Chube}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document mainly contains terse notes of commutative algebra and solutions to exercises from \cite{atiyah-macdonald}. The three main references were \cite{atiyah-macdonald}, \cite{dummit-foote} and \cite{lang}. 
+
+Except for in the chapter on modules, all rings are assumed to be commutative unless stated otherwise. We use a uniform convention to represent a commutative ring with $A$ and a general ring with $R$. Similarly, we represent modules by one of $M, N, P$. A maximal ideal is generally denoted by $\mathfrak m$ while a prime ideal is denoted by $\mathfrak p$.
+\end{abstract}
+
+\tableofcontents
+
+
+\part{Theory Building}
+\chapter{Rings and Ideals}
+\input{chapters/rings-ideals.tex}
+
+\chapter{Modules}
+\input{chapters/modules.tex}
+
+% \setcounter{chapter}{0}
+% \part{Solutions to Atiyah-Macdonald}
+% \chapter{Rings and Ideals}
+% \input{exercises/01.tex}
+
+\bibliographystyle{plain}
+\bibliography{ref}
+\end{document}
