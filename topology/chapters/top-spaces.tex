@@ -291,6 +291,13 @@ For example every element of $\R$ is a limit point of $\Q$.
     Follows from the fact that a subset $A$ of a topological space is closed if and only if $A = \overline{A}$.
 \end{proof}
 
+\begin{theorem}
+    Let $X$ be a topological space and $A\subseteq X$. Then 
+    \begin{equation*}
+        \Int A = X\backslash(\overline{X\backslash A})
+    \end{equation*}
+\end{theorem}
+
 \begin{definition}[Hausdorff Spaces]
     A topological space $X$ is called a \textit{Hausdorff space} if for each pair $x_1$ and $x_2$ of distinct points of $X$, there exist neighborhoods $U_1$ and $U_2$ of $x_1$ and $x_2$ respectively that are disjoint.
 \end{definition}
@@ -453,6 +460,20 @@ It is important to note that a bijection $f:X\to Y$ that is continuous need not 
         f^{-1}(U\times V) = f_1^{-1}(U)\cap f_2^{-1}(V)
     \end{equation*}
     which is an intersection of two open sets and is therefore open.
+\end{proof}
+
+\begin{example}
+    Let $X$ be a Hausdorff space and $A\subseteq X$ such that there is a retraction $r: X\to A$. Show that $A$ is closed in $X$.
+\end{example}
+\begin{proof}
+    Let $x\notin A$ and $a = r(x)$. Let $U$ and $V$ be disjoint neighborhoods of $a$ and $x$ respectively. Let $W = r^{-1}(U)\cap V$. Then $W$ contains $x$. Suppose $W\cap A$ is nonempty, then there is $s\in W\cap A$, therefore, $s\in r^{-1}(U)$, consequently, $s\in U$ and $s\in V$, a contradiction since $U\cap V$ is empty. Hence $W$ is a neighborhood of $x$ disjoint from $A$ and $A$ is closed.
+\end{proof}
+
+\begin{lemma}
+    Let $p: X\to Y$ be a closed continuous surjection. Then for any $y\in Y$ and an open set $U$ containing $p^{-1}(y)$, there is an open set $W$ in $Y$ containing $y$ such that $p^{-1}(W)\subseteq U$.
+\end{lemma}
+\begin{proof}
+    Let $W = Y\backslash f(X\backslash U)$. It is not hard to argue that $W$ satisfies the required conditions.
 \end{proof}
 
 \section{Product Topology}
@@ -673,6 +694,43 @@ A \textbf{metric space} is a metrizable space $X$ together with a specific metri
     where $\overline{d}$ is the standard bounded metric on $\R$. This is called the \textit{uniform metric} on $\R^J$ and the topology it induces is called the \textit{uniform topology}.
 \end{definition}
 
+\begin{theorem}
+    $\R^\omega$ with the product topology is metrizable.
+\end{theorem}
+\begin{proof}
+    Let $\overline{d}:\R\times\R\to\R_{\ge0}$ be the standard bounded metric on $\R$. Define the function $D:\R^\omega\times\R^\omega\to\R_{\ge0}$ by 
+    \begin{equation*}
+        D(\mathbf{x},\mathbf{y}) = \sup_{i\in\N}\left\{\frac{\overline{d}(x_i, y_i)}{i}\right\}
+    \end{equation*}
+    We shall show that $D$ is a metric and induces the product topology on $\R^\omega$. 
+
+    That $D$ is positive semi-definite and symmetric is evident. To verify the triangle inequality, note that 
+    \begin{equation*}
+        \frac{\overline{d}(x_i, z_i)}{i}\le\frac{\overline{d}(x_i, y_i)}{i} + \frac{\overline{d}(y_i, z_i)}{i}\le D(\mathbf{x},\mathbf{y}) + D(\mathbb{y},\mathbf{z})
+    \end{equation*}
+    Consequently, we have 
+    \begin{equation*}
+        D(\mathbf{x},\mathbf{z}) = \sup\left\{\frac{\overline{d}(x_i,z_i)}{i}\right\}\le D(\mathbf{x},\mathbf{y}) + D(\mathbf{y},\mathbf{z})
+    \end{equation*}
+
+    All that remains to show is that $D$ induces the product topology on $\R^\omega$. Let $\mathbf{x}\in\R^\omega$ and $B\subseteq\R^\omega$ be a basis element in the product topology. Then, $B$ is of the form 
+    \begin{equation*}
+        B = U_1\times\cdots\times U_n\times\R\times\R\times\cdots
+    \end{equation*}
+
+    Where each $U_i$ is an open set in $\R$ under the standard topology. Since $\overline{d}$ induces the standard topology on $\R$, there is $r_i$ for each $1\le i\le n$ such that $B_{\overline{d}}(x_i,r_i)\subseteq U_i$. Now, let 
+    \begin{equation*}
+        r = \min_{1\le i\le n}\left\{\frac{r_i}{i}\right\}
+    \end{equation*}
+    It is not hard to see that $B_{D}(\mathbf{x}, r)\subseteq U$, consequently, the topology induced by $D$ is finer than the product topology.
+
+    Conversely, let $U$ be an open set in the topology induced by $D$ with $\mathbf{x}\in U$. Then, there is a basis element $B_{D}(\mathbf{x}, r)$ that is contained in $U$. Let $N$ be the smallest positive integer such that $\frac{1}{N} < r$. We shall show that the open set 
+    \begin{equation*}
+        V = (x_1 - r, x_1 + r)\times\cdots\times(x_N - r, x_N + r)\times\R\times\R\times\cdots
+    \end{equation*}
+    is contained in $B(x,r)$. Indeed, for any $\mathbf{y}\in V$, we have that $\overline{d}(x_i,y_i)\le\min\{r, 1\}$ and therefore, $D(\mathbf{x},\mathbf{y})\le r$, giving us the desired conclusion.
+\end{proof}
+
 \begin{theorem}[$\e-\delta$ Theorem]
     Let $f:X\to Y$; let $X$ and $Y$ be metrizable with metrics $d_X$ and $d_Y$ respectively. Then continuity of $f$ is equivalent to the requirement that tiven $x\in X$ and given $\e > 0$, there exists $\delta > 0$ such that 
     \begin{equation*}
@@ -785,17 +843,63 @@ We say a subset $C$ of $X$ is saturated with respect to the surjective map $p:X\
     We shall now show that $\T$ is unique. Suppose $\T'$ is another topology induced by $p$ on $A$. It is obvious that $\T\subseteq\T'$. Further, for any $V\in\T'$, $U = p^{-1}(V)\in\T_X$, therefore, $V = p(U)\in\T$, consequently $\T'\subseteq\T$ and we have the desired conclusion.
 \end{proof}
 
-\begin{definition}[Quotient Space]
-    Let $X$ be a topological space, and let $X^*$ be a partition of $X$ into disjoint subsets whose union is $X$. Let $p:X\to X^*$ be the surjective map that carries each point of $X$ to the element of $X^*$ containing it. In the quotient topology induced by $p$, the space $X^*$ is called a \textit{quotient space} of $X$.
-\end{definition}
+On the topological space $X$, consider an equivalence relation $\sim$ and let $X/\sim$ denote the collection of equivalence classes under the aforementioned relation. Then, the map $p: X\to X/\sim$ taking a point to the equivalence class containing it is a surjection. Due to the preceeding lemma, we may topologize $X/\sim$ such that $p$ is a quotient map. In this case, we say that $X/\sim$ is a quotient space of $X$.
 
 \begin{theorem}
-    Let $p:X\to Y$ be a quotient map; let $A$ be a subspace of $X$ that is saturated with respect to $p$; let $q:A\to p(A)$ be the map obtained by restricting $p$
+    Let $p: X\to Y$ be a quotient map and $A\subseteq X$ be a saturated subset of $X$ with respect to $p$. Let $q: A\to p(A)$ denote the restriction of the map $p$. Then 
     \begin{enumerate}
-        \item if $A$ is either open or closed in $X$, then $q$ is a quotient map 
-        \item if $p$ is either an open map or a closed map, then $q$ is a quotient map
+    \item If $A$ is either open or closed in $X$, then $q$ is a quotient map 
+    \item If $p$ is either an open or a closed map then $q$ is a quotient map.
     \end{enumerate}
 \end{theorem}
 \begin{proof}
-    
+\begin{enumerate}
+\item Suppose $A$ is open in $X$. Let $U\subseteq A$ be an open set that is saturated with respect to $q$. Then, there is $V\subseteq p(A)$ such that $U = q^{-1}(V) = p^{-1}(V)$. Where the last equality follows from the fact that $A$ is saturated with respect to $p$. Now, since $p$ is a quotient map, by definition, $V$ must be open in $Y$ and in the subspace topology, it must be open in $p(A)$, consequently $q$ maps saturated open sets to saturated open sets whence it is quotient.
+
+\item Now suppose $p$ is an open map and similarly, let $U\subseteq A$ be saturated with respect to $q$, thus, there is $V\subseteq p(A)$ with $U = q^{-1}(V) = p^{-1}(V)$. Now, there is some $W$ open in $X$ such that $U =  W\cap A$. We have that $V = p(U) = p(W\cap A) = p(W)\cap p(A)$ where the last equality follows from the fact that $A$ is saturated with respect to $p$. But since $p$ is an open map, $p(W)$ is open in $Y$, consequently, $V$ is open in $p(A)$. This completes the proof.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    The composition of two quotient maps is a quotient map.
+\end{lemma}
+\begin{proof}
+    Let $p: X\to Y$ and $q: Y\to Z$ be quotient maps. Then, the composition $r = q\circ p$ is a continuous surjection. Next, let $U\subseteq X$ be a saturated open set, that is, there is some $W\subseteq Z$ such that $V = r^{-1}(W) = p^{-1}\circ q^{-1}(W)$. As a result, $V$ is saturated with respect to $p$, implying that $q^{-1}(W)$ is open and since $q$ is an open map, $W$ is open in $Z$. 
+\end{proof}
+
+\begin{theorem}
+    Let $p: X\to Y$ be a quotient map. Let $Z$ be a topological space and $g: X\to Z$ which is constant on each fibre of $Y$ induced by $p$. Then $g$ induces a map $f: Y\to Z$ such that $f\circ p = g$. The induced map $f$ is continuous if and only if $g$ is continuous. Further, $f$ is a quotient map if and only if $g$ is a quotient map.
+    \begin{equation*}
+    \xymatrix {
+        X\ar[d]_p\ar[rd]^g\\
+        Y\ar@{.>}[r]_f & Z
+    }
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    That $f$ exists and is well defined is trivial. Further, if $f$ is continuous then $g$ is continuous and if $f$ is quotient then $g$ is quotient, since both properties are preserved under composition. 
+
+    Conversely, suppose $g$ is continuous. Let $U$ be an open set in $Z$. We would like to show that $V = f{^-1}(U)$ is open in $Y$, which is equivalent to showing that $p^{-1}(V)$ is open in $X$. But due to the commutativity of the above diagram, $p^{-1}(V) = g^{-1}(U)$ which is open since $g$ is continuous.
+
+    Suppose now that $g$ is quotient. Then $f$ is surjective and due to the commutativity of the diagram. Further, $U\subseteq Z$ is open if and only if $g^{-1}(U)$ is open in $X$, that is, $p^{-1}(f^{-1}(U))$ is open in $X$, which is equivalent to $f^{-1}(U)$ open in $Y$. This shows that $f$ must be a quotient map.
+\end{proof}
+
+\begin{corollary}
+    Let $g: X\to Z$ be a continuous surjection. Define 
+    \begin{equation*}
+        X^* = \{g^{-1}(\{z\})\mid z\in Z\}
+    \end{equation*}
+    and give $X^*$ the quotient topology with respect to the map that takes every point to its respective equivalence class.
+    \begin{enumerate}[label=(\alph*)]
+        \item The map $g$ induces a bijective continuous map $f: X^*\to Z$, which is a homeomorphism if and only if $g$ is a quotient map. 
+        \item If $Z$ is Hausdorff, then so is $X^*$
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+\hfill 
+\begin{enumerate}[label=(\alph*)]
+\item That $f$ is bijective is evident. Furthermore, since $g$ is continuous, so is $f$. If $f$ is a homeomorphism, then it is trivially a quotient map and thus $g$ is a quotient map. On the other hand, if $g$ is a quotient map, then so is $f$. A quotient map which is a bijection must be a homeomorphism (this is not hard to see).
+
+\item Let $u,v\in X^*$ and $a = f(u), b = f(v)$. Then, there are disjoint open sets $U$ and $V$ in $Z$ separating $a$ and $b$. Then $f^{-1}(U)$ and $f^{-1}(V)$ are disjoint open sets separating $u$ and $v$.
+\end{enumerate}
 \end{proof}

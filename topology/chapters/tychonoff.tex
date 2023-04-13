@@ -1,0 +1,196 @@
+\section{The Tychonoff Theorem}
+\subsection{Filters and Ultrafilters}
+
+\begin{definition}[Filter]
+    A \textit{filter} on a set $X$ is a subset $\mathcal F$ of $\mathcal P(X)$ satisfying: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\emptyset\notin\mathcal F$
+        \item If $A\in\mathcal F$ and $A\subseteq B\subseteq X$, then $B\in\mathcal F$
+        \item If $A,B\in\mathcal F$, then $A\cap B\in\mathcal F$
+    \end{enumerate}
+\end{definition}
+
+It is not hard to see, using $(a)$ and $(b)$ that $X\in\mathcal F$ for every filter $\mathcal F$ on $X$.
+
+A subset $\mathscr A$ of $\mathcal P(X)$ is said to have the \textit{finite intersection property} if the intersection of a finite subset of $\mathscr A$ is nonempty.
+
+\begin{lemma}\thlabel{lem:fip-contained-in-filter}
+    Let $\mathscr A\subseteq\mathcal P(X)$ have the finite intersection property. Then there is a minimal filter containing $\mathscr A$.
+\end{lemma}
+\begin{proof}
+    Define $\mathscr U$ to be the closure of $\mathscr A$ under finite intersection. Next, define 
+    \begin{equation*}
+    \mathcal F = \left\{S\subseteq X\mid\exists~A\in\mathscr U,~A\subseteq S\right\}
+    \end{equation*}
+    We shall show that $\mathcal F$ is a filter on $X$. Since $\mathscr U$ does not contain $\emptyset$, neither does $\mathcal F$. Now, suppose $A\in\mathcal F$ and $A\subseteq B$, then by definition, there is $C\in\mathscr U$ such that $C\subseteq A$, consequently, $C\subseteq B$ and $B\in\mathcal F$. Finally, if $A,B\in\mathcal F$, then there are $C,D\in\mathcal U$ such that $C\subseteq A$ and $D\subseteq B$. Then, $C\cap D\in\mathcal U$ such that $C\cap D\subseteq A\cap B$, and thus, $A\cap B\in\mathcal F$. This shows that $\mathcal F$ is a filter.
+
+    Let $\mathscr S$ be the set of all filters on $X$ containing $\mathscr A$. We know that $\mathscr S$ is nonempty due to the above discussion. Now, define 
+    \begin{equation*}
+        \mathscr F = \bigcap_{\mathcal F\in\mathscr S} \mathcal F
+    \end{equation*}
+    from here it is not hard to see that $\mathscr F$ is the unique minimal filter containing $\mathscr A$.
+\end{proof}
+
+\begin{definition}[Ultrafilter]
+    An \textit{ultrafilter} on $X$ is a filter that is maximal with respect to the containment (partial) order.
+\end{definition}
+
+\begin{theorem}\thlabel{thm:subset-charac-ultrafilter}
+    Let $\mathcal F$ be a filter on $X$. Then $\mathcal F$ is an ultrafilter if and only if for all $A\subseteq X$, either $A\in\mathcal F$ or $X\backslash A\in\mathcal F$ but not both.
+\end{theorem}
+\begin{proof}
+    Let $\mathcal F$ be an ultrafilter on $X$ and suppose $A\subseteq X$ such that $A\notin\mathcal F$ and $X\backslash A\notin\mathcal F$. Define $\mathcal F' = \mathcal F\cup\{A\}$. Then, $\mathcal F'\subseteq\mathcal P(X)$ and has the finite intersection property, consequently is contained in a filter $\overline{\mathcal F}$ due to \thref{lem:fip-contained-in-filter} and hence, $\mathcal F\subsetneq\mathcal F'\subseteq\overline{\mathcal F}$, a contradiction to the maximality of $\mathcal F$.
+
+    Conversely, let $\mathcal F$ be a filter on $X$ satisfying the statement of the theorem. Suppose there is a filter $\mathcal F'$ on $X$ satisfying $\mathcal F\subsetneq\mathcal F'$. Let $A\in\mathcal F'\backslash\mathcal F$, then by the hypothesis, $X\backslash A\in\mathcal F$, and thus $X\backslash A\in\mathcal F'$, whence $\emptyset = A\cap(X\backslash A)\in\mathcal F'$, a contradiction. Hence, $\mathcal F$ is an ultrafilter.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:filter-in-ultrafilter}
+    Every filter is contained in an ultrafilter.
+\end{lemma}
+\begin{proof}
+    Let $\mathcal F$ be a filter on a set $X$ and $\mathscr S$ be the set of all filters on $X$ containing $\mathcal F$. Notice that $\mathscr S$ forms a poset under containment. Let $\mathscr C$ be a chain in the poset $(\mathscr S,\subseteq)$. Define the collection 
+    \begin{equation*}
+        \mathscr F = \bigcup_{F\in\mathscr C} F
+    \end{equation*}
+    We claim that $\mathscr F$ is a filter on $X$. Indeed, $\emptyset\notin F$ for all $F\in\mathscr C$, whence $\emptyset\notin\mathscr F$. If $A,B\in\mathscr F$, then there is $F\in\mathscr C$ containing both $A$ and $B$ (since $\mathscr C$ is a chain). Therefore, $A\cap B\in F\subseteq\mathscr F$. Finally, suppose $A\in\mathscr F$ and $A\subseteq B$, then there is $F\in\mathscr C$ such that $A\in F$, from which it would follow that $B\in F\subseteq\mathscr F$.
+
+    Finally, since $\mathscr F$ is an element of $\mathscr S$, the chain $\mathscr C$ is bounded above. Invoking Zorn's Lemma, we have a maximal element in $\mathscr S$ with respect to inclusion, which is an ultrafilter containing $\mathcal F$.
+\end{proof}
+
+\begin{corollary}
+    Let $\mathscr A\subseteq\mathcal P(X)$ have the finite intersection property. Then there is a ultrafilter on $X$ containing $\mathscr A$.
+\end{corollary}
+
+\begin{proposition}\thlabel{prop:intersects-all-contained}
+    Let $\mathcal F$ be an ultrafilter on $X$ and $A\subseteq X$ such that $A$ intersects every element in $\mathcal F$. Then, $A\in\mathcal F$.
+\end{proposition}
+\begin{proof}
+    Suppose $A\notin\mathcal F$. Then, due to \thref{thm:subset-charac-ultrafilter}, $X\backslash A\in\mathcal F$, a contradiction to the hypothesis that $A$ intersects every element in $\mathcal F$.
+\end{proof}
+
+\begin{definition}[Filter Convergence]
+    A filter $\mathcal F$ on a topological space $X$ is said to converge to $x\in X$ if for every neighborhood $U$ of $x$, $U\in\mathcal F$.
+\end{definition}
+
+\begin{definition}[Pushforward]
+    Let $\mathcal F$ be a filter on $X$ and $f: X\to Y$ be a map of sets. Then 
+    \begin{equation*}
+        f_*\mathcal F = \{A\subseteq Y\mid f^{-1}(A)\in\mathcal F\}
+    \end{equation*}
+    is a filter on $Y$.
+\end{definition}
+
+\begin{theorem}
+    As defined above, $f_*\mathcal F$ is indeed a filter on $Y$. Further, if $\mathcal F$ is an ultrafilter, then so is $f_*\mathcal F$
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{First Proof}
+
+This version of the proof requires a more suitable characterization of compactness: 
+
+\begin{theorem}
+    A topological space $X$ is compact if and only if for every collection $\mathscr C$ of closed sets in $X$ having the finite intersection property, 
+    \begin{equation*}
+        \bigcap_{C\in\mathscr C} C
+    \end{equation*}
+    is nonempty.
+\end{theorem}
+
+We are now ready to prove the Tychonoff Theorem.
+
+\begin{proof}[Proof 1 of The Tychonoff Theorem]
+    Let $\mathscr A$ be a collection of subsets of $\prod\limits_{\alpha\in J} X_\alpha$ having the finite intersection property. It suffices to show that 
+    \begin{equation*}
+        \bigcap_{A\in\mathscr A} \overline A
+    \end{equation*}
+    is nonempty.
+
+    Let $\mathcal F$ be an ultrafilter containing $\mathscr A$. We shall show that 
+    \begin{equation*}
+        \bigcap_{F\in\mathcal F}\overline{F}
+    \end{equation*}
+    is nonempty, from which the result would follow. 
+
+    Since $\mathcal F$ has the finite intersection property, so does $\pi_\alpha(\mathcal F) = \{\pi_\alpha(F)\mid F\in\mathcal F\}$. Consequently, there is $x_\alpha\in X_\alpha$ such that $x_\alpha\in\overline{\pi_\alpha(F)}$ for all $F\in\mathcal F$. Let $\mathbf x = (x_\alpha)_{\alpha\in J}$. We claim that $\mathbf x\in\overline F$ for all $F\in\mathcal F$.
+
+    First, we shall show that every subbasis element containing $\mathbf x$ intersects every element of $\mathcal F$. Consider the subbasis element $\pi_\alpha^{-1}(U_\alpha)$ where $U_\alpha$ is a neighborhood of $x_\alpha$ in $X_\alpha$. Since $x_\alpha\in\overline{\pi_\alpha(F)}$ for all $F\in\mathcal F$, $U_\alpha\cap\pi_\alpha(F)\ne\emptyset$, consequently, $\pi_\alpha^{-1}(U_\alpha)\cap F\ne\emptyset$ for all $F\in\mathcal F$. From here, using \thref{prop:intersects-all-contained}, $\mathcal F$ contains every subbasis element containing $\mathbf x$ whence it contains every basis element containing $\mathbf x$.
+
+    Finally, let $U$ be an open set in $X$ containing $\mathbf x$. Then, $U$ contains a basis element, say $B$ that contains $\mathbf x$. Due to the preceeding paragraph, $B\in\mathcal F$, consequently, $B\cap F\ne\emptyset$ for all $F\in\mathcal F$ and therefore $U\cap F\ne\emptyset$ for all $F\in\mathcal F$ and $x\in\overline{F}$ for all $F\in\mathcal F$. This completes the proof.
+\end{proof}
+
+\subsection{Second Proof}
+We first characterise compactness using the convergence of filters and ultrafilters.
+
+\begin{theorem}[Ultrafilter Convergence Theorem]\thlabel{thm:compactness-convergence-filters}
+    Let $X$ be a topological space. $X$ is compact if and only if every ultrafilter $\mathcal F$ on $X$ converges to at least one point.
+\end{theorem}
+\begin{proof}
+    Suppose $X$ is compact. Since $\mathcal F$ has the finite intersection property, we must have $\bigcap\limits_{F\in\mathcal F}\overline F\ne\emptyset$, and thus there is $x\in X$ such that $x\in\overline F$ for all $F\in\mathcal F$. Let $U$ be a neighborhood of $x$ in $X$. Then $U\cap F\ne\emptyset$ for all $F\in\mathcal F$, and due to \thref{prop:intersects-all-contained}, $U\in\mathcal F$. Thus $\mathcal F$ converges to $x$.
+
+    Now, suppose $X$ is not compact. Then, there is an open cover $\{U_\alpha\}_{\alpha\in J}$ that has no finite subcover. Define $A_\alpha = X\backslash U_\alpha$. Then $\{A_\alpha\}$ has the finite intersection property and hence is contained in an ultrafilter $\mathcal F$. Suppose $\mathcal F$ does converge to a point $x\in X$. Choose $\beta\in J$ such that $x\in U_\beta$. By choice of $x$, we must have $U_\beta\in\mathcal F$, but this is a contradiction to $A_\beta\in\mathcal F$.
+\end{proof}
+
+We are now ready to prove the Tychonoff Theorem. 
+
+\begin{proof}[Proof 2 of The Tychonoff Theorem]
+    Let $\mathscr U$ be an ultrafilter on $X$. Then $(\pi_\alpha)_*\mathscr U$ is an ultrafilter on $X_\alpha$, consequently, converges to a point $x_\alpha\in X_\alpha$. Define the point $\mathbf x = (x_\alpha)_{\alpha\in J}$. We contend that $\mathscr U$ converges to $\mathbf x$. Indeed, let $U$ be an open set containing $\mathbf x$, then it contains a basis element $B = \prod_{\alpha\in J} U_\alpha$ containing $\mathbf x$. If we show that $B$ is contained in $\mathscr U$, then it would immediately imply that $U$ is contained in $\mathscr U$. But since each $U_\alpha$ is contained in $(\pi_\alpha)_*\mathscr U$, by definition, $\pi_\alpha^{-1}(U_\alpha)$ is contained in $\mathscr U$. Due to this and the fact that $\mathscr U$ is closed under finite intersection, we have the desired conclusion.
+\end{proof}
+
+\section{Stone-\v{C}ech Compactification}
+\begin{definition}[Compactification]
+    A compactification of a space $X$ is a compact Hausdorff space $Y$ containing $X$ as a subspace such that $\overline X = Y$. Two compactifications $Y_1$ and $Y_2$ of $X$ are said to be equivalent if there is a homeomorphism $h: Y_1\to Y_2$ such that $h(x) = x$ for all $x\in X$.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:compactification-exists}
+    Let $X$ be a sapce and $h: X\to Z$ be an imbedding of $X$ in the compact Hausdorff space $Z$. Then, there is a corresponding compactification $Y$ of $X$ such that there is an imbedding $H: Y\to Z$ that agrees with $h$ on $X$. Further, the compactification $Y$ is uniquely determined up to equivalence.
+\end{lemma}
+$Y$ is called the \textbf{compactification induced} by the imbedding $h$.
+
+\begin{theorem}\thlabel{thm:imbedding-theorem}
+    Let $X$ be Fr\'echet. Suppose $\{f_\alpha\}_{\alpha\in J}$ is an indexed family of continuous functions $f_\alpha: X\to\R$ satisfying the requirement that for each point $x_0\in X$ and each neighborhood $U$ of $x_0$, there is an index $\alpha$ such that $f_\alpha$ is positive at $x_0$ and vanishes outside $U$. Then the function $F: X\to\R^J$ defined by 
+    \begin{equation*}
+        F(x) = (f_\alpha(x))_{\alpha\in J}
+    \end{equation*}
+    is an imbedding of $X$ in $\R^J$. In particular, if $f_\alpha$ maps $X$ into $[0,1]$ for each $\alpha$, then $F$ imbeds $X$ in $[0,1]^J$.
+\end{theorem}
+\begin{proof}
+    That $F$ is a continuous function is obvious. Let $Z = F(X)$. Let $U$ be open in $X$. We shall show that $F(U)$ is open in $Z$. Choose some $z_0\in F(U)$, then, there is some $x_0\in U$ such that $F(x_0) = z_0$. There is some index $\beta$ such that $f_\beta(x_0) > 0$ and $f_\beta$ vanishes outside $U$. Let $W = \pi_\beta^{-1}((0,\infty))\cap Z$. We contend that $z_0\in W\subseteq F(U)$. That $z_0\in W$ is obvious. Now, let $z\in W$, then there is some $x\in X$ such that $F(x) = z$. Since $\pi_\beta(z) > 0$, $f_\beta(x) > 0$ and thus $x\in U$, consequently, $F(x)\in F(U)$. This completes the proof.
+\end{proof}
+
+    
+\begin{theorem}\thlabel{thm:extension-sc-r}
+    Let $X$ be completely regular. Then there is a compactification $Y$ of $X$ having the property that every bounded continuous map $f: X\to\R$ extends uniquely to a continuous map of $Y$ into $\R$.
+\end{theorem}
+\begin{proof}
+    Let $\{f_\alpha\}_{\alpha\in J}$ be the collection of all bounded continuou functions $f_\alpha: X\to\R$. Due to \thref{thm:imbedding-theorem} and the fact that complete regularity implies the separation of points from open sets with a bounded function, there is an imbedding $F: X\to Z = \prod_{\alpha\in J}[\inf f_\alpha(X), \sup f_\alpha(X)]$. Due to the Tychonoff Theorem, the space $Z$ is compact Hasudorff and hence, using \thref{lem:compactification-exists}, there is a compactification $Y$ of $X$ and a map $H: X\to Z$ which agrees with $F$ on $X$. Now, by taking the projection map $\pi_\alpha$, we have a continuous map $h$ that agrees with $f_\alpha$ on $X$.
+
+    The uniqueness of extension follows from a trivial property of a Hausdorff image space.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be completely regular and $Y$ be a compatification of $X$ satisfying the extension property of \thref{thm:extension-sc-r}. Given any continuous map $f: X\to K$ to a compact Hausdorff space $K$, the map $f$ extends uniquely to a continuous map $g: Y\to K$.
+\end{theorem}
+\begin{proof}
+    Since $K$ is compact Hausdorff and therefore completely regular, it may be imbedded into $[0,1]^J$ for some indexing set $J$. Let $f = (f_\alpha)$ be the imbedding. Then each map $f_\alpha: X\to[0,1]\hookrightarrow\R$ may be extended uniquely to a map $f_\alpha: Y\to\R$. Further, 
+    \begin{equation*}
+        f_\alpha(Y) = f_\alpha(\overline X)\subseteq\overline{f_\alpha(X)} = [0,1]
+    \end{equation*}
+    and thus, we have an extension $f: Y\to K$. This completes the proof.
+\end{proof}
+
+\subsubsection*{The Universal Property}
+
+Fix some completely regular space $X$ and consider the category $\mathscr C$ of all maps $f: X\to K$ for some compact Hausdorff space $K$. A morphism between two objects $f$ and $g$ in $\mathscr C$ is a continuous map $h$ such that the following diagram commutes: 
+\begin{equation*}
+\xymatrix {
+    X\ar[d]_f\ar[r]^g & K_2\\
+    K_1\ar@{.>}[ru]_h
+}
+\end{equation*}
+
+It is immediate from the definition of the category that the map $X\hookrightarrow Y$ is universal in this category and therefore is unique upto a unique isomorphism. 
+
+This object is known as the \textit{Stone-\v{C}ech compactification} of $X$ and is denoted by $\beta X$.

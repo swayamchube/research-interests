@@ -1,0 +1,53 @@
+\begin{definition}[Baire Space]
+    A space $X$ is said to be a \textit{Baire space} if the following condition holds: 
+    \begin{quote}
+        Given any countable collection $\{A_n\}$ of closed sets in $X$, each of which has empty interior in $X$, their union $\bigcup\limits_{n = 1}^\infty A_n$ also has empty interior in $X$.
+    \end{quote}
+\end{definition}
+
+\begin{lemma}
+    Let $X$ be a topological space. Then $X$ is Baire if and only if given any countable collection $\{U_n\}$ of open dense sets in $X$, their intersection $\bigcap\limits_{n = 1}^\infty U_n$ is dense in $X$.
+\end{lemma}
+
+\begin{lemma}
+    Let $X$ be a complete metric space and $A_1\supseteq A_2\supseteq\cdots$ be a descending chain of nonempty closed sets in $X$ with $\lim\limits_{n\to\infty}\operatorname{diam} A_n = 0$. Then, $\bigcap\limits_{n = 1}^\infty A_n$ is nonempty.
+\end{lemma}
+\begin{proof}
+    Using the Axiom of Choice, pick $x_n\in A_n$. It is not hard to show that these form a Cauchy sequence. Thus, must converge to some $x\in X$. Using simple arguments, it is easy to see that $x\in A_n$ for all $n\in\N$. Thus, $x\in\bigcap\limits_{n = 1}^\infty A_n$, and thus the intersection is nonempty.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a topological space. Then, $X$ is Baire if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $X$ is compact and Hausdorff .
+        \item $X$ is a complete metric space.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+Let $\{U_n\}$ be a countable collection of open, dense subsets of $X$. Let $G = \bigcap U_n$. Let $x\notin G$ and $U$ a neighborhood of $x$.
+\begin{enumerate}[label=(\alph*)]
+\item The intersection $U_1\cap U$ is a nonempty open set in $X$, because $U_1$ is dense in $X$. Pick some point $x_1\in U_1\cap U$. Using the regularity of $X$, there is an open set $V_1$ containing $x$ such that $\overline{V_1}\subseteq U_1$. Now, $V_1$ is an open set containing $x_1$, consequently, has nonempty intersection with $U_2$. As a result, there is a point $x_2$ in $V_1\cap U_2$ and proceeding similarly, we obtain a descending chain $\overline{V_1}\supseteq\overline{V_2}\supseteq\cdots$ of closed sets in $X$, all of which are contained in $U$. As a result, $V = \bigcap\overline{V_n}$ is contained in $U$ and due to Cantor's Intersection Theorem, is nonempty. Hence, 
+\begin{equation*}
+    \emptyset\ne\bigcap_{n = 1}^\infty\overline{V_n}\subseteq U\cap\bigcap_{n = 1}^\infty U_n = U\cap G
+\end{equation*}
+thus $G$ is dense in $X$.
+
+\item When $X$ is a complete metric space, we use a similar strategy as above. Just, instead of using regularity, we use the fact that any open ball contains a closed ball of arbitrarily small radius. Finally, we would have a descending sequence of nonempty closed sets $A_1\supseteq A_2\supseteq\cdots$ with $\lim\limits_{n\to\infty}\operatorname{diam} A_n = 0$, and due to the preceeding lemma, their intersection is nonempty.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    Any open subspace $Y$ of a Baire space $X$ is itself a Baire space.
+\end{lemma}
+\begin{proof}
+    Let $\{A_n\}$ be a countable collection of closed sets with empty interiors in $Y$. Let $\overline{A_n}$ denote the closure of $A_n$ in $X$. We contest that $\overline{A_n}$ has empty interior, for if $U\subseteq\overline{A_n}$, then it is not hard to show that $U\cap A_n\ne\emptyset$, from which it follows that $U\cap Y\subseteq A_n$, contradicting the fact that $A_n$ has an empty interior.
+
+    Thus, $\bigcup\overline{A_n}$ has empty interior in $X$. Now, if $U\subseteq\bigcup A_n$ in $Y$, then $U\subseteq\bigcup\overline{A_n}$, and $U$ is open in $X$ since $Y$ is open in $Y$, a contradiction. Thus $Y$ is Baire.
+\end{proof}
+
+\begin{corollary}
+    A locally compact Hausdorff space is Baire.
+\end{corollary}
+\begin{proof}
+    Let $X$ be a locally compact Hausdorff space and $Y$ its one point compactification. Since $Y$ is compact Hausdorff, it is Baire. Further, since $X$ is an open subset of $Y$, it must be Baire.
+\end{proof}

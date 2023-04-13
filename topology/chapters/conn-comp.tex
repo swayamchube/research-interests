@@ -65,11 +65,28 @@ It isn't hard to show the equivalence of the two statements.
     \end{enumerate}
 \end{definition}
 
+\begin{proposition}
+    Let $X$ be a well-ordered set. Then $X\times[0,1)$ in the dictionary order is a linear continuum.
+\end{proposition}
+\begin{proof}
+    \textcolor{red}{TODO: Add in later}
+    % TODO: Add this 
+\end{proof}
+
 \begin{theorem}
     If $L$ is a linear continuum in the order topology, then $L$ is connected and so are intervals and rays in $L$.
 \end{theorem}
 \begin{proof}
     We shall show that every convex subspace of $L$ is connected. Let $Y$ be a convex subspace of $L$ that is not connected and therefore has a separation $Y = A\cup B$. Choose $a\in A$ and $b\in B$ and let $A_0 = A\cap[a,b]$ and $B_0 = B\cap[a,b]$, each of which is open and nonempty in $[a,b]$ due to the subspace topology, which is the same as the order topology. Let $c = \sup A_0$, we know this exists because of the least upper bound property.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is an ordered set that is connected in the order topology, then $X$ is a linear continuum.
+\end{theorem}
+\begin{proof}
+    Let $x,y\in X$ with $x < y$. Suppose there is no $z$ such that $x < z < y$, then the sets $(-\infty, y)$ and $(x,\infty)$ form a separation of $X$, contradicting the connectedness.
+
+    Now, we shall show that $X$ has the least upper bound property. Let $A$ be a bounded subset of $X$. Suppose $A$ does not have a least upper bound. Let $B$ be the set of all upper bounds of $A$. We shall show that $B$ is clopen. Let $b\in B$ since $A$ does not have a least upper bound, there is $c\in X$ such that $c < b$ and $c\in B$. Thus $(c,\infty)$ is an open set contained in $B$ that contains $b$. Next, let $x\notin B$, then there is some $a\in A$ such that $x < a$, for if not, then $x$ would be an upper bound for $A$. Then, $(-\infty, x)$ is an open set disjoint from $B$ that contains $x$. As a result, $B$ is clopen, a contradiction.
 \end{proof}
 
 \begin{theorem}[Intermediate Value Theorem]
@@ -79,9 +96,62 @@ It isn't hard to show the equivalence of the two statements.
     Consider the sets $A = f(X)\cap(-\infty, r)$ and $B = f(X)\cap(r,\infty)$, both of which are open in $f(X)$. Suppose there is no $c$ such that $f(c) = r$, then $f(X) = A\cup B$, both of which are non-empty because $f(a)\in A$ and $f(b)\in B$ and is therefore a separation, a contradiction to the fact that a continuous function maps connected spaces to connected spaces.
 \end{proof}
 
+\begin{theorem}
+    Let $\{X_\alpha\}_{\alpha\in J}$ be a collection of connected spaces. Then the product space $\prod_{\alpha\in J} X_\alpha$ is connected.
+\end{theorem}
+\begin{proof}
+    Fix a point $\mathbf a = (a_\alpha)$ in $X$. For each finite subset $K$ of $J$, define the space $X_K := \{(x_\alpha)\mid x_\alpha = a_\alpha,~\alpha\notin K\}$. Then $X_K$ is homeomorphic to $\prod_{\alpha\in K} X_\alpha$ and therefore, connected. Let $Y$ be the union of all such $X_K$ for $K$ finite. We shall show that $\overline{Y} = X$, which would imply the connectedness of $X$. Let $\mathbf x = (x_\alpha)\in X$. And $U = \prod_{\alpha\in J} U_\alpha$ be a basic open set containing $\mathbf x$. Then, there are finitely many indices $\alpha_1,\ldots,\alpha_n$ such $U_{\alpha_i}\ne X_{\alpha_i}$. Let $\mathbf y\in Y$ be given by 
+    \begin{equation*}
+        y_\alpha = 
+        \begin{cases}
+            a_\alpha & \alpha\notin\{\alpha_1,\ldots,\alpha_n\}\\
+            x_\alpha & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    It follows that $\mathbf y\in U\cap Y$, consequently, $\mathbf x\in\overline{Y}$. This completes the proof.
+\end{proof}
+
 \begin{definition}[Path, Path Connected]
     Given points $x$ and $y$ of the space $X$, a \textit{path} in $X$ from $x$ to $y$ is a continuous map $f:[a,b]\to X$ of some closed interval in the real line into $X$, such that $f(a) = x$ and $f(b) = y$. A space $X$ is said to be \textit{path connected} if every pair of points of $X$ can be joined by a path in $X$.
 \end{definition}
+
+\begin{proposition}
+    A path connected space is connected.
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{example}
+    Let $\overline S$ denote the topologist's sine curve, which is the closure of 
+    \begin{equation*}
+        \left\{x\times\sin\left(\frac{1}{x}\right)\mid 0 < x\le 1\right\}
+    \end{equation*}
+    Then $\overline S$ is connected but not path connected.
+\end{example}
+\begin{proof}
+    Note that $\overline S = S\cup \{0\}\times[-1,1]$. Since $S$ is the continuous image of $(0,1]$, it is connected and therefore, so is $\overline S$. Suppose $\overline S$ were path connected. Then there is a continuous function $f:[0,1]\to\overline S$ such that $f(0) = 0\times 0$ and $f(1) = 1\times\sin 1$. Since $f^{-1}(0\times[-1,1])$ is closed in $[0,1]$, it has a supremum, say $a$, which it contains, owing to it being closed. Then, the restriction $\widetilde f:[a,1]\to\overline S$ is such that $f(x)\in\{0\}\times[-1,1]$ if and only if $x = a$. We may apply a suitable linear transformation to obtain a function $g: [0,1]\to\overline S$ such that $g(x)\in\{0\}\times[-1,1]$ if and only if $x = 0$.
+    
+    We may now construct continuous functions $x, y:[0,1]\to\R$ such that $g = x\times y$. Now, for any $n\in\N$, $x(1/n) > 0$ and hence, there is $0 < u < x(1/n)$ such that $\sin(1/u) = (-1)^n$. Due to the intermediate value theorem, there is $0 < t_n < 1/n$ such that $x(t_n) = u$. By construction, $y(t_n) = (-1)^n$. But notice that $t_n\to 0$ and since $y$ is continuous, we must have $y(t_n)\to y(0)$, a contradiction since the sequence $\{(-1)^n\}$ does not converge.
+\end{proof}
+
+\begin{example}
+    $\R_K$ is connected but not path connected.
+\end{example}
+\begin{proof}
+\begin{description}
+\item[$\R_K$ is connected: ] 
+    To do this, we show that the subspaces $(-\infty, 0)$ and $(0,\infty)$ are connected, from which we can infer that $\R = \overline{(-\infty, 0)}\cup\overline{(0,\infty)}$ is connected.
+
+    We contend that $(-\infty, 0)$ and $(0,\infty)$ inherit the standard topology as a subspace of $\R_K$. This is obvious for $(-\infty, 0)$. The topology inherited by $(0,\infty)$ is finer than the standard topology since $\R_K$ is finer than the standard topology. Let $x\in (a,b)\backslash K$ where $0\le a < b$. If $x > 1$, then it is trivial to see that there is a basis element $(c,d)$ of the standard topology such that $x\in (c,d)\subseteq(a,b)\backslash K$. On the other hand, if $x < 1$, then there is some $N$ such that $1/(N + 1) < x < 1/N$ and hence, we may choose $c,d$ such that 
+    \begin{equation*}
+        \frac{1}{N + 1} < c < x < d < \frac{1}{N}
+    \end{equation*}
+    Thus, we would have $x\in (c,d)\subseteq (a,b)\backslash K$. Thus, the topologies are equivalent on $(0,\infty)$.
+
+\item[$\R_K$ is not path connected: ] Suppose not, then there is a continuous function $f: [0,1]\to\R_K$ such that $f(0) = 0$ and $f(1) = 1$. Since $[0,1]$ is connected and compact, so is $f([0,1])$. Since $\R_K$ is strictly finer than the standard topology, a connected subspace of $\R_K$ must be an interval, since the latter are the only connected sets in the standard topology. Hence, $f([0,1])$ is a compact connected interval in $\R_K$ which contains $[0,1]$. Since $[0,1]$ is closed in $\R_K$ and is contained in a compact interval, it must be compact. This is untrue, since $[0,1]$ is compact Hausdorff as a subspace of the standard topology and the topology it inherits as a subspace of $\R_K$ is strictly finer than the former, and therefore not compact. This completes the proof.
+\end{description}
+\end{proof}
 
 \section{Compact Spaces}
 \begin{definition}[Cover]
@@ -115,10 +185,29 @@ This definition is extended to subspaces through the following lemma:
 \end{proof}
 
 \begin{theorem}
+    Every compact subspace of a metric space is closed and bounded.
+\end{theorem}
+\begin{proof}
+    Let $(X,d)$ be a metric space and $A\subseteq X$ be compact. That $A$ is closed, follows from the previous theorem. If $A = \emptyset$, then it is trivially bounded. Let $a\in A$ be any point. Notice that $\mathscr{A} = \{B(a,n)\mid n\in\N\}$ forms an open cover of $A$, and therefore has a finite subcover, implying boundedness.
+\end{proof}
+
+\begin{mdframed}[]
+    The converse of the above theorem is not true. Consider $\R$ equipped with the discrete metric. That is, 
+    \begin{equation*}
+        d(x,y) = 
+        \begin{cases}
+            1 & x \ne y\\
+            0 & x = y
+        \end{cases}
+    \end{equation*}
+    Note that $\R$ is now bounded since it is contained in $B(0,2)$ and is trivially closed. Furthermore, $\mathscr{A} = \{B_d(r,0.5)\mid r\in\R\}$ forms an open cover for $\R$ with no finite subcover since each open ball $B_d(r,0.5)$ is singleton.
+\end{mdframed}
+
+\begin{theorem}
     The image of a compact space under a continuous map is compact.
 \end{theorem}
 \begin{proof}
-    Let $f:X\to Y$ be continuous and $\mathscr{A}$ be an open cover for $f(X)$. Then $\mathscr{B} = \{f^{-1}(A)\mid A\in\mathscr{A}\}$ is an open cover for $X$ and therefore has a finite subcover, $\{f^{-1}(A_1),\ldots,f^{-1}(A_n)\}$. This immediately implies that the collection $\{A_1,\ldots,A_n\}$ is a finite subcover for $f(X)$ and thus $f(X)$ is compact.
+    Let $f:X\to Y$ be continuous and $\mathscr{A}$ be an open cover for $f(X)$. Then $\mathscr{B} = \{f^{-1}(A)\mid A\in\mathscr{A}\}$ is an open cover for $X$ and therefore has a finite subcover $\{f^{-1}(A_1),\ldots,f^{-1}(A_n)\}$. This immediately implies that the collection $\{A_1,\ldots,A_n\}$ is a finite subcover for $f(X)$ and thus $f(X)$ is compact.
 \end{proof}
 
 \begin{theorem}
@@ -128,14 +217,20 @@ This definition is extended to subspaces through the following lemma:
     Due to a preceeding theorem, $Y$ must be compact. Let $U$ be an open set in $X$. It suffices to show that $f(U)$ is open in $Y$. Since $X\backslash U$ is closed in $X$, due to a preceeding theorem, it must be compact, as a result, $Y\backslash f(U) = f(X\backslash U)$ must be compact and thus closed (since $Y$ is Hausdorff). Thus, $f(U)$ is open and $f$ is a homeomorphism.
 \end{proof}
 
+\begin{lemma}[Tube Lemma]
+    Let $Y$ be a compact topologial space and $X$ be any topological space. Let $N$ be an open set in the product topology $X\times Y$ that contains the ``slice'' $x\times Y$ for some $x\in X$. Then, there is an open set $W\subseteq X$ such that $N$ contains $W\times Y$.
+\end{lemma}
+\begin{proof}
+    For each element $y\in Y$, there is a basis element $U_y\times V_y\subseteq N$ containing $x\times y$. Therefore, $\{U_y\times V_y\}_{y\in Y}$ forms an open cover for $x\times Y$ and has a finite subcover, say $U_1\times V_1,\ldots, U_n\times V_n$. Let $W = \bigcap\limits_{i = 1}^n U_i$. Then $N$ contains $W\times Y$, which is obviously open in the product topology.
+\end{proof}
+
 \begin{theorem}
     The product of finitely many compact spaces is compact.
 \end{theorem}
-The following proof was taken from \href{https://math.stackexchange.com/a/980487}{here}.
 \begin{proof}
-    It suffices to show that the product of two compact sets is compact, since the theorem statement follows from induction. Let $X$ and $Y$ be compact spaces and $\mathscr{A}$ be an open cover for $X\times Y$. Then, for each point $(a,b)\in X\times Y$, there is an open set $A_{(a,b)}$ that contains it. Then, by definition, there is some basis element $U_{(a,b)}\times V_{(a,b)}$ that contains $(a,b)$. 
+    It suffices to show the theorem for a product of two compact spaces since the general result follows from induction.
 
-    Let $a$ be fixed and vary $b$ over $Y$. The collection $\{V_{(a,b)}\}$ thus obtained is an open cover for $Y$ and thus has a finite subcover $\{V_{(a,b_1(a))},\ldots,V_{(a,b_n(a))}\}$. Let now, $U_a = \bigcup_{i=1}^n U_{(a,b_i(a))}$ which is an open set that contains $a$. The collection $\{U_a\}$ forms an open cover of $A$ and thus has a finite subcover $\{U_{a_1},\ldots,U_{a_m}\}$. It then follows that the collection $\{O_{(a_i, b_j(a_i))}\}$ where $1\le i\le m$ and $1\le j\le n$ forms a finite subcover for $X\times Y$, thus finishing the proof.
+    Let $X$ and $Y$ be compact spaces and $\mathscr A$ be an open cover for $X\times Y$. For each $x\in X$, we note that $x\times Y$ is compact and therefore, has a finite subcover, $\{A_1,\ldots,A_n\}\subseteq X\times Y$. Let $N_x = \bigcup\limits_{i = 1}^n A_i$. Due to the Tube Lemma, there is an open set $W_x\subseteq X$ such that $W_x\times Y$ is contained in $N_x$. Finally, note that $\{W_x\}_{x\in X}$ is an open cover for $X$ and therefore has a finite subcover, say $\{W_{x_1},\ldots,W_{x_n}\}$, consequently, $\{N_{x_1},\ldots,N_{x_n}\}$ is a finite open cover for $X\times Y$. Since each $N_{x_i}$ is a union of a finite subset of $\mathscr A$, we have that $X\times Y$ is compact.
 \end{proof}
 
 \begin{definition}[Finite Intersection]
@@ -151,12 +246,41 @@ The following proof was taken from \href{https://math.stackexchange.com/a/980487
     Conversely, let $\mathscr{A}$ be an open cover for $X$ and $\mathscr{C} = \{X\backslash A\mid A\in\mathscr{A}\}$. It is then obvious that $\bigcap_{C\in\mathscr{C}} C$ is empty and thus, $\mathscr{C}$ may not have the finite intersection property. As a result, there is a finite subcollection of $\mathscr{A}$ that covers $X$. This finishes the proof.
 \end{proof}
 
+\begin{lemma}
+    Let $f: X\to Y$ where $Y$ is compact Hausdorff. Then $f$ is continuous if and only if the graph of $f$, $G_f = \{x\times f(x)\mid x\in X\}$ is closed in $X\times Y$.
+\end{lemma}
+\begin{proof}
+$(\Longrightarrow)$ Suppose $f$ is continuous. Let $x\times y\notin G_f$. Then, there are disjoint neighborhoods $U$ and $V$ of $y$ and $f(x)$. Now, let $\mathcal O = f^{-1}(V)$, which is open in $X$ since $f$ is continuous. Let $x'\times y'\in\mathcal O\times U$. Since $f(x')\in V$ and $y'\in U$, we see that $G_f\cap\mathcal O\times U$ is empty, thus $G_f$ is closed. \textcolor{red}{This direction of the proof only required $Y$ to be Hausdorff.}
+
+$(\Longleftarrow)$ Suppose $G_f$ is closed in $X\times Y$. Let $A\subseteq Y$ be closed. Then, $X\times A$ is closed in the product topology, as a result, $G_f\cap (X\times A)$ is closed in $X\times Y$. Using the compact Hausdorff-ness of $Y$, we know that the projection $\pi: X\times Y\to X$ is closed and therefore, $\pi(G_f\cap (X\times A))$ is closed in $X$. But note that 
+\begin{equation*}
+    \pi\left(G_f\cap(X\times A)\right) = \{x\in X\mid f(x)\in A\} = f^{-1}(A)
+\end{equation*}
+and hence, $f$ is continuous.
+\end{proof}
+
 \begin{theorem}
     Let $X$ be a simply ordered set having the least upper bound property. In the order topology, each closed interval in $X$ is compact.
 \end{theorem}
 \begin{proof}
-    \textbf{\textcolor{red}{TODO: Find a clean approach}}
+Let $[a,b]\subseteq X$ and $\mathscr A$ be an open cover for the same. We shall show that $\mathscr A$ admits a finite subcover.
+
+\textbf{Claim 1.} Let $x\in [a,b)$. Then, there is $y > x$ such that $[x,y]$ can be covered by at most $2$ elements of $\mathscr A$.
+
+\textbf{Proof.} If $x$ has an immediate successor, $y$ in $X$, that is, an element $y$ such that $(x,y)$ is empty, then the closed interval $[x,y]$ can be covered by at most $2$ elements of $\mathscr A$. Suppose not, then $x$ is contained in some open set $A\in\mathscr A$. Since $A$ is open, it is open in the subspace topology on $[x,b]$, consequently, it contains a basis element of the form $[x,c)$. Choose some $y$ in $[x,c)$, the existence of which is guaranteed by the fact that $x$ has no immediate successor. Then, $[x,y]$ is covered by the single element $A\in\mathscr A$.
+
+Let $\mathscr C$ be the set of all $x > a$ such that the interval $[a,x]$ can be covered by finitely many elements of $\mathscr A$. Since $\mathscr C$ is non-empty, we may let $c = \sup\mathscr C$.
+
+\textbf{Claim 2.} $c\in\mathscr C$ 
+
+\textbf{Proof.} Suppose not. First, note that $c\le b$. Therefore, there is an open set $A\in\mathscr A$ containing $c$. Consequently, it contains an interval of the form $(d,c]$. Notice that $(d,c)$ is non-empty, for if not, then $\sup\mathscr C\le d < c$. Let $e\in (d,c)$. Obviously, $e\in C$, therefore, the interval $[a,e]$ can be covered by finitely many elements of $\mathscr A$ and since the interval $[e,c]$ is contained in $A$, we conclude that $[a,c] = [a,e]\cup[e,c]$ can be covered by finitely many elements of $\mathscr A$, hence, $c\in\mathscr C$, a contradiction.
+
+Finally, we shall show that $c = b$. Suppose $c < b$, then there is $y$ satisfying $c < y\le b$ and the interval $[c,y]$ can be covered by finitely many elements of $\mathscr A$, consequently, $[a,y] = [a,c]\cup[c,y]$ can be covered by finitely many elements of $\mathscr A$, a contradiction to the definition of $c$. This shows that $c = b$ and completes the proof.
 \end{proof}
+
+\begin{corollary}
+    Let $I_o^2$ be the ordered square, that is, $I^2 = [0,1]\times[0,1]$ in the order topology. Then, $I_o^2$ is compact.
+\end{corollary}
 
 \begin{theorem}
     A subspace $A$ of $\R^n$ is compact if and only if it is closed and is bounded in the Euclidean metric $d$ or the square metric $\rho$.
@@ -263,6 +387,35 @@ The following proof was taken from \href{https://math.stackexchange.com/a/980487
     Coming back to the original proof. Let $\mathscr{A}$ be an open covering for $X$ with Lebesgue number $\delta$. Let $\e = \delta/3$. Consider the finite covering of $X$ with $\e$-balls. Each ball has a diameter of at most $2\delta/3$ and thus is contained in some element of $\mathscr{A}$. The collection of all such elements of $\mathscr{A}$ is a finite cover of $X$. Thus $X$ is compact. This finishes the proof.
 \end{proof}
 
+\begin{theorem}
+    Let $X$ be a compact metric space and $f: X\to X$ be a continuous map such that $d(f(x), f(y)) < d(x,y)$ for all $x,y\in X$. Then $f$ has a unique fixed point.
+\end{theorem}
+\begin{proof}
+    Define $A_n = f^{(n)}(X)$. Then, 
+    \begin{equation*}
+        A_{n + 1} = f^{(n)}(f(X))\subseteq f^{(n)}(X) = A_n
+    \end{equation*}
+    Let $A = \bigcap\limits_{n = 1}^\infty A_n$. Obviously, $f(A)\subseteq A$. We shall show the reverse inclusion. Choose some $x\in A$. Then, $x\in A_{n + 1}$ for all $n\in\N$. Hence, there is some $x_n\in X$ such that $x = f^{(n + 1)}(x_n)$. Consider now the sequence $y_n = f^{(n)}(x_n)$. Since every compact metric space is sequentially compact, the sequence $\{y_n\}$ has a convergent subsequence $\{y_{n_k}\}$, converging to some $a\in X$. Then, the sequence $\{x_{n_k} = f(y_{n_k})\}$ converges to $f(a)$, since $f$ is continuous. Finally, since $y_n\in A_n$, by definition, we see that eventually the sequence $\{y_{n_k}\}$ lies completely in $A_n$ for all $n\in\N$. Then, using the fact that each $A_n$ is closed, we must have that $a\in A_n$ for all $n\in\N$, whence $a\in A$.
+
+    This shows that $A = f(A)$. Suppose $A$ had more than one point. Now, since $A$ is closed in a compact space, it is compact and hence, there are points $x,y\in A$ such that $\diam(A) = d(x,y)$. From our hypothesis, there are $x_1,y_1\in X$ such that $f(x_1) = x$ and $f(y_1) = y$. Therefore, 
+    \begin{equation*}
+        d(x,y) = d(f(x_1), f(y_1)) < d(x_1, y_1)\le d(x,y)
+    \end{equation*}
+    a contradiction. Hence, $A$ is a singleton and contains the fixed point.
+\end{proof}
+
+Note that the above result does not hold for complete metric spaces. Consider the function $f:\R\to\R$ given by 
+\begin{equation*}
+    f(x) = \frac{1}{2}(x + \sqrt{x^2 + 1})
+\end{equation*}
+
+To see that this is shrinking map, invoke the mean value theorem along with the following inequality:
+\begin{equation*}
+    |f'(x)| = \left|\frac{1}{2}\left(1 + \frac{x}{\sqrt{x^2 + 1}}\right)\right| < 1
+\end{equation*}
+That $f$ does not have a fixed point is obvious.
+
+
 \section{Local Compactness}
 \begin{definition}[Local Compactness]
     A space $X$ is said to be \textit{locally compact} at $x$ if there is some compact subspace $C$ of $X$ that contains a neighborhood of $x$. If $X$ is locally compact at each of its points, $X$ itself is said to be \textit{locally compact}.
@@ -275,6 +428,8 @@ The space $\R^\omega$ is \textit{not} locally compact; none of its basis element
     (a_1, b_1)\times\cdots\times(a_n,b_n)\times\R\times\R\times\cdots
 \end{equation*}
 whose closure is obviously not compact.
+
+
 
 \begin{theorem}
     Let $X$ be a space. Then $X$ is locally compact Hausdorff if and only if there exists a space $Y$ satisfying the following conditions:
@@ -306,10 +461,10 @@ whose closure is obviously not compact.
     one notes that if $C$ is compact in $X$ and $U$ is open in $X$, then obviously $C\backslash U$ is compact in $X$ (the proof is Straightforward). Thus this is also of type (2). And the collection is indeed a topology.
 
     We now show that $Y$ is compact Hausdorff. Let $x,y\in Y$. If both lie in $X$, then there exist disjoint open sets $U$, $V$ in $X$ that contain $x$ and $y$ respectively. Now suppose $x\in X$ and $y =\infty$. Consider a compact set $C$ in $X$ containing a neighborhood of $x$. Then $Y\backslash C$ contains $Y$ and is disjoint from said neighborhood of $X$ and thus $Y$ is Hausdorff. Next, suppose $\mathscr{A}$ is an open cover of $Y$. Then, it must contain an element of the form $Y\backslash C$ where $C$ is compact in $X$, since all the open sets in $Y$ of type (1) do not contain $\infty$. Since $\mathscr{A}$ covers $Y$, $\mathscr{A}\backslash\{Y\backslash C\}$ covers $C$ and therefore has a finite subcollection that covers $C$. This along with $Y\backslash C$ is a finite subcover for $Y$ and thus $Y$ is compact.
-
+    
     Finally, we show that if $X$ is a subspace of $Y$ satisfying all the conditions, then $X$ is locally compact Hausdorff. The fact that $X$ is Hausdorff follows from the fact that $Y$ is Hausdorff. Let $x\in X$. We shall show that $X$ is locally compact at $x$. Since $Y$ is Hausdorff, there exist disjoint open sets in $Y$ containing $x$ and $\infty$ respectively. The set $Y\backslash V$ is closed in $Y$, but since $Y$ is compact, $Y\backslash V$ is also compact in $Y$ and is a subset of $X$ that contains $U$. This implies local compactness and finishes the proof.
 \end{proof}
 
 \begin{definition}[Compactification]
-    If $Y$ is a compact Hausdorff space and $X$ is a proper subspace of $Y$ whose closure equals $Y$, then $Y$ is said to be a \textit{compactification} of $X$. If $Y\backslash X$ equals a single point, then $Y$ is called the \textit{one-point compactification} of $X$.
+    A \textit{compactification} of a space $X$ is a compact Hausdorff space $Y$ containing $X$ as a subspace such that $\overline{X} = Y$. If $Y\backslash X$ is a singleton set, then $Y$ is called the \textit{one-point compactification} of $X$. Two compactifications $Y_1$ and $Y_2$ of $X$ are said to be \textit{equivalent} if there is a homeomorphism $h: Y_1\to Y_2$ inducing the identity on $X$.
 \end{definition}

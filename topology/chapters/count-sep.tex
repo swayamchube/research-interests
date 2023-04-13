@@ -57,14 +57,44 @@ We now show that the same isn't true for $\R^\omega$ equipped with the product t
 \end{definition}
 
 \begin{definition}[Dense]
-    A subset $A$ of a space $X$ is said to be \textit{dense} in $X$ if $\overline{A} = X$.
+    A subset $A$ of a space $X$ is said to be \textit{dense} in $X$ if $\overline{A} = X$. $X$ is said to be separable if it has a countable dense subset.
 \end{definition}
+
+\begin{theorem}
+    The following are true: 
+    \begin{enumerate}[label=(\alph*)]
+    \item The continuous image of a separable space is separable 
+    \item An open subspace of a separable space is separable
+    \item Let $\{X_\alpha\}_{\alpha\in J}$ be a collection of Hausdorff spaces with at least two points each. Then $\prod_{\alpha\in J}X_\alpha$ is separable if and only if each $X_\alpha$ is separable and $J$ has cardinality at most that of the continuum.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item Trivial.
+\item Trivial.
+\item Suppose $X = \prod_{\alpha\in J}X_\alpha$ is separable. Since projection is a continuous map, each $X_\alpha$ is continuous. We shall now show that the cardinality of $J$ is atmost that of the continuum. Since each $X_\alpha$ is Hausdorff, with at least two points, there are disjoint open sets $U_\alpha, V_\alpha$ in $X_\alpha$. Let $D$ be a countable dense subset of $X$. Define $D_\alpha = D\cap\pi_{\alpha}^{-1}(U_\alpha)$. We claim that the map $\psi: J\to 2^D$ given by $\alpha\mapsto D_\alpha$ is injective. Indeed, for $\alpha\ne\beta$, consider the open sets $U = \pi_{\alpha}^{-1}(U_\alpha)\cap\pi_{\beta}^{-1}(V_\beta)$ and $V = \pi_{\beta}^{-1}(U_\beta)$. Note that $U$ and $V$ are disjoint, further, the points in $U\cap D$ belong to $D_\alpha$ and due to the disjointness of $U$ and $V$, they are not in $D_\beta = V\cap D$. Finally, since $D$ is countable, the cardinality of $2^D$ is at most the cardinality of the continuum and thus $J$ has cardinality at most that of the continuum.
+
+Conversely suppose $J$ has cardinality atmost that of the continuum. Then, we may treat $J$ as a subset of $[0,1]$. Let $D_\alpha = \{d_{\alpha 1}, d_{\alpha 2},\ldots\}$ be a countable dense subset of $X_\alpha$. Let $\mathscr I$ be the countable collection of open intervals with rational endpoints in the order topology on $[0,1]$. Consider the collection of all even length tuples of the form $(I_1,\ldots,I_k;n_1,\ldots,n_k)$ where the $I_j$'s are disjoint intervals in $\mathscr I$ and $n_1,\ldots,n_k$ are positive integers. Define the point $p(I_1,\ldots,I_k;n_1,\ldots,n_k)$ by 
+\begin{equation*}
+    p_\alpha = 
+    \begin{cases}
+        d_{\alpha n_i} & \alpha\in J_i\text{ for some $i$}\\
+        d_{\alpha 1} & \text{otherwise}
+    \end{cases}
+\end{equation*}
+Obviously, the collection of such points, $D$, is countable. We shall show that this collection is dense. Consider a basic open set in $X$, which is of the form 
+\begin{equation*}
+    B = \pi_{\alpha_1}^{-1}(U_{\alpha_1})\cap\cdots\cap\pi_{\alpha_m}^{-1}(U_{\alpha_m})
+\end{equation*}
+Note that each $U_{\alpha_i}$ contains a point $d_{\alpha_in_i}$ of $D_{\alpha_i}$ for some $n_i\in\N$. Since the $\alpha_i$'s are finitely many, there are disjoint intervals $I_1,\ldots,I_m$ in $\mathscr I$ containing $\alpha_1,\ldots,\alpha_m$ respectively. Then, the point $p(J_1,\ldots,J_m;n_1,\ldots,n_m)$ belongs to $B$ and the set $D$ is dense as desired.
+\end{enumerate}
+\end{proof}
 
 \begin{theorem}
     Suppose that $X$ is second countable. Then 
     \begin{enumerate}
         \item $X$ is Lindel\"of 
-        \item There exists a countable subset of $X$ that is dense in $X$
+        \item $X$ is separable
     \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -74,6 +104,25 @@ We now show that the same isn't true for $\R^\omega$ equipped with the product t
 
         \item Using the Axiom of Choice, choose a set $D = \{x_n\mid x_i\in B_i\}$. For each $x\in X\backslash D$, and an open set $U$ containing $x$, then there is a basis element $B_j$ containing $x$ that is contained in $U$. Therefore, $x_j\in U$. This implies $x\in\overline{D}$.
     \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Let $(X,d)$ be a metric space. Then, the following are equivalent
+    \begin{enumerate}
+        \item $X$ is second countable 
+        \item $X$ is Lindel\"of
+        \item $X$ is separable
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\hfill 
+\begin{itemize}
+    \item \noindent$\underline{(1)\Longrightarrow(2)\wedge(1)\Longrightarrow(3)}$ Proved above.
+
+    \item \noindent$\underline{(3)\Longrightarrow(1)}$ Let $D = \{x_1,x_2,\ldots\}$ and $\Q = \{q_1,q_2,\ldots\}$. We shall show that the collection $\{B(x_i, q_j)\}_{i,j\in\N\times\N}$ is a basis for the metric topology on $X$.
+
+    \item \noindent$\underline{(2)\Longrightarrow(1)}$ Let $\mathscr A_n$ denote the open cover $\{B(x,\frac{1}{n})\}_{x\in X}$. Since $X$ is Lindel\"of, it has a countable subcover, say $\mathscr B_n$. Define $\B = \bigcup\limits_{n\in\N}\mathscr B_n$ which is countable. We shall show that $\B$ is a basis for the metric topology on $X$. Let $U$ be a neighborhood of $x\in X$. Then, there is $r\in\R^+$ such that $B(x,r)\subseteq U$. Choose $N\in\N$ such that $\frac{1}{N} < r/2$. Let $B$ be the element of $\mathscr B_N$ that contains $x$. Then, for any $y\in B_N$, $d(x,y)\le\frac{2}{N} < r$ and $y\in U$. Consequently, $B\subseteq U$ and we are done.
+\end{itemize}
 \end{proof}
 
 \section{Separation Axioms}
@@ -232,6 +281,43 @@ It is not hard to see that
 \begin{proof}
     \textbf{\textcolor{red}{TODO: Add in later}}
 \end{proof}
+\begin{corollary}
+    A locally compact Hausdorff space is completely regular.
+\end{corollary}
+
+\begin{proposition}
+    Let $X$ be locally compact Hausdorff, $K$ a compact subset and $A$ a disjoint closed subset. Then, there is a continuous function $f: X\to[0,1]$ such that $f(K) = 0$ and $f(A) = 1$.
+\end{proposition}
+
+\begin{theorem}
+    Let $X$ be a locally compact Hausdorff space and $K\subseteq X$ be compact. Let $V$ be an open set containing $K$. Then there is a continuous function $f: X\to[0,1]$ with compact support such that $f(K) = 1$ and $\operatorname{supp}(f)\subseteq V$.
+\end{theorem}
+\begin{proof}
+    First, we show that there is a compact set $K'$ and an open set $U$ such that $K\subseteq U\subseteq K'\subseteq V$. For each $a\in K$, there is a neighborhood $U_a$ with compact closure such that $a\in\overline{U_a}\subseteq V$. Since $\{U_a\}$ forms an open cover for $K$, it has a finite cover, say $\{U_{a_1},\ldots,U_{a_n}\}$. Define $U = U_{a_1}\cup\cdots\cup U_{a_n}$ and $K' = \overline{U_{a_1}}\cup\cdots\cup\overline{U_{a_n}}$. 
+
+    Due to the previous proposition, there is a continuous function such that $f(K) = 1$ and $f(X\backslash U) = 0$. Obviously, $\{x\in X\mid f(x)\ne 0\}\subseteq K'$ and since $K'$ is closed, $\operatorname{supp}(f)\subseteq K'$ whence it is compact. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $X$ be normal and $A\subseteq X$. Then, there is a function $f: X\to[0,1]$ such that $f^{-1}(\{0\}) = A$ if and only if $A$ is a closed $G_\delta$ set.
+\end{lemma}
+\begin{proof}
+    Suppose there is a function $f: X\to[0,1]$ such that $f^{-1}(\{0\}) = A$. Then, obviously $A$ is closed, further 
+    \begin{equation*}
+        A = \bigcap_{n = 1}^\infty f^{-1}\left(\left[0,\frac{1}{n}\right)\right)
+    \end{equation*}
+    whence $A$ is $G_\delta$.
+
+    Conversely, suppose $A$ is a closed $G_\delta$ subset of $X$. Then there is a countable collection of open sets $\{U_n\}$ such that $A = \bigcap_{n = 1}^\infty U_n$. Using normality and the Urysohn Lemma, there is a continuous function $f_n: X\to[0,1]$ such that $f(A) = \{0\}$ and $f(X\backslash U_n) = \{1\}$. Define the function 
+    \begin{equation*}
+        f = \sum_{n = 1}^\infty 2^{-n}f_n
+    \end{equation*}
+    Using the Weierstrass M-test, it is not hard to see that the convergence of the series to $f$ is uniform and thus $f$ is a continuous function satisfying the required prooperties.
+\end{proof}
+
+\begin{theorem}
+    
+\end{theorem}
 
 \section{The Urysohn Metrization Theorem}
 \begin{theorem}[Urysohn Metrization Theorem]

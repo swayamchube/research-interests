@@ -1,0 +1,298 @@
+\section{Complete Metric Spaces}
+
+\begin{definition}[Completeness]
+    A metric space is said to be complete if every Cauchy sequence converges.
+\end{definition}
+
+\begin{lemma}
+    A metric space $X$ is complete if and only if every Cauchy sequence has a convergent subsequence.
+\end{lemma}
+\begin{proof}
+    One direction is trivial. Suppose now that every Cauchy sequence has a convergent subsequence. Let $\{x_n\}$ be a Cauchy sequence and $\{x_{n_k}\}$ be the convergent subsequence that converges to $x\in X$. Let $\varepsilon > 0$. Then there is $K\in\N$ such that for all $k\ge K$, $d(x_{n_k}, x) < \varepsilon/2$. Further, since the sequence is Cauchy, there is $N\in\N$ such that for all $m,n\ge N$, $d(x_m,x_n) < \varepsilon/2$. Let $l\ge K$ be such that $n_l\ge N$. As a result, for all $m\ge n_l$, 
+    \begin{equation*}
+        d(x_m, x)\le d(x_m, x_{n_l}) + d(x_{n_l}, x) < \varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    A compact metric space is complete. Further, $\R^n$ is complete for each $n\in\N$.
+\end{corollary}
+\begin{proof}
+    The first assertion follows from the fact that every compact metric space is sequentially compact. Since every Cauchy sequence is bounded, it is contained in some closed $n$-cell, which is compact. The conclusion follows.
+\end{proof}
+
+\begin{lemma}
+    Let $X = \prod_{\alpha\in J} X_\alpha$ in the product topology. Let $\mathbf x_n$ be a sequence of points of $X$. Then $\mathbf x_n\to\mathbf x$ if and only if $\pi_{\alpha}(\mathbf x)\to\pi_\alpha(\mathbf x)$.
+\end{lemma}
+\begin{proof}
+    The forward direction follows trivially from the fact that $\pi_\alpha: X\to X_\alpha$ is a continuous function. Conversely, suppose $\pi_\alpha(\mathbf x_n)\to\pi_\alpha(\mathbf x)$ for each $\alpha\in J$. Let $U$ be an open set containing $\mathbf x$, then $U$ contains a basis element of the form $\prod_{\alpha\in J} U_\alpha$ where $U_\alpha = X_\alpha$ for all but finitely many $\alpha\in J$, say $\alpha_1,\ldots,\alpha_k$. For each $\alpha_i$, there is $N_i\in\N$ such that for all $n\ge N_i$, $\pi_{\alpha_i}(\mathbf x_n)\in U_{\alpha_i}$. Finally, letting $N = \max\{N_1,\ldots,N_k\}$, we have that $\mathbf x_n\in\prod_{\alpha\in J}U_\alpha$ for all $n\ge N$.
+\end{proof}
+
+Note that the above lemma is obviously not true for the box topology. Indeed, consider the sequence $\left\{\frac{1}{n}\times\frac{1}{n}\times\cdots\right\}_{n\in\N}$, in $\R^\omega$ with the box topology. This sequence obviously does not converge to $\mathbf 0$, but each component does converge to $0$.
+
+\begin{theorem}
+    If the space $Y$ is complete in the metric $d$, then the space $Y^J$ is complete in the uniform metric $\overline\rho$ induced by $d$ where $J$ is any indexing set.
+\end{theorem}
+\begin{proof}
+    Let $\varepsilon > 0$ be given. Set $\delta = \varepsilon/3$. There is $N\in\N$ such that for all $m,n\ge N$, $\overline{\rho}(f_m, f_n) < \delta$, consequently, $\overline d(f_m(\alpha), f_n(\alpha)) < \delta$ for each $\alpha\in J$. Using the completeness of $Y$, the sequence $\{f_n(\alpha)\}$ converges to say $f(\alpha)$ where $f: J\to Y$. Now, for each $\alpha\in J$, there is $M_\alpha$ such that for all $m\ge M_\alpha$, $\overline d(f_m(\alpha), f(\alpha)) < \delta$. As a consequence, $\overline{d}(f(\alpha), f_n(\alpha)) < 2\delta$ for each $n\ge N$ and thus $\overline\rho(f, f_n)\le 2\delta < \varepsilon$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $(X,d)$ be a complete metric space and $A\subseteq X$ be closed. Then $A$ is complete.
+\end{proposition}
+\begin{proof}
+    Let $\{a_n\}$ be a Cauchy sequence in $A$. Then, it is Cauchy in $X$, consequently, converges to a point $x\in X$. Since $A$ is closed, $x\in\overline A = A$, and the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a topological space and $Y$ a metric space. Then $\mathcal C(X,Y)$ denotes the subspace of continuous functions from $X$ to $Y$ of $Y^X$ and $\mathcal B(X,Y)$ denotes the subspace of bounded functions from $X$ to $Y$ of $Y^X$.
+\end{definition}
+
+\begin{theorem}
+    If the space $Y$ is complete in the metric $d$ and $X$ a topological space, then $Y^X$, $\mathcal C(X,Y)$ and $\mathcal B(X,Y)$ are complete in the uniform metric corresponding to $d$.
+\end{theorem}
+\begin{proof}
+    We shall show that $\mathcal C(X,Y)$ and $\B(X,Y)$ are closed in $Y^X$. The closedness of $\mathcal C(X,Y)$ follows from the uniform limit theorem. To show that $\B(X,Y)$ is closed, we shall show that its complement is open. Let $f: X\to Y$ be an unbounded function. We shall show that $B_{\overline\rho}(f,1/2)$ is disjoint from $\B(X,Y)$. Let $g\in B_{\overline\rho}(f,1/2)$. Fix some basepoint $y_0\in Y$ and $M > 0$. There is $x\in X$ such that $d(y_0, f(x)) > M + 1/2$. As a result, $d(y_0, g(x)) > M$, this completes the proof.
+\end{proof}
+
+\section{Completion of a Metric Space}
+
+\begin{theorem}
+    Let $(X,d)$ be a metric space. Then there is a complete metric space $(Y,D)$ and an isometric map $\Phi: (X,d)\to(Y,D)$ such that $\overline{\Phi(X)} = Y$. In this case, $Y$ is called the \textbf{completion} of $X$.
+\end{theorem}
+
+We present two proofs of this theorem. The first is inspired by the construction of the real numbers from the rationals, while the second imbeds $X$ in a complete function space.
+
+\begin{proof}[Proof 1]
+    Let $\widetilde X$ denote the set of all Cauchy sequences in $X$. Since every constant sequence is Cauchy, the set $\widetilde X$ is nonempty. Consider the relation $\sim$ on $\widetilde X$, given by 
+    \begin{equation*}
+        \mathbf x\sim\mathbf y \Longleftrightarrow\lim_{n\to\infty}d(x_n,y_n) = 0
+    \end{equation*}
+    We claim that $\sim$ is an equivalence relation. The reflexivity and symmetry of $\sim$ is obvious. It remains to show the transitivity of $\sim$. Indeed, if $\mathbf x\sim\mathbf y$ and $\mathbf y\sim\mathbf z$, then 
+    \begin{equation*}
+        0\le\lim_{n\to\infty}d(x_n,z_n)\le\lim_{n\to\infty}d(x_n,y_n) + d(y_n, z_n) = 0
+    \end{equation*}
+    and the conclusion follows.
+
+    Let $Y = \widetilde X/\sim$. Define the function $D:Y\times Y\to\R$ by 
+    \begin{equation*}
+        D([\mathbf x], [\mathbf y]) = \lim_{n\to\infty}d(x_n,y_n)
+    \end{equation*}
+    We must first show that $D$ is well defined. Indeed, let $\mathbf x,\mathbf x'\in[\mathbf x]$ and $\mathbf y,\mathbf y'\in[\mathbf y]$. Then, 
+    \begin{equation*}
+        \lim_{n\to\infty}d(x_n',y_n')\le\lim_{n\to\infty}d(x_n',x_n) + d(x_n,y_n) + d(y_n,y_n') = \lim_{n\to\infty}d(x_n,y_n)
+    \end{equation*}
+    and by symmetry, the inequality also holds in the other direction and thus $D$ is well defined. We now show that $D$ is a metric. To do so, notice that it suffices to verify that it satisfies the triangle inequality. Let $[\mathbf x],[\mathbf y],[\mathbf z]\in Y$. Then, 
+    \begin{equation*}
+        \lim_{n\to\infty}d(x_n, z_n)\le\lim_{n\to\infty}d(x_n, y_n) + d(y_n, z_n) = D([\mathbf x],[\mathbf y]) + D([\mathbf y],[\mathbf z])
+    \end{equation*}
+
+    Consider the map $\Phi:(X,d)\to(Y,D)$ by $\Phi(x) = (x,x,\ldots)$. It is obvious that this is an isometric imbedding. Let $[\mathbf y]\in Y$ where $\mathbf y = (y_n)$. Define $\mathbf x_n = (y_n,y_n,\ldots)$. Since $\mathbf y$ is a Cauchy sequence, it is not hard to see that $[\mathbf x_n]\to[\mathbf y]$. Hence, $\Phi(X)$ is dense in $Y$. 
+
+    Next, note that any Cauchy sequence in $\Phi(X)$ converges in $Y$, for if $\{[(x_n,x_n,\ldots)]\}$ is a Cauchy sequence in $\Phi(X)$, then it converges to $[(x_1,x_2,\ldots)]$.
+
+    Finally, we shall show that $Y$ is complete. Let $\{[\mathbf y_n]\}$ be a Cauchy sequence in $Y$. Since $\Phi(X)$ is dense in $Y$, there is a sequence $\{x_n\}$ in $X$ such that $D(\Phi(x_n), [\mathbf y_n]) < 1/n$. It is not hard to see that $\{\Phi(x_n)\}$ is a Cauchy sequence and converges to some point $\mathbf x\in Y$. We contend that $[\mathbf y_n]\to\mathbf x$. Let $\varepsilon > 0$ be given and $N\in\N$ such that $1/N < \varepsilon/2$. Further, let $M\in\N$ such that for all $n\ge M$, $D(\Phi(x_n),\mathbf x) < \varepsilon/2$. As a result, for all $n\ge\max\{M, N\}$,
+    \begin{equation*}
+        D([\mathbf y_n],\mathbf x)\le D([\mathbf y_n],\Phi(x_n)) + D(\Phi(x_n), \mathbf x) < \varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+Then next proof is shorter but less insightful.
+\begin{proof}[Proof 2]
+    We have already shown that $\B(X,\R)$ is complete under the $\sup$-metric. We shall now imbed $(X,d)$ in $\B(X,\R)$. Fix some point $x_0\in X$. For each $a\in X$, define the function $\phi_a: X\to\R$ by 
+    \begin{equation*}
+        \phi_a(x) = d(x,a) - d(x,x_0)
+    \end{equation*}
+    It is not hard to see, using the triangle inequality that $|\phi_a(x)|\le d(a, x_0)$. Thus, $\phi_a\in\B(X,\R)$. We claim that the map $\Phi:X\to\B(X,\R)$ given by $\Phi(a) = \phi_a$ is an imbedding under the $\sup$-metric on $\B(X,\R)$. Note that we have 
+    \begin{equation*}
+        |\phi_a(x) - \phi_b(x)| = |d(x,a) - d(x,x_0) - d(x,b) + d(x,x_0)| = |d(x,a) - d(x,b)|\le d(a,b)
+    \end{equation*}
+    as a result, $\rho(\phi_a,\phi_b)\le d(a,b)$. On the other hand, since $|\phi_a(a) - \phi_b(a)| = d(a,b)$, we must have $\rho(\phi_a,\phi_b) = d(a,b)$. Thus, $\Phi$ is an isometric imbedding. The conclusion follows by taking $Y = \overline{\Phi(X)}$.
+\end{proof}
+
+\section{Compactness in Metric Spaces}
+
+\begin{definition}[Total Boundedness]
+    A metric space $(X,d)$ is said to be totally bounded if for each $\varepsilon > 0$, there is a finite cover of $X$ by $\varepsilon$-balls.
+\end{definition}
+
+\begin{theorem}
+    A metric space $(X,d)$ is compact if and only if it is complete and totally bounded.
+\end{theorem}
+\begin{proof}
+    The forward direction is trivial. Conversely, suppose $(X,d)$ is complete and totally bounded. We shall show that it is sequentially compact. Let $\{x_n\}$ be sequence in $X$. Using total boundedness, there is a covering of $X$ with $1$-balls. Choose the ball containing $x_n$ for infinitely many indices $n$. Call the set of all such $x_n$'s as $J_1$. Inductively, given $J_{n - 1}$, consider a finite covering of $X$ with $1/n$-balls and choose the ball containing $x_k\in J_{n - 1}$ for infinitely many indices $k$. Then $J_1\supseteq J_2\supseteq\cdots$ and furthermore, $\diam J_k\le 2/k$. From each $J_k$, choose $x_{n_k}$ such that $n_k > n_{k - 1}$ which can obviously be done since each $J_k$ contains $x_n$ for infinitely many indices $n$.
+
+    Finally, it is not hard to see that $\{x_{n_k}\}$ forms a Cauchy sequence and is thus convergent. Hence $(X,d)$ is sequentially compact, as a result, compact.
+\end{proof}
+
+\begin{definition}[Equicontinuous]
+    Let $X$ be a topological space and $(Y,d)$ a metric space. A subset $\mathcal F$ of $\mathcal C(X,Y)$ is said to be equicontinuous at $x_0\in X$ if for each $\varepsilon > 0$, there is a neighborhood $U$ of $x_0$ such that for all $x\in U$ and $f\in\mathcal F$, $d(f(x), f(x_0)) < \varepsilon$. Further, $\mathcal F$ is said to be equicontinuous if it is equicontinuous at each point $x\in X$.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a topological space and $(Y,d)$ a metric space. Then if $\mathcal F\subseteq\mathcal C(X,Y)$ is totally bounded under the uniform metric corresponding to $d$, then it is equicontinuous.
+\end{theorem}
+\begin{proof}
+    Let $0 < \varepsilon < 1$ be given and $x_0\in X$. Let $\delta = \varepsilon/3$. Then there is a collection $\{B_{\overline\rho}(f_i, \delta)\}_{i = 1}^n$ of $\delta$-balls that cover $\mathcal F$. Since this collection is finite, there is a neighborhood $U$ of $x_0$ such that for all $x\in U$, $d(f_i(x), f_i(x_0)) < \delta$ for $1\le i\le n$. 
+
+    Let $f\in\mathcal F$. Then there is an index $j$ such that $f\in B_{\overline\rho}(f_j,\delta)$ and hence $\overline\rho(f,f_j) < \delta$. Using the triangle inequality, we have, for all $x\in U$, 
+    \begin{equation*}
+        d(f(x), f(x_0)) < d(f(x), f_j(x)) + d(f_j(x), f_j(x_0)) + d(f(x_0), f_j(x_0)) < 3\delta = \varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $X$ be a compact topological space and $Y$ a compact metric space. If the subset $\mathcal F$ of $\mathcal C(X,Y)$ is equicontinuous under $d$, then $\mathcal F$ is totally bounded under the uniform and $\sup$ metrics corresponding to $d$.
+\end{lemma}
+\begin{proof}
+    Since $X$ is compact, all functions in $\mathcal C(X,Y)$ are bounded and as a result, the $\sup$ metric is well defined. We shall show total boundedness in the $\sup$ metric which would immediately imply total boundedness in the uniform metric. 
+
+    Let $\varepsilon > 0$ and $\delta = \varepsilon/3$. Using equicontinuity, for each $x\in X$, there is a neighborhood $U_x$ of $x$ such that for all $t\in U_x$, $d(f(t), f(x)) < \delta$. Since $X$ is compact, there is a finite cover, $\{U_{a_1,},\ldots,U_{a_k}\}$. Using compactness and therefore, total boundedness of $Y$, there is a covering of $Y$ by $\delta/2$-balls, $\{V_1,\ldots,V_m\}$.
+
+    Let $J$ be the collection of all functions $\alpha:\{1,\ldots,k\}\to\{1,\ldots,m\}$ such that for there is a function $f_\alpha\in\mathcal F$ such that $f_\alpha(a_i)\in V_{\alpha(i)}$. We shall show that $\{B_\rho(f_\alpha,\varepsilon)\}_{\alpha\in J}$ forms a cover for $\mathcal F$.
+
+    Let $f\in\mathcal F$. For each $1\le i\le k$, choose an integer $\alpha(i)\in \{1,\ldots,m\}$ such that $f(a_i)\in V_{\alpha(i)}$. Obviously, $\alpha\in J$ and $f_\alpha(a_i)\in V_{\alpha(i)}$. As a result, for all $x\in X$, choose $a_i$ such that $x\in U_{a_i}$, then 
+    \begin{equation*}
+        d(f(x), f_\alpha(x))\le d(f(x), f(a_i)) + d(f(a_i), f_\alpha(a_i)) + d(f_\alpha(a_i), f_\alpha(x)) < 3\delta = \varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{definition}
+    If $(Y,d)$ is a metric space, a subset $\mathcal F$ of $\mathcal C(X,Y)$ is said to be pointwise bounded under $d$ if for each $x\in X$, the subset $\mathcal F_a = \{f(a)\mid f\in\mathcal F\}$ of $Y$ is bounded under $d$.
+\end{definition}
+
+\begin{theorem}[Classical Ascoli's Theorem]
+    Let $X$ be a compact space and $(\R^n,d)$ have the standard metric topology and give $\mathcal C(X,\R^n)$ the corresponding uniform topology. A subspace $\mathcal F$ of $\mathcal C(X,\R^n)$ has compact closure if and only if $\mathcal F$ is equicontinuous and bounded.
+\end{theorem}
+\begin{proof}
+Since $X$ is compact, the uniform metric and sup metric induce the same topologies. As a result, it suffices to consider the sup metric. Let $\mathcal G$ denote the closure of $\mathcal F$ in $\mathcal C(X,\R^n)$.
+\begin{description}
+\item[($\Longrightarrow$)] Suppose $\mathcal G$ is compact and therefore, is totally bounded under $\rho$. Using a preceeding lemma, we may conclude that it is equicontinuous. Pointwise boundedness follows from the fact that it is compact and therefore bounded, as a result, $d(f(x), g(x)) < M$ for some $M > 0$ for all $f,g\in\mathcal G$ and $x\in X$. As a result, $\diam\mathcal G_x\le M$. 
+
+\item[($\Longleftarrow$)] Now suppose $\mathcal F$ is equicontinuous and pointwise bounded. We shall first show that $\mathcal G$ is equicontinuous and pointwise bounded. Since $\mathcal G$ is the closure of $\mathcal F$, $\diam\mathcal G = \diam\mathcal F$ and pointwise boundedness follows. We now show equicontinuity. Let $\varepsilon > 0$ and choose some $x_0\in X$. There is a neighborhood $U$ of $x_0$ such that for all $x\in U$, $d(f(x), f(x_0)) < \varepsilon/3$. Let $g\in\mathcal G$. Then, there is some $f\in\mathcal F$ such that $\rho(f,g) < \varepsilon/3$. Then, 
+\begin{equation*}
+    d(g(x), g(x_0))\le d(g(x), f(x)) + d(f(x), f(x_0)) + d(f(x_0), g(x_0)) < \varepsilon
+\end{equation*}
+for all $x\in U$. This shows equicontinuity.
+
+Next, we shall show that $\bigcup\limits_{g\in\mathcal G} g(X)$ is bounded in $Y$. Using equicontinuity, for each $a\in X$, there is a neighborhood $U_a$ of $a$ such that for all $x\in U_a$, and $g\in\mathcal G$, $d(g(x), g(a)) < 1$. Since $X$ is compact, there is a finite cover $\{U_{a_1},\ldots,U_{a_k}\}$ of $X$. Now, for any $g\in G$ and $x_1,x_2\in X$, there are open sets, say $U_{a_1}$ and $U_{a_2}$ containing $x_1$ and $x_2$ respectively. Then, 
+\begin{align*}
+    d(g(x_1), g(x_2)) &\le d(g(x_1),g(a_1)) + d(g(a_1), g(a_2)) + d(g(a_2),g(x_2)) \\
+    &< 2 + d(g(a_1), g(a_2))\\
+    &\le 2 + \max_{1\le i,j\le k} d(g(a_i), g(a_j))
+\end{align*}
+The last quantity is bounded since $\mathcal G_{a_i}$ is bounded for each $1\le i\le k$.
+
+Finally, we shall show that $\mathcal G$ is compact. Note that since it is a closed subset of $\mathcal C(X,\R^n)$, it is complete, therefore, it suffices to show that it is totally bounded. In the previous paragraph, we have shown that $\bigcup\limits_{g\in\mathcal G}g(X)$ is bounded in $\R^n$ and therefore, is a subset of a compact subspace $Y$ of $\R^n$, consequently, we may view $\mathcal G$ as a subspace of $\mathcal C(X,Y)$ and total boundedness follows from the previous lemma.
+\end{description}
+\end{proof}
+
+\begin{theorem}[Classical Arzel\`a's Theorem]
+    Let $X$ be compact and let $f_n\in\mathcal C(X,\R^k)$ for all $k\in\N$. If the collection $\{f_n\}_{n = 1}^\infty$ is pointwise bounded and equicontinuous, then it has a uniformly convergent subsequence.
+\end{theorem}
+\begin{proof}
+    Let $\mathcal F = \{f_n\}_{n = 1}^\infty$ then due to Ascoli's Theorem, $\mathcal F$ has compact closure $\mathcal G$ in $\mathcal C(X,\R^k)$. Since $\mathcal G$ is a compact metric space, it is sequentially compact, as a result, there is a subsequence $\{f_{n_j}\}$ which is convergent in the uniform metric, and thus uniformly convergent.
+\end{proof}
+
+The following is the version of Arzel\`a-Ascoli that Rudin states:
+
+\begin{corollary}
+    Let $X$ be compact and $\{f_n\}$ be a sequence of functions in $\mathcal C(X,\R^k)$ for some positive integer $k$. If $\{f_n\}$ is pointwise bounded and equicontinuous on $X$, then 
+    \begin{enumerate}[label=(\alph*)]
+    \item $\{f_n\}$ is uniformly bounded on $X$ 
+    \item $\{f_n\}$ contains a uniformly convergent subsequence
+    \end{enumerate}
+\end{corollary}
+
+\section{The Stone-Weierstrass Theorem}
+
+\begin{definition}[Algebra]
+    Let $X$ be a topological space. A family $\mathscr A\subseteq\mathcal C(X,\R)$ is said to be a real algebra if for all $f,g\in\mathscr A$ and $c\in\R$, 
+    \begin{equation*}
+        f + g\in\mathscr A,\quad fg\in\mathscr A,\quad cf\in\mathscr A
+    \end{equation*}
+
+    Similarly, a complex algebra satisfies all the above requirements along with $c\in\bbC$ and $\mathscr A\subseteq\mathcal C(X,\bbC)$.
+\end{definition}
+
+\begin{definition}[Uniformly Closed]
+    An algebra $\mathscr A\subseteq\mathcal C(X,\mathbb K)$, where $\mathbb K = \R,\bbC$ is said to be uniformly closed if it is a closed set in the uniform topology given to $\mathcal C(X,\mathbb K)$. Analogously define the uniform closure.
+\end{definition}
+
+\begin{definition}
+    Suppose $\mathscr A$ is an algebra of functions on a set $X$, then $\mathscr A$ is said to separate points in $X$ if for every pair of distinct points $x_1,x_2\in X$, there is a function $f\in\mathscr A$ such that $f(x_1)\ne f(x_2)$.
+
+    If for each $x\in X$, there is a function $f\in\mathscr A$ such that $f(x)\ne 0$, then we say that $\mathscr A$ vanishes at no point of $E$.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:can-choose-values-in-algebra}
+    Suppose $\mathscr A$ is an algebra over a topological space $X$ which separates points and vanishes at no point on $X$. Suppose $x_1,x_2\in X$ are distinct and $c_1,c_2\in\bbC$. Then there is $f\in\mathscr A$ such that $f(x_1) = c_1$ and $f(x_2) = c_2$.
+\end{lemma}
+\begin{proof}
+    According to the hypohtesis on $\mathscr A$, there are continuous functions $g,h,k\in\mathscr A$ such that $g(x_1)\ne g(x_2)$ and $h(x_1)\ne 0$ and $k(x_2)\ne 0$. Define the functions 
+    \begin{equation*}
+        u = (g - g(x_1))k\qquad v = (g - g(x_2))h
+    \end{equation*}
+    Since $\mathscr A$ forms an algebra, $u,v\in\mathscr A$. Further, $u(x_1) = 0$, $u(x_2)\ne 0$, $v(x_1)\ne 0$ and $v(x_2) = 0$. Finally, define the function 
+    \begin{equation*}
+        f = c_1\frac{v}{v(x_1)} + c_2\frac{u}{u(x_2)}
+    \end{equation*}
+    Again, since $\mathscr A$ forms an algebra, $f\in\mathscr A$ and the proof is complete.
+\end{proof}
+
+\begin{theorem}[Stone-Weierstrass Theorem]
+    Let $X$ be a compact Hausdorff space and $\mathscr A\subseteq\mathcal C(X,\R)$. If $\mathscr A$ separates points on $X$ and vanishes at no point of $X$, then $\mathscr A$ is dense in $\mathcal C(X,\R)$ in the sup metric (which is the same as the uniform topology).
+\end{theorem}
+\begin{proof}
+The proof proceeds in multiple steps. Let $\mathscr B$ denote the closure of $\mathscr A$ in $\mathcal C(X,\R)$. Then, we have 
+\begin{description}
+\item[Claim 1.] \itshape If $f\in\mathscr B$, then $|f|\in\mathscr B$.\normalfont
+\item[Proof.] First, let $a = \sup\limits_{x\in X} |f|$. Thus, $-a\le f\le a$ on $X$. Using the Weierstrass Approximation Theorem, there is a sequence of polynomials $\{p_n(t)\}$ that converge uniformly to $|t|$ on the interval $[-a,a]$. Note that the function $p_n\circ f$ is in the algebra $\mathscr A$, since it is a polynomial in $f$, therefore, the sequence $\{p_n(f)\}$ of continuous functions in $\mathscr A$ converge in the sup metric to $|f|$, as a result, $|f|\in\mathscr B$, since the latter is a closed set.
+
+\item[Claim 2.] \itshape If $f,g\in\mathscr B$ then $\max\{f,g\}, \min\{f,g\}\in\mathscr B$.\normalfont
+\item[Proof.] Follows from the following identities: 
+\begin{equation*}
+    \max\{f,g\} = \frac{f + g + |f - g|}{2}\qquad\min\{f,g\} = \frac{f + g - |f - g|}{2}
+\end{equation*}
+
+\item[Claim 3.]\itshape Let $f\in\mathcal C(X,\R)$, $x\in X$ and $\varepsilon > 0$. Then there is a function $g_x\in\mathscr B$ such that $g_x(x) = f(x)$ and $g_x(t) > f(t) - \varepsilon$ for each $t\in X$\normalfont
+\item[Proof.] Note that $\mathscr A\subseteq\mathscr B$ and due to \thref{lem:can-choose-values-in-algebra}, for every $y\in X$, there is a continuous function $h_y\in\mathscr A$ such that $h_y(x) = f(x)$ and $h_y(y) = f(y)$. Let $U_y$ be the open set $(f - h_y)^{-1}((-\infty,\varepsilon))$. Notice that $\{U_y\}$ is an open cover for $X$, and thus has a finite subcover, say $\{U_{y_1},\ldots,U_{y_n}\}$. Finally, define the function 
+\begin{equation*}
+    g_x = \max\{h_{y_1},\ldots,h_{y_n}\}
+\end{equation*}
+Note that in fact, $g_x\in\mathscr A$. The conclusion follows. 
+
+\item[Claim 4.]\itshape Let $f\in\mathcal C(X,\R)$ and $\varepsilon > 0$, there exists a function $h\in\mathscr A$ such that $|h(x) - f(x)| < \varepsilon$\normalfont
+\item[Proof.] In the previous claim, we have constructed the functions $g_x$. Let $U_x = (g_x - f)^{-1}((-\infty,\varepsilon))$. Then, $\{V_x\}$ forms an open cover for $X$, and therefore has a finite subcover, say $\{V_{x_1},\ldots,V_{x_n}\}$. Define the function 
+\begin{equation*}
+    h = \min\{g_{x_1},\ldots,g_{x_n}\}
+\end{equation*}
+It is not hard to see that $|h - f| < \varepsilon$ on $X$.
+\end{description}
+
+From the four claims, we see that for each $\varepsilon > 0$ and each $f\in\mathcal C(X,\R)$, there is $h\in\mathscr A$ such that $|h - f| < \varepsilon$ and the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    A complex algebra $\mathscr A$ is said to be self-adjoint if for every $f\in\mathscr A$, $\overline f\in\mathscr A$, where $\overline f$ denotes the complex conjugate of $f$.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a compact Hausdorff space and $\mathscr A\subseteq\mathcal(X,\bbC)$ a self-adjoint complex algebra which separates points and vanishes at no point of $X$. Then, $\mathscr A$ is dense in $\mathcal C(X,\bbC)$.
+\end{theorem}
+\begin{proof}
+    Let $f = u + iv\in\mathscr A$. Then $u = \frac{f + \overline f}{2}\in\mathscr A$. Let $x_1,x_2\in X$ be distinct points. Then, due to \thref{lem:can-choose-values-in-algebra}, there is $f\in\mathscr A$ such that $f(x_1) = 0$ and $f(x_2) = 1$, then, for $u = \frac{f + \overline f}{2}\in\mathscr A$, $u(x_1) = 0$ and $u(x_2) = 1$. Finally, let $x_0\in X$, then there is $f\in\mathscr A$ such that $f(x_0)\ne 0$, then, the function $g = \overline{f(x_0)}f(x)\in\mathscr A$ is such that $g(x_0) > 0$, and thus $\Re(g)(x_0) > 0$.
+
+    If we denote $\mathscr A_R = \{\Re(f)\mid f\in\mathscr A\}$, then $\mathscr A_R$ forms a real algebra that separates points and vanishes at no point of $X$. Therefore, for any $f = u + iv\in\mathcal C(X,\bbC)$, there is a sequence of functions $u_n,v_n$ converging uniformly to $u$ and $v$ respectively. As a result, $f_n = u_n + iv_n$ converges uniformly to $f$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $X$ be a compact Hausdorff space. Then $X$ is metrizable if and only if $\mathcal C(X,\R)$ is separable.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
