@@ -1,0 +1,66 @@
+In the infinite case, a Galois extension is defined as usual, that is, an extension which is normal and separable. The Galois group is again defined to be the group of automorphisms that fix a base field. Since our definitions of normal and separable extensions do not assume finiteness, we are in the clear. As we have seen earlier, finite-degree Galois extensions have finite Galois groups. The following proposition establishes the converse.
+
+\begin{proposition}
+    If $K/k$ is an infinite-degree Galois extension, then $\Gal(K/k)$ is an infinite group. 
+\end{proposition}
+\begin{proof}
+    We shall prove the contrapositive. If $\Gal(K/k)$ is a finite group with cardinality $M$, then for each $\alpha\in K$, $[k(\alpha):k]\le M$, and it follows from \thref{lem:artin-lemma} that $[K:k]\le M$.
+\end{proof}
+
+
+\begin{definition}
+    Let $K/k$ be a Galois extension. For $\sigma\in\Gal(K/k)$, a \textit{basic open set} around $\sigma$ is a coset $\sigma\Gal(K/F)$ where $F/k$ is a \textbf{finite} extension.
+\end{definition}
+
+\begin{proposition}
+    The collection of basic open sets as defined above form a basis for a topology on $\Gal(K/k)$.
+\end{proposition}
+\begin{proof}
+    Since $\Gal(K/F)$ contains the identity element for each $F/k$ finite, the union of all the basic open sets is equal to $\Gal(K/k)$. Consider two basic open sets $\sigma_1\Gal(K/F_1)$ and $\sigma_2\Gal(K/F_2)$ having a nonempty intersection. Let $\sigma$ be an automorphism in that intersection. We shall show that $\sigma\Gal(K/F_1F_2)$ is contained in the intersection. Since $\sigma\in\sigma_1\Gal(K/F_1)$, there is $\alpha\in\Gal(K/F_1)$ such that $\sigma = \sigma_1\alpha$. Let $\tau\in\sigma\Gal(K/F_1F_2)$, then there is $\beta\in\Gal(K/F_1F_2)$ such that $\tau = \sigma\beta$. Now, $\sigma_1^{-1}\tau = \alpha\beta\in\Gal(K/F_1)$, whence $\tau\in\sigma_1\Gal(K/F_1)$. This completes the proof.
+\end{proof}
+
+The topology defined above is known as the \textbf{Krull Topology}.
+
+\begin{theorem}
+    The Krull Topology on $\Gal(K/k)$ makes it a topological group.
+\end{theorem}
+\begin{proof}
+    We must show that the multiplication map and the inversion map are continuous. Let $G = \Gal(K/k)$ and $\varphi: G\times G\to G$ be given by $(x,y)\mapsto xy$. Let $U$ be an open set in $G$ and $(\sigma,\tau)\in\varphi^{-1}(U)$. Then there is a basic open set of the form $\sigma\tau\Gal(K/F)$ for some finite extension $F/k$. Since the larger $F$ is, the smaller $\Gal(K/F)$ gets, we may suppose that $F/k$ is Galois. Consider the basic open set $\sigma\Gal(K/F)\times\tau\Gal(K/F)$ that contains $(\sigma,\tau)$. I claim that the image of this basic open set lies inside $\sigma\tau\Gal(K/F)$. Indeed, for $(\sigma\alpha,\tau\beta)$ in the basic open set, its image is $\sigma\alpha\tau\beta = \sigma\tau\alpha'\beta = \sigma\tau\gamma$ for some $\gamma\in\Gal(K/F)$. Where we used the normality of $\Gal(K/F)$ in $G$ since the extension is normal. Thus $\varphi$ is continuous.
+
+    Let $\psi: G\to G$ be the inversion map, that is, $x\mapsto x^{-1}$. We use a similar strategy as above. Let $U$ be an open set containing $\sigma^{-1}$ for some $\sigma\in G$. Then, there is a basic open set $\sigma^{-1}\Gal(K/F)$ that is contained in $U$. We may make $F$ larger to make it a Galois extension of $k$. Thus, $\Gal(K/F)$ is normal in $G$. As a result, under $\psi$, $\sigma\Gal(K/F)$ maps to $\sigma^{-1}\Gal(K/F)$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    $\Gal(K/k)$ under the Krull Topology is Hausdorff.
+\end{proposition}
+\begin{proof}
+    Let $\sigma,\tau\in\Gal(K/k)$ be distinct elements. Then, there is $\alpha\in K$ such that $\sigma(\alpha)\ne\tau(\alpha)$. Let $F = k(\alpha)$, and note that $\sigma\Gal(K/F)\ne\tau\Gal(K/F)$ and thus must be disjiont (since they are cosets). 
+\end{proof}
+
+We state the main theorem of this chapter below. We shall prove it in parts and not all at once. It would seem less daunting that way.
+
+\begin{theorem}[Krull]
+    Let $K/k$ be Galois and equip $G = \Gal(K/k)$ with the Krull topology. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item For all intermediate fields $E$, $\Gal(K/E)$ is a closed subgroup of $G$.
+        \item For all $H\le G$, $\Gal(K/K^H)$ is the closure of $H$ in $G$.
+        \item (The Galois Correspondence) There is an inclusion reversing bijection between the intermediate fields of $K/k$ an closed subgroups of $\Gal(K/k)$.
+        \item For an arbitrary subgroup $H$ of $G$, $K^H = K^{\overline H}$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proposition}
+    Let $K/k$ be a Galois extension and $E$ an intermediate field. Then $\Gal(K/E)$ is a closed subgroup of $\Gal(K/k)$.
+\end{proposition}
+\begin{proof}
+    Let $\sigma\in G\backslash\Gal(K/E)$. Then $\sigma\Gal(K/E)$ is a basic open set containing $\sigma$ and disjiont from $\Gal(K/E)$ (since it is a coset). This implies the desired conclusion.
+\end{proof}
+
+\begin{proposition}
+    Let $H\le G = \Gal(K/k)$. Then $\Gal(K/K^H)$ is the closure of $H$ in $G$.
+\end{proposition}
+\begin{proof}
+    Obviously, $H\subseteq\Gal(K/K^H)$. Further, since the latter is closed, $\overline{H}\subseteq\Gal(K/K^H)$. We shall show the reverse inclusion. Let $\sigma\in G\backslash\overline H$. As we have seen earlier, there is a finite Galois extension $F/k$ such that the basic open set $\sigma\Gal(F/k)$ is disjoint from $\overline H$. We claim that there is $\alpha\in F$ such that $\alpha$ is fixed under $H$ but not under $\sigma$. Suppose there is no such $\alpha$. Then, $\sigma|_F$ fixes $F^{H\vert_F}$ where $H\vert_F = \{h\vert_F : h\in H\}$. From finite Galois theory, we know that $\sigma|_F\in H|_F$. And thus, there is some $h\in H$ such that $\sigma|_F = h|_F$, consequently, $\sigma\Gal(K/F) = h\Gal(K/F)$, a contradiction. 
+
+    Since there is some $\alpha\in F$ that is not fixed by $\sigma$ but fixed under $H$, we must have that $\sigma\notin\Gal(K/K^H)$. This completes the proof.
+\end{proof}

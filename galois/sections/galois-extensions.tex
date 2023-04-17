@@ -1,0 +1,93 @@
+\begin{definition}[Fixed Field]
+    Let $K$ be a field and $G$ be a group of automorphisms of $K$. The \textit{fixed field} of $K$ under $G$, denoted by $K^G$ is the set of all elements $x\in K$ such that $\sigma x = x$ for all $\sigma\in G$.
+\end{definition}
+
+That the aforementioned set forms a field is trivial.
+
+\begin{definition}[Galois Extension, Group]
+    An extension $K/k$ is said to be \textit{Galois} if it is normal and separable. The group of automorphisms of $K$ over $k$ is known as the \textit{Galois Group} of $K/k$ and is denoted by $\Gal(K/k)$.
+\end{definition}
+
+\begin{theorem}
+    Let $K$ be a Galois extension of $k$ and $G = \Gal(K/k)$. Then $k = K^G$. If $F$ is an intermediate field, $k\subseteq F\subseteq K$, then $K$ is Galois over $F$ and the map 
+    \begin{equation*}
+        F\mapsto\Gal(K/F)
+    \end{equation*}
+    from the intermediate fields to subgroups of $G$ is injective.
+    \textcolor{red}{Finiteness is not required in this case.}
+\end{theorem}
+\begin{proof}
+    Let $\alpha\in K^G$ and $\sigma: k(\alpha)\to\overline{K}$ be an embedding over $k$. Due to \thref{thm:extension-theorem}, $\sigma$ may be extended to an embedding of $K$ over $k$ in $\overline{K}$. Since $K/k$ is normal, this is an automorphism and therefore, an element of $G$. As a result, $\sigma$ sends $\alpha$ to itself, therefore, any embedding of $k(\alpha)$ over $k$ is the identity map, implying that $[k(\alpha):k]_s = 1$, or equivalently, $k(\alpha) = k$ whence $\alpha\in k$.
+
+    Let $F$ be an intermediate field. Due to \thref{thm:normal-properties} and \thref{thm:sep-distinguished-class}, we have that $K/F$ is normal and separable, therefore Galois.
+
+    Finally, if $F$ and $F'$ map to the same subgroup $H$ of $G$, then due to the first part, of this theorem, we must have $F = K^H = F'$, establishing injectivity.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:artin-lemma}
+    Let $E/k$ be algebraic and separable, further suppose that there is an integer $n\ge 1$ such that every element $\alpha\in E$ is of degree at most $n$ over $k$. Then $[E:k]\le n$.
+\end{lemma}
+\begin{proof}
+    Let $\alpha\in E$ such that $[k(\alpha):k]$ is maximized. We shall show that $k(\alpha) = E$. Suppose not, then there is $\beta\in E\backslash k(\alpha)$ and thus, we have a tower $k\subseteq k(\alpha)\subsetneq k(\alpha,\beta)$. Due to \thref{thm:primitive-element-theorem}, there is $\gamma\in E$ such that $k(\alpha,\beta) = k(\gamma)$. But then, 
+    \begin{equation*}
+        [k(\gamma): k] = [k(\alpha, \beta): k] > [k(\alpha):k]
+    \end{equation*}
+    a contradiction to the maximality of $\alpha$. Therefore, $E = k(\alpha)$ and we have the desired conclusion.
+\end{proof}
+
+\begin{theorem}[Artin]
+    Let $K$ be a field and let $G$ be a finite group of automorphisms of $K$, of order $n$. Let $k = K^G$. Then $K$ is a finite Galois extension of $k$, and its Galois group is $G$. Further, $[K:k] = n$.
+\end{theorem}
+\begin{proof}
+    Let $\alpha\in K$. We shall show that $K$ is the splitting field of the family $\{m_\alpha(x)\}_{\alpha\in K}$ and that $\alpha$ is separable over $k$. 
+
+    Let $\{\sigma_1\alpha,\ldots,\sigma_m\alpha\}$ be a maximal set of images of $\alpha$ under the elements of $G$. Define the polynomial: 
+    \begin{equation*}
+        f(x) = \prod_{i = 1}^m(x - \sigma_i\alpha)
+    \end{equation*}
+    For any $\tau\in G$, we note that $\{\tau\sigma_1\alpha,\ldots,\tau\sigma_m\alpha\}$ must be a permutation of $\{\sigma_1\alpha,\ldots,\sigma_m\alpha\}$, lest we contradict maximality. As a result, $\alpha$ is a root of $f^\tau$ for all $\tau\in G$ and therefore, the coefficients of $f$ lie in $K^G = k$, i.e. $f(x)\in k[x]$. 
+
+    Since the $\sigma_i\alpha$'s are distinct, the minimal polynomial of $\alpha$ over $k$ must be separable, and thus $K/k$ is separable. Next, we see that the minimal polynomial for $\alpha$ also splits in $K$ and thus, $K$ is the splitting field for the family $\{m_\alpha(x)\}_{\alpha\in K}$. Consequently, $K/k$ is normal and hence, Galois.
+
+    Finally, since the minimal polynomial for $\alpha$ divides $f$, we must have $[k(\alpha):k]\le\deg f\le n$ whence due to \thref{lem:artin-lemma}, $[K:k]\le n$. Now, recall that $n = |G|\le [K:k]_s\le[K:k]$ and we have the desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    Let $K/k$ be a finite Galois extension and $G = \Gal(K/k)$. Then, every subgroup of $G$ belongs to some subfield $F$ such that $k\subseteq F\subseteq K$.
+\end{corollary}
+
+\begin{lemma}
+    Let $K/k$ be Galois and $F$ an intermediate field, $k\subseteq F\subseteq K$, and let $\lambda: F\to\overline{k}$ be an embedding. Then, 
+    \begin{equation*}
+        \Gal(K/\lambda F) = \lambda\Gal(K/F)\lambda^{-1}
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    The embedding $\lambda$ can be extended to an embedding of $K$ due to \thref{thm:extension-theorem} and since $K/k$ is normal, $\lambda$ is an automorphism. As a result, $\lambda F\subseteq K$ and thus, $K/\lambda F$ is Galois. Let $\sigma\in\Gal(K/F)$. It is not hard to see that $\lambda\sigma\lambda^{-1}\in\Gal(K/\lambda F)$ and conversely, for $\tau\in\Gal(K/\lambda F)$, $\lambda^{-1}\tau\lambda\in\Gal(K/F)$. This implies the desired conclusion.
+\end{proof}
+
+\begin{theorem}
+    Let $K/k$ be Galois with $G = \Gal(K/k)$. Let $F$ be an intermediate field, $k\subseteq F\subseteq K$, and let $H = \Gal(K/F)$. Then $F$ is normal over $k$ if and only if $H$ is normal in $G$. If $F/k$ is normal, then the restriction map $\sigma\mapsto\sigma\mid_F$ is a homomorphism of $G$ onto $\Gal(F/k)$ whose kernel is $H$. This gives us $\Gal(F/k)\cong G/H$.
+\end{theorem}
+\begin{proof}
+    Suppose $F/k$ is normal. To see that the map $\sigma\to\sigma\mid_F$ is surjective, simply recall \thref{thm:extension-theorem}. The kernel of said mapping is obviously $H$ and we have that $H\unlhd G$ and due to the First Isomorphism Theorem, $G/H\cong\Gal(F/k)$.
+
+    On the other hand, if $F/k$ is not normal, then there is an embedding $\lambda: F\to\overline{k}$ such that $F\ne\lambda F$. Note that due to \thref{thm:extension-theorem}, $\lambda F\subseteq K$. Then, we have $\Gal(K/F)\ne\Gal(K/\lambda F) = \lambda\Gal(K/F)\lambda^{-1}$, and equivalently, $\Gal(K/F)$ is not normal in $G$. This completes the proof of the theorem.
+\end{proof}
+
+\textcolor{red}{Note that in the proof of the above theorem, while showing $H$ is normal in $G$, we did not use that the Galois extension is finite}. We can now put together all the above results into one all-powerful theorem.
+
+\begin{theorem}[Fundamental Theorem of Galois Theory]\thlabel{thm:ftgt}
+    Let $K/k$ be a finite Galois extension with $G = \Gal(K/k)$. There is a bijection between the set of subfields $E$ of $K$ containing $k$ and the set of subgroups $H$ of $G$ given by $E = K^H$. The field $E$ is Galois over $k$ if and only if $H$ is normal in $G$, and if that is the case, then the restriction map $\sigma\mapsto\sigma\mid_E$ induces an isomorphism of $G/H$ onto $\Gal(E/k)$.
+\end{theorem}
+
+\begin{definition}
+    A Galois extension $K/k$ is said to be \textit{abelian (resp. cyclic)} if its Galois group is \textit{abelian (resp. cyclic)}.
+\end{definition}
+
+\begin{theorem}
+    Let $K/k$ be finite Galois and $F/k$ an arbitrary extension. Suppose $K, F$ are subfields of some larger field. Then $KF$ is Galois over $F$, and $K$ is Galois over $K\cap F$. Let $H = \Gal(KF/F)$ and $G = \Gal(K/k)$. For all $\sigma\in H$, the restriction of $\sigma$ to $K$ is in $G$ and the restriction map $\sigma\mapsto\sigma\mid_K$ gives an isomorphism of $H$ on $\Gal(K/K\cap F)$.
+\end{theorem}
+\begin{proof}
+    That $KF/F$ and $K/K\cap F$ are Galois follow from \thref{thm:normal-properties} and \thref{thm:sep-distinguished-class}. Let $\chi: H\to G$ denote the restriction map. Note that $\ker\chi$ contains all $\sigma\in H$ such that $\sigma$ fixes $K$. But since $\sigma$ implicitly fixes $F$, it must also fix $KF$ and is therefore the unique identity automorphism. As a result, $\ker\chi$ is trivial and $\chi$ is injective. Let $H' = \chi(H)\subseteq G$. We shall show that $K^{H'} = K\cap F$. Indeed, if $\alpha\in K^{H'}$, then $\alpha$ is also fixed by all elements of $H$, since $\chi$ is only the restriction map. As a result, $\alpha\in F$, consequently $\alpha\in K\cap F$. We are now done due to \thref{thm:ftgt}.
+\end{proof}

@@ -1,0 +1,43 @@
+\begin{theorem}\thlabel{thm:alg-closed-fields-exist}
+    Let $k$ be a field. Then there is an algebraicaly closed field containing $k$.
+\end{theorem}
+\begin{proof}[Proof due to Artin]
+\end{proof}
+
+\begin{corollary}
+    Let $k$ be a field. Then there exists an extension $kâ$ which is algebraic over $k$ and algebraically closed.
+\end{corollary}
+\begin{proof}
+    
+\end{proof}
+
+\begin{lemma}\thlabel{lem:num-extensions-eq-distinct-roots}
+    Let $k$ be a field and $L$ and algebraically closed field with $\sigma: k\to L$ an embedding. Let $\alpha$ be algebraic over $k$ in some extension of $k$. Then, the number of extensions of $\sigma$ to an embedding $k(\alpha)\to L$ is precisely equal to the number of distinct roots of the minimal polynomial of $\alpha$ over $k$.
+\end{lemma}
+
+\begin{lemma}
+    Suppose $E$ and $L$ are algebraically closed fields with $E\subseteq L$. If $L/E$ is algebraic, then $E = L$.
+\end{lemma}
+\begin{proof}
+    Let $\alpha\in L$. Let $p(x)\in E[x]$ be the minimal polynomial of $\alpha$ over $E$. Since $E$ is algebraically closed, $p$ splits into linear factors over $E$, one of them being $(x - \alpha)$, implying that $\alpha\in E$. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Extension Theorem]\thlabel{thm:extension-theorem}
+    Let $E/k$ be algebraic, $L$ an algebraically closed field and $\sigma: k\to L$ be an embedding of $k$. Then there exists an extension of $\sigma$ to an embedding of $E$ in $L$. If $E$ is algebraically closed and $L$ is algebraic over $\sigma k$, then any such extension of $\sigma$ is an isomorphism of $E$ onto $L$.
+\end{theorem}
+\begin{proof}
+    Let $\mathscr S$ be the set of all pairs $(F,\tau)$ where $F\subseteq E$ and $F/k$ is algebraic and $\tau: F\to L$ is an extension of $\sigma$. Define a partial order $\leqq$ on $\mathscr S$ by $(F_1,\tau_1)\leqq(F_2,\tau_2)$ if and only if $F_1\subseteq F_2$ and $\tau_2\mid_{F_1}\equiv\tau_1$. Note that $\mathscr S$ is nonempty since it contains $(k,\sigma)$. Let $\mathscr C = \{(F_\alpha,\tau_\alpha)\}$ be a chain in $\mathscr S$. Define $F = \bigcup_{\alpha} F_\alpha$. Now, for any $t\in F$, there is $\beta$ such that $t\in F_\beta$; using this, define $\tau(t) = \tau_\beta(t)$. It is not hard to see that this is a valid embedding.
+
+    Now, invoking Zorn's Lemma, there is a maximal element, say $(K,\tau)$. We claim that $K = E$, for if not, then we may choose some $\alpha\in E$ and invoke \thref{lem:num-extensions-eq-distinct-roots}.
+
+    Finally, if $E$ is algebraically closed, so is $\sigma E$, consequently, we are done due to the preceeding lemma.
+\end{proof}
+
+\begin{corollary}
+    Let $k$ be a field and $E, E'$ be algebraic extensions of $k$. Assume that $E, E'$ are algebraically closed. Then there exists an isomorphism $\tau: E\to E'$ inducing the identity on $k$.
+\end{corollary}
+\begin{proof}
+    Consider the extension of $\sigma: k\to E'$ where $\sigma\mid_k = \mathbf{id}_k$ whence the conclusion immediately follows.
+\end{proof}
+
+Since an algebraically closed and algebraic extension of $k$ is determined upto an isomorphism, we call such an extension an \textit{algebraic closure} of $k$ and is denoted by $k^a$.

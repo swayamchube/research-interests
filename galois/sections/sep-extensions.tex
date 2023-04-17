@@ -1,0 +1,186 @@
+Let $E/k$ be a finite extension, and therefore, algebraic. Let $L$ be an algebraically closed field along with an embedding $\sigma: k\to L$. Define $S_\sigma$ to be the set of extensions of $\sigma$ to $\sigma^*: E\to L$.
+
+\begin{definition}[Separable Degree]
+    Given the above setup, the \textit{separable degree} of the finite extension $E/k$, denoted by $[E:k]_s$ is defined to be the cardinality of $S_\sigma$.
+\end{definition}
+
+\begin{proposition} 
+    The separable degree is well defined. That is, if $L'$ is an algebraically closed field and $\tau: k\to L'$ be an embedding, then the cardinality of $S_\tau$ is equal to that of $S_\sigma$
+\end{proposition}
+
+\begin{definition}[Separable Extension]
+    Let $E/k$ be a finite extension. Then it is said to be \textit{separable} if $[E:k]_s = [E:k]$. Similarly, let $\alpha\in\overline{k}$. Then $\alpha$ is said to be separable over $k$ if $k(\alpha)/k$ is separable.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:sep-deg-multiplicative}
+    Let $E/F$ and $F/k$ be finite extensions. Then 
+    \begin{equation*}
+        [E:k]_s = [E:F]_s[F:k]_s
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $L$ be an algebraically closed field and $\sigma: k\to L$ be an embedding. Let $\{\sigma_i\}_{i\in I}$ be the extensions of $\sigma$ to an embedding $F\to L$ and $\{\tau_{ij}\}$ be the extensions of $\sigma$ to an embedding $E\to L$. We have indexed $\tau$ in such a way that the restriction $\tau_i\mid_{E} = \sigma_i$. Using the definition of the separable degree, we have that for each $i$ there are precisely $[E:F]_s$ $j$'s such that $\tau_{ij}$ is a valid extension. This immediately implies the desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    Let $E/k$ be finite. Then, $[E:k]_s\le [E:k]$.
+\end{corollary}
+\begin{proof}
+    Due to finitness, we have a tower of extensions 
+    \begin{equation*}
+        k\subsetneq k(\alpha_1)\subsetneq\cdots\subsetneq k(\alpha_1,\ldots,\alpha_n)
+    \end{equation*}
+    We may now finish using \thref{lem:num-extensions-eq-distinct-roots}.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:charzero-finite-separable}
+    Let $E/k$ be finite and $\chr k = 0$. Then $E/k$ is separable.
+\end{theorem}
+\begin{proof}
+    Since $E/k$ is finite, there is a tower of extensions as follows: 
+    \begin{equation*}
+        k\subsetneq k(\alpha_1)\subsetneq\cdots\subsetneq k(\alpha_1,\ldots,\alpha_n)
+    \end{equation*}
+
+    We shall show that the extension $k(\alpha)/k$ is separable for some $\alpha\in\overline{k}$. Let $p(x) = m_\alpha(x)$ be the minimal polynomial over $k[x]$. We contend that $p(x)$ does not have any multiple roots. Suppose not, then $p(x)$ and $p'(x)$ share a root, say $\beta$. But since $p(x)$ is the minimal polynomial for $\beta$ over $k$, it must divide $p'(x)$ which is impossible over a field of characteristic $0$. Finally, due to \thref{lem:num-extensions-eq-distinct-roots}, we must have $k(\alpha)/k$ is separable.
+
+    This immediately implies the desired conclusion, since 
+    \begin{equation*}
+        [E:k]_s = [k(\alpha_1,\ldots,\alpha_n): k(\alpha_1,\ldots,\alpha_{n - 1}]\cdots[k(\alpha_1): k] = [E:k]
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}\thlabel{thm:nonzerochar-sep-degree}
+    Let $E/k$ be finite and $\chr k = p > 0$. Then, there is $m\in\N_0$ such that 
+    \begin{equation*}
+        [E:k] = p^m[E:k]_s
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{corollary}
+    Let $E/k$ be a finite extension. Then, $[E:k]_s$ divides $[E:k]$. 
+\end{corollary}
+\begin{proof}
+    Follows from \thref{thm:charzero-finite-separable} and \thref{thm:nonzerochar-sep-degree}.
+\end{proof}
+
+\begin{definition}[Inseparable Degree]
+    Let $E/k$ be finite. Then, we denote 
+    \begin{equation*}
+        [E:k]_i = \frac{[E:k]}{[E:k]_s}
+    \end{equation*}
+    as the \textit{inseparable degree}.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:separable-element-lifting}
+    Let $K/k$ be algebraic and $\alpha\in K$ is separable over $k$. Let $k\subseteq F\subseteq K$. Then, $\alpha$ is separable over $F$.
+\end{lemma}
+\begin{proof}
+    Let $p(x)\in k[x]$ and $f(x)\in F[x]$ be the minimal polynomial of $\alpha$ over $k$ and $F$ respectively. By definition, $f(x)\mid p(x)$ and therefore has distinct roots in the algebraic closure of $k$. Consequently, $\alpha$ is separable over $F$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:finite-sep-iff-elem-sep}
+    Let $E/k$ be finite. Then, it is separable if and only if each element of $E$ is separable over $k$.
+\end{proposition}
+\begin{proof}
+    Suppose $E/k$ is separable and $\alpha\in E\backslash k$. Then, there is a tower of extensions 
+    \begin{equation*}
+        k\subsetneq k(\alpha_1)\subsetneq\cdots\subsetneq k(\alpha_1,\ldots,\alpha_n) = E
+    \end{equation*}
+    with $\alpha_1 = \alpha$. Recall that $[E:k]_s\le [E:k]$ with equality if and only if there is an equality at each step in the tower. This implies the desired conclusion.
+
+    Conversely, suppose each element of $E$ is separable over $k$. Then, each $\alpha_i$ is separable over $k(\alpha_1,\ldots,\alpha_{i - 1})$ due to \thref{lem:separable-element-lifting}. Consequently, for each step in the tower, 
+    \begin{equation*}
+        [k(\alpha_1,\ldots,\alpha_i):k(\alpha_1,\ldots,\alpha_{i - 1})]_s = 
+        [k(\alpha_1,\ldots,\alpha_i):k(\alpha_1,\ldots,\alpha_{i - 1})]
+    \end{equation*}
+    implying the desired conclusion.
+\end{proof}
+
+\begin{definition}[Infinite Separable Extensions]
+    An algebraic extension $E/k$ is said to be \textit{separable} if each finitely generated sub-extension is separable.
+\end{definition}
+
+\begin{theorem}\thlabel{thm:sep-if-generators-sep}
+    Let $E/k$ be algebraic and generated by a family $\{\alpha_i\}_{i\in I}$. If each $\alpha_i$ is separable over $k$, then $E$ is separable over $k$.
+\end{theorem}
+\begin{proof}
+    Let $k(\alpha_1,\ldots,\alpha_n)/k$ be a finitely generated sub-extension of $E/k$. From our proof of \thref{prop:finite-sep-iff-elem-sep}, we know that $\alpha_i$ is separable over $k(\alpha_1,\ldots,\alpha_{i - 1})$, and therefore, $k(\alpha_1,\ldots,\alpha_n)$ is separable over $k$ and we have the desired conclusion.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:sep-iff-elem-sep}
+    Let $E/k$ be algebraic. Then, $E/k$ is separable if and only if each element of $E$ is separable over $k$.
+\end{theorem}
+\begin{proof}
+    Suppose $E/k$ is separable, then for each $\alpha\in E$, $k(\alpha)$ is a finitely generated sub-extension of $E$, which is separable by definition. This implies that $\alpha$ is separable over $k$, again by definition.
+
+    Conversely, suppose each element is separable over $k$. Let $k(\alpha_1,\ldots,\alpha_n)$ be a finitely generated sub-extension of $E$. Then, we have the following tower 
+    \begin{equation*}
+        k\subsetneq k(\alpha_1)\subsetneq\cdots\subsetneq k(\alpha_1,\ldots,\alpha_n)
+    \end{equation*}
+    From our proof of \thref{prop:finite-sep-iff-elem-sep}, we know that $\alpha_i$ is separable over $k(\alpha_1,\ldots,\alpha_{i-1})$, this immediately implies that $k(\alpha_1,\ldots,\alpha_n)/k$ is separable.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:sep-distinguished-class}
+    Separable extensions (not necessarily finite) form a distinguished class of extensions.
+\end{theorem}
+\begin{proof}
+    Suppose $E/k$ is separable and $F$ is an intermediate field. Since each element of $F$ is an element of $E$, we have that $F$ must be separable over $K$, due to \thref{thm:sep-iff-elem-sep}. Conversely, suppose both $E/F$ and $F/k$ are separable. Now, if $E/k$ is finite, so is $F/k$ and we are done due to \thref{prop:sep-deg-multiplicative}.
+
+    Now, suppose $E/k$ is not finite. It suffices to show that for all $\alpha\in E$, $\alpha$ is separable over $k$. Let $p(x) = a_nx^n + \cdots + a_0$ be the unique monic irreducible polynomial of $\alpha$ over $F$. Then, $p(x)$ is also the monic irreducible polynomial of $\alpha$ over $k(a_0,\ldots,a_n)$. Since $\alpha$ is separable over $F$, $p(x)$ has no repeated roots and therefore $\alpha$ is also separable over $k(a_0,\ldots,a_n)$. We now have a finite tower 
+    \begin{equation*}
+        k\subsetneq k(a_0,\ldots,a_n)\subsetneq k(a_0,\ldots,a_n)(\alpha)
+    \end{equation*}
+    Furthermore, since each $a_i$ is separable over $k$ for $0\le i\le n$, it must be the case that $k(a_0,\ldots,a_n)$ is separable over $k$ and finally so must $\alpha$.
+
+    Next, suppose $E/k$ is separable and $F/k$ is an extension, where both $E$ and $F$ are contained in some algebraically closed field $L$. Since every element of $E$ is separable over $k$, it must be separable over $F$, through a similar argument involving the minimal polynomial as carried out above. Since $EF$ is generated by all the elements of $E$, we may finish using \thref{thm:sep-if-generators-sep}. This completes the proof.
+\end{proof}
+
+\begin{definition}[Separable Closure]
+    Let $k$ be a field and $\overline k$ be an algebrai closure. We define the separable closure $k^\sep$ as 
+    \begin{equation*}
+        k^\sep = \{a\in\overline k\mid\text{$a$ is separable over $k$}\}
+    \end{equation*}
+\end{definition}
+
+If $\alpha,\beta\in k^\sep$, then $\alpha,\beta\in k(\alpha,\beta)$, which by choice of $\alpha,\beta$ is separable over $k$. Therefore, $\alpha\beta,\alpha/\beta,\alpha + \beta,\alpha - \beta\in k(\alpha,\beta)$ are separable over $k$, and lie in $k^\sep$, from which it follows that $k^\sep$ is a field extension of $k$.
+
+\section*{Primitive Element Theorem}
+
+\begin{definition}[Primitive Element]
+    Let $E/k$ be a finite extension. Then $\alpha\in E$ is said to be \textit{primitive} if $E = k(\alpha)$. In this case, the extension $E/k$ is said to be simple.
+\end{definition}
+
+\begin{theorem}[Steinitz, 1910]\thlabel{thm:primitive-element-theorem}
+    Let $E/k$ be a finite extension. Then, there exists a primitive element $\alpha\in E$ if and only if there exist only a finite number of fields $F$ such that $k\subseteq F\subseteq E$. If $E/k$ is separable, then there exists a primitive element.
+\end{theorem}
+\begin{proof}
+    If $k$ is finite, then so is $E$ and it is known that the multiplicative group of finite fields are cyclic, therefore generated by a single element, immediately implying the desired conclusion. Henceforth, we shall suppose that $k$ is infinite.
+
+    Suppose there are only a finite number of fields intermediate between $k$ and $E$. Let $\alpha,\beta\in E$. We shall show that $k(\alpha,\beta)/k$ has a primitive element. Indeed, consider the intermediate fields $k(\alpha + c\beta)$ for $c\in k$, which are infinite in number. Therefore, there are distinct elements $c_1,c_2\in k$ such that $k(\alpha + c_1\beta) = k(\alpha + c_2\beta)$. Consequently, $(c_1 - c_2)\beta\in k(\alpha + c_1\beta)$, therefore, $\beta\in k(\alpha + c_1\beta)$ and thus $\alpha\in k(\alpha + c_1\beta)$. This implies that $\alpha + c_1\beta$ is a primitive element for $k(\alpha,\beta)/k$. Now, since $E/k$ is finite, it must be finitely generated. We may now use induction to finish.
+
+    Conversely, suppose $E/k$ has a primitive element, say $\alpha\in E$. Let $f(x)$ be the monic irreducible polynomial for $\alpha$ over $k$. Now, for each intermediate field $k\subseteq F\subseteq E$, let $g_F$ denote the monic irreducible polynomial for $\alpha$ over $F$. Using the unique factorization over $\overline{k}[x]$, $g_F\mid f$ for each intermediate field $F$, therefore, there may be only finitely many such $g_F$ and thus, only finitely many intermediate fields $F$.
+
+    Finally, suppose $E/k$ is separable and therefore, finitely generated. Hence, it suffices to prove the statement for $k(\alpha, \beta)/k$. Say $n = [k(\alpha, \beta): k]$ and let $\sigma_1,\ldots,\sigma_n$ be distinct embeddings of $k(\alpha,\beta)$ into $\overline{k}$ over $k$
+    \begin{equation*}
+        f(x) = \prod_{1\le i\ne j\le n}\left(x(\sigma_i\beta - \sigma_j\beta) + (\sigma_i\alpha - \sigma_j\beta)\right)
+    \end{equation*}
+
+    Since $f$ is not identically zero, there is $c\in k$ (due to the infiniteness of $k$), such that $f(c)\ne 0$ and thus, the elements $\sigma_i(\alpha + c\beta)$ are distinct for $1\le i\le n$, and thus
+    \begin{equation*}
+        n\le[k(\alpha + c\beta): k]_s\le [k(\alpha + c\beta): k]\le[k(\alpha,\beta): k] = n
+    \end{equation*}
+    Thus, $\alpha + c\beta$ is primitive for $k(\alpha,\beta)/k$ which completes the proof.
+\end{proof}
+
+Note that there are finite extension with infinitely many subfields. For example, consider the extension $\F_p(x,y)/\F_p(x^p,y^p)$ which has degree $p^2$. Let $z\in k=\F_p(x^p,y^p)$ and $w = x + zy\in\F_p(x,y)$. We have $w^p = x^p + z^py^p\in\F_p(x^p,y^p)$ and thus, $k(w)/k$ has degree $p$. Furthermore, for $z\ne z'$ and $w' = x + z'y$, it is not hard to see that $k(w,w')$ contains both $x$ and $y$, and is equal to $\F_p(x,y)$, from which it follows that $w\ne w'$. Since we have infinitely many choices of $z$, there are infinitely many subfields of the extension $\F_p(x,y)/\F_p(x^p,y^p)$.
+
+\begin{lemma}
+    Let $E/k$ be an algebraic separable extension. Further, suppose that there is an integer $n\ge 1$ such that for every element $\alpha\in E$, $[k(\alpha):k]\le n$. Then $E/k$ is finite and $[E:k]\le n$.
+\end{lemma}
+\begin{proof}
+    Let $\alpha\in E$ such that $[k(\alpha):k]$ is maximal. We claim that $E = k(\alpha)$, for if not, there would be $\beta\in E\backslash k(\alpha)$. Now, since $k(\alpha,\beta)$ is a separable extension and is finite, it must be primitve. Thus, there is $\gamma\in E$ such that $k(\alpha,\beta) = k(\gamma)$ and $[k(\gamma):k] = [k(\alpha,\beta):k] > [k(\alpha):k]$, contradicting the assumed maximality. This completes the proof.
+\end{proof}
