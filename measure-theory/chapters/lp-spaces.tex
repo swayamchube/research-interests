@@ -1,0 +1,148 @@
+\section{Introduction}
+
+Let $E\subseteq\R$ be measurable and $\mathcal F$ be the set of all extended real valued measurable functions defined on $E$. We define the equivalence relation $\sim$ on $\mathcal F$ by $f\sim g$ if and only if $f = g$ a.e. on $E$. That this is an equivalence relation is trivial.
+
+For $1\le p < \infty$, define $L^p(E)$ to be the collection of equivalence classes $[f]$ for which 
+\begin{equation*}
+    \int_E|f|^p < \infty
+\end{equation*}
+
+It is not hard to see that this property is well defined by taking any representative of an equivalence class. Note that $L^1(E)$ is the collection of equivalence classes of integrable functions on $E$.
+
+We contend that $L^p(E)$ is an $\R$-vector space. Indeed, note that for real numbers $a,b$ we have 
+\begin{equation*}
+    |a + b|\le |a| + |b|\le 2\max\{|a|,|b|\}
+\end{equation*}
+and consequently, 
+\begin{equation*}
+    |a + b|^p\le 2^p\max\{|a|^p,|b|^p\}
+\end{equation*}
+This shows that if $[f],[g]\in L^p(E)$, then so does $[f + g]$.
+
+A function $f\in\mathcal F$ is said to be \textit{essentially bounded} if there is $M\ge 0$, called an \textit{essential upper bound} for $f$, for which $|f(x)|\le M$ for almost all $x\in E$. It is not hard to show that $L^\infty(E)$ is an $\R$-vector space. In conclusion, all the $L^p$ spaces are $\R$-vector spaces for $1\le p < \infty$.
+
+\section{Some Inequalities}
+
+\begin{theorem}[Young]
+    Let $p,q > 1$ be such that $\frac{1}{p} + \frac{1}{q} = 1$. For nonnegative reale numbers $a,b$, 
+    \begin{equation*}
+        ab\le\frac{a^p}{p} + \frac{b^q}{q}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Consider the function $f(x) = \frac{1}{p}x^p + \frac{1}{q} - x$. Note that $f(1) = 0$. Moreover, $f'(x) < 0$ on $(0,1)$ and $f'(x) > 0$ on $(1,\infty)$. As a result, $f(x)\ge 0$ for each $x\in[0,\infty)$. Substituting $x = a/b^{q - 1}$ we obtain the desired inequality.
+\end{proof}
+
+Note, if $p,q > 1$ are such that $\frac{1}{p} + \frac{1}{q} = 1$, then $p$ and $q$ are said to be \textit{conjugates} of one another.
+
+\begin{theorem}[H\"older]
+    Let $E$ be a measurable set, $1\le p < \infty$ and $q$ the conjugate of $p$. If $f\in L^p(E)$ and $g\in L^q(E)$, then $fg$ is integrable over $E$ and 
+    \begin{equation*}
+        \int_E|fg|\le\|f\|_p\|g\|_q
+    \end{equation*}
+    Moreover, if $f\ne 0$, the function $f^* = \|f\|_p^{1 - p}\sgn(f)|f|^{p - 1}$ belongs to $L^q(E)$ and 
+    \begin{equation*}
+        \int_E ff^* = \|f\|_p 
+    \end{equation*}
+    and $\|f\|_q = 1$.
+\end{theorem}
+\begin{proof}
+    First, we analyze the case $p > 1$. Upon replacing $f$ by $f/\|f\|_p$ and $g$ by $g/\|g\|_q$, we need only show, for $\|f\|_p = 1$ and $\|g\|_q = 1$ that $\int_E|fg|\le 1$. First, since $|f|^p$ and $|g|^q$ are integrable over $E$, they are finite a.e. on $E$. Hence, due to Young's Inequality, 
+    \begin{equation*}
+        |fg|\le\frac{|f|^p}{p} + \frac{|g|^q}{q}\text{ a.e. on }E
+    \end{equation*}
+    Then, due to the Integral Comparison Test, $|fg|$ is integrable on $E$, further, 
+    \begin{equation*}
+        \int_E|fg|\le\int_E\left(\frac{|f|^p}{p} + \frac{|g|^q}{q}\right) = 1
+    \end{equation*}
+    
+    Next, note that 
+    \begin{equation*}
+        \int_E ff^* = \int_E\|f\|_p^{1 - p}|f|^p = \|f\|_p
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \|f^*\|_q = \|f\|^{1 - p}_p\left(\int_E|f|^{p}\right)^{\frac{1}{q}} = \|f\|_p^{1 - p}\|f\|_p^{p/q} = 1
+    \end{equation*}
+
+    We now prove the statement for $p = 1$. On $E$, we have $|fg|\le|f|\|g\|_\infty$, thus $|fg|$ is integrable and 
+    \begin{equation*}
+        \int_E|fg|\le\int_E|f|\|g\|_\infty\le\|f\|_1\|g\|_\infty
+    \end{equation*}
+    The second part of the assertion is trivial for $p = 1$.
+\end{proof}
+
+\begin{theorem}[Minkowski]
+    Let $E\subseteq\R$ be measurable and $1\le p\le\infty$. If $f,g\in L^p(E)$, then so does $f + g$ and 
+    \begin{equation*}
+        \|f + g\|_p\le\|f\|_p + \|g\|_p
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We have 
+    \begin{align*}
+        \|f + g\|_p &= \int_E(f + g)(f + g)^*\\
+        &= \int_E f(f + g)^* + \int_E g(f + g)^*\\
+        &\le\left(\|f\|_p + \|g\|_p\right)\|(f + g)^*\|_p\\
+        &= \|f\|_p + \|g\|_p
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    For $1\le p\le\infty$, $\left(L^p(E), \|\cdot\|_p\right)$ forms a normed $\R$-vector space.
+\end{theorem}
+\begin{proof}
+    That it forms an $\R$-vector space has been established. Further, due to Minkowski's Inequality, we conclude that $\|\cdot\|_p$ is indeed a norm on $L^p(E)$.
+\end{proof}
+
+\section{Riesz-Fischer Theorem}
+
+\begin{definition}[Rapidly Cauchy Sequences]
+    Let $(V,\|\cdot\|)$ be a normed vector space. A sequence $\{v_n\}$ in $V$ is said to be rapidly Cauchy if there is a sequence $\{\varepsilon_n\}$ of positive reals such that $\sum\limits_{n = 1}^\infty\varepsilon_n$ converges and $\|v_{n + 1} - v_n\|\le\varepsilon_n^2$ for each $n\in\N$.
+\end{definition}
+
+Obviously, every rapidly Cauchy sequence is Cauchy. The following proposition gives a partial converse.
+
+\begin{proposition}
+    Let $(V,\|\cdot\|)$ be a normed vector space. Then every Cauchy sequence has a rapidly Cauchy subsequence.
+\end{proposition}
+\begin{proof}
+    For each $k\in\N$, there is $N_k\in\N$ such that for all $m,n\ge N_k$, $\|v_m - v_n\| < 1/2^k$. We may choose $N_k$ as an increasing sequence, whence it follows that $\{v_{N_k}\}$ is a rapidly Cauchy sequence.
+\end{proof}
+
+\begin{theorem}
+    Let $E$ be a measurable set and $1\le p\le\infty$. Then every rapidly Cauchy sequence in $L^p(E)$ converges both with respect to the $L^p(E)$ norm and pointwise a.e. on $E$ to a function in $L^p(E)$.
+\end{theorem}
+\begin{proof}
+First, by excising a suitable subset of measure $0$ from $E$, we may suppose that all functions in the rapidly Cauchy sequence are real valued. We divide the proof into two cases.
+\begin{description}
+\item[Case 1: $1\le p < \infty$.] Let $\{f_n\}$ be a rapidly Cauchy sequence in $L^p(E)$ and $\{\varepsilon_n\}$ be the corresponding sequence such that $\|f_{n + 1} - f_n\|_p < \varepsilon_n^2$.
+
+We now have 
+\begin{align*}
+    m\left(\{x\in E: |f_{k + 1}(x) - f_k(x)|\ge\varepsilon_k\}\right) &= m\left(\{x\in E: |f_{k + 1}(x) - f_k(x)|^p\ge\varepsilon_k^p\}\right)\\
+    &\le\frac{1}{\varepsilon_k^p}\int_E|f_{k + 1} - f_k|^p\\
+    & < \varepsilon_k^p
+\end{align*}
+
+Since $\sum_{n = 1}^\infty\varepsilon_n$ converges, so does $\sum_{n = 1}^\infty\varepsilon_n^p$. Then, due to \thref{lem:borel-cantelli}, every $x\in E$ belongs to at most finitely many of the above sets. Therefore, there is $E_0\subseteq E$ of measure $0$ such that for each $x\in E\backslash E_0$, there is $K(x)\in\N$ such that for all $k\ge K(x)$, $|f_{k + 1}(x) - f_k(x)| < \varepsilon_k$. 
+
+From here, it is not hard to see that for each $x\in E\backslash E_0$, the sequence $\{f_n(x)\}$ is Cauchy and therefore, converges in $\R$. Let $f(x)$ be the limit of $\{f_n(x)\}$. Using the triangle inequality, we have 
+\begin{equation*}
+    \int_E|f_{n + k} - f_n|^p < \left(\sum_{j = n}^{n + k - 1}\varepsilon_j^2\right)^p < \left(\sum_{j = n}^\infty\varepsilon_j^2\right)^p
+\end{equation*}
+In the limit $k\to\infty$, due to Fatou's Lemma, we have 
+\begin{equation*}
+    \int_E|f - f_n|^p\le\left(\sum_{j = n}^\infty\varepsilon_j^2\right)^p
+\end{equation*}
+Now, due to the above inequality, we see that $f - f_n\in L^p(E)$, therefore, $f\in L^p(E)$. Further, from the inequality, we infer that $f_n\to f$ under the $L^p$ norm, completing the proof in this case.
+\end{description}
+\end{proof}
+
+\begin{theorem}[Riesz-Fischer]
+    Let $E\subseteq\R$ be measurable and $1\le p\le\infty$. Then $L^p(E)$ is a Banach space.
+\end{theorem}
+\begin{proof}
+    We have shown that every Cauchy sequence in a normed vector space has a rapidly Cauchy subsequence, and from the above result, that subsequence must converge. Hence, every Cauchy sequence in $L^p(E)$ has a convergent subsequence, consequently the Cauchy sequence must converge\footnote{This is a well known result}.
+\end{proof}

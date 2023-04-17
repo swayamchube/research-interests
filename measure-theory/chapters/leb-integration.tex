@@ -1,0 +1,599 @@
+\section{Lebesgue Integral of Bounded Function on Finite Measure Sets}
+In this section we shall study only bounded functions on sets of finite measure and show that all Riemann Integrable functions are Lebesgue Integrable. Of course, to prove this result, it suffices to consider a domain of finite measure since the Riemann Integral is defined over a bounded interval. 
+
+We shall also show in this section that all bounded measurable functions on a set of finite measure are integrable, due to \thref{lem:simple-approximation}.
+In the next section, we shall extend our theory of integration to general measurable functions, which need not be finite and which may be defined over sets of infinite measure.
+
+\begin{definition}[Integral of Simple Functions]
+    Let $\psi: E\to\R$ be a simple function with canonical representation 
+    \begin{equation*}
+        \psi = \sum_{i = 1}^n\alpha_i\chi_{E_i}
+    \end{equation*}
+    Then, we define the integral of $\psi$ over $E$ by 
+    \begin{equation*}
+        \int_E\psi = \sum_{i = 1}^n\alpha_i m(E_i)
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Let $\{E_i\}_{i = 1}^n$ be a finite disjoint collection of measurable subsets of a set of finite measure $E$. If $\varphi = \sum_{i = 1}^n\alpha_i\chi_{E_i}$ on $E$, then 
+    \begin{equation*}
+        \int_{E}\varphi = \sum_{i = 1}^n\alpha_i m(E_i)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{proposition}[Simple Linearity and Monotonicity]
+    Let $\varphi$ and $\psi$ be simple functions on a set of finite measure $E$. Then for any $\alpha,\beta\in\R$, 
+    \begin{equation*}
+        \int_E \alpha\varphi + \beta\psi = \alpha\int_E\varphi + \beta\int_E\psi
+    \end{equation*}
+    Further, if $\varphi\le\psi$ on $E$, then $\int_E\varphi\le\int_E\psi$.
+\end{proposition}
+\begin{proof}
+    Since $\varphi$ and $\psi$ take finitely many distinct values, we may represent $E$ as the disjoint union of measurable sets $E_i$, such that $\varphi$ and $\psi$ are constant on each $E_i$. Then, we may write 
+    \begin{equation*}
+        \varphi = \sum_{i = 1}^n a_i\chi_{E_i}\qquad\psi = \sum_{i = 1}^n b_i\chi_{E_i}
+    \end{equation*}
+    As a result, we have 
+    \begin{align*}
+        \alpha\varphi + \beta\psi &= \sum_{i = 1}^n (\alpha a_i + \beta b_i)\chi_{E_i}\\
+        \Longrightarrow\int_{E}\alpha\varphi + \beta\psi &= \sum_{i = 1}^n(\alpha a_i + \beta b_i)m(E_i) = \alpha\sum_{i = 1}^n a_i m(E_i) + \beta\sum_{i = 1}^n b_i m(E_i) = \alpha\int_E\varphi + \beta\int_E\psi
+    \end{align*}
+
+    Next,
+    \begin{equation*}
+        \int_E\psi - \int_E\varphi = \int_E(\psi - \varphi) \ge 0
+    \end{equation*}
+    since $\psi -\varphi\ge 0$.
+\end{proof}
+
+\begin{definition}[Upper and Lower Integrals]
+    Let $E\subseteq\R$ have finite measure and $f: E\to\R$ be a bounded function. We define the lower and upper Lebesgue integral of $f$ over $E$ to be 
+    \begin{align*}
+        \overline{\int}_E f = \sup\left\{\int_E\varphi~\bigg\vert~\varphi\text{ simple and $\varphi\le f$ on $E$}\right\}\\
+        \underline{\int}_E f = \inf\left\{\int_E\varphi~\bigg\vert~\varphi\text{ simple and $f\le \varphi$ on $E$}\right\}
+    \end{align*}
+
+    Then $f$ is said to be \textit{Lebesgue Integrable} over $E$ provided its upper and lower Lebesgue intnegrals over $E$ are equal. The common value is termed the \textit{Lebesgue Integral} of $f$ over $E$ and is denoted by $\int_E f$.
+\end{definition}
+
+Since every step function is simple we immediately have that \textbf{every Riemann Integrable function is Lebesgue Integrable.}
+
+\begin{theorem}
+    Let $E\subseteq\R$ have finite measure and $f: E\to\R$ be a bounded measurable function. Then $f$ is integrable over $E$.
+\end{theorem}
+\begin{proof}
+    Due to \thref{lem:simple-approximation}, there are simple functions $\varphi,\psi$ such that $\varphi\le f\le\psi$ and $\psi - \varphi < 1/n$. Consequently, 
+    \begin{equation*}
+        \int_{E}\psi - \varphi\le\frac{1}{n}m(E)
+    \end{equation*}
+    This immediately implies the desired conclusion.
+\end{proof}
+
+\begin{theorem}[Linearity and Monotonicity]
+    Let $E\subseteq\R$ have finite measure and $f,g: E\to\R$ be bounded measurable functions. Then for any $\alpha,\beta\in\R$ 
+    \begin{equation*}
+        \int_E(\alpha f + \beta g) = \alpha\int_E f + \beta\int_E g
+    \end{equation*}
+    and if $f\le g$ on $E$, then 
+    \begin{equation*}
+        \int_E f\le\int_E g
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We shall show linearity in two steps. First, we shall show that $\int_E\alpha f = \alpha\int_E f$. The case for $\alpha = 0$ is trivial. Let us consider the case $\alpha > 0$, since the other case follows analogously.
+    \begin{equation*}
+        \int_E\alpha f = \sup_{\psi\le\alpha f}\int_E\psi = \sup_{\varphi\le f}\int_E\alpha\varphi = \alpha\int_E f
+    \end{equation*}
+    Next, we shall show that $\int_E (f + g) = \int_E f + \int_E g$. First note that since $f$ and $g$ are bounded, so is $f + g$. Now, for every pair of simple functions $(\phi,\varphi)$ with $\phi\le f$ and $\varphi\le g$, we have $\phi + \varphi\le f+ g$ and thus,
+    \begin{equation*}
+        \int_E (f + g) = \sup_{\psi\le f+ g}\int_E\psi\ge\int_E(\phi+\varphi) = \int_E\phi + \int_E\varphi
+    \end{equation*}
+    Taking the supremum on both sides, we have $\int_E (f + g)\ge\int_E f + \int_E g$. A similar inequality can be obtained in the reverse direction and the conclusion follows.
+
+    Finally, for monotonicity, note that $g - f\ge 0$ on $E$ and therefore, $\int_E(g - f)\ge 0$ and using linearity, we have $\int_E g\ge\int_E f$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $E$ have finite measure and $f: E\to\R$ be bounded. Then for any measurable $E_1\subseteq E$, 
+    \begin{equation*}
+        \int_{E_1} f = \int_E f\chi_{E_1}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $\varphi$ be a simple function such that $\varphi\le f$ on $E_1$. Extend $\varphi$ to the function $\phi: E\to\R$ on $E$ that is defined as 
+    \begin{equation*}
+        \phi(x) = 
+        \begin{cases}
+            \varphi(x) & x\in E_1\\
+            0 & x\notin E_1
+        \end{cases}
+    \end{equation*}
+    It is not hard to see that $\phi\le f\chi_{E_1}$ on $E$ and thus 
+    \begin{equation*}
+        \int_E f\chi_{E_1}\ge\sup_{\phi}\int_E\phi = \sup_{\varphi}\int_{E_1}\varphi = \int_{E_1} f
+    \end{equation*}
+    Conversely, let $\varphi$ be a simple function such that $\varphi\ge f$ on $E_1$, then the extension $\phi$ is such that $\phi\ge f\chi_{E_1}$ on $E$ and therefore, 
+    \begin{equation*}
+        \int_E f\chi_{E_1}\le\inf_\phi\int_E\phi = \inf_\varphi\int_{E_1}\varphi = \int_{E_1}f
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $E$ have finite measure and $f: E\to\R$ be bounded. Suppose $A$ and $B$ are disjoint measurable subsets of $E$. Then, 
+    \begin{equation*}
+        \int_{A\cup B}f = \int_Af + \int_Bf
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Note that $\chi_{A\cup B} = \chi_A + \chi_B$. The conclusion is obvious now.
+\end{proof}
+
+\begin{lemma}
+    Let $E$ have finite measure and $f:E\to\R$ be bounded. Then 
+    \begin{equation*}
+        \left|\int_E f\right|\le\int_E|f|
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Obviously, we have $-|f|\le f\le|f|$, then, using monotonicity and linearity of integration, we have 
+    \begin{equation*}
+        -\int_E|f|\le\int_E f\le\int_E|f|
+    \end{equation*}
+    The conclusion is now obvious.
+\end{proof}
+
+\begin{proposition}
+    Let $E$ have finite measure and $f_n: E\to\R$ be a sequence of bounded measurable functions that converges uniformly to $f: E\to\R$ which is a bounded function. Then, 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E f_n = \int_E f
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $\varepsilon > 0$ be given. Since the convergence is uniform, there is an index $N\in\N$ such that for all $n\ge N$, $|f_n - f| < \varepsilon/m(E)$. Using the above lemma, for all $n\ge N$, we have 
+    \begin{equation*}
+        \left|\int_E(f_n - f)\right|\le\int_E|f_n - f|\le\varepsilon
+    \end{equation*}
+    The conclusion is obvious.
+\end{proof}
+
+\begin{theorem}[Bounded Convergence Theorem]\thlabel{thm:bounded-convergence-theorem}
+    Let $E$ have finite measure and $f_n:E\to\R$ be a sequence of measurable functions. Suppose $\{f_n\}$ is uniformly pointwise bounded on $E$. If $\{f_n\}\to f$ pointwise on $E$, then 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E f_n = \int_E f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    First, since $f_n$ converge pointwise to $f$, the latter is measurable. There is some $M > 0$ such that for all $n\in\N$, $|f_n|\le M$. As a result, $f$ is also bounded and therefore, the integral is well defined. Let $\varepsilon > 0$ be given. Due to \thref{thm:egoroff}, there is a closed subset $F$ of $E$ with $m(E\backslash F) < \varepsilon/4M$ and $f_n\rightrightarrows f$ on $F$. Furthermore, due to uniform convergence, there is $N\in\N$ such that for all $n\ge N$, $|f_n - f| < \varepsilon/2m(E)$. As a result, for all $n\ge N$, we have 
+    \begin{equation*}
+        \left|\int_E (f_n - f)\right|\le\left|\int_F(f_n - f) + \int_{E\backslash F} f_n - f\right|\le\int_F|f_n - f| + \int_{E\backslash F}|f_n - f|\le\int_F\frac{\varepsilon}{2m(E)} + \int_{E\backslash F}2M\le\varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+Note that dropping the uniform boundedness hypothesis will not work. Take for example the sequence of functions $f_n:[0,1]\to\R$ given by 
+\begin{equation*}
+    f_n(x) = 
+    \begin{cases}
+        n^2x & 0\le x < 1/n\\
+        2n - n^2x & 1/n\le x < 2/n\\
+        0 & 2/n\le x\le 1
+    \end{cases}
+\end{equation*}
+
+It is not hard to see that $f_n$ converges to the zero function pointwise, but $\int_{[0,1]} f_n = 1$ for each $n\in\N$, and hence the sequence of integrals do not converge.
+
+Next, the Bounded Convergence Theorem does not hold for the Riemann Integral. To see this, let $\{q_1,q_2,\ldots\}$ be the enumertion of rationals in $[0,1]$. Define the sequence of Riemann Integrable functions $f_n: [0,1]\to\R$ as 
+\begin{equation*}
+    f_n(x) = 
+    \begin{cases}
+        1 &  x = r_k,~1\le k\le n\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+
+We see that $|f_n|\le 1$ for all $n\in\N$ and $f_n$ converges pointwise to $\chi_{\Q\cap[0,1]}$ which is not Riemann integrable. 
+
+\section{Lebesgue Integral of Nonnegative Measurable Functions}
+
+In this section we study the integrals of measurable functions that are not necessarily bounded over domains that are not necessarily having finite measure. This is of course an extension of the theory we have built in the previous section.
+
+\begin{definition}[Support]
+    Let $f: E\to[-\infty,\infty]$ be a measurable function. The \textit{support} of $f$, denoted by $\supp(f) = \{x\in E\mid f(x)\ne 0\}$. The function $h$ is said to have \textit{finite suppor} if $\supp(f)$ has finite measure.
+\end{definition}
+
+If $f: E\to\R$ is bounded, measurable and has finite support, we define 
+\begin{equation*}
+    \int_E f = \int_{\supp(f)}f
+\end{equation*}
+which is well defined, since $\supp(h)$ is a measurable subset of $E$ and thus Lebesgue measurable, further, since it has finite measure and $f$ is bounded, the integral is as defined in the previous section.
+
+\begin{definition}
+    Let $E$ be a measurable subset of $\R$ and $f:E\to[0,\infty]$, a nonnegative measurable function on $E$. We define the integral of $f$ over $E$ by 
+    \begin{equation*}
+        \int_E f = \sup\left\{\int_E h~\bigg\vert~h\text{ bounded, measurable and of finite support }0\le h\le f\text{ on }E\right\}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Chebychev's Inequality]\thlabel{thm:chebychev-inequality}
+    Let $E\subseteq\R$ be measurable and $f: E\to[0,\infty]$ be a measurable function. Then for any $\lambda > 0$, 
+    \begin{equation*}
+        m\left(\{x\in E\mid f(x)\ge\lambda\}\right)\le\frac{1}{\lambda}\int_E f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Define $E_\lambda = \{x\in E\mid f(x)\ge\lambda\}$. If $m(E_\lambda) = \infty$. Further, define $E_\lambda^{(n)} = [-n,n]\cap E_\lambda$. Due to \thref{thm:continuity-of-leb-measure}, $\lim\limits_{n\to\infty} E_\lambda^{(n)} = \infty$. Note that the function $\lambda\chi_{E_\lambda^{(n)}}\le f$ on $E$ and is bounded, measurable with finite support, and therefore, 
+    \begin{equation*}
+        \lambda m(E_\lambda^{(n)})\le\int_E f
+    \end{equation*}
+    Taking supremum on both sides, we havethe desired conclusion. Next, suppose $m(E_\lambda) < \infty$. Then, the function $\lambda\chi_{E_\lambda}$ is bounded measurable with finite support and is $\le f$ on $E$, whence the conclusion follows.
+\end{proof}
+
+\begin{proposition}
+    Let $E\subseteq\R$ be measurable and $f: E\to[0,\infty]$ be a measurable function. Then 
+    \begin{equation*}
+        \int_E f = 0\text{ if and only if } f = 0\text{ a.e. on }E
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Define the set 
+    \begin{equation*}
+        E_n := \{x\in E\mid f(x)\ge 1/n\}
+    \end{equation*}
+    Then, due to \thref{thm:chebychev-inequality}, $m(E_n)\le 0$ and thus $m(E_n) = 0$. Finally using the continuity of measure, 
+    \begin{equation*}
+        m(\{x\in E\mid f(x) > 0\}) = m\left(\bigcup_{n = 1}^\infty E_n\right) = \lim_{n\to\infty} m(E_n) = 0
+    \end{equation*}
+    The conclusion follows.
+\end{proof}
+
+\begin{theorem}
+    Let $E\subseteq\R$ be measurable and $f,g: E\to[0,\infty]$ be measurable. Then for any $\alpha > 0$ and $\beta > 0$, 
+    \begin{equation*}
+        \int_E(\alpha f + \beta g) = \alpha\int_E f + \beta\int_E g
+    \end{equation*}
+    Moreover, if $f\le g$ on $E$, then $\int_E f\le\int_E g$.
+\end{theorem}
+\begin{proof}
+    First, for any $h$, note that $h\le f$ if and only if $\alpha h\le\alpha f$ and it follows that $\int_E\alpha f = \alpha\int_E f$. We would now show that $\int_E f + g = \int_E f + \int_E g$. First, one direction of the inequality is trivial, since for every pair $(h,k)$ of nonnegative bounded measurable functions of finite support with $h\le f$ and $k\le g$, we have $h + k\le f + g$ and hence,
+    \begin{equation*}
+        \int_E h + \int_E k = \int_E (h + k)\le\int_E(f + g)
+    \end{equation*}
+    and taking the supremum on both sides, we have $\int_E f + \int_E g\le\int_E(f + g)$. It suffices to show that other direction of the inequality.
+
+    Let $\ell$ be a nonnegative bounded measurable function of finite support satisfying $\ell\le f + g$. Let us define $h = \min\{\ell, f\}$ and $k = \ell - h$. It is not hard to see that $h,k$ are bounded measurable functions of finite support on $E$ satisfying $h\le f$ and $k\le g$. As a result, 
+    \begin{equation*}
+        \int_E\ell = \int_E h + \int_E k\le \int_E f + \int_E g
+    \end{equation*}
+    and taking the supremum, the conclusion follows. The assertion about monotonicity follows from noting that $g - f$ is a nonnegative function on $E$ and therefore has nonnegative integral and finally using linearity.
+\end{proof}
+
+\begin{lemma}
+    Let $E\subseteq\R$ be measurable and $f: E\to[0,\infty]$ be measurable. Then, for a measurable subset $E_1$ of $E$,
+    \begin{equation*}
+        \int_{E_1}f = \int_E f\chi_{E_1}
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[Additivity over Domains]
+    Let $E\subseteq\R$ be measurable and $A,B\subseteq E$ be disjoint measurable. Then, 
+    \begin{equation*}
+        \int_{A\cup B}f = \int_A f + \int_B f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Follows from the previous lemma.
+\end{proof}
+\begin{corollary}
+    Let $E_0\subseteq E$ have measure $0$. Then 
+    \begin{equation*}
+        \int_E f = \int_{E\backslash E_0} f
+    \end{equation*}
+\end{corollary}
+
+\begin{lemma}[Fatou's Lemma]\thlabel{lem:fatou}
+    Let $E\subseteq\R$ be measurable and $\{f_n\}$ be sequence of nonnegative measurable functions on $E$ that converge pointwise a.e. on $E$ to $f$. Then 
+    \begin{equation*}
+        \int_E f\le\liminf_{n\to\infty}\int_E f_n
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    First, we may suppose without loss of generality that the convergence is everywhere on $E$ (this is not hard to reason). Next, let $h$ be a nonnegative bounded measurable function of finite support such that $0\le h\le f$. Define $h_n = \min\{f_n, h\}$. Then, $h_n\to h$ on $E$. Further, each $h_n\le h$ and is therefore pointwise uniformly bounded (since $h$ is bounded). 
+
+    Due to \thref{thm:bounded-convergence-theorem}, $\int_E h_n\to\int_E h$. Furthermore, since $h_n\le f_n$, we have $ \int_E h_n\le\int_E f_n$ for each $n\in\N$. Taking $\liminf$, we have 
+    \begin{equation*}
+        \int_E h = \lim_{n\to\infty}\int_E h_n = \liminf_{n\to\infty}\int_E h_n\le\liminf_{n\to\infty}\int_E f_n
+    \end{equation*}
+    The conclusion follows.
+\end{proof}
+
+\begin{example}
+    Let $\{f_n\}$ be a sequence of nonnegative measurable functions on $E$ that converges pointwise on $E$ to $f$. Suppose $f_n\le f$ on $E$ for each $n$. Show that 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E f_n = \int_E f
+    \end{equation*}
+\end{example}
+\begin{proof}
+    Due to Fatou's Lemma and the fact that $f_n\le f$, we have 
+    \begin{equation*}
+        \int_E f\le\liminf_{n\to\infty}\int_E f_n\le\limsup_{n\to\infty}\int_E f_n\le\int_E f
+    \end{equation*}
+    The conclusion now follows.
+\end{proof}
+
+\begin{theorem}[Monotone Convergence Theorem]\thlabel{thm:monotone-convergence}
+    Let $E\subseteq\R$ be measurable and $\{f_n\}$ an increasing sequence of nonnegative measurable functions on $E$. Let $f: E\to[0,\infty]$ be such that $f_n\to f$ a.e. on $E$. Then 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E f_n = \int_E f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Since the sequence $\{f_n\}$ is increasing, so is the sequence $\left\{\int_E f_n\right\}$ and therefore, converges to some extended real number. Now, \thref{lem:fatou} gives us 
+    \begin{equation*}
+        \int_E f\le\liminf_{n\to\infty}\int_E f_n\le\int_E f
+    \end{equation*}
+    The conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    Let $\{u_n\}$ be a sequence of nonnegative measurable functions on $E$. If $f = \sum_{n = 1}^\infty u_n$ pointwise a.e. on $E$, then 
+    \begin{equation*}
+        \int_E f = \sum_{n = 1}^\infty\int_E u_n
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Trivial and omitted.
+\end{proof}
+
+Note that the Monotone Convergence Theorem may not hold for decreasing sequences of positive measurable functions, take for example the sequence $\{f_n = \chi_{(n,\infty)}\}_{n\in\N}$. The pointwise limit of this sequence is the zero function but $\int_E f_n = \infty$ for each $n\in\N$.
+
+The following is a generalization of \thref{lem:fatou} but we shall use \thref{thm:monotone-convergence} to prove it which in turn depends on \thref{lem:fatou}.
+
+\begin{lemma}[Generalized Fatou's Lemma]
+    Let $E\subseteq\R$ be measurable and $\{f_n\}$ be a sequence of nonnegative measurable functions. Then 
+    \begin{equation*}
+        \int_E\liminf_{n\to\infty}f_n\le\liminf_{n\to\infty}\int_E f_n
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Define the function 
+    \begin{equation*}
+        g_k = \inf_{i\ge k}f_i
+    \end{equation*}
+    Then, $g_1\le g_2\le\cdots$ and $g_n\to\liminf\limits_{n\to\infty} f_n$. By definition, we also have 
+    \begin{equation*}
+        \int_E g_k\le\int_E f_k
+    \end{equation*}
+    Taking $\liminf\limits_{n\to\infty}$ and using \thref{thm:monotone-convergence}, we have 
+    \begin{equation*}
+        \int_E\liminf_{n\to\infty} f_n = \lim_{n\to\infty}\int_E g_n = \liminf_{n\to\infty}\int_E g_n\le\liminf_{n\to\infty}\int_E f_n
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{definition}[Integrable]
+    A nonnegative measurable function $f$ on a measurable set $E$ is said to be \textit{integrable} on $E$ provided 
+    \begin{equation*}
+        \int_E f < \infty
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Let $E\subseteq\R$ be measurable and $f$ be integrable over $E$. Then $f$ is finite a.e. on $E$.
+\end{proposition}
+\begin{proof}
+    Due to \thref{thm:chebychev-inequality}, for each $n\in\N$, 
+    \begin{equation*}
+        m(\{x\in E\mid f(x)\ge n\})\le\frac{1}{n}\int_E f
+    \end{equation*}
+    since $\int_E f$ is finite, the right hand side tends to $0$ as $n\to\infty$. The conclusion follows.
+\end{proof}
+
+\begin{proposition}
+    Let $E\subseteq\R$ be measurable and $f: E\to[0,\infty]$ be measurable. Then, 
+    \begin{equation*}
+        \int_E f = \sup\left\{\int_E\varphi~\bigg\vert~\varphi\text{ simple of finite support and }0\le\varphi\le f\right\}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    We first show that there is an increasing sequence of nonnegative simple functions with finite support that converges to $f$. Define $E_n = E\cap[-n, n]$. Consider the simple function $\varphi_n$ on $\{x\in E_n\mid f(x)\le n\}$, which is measurable and has finite measure since $E_n$ has finite measure. On the remaining $E_n$, define $\varphi = n$. We now have a sequence of measurable functions, each with finite support that converges to $f$. To make sure this is increasing, write 
+    \begin{equation*}
+        \psi_n = \max_{1\le i\le n}\varphi_n
+    \end{equation*}
+    
+    Finally, due to the Monotone Convergence Theorem, we have 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E\varphi_n = \int_E f
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+This establishes that Rudin's definition of the integral is equivalent to Royden's definition of the integeral, albeit the former does it in a more abstract sense.
+
+\section{General Lebesgue Integral}
+
+In this section we shall study the Lebesgue Integral of not necessarily nonnegative measurable functions on a measurable set. This is the integral in its maximum generality. The highlight of this section is the Dominated Convergence Theorem (\thref{thm:dominated-convergence}).
+
+\begin{proposition}
+    Let $E\subseteq\R$ be measurable and $f$ be a measurable function on $E$. Then $f^+$ and $f^-$ are integrable over $E$ if and only if $|f|$ is integrable over $E$.
+\end{proposition}
+\begin{proof}
+    We have $|f| = f^+ + f^-$ and $f^+\le|f|$ and $f^-\le|f|$. The conclusion follows from linearity and monotonicity.
+\end{proof}
+
+\begin{definition}[Integrable]
+    Let $E\subseteq\R$ be measurable. A measurable function $f$ on $E$ is said to be integrable over $E$ provided $|f|$ is integrable over $E$. In this case, we define 
+    \begin{equation*}
+        \int_E f = \int_E f^+ - \int_E f^-
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Let $E\subseteq\R$ be measurable and let $f$ be integrable over $E$. Then $f$ is finite a.e. on $E$ and 
+    \begin{equation*}
+        \int_E f = \int_{E\backslash E_0} f
+    \end{equation*}
+    if $E_0\subseteq E$ and $m(E_0) = 0$.
+\end{proposition}
+\begin{proof}
+    Since $|f|$ is integrable, it is finite a.e. on $E$, thus $f$ is finite a.e. on $E$. We have 
+    \begin{equation*}
+        \int_{E\backslash E_0} f = \int_{E\backslash E_0} f^+ - \int_{E\backslash E_0} f^- = \int_E f^+ - \int_E f^- = \int_E f
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}[Integral Comparison Test]
+    Let $E\subseteq\R$ be measurable and $f$ be a measurable function on $E$. Suppose there is a nonnegative function $g$ that is integrable over $E$ and $|f|\le g$ on $E$. Then $f$ is integrable over $E$ and 
+    \begin{equation*}
+        \left|\int_E f\right|\le\int_E|f|
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{theorem}[Linearity and Monotonicity]
+    Let $E\subseteq\R$ be measurable and $f,g$ be measurable functions on $E$. Then, for any $\alpha,\beta\in\R$, the function $\alpha f + \beta g$ is integrable over $E$ and 
+    \begin{equation*}
+        \int_E(\alpha f + \beta g) = \alpha\int_E f + \beta\int_E g
+    \end{equation*}
+    Further, if $f\le g$ on $E$, then $\int_E f\le\int_E g$.
+\end{theorem}
+\begin{proof}
+    First, suppose $\alpha > 0$. Then $[\alpha f]^+ = \alpha f^+$ and $[\alpha f]^- = \alpha f^-$. Similarly, when $\alpha < 0$, $[\alpha f]^+ = -\alpha f^-$ and $[\alpha f]^- = -\alpha f^+$. It is not hard to see from here that $\int_E \alpha f = \alpha\int_E f$. 
+
+    Next, we establish that $\int_E(f + g) = \int_E f + \int_E g$. Since $|f + g|\le |f| + |g|$, it is integrable due to the Integral Comparison Test. Furthermore, since $f$ and $g$ are integrable, we may suppose without loss of generality that they are finite on $E$ (since they are required to be finite a.e. on $E$). We have 
+    \begin{equation*}
+        (f + g)^+ - (f + g)^- = (f^+ - f^-) + (g^+ - g^-)
+    \end{equation*}
+    rearranging, we obtain 
+    \begin{equation*}
+        (f + g)^+ + f^- + g^- = (f + g)^-  + f^+ + g^+
+    \end{equation*}
+    Since both sides are nonnegative integrable functions, we have, using the linearity of integration of nonnegative measurable functions,
+    \begin{equation*}
+        \int_E (f + g)^+ + \int_E f^- + \int_E g^- = \int_E (f + g)^- + \int_E f^+ + \int_E g^+
+    \end{equation*}
+    Rearranging the terms, we have the desired conclusion. 
+
+    Finally, we may suppose without loss of generality that $f$ and $g$ are finite on $E$, now if $f\le g$, then $g - f\ge 0$ on $E$, then 
+    \begin{equation*}
+        0\le \int_E(g - f) = \int_E g - \int_E f
+    \end{equation*}
+    The conclusion follows.
+\end{proof}
+
+\begin{theorem}[Dominated Convergence Theorem]\thlabel{thm:dominated-convergence}
+    Let $\{f_n\}$ be a sequence of measurable functions on $E$. Suppose there is a function $g$ that is integrable over $E$ and $|f_n|\le g$ on $E$ for all $n\in\N$. If $\{f_n\}\to f$ pointwise a.e. on $E$, then $f$ is integrable over $E$ and 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E f_n = \int_E f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    First, note that $|f|\le g$ and therefore is integrable due to the Integral Comparison Test. Since each $f_n$, $f$ and $g$ are finite a.e. and the convergence is pointwise a.e., we may suppose without loss of generality that all the $f_n$, $f$ and $g$ are finite on $E$ and the convergence is pointwise on all of $E$. Consider the sequence of nonnegative integrable functions $\{g - f_n\}$ on $E$. It is not hard to see that this sequence converges pointwise to the nonnegative function $g - f$ on $E$. As a result, using \thref{lem:fatou}, 
+    \begin{equation*}
+        \int_E (g - f)\le\liminf_{n\to\infty}\int_E(g - f_n) = \int_E g - \limsup_{n\to\infty}\int_E f_n
+    \end{equation*}
+    and thus $\limsup\limits_{n\to\infty}\int_E f_n\le\int_E f$.
+
+    Similarly, consider the sequence of nonnegative integrable functions $\{g + f_n\}$ that converges pointwise to the nonnegative integrable function $g + f$ on $E$. Using \thref{lem:fatou}, we have 
+    \begin{equation*}
+        \int_E (g + f)\le\liminf_{n\to\infty}\int_E(g + f_n) = \int_E g + \liminf_{n\to\infty}\int_E f_n
+    \end{equation*}
+    and thus $\int_E f\le\liminf\limits_{n\to\infty} \int_E f_n$. The conclusion follows.
+\end{proof}
+
+\section{Countable Additivity and Continuity of Integration}
+
+\begin{theorem}[Countable Additivity]
+    Let $E\subseteq\R$ and $f: E\to[-\infty,\infty]$ be integrable. Let $\{E_n\}$ be a disjoint countable collection of measurable subsets of $E$ whose union is $E$. Then 
+    \begin{equation*}
+        \int_E f = \sum_{n = 1}^\infty\int_{E_n} f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Define $A_n = \bigcup_{k = 1}^n E_k$ and $f_n := f\chi_{A_n}$. Then $f_n$ is measurable on $E$ and $|f_n|\le|f|$ on $E$ for all $n\in\N$. Further, note that $f_n\to f$ pointwise on $E$. Since $f$ is measurable, we may invoke the Dominated Convergence Theorem to obtain 
+    \begin{equation*}
+        \int_E f = \lim_{n\to\infty}\int_E f_n = \lim_{n\to\infty}\int_{A_n} f = \lim_{n\to\infty}\sum_{k = 1}^n\int_{E_k} f
+    \end{equation*}
+    Since the right hand side is the definition of $\sum\limits_{n = 1}^\infty\int_{E_n} f$, the proof is complete.
+\end{proof}
+
+\begin{theorem}[Continuity of Integration]
+    
+\end{theorem}
+
+\section{The Vitali Convergence Theorem}
+
+\begin{theorem}
+    Let $f: E\to[-\infty,\infty]$ be measurable. If $f$ is integrable over $E$, then for each $\varepsilon > 0$, there is $\delta > 0$ such that whenever $A\subseteq E$ is measurable with $m(A) < \delta$, then $\int_E |f| < \varepsilon$.
+
+    Conversely, if $m(E) < \delta$ and for each $\varepsilon > 0$, there is $\delta > 0$ such that whenever $A\subseteq E$ with $m(A) < \delta$, $\int_A |f| < \varepsilon$, then $f$ is integrable on $E$.
+\end{theorem}
+\begin{proof}
+    We shall show this for $f^+$ and $f^-$ separately, which would immediately imply the result for $f$. Therefore, we may suppose that $f\ge 0$ on $E$. Then, by definition, there is a measurable bounded function of finite support $f_\varepsilon$ satisfying $0\le f_\varepsilon\le f$ on $E$ and $\int_E f - f_\varepsilon < \varepsilon/2$. 
+
+    Now, for any $A\subseteq E$, we have 
+    \begin{equation*}
+        \int_A (f - f_\varepsilon)\le\int_E(f - f_\varepsilon) < \varepsilon/2
+    \end{equation*}
+    And hence, $\int_A f < \int_A f_\varepsilon + \varepsilon/2$. Since $f_\varepsilon$ is bounded, there is some $M > 0$ such that $0\le f_\varepsilon\le M$ on $E$ and hence, when $m(A) < \varepsilon/2M$, we have 
+    \begin{equation*}
+        \int_A f < \int_A f_\varepsilon + \varepsilon/2\le\varepsilon
+    \end{equation*}
+    This proves the first assertion.
+
+    Conversely, suppose $m(E) < \infty$. Then, there is $\delta > 0$ corresponding to $\varepsilon = 1$. Since we may construct disjoint sets $\{E_i\}_{i = 1}^N$ such that $E = \bigsqcup\limits_{i = 1}^N E_i$ and $m(E_i) < \delta$ for each $1\le i\le N$, we have 
+    \begin{equation*}
+        \int_E f = \sum_{i = 1}^N\int_{E_i} f < N
+    \end{equation*}
+    which completes the proof.
+\end{proof}
+
+\begin{definition}[Uniformly Integrable]
+    A family $\mathcal F$ of measurable functions on $E$ is said to be \textit{uniformly integrable over} $E$ provided for each $\varepsilon > 0$, there is a $\delta > 0$ such that for each $f\in\mathcal F$, whenever $A\subseteq E$ is measurable and $m(A) < \delta$, then $\int_A |f| < \varepsilon$.
+\end{definition}
+
+\begin{proposition}
+    Let $E\subseteq\R$ be measurable and $\mathcal F = \{f_i\}_{i = 1}^n$ be a finite collection of integrable functions on $E$. Then $\mathcal F$ is uniformly integrable over $E$.
+\end{proposition}
+\begin{proof}
+    Let $\varepsilon > 0$ be given. Since every singleton is uniformly integrable, there is $\delta_i > 0$ corresponding to $\varepsilon$ for $\{f_i\}$. Now, just set $\delta = \min_{1\le i\le n}\delta_i$.
+\end{proof}
+
+\begin{theorem}[Vitali Convergence Theorem]\thlabel{thm:vitali-convergence}
+    Let $E\subseteq\R$ have finite measure. Suppose the sequence of functions $\{f_n\}_{n = 1}^\infty$ is uniformly integrable over $E$. If $f_n\to f$ pointwise a.e. on $E$, then $f$ is integrable over $E$ and 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E f_n = \int_E f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We shall first show that $f$ is integrable over $E$. Since the collection $\{f_n\}$ is uniformly integrable, there is $\delta > 0$ corresponding to $\varepsilon = 1$ in the definition of uniform integrability. We may write $E = \bigsqcup\limits_{k = 1}^N E_k$ where $m(E_k) < \delta$. Therefore, 
+    \begin{equation*}
+        \int_E|f_n| = \sum_{k = 1}^N\int_{E_n}|f_n| < N
+    \end{equation*}
+    Note that since $f_n\to f$ pointwise a.e. on $E$, we must have that $|f_n|\to|f|$ pointwise a.e. on $E$. Therefore, due to Fatou's Lemma,
+    \begin{equation*}
+        \int_E|f|\le\liminf_{n\to\infty}\int_E|f_n|\le N
+    \end{equation*}
+    This shows that $|f|$ and hence $f$ is integrable. Therefore, $f$ is finite a.e. on $E$, hence, we may suppose without loss of generality that $f$ is real valued on $E$ and the convergence is pointwise on $E$.
+
+    Now, we have 
+    \begin{equation*}
+        \left|\int_E f - \int_E f_n\right|=\left|\int_E(f - f_n)\right|\le\int_E|f - f_n|
+    \end{equation*}
+    Let $\varepsilon > 0$ be given. Correspondingly, there is $\delta > 0$ corresponding to $\varepsilon/3$ in the definition of uniform integrability. Due to Egoroff's Theorem (\thref{thm:egoroff}), there is a subset $A\subseteq E$ with $m(A) < \delta$ such that $E\backslash A$ is closed and the convergence $f_n\to f$ is uniform on $E$. 
+
+    Further, since $m(A) < \delta$, we have $\int_A|f_n| < \varepsilon/3$ for each $n\in\N$ and due to Fatou's Lemma, we have $\int_A|f|\le\varepsilon/3$. Finally, there is some $N\in\N$ such that for all $n\ge N$, $|f_n - f|\le\varepsilon/3m(E\backslash A)$. Putting all this together, we have, for all $n\ge N$ that 
+    \begin{equation*}
+        \left|\int_E f - \int_E f_n\right|\le\int_E|f - f_n|\le\int_{E\backslash A}|f_n - f| + \int_A |f_n| + \int_A |f| < \varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}

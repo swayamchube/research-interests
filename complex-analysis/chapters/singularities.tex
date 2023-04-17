@@ -1,3 +1,5 @@
+\section{Classification of Singularities}
+
 \begin{definition}
     A function $f$ has an \textit{isolated singularity} at a point $z = a$ if there is $R > 0$ such that $f$ is analytic on $0 < |z - a| < R$. The point $a$ is called a \textit{removable singularity} if there is an analytic function $g: B(a,R)\to\bbC$ such that $f(z) = g(z)$ for $0 < |z - a| < R$.
 \end{definition}
@@ -48,3 +50,237 @@
 \begin{definition}
     If $f$ has a pole at $z = a$, and $m$ is the smallest positive integer such that $f(z)(z - a)^m$ has a removable singularity at $z = a$, then $f$ is said to have a \textit{pole of order $m$} at $z = a$.
 \end{definition}
+
+\begin{definition}
+    Let $\{z_n\}_{n\in\Z}$ be a doubly infinite sequence of complex numbers. We say that $\sum\limits_{n = -\infty}^\infty z_n$ is \textit{absolutely convergent} if both $\sum\limits_{n = 0}^\infty z_n$ and $\sum\limits_{n = 1}^\infty z_{-n}$ are absolutely convergent.
+\end{definition}
+
+We denote the annular region $R_1 < |z - a| < R_2$ by $\ann(a,R_1,R_2)$.
+
+\begin{theorem}[Laurent Series Development]
+    Let $f$ be analytic on $\ann(a,R_1,R_2)$. Then 
+    \begin{equation*}
+        f(z) = \sum_{n = -\infty}^\infty a_n(z - a)^n
+    \end{equation*}
+    where the convergence is absolute and uniform over $\overline{\ann}(a,r_1,r_2)$ for $R_1 < r_1 < r_2 < R_2$. Also the coefficients $a_n$ are given by the formula 
+    \begin{equation*}
+        a_n = \frac{1}{2\pi i}\int_\gamma\frac{f(z)}{(z - a)^{n + 1}}~dz
+    \end{equation*}
+    where $\gamma$ is the circle $|z - a| = r$ for all $R_1 < r < R_2$. Furthermore, this series is unique.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\section{Residues}
+
+\begin{definition}
+    Let $f$ have an isolated singularity at $z = a$ and let 
+    \begin{equation*}
+        f(z) = \sum_{n = -\infty}^\infty a_n(z - a)^n
+    \end{equation*}
+    be its Laurent expansion about $z = a$. Then the \textit{residue} of $f$ at $z = a$ is defined as $a_{-1}$.
+\end{definition}
+
+\begin{theorem}[Weak Residue Theorem]\thlabel{thm:weak-residue}
+    Let $f$ be analytic in the region $G$ except for isolated \textbf{poles} $a_1,\ldots,a_n\in G$. If $\gamma$ is a closed rectifiable curve in $G$ which does not pass through any of the points $a_k$ and if $\gamma$ is nulhomotopic in $G$, then 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma f = \sum_{k = 1}^n n(\gamma,a_k)\Res(f,a_k)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $S_j$ denote the singular part of $f$ at $a_j$. Then, $g = f - \sum_{k = 1}^n S_k$ has removable singularities at $a_1,\ldots,a_n$. As a result,
+    \begin{equation*}
+        0 = \int_\gamma g = \int_\gamma f - \sum_{k = 1}^n\int_\gamma S_k 
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+There is a stronger version of the above theorem wherein the word \textit{poles} is replaced by \textit{singularities}. We shall prove this later.
+
+\begin{proposition}
+    Suppose $f$ has a pole of order $m$ at $z = a$ and let $g(z) = (z - a)^mf(z)$. Then, 
+    \begin{equation*}
+        \Res(f,a) = \frac{1}{(m - 1)!}g^{(m - 1)}(a)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Follows from the definition.
+\end{proof}
+
+\subsection*{Evaluating Integrals using the Residue Theorem}
+
+\begin{example}
+    Evaluate: 
+    \begin{equation*}
+        \int_{-\infty}^\infty\frac{x^2}{1 + x^4}~dx
+    \end{equation*}
+\end{example}
+\begin{proof}[Solution]
+Define the contour 
+\begin{equation*}
+    \gamma := [-R,R]\cup\underbrace{\{Re^{it}\mid t\in[0,\pi]\}}_{\Gamma}\qquad R > 1
+\end{equation*}
+and the function $f(z) = \frac{z^2}{1 + z^4}$, which has poles of order $1$ at 
+\begin{equation*}
+    \cis\left(\frac{\pi}{4}\right),
+    \cis\left(\frac{3\pi}{4}\right),
+    \cis\left(\frac{5\pi}{4}\right),
+    \cis\left(\frac{7\pi}{4}\right)
+\end{equation*}
+
+Within our contour, we have only $a_1 = \cis\left(\frac{\pi}{4}\right)$ and $a_2 = \cis\left(\frac{3\pi}{4}\right)$ and 
+\begin{align*}
+    \Res(f,a_1) &= \lim_{z\to a_1}(z - a_1)f(z) = \frac{1}{4a_1} = \frac{1}{4}\cis\left(-\frac{\pi}{4}\right)\\
+    \Res(f,a_2) &= \lim_{z\to a_2}(z - a_2)f(z) = \frac{1}{4a_2} = \frac{1}{4}\cis\left(-\frac{3\pi}{4}\right)
+\end{align*}
+
+\begin{equation*}
+    \int_\gamma f(z)~dz =  \frac{\pi i}{2}\left(\cis\left(-\frac{\pi}{4}\right) + \cis\left(-\frac{3\pi}{4}\right)\right) = \frac{\pi}{\sqrt{2}}
+\end{equation*}
+
+Now, 
+\begin{equation*}
+    0\le\int_\Gamma f\le\int_\Gamma\frac{R^2}{|1 + z^4|}~|dz|\le\int_\Gamma\frac{\pi R^3}{R^4 - 1}
+\end{equation*}
+And in the limit $R\to\infty$, $\int_\Gamma f = 0$. The conclusion follows.
+\end{proof}
+
+\begin{example}
+    Show that 
+    \begin{equation*}
+        \int_{-\infty}^\infty\frac{e^{ax}}{1 + e^x}~dx = \frac{\pi}{\sin\pi a}
+    \end{equation*}
+    for $0 < a < 1$.
+\end{example}
+\begin{proof}
+    Consider the function $f(z) = \frac{e^{az}}{1 + e^z}$, which is analytic except for poles at $(2k + 1)\pi i$ for all $k\in\Z$. Let $\gamma$ denote the rectangular contour:
+    \begin{equation*}
+        -R\longrightarrow R\longrightarrow R + 2\pi i\longrightarrow -R + 2\pi i\longrightarrow -R
+    \end{equation*}
+    We note that 
+    \begin{equation*}
+        n(\gamma, (2k + 1)\pi i) = 
+        \begin{cases}
+            1 & k = 0\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    Furthermore, 
+    \begin{equation*}
+        \lim_{z\to\pi i}(z - \pi i)\frac{e^{az}}{1 + e^z} = -e^{a\pi i}
+    \end{equation*}
+    Therefore, we have, due to \thref{thm:weak-residue}, that 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma\frac{e^{az}}{1 + e^z}~dz = -e^{a\pi i}
+    \end{equation*}
+    It is not hard to argue that the integral on the segments $R\to R + 2\pi i$ and $-R + 2\pi i\to -R$ both tend to $0$ as $R\to\infty$. Thus, in the limit $R\to\infty$, we have 
+    \begin{equation*}
+        \int_{-R}^R f + \int_{R + 2\pi i}^{-R + 2\pi i} f = -e^{a\pi i}
+    \end{equation*}
+    Further, 
+    \begin{equation*}
+        \int_{R + 2\pi i}^{-R + 2\pi i } f = e^{2a\pi i}\int_{R}^{-R}\frac{e^{ax}}{1 + e^x}dx
+    \end{equation*}
+    Thus, 
+    \begin{equation*}
+        (1 - e^{2a\pi i})\int_{-\infty}^\infty f = (-2\pi i)e^{a\pi i}
+    \end{equation*}
+    Thus, 
+    \begin{equation*}
+        \int_{-\infty}^\infty f = \frac{2\pi i}{e^{a\pi i} - e^{-a\pi i}} = \frac{\pi}{\sin\pi a}
+    \end{equation*}
+\end{proof}
+
+The next example has a rather unmotivated solution but we present it anyways since it is an important result to keep in mind.
+
+\begin{example}
+    Let $u\in\R\backslash\Z$. Then, show that 
+    \begin{equation*}
+        \sum_{n = -\infty}^\infty\frac{1}{(u + n)^2} = \frac{\pi}{\sin^2\pi u}
+    \end{equation*}
+\end{example}
+\begin{proof}
+    Consider the meromorphic function
+    \begin{equation*}
+        f(z) = \frac{\pi\cot\pi z}{(u + z)^2}
+    \end{equation*}
+    It has poles at $k$ for $k\in\Z$ and $-u$. Let $N$ be an integer such that $N > |u|$ and let $R = N + 1/2$. This contour contains the following poles: 
+    \begin{equation*}
+        \{-u\}\cup\{k\in\Z\mid -N\le k\le N\}
+    \end{equation*}
+    The residue at $z = k\in\Z$ is given by 
+    \begin{equation*}
+        \lim_{z\to k}(z - k)\frac{\pi\cot\pi z}{(u + z)^2} = \frac{\pi}{(u + k)^2}
+    \end{equation*}
+    On the other hand, the residue at $z = -u$ is the coefficient $a_{-1}$ in the Laurent expansion of $f(z)$ around $z = -u$. Since $u$ is not an integer, $\pi\cot\pi z$ is analytic in a ball around $u$, and the required coefficient is given by $f'(u) = -\frac{\pi^2}{\sin^2\pi u}$.
+    Hence, 
+    \begin{equation*}
+        \sum_{n = -N}^N\frac{\pi}{(u + n)^2} = \int_{|z| = R}f(z)~dz + \frac{\pi^2}{\sin^2\pi u}
+    \end{equation*}
+    Therefore, it suffices to show that the integral on the circle is zero. \textcolor{red}{TODO: Add in later}
+\end{proof}
+
+\section{Argument Principle}
+
+\begin{definition}[Meromorphic]
+    A function which is analytic on a region except for poles is said to be \textit{meromorphic} on that region.
+\end{definition}
+
+\begin{theorem}[Argument Principle]
+    Let $f$ be meromorphic in $G$ with poles $p_1,\ldots,p_m$ and zeros $z_1,\ldots,z_n$ counted according to multiplicity. If $\gamma$ is a closed rectifiable curve which is nulhomotopic and not passing through any of the aforementioned points, then 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma\frac{f'(z)}{f(z)}~dz = \sum_{k = 1}^n n(\gamma,z_k) - \sum_{k = 1}^m n(\gamma,p_k)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    It is not hard to argue that there is an analytic function $g$ on $G$ that does not vanish anywhere such that 
+    \begin{equation*}
+        \frac{f'}{f} = \sum_{k = 1}^n\frac{1}{z - z_k} - \sum_{k = 1}^m\frac{1}{z - p_k} + \frac{g'}{g}
+    \end{equation*}
+    Note that $g'/g$ is an analytic function and due to Cauchy's Theorem, 
+    \begin{equation*}
+        \int_\gamma\frac{f'}{f} = \sum_{k = 1}^nn(\gamma,z_k) - \sum_{k = 1}^mn(\gamma,p_k)
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $f$ be meromorphic in $G$ with poles $p_1,\ldots,p_m$ and zeros $z_1,\ldots,z_n$ counted according to multiplicity. If $\gamma$ is a closed rectifiable curve which is nulhomotopic and not passing through any of the aforementioned points, then for an analytic function $g$ on $G$, 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma g\frac{f'(z)}{f(z)}~dz = \sum_{k = 1}^n g(z_k)n(\gamma,z_k) - \sum_{k = 1}^m g(p_k)n(\gamma,p_k)
+    \end{equation*}
+\end{corollary}
+
+\begin{theorem}[Rouch\'e]
+    Suppose $f$ and $g$ are meromorphic in the region $G$ and $\overline B(a,R)\subseteq G$. If $f$ and $g$ have no zeros or poles on the circle $\gamma:= \{z: |z - a| = R\}$ and $|f(z) - g(z)| < |g(z)|$ on $\gamma$, then 
+    \begin{equation*}
+        Z_f - P_f = Z_g - P_g
+    \end{equation*}
+    where $Z_f,Z_g$ denote the zeros of $f$ and $g$ in $B(a,R)$ and $P_f,P_g$ denote the poles of $f$ and $g$ in $B(a,R)$.
+\end{theorem}
+\begin{proof}
+    First, note that 
+    \begin{equation*}
+        \left|1 - \frac{f(z)}{g(z)}\right| < 1
+    \end{equation*}
+    for all $z\in\{\gamma\}$. Since $(f/g)(\{\gamma\})\subseteq B(1,1)$, there is a neighborhood of $\{\gamma\}$ that is mapped into $B(1,1)$. As a result, on this neighborhood, $\log(f/g)$, the principal branch is a primitive for $(f/g)'/(f/g)$. As a result, we have 
+    \begin{equation*}
+        0 = \frac{1}{2\pi i}\int_\gamma\frac{(f/g)'}{(f/g)} = \frac{1}{2\pi i}\int_\gamma\left(\frac{f'}{f} - \frac{g'}{g}\right)
+    \end{equation*}
+    The conclusion follows.
+\end{proof}
+
+We conclude this chapter with a beautiful problem from \cite{ahlfors}.
+
+\begin{theorem}
+Let $f$ be a non-constant entire function. Then the following are equivalent: 
+\begin{enumerate}[label=(\alph*)]
+\item $f$ has no essential singularity at $\infty$ 
+\item $f$ is proper 
+\item $f$ is a polynomial
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    \textcolor{red}{TODO: Add in later}
+\end{proof}

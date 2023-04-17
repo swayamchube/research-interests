@@ -1,0 +1,229 @@
+\section{Measurable Functions}
+
+\begin{definition}[Measurable Function]
+    Let $(X,\frakM)$ be a measurable space and $f: X\to[-\infty,\infty]$ be an extended real valued function. Then, $f$ is said to be measurable if it satisfies one of the following equivalent conditions for all $c\in\R$
+    \begin{enumerate}[label=(\alph*)]
+    \item $\{x\in X\mid f(x) < c\}$ is measurable
+    \item $\{x\in X\mid f(x) \le c\}$ is measurable
+    \item $\{x\in X\mid f(x) > c\}$ is measurable
+    \item $\{x\in X\mid f(x) \ge c\}$ is measurable
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let $(X,\frakM,\mu)$ be a complete measure space and $X_0$ a measurable subset of $X$ for which $\mu(X\backslash X_0) = 0$. Then a function $f: X\to[-\infty,\infty]$ is measurable if and only if its restriction to $X_0$ is measurable.
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \{x\in X_0\mid f(x) > c\}\subseteq\{x\in X\mid f(x) > c\}\subseteq\{x\in X_0\mid f(x) > c\}\cup(X\backslash X_0)
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    Let $(X,\frakM,\mu)$ be a complete measure space. If $g,h: X\to[-\infty,\infty]$ are functions such that $g = h$ a.e. on $X$, then $g$ is measurable if and only if $h$ is measurable.
+\end{corollary}
+
+\begin{proposition}
+    Let $(X,\frakM,\mu)$ be a complete measure space. Let $f,g: X\to[-\infty,\infty]$ be measurable functions that are finite a.e. on $X$. Let $\alpha,\beta\in\R$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+    \item $\alpha f + \beta g$ is measurable
+    \item $f\cdot g$ is measurable 
+    \item $\min\{f,g\}$ and $\max\{f,g\}$ are measurable
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Same as that for Lebesgue measurable functions.
+\end{proof}
+
+\begin{proposition}
+    Let $(X,\frakM)$ be a measurable space and $f$ a real valued measurable function on $X$. Let $\varphi:\R\to\R$ be continuous. Then $\varphi\circ f$ is measurable.
+\end{proposition}
+\begin{proof}
+    Same as that for Lebesgue measurable functions.
+\end{proof}
+
+\begin{theorem}
+    Let $(X,\frakM,\mu)$ be a measure space and $\{f_n\}$ a sequence of measurable functions on $X$ for which $\{f_n\}\to f$ pointwise a.e. on $X$. If either the measure space $(X,\frakM,\mu)$ is complete or the convergence is pointwise on all of $X$, then $f$ is measurable.
+\end{theorem}
+\begin{proof}
+    Again, by excising a suitable subset of measure 0, we may suppose that the convergence is everywhere. The remainder of the proof is the same as that for Lebesgue measurable functions.
+\end{proof}
+
+\begin{lemma}[Simple Approximation Lemma]\thlabel{lem:abstract-simple-approximation}
+    Let $(X,\frakM)$ be a measurable space and $f: X\to\R$ be bounded and measurable. Then, for each $\varepsilon > 0$, there are simple functions $\varphi_\varepsilon$, $\psi_\varepsilon$ such that $\varphi_\varepsilon\le f\le\psi_\varepsilon$ and $\psi_\varepsilon - \varphi_\varepsilon < \varepsilon$ on $X$.
+\end{lemma}
+\begin{proof}
+    Same as that for Lebesgue measurable functions.
+\end{proof}
+
+\begin{theorem}[Simple Approximation Theorem]\thlabel{thm:abstract-simple-approximation}
+    Let $(X,\frakM,\mu)$ be a measure space and $f$ a measurable function on $X$. Then, there is a sequence of simple functions $\{\psi_n\}$ on $X$ that converges pointwise on $X$ to $f$ such that $|\psi_n|\le|f|$ on $X$ for all $n$. Further, 
+    \begin{enumerate}[label=(\alph*)]
+    \item If $X$ is $\sigma$-finite, then we may choose the sequence $\{\psi_n\}$ so that each $\psi_n$ vanishes outside a set of finite measure
+    \item If $f$ is nonnegative, we may choose the sequence $\{\psi_n\}$ to be increasing and each $\psi_n\ge 0$ on $X$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We may write $f = f^+ - f^-$ where $f^+$ and $f^-$ are nonnegative measurable functions on $X$. First, we shall suppose $f$ is nonnegative. Define 
+    \begin{equation*}
+        E_n = \{x\in X\mid f(x)\le n\}
+    \end{equation*}
+    Then $E_n$ is measurable and $f$ is bounded over $E_n$. Therefore, due to \thref{lem:abstract-simple-approximation}, there is a simple function $\psi_n$ defined on $E_n$ such that $f - \psi_n < 1/n$ on $E_n$. Extend $\psi_n$ to all of $X$ by giving it the value $n$ on $X\backslash E_n$. It is obvious that $\psi_n\to f$ pointwise on $X$.
+
+    Let us now return to the general case. From the previous paragraph, we infer that there are sequences $\{\psi_n^+\}$ of nonnegative simple functions converging to $f^+$ and similarly, $\{\psi_n^-\}$ converging to $f^-$. Now, consider the sequence $\{\psi_n^+ - \psi_n^-\}$. It is not hard to show that it converges to $f$ and satisfies the required properties.
+
+\begin{enumerate}
+    \item Now, if $X$ is $\sigma$-finite, there is a countable collection of subsets $\{E_n\}$ of $X$ with finite measure such that $X = \bigcup\limits_{n = 1}^\infty E_n$. Define $X_n = \bigcup\limits_{k = 1}^n E_k$. Due to the above discussion, there is a sequence of simple functions $\{\psi_n\}$ that converge pointwise to $f$. Define now $\varphi_n = \psi_n\chi_{X_n}$. Then $\varphi_n$ vanishes outside a set of finite measure and converges pointwise to $f$ on $X$.
+
+    \item If $f$ were nonnegative, then we have a sequence of nonnegative measurable functions $\{\psi_n\}$ converging pointwise to $f$. Define $\varphi_n = \max_{1\le k\le n}\psi_n$. Then $\{\varphi_n\}$ is an increasing sequence of simple functions that converges pointwise to $f$ on $X$.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[Egoroff]\thlabel{thm:abstract-egoroff}
+    Let $(X,\frakM,\mu)$ be a finite measure space and $\{f_n\}$ a sequence of measurable functions on $X$ that converges pointwise a.e. on $X$ to a function $f$ that is finite a.e. on $X$. Then for each $\varepsilon > 0$, there is a measurable subset $X_\varepsilon$ of $X$ for which $\mu(X\backslash X_\varepsilon) < \varepsilon$ and $\{f_n\}\to f$ uniformly on $X_\varepsilon$.
+\end{theorem}
+\begin{proof}
+    First, we shall excise suitable measure 0 sets and suppose the function $f$ is real valued and convergence is pointwise on $X$. Notice that this should not change our conclusion. Fix some $N\in\N$. Define 
+    \begin{equation*}
+        A_n = \{x\in X:~ |f(x) - f_m(x)| < 1/N~\forall m\ge n\}
+    \end{equation*}
+    It is not hard to see that $A_1\subseteq A_2\subseteq\cdots$. Moreover, for all $x\in X$, there is $n\in\N$ such that $x\in A_n$. As a result, $\bigcup\limits_{n = 1}^\infty A_n = X$. Using the continuity of measure, there is an index $M_N$ such that $\mu(X\backslash A_{M_N}) < \varepsilon/2^{N}$.
+
+    Finally, define $X_\varepsilon = \bigcap_{n = 1}^\infty A_{M_n}$. Then, $\mu(X\backslash X_\varepsilon) < \varepsilon$. We contend that the convergence is uniform on $X_\varepsilon$. Let $\delta > 0$ be given, then there is $N\in\N$ such that $1/N < \delta$. For all $m\ge M_{N}$ and $x\in X_\varepsilon$, we have $x\in A_{M_N}$, thus, $|f(x) - f_m(x)| < 1/N < \delta$, which completes the proof.
+\end{proof}
+
+\section{Integration of Nonnegative Measurable Functions}
+
+For a nonnegative simple function $\psi$ on $X$ with canonical representation $\sum_{k = 1}^n c_k\chi_{E_k}$, we define 
+\begin{equation*}
+    \int_X\psi = \sum_{k = 1}^n c_k\mu(E_k)
+\end{equation*}
+With the normal convention of arithmetic in $[0,\infty]$. For a measurable subset $E\subseteq X$, we define $\int_E\psi = \int_X\psi\chi_E$.
+
+For a nonnegative extended real valued measurable function $f: X\to[0,\infty]$, we define 
+\begin{equation*}
+    \int_X f = \sup\left\{\int_X\psi~\bigg\vert~0\le\psi\le f,~\psi\text{ is simple}\right\}
+\end{equation*}
+For a measurable subset $E\subseteq X$, define $\int_E f = \int_X f\chi_E$.
+
+\subsection*{Some Elementary Properties}
+\textcolor{red}{TODO: Add when you feel the need to do so. This will probably be when a lab submission is an hour away and your procrastination kicks in.}
+
+\begin{theorem}[Chebyshev's Inequality]\thlabel{thm:chebyshev-inequality}
+    Let $(X,\frakM,\mu)$ be a measure space, $f$ a nonnegative measurable function on $X$, and $\lambda$ a positive real number. Then 
+    \begin{equation*}
+        \mu\left(\{x\in X\mid f(x)\ge\lambda\}\right)\le\frac{1}{\lambda}\int_X f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $E_\lambda = \{x\in X\mid f(x)\ge\lambda\}$. Then $\lambda\chi_{E_\lambda}\le f$ is a simple function and from the definition of the integral, 
+    \begin{equation*}
+        \lambda\mu(E_\lambda)\le\int_X f
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{proposition}
+    Let $(X,\frakM,\mu)$ be a measure space and $f$ a nonnegative measurable function on $X$ for which $\int_X f < \infty$. Then $f$ is finite a.e. on $X$ and $\{x\in X\mid f(x) > 0\}$ is $\sigma$-finite.
+\end{proposition}
+\begin{proof}
+    Define $E_n = \{x\in X\mid f(x)\ge n\}$. Then $\mu(E_n)\le 1/n\int_X f$ and 
+    \begin{equation*}
+        \{x\in X\mid f(x) = \infty\} = \bigcap_{n = 1}^\infty E_n
+    \end{equation*}
+    and using the continuity of measure, we see that the measure of the above set is $0$. 
+
+    Next, define $A_n = \{x\in X\mid f(x)\ge 1/n\}$. $\mu(A_n)\le n\int_X f < \infty$ and 
+    \begin{equation*}
+        \{x\in X\mid f(x) > 0\} = \bigcup_{n = 1}^\infty A_n 
+    \end{equation*}
+    and is therefore $\sigma$-finite.
+\end{proof}
+
+\begin{lemma}[Fatou]\thlabel{lem:abstract-fatou}
+    Let $(X,\frakM,\mu)$ be a measure space and $\{f_n\}$ a sequence of nonnegative measurable functions on $X$ for which $\{f_n\}\to f$ pointwise a.e. on $X$. Assume $f$ is measurable. Then 
+    \begin{equation*}
+        \int_X f\le\liminf_{n\to\infty}\int_X f_n
+    \end{equation*}
+\end{lemma}
+Note that since the measure space may not be complete, it is not implicit that $f$ is measurable from pointwise a.e. convergence.
+\begin{proof}
+    We may excise a suitable subset of $X$ such that the convergence is pointwise on the rest of $X$. Let $\varphi\le f$ be a simple function. If $\int_X\varphi = 0$, then obviously, $\int_X\varphi\le\liminf\limits_{n\to\infty}\int_X f_n$. We now consider two cases.
+    \begin{description}
+    \item[Case 1: $\int_X\varphi = \infty$.] Then there is some positive real number $a$ and a measurable $E\subseteq X$ such that $\mu(E) = \infty$ and $\varphi(x) = a$ for all $x\in E$. Define the (measurable) subsets 
+    \begin{equation*}
+        X_n := \{x\in X\mid f_k(x)\ge a/2,~\forall~k\ge n\}
+    \end{equation*}
+    Since $f_k$ converges pointwise to $f$ and $\varphi\le f$, $\bigcup\limits_{n = 1}^\infty X_n\supseteq E$, consequently, using the continuity of measure, $\lim\limits_{n\to\infty}\mu(X_n) = \infty$. Next, using Chebyshev's Inequality, 
+    \begin{equation*}
+        \mu(X_n)\le\frac{2}{a}\int_{X_n}f_n\le\frac{2}{a}\int_X f_n
+    \end{equation*}
+    and we conclude that $\liminf\limits_{n\to\infty}\int_X f_n = \infty$.
+
+    \item[Case 2: $0 < \int_X\varphi < \infty$.] Then, $\varphi$ is nonzero on a set of finite measure, say $X_0$.
+    \end{description}
+\end{proof}
+
+\begin{theorem}[Monotone Convergence Theorem]\thlabel{thm:abstract-monotone-convergence}
+    Let $(X,\frakM,\mu)$ be a measure space and $\{f_n\}$ an increasing sequence of measurable functions converging pointwise a.e. to $f$, which is measurable on $X$. Then, 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_X f_n = \int_X f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Since the convergence is pointwise a.e., we may excise a suitable subset of measure 0 from $X$ such that the convergence is pointwise on the remaining set. Notice that this doesn't change the value of any integral. Therefore, we may suppose that the convergence is pointwise on $X$. Then, we woud have $f_n\le f$ for all $n\in\N$. As a result, 
+    \begin{equation*}
+        \int_Xf_n\le\int_X f
+    \end{equation*}
+    and consequently, 
+    \begin{equation*}
+        \int_Xf\ge\limsup_{n\to\infty}\int_X f_n\ge\liminf_{n\to\infty}\int_X f_n\ge\int_X f
+    \end{equation*}
+    where the last inequality is due to \thref{lem:abstract-fatou}. This implies the desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    Let $(X,\frakM,\mu)$ be a measurable space and $f$ a nonnegative measurable function on $X$. Then there is an increasing sequence $\{\psi_n\}$ of simple functions on $X$ that converges pointwise on $X$ to $f$ and 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_X\psi_n = \int_X f
+    \end{equation*}
+\end{corollary}
+
+The proof is omitted due to obviousness.
+
+\begin{proposition}[Additivity of Integration]
+    Let $(X,\frakM,\mu)$ be a measure space and $f,g$ nonnegative measurable functions. Then for $\alpha,\beta\in\R_{\ge0}$, 
+    \begin{equation*}
+        \int_X(\alpha f + \beta g) = \alpha\int_X f + \beta\int_X g
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    From the simple approximation theorem, there are increasing sequences of simple functions $\{\psi_n\}$ and $\{\varphi_n\}$ converging to $f$ and $g$ respectively. As a result, the increasing sequences of simple functions $\{\alpha\psi_n\}$ and $\{\beta\varphi_n\}$ converge to $\alpha f$ and $\beta g$ respectively. Then, the sequence $\{\alpha\psi_n + \beta\varphi_n\}$ is an increasing sequence of measurable functions converging to $\alpha f + \beta g$, and thus,
+    \begin{equation*}
+        \int_X(\alpha f + \beta g) = \lim_{n\to\infty}\int_X(\alpha\psi_n + \beta\varphi_n) = \lim_{n\to\infty}\left[\alpha\int_X\psi_n + \beta\int_X\varphi_n\right] = \alpha\int_X f + \beta\int_X g
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{definition}[Integrable]
+    Let $(X,\frakM,\mu)$ be a measure space. A nonnegative measurable function $f$ is said to be integrable if $\int_X f < \infty$.
+\end{definition}
+
+\section{Integration of General Measurable Functions}
+
+\begin{proposition}
+    Let $(X,\frakM,\mu)$ be a measure space and $f\in L^1(\mu)$. Then, for every $\varepsilon > 0$, there is $\delta > 0$ such that whenever $E\in\frakM$ with $\mu(E) < \delta$, $\displaystyle\int_E|f| < \varepsilon$.
+\end{proposition}
+\begin{proof}
+    We may suppose without loss of generality that $f\ge 0$ and $f$ is integrable. Then, there is a simple function $0\le\varphi_\varepsilon\le f$ such that 
+    \begin{equation*}
+        \int_X f - \int_X\varphi_\varepsilon < \varepsilon/2
+    \end{equation*}
+    Since $\varphi_\varepsilon$ is a simple function, there is $M > 0$ such that $\varphi_\varepsilon < M$ on $X$. Then, for any $E\subseteq X$ with $\mu(E) < \varepsilon/2M$, we have 
+    \begin{equation*}
+        \int_E f = \int_E(f - \varphi_\varepsilon) + \int_E\varphi_\varepsilon < \varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}

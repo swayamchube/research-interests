@@ -1,0 +1,462 @@
+\section{Measures and Measurable Sets}
+
+\begin{definition}[Measurable Space]
+    A \textit{measurable space} is a pair $(X,\mathfrak M)$ consisting of a set $X$ and a $\sigma$-algebra $\mathfrak M$ of subsets of $X$. A subset $E$ of $X$ is said to be \textit{measurable} if $E\in\mathfrak M$.
+\end{definition}
+
+\begin{proposition}
+    Let $(X,\frakM)$ be a measurable space. Then, $\frakM$ cannot be countably infinite.
+\end{proposition}
+\begin{proof}
+    Suppose $\frakM$ were countably infinite. For each $x\in X$, define 
+    \begin{equation*}
+        A_x = \bigcap_{x\in A\in\frakM} A
+    \end{equation*}
+    Then, $A_x$ is measurable, since the intersection is over a countable set. We contend that the collection $\{A_x\}_{x\in X}$ forms a partition of $X$. To see this, suppose $x\ne y$ and $y\in A_x$. If $A_y\ne A_x$, then $A_x\backslash A_y$ is a measurable set containing $x$ and not $y$, a contradiction. Thus, $A_x = A_y$. On the other hand, if $y\notin A_x$, then $X\backslash A_x$ is a measurable set containing $y$, consequently, $A_y\subseteq X\backslash A_x$, equivalently, $A_x$ and $A_y$ are disjoint.
+
+    Let $\mathscr A = \{A_x\mid x\in X\}$. It is not hard to see that every element of $\frakM$ must be a disjoint union of elements in $\mathscr A$, consequently, the cardinality of $\frakM$ is $2^{|\mathscr A|}$, whence the conclusion follows.
+\end{proof}
+
+\begin{definition}[Measure]
+    A \textit{measure} on a measurable space $(X,\frakM)$ is an extended real-valued nonnegative function $\mu:\frakM\to[0,\infty]$ such that $\mu(\emptyset) = 0$ and $\mu$ is \textit{countably additive}. A \textit{measure space} is a triple $(X,\frakM,\mu)$ where $\mu$ is a measure on the $\sigma$-algebra $\frakM$ on $X$.
+\end{definition}
+
+The triple $(\R,\mathcal L, m)$ is a measure space where $\mathcal L$ is the Lebesgue $\sigma$-algebra. Similarly, $(\R,\mathcal B, m)$ is also a measure space where $\mathcal B$ is the Borel $\sigma$-algebra.
+
+A rather artificial measure space is constructed by defining the \textit{counting measure} $\eta$ on $X$ which maps a finite set to its cardinality and an infinite set to $\infty$. This makes the triple $(X,\mathcal P(X),\eta)$ a measure space. 
+
+Let $X$ be a set and fix some $x_0\in X$. Define the measure $\delta_{x_0}$ on the power set $\mathcal P(X)$ by 
+\begin{equation*}
+    \delta_{x_0}(A) = 
+    \begin{cases}
+        1 & x_0\in A\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+That this is a valid measure is evident and is called the \textit{Dirac measure} concentrated at $x_0$. 
+
+Next, we define the \textit{co-countable measure}. Let $X$ be an uncountable set and 
+\begin{equation*}
+    \Sigma = \{E\subseteq X\mid E\text{ or }E^c\text{ is countable}\}
+\end{equation*}
+We shall first establish that $\Sigma$ is indeed a $\sigma$-algebra. To do this, we need only show that the set is closed under countable union. Let $\{E_n\}_{n = 1}^\infty$ be a collection of sets in $\Sigma$. If any $E_k$ is such that $E_k^c$ is countable, then $\left(\bigcup\limits_{n = 1}^\infty E_n\right)^c\subseteq E_k^c$ and is therefore countable. On the other hand, if none of the $E_k$ have a countable complement, then each $E_k$ must be countable. Then, $\bigcup\limits_{n = 1}^\infty E_n$ is a countable union of countable sets and is therefore countable. Thus, $\Sigma$ forms a $\sigma$-algebra. Define now the function $\mu:\Sigma\to[0,\infty]$ by 
+\begin{equation*}
+    \mu(E) = 
+    \begin{cases}
+        0 & E\text{ is countable}\\
+        1 & E^c\text{ is countable}
+    \end{cases}
+\end{equation*}
+
+From our definition, we have $\mu(\emptyset) = 0$. To establish that $\mu$ is a valid measure, we need only verify that it is countably additive. Let $\{E_n\}_{n = 1}^\infty$ be a collection of disjoint measurable sets. If any one of the $E_k$'s have a countable complement, then all the other $E_j$'s, being a subset of $E_k^c$ must be countable and hence have measure $0$. Therefore, 
+\begin{equation*}
+    1 = \mu\left(\bigcup_{n = 1}^\infty E_n\right) = \sum_{n = 1}^\infty\mu(E_n) = 1
+\end{equation*}
+
+On the other hand, if all the $E_k$'s are countable, there is nothing to prove.
+
+\begin{proposition}
+    Let $(X,\frakM,\mu)$ be a measure space. Then, the following hold: 
+    \begin{description}
+    \item[Finite Additivity:] For any finite disjoint collection $\{E_k\}_{k = 1}^n$ of measurable sets, 
+    \begin{equation*}
+        \mu\left(\bigcup_{k = 1}^n E_k\right) = \sum_{k = 1}^n\mu(E_k)
+    \end{equation*}
+
+    \item[Monotonicity:] If $A$ and $B$ are measurable sets and $A\subseteq B$, then $\mu(A)\le\mu(B)$. 
+    
+    \item[Excision:] If, moreover $A\subseteq B$ and $m(A) < \infty$, then $\mu(B\backslash A) = \mu(B) - \mu(A)$ 
+    
+    \item[Countable Monotonicity:] For any countable collection $\{E_k\}_{k = 1}^\infty$ of measurable sets that covers a measurable set $E$,
+    \begin{equation*}
+        \mu(E)\le\sum_{k = 1}^\infty\mu(E_k)
+    \end{equation*}
+    \end{description}
+\end{proposition}
+\begin{proof}
+    Finite additivity follows from countable additivity by taking $E_{n + 1} = \cdots = \emptyset$ whereas monotonicity follows from the equality $\mu(B) = \mu(B\backslash A) + \mu(A)$ and that $\mu(B\backslash A)\ge 0$. Note that excision also follows from the same equality. 
+
+    Finally, for countable monotonicity, define the following sets: 
+    \begin{equation*}
+        F_n = E_n\backslash\bigcup_{k = 1}^{n - 1} E_k
+    \end{equation*}
+    It is obvious that the collection $\{F_k\}$ is a collection of disjoint measurable sets. Furthermore, $\bigcup\limits_{n = 1}^\infty F_n = \bigcup\limits_{n = 1}^\infty E_n$ and hence, 
+    \begin{equation*}
+        \mu\left(\bigcup_{n = 1}^\infty F_n\right) = \sum_{n = 1}^\infty\mu(F_n)\le\sum_{n = 1}^\infty\mu(E_n)
+    \end{equation*}
+    where the last inequality follows from the fact that $F_n\subseteq E_n$ and hence, $\mu(F_n)\le\mu(E_n)$. This completes the proof.
+\end{proof}
+
+\begin{proposition}[Continuity of Measure]
+    Let $(X,\frakM,\mu)$ be a measure space. 
+    \begin{enumerate}[label=(\alph*)]
+    \item If $\{A_k\}_{k = 1}^\infty$ is an ascending sequence of measurable sets, then 
+    \begin{equation*}
+        \mu\left(\bigcup_{k=1}^\infty A_k\right) = \lim_{k\to\infty}\mu(A_k)
+    \end{equation*}
+
+    \item If $\{B_k\}_{k = 1}^\infty$ is a descending sequence of measurable sets with $\mu(B_1) < \infty$, then 
+    \begin{equation*}
+        \mu\left(\bigcap_{k = 1}^\infty B_k\right) = \lim_{k\to\infty}\mu(B_k)
+    \end{equation*}
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\hfill 
+\begin{enumerate}[label=(\alph*)]
+\item If there is an index $k$ such that $\mu(A_k) = \infty$, then $\mu(A_n) = \infty$ for all $n\ge k$ and equality holds. Now suppose $\mu(A_n)$ is finite for all $n\in\N$.Let $A_0 = \emptyset$. Next, define $C_n = A_n\backslash A_{n - 1}$ for all $n\in\N$. Then, the $C_n$'s are disjoint and $\bigsqcup_{n = 1}^\infty C_n = \bigcup_{n = 1}^\infty A_n$. Using countable additivity, we have 
+\begin{equation*}
+    \mu\left(\bigcup_{n = 1}^\infty A_n\right) = \mu\left(\bigsqcup_{n = 1}^\infty C_n\right) = \sum_{n = 1}^\infty\mu(A_n) - \mu(A_{n - 1}) = \lim_{n\to\infty}\mu(A_n)
+\end{equation*}
+
+\item 
+\end{enumerate}
+\end{proof}
+
+A property $\mathcal P$ is said to hold \textbf{almost everywhere} on $E$ if there is a measurable subset $E_0$ of $E$ with $\mu(E_0) = 0$ such that $\mathcal P$ holds on $E\backslash E_0$.
+
+\begin{lemma}[Borel-Cantelli]\thlabel{lem:abstract-borel-cantelli}
+    Let $(X,\frakM,\mu)$ be a measure space and $\{E_k\}_{k = 1}^\infty$ a countable collection of measurable sets for which $\sum_{k = 1}^\infty\mu(E_k) < \infty$. Then almost all $x\in X$ belong to at most a finite number of the $E_k$'s.
+\end{lemma}
+\begin{proof}
+    It is not hard to see that the set of all $x\in X$ that belong to infinitely many of the $E_k$'s is given by 
+    \begin{equation*}
+        S = \bigcap_{n = 1}^\infty\bigcup_{k = n}^\infty E_k
+    \end{equation*}
+    Since $S$ is a countable intersection of a collection of measurable sets (each being a countable union of measurable sets), is measurable. Note that the sequence of measurable sets $\{A_n\}$, given by
+    \begin{equation*}
+        A_n = \bigcup_{k = n}^\infty E_k
+    \end{equation*}
+    is a descending chain such that 
+    \begin{equation*}
+        \mu(A_1)\le\sum_{k = 1}^\infty\mu(E_k) < \infty
+    \end{equation*}
+    Thus, due to the continuity of measure, 
+    \begin{equation*}
+        \mu(S) = \lim_{n\to\infty}\mu(A_n)\le\lim_{n\to\infty}\sum_{k = n}^\infty\mu(E_k)
+    \end{equation*}
+    It is not obvious that $\mu(S) = 0$. This completes the proof.
+\end{proof}
+
+\begin{definition}[Finite, $\sigma$-finite]
+    Let $(X,\frakM,\mu)$ be a measure space. Then $\mu$ is said to be \textit{finite} if $\mu(X) < \infty$. Similarly, it is said to be \textit{$\sigma$-finite} if $X$ is the union of a countable collection of measurable sets, each having finite measure.
+\end{definition}
+
+From the definition, it is clear that every finite measure is $\sigma$-finite.
+
+The restriction of the Lebesgue measure on $[0,1]$ is finite and thus, trivially $\sigma$-finite while the Lebesgue measure on $\R$ is $\sigma$-finite.
+
+On the other hand, the counting measure on $\R$ is not $\sigma$-finite and hence, not finite.
+
+\begin{definition}[Complete Measure Space]
+    A measure space $(X,\frakM,\mu)$ is said to be \textit{complete} if for every $E\subseteq X$ with $\mu(E) = 0$, every $F\subseteq E$ is measurable.
+\end{definition}
+
+The Lebesgue measure on $\R$ is complete while the restriction of the Lebesgue measure to the Borel $\sigma$-algebra, $\mathcal B$, while a valid measure space, is not complete, since the Cantor set, which is Borel, contains a subset which is not Borel.
+
+\begin{theorem}[Completion]
+    Let $(X,\frakM,\mu)$ be a measure space. Define the collection $\frakM_0$ of subsets of $X$ which may be written in the form $E = A\cup B$ where $B$ is a subset of some $C\subseteq X$ with measure $0$. Finally, define $\mu_0(E) = \mu(A)$. Then $(X,\frakM_0,\mu_0)$ is a measure space and extends $(X,\frakM,\mu)$.
+\end{theorem}
+\begin{proof}
+    There are two parts to this proof. First, we show that $\frakM_0$ is a $\sigma$-algebra. Next, we show that $\mu_0$ is a valid measure on $\frakM_0$ that extends $\mu$. 
+
+    Let $E\in\frakM_0$. Then there is $A\in\frakM$ and $B\subseteq C$ with $\mu(C) = 0$ such that $E = A\cup B$. Now, let $D = C\backslash B$. We have 
+    \begin{equation*}
+        E^c = A^c\cap B^c = A^c\cap(C^c\cup B) = (A^c\cap C^c)\cup(A^c\cap B)\in\frakM_0
+    \end{equation*}
+    Next, let $\{E_n\}_{n = 1}^\infty$ be a countable collection of sets in $\frakM_0$. Then there is a corresponding collection $\{A_n\}_{n = 1}^\infty$ in $\frakM$ and $\{B_n\}$ and $\{C_n\}$ where the latter is a collection of sets with $\mu$-measure $0$. Then,
+    \begin{equation*}
+        \bigcup_{n = 1}^\infty A_n = \left(\bigcup_{n = 1}^\infty A_n\right)\cup\left(\bigcup_{n = 1}^\infty B_n\right)
+    \end{equation*}
+    where $\bigcup\limits_{n = 1}^\infty B_n\subseteq\bigcup\limits_{n = 1}^\infty C_n$ and the set on the right hand side has measure $0$. Hence, $\frakM_0$ is a $\sigma$-algebra.
+
+    Now, we must show that the function $\mu_0$ is well defined on $\frakM_0$. To do this, let $A_1\cup B_1 = A_2\cup B_2 = E\in\frakM_0$ where $B_1\subseteq C_1$ and $B_2\subseteq C_2$, both of which have $\mu$-measure $0$. Then, $A_1\subseteq A_1\cup B_1 = A_2\cup B_2\subseteq A_2\cup C_2$, and hence, $\mu(A_1)\le\mu(A_2)$. Similarly, the reverse direction is also seen to hold. Hence, $\mu(A_1) = \mu(A_2)$ and the function $\mu_0$ is well-defined.
+
+    Finally, we must show countable additivity. For this, let $\{E_n\}_{n = 1}^\infty$ be a countable disjoint collection in $\frakM_0$ and correspondingly, we have collections $\{A_n\}$, $\{B_n\}$ and $\{C_n\}$. We have 
+    \begin{equation*}
+        \mu_0\left(\bigcup E_n\right) = \mu_0\left(\bigcup A_n\cup\bigcup B_n\right) = \mu\left(\bigcup A_n\right) = \sum_{n = 1}^\infty\mu(A_n) = \sum_{n = 1}^\infty\mu_0(E_n)
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\section{Carath\'eodory Measure Induced By Outer Measure}
+
+\begin{definition}[Countably Monotone, Outer Measure]
+    Let $X$ be a set and $\mathcal S\subseteq 2^X$. A set function $\mu: S\to[0,\infty]$ is said to be \textit{countably monotone} if whenever a set $E\in\mathcal S$ is covered by a countable collection $\{E_k\}_{k = 1}^\infty$ then 
+    \begin{equation*}
+        \mu(E)\le\sum_{k = 1}^\infty\mu(E_k)
+    \end{equation*}
+    A set function $\mu^*: 2^X\to[0,\infty]$ is said to be an \textit{outer measure} if $\mu(\emptyset) = 0$ and $\mu^*$ is countably monotone.
+\end{definition}
+
+It is not hard to show that an outer measure is finitely monotone and therefore, monotone.
+
+\begin{definition}[Measurable]
+    For an outer measure $\mu^*: 2^X\to[0,\infty]$, a subset $E$ of $X$ is said to be \textit{measurable} with respect to $\mu^*$ if for every $A\subseteq X$, 
+    \begin{equation*}
+        \mu^*(A) = \mu^*(A\cap E) + \mu^*(A\backslash E)
+    \end{equation*}
+\end{definition}
+
+From the definition of measurability, we see that $E$ is measurable if and only if $E^c$ is measurable.
+
+From the finite monotonicity of $\mu^*$, we obtain $\mu^*(A)\le\mu^*(A\cap E) + \mu^*(A\backslash E)$. Hence, to show $E$ is measurable, it suffices to sho $\mu^*(A)\ge\mu^*(A\cap E) + \mu^*(A\backslash E)$. Since this inequality trivially holds when $\mu^*(A) = \infty$, we need only verify it in the case $\mu^*(A) < \infty$.
+
+\begin{proposition}
+    The union of a finite collection of measurable sets is measurable.
+\end{proposition}
+\begin{proof}
+    We shall show that the union of two measurable sets is measurable and finite union would follow from induction. Let $E_1,E_2$ be measurable. Then, for any $A\subseteq X$, 
+    \begin{align*}
+        \mu^*(A) &= \mu^*(A\cap E_1) + \mu^*(A\cap E_1^c)\\
+        &=\mu^*(A\cap E_1) + \mu^*(A\cap E_1^c\cap E_2) + \mu^*(A\cap E_1^c\cap E_2^c)\\
+        &\ge\mu^*(A\cap(E_1\cup E_2)) + \mu^*(A\cap E_1^c\cap E_2^c)
+    \end{align*}
+    where the last inequality follows from $E_1\cup(E_1^c\cap E_2) = E_1\cup E_2$.
+\end{proof}
+
+\begin{proposition}
+    Let $A\subseteq X$ and $\{E_k\}_{k = 1}^\infty$ be a finite disjoint collection of measurable sets. Then 
+    \begin{equation*}
+        \mu^*\left(A\cap\left[\bigcup_{k = 1}^n E_k\right]\right) = \sum_{k = 1}^n\mu^*(A\cap E_k)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    For $n = 1$, there is nothing to prove. We shall prove the statement for $n = 2$ and the general case would then follow from induction. 
+    \begin{align*}
+        \mu^*(A\cap(E_1\cup E_2)) &= \mu^*(A) - \mu^*(A\cap E_1^c\cap E_2^c)\\
+        &= \mu^*(A) - \left[\mu^*(A\cap E_1^c) - \mu^*(A\cap E_1^c\cap E_2)\right]\\
+        &= \mu^*(A) - \mu^*(A\cap E_1^c) + \mu^*(A\cap E_2)\\
+        &= \mu^*(A\cap E_1) + \mu^*(A\cap E_2)
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    The union of a countable collection of measurable sets is measurable.
+\end{proposition}
+\begin{proof}
+    Let $\{E_n\}_{n = 1}^\infty$ be a countable collection of measurable sets. Define $E_0 = \emptyset$ and 
+    \begin{equation*}
+        F_n = E_n\backslash\left(\bigcup_{k = 1}^n E_k\right)
+    \end{equation*}
+    Then $\{F_n\}_{n = 1}^\infty$ is a disjoint collection of measurable sets such that $E = \bigcup_{n = 1}^\infty E_n = \bigcup_{n = 1}^\infty F_n$. Let $A\subseteq X$. Define $G_n = \bigcup_{k = 1}^n F_k$. We have 
+    \begin{equation*}
+        \mu^*(A) = \mu^*(A\cap G_n) + \mu^*(A\backslash G_n)\ge\mu^*(A\cap G_n) + \mu^*(A\backslash E) = \sum_{k = 1}^n\mu^*(A\cap F_k) + \mu^*(A\backslash E)
+    \end{equation*}
+    Taking $n\to\infty$, we have the desired conclusion.
+\end{proof}
+
+\begin{proposition}
+    Let $\{E_n\}_{n = 1}^\infty$ be a disjoint collection of measurable sets. Then, for any $A\subseteq X$,
+    \begin{equation*}
+        \mu^*\left(A\cap\left[\bigcup_{n = 1}^\infty E_n\right]\right) = \sum_{n = 1}^\infty\mu^*(A\cap E_n)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \mu^*\left(A\cap\left[\bigcup_{k = 1}^\infty E_k\right]\right)\ge\mu^*\left(A\cap\left[\bigcup_{k = 1}^n E_k\right]\right) = \sum_{k = 1}^n\mu^*(A\cap E_k)
+    \end{equation*}
+    Then, taking $n\to\infty$, we have the desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    Let $\frakM$ be the collection of measurable sets. Then $\frakM$ is a $\sigma$-algebra. Further, the restriction of $\mu^*$ to $\frakM$ makes $(X,\frakM,\mu)$ into a complete measure space.
+\end{corollary}
+\begin{proof}
+    We need only show that $\mu$ is a complete measure. Let $E\subseteq X$ have measure $0$. Then, for any $F\subseteq E$, we have $0\le\mu^*(F)\le\mu^*(E) = 0$, as a result, $\mu^*(F) = 0$. Finally, for any $A\subseteq X$, 
+    \begin{equation*}
+        \mu^*(A\cap F) + \mu^*(A\cap F^c) = \mu^*(A\cap F^c)\le\mu^*(A)
+    \end{equation*}
+    and hence $F$ is measurable.
+\end{proof}
+
+\section{Constructing Outer Measures}
+\begin{theorem}
+    Let $\mathcal S$ be a collection of subsets of a set $X$ and $\mu: S\to[0,\infty]$ a set function. Define $\mu^*(\emptyset) = 0$. For $\emptyset\subsetneq E\subseteq X$, define 
+    \begin{equation*}
+        \mu^*(E) = \inf\sum_{k = 1}^\infty\mu(E_k)
+    \end{equation*}
+    where the infimum is taken over countable collections $\{E_k\}_{k = 1}^\infty$ of sets in $\mathcal S$ that cover $E$ with the convention that $\mu^*(E) = \infty$ if there is no cover of $E$ by a countable collection in $\mathcal S$.
+\end{theorem}
+\begin{proof}
+    It is not hard to see, from the definition that $\mu^*$ is monotone. It now suffices to show countable monotonicity. Let $\varepsilon > 0$ and $\{E_n\}_{n = 1}^\infty$ be a countable collection of measurable sets. Let $E = \bigcup_{n = 1}^\infty E_n$. If $\mu^*(E_k) = \infty$ for some $k\in\N$, then $\mu^*(E) = \infty$ due to monotonicity. Now suppose $\mu^*(E_n) < \infty$ for each $n\in\N$. Then, for each $n\in\N$, there is a countable cover $\{E_{nk}\}_{k = 1}^\infty$ of $E_n$ such that 
+    \begin{equation*}
+        \mu^*(E_n) < \sum_{k = 1}^\infty\mu^*(E_{nk}) + \frac{\varepsilon}{2^n}
+    \end{equation*}
+    As a result,
+    \begin{equation*}
+        \mu^*(E)\le\sum_{n = 1}^\infty\mu^*(E_n) < \sum_{n = 1}^\infty\sum_{k = 1}^\infty\mu^*(E_{nk}) + \varepsilon
+    \end{equation*}
+    In the limit $\varepsilon\to0$, the conclusion follows.
+\end{proof}
+
+\begin{definition}
+    Let $\mathcal S$ be a collection of subsets of $X$ and $\mu:\mathcal S\to[0,\infty]$ be a set function. Let $\mu^*: 2^X\to[0,\infty]$ be the outer measure induced by $\mu$. The measure $\overline\mu$ obtained by restricting $\mu^*$ to the $\sigma$-algebra of $\mu^*$-measurable sets is called the \textit{Carath\'eodory measure induced by} $\mu$.
+\end{definition}
+
+\section{Carath\'eodory Extension Theorem}
+
+\begin{definition}[Semi-Algebra]
+    Let $X$ be a nonempty set. A collection $\mathscr C$ of subsets of $X$ is said to be a \textit{semi-algebra} if 
+    \begin{enumerate}[label=(\alph*)]
+    \item $\emptyset, X\in\mathscr C$ 
+    \item If $A,B\in\mathscr C$, then $A\cap B\in\mathscr C$ 
+    \item For every $A\in\mathscr C$, there is $n\in\N$ and disjoint $C_1,\ldots,C_n\in\mathscr C$ such that $A^c = \bigcup\limits_{k = 1}^n C_k$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Algebra]
+    Let $X$ be a nonempty set. A collection $\mathcal A$ of subsets of $X$ is said to be an algebra if 
+    \begin{enumerate}[label=(\alph*)]
+    \item $X\in\mathcal A$ 
+    \item $\mathcal A$ is closed under finite intersections
+    \item $\mathcal A$ is closed under complements
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let $X$ be a nonempty set and $\mathscr C$ a semialgebra on $X$. Denote by $\mathcal A(\mathscr C)$, the minimal algebra containing $\mathscr C$. Then, 
+    \begin{equation*}
+        \mathcal A(\mathscr C) = \{E\subseteq X\mid E = \bigsqcup_{k = 1}^n C_k,~C_j\in\mathscr C\}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $\mathcal S$ denote the set of all finite disjoint unions of elements of $\mathscr C$. Obviously, any algebra containing $\mathscr C$ must contain $\mathcal S$. It now suffices to show that $\mathscr S$ is an algebra. We shall first show that $\mathcal S$ is closed under finite intersection. Indeed, let $\{E_k\}_{k = 1}^n$ be a collection of sets in $\mathcal S$. Then, for each $1\le k\le n$, there is a disjoint collection $\{C_{k,i}\}_{i = 1}^{N(k)}$ such that $E_k = \bigcup_{i = 1}^{N(k)}C_{k,i}$. Then, 
+    \begin{equation*}
+        \bigcap_{k = 1}^n E_k = \bigcup_{i_1 = 1}^{N(1)}\cdots\bigcup_{i_n = 1}^{N(n)}\left(\bigcap_{k = 1}^n C_{k,i_k}\right)
+    \end{equation*}
+    It is not hard to see that this is a disjoint union of sets in $\mathscr C$ and thus, belongs to $\mathcal S$.
+
+    We shall now show closure under complements. From the definition of a semi-algebra, we note that for each $A\in\mathscr C$, $A^c\in\mathcal S$. Finally, for any $E\in\mathcal S$, we may write it as a disjoint union $\bigsqcup\limits_{k = 1}^n C_k$ of sets in $\mathscr C$. As a result, $E^c = \bigcap_{k = 1}^n C_k^c$. Since $C_k^c\in\mathcal S$ for each $1\le k\le n$, and $\mathcal S$ is closed under intersections, we conclude that $E^c\in\mathcal S$. This completes the proof of the theorem.
+\end{proof}
+
+\begin{definition}[Measure on a Class]
+    Let $\mathcal C$ be a collection of subsets of a nonempty set $X$. A set function $\mu:\mathcal C\to[0,\infty]$ is said to be a \textit{measure} on $\mathcal C$ if 
+    \begin{enumerate}[label=(\alph*)]
+    \item $\mu(\emptyset) = 0$ 
+    \item whenever $\{A_n\}_{n = 1}^\infty$ is a collection of disjoint sets in $\mathcal C$ with $\bigcup\limits_{n = 1}^\infty A_n\in\mathcal C$, 
+    \begin{equation*}
+        \mu\left(\bigcup_{n = 1}^\infty A_n\right) = \sum_{n = 1}^\infty\mu(A_n)
+    \end{equation*}
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a nonempty set and $\mu$ a measure on a semi-algebra $\mathscr C$ on $X$, there is a unique measure $\widetilde\mu$ on $\mathcal A(\mathscr C)$ which extends $\mu$.
+\end{theorem}
+\begin{proof}
+    For ease of notation, denote $\mathcal A(\mathscr C)$ by $\mathcal A$. Note that for each $A\in\mathcal A$, there is a collection of disjoint sets $\{C_1,\ldots,C_n\}$ in $\mathcal C$ such that $A = \bigsqcup\limits_{i = 1}^n C_i$. Define 
+    \begin{equation*}
+        \widetilde\mu(A) = \sum_{i = 1}^n\mu(C_i)
+    \end{equation*}
+    We must first show that this is well defined. Indeed, let $\{C_i\}_{i = 1}^n$ and $\{D_j\}_{j = 1}^m$ be collections of disjoint sets from $\mathscr C$ such that $A = \bigsqcup\limits_{i = 1}^n C_i = \bigsqcup\limits_{j = 1}^m D_j$. 
+
+    Notice that for each $1\le i\le n$, the collection $\{C_i\cap D_j\}_{j = 1}^m$ consists of disjoint sets whose union is $C_i$. Then, using countable additivity of $\mu$, 
+    \begin{equation*}
+        \mu(C_i) = \sum_{j = 1}^m\mu(C_i\cap D_j)
+    \end{equation*}
+    and thus,
+    \begin{equation*}
+        \sum_{i = 1}^n\mu(C_i) = \sum_{i = 1}^n\sum_{j = 1}^m\mu(C_i\cap D_j) = \sum_{j = 1}^m\sum_{i = 1}^n\mu(D_j\cap C_i) = \sum_{j = 1}^m\mu(D_j)
+    \end{equation*}
+    This shows that $\widetilde\mu$ is well defined. 
+
+    We must now show that $\widetilde\mu$ is a measure on $\mathcal A$. To do so, it suffices to show countable additivity. Indeed, let $\{A_n\}_{n = 1}^\infty$ be a disjoint collection of sets in $\mathcal A$ such that $A = \bigsqcup\limits_{n = 1}^\infty A_n\in\mathcal A$. There is a finite collection of disjoint sets in $\mathscr C$, $\{C_i\}_{i = 1}^n$ such that $A = \bigsqcup\limits_{i = 1}^n C_i$.
+
+    For each $A_k$, there is a finite collection $\{D_j^{(k)}\}_{j = 1}^{N(k)}$ of disjoint sets in $\mathscr C$ such that $A_k = \bigsqcup_{j = 1}^{N(k)}D_j^{(k)}$. Since the $A_k$'s are disjoint so are the $D_j^{(k)}$'s. As a result, for each $i$, $\{C_i\cap D_j^{(k)}\}$ is a disjoint collection of sets in $\mathscr C$ whose union is $C_i$. Thus,
+    \begin{equation*}
+        \sum_{i = 1}^n \mu(C_i) = \sum_{i = 1}^n\sum_{k = 1}^\infty\sum_{j = 1}^{N(k)}\mu(C_i\cap D_j^{(k)}) = \sum_{k = 1}^{\infty}\sum_{j = 1}^{N(k)}\sum_{i = 1}^n\mu(C_i\cap D_j^{(k)}) = \sum_{k = 1}^\infty\sum_{j = 1}^{N(k)}\mu(D_j^{(k)}) = \sum_{k = 1}^\infty\widetilde\mu(A_k)
+    \end{equation*}
+    This shows that $\widetilde\mu$ is a valid extension of $\mu$ to $\mathcal A$. Showing uniqueness is trivial and is left as an exercise to whoever dared to read these notes.
+\end{proof}
+
+\begin{definition}[Monotone Class]
+    Let $X$ be a nonempty set and $\mathcal M$ a collection of subsets of $X$. We say $\mathcal M$ is a monotone class if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\bigcup\limits_{n = 1}^\infty A_n\in\mathcal M$ if $A_n\in\mathcal M$ for each $n\in\N$ and $\{A_n\}_{n = 1}^\infty$ is an ascending chain.
+        \item $\bigcap\limits_{n = 1}^\infty A_n\in\mathcal M$ if $A_n\in\mathcal M$ for each $n\in\N$ and $\{A_n\}_{n = 1}^\infty$ is a descending chain.
+    \end{enumerate}
+\end{definition}
+
+For a collection of subsets $\mathscr C$ of $X$, define $\mathcal M(\mathscr C)$ to be the smallest monotone class containing $\mathscr C$, which is just the intersection of all monotone classes containing $\mathscr C$. Note that the intersection is over a nonempty set, since the powerser of $X$ is a monotone class containing $\mathscr C$ (trivially).
+
+\begin{proposition}
+    Let $\mu_1$ and $\mu_2$ be measures on a measurable space $(X,\frakM)$. Define the collection
+    \begin{equation*}
+        \mathcal M = \{E\in\frakM\mid\mu_1(E) = \mu_2(E)\}
+    \end{equation*}
+    \begin{enumerate}[label=(\alph*)]
+    \item $\emptyset\in\mathcal M$ 
+    \item If $A_n\in\mathcal M$ for all $n\in\N$, and $\{A_n\}$ is an ascending chain, then $\bigcup\limits_{n = 1}^\infty A_n\in\mathcal M$.
+    \item If $\mu_1$ and $\mu_2$ are finite. Then for $A_n\in\mathcal M$ for all $n\in\N$ and $\{A_n\}$ being a descending chain, we have $\bigcap\limits_{n = 1}^\infty A_n\in\mathcal M$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Follows from the continuity of measure.
+\end{proof}
+
+\begin{definition}
+    For a collection $\mathscr C$ of subsets of $X$, $\frakM(\mathscr C)$ is defined as the smallest $\sigma$-algebra containing $\mathscr C$, which is equal to the intersection of all the $\sigma$-algebras containing $\mathscr C$.
+\end{definition}
+
+\begin{theorem}[Monotone Class Theorem]\thlabel{thm:monotone-class}
+    Let $\mathcal A$ be an algebra of sets. Then $\mathcal M(\mathcal A) = \frakM(\mathcal A)$.
+\end{theorem}
+\begin{proof}
+    We shall denote $\mathcal M(\mathcal A)$ by $\mathcal M$ and $\frakM(\mathcal A)$ by $\frakM$. Since all $\sigma$-algebras are monotone classes, we have $\mathcal M\subseteq\frakM$. We shall show the reverse inclusion. First, we shall show that $\mathcal M$ is an algebra.
+
+    For each $M\in\mathcal M$, define 
+    \begin{equation*}
+        \mathcal M(M) = \{E\in\mathcal M\mid E\backslash M, M\backslash E, E\cap M\in\mathcal M\}
+    \end{equation*}
+
+    We contend that $\mathcal M(M)$ forms a monotone class. Indeed, suppose $\{E_n\}$ is an ascending chain in $\mathcal M(M)$. Then, 
+    \begin{align*}
+        \left(\bigcup_{n = 1}^\infty E_n\right)\backslash M = \bigcup_{n = 1}^\infty(E_n\backslash M)\\
+        \left(\bigcup_{n = 1}^\infty E_n\right)\cap M = \bigcup_{n = 1}^\infty(E_n\cap M)
+    \end{align*}
+    And thus, $\bigcup\limits_{n = 1}^\infty E_n\in\mathcal M(M)$. Similarly, one can show this for descending chains.
+
+    Further, by symmetry, also note that if $M\in\mathcal M(N)$, then $N\in\mathcal M(M)$. Pick any $A\in\mathcal A$. Since $\mathcal A$ is an algebra, we must have $\mathcal A\subseteq\mathcal M(A)$. Now, since $\mathcal M(A)$ is a monotone class and $\mathcal M$ is the minimal monotone class containing $\mathcal A$, we must have $\mathcal M\subseteq\mathcal M(A)\subseteq\mathcal M$, as a result, $\mathcal M(A) = \mathcal M$. This means, $M\in\mathcal M(A)$ and due to symmetry, $A\in\mathcal M(M)$. 
+
+    Since the choice of $A\in\mathcal A$ was arbitrary, we have $\mathcal A\subseteq\mathcal M(M)$. Again, using the minimality of $\mathcal M$, we have $\mathcal M = \mathcal M(M)$ for each $M\in\mathcal M$. From this, we infer that $\mathcal M$ is closed under finite intersection and relative complements, and since $X\in\mathcal M$ (trivially), we see that $\mathcal M$ is an algebra.
+
+    Finally, we shall show that $\mathcal M$ is a $\sigma$-algebra. Indeed, let $\{E_n\}_{n = 1}^\infty$ be a collection of sets in $\mathcal M$. Then, $\{\bigcup_{k = 1}^n E_k\}$ forms an ascending chain and since $\mathcal M$ is a monotone class, $\bigcup\limits_{n = 1}^\infty E_n\in\mathcal M$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $X$ be a set and $\mathcal A$ an algebra of subsets of $X$. Then, for any $T\subseteq X$, 
+    \begin{equation*}
+        \frakM(\mathcal A\cap T) = \frakM(\mathcal A)\cap T
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Define 
+    \begin{equation*}
+        \mathscr S = \{A\subseteq X\mid A\cap T\in\frakM(\mathcal A\cap T)\}
+    \end{equation*}
+    It is not hard to see that $\mathscr S$ is a $\sigma$-algebra and contains $\mathcal A$. Therefore, $\frakM(\mathcal A)\subseteq\mathscr S$. Consequently, $\frakM(\mathcal A)\cap T\subseteq\frakM(\mathcal A\cap T)$.
+
+    On the other hand, since $\frakM(\mathcal A)\cap T$ is a $\sigma$-algebra of subsets of $T$, containing $\mathcal A\cap T$, we must have $\frakM(\mathcal A\cap T)\subseteq\frakM(\mathcal A)\cap T$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $\mu$ be a measure on an algebra $\mathcal A$ of subsets of a nonempty set $X$. If $\mu$ is $\sigma$-finite, then there is a unique extension $\widetilde\mu$ of $\mu$ on $\frakM(\mathcal A)$.
+\end{theorem}
+\begin{proof}
+    Since $\mu$ is a nonnegative set function, we may take the Carath\'eodory extension of $\mu$ to some $\sigma$-algebra. Since that $\sigma$-algebra must contain $\frakM(\mathcal A)$, we simply restrict it to $\frakM(\mathcal A)$ to obtain an extension of $\mu$ to $\frakM(\mathcal A)$.
+
+    We shall now show uniqueness. Let $\mu_1$ and $\mu_2$ be two measures which extend $\mu$. Since $\mu$ is $\sigma$-finite, so are $\mu_1$ and $\mu_2$. Further, there is a disjoint collection of sets $\{X_i\}_{i = 1}^\infty$ in $\mathcal A$ such that $X = \bigsqcup_{i = 1}^\infty X_i$ and $\mu(X_i) < \infty$. Then for any $E\in\frakM(\mathcal A)$, and $i\in\{1,2\}$,
+    \begin{equation*}
+        \mu_i(E) = \mu_i\left(E\cap\left(\bigcup_{j = 1}^\infty X_j\right)\right) = \sum_{j = 1}^\infty\mu_i(E\cap X_j)
+    \end{equation*}
+    Moreover, $\frakM(\mathcal A)\cap X_i = \frakM(\mathcal A\cap X_i)$, since $\mathcal A\cap X_i$ is an algebra. Hence, if we show that $\mu_1$ and $\mu_2$ agree on each $X_i$, then they would agree on $X$. As a result, we may suppose $\mu$ is finite and hence, so are $\mu_1$ and $\mu_2$.
+
+    Define now 
+    \begin{equation*}
+        \mathcal M = \{E\in\frakM(\mathcal A)\mid\mu_1(E) = \mu_2(E)\}
+    \end{equation*}
+    We have shown already that $\mathcal M$ must form a monotone class and must contain $\mathcal A$. Finally, using \thref{thm:monotone-class}, have that $\frakM(\mathcal A) = \mathcal M$, which completes the proof.
+\end{proof}

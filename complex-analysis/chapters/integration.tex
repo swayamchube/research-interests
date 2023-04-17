@@ -948,15 +948,24 @@ The proof is divided into two parts. First, we prove the statement of the propos
     \begin{equation*}
         F_m(z) = \int_{\gamma}\frac{\varphi(w)}{(w - z)^m}~dw
     \end{equation*}
-    Then $F_m$ is analytic on $\bbC\backslash\{\gamma\}$. Furthermore, $F_m'(z) = mF_{m + 1}'(z)$.
+    Then $F_m$ is analytic on $\bbC\backslash\{\gamma\}$. Furthermore, $F_m'(z) = mF_{m + 1}(z)$.
 \end{lemma}
 \begin{proof}
     Fix some $a\in\bbC\backslash\{\gamma\}$. Now, there is $R > 0$ such that $B(a,R)\subseteq\bbC\backslash\{\gamma\}$. Consider some $z\in B(a,R)$. Then, 
     \begin{align*}
         F_m(z) - F_m(a) &= \frac{1}{2\pi i}\int_{\gamma}\varphi(w)\left[\frac{1}{(w - z)^{m}} - \frac{1}{(w - a)^m}\right]~dw\\
         &= \frac{1}{2\pi i}\int_\gamma\varphi(w)\left(\frac{1}{w - z} - \frac{1}{w - a}\right)\left(\sum_{k = 0}^{m - 1}\frac{1}{(w - z)^k(w - a)^{m - k - 1}}\right)~dw\\
-        &= \frac{z - a}{2\pi i}\int_\gamma\varphi(w)\left(\sum_{k = 1}^{m}\frac{1}{(w - z)^k(w - a)^{m - k}}\right)~dw\\
+        &= \frac{z - a}{2\pi i}\int_\gamma\varphi(w)\left(\sum_{k = 1}^{m}\frac{1}{(w - z)^k(w - a)^{m + 1 - k}}\right)~dw\\
     \end{align*}
+    From here, it follows that 
+    \begin{equation*}
+        \frac{F_m(z) - F_m(a)}{z - a} = \frac{1}{2\pi i}\int_\gamma\varphi(w)\left(\sum_{k = 1}^m\frac{1}{(w - z)^k(w - a)^{m + 1 - k}}\right)~dw
+    \end{equation*}
+    in the limit $z\to a$, we get 
+    \begin{equation*}
+        F_m'(z) = \frac{m}{2\pi i}\int_\gamma\frac{\varphi(w)}{(w - a)^m}~dw = mF_{m + 1}(z)
+    \end{equation*}
+    It is now easy to see that the function is analytic.
 \end{proof}
 
 \begin{theorem}[Extended Cauchy's Integral Formula]
@@ -993,9 +1002,16 @@ The proof is divided into two parts. First, we prove the statement of the propos
 
 In particular, if $m\ge 1$, then for each $\zeta\in B(\alpha,\delta)$, there is a corresponding $\xi\in B(a,\varepsilon)$ such that $f(\xi) = \zeta$. Therefore, $B(\alpha,\delta)\subseteq f(B(a,\varepsilon))$. 
 
-\begin{theorem}[Open Mapping Theorem]
+\begin{theorem}[Open Mapping Theorem]\thlabel{thm:open-mapping}
     Let $G\subseteq\bbC$ be a region and $f: G\to\bbC$ be analytic. Let $U$ be open in $G$. Then $f(U)$ is open in $\bbC$.
 \end{theorem}
 \begin{proof}
     Choose some $a\in U$. Then, there is some $R > 0$ such that $B(a,R)\subseteq U$. Due to \thref{thm:zeros-multiple-to-simple} and the remark following it, there is $\varepsilon > 0$ and $\delta > 0$ such that $B(f(a),\delta)\subseteq f(B(a,\varepsilon))$. The conclusion is immediate now.
+\end{proof}
+
+\begin{corollary}
+    Suppose $f: G\to\bbC$ is one-one, analytic and $f(G) = \Omega$. Then $f^{-1}:\Omega\to\bbC$ is analytic and $(f^{-1})'(\omega) = f'(z)^{-1}$ where $\omega = f(z)$.
+\end{corollary}
+\begin{proof}
+    From \thref{thm:open-mapping}, it is immediate that $f$ is a homeomorphism. Let $g = f^{-1}$. We have $g\circ f = \mathbf id$, from which the conclusion follows.
 \end{proof}

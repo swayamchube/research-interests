@@ -1,0 +1,409 @@
+\begin{theorem}\thlabel{thm:equivalence-measurable}
+    Let the function $f$ have a measurable domain $E$. Then the following statements are equivalent: 
+    \begin{enumerate}[label=(\roman*)]
+        \item For each real number $c$, the set $E_1(c) = \{x\in E\mid f(x) > c\}$ is measurable 
+        \item For each real number $c$, the set $E_2(c) = \{x\in E\mid f(x)\ge c\}$ is measurable 
+        \item For each real number $c$, the set $E_3(c) = \{x\in E\mid f(x) < c\}$ is measurable 
+        \item For each real number $c$, the set $E_4(c) = \{x\in E\mid f(x)\le c\}$ is measurable
+    \end{enumerate}
+    Each of the above implies that for each \textbf{extended real number} $c$, the set 
+    \begin{equation*}
+        \{x\in E\mid f(x) = c\}
+    \end{equation*}
+    is measurable.
+\end{theorem}
+\begin{proof}
+We shall show that $(i)\Longrightarrow(iv)\Longrightarrow(iii)\Longrightarrow(ii)\Longrightarrow(i)$. This follows from the following equalities: 
+\begin{align*}
+    E_4(c) &= E\backslash E_1(c)\\
+    E_3(c) &= \bigcup_{n = 1}^\infty E_4\left(c - \frac{1}{n}\right)\\
+    E_2(c) &= E\backslash E_3(c)\\
+    E_1(c) &= \bigcup_{n = 1}^\infty E_2\left(c + \frac{1}{n}\right)
+\end{align*}
+Now, if $c$ is finite, then 
+\begin{equation*}
+    \{x\in E\mid f(x) = c\} = E_2(c)\cap E_4(c)
+\end{equation*}
+and is measurable. Next, if $c = \infty$, then 
+\begin{equation*}
+    \{x\in E\mid f(x) = c\} = \bigcap_{n\in\N} E_1(n)
+\end{equation*}
+\end{proof}
+
+We denote the extended real line by $[-\infty,\infty]$. The arithmetic on this real line is well known and we omit its discussion.
+
+\begin{definition}[Measurable Function]
+    An extended real-valued function $f: E\to[-\infty,\infty]$ defined on $E$ is said to be \textit{Lebesgue measurable}, or just \textit{measurable} provided $E$ is measurable and it satisfies one of the four statements of \thref{thm:equivalence-measurable}.
+\end{definition}
+
+\begin{proposition}
+    Let $E$ be a measurable set and $f: E\to[-\infty,\infty]$. Then $f$ is measurable if and only if for each open set $\mathcal O$, $f^{-1}(\mathcal O)$ is measurable.
+\end{proposition}
+\begin{proof}
+    Suppose the inverse image of each open set is measurable, consequently, the inverse image of $(c,\infty)$ is open for all $c\in\R$, and due to \thref{thm:equivalence-measurable}, $f$ is measurable. 
+
+    Now suppose $f$ is measurable. Then, 
+    \begin{equation*}
+        f^{-1}((a,b)) = f^{-1}((-\infty, b))\cap f^{-1}((a,\infty))
+    \end{equation*}
+    is measurable. Since $\mathcal O$ is open, it can be written as the union of countably many disjoint open intervals, and thus, the inverse image of $\mathcal O$ can be written as the union of countably many disjoint measurable sets and is measurable. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    If $E$ is measurable and $f: E\to\R$\footnote{Note that we are not talking about an extended real valued function here} is continuous, then it is measurable.
+\end{corollary}
+
+\begin{proposition}
+    A monotone function that is defined on an interval is measurable.
+\end{proposition}
+
+\begin{proposition}
+    Let $f, g: E\to[-\infty,\infty]$
+    \begin{enumerate}[label=(\roman*)]
+        \item If $f$ is measurable on $E$ and $f = g$ a.e. on $E$, then $g$ is measurable on $E$
+        \item For a measurable subset $D$ of $E$, $f$ is measurable on $E$ if and only if the restrictions of $f$ to $D$ and $E\backslash D$ are measurable.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\roman*)]
+\item Let $A = \{x\in E\mid f(x)\ne g(x)\}$. It is known that $m(A) = 0$. Then, for any $c\in\R$, 
+\begin{equation*}
+    \{x\in E\mid g(x) > c\} = \{x\in A\mid g(x) > c\}\cup\left(\{x\in E\mid f(x) > c\}\cap(E\backslash A)\right)
+\end{equation*}
+
+Since $\{x\in A\mid g(x) > c\}\subseteq A$, it has outer measure $0$ and is measurable. Further, since measurable sets are closed under intersection, $\{x\in E\mid f(x) > c\}\cap(E\backslash A)$ is measurable. As a result, their union is measurable.
+
+\item Simply note that 
+\begin{equation*}
+    \{x\in E\mid f(x) > c\} = \{x\in D\mid f(x) > c\}\cup\{x\in E\backslash D\mid f(x) > c\}
+\end{equation*}
+\end{enumerate}
+\end{proof}
+
+Assertion $(i)$ of the previous theorem allows us to extend a measurable function to another measurable function. Take for example two extended real valued functions $f$ and $g$ finite on $E\backslash E_0$ where $E_0$ has measurae $0$. Then, $f + g$ is defined on $E\backslash E_0$. If we were to show that $f + g$ is measurable on $E\backslash E_0$, any extension of it to $E$ would also be measurable.
+
+\begin{theorem}
+    Let $f$ and $g$ be measurable (extended real valued) functions on $E$ that are finite a.e. on $E$. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item For any $\alpha$ and $\beta$, $\alpha f + \beta g$ is measurable on $E$ 
+        \item $fg$ is measurable on $E$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+Note that since $f,g$ are finite a.e. on $E$, we may suppose, due to the discussion preceeding the statement of the theorem that $f,g$ are finite everywhere on $E$. Then, it shall suffice to show that both $\alpha f$ and $f + g$ are measurable. Without loss of generality, let $\alpha > 0$. Then 
+\begin{equation*}
+    \{x\in E\mid \alpha f(x) < c\} = \{x\in E\mid f(x) < c/\alpha\}
+\end{equation*}
+Thus, $\alpha f(x)$ is measurable. 
+
+Next, we shall show that $f + g$ is measurable for which it suffices to show that $\{x\in E\mid f(x) + g(x) < c\}$ is measurable. We claim that 
+\begin{equation*}
+    \{x\in E\mid f(x) + g(x) < c\} = \bigcup_{q\in\Q}\{x\in E\mid f(x) < q\}\cap\{x\in E\mid g(x) < c - q\}
+\end{equation*}
+Indeed, if $f(x) + g(x) < c$, then there is a rational $q$ such that $f(x) < q < c - g(x)$, consequently, $f(x) < q$ and $g(x) < c - q$. Since the rationals are countable, we have the desired conclusion.
+
+Finally, note that
+\begin{equation*}
+    \{x\in E\mid f(x)^2 > c\} = 
+    \begin{cases}
+        \{x\in E\mid f(x) > \sqrt{c}\}\cup\{x\in E\mid f(x) < -\sqrt{c}\} & c\ge 0\\
+        E & c < 0
+    \end{cases}
+\end{equation*}
+Thus, $f^2$ is also measurable. Now, simply note that 
+\begin{equation*}
+    fg = \frac{1}{2}\left((f + g)^2 - f^2 - g^2\right)
+\end{equation*}
+whence $fg$ is measurable.
+\end{proof}
+
+\begin{proposition}
+    The composition of two measurable functions need not be measurable.
+\end{proposition}
+\begin{proof}
+    Define the function 
+    \begin{equation*}
+        \psi(x) = 
+        \begin{cases}
+            \varphi(x) + x & x\in [0,1]\\
+            2x & x\notin[0,1]
+        \end{cases}
+    \end{equation*}
+    where $\varphi$ is the Cantor-Lebesgue function. We have already shown that $\psi$ is continuous and strictly increasing, and is therefore a bijection from $\R$ to $\R$. We have also shown that there is $A\subseteq\mathbf C$ such that $\psi(A)$ is not measurable. Let $\chi_A$ be the characteristic function from $\R$ to $\R$ for the set $A$. We claim that $f = \chi_A\circ\psi^{-1}$ is not measurable, which would prove the statement of the proposition, since $\psi^{-1}$ is continuous and thus measurable.
+
+    Indeed, 
+    \begin{equation*}
+        \{x\in\R\mid f(x) > 0.5\} = \{x\in\R\mid\psi^{-1}(x)\in A\} = \psi(A)
+    \end{equation*}
+    which is not measurable. This shows that $f$ is not measurable.
+\end{proof}
+
+\begin{proposition}
+    Let $E$ be measurable, $g: E\to\R$ be measurable and $f:\R\to\R$ be continuous. Then the composition $f\circ g: E\to\R$ is measurable.
+\end{proposition}
+\begin{proof}
+    Let $\mathcal O$ be an open set in $\R$. Then $(f\circ g)^{-1}(\mathcal O) = g^{-1}(f^{-1}(\mathcal O))$. Since $f$ is contiuous, $f^{-1}(\mathcal O)$ is open and thus $g^{-1}(f^{-1}(\mathcal O))$ is measurable, implying that $f\circ g$ is measurable.
+\end{proof}
+
+\begin{proposition}
+    Let $f: E\to[-\infty,\infty]$ be an extended real valued measurable function on a measurable domain $E$. Then, for every Borel set $B$, $f^{-1}(B)$ is measurable.
+\end{proposition}
+\begin{proof}
+    Let $\mathfrak M = \{A\subseteq\R\mid f^{-1}(A)\text{ is measurable}\}$. It is not hard to show that $\mathfrak M$ is a $\sigma$-algebra. Further, $\mathfrak M$ contains all the open sets in $\R$, consequently, contains all the Borel sets in $\R$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $E$ be measurable and $\{f_n: E\to[-\infty,\infty]\}$ be a sequence of measurable functions. Define 
+    \begin{equation*}
+        g = \sup f_n\quad\text{and}\quad h = \limsup_{n\to\infty} f_n
+    \end{equation*}
+    Then $g$ and $h$ are measurable.
+\end{theorem}
+\begin{proof}
+    Let $c\in\R$. Then we have 
+    \begin{equation*}
+        \{x\in E\mid g(x) > c\} = \bigcup_{n\in\N}\{x\in E\mid f_n(x)>c\}
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \{x\in E\mid h(x) > c\} = \bigcap_{n\in\N}\bigcup_{m = n}^\infty\{x\in E\mid f_m(x) > c\}
+    \end{equation*}
+    both of which are measurable. This completes the proof.
+\end{proof}
+
+Similarly, one can show that $\inf f_n$ and $\liminf f_n$ are measurable.
+
+\begin{corollary}
+    Let $E$ be measurable and $f,g: E\to[-\infty,\infty]$ be measurable functions. Then $\min\{f,g\}$ and $\max\{f,g\}$ are measurable.
+\end{corollary}
+\begin{proof}
+    Note that 
+    \begin{align*}
+        \max\{f,g\} &= \limsup\{f,g,f,g,f,g,\ldots\}\\
+        \min\{f,g\} &= \liminf\{f,g,f,g,f,g,\ldots\}
+    \end{align*}
+\end{proof}
+
+For a function $f: E\to[-\infty,\infty]$, define $f^+ = \max\{f, 0\}$ and $f^- = -\min\{f, 0\}$. It is obious that $f^+$ and $f^-$ are nonnegative functions and $f = f^+ - f^-$ on $E$.
+
+
+\section{Pointwise Limits and Simple Approximation}
+
+We begin by reacalling some definitions from Real Analysis.
+
+\begin{definition}
+    For a sequence $\{f_n\}$ of functions with common domain $E$ and a function $f$ on $E$ and a subset $A$ of $E$, we say that 
+    \begin{enumerate}[label=(\roman*)]
+        \item The sequence $\{f_n\}$ converges to $f$ pointwise on $A$ provided $\lim\limits_{n\to\infty} f_n(x) = f(x)$ for all $x\in A$
+        \item The sequence $\{f_n\}$ covnerges to $f$ pointwise a.e. on $A$ provided it converges to $f$ pointwise on $A\backslash B$ where $m(B) = 0$ 
+        \item The sequence $\{f_n\}$ converges to $f$ uniformly on $A$ provided for each $\varepsilon > 0$ there is an index $N$ for which 
+        \begin{equation*}
+            |f - f_n| < \varepsilon \text{ on $A$ for all $n\ge N$}
+        \end{equation*}
+    \end{enumerate}
+\end{definition}
+
+Recall that the pointwise limit of a Riemann integrable function need not be Riemann integrable. Measurable functions on the other hand are better behaved under pointwise limits.
+
+\begin{proposition}
+    Let $\{f_n\}$ be a sequence of measurable functions on $E$ that converges pointwise a.e. on $E$ to the function $f$. Then $f$ is measurable.
+\end{proposition}
+\begin{proof}
+    Let $E_0$ be such that $\{f_n\}$ converges pointwise on $E\backslash E_0$. If we show that $f$ is measurable on $E\backslash E_0$, then every extension of $f$ to $E$ is measurable. Therefore, without loss of generality, we may suppose that $\{f_n\}$ converges pointwise on $E$. 
+
+    If $\{f_n\}$ converges pointwise, then $f = \limsup f_n$ and is measurable.
+\end{proof}
+
+The \textbf{characteristic function} of a set $A$, denoted $\chi_A$ is defined as 
+\begin{equation*}
+    \chi_A = 
+    \begin{cases}
+        1 & x\in A\\
+        0 & x\notin A
+    \end{cases}
+\end{equation*}
+
+\begin{definition}[Simple Function]
+    A real-valued function $\varphi$ defined on a measurable set $E$ is called \textit{simple} if it is measurable and takes only a finite number of distinct values.
+\end{definition}
+
+It is not hard to infer from the definition that a simple function can be represented as 
+\begin{equation*}
+    \varphi = \sum_{k = 1}^n c_k\chi_{E_k}
+\end{equation*}
+where $E_k$'s are disjoint and measurable. This is known as the \textbf{canonical representation of the simple function}.
+
+Note that the simple functions that we consider are real valued and not extended real valued.
+
+\begin{lemma}[Simple Approximation Lemma]\thlabel{lem:simple-approximation}
+    Let $f$ be measurable real-valued bounded function on $E$. Then for each $\varepsilon > 0$, there are simple functions $\varphi_\varepsilon$ and $\psi_\varepsilon$ defined on $E$ such that 
+    \begin{equation*}
+        \varphi_\varepsilon\le f\le\psi_\varepsilon\text{ and } 0\le\psi_\varepsilon - \varphi_\varepsilon < \varepsilon
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Since $f$ is bounded, there is an open interval $(c,d)$ containing $f(E)$. Consider a partition 
+    \begin{equation*}
+        c = y_0 < y_1 < \cdots < y_{n - 1} < y_n = d
+    \end{equation*}
+    such that $y_k - y_{k - 1} < \varepsilon$. Define $E_k = f^{-1}([y_{k - 1}, y_k))$ and the functions 
+    \begin{equation*}
+        \psi = \sum_{k = 1}^n y_k\chi_{E_k}\quad\text{and}\quad\varphi = \sum_{k = 1}^{n}y_{k - 1}\chi_{E_k}
+    \end{equation*}
+
+    Obviously, for all $x$, $\psi - \varphi < \varepsilon$, further, there is a unique $k$ such that $x\in E_k$. Then $\varphi(x) = y_{k - 1} < f(x) < y_k = \psi(x)$. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Simple Approximation Theorem]
+    Let $E$ be measurable and $f: E\to[-\infty,\infty]$ is measurable if and only if there is a sequence $\{\varphi_n\}$ of simple functions on $E$ which converge pointwise on $E$ to $f$ and has the property that $|\varphi_n|\le|f|$ on $E$ for all $n$. If $f$ is nonnegative, we may choose $\{\varphi_n\}$ to be increasing.
+\end{theorem}
+\begin{proof}
+    If there is a sequence of simple functions that converge to $f$, then $f$ is measurable since it is the pointwise limit of measurable functions.
+
+    Now suppose $f$ is measurable. We shall first prove the statement in the case when $f$ is nonnegative. Let $E_n = \{x\in E\mid f(x)\le n\}$, which is measurable. Due to \thref{lem:simple-approximation}, there are simple functions $\varphi_n$ and $\psi_n$ on $E_n$ such that 
+    \begin{equation*}
+        0\le\varphi_n\le f\le\psi_n\quad\text{and}\quad 0\le\psi_n - \varphi_n < 1/n\text{ on $E_n$}
+    \end{equation*}
+
+    Extend both $\varphi_n$ and $\psi_n$ to $E$ by defining $\varphi_n(x) = \psi_n(x) = n$ when $x\in E\backslash E_n$. It is not hard to show that the sequences $\{\varphi_n\}$ and $\{\psi_n\}$ converge pointwise to $f$ on $E$. Now, let $\varphi_n' = \max\{\varphi_1,\ldots,\varphi_n\}$. Then, $\{\varphi_n'\}$ is an increasing sequence of functions that converge to $f$.
+
+    Now, we shall prove the problem statement for a general function $f = f^+ - f^-$. Since $f^+$ and $f^-$ are nonnegative functions, there are sequences $\varphi_n^+$ and $\varphi_n^-$ of simple functions satisfying the assertion of the theorem. Note that the functions $\varphi^+_n$ and $\varphi_n^-$ are defined in such a way that they do not both take nonzero values at the same point. Then, 
+    \begin{equation*}
+        |\varphi_n^+ - \varphi_n^-| = \varphi_n^+ + \varphi_n^-\le f^+ + f^- = |f|
+    \end{equation*}
+    which completes the proof.
+\end{proof}
+
+\subsection{Step Functions}
+
+A step function is a special kind of simple function. It is of the form $\sum_{k = 1}^n \alpha_k\chi_{E_k}$ where each $E_k$ is an interval. One must note that step functions are not as strong as simple functions, that is to say that they do not approximate measurable functions as well as simple functions do.
+
+\begin{theorem}[Step Approximation Theorem]\thlabel{thm:step-approximation}
+    Let $I$ be a closed, bounded interval and $f: I\to\R$ a bounded measurable function. Let $\varepsilon, \delta > 0$. Then there is a step function $h$ on $I$ and a measurable subset $F$ of $I$ for which 
+    \begin{equation*}
+        |h - f| < \varepsilon \text{ and } m(I\backslash F) < \delta
+    \end{equation*}
+\end{theorem}
+
+To prove the above theorem, we require a series of lemmas. 
+
+\begin{lemma}
+    Let $E\subseteq I$ be measurable. Let $\varepsilon > 0$. Show that there is a step function $h:I\to\R$ and a measurable subset $F$ of $I$ for which 
+    \begin{equation*}
+        h = \chi_E\text{ on F, and } m(I\backslash F) < \varepsilon
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $U$ be an open set containing $U$ such that $m(U\backslash E) < \varepsilon/2$. Now, $U$ may be written as as disjiont union of open intervals $\{I_k\}_{k = 1}^\infty$ where some intervals may be empty. Using the continuity of measure, there is a positive integer $N$ such that 
+    \begin{equation*}
+        \sum_{k = N + 1}^\infty\ell(I_k) < \varepsilon/2
+    \end{equation*}
+    Define $\mathcal O = \bigcup\limits_{k = 1}^{N} I_k$ and $F = (\mathcal O\cap E)\cup(I\backslash U)$. Then, 
+    \begin{equation*}
+        I\backslash F = (U\backslash E)\cup(\mathcal U\backslash O)
+    \end{equation*}
+    and thus, $m(I\backslash F)\le m(U\backslash E) + m(\mathcal U\backslash O) < \varepsilon$. Finally, define $h = \chi_{\mathcal O}$. Since $F\cap\mathcal O = \mathcal O\cap E\subseteq E$, the restrictions on $h$ are satisfied.
+\end{proof}
+
+\begin{lemma}
+    Let $\psi: I\to\R$ be a simple function, $E\subseteq I$ be measurable and $\varepsilon > 0$. Then there is a step function $h: I\to\R$ and a measurable subset $F$ of $I$ for which 
+    \begin{equation*}
+        h = \psi\text{ on F, and } m(I\backslash F) < \varepsilon
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Follows from the previous lemma by taking linear combinations.
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:step-approximation}]
+    Due to \thref{lem:simple-approximation}, there is a simple function $\psi: I\to\R$ such that $0\le f - \psi < \varepsilon$. Due to the preceeding lemma, there is a step function $h: I\to\R$ and a measurable subset $F$ of $I$ with $m(I\backslash F) < \delta$ such that $h = \psi$ on $F$. The conclusion now follows.
+\end{proof}
+
+
+\section{Egoroff and Lusin's Theorems}
+
+\begin{theorem}[Egoroff]\thlabel{thm:egoroff}
+    Let $E$ be a measurable set with finite measure. Let $\{f_n\}$ be a sequence of measurable functions on $E$ that converge pointwise a.e. on $E$ to the extended real-valued function $f$ which is finite a.e. Then for each $\varepsilon > 0$, there is a closed set $F\subseteq E$ for which 
+    \begin{equation*}
+        \{f_n\}\rightrightarrows f\text{ on $F$ and }m(E\backslash F) < \varepsilon
+    \end{equation*}
+\end{theorem}
+
+Since $\{f_n\}\to f$ pointwise a.e. on $E$, there is a subset $E_0$ such that $m(E_0) = 0$ and $\{f_n\}\to f$ pointwise on $E\backslash E_0$. Similarly, there is $E_0'$ such that $f$ is finite on $E\backslash E_0'$ and $m(E_0') = 0$. Let $E' = E\backslash(E_0\cup E_0')$. Then $m(E') = m(E)$ and $\{f_n\}\to f$ pointwise on $E'$ and $f$ is finite on all of $E'$. Then, if we prove Egoroff's Theorem on $E'$, we woud have a closed subset $F$ of $E'$ such that $\{f_n\}\rightrightarrows f$ on $F$ and $m(E\backslash F) = m(E'\backslash F) < \varepsilon$, and hence would prove it for the general case. Therefore, without loss of generality, we may suppose that $\{f_n\}\to f$ pointwise on $E$ and is finite on all of $E$.
+
+In order to prove the reduced statement of Egoroff's Theorem, we require the following lemma,
+
+\begin{lemma}
+    Let $E$ have finite measure and $\{f_n\}\to f$ pointwise on $E$ where $f$ is finite on all of $E$. Then, for every $\eta > 0$ and $\delta > 0$, there is a measurable subset $A\subseteq E$ and index $N\in\N$ such that 
+    \begin{equation*}
+        |f_n - f|\le\eta\text{ $\forall~n\ge N$ on $A$ and }m(E\backslash A) < \delta
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Define the collection of sets $\{F_n\}$ as 
+    \begin{equation*}
+        F_n := \{x\in E\mid |f(x) - f_n(x)| < \eta\}
+    \end{equation*}
+    Since the function $|f - f_n|$ is measurable, so is the set $F_n$. Now, define 
+    \begin{equation*}
+        E_n := \bigcap_{k = n}^\infty F_k = \{x\in E\mid |f(x) - f_n(x)| < \eta,~\forall n\ge N\}
+    \end{equation*}
+    Since $E_n$ is the countable intersection of measurable sets, it is measurable. Furthermore, by definition, the collection $\{E_n\}$ forms an ascending chain satisfying 
+    \begin{equation*}
+        \bigcup_{n = 1}^\infty E_n = E
+    \end{equation*}
+    Consequently, $\lim\limits_{n\to\infty} m(E_n) = m(E) < \infty$. Hence, there is $N\in\N$ such that $m(E\backslash E_N) = m(E) - m(E_N) < \delta$. Let $A = E_N$. Then, for all $x\in A$, $|f(x) - f_n(x)| < \eta$ for all $n\ge N$. This completes the proof.
+\end{proof}
+
+We can now prove \thref{thm:egoroff}.
+
+\begin{proof}[Proof of \thref{thm:egoroff}]
+    Due to our discussion above, we may suppose that $f_n\to f$ pointwise on $E$ and $f$ is finite on all of $E$. Let $A_n$ be such that there is an index $N$ with $|f - f_k|\le 1/n$ for all $k\ge N$ and $m(E\backslash A_n) < \varepsilon/2^{n + 1}$. Define $A = \bigcap\limits_{n = 1}^\infty A_n$. Then 
+    \begin{equation*}
+        m(E\backslash A)\le \sum_{n = 1}^\infty m(E\backslash A_n) < \varepsilon/2
+    \end{equation*}
+
+    We claim that $f_n\rightrightarrows f$ uniformly on $A$. Choose some $\eta > 0$. Then, there is $N\in\N$ such that $1/N < \eta$. Consequently, for all $x\in A_N$, there is an index $M$ such that for all $k\ge M$, $|f - f_k| < \eta$. But since $A\subseteq A_N$, we have that for all $x\in A$, there is an index $M$ such that for all $k\ge M$, $|f(x) - f_k(x)| < \eta$, which implies uniform convergence.
+
+    Now, since $A$ is the countable intersection of measurable sets, it is measurable. As a result, due to \thref{thm:inner-outer-approx-measurable}, there is a closed set $F\subseteq A$ with $m(A\backslash F) < \varepsilon/2$. Thus, $F\subseteq E$ and $m(E\backslash F) < \varepsilon$ and $f_n\rightrightarrows f$ on $F$. This completes the proof.
+\end{proof}
+
+\begin{mdframed}
+Let us consider the case when $m(E) = \infty$. Consider the sequence of functions $f_n:\R\to\R$ given by 
+\begin{equation*}
+    f_n(x) = x\left(1 - \frac{1}{n}\right)
+\end{equation*}
+Then, it is not hard to see that $f_n\to f$ on $E = \R$ and $f$ is finite on $E$. Choose any $\varepsilon > 0$ and let $F\subseteq\R$ be a closed subset of $\R$ such that $m(\R\backslash F) < \varepsilon$. Since $\R\backslash F$ is open in $\R$, it is the disjiont union of open intervals. Further, since it has finite measure, all the disjiont intervals must be bounded. As a result, $F$ is not bounded.
+
+We now claim that $f_n$ may not converge uniformly to $f$ on $F$. Suppose it did, then, pick some $\delta > 0$. Then, there is $N\in\N$ such that for all $n\ge N$, $|f - f_n| < \delta$ on $F$. But this implies $|x/n| < \delta$ on $F$, which is absurd, since $F$ is unbounded.
+\end{mdframed}
+The above discussion shows that Egoroff's theorem may not hold on dropping the finite measure hypothesis.
+
+Next, we come to Lusin's Theorem, illustrating the third of Littlewood's three principles. We shall state the theorem first, then prove a useful lemma and finally prove the theorem.
+
+\begin{lemma}
+    Let $f$ be a simple function defined on $E$. Then for each $\varepsilon > 0$, there is a continuous function $g$ on $\R$ and a closed set $F$ contained in $E$ for which $f = g$ on $F$ and $m(E\backslash F) < \varepsilon$.
+\end{lemma}
+\begin{proof}
+    Let $f = \sum_{i = 1}^n a_i\chi_{E_i}$ where the sets $E_i$ are disjoint. Due to \thref{thm:inner-outer-approx-measurable}, there are closed sets $F_i$ with $m(E_i\backslash F_i) < \varepsilon/n$ and $F_i\subseteq E_i$. Let $F = \bigsqcup_{k = 1}^n F_i$. Then $F$ is closed. Define the function $g$ on $F$ by $g(x) = a_i$ if $x\in F_i$. Note that this function is well defined because the $F_i$ are disjoint. Then, using Tietze's Extension Theorem, we may extend $g$ to a continuous function on all of $\R$.
+
+    Finally, note that 
+    \begin{equation*}
+        m(E\backslash F) = m\left(\bigsqcup_{k = 1}^n(E_k\backslash F_k)\right) = \sum_{k = 1}^n m(E_k\backslash F_k) < \varepsilon
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+Lusin's Theorem essentially extends the above proposition to general measurable functions.
+
+\begin{theorem}[Lusin]
+    Let $f: E\to\R$ be real valued measurable. Then for each $\varepsilon > 0$, there is a continuous function $g:\R\to\R$ and a closed set $F\subseteq E$ such that $f = g$ on $F$ and $m(E\backslash F) < \varepsilon$.
+\end{theorem}
+\begin{proof}
+We divide the proof into two cases, one for when $m(E) < \infty$ and the other for when $m(E) = \infty$.
+\begin{description}
+\item[\underline{$m(E) < \infty$}: ] Due to the Simple Approximation Theorem, there is a sequence $\varphi_n: E\to\R$ of simple functions that converge to $f$ on $E$. Using the preceeding lemma, there is a sequence of continuous functions $g_n: \R\to\R$ and closed sets $F_n$ such that the restriction of $g_n$ to $F_n$ is $\varphi_n$ and $m(E\backslash F_n) < \varepsilon/2^{n + 2}$. Further, due to Egoroff's Theorem, there is a closed set $F_0$ that is contained in $E$ such that $\{f_n\}$ converges to $f$ uniformly on $F_0$ and $m(E\backslash F_0) < \varepsilon/2^2$. Define $F = \bigcap\limits_{n = 0}^\infty$. Then $m(E\backslash F)\le\varepsilon/2 < \varepsilon$ and since $\varphi_n$ converge uniformly on $F_0$ and thus on $F$, so do $g_n$ and their pointwise limit $g$ is continuous on $F$. Finally, due to the Tietze Extension Theorem, this function may be extended to a continuous function $g:\R\to\R$.
+
+\item[\underline{$m(E) = \infty$}: ] Consider the collection $\{E\cap[k,k + 1)\}_{k\in\Z}$, which is a countable collection of disjoint sets whose union is $E$. Reindex this set as $\{E_n\}$. For each $E_n$, there is a closed subset $F_n$ such that $m(E_n\backslash F_n) < \varepsilon/2^{n + 1}$ and there is a continuous function $g_n$ on $E_n$ which agrees with $f$ on $F_n$. Since the collection $F_n$ is locally finite, the Pasting Lemma holds and there is a continuous function $g$ on $\bigcup F_n$ which agrees with $f$. Again, since $F_n$ is locally finite, the union $\bigcup F_n$ is closed and thus, we may use the Tietze Extension Theorem.
+\end{description}
+\end{proof}

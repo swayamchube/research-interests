@@ -1,0 +1,703 @@
+\section{Outer Measure}
+
+The Lebesgue Outer Measure, unlike the Lebesgue Measure is defined for every subset of $\R$. We construct the Lebesgue Measure from the outer measure by restricting it to a class of special subsets.
+
+\begin{definition}[Interval]
+    An unbounded interval is of one of the following forms: 
+    \begin{equation*}
+        (-\infty, a],~(-\infty, a),~[a,\infty),~(a,\infty)
+    \end{equation*}
+    while a bounded interval is of one of the following forms: 
+    \begin{equation*}
+        [a,b],~(a,b],~[a,b),~(a,b)
+    \end{equation*}
+
+    For an unbounded interval, we define $\ell(I) = \infty$ while for a bounded interval, we define $\ell(I) = b - a$.
+\end{definition}
+
+\begin{definition}[Outer Measure]
+    Let $A\subseteq\R$. Consider the countable collections $\{I_k\}_{k\in\N}$ of nonempty open bounded intervals that cover $A$, that is, $A\subseteq\bigcup\limits_{k\in\N} I_k$ and define 
+    \begin{equation*}
+        m^*(A) = \inf\left\{\sum_{k\in\N}\ell(I_k)\Bigm\vert A\subseteq\bigcup_{k\in\N} I_k\right\}
+    \end{equation*}
+\end{definition}
+
+It is obvious that $m^*(\emptyset) = 0$. Moreover, for sets $A\subseteq B$, the set of covers of $B$ is a subset of covers of $A$, consequently, $m^*(A)\le m^*(B)$. Further, let $A = \{a_1,a_2,\ldots\}$ be a countable set. Consider the cover $\{I_k\}_{k\in\N}$ where $I_k = \left(a_k - \frac{\varepsilon}{2^{k + 1}}, a_k + \frac{\varepsilon}{2^{k + 1}}\right)$. Then, 
+\begin{equation*}
+    0\le m^*(A)\le\sum_{k\in\N}\frac{\varepsilon}{2^k} = \varepsilon
+\end{equation*}
+Since the above holds for all $\varepsilon > 0$, we conclude that $m^*(A) = 0$.
+
+\begin{proposition}
+    Let $I$ be an interval. Then $m^*(I) = \ell(I)$.
+\end{proposition}
+\begin{proof}
+    Let $I = [a,b]$. We shall first show that $m^*(I) = b - a$. It is easy to see that $m^*(I)\le b - a$. Let $\{I_k\}_{k\in\N}$ be a collection of open intervals covering $[a,b]$. Since $I$ is compact, there is a finite subcover, say $\{I_k\}_{k = 1}^n$. We shall show that 
+    \begin{equation*}
+        \sum_{k = 1}^\infty\ell(I_k)\ge\sum_{k = 1}^n\ell(I_k) > b - a
+    \end{equation*}
+    which would imply the desired conclusion.
+
+    Since $a\in I$, there is an open interval, say, $I_1 = (a_1, b_1)$ containing $a$. If $b_1 > b$, stop here and set $N = 1$. Else, choose an interval, say $I_2 = (a_2, b_2)$ containing $b_1$. If $b_2 > b$, stop here and set $N = 2$ and so on. This process must terminate since $n$ is finite, consequently, $N\le n$.
+
+    Notice that due to the choice of the $a_i$ and $b_i$'s, $a_{k + 1} < b_k$ for all $k\le N - 1$ and $b_N > b$. Then, 
+    \begin{equation*}
+        \sum_{k = 1}^n\ell(I_k)\ge\sum_{k = 1}^N\ell(I_k) = (b_N - a_1) + \sum_{k = 1}^{N - 1}(a_{k + 1} - b_k) > b - a
+    \end{equation*}
+
+    Now, let $I$ be any bounded interval. Obviously there exist closed bounded intervals $J_1$ and $J_2$ such that 
+    \begin{equation*}
+        J_1\subseteq I\subseteq J_2\quad\text{and}\quad\ell(J_1) + \varepsilon = \ell(I) = \ell(J_2) - \varepsilon
+    \end{equation*}
+    Then, we have 
+    \begin{equation*}
+        \ell(I) - \varepsilon = m^*(J_1)\le m^*(I)\le m^*(J_2) = \ell(I) + \varepsilon
+    \end{equation*}
+    Since the above inequality holds for all $\varepsilon > 0$, we have the desired conclusion.
+
+    The case when $I$ is unbounded is easy enough.
+\end{proof}
+
+The following follows readily from the definition.
+\begin{proposition}
+    The outer measure $m^*$ is translation invariant. That is, for any set $A\subseteq\R$ and $y\in\R$, 
+    \begin{equation*}
+        m^*(A + y) = m^*(A)
+    \end{equation*}
+\end{proposition}
+
+\begin{proposition}\thlabel{prop:outer-measure-countable-subadditivity}
+    The outer measure $m^*$ is countably subadditive, that is, if $\{E_k\}_{k\in\N}$ is a countable collection of sets, disjoint or not, then 
+    \begin{equation*}
+        m^*\left(\bigcup_{k\in\N}E_k\right)\le\sum_{k\in\N}m^*(E_k)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    If any of the $E_k$'s has infinite outer measure, then the inequality follows trivially. Henceforth suppose that all $E_k$ have finite outer measure. Let $\varepsilon > 0$ be given. By definition, for every $k\in\N$ there is a collection of open intervals $\{I_{k,i}\}_{i\in\N}$ such that 
+    \begin{equation*}
+        E_k\subseteq\bigcup_{i\in\N} I_{k,i}\quad\text{and}\quad\sum_{i = 1}^\infty\ell(I_{k,i}) < m^*(E_k) + \frac{\varepsilon}{2^k}
+    \end{equation*}
+
+    Now, note that $\{I_{k,i}\}_{k,i\in\N}$ is an open cover for $\bigcup_{k\in\N} E_k$, consequently, we have 
+    \begin{equation*}
+        m^*\left(\bigcup_{k\in\N} E_k\right)\le\sum_{k = 1}^\infty\sum_{i = 1}^\infty\ell(I_{k,i}) < \varepsilon + \sum_{k = 1}^\infty m^*(E_k)
+    \end{equation*}
+
+    Since the above inequality holds for all $\varepsilon > 0$, we have the desired conclusion.
+\end{proof}
+
+As a corollary, we have \textit{finite subadditivity}. 
+\begin{corollary}
+    Let $\{E_k\}_{k = 1}^n$ be a finite collection of sets, disjoint or not, then 
+    \begin{equation*}
+        m^*\left(\bigcup_{k = 1}^n E_k\right)\le\sum_{k = 1}^n m^*(E_k)
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Let $E_k = \emptyset$ for all $k > n$ in \thref{prop:outer-measure-countable-subadditivity}.
+\end{proof}
+
+\begin{theorem}\thlabel{lem:outer-measure-metric-measure}
+    The Lebesgue Outer Measure $m^*$ is a metric outer measure. That is, if $A$ and $B$ are bounded subsets of $\R$ that are positively separated, then $m^*(A\cup B) = m^*(A) + m^*(B)$.
+\end{theorem}
+
+In order to prove the above theorem, we require the following lemmas: 
+
+\begin{lemma}
+    Let $I$ be an open bounded interval and $\varepsilon, \delta > 0$. Then, there is a finite collection of open bounded intervals $\{I_k\}_{k = 1}^\infty$ such that $\operatorname{diam} I_k < \delta$ for all $k\in\N$ and $\sum_{k = 1}^\infty\ell(I_k) < \ell(I) + \varepsilon$.
+\end{lemma}
+
+\begin{lemma}
+    Let $E\subseteq\R$ be bounded. Given $\varepsilon, \delta > 0$, there is an open cover of $E$ by bounded intervals $\{I_k\}_{k = 1}^\infty$ with $\operatorname{diam} I_k < \delta$ for all $k\in\N$ and 
+    \begin{equation*}
+        \sum_{k = 1}^\infty \ell(I_k) < m^*(E) + \varepsilon
+    \end{equation*}
+\end{lemma}
+The following proof is a sketch.
+\begin{proof}
+    Let $\{I_k\}_{k = 1}^\infty$ be an open cover by bounded intervals of $E$ such that 
+    \begin{equation*}
+        \sum_{k = 1}^\infty \ell(I_k) < m^*(E) + \varepsilon/2
+    \end{equation*}
+
+    For each $I_k$, construct a finite open cover by bounded intervals $\{J_l\}_{l = 1}^N$ for it with intervals of diameter less than $\delta$ such that 
+    \begin{equation*}
+        \sum_{l = 1}^N\ell(J_l) < \ell(I_k) + \varepsilon/2^{k + 1}
+    \end{equation*}
+
+    Then the union of all such filterations is countable and has total length not exceeding $m^*(E) + \varepsilon$.
+\end{proof}
+
+\begin{proof}[Proof of \thref{lem:outer-measure-metric-measure}]
+    Let $\alpha = d(A,B)$, $\varepsilon > 0$ and $\delta = \alpha/3$ and let $\{I_k\}_{k = 1}^\infty$ be an open cover by bounded intervals such that $\operatorname{diam} I_k < \delta$ and $\sum_{k = 1}^\infty\ell(I_k) < m^*(A\cup B) + \varepsilon$. Let $\mathscr A$ be the subcollection of intervals that intersect $A$ and similarly define $\mathscr B$. It is not hard to show that $\mathscr A\cap\mathscr B = \emptyset$, whence $\mathscr A\cup\mathscr B$ is an open cover by bounded intervals of $A\cup B$. Then, 
+    \begin{equation*}
+        m^*(A) + m^*(B)\le\sum_{I\in\mathscr A}\ell(I) + \sum_{I\in\mathscr B}\ell(I) < \sum_{k = 1}^\infty\ell(I_k) < m^*(A\cup B) + \varepsilon
+    \end{equation*}
+    since the above inequality holds for all $\varepsilon > 0$, we have $m^*(A) + m^*(B)\le m^*(A\cup B)$ from which the conclusion follows.
+\end{proof}
+
+\section{Constructing the \texorpdfstring{$\sigma$}{}-Algebra}
+
+\begin{definition}[Measurable Sets]
+    A set $E$ is said to be \textit{measurable} if for every $A\subseteq\R$, 
+    \begin{equation*}
+        m^*(A) = m^*(A\cap E) + m^*(A\backslash E)
+    \end{equation*}
+\end{definition}
+
+\begin{remark}
+    Since \thref{prop:outer-measure-countable-subadditivity} guarantees that $m^*(A)\le m^*(A\cap E) + m^*(A\backslash E)$, it suffices to show that $m^*(A)\ge m^*(A\cap E) + m^*(A\backslash E)$.
+\end{remark}
+
+\begin{proposition}
+    Any set of outer measure $0$ is measurable. In particular, any countable set is measurable.
+\end{proposition}
+\begin{proof}
+    Let $E\subseteq\R$ have outer measure $0$ and $A\subseteq\R$. Since $A\cap E\subseteq E$, using the monotonicity of $m^*$, we have that $m^*(A\cap E) = 0$. Now, using \thref{prop:outer-measure-countable-subadditivity},
+    \begin{equation*}
+        m^*(A\backslash E)\le m^*(A)\le m^*(A\cap E) + m^*(A\backslash E) = m^*(A\backslash E)
+    \end{equation*}
+    This shows that $m^*(A) = m^*(A\cap E) + m^*(A\backslash E)$ and that $E$ is measurable.
+\end{proof}
+
+\begin{proposition}
+    The union of a finite collection of measurable sets is measurable.
+\end{proposition}
+\begin{proof}
+    It suffices to show that the union of two measurable sets is measurable since the general result follows from induction. Let $E_1$ and $E_2$ be measurable sets. Then, we have 
+    \begin{align*}
+        m^*(A) &= m^*(A\cap E_1) + m^*(A\cap E_1^c)\\
+        &= m^*(A\cap E_1) + m^*(A\cap E_1^c\cap E_2^c) + m^*(A\cap E_1^c\cap E_2^c)\\
+        &\ge m^*(A\cap(E_1\cup E_2)) + m^*(A\cap (E_1\cup E_2)^c)
+    \end{align*}
+    This coupled with $m^*(A)\le m^*(A\cap(E_1\cup E_2)) + m^*(A\cap (E_1\cup E_2)^c)$ implies the desired conclusion.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:disjoint-finite-additive-outer}
+    Let $A$ be any set and $\{E_k\}_{k = 1}^n$ a finite \textbf{disjoint} collection of measurable sets. Then 
+    \begin{equation*}
+        m^*\left(A\cap\left[\bigcup_{k = 1}^n E_k\right]\right) = \sum_{k = 1}^n m^*(A\cap E_k)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    The equality obviously holds for $n = 1$. Let $E_1$ and $E_2$ be disjoint measurable sets. Then, 
+    \begin{align*}
+        m^*(A\cap(E_1\cup E_2)) &= m^*(A) - m^*(A\cap E_1^c\cap E_2^c)\\
+        &= m^*(A) - \left(m^*(A\cap E_1^c) - m^*(A\cap E_1^c\cap E_2)\right)\\
+        &= m^*(A) - m^*(A\cap E_1^c) + m^*(A\cap E_2)\\
+        &= m^*(A\cap E_1) + m^*(A\cap E_2)
+    \end{align*}
+    
+    We now proceed by induction on $n$. Note that $\bigcup\limits_{k = 1}^{n - 1} E_k$ and $E_n$ are disjoint. Consequently 
+    \begin{align*}
+        m^*\left(A\cap\left[\bigcup_{k = 1}^n E_k\right]\right) &= m^*\left(A\cap\left[\bigcup_{k = 1}^{n - 1}E_k\right]\right) + m^*(A\cap E_n)\\
+        &= \sum_{k = 1}^{n - 1} m^*(A\cap E_k) + m^*(A\cap E_n)
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+We readily obtain the following by setting $A = \R$ in the above proposition.
+
+\begin{corollary}
+    Let $\{E_k\}_{k = 1}^n$ be a finite dsjoint collection of measurable sets. Then 
+    \begin{equation*}
+        m^*\left(\bigcup_{k = 1}^n E_k\right) = \sum_{k = 1}^n m^*(E_k)
+    \end{equation*}
+\end{corollary}
+
+\begin{definition}[Algebra]
+    Let $X$ be a set. A collection $\mathcal F$ of subsets of $X$ is called an \textit{algebra} if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $X\in\mathcal F$ 
+        \item If $A\in\mathcal F$, then $X\backslash A\in\mathcal F$ 
+        \item Let $n\in\N$ and $\{A_i\}_{i = 1}^n$ be such that $A_i\in\mathcal F$. Then $\bigcup\limits_{i = 1}^n A_i\in\mathcal F$
+    \end{enumerate}
+\end{definition}
+
+From the previous proposition, we can infer that the measurable sets form an \textit{algebra}.
+
+\begin{proposition}
+    A countable union of mesurable sets is measurable.
+\end{proposition}
+\begin{proof}
+    Let $E$ be a countable union of measurable sets, $\{E_k\}_{k\in\N}$. Define 
+    \begin{equation*}
+        E_k'= E_k\backslash\bigcup_{i = 1}^k E_i
+    \end{equation*}
+    It is not hard to see that $\{E_k'\}$ is a collection of disjoint measurable sets whose union is $E$. Consequently, without loss of generality, we may suppose that $E_k$ are disjoint. 
+
+    Define $F_n = \bigcup\limits_{i = 1}^n E_i$. Since each $F_n$ is measurable and $F_1\subseteq F_2\subseteq\cdots$, we have, for any $A\subseteq\R$,
+    \begin{align*}
+        m^*(A) &= m^*(A\cap F_n) + m^*(A\cap F_n^c)\\
+        &\ge m^*(A\cap F_n) + m^*(A\cap E^c)\\
+        &= \sum_{k = 1}^n m^*(A\cap E_k) + m^*(A\cap E^c)
+    \end{align*}
+
+    Since the above inequality holds for all $n\in\N$, we must have that 
+    \begin{equation*}
+        m^*(A)\ge\sum_{k = 1}^\infty m^*(A\cap E_k) + m^*(A\cap E^c)\ge m^*(A\cap E) + m^*(A\cap E^c)
+    \end{equation*}
+    and hence $E$ is measurable.
+\end{proof}
+
+\begin{definition}[$\sigma$-Algebra]
+    Let $X$ be a set. A collection $\mathcal F$ of subsets of $X$ is called a \textit{$\sigma$-algebra} if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $X\in\mathcal F$ 
+        \item If $A\in\mathcal F$, then $X\backslash A\in\mathcal F$
+        \item If $\{A_i\}_{i = 1}^\infty$ is a sequence of sets in $\mathcal F$, then $\bigcup\limits_{i = 1}^\infty A_i\in\mathcal F$
+    \end{enumerate}
+\end{definition}
+
+From the previous proposition, we can infer that the collection of measurable sets forms a \textit{$\sigma$-algebra}.
+
+\begin{proposition}
+    Every interval is measurable.
+\end{proposition}
+\begin{proof}
+    We claim that it suffices to show that every interval of the form $(a,\infty)$ is measurable. Indeed, from here we have that every interval of the form $(-\infty, a]$ is measurable. Then, 
+    \begin{equation*}
+        (-\infty, a) = \bigcup_{n = 1}^\infty \left(-\infty, a - \frac{1}{n}\right]
+    \end{equation*}
+    is also measurable whence $[a,\infty)$ is also measurable. Now, note that 
+    \begin{align*}
+        [a,b] = [a,\infty)\cap(-\infty, b]\qquad [a,b) = [a,\infty)\cap(-\infty, b)\\
+        (a,b] = (a,\infty)\cap(-\infty,b]\qquad (a,b) = (a,\infty)\cap(-\infty, b)
+    \end{align*}
+    and hence every interval is measurable.
+
+
+    We shall now show that every interval of the form $(a,\infty)$ is measurable, for which it suffices to show that $m^*(A\cap(a,\infty)) + m^*(A\cap(-\infty,a]) = m^*(A)$. Let $A' = A\backslash\{a\}$, then 
+    \begin{equation*}
+        m^*(A\cap(a,\infty)) + m^*(A\cap(-\infty,a]) = m^*(A)\Longleftrightarrow m^*(A'\cap(a,\infty)) + m^*(A'\cap(-\infty,a]) = m^*(A')
+    \end{equation*}
+
+    Therefore, without loss of generality, we may suppose that $a\notin A$. Define $A_1 = A\cap(-\infty, a] = A\cap(-\infty, a)$ and $A_2 = A\cap(a,\infty)$. Let $\{I_k\}_{k\in\N}$ be a collection of open bounded intervals that covers $A$. Define $I_k' = I_k\cap(-\infty, a)$ and $I_k'' = I_k\cap(a,\infty)$. Note that $I_k'$ and $I_k''$ are both open bounded intervals and the collections $\{I_k'\}_{k\in\N}$ and $\{I_k''\}_{k\in\N}$ cover $A_1$ and $A_2$ respectively. Further, from the definition of $I_k'$ and $I_k''$, we have that $\ell(I_k) = \ell(I_k') + \ell(I_k'')$. Consequently, 
+    \begin{align*}
+        m^*(A_1) + m^*(A_2) &\le \sum_{k = 1}^\infty\ell(I_k') + \sum_{k = 1}^\infty\ell(I_k'')\\
+        &= \sum_{k = 1}^\infty\left(\ell(I_k') + \ell(I_k'')\right)\\
+        &= \sum_{k = 1}^\infty\ell(I_k)
+    \end{align*}
+
+    Since this inequality holds for all covers $\{I_k\}$ of $A$ by open bounded intervals, we must have that $m^*(A_1) + m^*(A_2)\le m^*(A)$ and $(a,\infty)$ is measurable. This completes the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:open-set-countable-intervals}
+    Every open set is the disjoint union of a countable collection of open intervals.
+\end{lemma}
+
+\begin{corollary}
+    Open sets, closed sets, $G_\delta$-sets and $F_\sigma$-sets are measurable.
+\end{corollary}
+
+\begin{proposition}[Excision Property]
+    Let $E$ be a measurable set and $E\subseteq A\subseteq\R$. Then, 
+    \begin{equation*}
+        m^*(A\backslash E) = m^*(A) - m^*(E)
+    \end{equation*}
+\end{proposition}
+The proof of the above proposition follows from the definition of a measurable set and is omitted.
+
+\begin{theorem}\thlabel{thm:inner-outer-approx-measurable}
+    Let $E\subseteq\R$. Then the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $E$ is measurable
+        \item For each $\varepsilon > 0$ there is an open set $U$ containing $E$ for which $m^*(U\backslash E) < \varepsilon$ 
+        \item There is a $G_\delta$ set $G$ containing $E$ for which $m^*(G\backslash E) = 0$ 
+        \item For each $\varepsilon > 0$, there is a closed set $F$ contained in $E$ for which $m^*(E\backslash F) < \varepsilon$
+        \item There is an $F_\sigma$ set $F$ contained in $E$ for which $m^*(E\backslash F) = 0$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+We shall show that $(a)\Longrightarrow (b)\Longrightarrow (c)\Longrightarrow(a)$ along with $(b)\Longleftrightarrow(d)$ and $(c)\Longleftrightarrow(c)$, which would imply the desired conclusion. 
+
+\begin{itemize}
+    \item $\underline{(a)\Longrightarrow(b)}:$ First, suppose $E$ has finite measure. Then, by definition, there is a covering of $E$ with open bounded intervals $\{I_k\}_{k\in\N}$ such that 
+    \begin{equation*}
+        \sum_{k\in\N}\ell(I_k) < m^*(E) + \varepsilon
+    \end{equation*}
+
+    But using the countable subadditivity of the outer measure, we have 
+    \begin{equation*}
+        m^*(E)\le m^*\left(\bigcup_{k\in\N} I_k\right)\le\sum_{k\in\N}\ell(I_k) < m^*(E) + \varepsilon
+    \end{equation*}
+    Letting $U = \bigcup\limits_{k\in\N} I_k$, we have 
+    \begin{equation*}
+        m^*(U\backslash E) = m^*(U) - m^*(E) < \varepsilon
+    \end{equation*}
+
+    Now suppose $E$ has infinite measure. Let $F_k = E\cap[k, k + 1)$. Obviously each $F_k$ is measurable and has finite measure. Reindex the collection $\{F_k\}_{k\in\Z}$ as $\{E_k\}_{k\in\N}$, where $E = \bigsqcup\limits_{k\in\N} E_k$ and each $E_k$ is measurable and has finite measure. Choose an open set $U_k$ containing $E_k$ and $m^*(U_k\backslash E_k) < \varepsilon/2^k$. Let $U = \bigcup\limits_{k\in\N} U_k$. Then, 
+    \begin{equation*}
+        m^*\left(U\backslash E\right)\le m^*\left(\bigcup_{k\in\N}[U_k\backslash E_k]\right) < \sum_{k = 1}^\infty\frac{\varepsilon}{2^k} = \varepsilon
+    \end{equation*}
+
+    \item $\underline{(b)\Longrightarrow(c)}:$ Let $U_k$ be an open set containing $E$ such that $m^*(U_k\backslash E) < 1/k$. Define $G = \bigcap\limits_{k\in\N} U_k$, which is a $G_\delta$-set. Then, $E\subseteq G$ and 
+    \begin{equation*}
+        m^*(G\backslash E)\le m^*(U_k\backslash E) < \frac{1}{k}\quad\forall~k\in\N
+    \end{equation*}
+    whence $m^*(G\backslash E) = 0$.
+
+    \item $\underline{(c)\Longrightarrow(a):}$ Since $G$ is measurable, and $G\backslash E$ being a set of outer measure $0$ is measurable, we must have that $E = G\backslash(G\backslash E)$ is measurable.
+
+    \item $\underline{(b)\Longrightarrow(d):}$ Since $E$ is measurable, so is $E^c$. Due to $(b)$, there is a $G_\delta$-set $G$ containing $E^c$ with $m^*(G\backslash E^c) < \varepsilon$. Consequently, $F = G^c$ is an $F_\sigma$-set contained in $E$ with $E\backslash F = G\backslash E^c$ giving us the desired conclusion.
+
+    \item $\underline{(d)\Longrightarrow(b):}$ Similar to above.
+
+    \item Similarly, one can show $\underline{(c)\Longleftrightarrow(e)}$
+\end{itemize}
+
+This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $E$ be a measurable set of finite outer measure. Then for every $\varepsilon > 0$, there is a fiinte disjoint collection of open \textcolor{red}{bounded} intervals $\{I_k\}_{k = 1}^n$ for which if $\mathcal O = \bigcup_{k = 1}^n I_k$ then 
+    \begin{equation*}
+        m^*(E\Delta\mathcal O) < \varepsilon
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Due to \thref{thm:inner-outer-approx-measurable}~(b), there is an open set $U$ containing $E$ such that $m^*(U\backslash E) < \varepsilon/2$. Further, due to \thref{lem:open-set-countable-intervals}, there is a countable collection of disjoint (possibly empty) open intervals $\{I_k\}_{k\in\N}$ such that $U = \bigsqcup\limits_{k\in\N} I_k$. Since $m^*(U)$ is finite, so is $\sum_{k\in\N}\ell(I_k)$, consequently, there is $n\in\N$ such that 
+    \begin{equation*}
+        \sum_{k = n + 1}^\infty\ell(I_k) < \varepsilon/2
+    \end{equation*}
+
+    Define $\mathcal O = \bigsqcup\limits_{k = 1}^n I_k$. Then $\mathcal O\subseteq U$ and is measurable. Therefore, $m^*(\mathcal O\backslash E)\le m^*(U\backslash E) < \varepsilon/2$ and 
+    \begin{equation*}
+        m^*(E\backslash\mathcal O)\le m^*(U\backslash\mathcal O) = \sum_{k = n + 1}^\infty\ell(I_k) < \varepsilon/2
+    \end{equation*}
+    whence the conclusion follows.
+\end{proof}
+
+\begin{theorem}[Lebesgue]
+    A subset $E$ of $\R$ is measurable if and only if for every open bounded interval $(a,b)$, 
+    \begin{equation*}
+        b - a = m^*((a,b)\cap E) + m^*((a,b)\backslash E)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $\varepsilon > 0$. Then by definition, there is a collection of open bounded intervals $\{I_k\}_{k\in\N}$ such that $E\subseteq\mathcal O = \bigcup\limits_{k\in\N} I_k$ and 
+    \begin{equation*}
+        \sum_{k = 1}^\infty\ell(I_k) < m^*(E) + \varepsilon
+    \end{equation*}
+
+    Then, we have
+    \begin{equation*}
+        m^*(\mathcal O\backslash E) = m^*\left(\bigcup_{k = 1}^\infty[I_k\backslash E]\right)\le\sum_{k = 1}^{\infty}m^*(I_k\backslash E) = \sum_{k = 1}^\infty\left[\ell(I_k) - m^*(I_k\cap E)\right] < m^*(E) + \varepsilon - m^*(\mathcal O\cap E) = \varepsilon
+    \end{equation*}
+
+    And we are done due to \thref{thm:inner-outer-approx-measurable}~(b).
+\end{proof}
+
+\section{The Lebesgue Measure and Properties}
+
+\begin{definition}[Lebesgue Measure]
+    The restriction of the set function outer measure to the collection of measurable sets is called \textit{Lebesgue Measure}. It is denoted by $m$. Therefore, if $E$ is a measurable set, its Lebesgue Measure is defined as 
+    \begin{equation*}
+        m(E) = m^*(E)
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}\thlabel{prop:leb-measure-countable-additive}
+    If $\{E_k\}_{k = 1}^\infty$ is a countable disjoint collection of measurable sets and $A\subseteq\R$, then its union $\bigcup\limits_{k = 1}^\infty E_k$ is also measurable and 
+    \begin{equation*}
+        m^*\left(A\cap\bigcup_{k = 1}^\infty E_k\right) = \sum_{k = 1}^\infty m^*(A\cap E_k)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Obviously, $\bigcup\limits_{k = 1}^\infty E_k$ is measurable and due to \thref{prop:outer-measure-countable-subadditivity}, 
+    \begin{equation*}
+        m^*\left(A\cap\bigcup_{k = 1}^\infty E_k\right)\le\sum_{k = 1}^\infty m^*(A\cap E_k)
+    \end{equation*}
+    Further, due to \thref{prop:disjoint-finite-additive-outer}, 
+    \begin{equation*}
+        m^*\left(A\cap\bigcup_{k = 1}^\infty E_k\right)\ge m^*\left(A\cap\bigcup_{k = 1}^n E_k\right) = \sum_{k = 1}^n m^*(A\cap E_k)
+    \end{equation*}
+    
+    Since the above inequality holds for all $n\in\N$, we must have that 
+    \begin{equation*}
+        m^*\left(A\cap\bigcup_{k = 1}^\infty E_k\right)\ge\sum_{k = 1}^\infty m^*(A\cap E_k)
+    \end{equation*}
+    implying the desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    Lebesgue Measure is countably additive. if $\{E_k\}$ is a countable disjoint collection of measurable sets, then 
+    \begin{equation*}
+        m\left(\bigcup_{k = 1}^\infty E_k\right) = \sum_{k = 1}^\infty m(E_k)
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Follows from \thref{prop:leb-measure-countable-additive} by taking $A = \R$.
+\end{proof}
+
+Consolidating what we have till now: 
+\begin{mdframed} 
+    \itshape The set function Lebesgue Measure $(m)$ defined on the $\sigma$-algebra of Lebesgue measurable sets, assigns length to any interval, is translation invariant and countable additive.\normalfont
+\end{mdframed}
+
+\begin{definition}
+    A countabe collection of sets $\{E_k\}_{k = 1}^\infty$ is said to be \textit{ascending} if $E_1\subseteq E_2\subseteq\cdots$ and is said to be \textit{descending} if $E_1\supseteq E_2\supseteq\cdots$.
+\end{definition}
+
+\begin{theorem}[Continuity of Measure]\thlabel{thm:continuity-of-leb-measure}
+    The Lebesgue Measure possesses the folowing continuity properties: 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\{A_k\}_{k = 1}^\infty$ is an ascending collection of measurable sets, then 
+        \begin{equation*}
+            m\left(\bigcup_{k = 1}^\infty A_k\right) = \lim_{k\to\infty} m(A_k)
+        \end{equation*}
+        \item If $\{B_k\}_{k = 1}^\infty$ is an descending collection of measurable sets and $m(B_1) < \infty$, then
+        \begin{equation*}
+            m\left(\bigcap_{k = 1}^\infty B_k\right) = \lim_{k\to\infty} m(B_k)
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+We shall first show $(a)$ and infer $(b)$ from it.
+\begin{enumerate}[label=(\alph*)]
+    \item Define $\{C_n = A_n\backslash A_{n - 1} \}$ with $A_0 = \emptyset$. It then follows that $\{C_n\}$ is a collection of dijoint measurable sets such that $\bigcup C_n = \bigcup A_n$. Now, due to the countable additivity of measure, 
+    \begin{equation*}
+        m\left(\bigcup_{n = 1}^\infty A_n\right) = m\left(\bigcup_{n = 1}^\infty C_n\right) = \sum_{n = 1}^\infty m(C_n) = \sum_{n = 1}^\infty m(A_n) - m(A_{n - 1}) = \lim_{n\to\infty} m(A_n)
+    \end{equation*}
+    \item Define $D_n = B_1\backslash B_n$. Then, $\{D_n\}$ is an ascending chain with $\bigcup D_n = B_1\backslash\bigcap B_n$. Consequently, 
+    \begin{equation*}
+        \lim_{n\to\infty} m(D_n) = m\left(\bigcup_{n = 1}^\infty D_n\right) = m\left(B_1\backslash\bigcap_{n = 1}^\infty B_n\right) = m(B_1) - m\left(\bigcap_{n = 1}^\infty B_n\right)
+    \end{equation*}
+    Where we require $m(B_1) < \infty$ to use the excision property. Then, we have 
+    \begin{equation*}
+        m(B_1) - \lim_{n\to\infty} m(B_n) = m(B_1) - m\left(\bigcap_{n = 1}^\infty B_n\right)
+    \end{equation*}
+    whence the conclusion follows.
+\end{enumerate}
+\end{proof}
+
+The assertion about descending chains may not hold if $m(B_1) = \infty$. Take for example the descending chain $\{(n,\infty)\}_{n = 1}^\infty$. We have $\bigcap_{n = 1}^\infty (n,\infty) = \emptyset$ but $m((n,\infty)) = \infty$, and thus the limit $\lim\limits_{n\to\infty} m((n,\infty)) = \infty$. 
+
+\begin{lemma}[Borel-Cantelli]\thlabel{lem:borel-cantelli}
+    Let $\{E_k\}_{k = 1}^\infty$ be a countable collection of measurable sets for which $\sum_{k = 1}^\infty m(E_k) < \infty$. Then almost all $x\in\R$ belong to at most finitely many of the $E_k$'s.
+\end{lemma}
+\begin{proof}
+    Let $S$ be the set of all $x\in\R$ belonging to infinitely many of the $E_k$'s. Then, 
+    \begin{equation*}
+        S = \bigcap_{n = 1}^\infty\bigcup_{k = n}^\infty E_k
+    \end{equation*}
+    It is not hard to see that $S$ is measurable.
+
+    But then we have 
+    \begin{equation*}
+        m\left(S\right)\le\lim_{n\to\infty} m\left(\bigcup_{k = n}^\infty E_k\right)\le\lim_{n\to\infty}\sum_{k = n}^\infty m(E_k) = 0
+    \end{equation*}
+    where the last equality follows from the fact that $\sum_{k = 1}^\infty m(E_k)$ is finite. This completes the proof.
+\end{proof}
+
+\section{Nonmeasurable Sets}
+
+\begin{lemma}
+    Let $E\subseteq\R$ be a bounded and measurable. Suppose there is a bounded, countably infinite set of real numbers $\Lambda$ for which the collection of translates $\{\lambda + E\}_{\lambda\in\Lambda}$ is disjoint. Then $m(E) = 0$.
+\end{lemma}
+\begin{proof}
+    Using the countable additivity of Lebesgue Measure, 
+    \begin{equation*}
+        \infty > m\left(\bigcup_{\lambda\in\Lambda}[\lambda + E]\right) = \sum_{\lambda\in\Lambda} m(E)
+    \end{equation*}
+    therefoere, $m(E) = 0$.
+\end{proof}
+
+\begin{definition}[Rational Equivalence]
+    Let $E\subseteq\R$. Define an equivalence relation on $E$ by $x\sim_{\Q} y$ if $x - y\in\Q$.
+\end{definition}
+
+\begin{theorem}[Vitali]\thlabel{thm:vitali-positive-outer-non-mesaurable-subset}
+    Any set $E$ of real numbers with positive outer measure contains a subset that is not measurable.
+\end{theorem}
+\begin{proof}
+    Since every set of positive outer measure has a bounded subset with positive outer measure, we may suppose without loss of generality that $E$ is bouned. Let $\mathcal C_E$ be a choice set over the equivalence classes over $E$ defined by $\sim_{\Q}$. We shall show that $\mathcal C_E$ is not measurable. Suppose it is. Let $\Lambda$ be a bounded collection of rational numbers. Then, the collection $\{\lambda + \mathcal C_E\}_{\lambda\in\Lambda}$ is a collection of disjoint measurable sets. Then, we can say due to the preceeding lemma that $m(\mathcal C_E) = 0$.
+
+    Let $b\in\R$ such that $E\subseteq[-b,b]$ and choose $\Lambda_0 = [-2b,2b]\cap\Q$. We claim that $E\subseteq\bigcup_{\lambda\in\Lambda_0}[\lambda + \mathcal C_E]$. Indeed, if $x\in E$, there is $y\in[x]_{\sim_{\Q}}\cap\mathcal C_E$ but since $x,y\in [-b,b]$, we must have that $\lambda = x - y\in [-2b, 2b]$ and hence, $x\in\lambda + \mathcal C_E$
+    \begin{equation*}
+        m^*(E)\le\sum_{\lambda\in\Lambda_0} m(\lambda + \mathcal C_E) = 0
+    \end{equation*}
+    a contradiction and we have the desired conclusion.
+\end{proof}
+
+\begin{corollary}
+    There are disjoint sets of real numbers $A$ and $B$ for which 
+    \begin{equation*}
+        m^*(A\cup B) < m^*(A) + m^*(B)
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Suppose not, then for every pair of disjoint sets of real numbers $A$ and $B$, $m^*(A\cup B) = m^*(A) + m^*(B)$ and therefore, every subset of $\R$ is measurable. A contradiction to \thref{thm:vitali-positive-outer-non-mesaurable-subset}.
+\end{proof}
+
+\section{Cantor Set and Cantor Lebesgue Function}
+
+We shall first construct a descending chain of closed sets, $\{C_n\}_{n = 1}^\infty$. First, consider the closed, bounded interval $I = [0,1]$ and divide it into three intervals of equal length $1/3$ and remove the interior of the middle interval. Call the remaining set $C_1$. Explicitly, $C_1 = \left[0,\frac{1}{3}\right]\cup\left[\frac{2}{3}, 1\right]$. Repeat this procedure for each of the two intervals in $C_1$ to obtain $C_2$ and do this ad infinitum.
+
+Finally, define 
+\begin{equation*}
+    \mathbf{C} = \bigcap_{n = 1}^\infty C_n
+\end{equation*}
+
+
+Since each $C_k$ is closed and bounded, it is compact and also measurable. Further, since $\mathbf C$ is the intersection of closed, bounded sets, it is closed and bounded and therefore compact and measurable. Finally, due to Cantor's Intersection Theorem, $\mathbf{C}$ is non-empty and measurable.
+
+It is not hard to show using induction that $m(C_n) = \left(\frac{2}{3}\right)^n$ and thus, 
+\begin{equation*}
+    m(\mathbf{C})\le\left(\frac{2}{3}\right)^n
+\end{equation*}
+Since the above inequality holds for all $n\in\N$, $m(\mathbf C) = 0$.
+
+\begin{proposition}
+    The Cantor set $\mathbf{C}$ is uncountable.
+\end{proposition}
+\begin{proof}
+    Suppose $\mathbf C$ is countable and let $\{c_k\}_{k = 1}^\infty$ be an enumeration of $\mathbf C$. We shall construct a descending sequence of compact (and therefore closed) sets as follows.
+
+    Note that $C_1$ is the disjoint union of two closed intervals. Let $F_1$ be the interval not containing $c_1$. Now, inductively, if we have $F_k$, note that $C_{k + 1}\cap F_k$ is the disjoint union of two closed intervals, then let $F_{k + 1}$ be the interval not containing $c_{k + 1}$.
+
+    It is not hard to see that $F_{k + 1}$ is a descending sequence of closed and bounded, and therefore compact sets. Then, due to Cantor's Intersection Theorem, there is $x\in\bigcap_{k = 1}^\infty F_k\subseteq\mathbf C$. Therefore, $x = c_n$ for some $n$, but this is a contradiction to the fact that $x = c_n\notin F_n$.
+
+    Hence, $\mathbf{C}$ is uncountable.
+\end{proof}
+
+\begin{definition}[\href{https://www.youtube.com/watch?v=2Vv-BfVoq4g&ab_channel=EdSheeran}{Perfect}]
+    A set $S$ is said to be \textit{perfect} if the limit points of $S$ are precisely the points of $S$.
+\end{definition}
+
+\begin{proposition}
+    The Cantor set $\mathbf C$ is perfect.
+\end{proposition}
+\begin{proof}
+    Let $x\in\mathbf C$ and $\varepsilon > 0$ be given. Let $N\in\N$ be such that $3^{-N} < \varepsilon$. Since $x\in C_N$, there is a closed interval $F$ of length $3^{-N}$ that contains $x$. But due to our constraints, $F\subseteq B(x,\varepsilon)$. Note that $F\cap C_{N + 1}$ is a disjoint union of two closed intervals $G_1, G_2$ of length $3^{-(N + 1)}$. Without loss of generality, say $x\in G_2$. Then, consider the descending chain $\{G_1\cap C_k\}_{k = 1}^\infty$. Using Cantor's Intersection Theorem, there is some element of $\mathbf C$ in $G_1$, consequently in $F$ and thus $B(x,\varepsilon)$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    The Cantor set $\mathbf C$ is nowhere dense.
+\end{proposition}
+\begin{proof}
+    Let $\mathcal O$ be an open set in $\R$. If $\mathcal O\cap\mathbf C = \emptyset$, then we are done. If not, then it contains an interval, say $(a,b)$. If $(a,b)\cap\mathbf C = \emptyset$, then we are done. If not, then let $x\in (a,b)\cap\mathbf C$. Then, there is some $N\in\N$ such that the interval in $C_N$ containing $x$ is completely contained in $(a,b)$, call this interval $I$. Then, there is an open set $U\subseteq I$ such that $C_{N + 1}\cap I = I\backslash U$. Then, $U$ is an open set in $\mathcal O$ that does not intersect $\mathbf C$, thereby completing the proof.
+\end{proof}
+
+\begin{lemma}
+    Every nonempty perfect set in $\R$ is uncountable.
+\end{lemma}
+\begin{proof}
+    We shall prove this by contradiction. Suppose $A\subseteq\R$ is perfect and countable. Therefore, it has an enumeration $A = \{a_1,a_2,\ldots\}$. Let $U_0 = (a_1 - 1, a_1 + 1)$. Let $n\in\N$ be the smallest index greater than $1$ such that $a_n\in U_0$. Let $U_1$ be an open interval containing $a_n$ such that $\overline{U_1}\subseteq U_0$ and $a_1\notin\overline{U_1}$. Let $F_1 = \overline{U_1}$. Now, define $U_2 = \ldots = U_{n - 1} = U_1$ and $F_2 = \ldots = F_{n - 1} = F_1$. Repeat this procedure ad infinitum. Now consider the descending chain $\{F_n\cap A\}$, which is such that $a_n\notin F_n\cap A$. But due to Cantor's Intersection Theorem, $A\cap \bigcap\limits_{n = 1}^\infty F_n$ is nonempty, a contradiction.
+\end{proof}
+
+Now, define $\mathcal O_k = [0,1]\backslash C_k$ and $\mathcal O = \bigcup_{k = 1}^\infty\mathcal O_k$. Then, obviously, $\mathcal O = [0,1]\backslash\mathbf C$.
+We shall now define a sequence of functions $\{\varphi_k:\mathcal O_k\to[0,1]\}$ such that $\varphi_{k + 1}$ is an extension of $\varphi_k$. To do this, note that $\mathcal O_k$ is a disjoint union of $2^{k} - 1$ open intervals. On which we give $\varphi_k$ the successive values
+\begin{equation*}
+    \left\{\frac{1}{2^k},\ldots,\frac{2^k - 1}{2^k}\right\}
+\end{equation*}
+
+It is not hard to see that $\varphi_k$ and $\varphi_{k + 1}$ agree on $\mathcal{O}_k$. Using this, we may define $\varphi$ over all of $\mathcal O$. Finally, we shall extend this to define $\varphi$ over points of $\mathbf C$ as 
+\begin{equation*}
+    \varphi(0) = 0\quad\text{and}\quad\varphi(x) = \sup\{\varphi(t)\mid t\in\mathcal O\cap(0,x)\}
+\end{equation*}
+This function $\varphi$ is known as the Cantor-Lebesgue function.
+
+\begin{proposition}
+    The Cantor-Lebesgue function is an increasing continuous function that maps $[0,1]$ onto $[0,1]$. It is differentiable at every point in $\mathcal O$ and the value of its derivative is equal to $0$.
+\end{proposition}
+\begin{proof}
+    Note that each $\varphi_k$ is increasing, consequently, for any $x,y\in\mathcal O$ with $x < y$, there is some index $N$ such that $x,y\in\mathcal O_N$ and thus, $\varphi(x) < \varphi(y)$, whence $\varphi$ is increasing on $\mathcal O$. Now let $x\in\mathbf C$ and $y\in\mathcal O$ with $x < y$. If $x = 0$, then we trivially have that $\varphi(x) < \varphi(y)$. Now suppose $x > 0$. Then $\varphi(x) = \sup\{\varphi(t)\mid t\in(0,x)\cap\mathcal O\}$. But since $\varphi(y)\ge\varphi(t)$ for all $t\in\mathcal O\cap(0,x)$, we have that $\varphi(x)\le\varphi(y)$. When $x,y\in\mathbf C$, the conclusion is obvious. Thus $\varphi$ is increasing.
+
+    Next, we shall show that $\varphi$ is continuous. That $\varphi$ is continuous on $\mathcal O$ is easy to see since it is continuous on each $\mathcal O_k$. Let $x_0\in\mathbf C$. Then, for each $\mathcal O_k$, $x$ lies between two open intervals of $\mathcal O_k$. Let $\varepsilon > 0$ and choose $k$ such that $2^{-k} < \varepsilon$. Choose $a_k$ in the interval just before $x$ and $b_k$ in the interval just after $x$. Let $\delta = \min\{|a_k - x|, |b_k - x|\}$. Whenever $|x - y| < \delta$, $|\varphi(x) - \varphi(y)|\le|\varphi(a_k) - \varphi(b_k)| = 2^{-k} < \varepsilon$. This implies continuity of $\varphi$ at $x$.
+
+    Finally, we may conclude that $\varphi$ maps $[0,1]$ to $[0,1]$ using the Intermadiate Value Theorem.
+\end{proof}
+
+\begin{theorem}
+    Let $\varphi: [0,1]\to[0,1]$ be the Cantor-Lebesgue function and define the function $\psi: [0,1]\to[0,1]$ by $\psi(x) = \varphi(x) + x$ for all $x\in [0,1]$. Then $\psi$ is a strictly increasing continuous function that maps $[0,1]$ onto $[0,2]$ and 
+    \begin{enumerate}[label=(\alph*)]
+        \item maps the Cantor set $\mathbf C$ onto a measurable set of positive measure and 
+        \item maps a measurable set, a subsest of $\mathbf C$ onto a nonmeasurable set.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Note that since $\psi$ is a strictly increasing continuous function, it has a continuous inverse, as a result, it is a homeomorphism from $[0,1]$ to $[0,2]$. Then $\psi(\mathbf C)$ is closed and $\psi(\mathcal O)$ is open. These two are disjoint sets whose union is $[0,2]$. Let $\{I_k\}$ be the set of intervals that are removed while constructing the Cantor set. Then they are all disjoint and $\psi(I_k)$ is simply a translation of $I_k$ and is therefore homemomorphic to $I_k$. Consequently, 
+    \begin{equation*}
+        m\left(\psi(\mathcal O)\right) = m\left(\bigcup_{k = 1}^\infty \psi(I_k)\right) = \sum_{k = 1}^\infty m(\psi(I_k)) = \sum_{k = 1}^\infty m(I_k) = m(\mathcal O) = 1
+    \end{equation*}
+    Thus, $m(\psi(\mathbf C)) = 1$, which proves $(a)$.
+
+    Due to \thref{thm:vitali-positive-outer-non-mesaurable-subset}, there is a non-measurable set $V\subseteq\psi(\mathbf C)$. Define $U =\psi^{-1}(V)\subseteq\mathbf C$. Since $U$ has measure $0$, it is measurable and is mapped to a nonmeasurable set $V$, which proves $(b)$.
+\end{proof}
+
+\begin{theorem}
+    Let $f:[a,b]\to\R$ be Lipschitz. Then $f$ maps measurable sets to measurable sets.
+\end{theorem}
+\begin{proof}
+\hfill 
+\begin{itemize}
+    \item \underline{$f$ maps sets of measure $0$ to sets of measure $0$:} Let $E\subseteq[a,b]$ have measure $0$ and $\varepsilon > 0$. Note that it would suffice to show that $m^*(f(E)) = 0$, since that would immediately imply the measurability of $f(E)$. 
+    Let $\{I_k\}$ be a collection of open bounded intervals that cover $E$ such that $\sum_{k = 1}^\infty \ell(I_k) < \varepsilon$. Since $f$ is a continuous function, it maps intervals to intervals. Now, since $f(E)\subseteq\bigcup f(I_k)$. It follows that 
+    \begin{equation*}
+        m^*(f(E))\le\sum_{k = 1}^\infty\ell(f(E_k)) < c\varepsilon
+    \end{equation*}
+    It follows that $m^*(f(E)) = 0$.
+
+    \item \underline{$f$ maps $F_\sigma$ sets to $F_\sigma$ sets:} Let $F$ be an $F_\sigma$ set. Then, there is a countable collection $\{A_n\}$ of closed sets such that $F = \bigcup_{n\in\N} A_n$. Note that each $A_n$ is closed and bounded, therefore, its image is compact (since $f$ is continuous) and hence closed and bounded. As a result, 
+    \begin{equation*}
+        f(F) = \bigcup_{n\in\N} f(A_n)
+    \end{equation*}
+    and is an $F_\sigma$ set.
+
+    \item \underline{Putting it together:} Let $E\subseteq[a,b]$ be measurable. Then, there is an $F_\sigma$ set $F$ that is contained in $E$ such that $m(E\backslash F) = 0$. Now,
+    \begin{equation*}
+        f(E)\backslash f(F)\subseteq \underbrace{f(E\backslash F)}_{\text{has measure $0$}}
+    \end{equation*}
+    and hence, $m(f(E)\backslash f(F)) = 0$ and thus $f(E)$ is measurable.
+\end{itemize}
+\end{proof}
+
+\begin{lemma}
+    Let $f: X\to Y$ be a continuous function between two topological spaces $X$ and $Y$. Then, for every Borel set $B$ in $Y$, $f^{-1}(B)$ is a Borel set in $X$.
+\end{lemma}
+\begin{proof}
+    Define 
+    \begin{equation*}
+        \mathfrak M = \{E\subseteq Y\mid f^{-1}(E)~\text{is Borel}\}
+    \end{equation*}
+    We claim that $\mathfrak M$ is a $\sigma$-algebra. If $E\in\mathfrak M$, then $f^{-1}(Y\backslash E) = X\backslash f^{-1}(E)$, which is Borel and hence, $Y\backslash E\in\mathfrak M$. Similarly, let $\{E_1, E_2,\ldots\}\subseteq\mathfrak M$. We have 
+    \begin{equation*}
+        f^{-1}\left(\bigcup_{n = 1}^\infty E_n\right) = \bigcup_{n = 1}^\infty f^{-1}(E_n)
+    \end{equation*}
+    where the quantity on the right is a Borel set, whence $\bigcup\limits_{n = 1}^\infty E_n\in\mathfrak M$ from which it follows that $\mathfrak M$ is a $\sigma$-algebra.
+
+    Finally, since $\mathcal T_Y\subseteq\mathfrak M$, it must contain all Borel sets and we have the desired conclusion.
+\end{proof}
+
+\begin{lemma}
+    Let $f: I\to\R$ be a strictly increasing function where $I$ is an interval. Then $f$ maps Borel sets to Borel sets.
+\end{lemma}
+\begin{proof}
+    It is not hard to show that $f$ has a continuous inverse from $g:f(I)\to I$. Since $I$ is an interval, so is $f(I)$. Let $B$ be a Borel set contained in $I$. Then $f(B) = g^{-1}(B)$ is Borel due to the previous lemma.
+\end{proof}
+
+\begin{theorem}
+    The Cantor set $\mathbf C$ contains a measurable set that is not Borel.
+\end{theorem}
+\begin{proof}
+    Recall that we have shown that the function $\psi = \varphi + \mathbf{id}$ maps a measurable set $A$ to a non measurable set. But since $\psi$ is a strictly increasing continuous function defined on an interval, it must map Borel sets to Borel sets. Consequently, $A$ is not Borel lest $f(A)$ be measurable.
+\end{proof}
+
+\begin{theorem}
+    The set of all Lebesgue Measurable subsets of $\R$ has cardinality greater than $\R$.
+\end{theorem}
+\begin{proof}
+    Assuming \textsf{CH}, we have shown that $\mathbf C$ has cardinality equal to $\R$. Since $m(\mathbf C) = 0$, every subset of the Cantor set is measurable, consequently, the set of Lebesgue measurable sets contains a set that is in bijection with the power set of $\R$, consequently, it must have cardinality greater than that of $\R$.
+\end{proof}
+
+\begin{theorem}
+    $\Q$ is not a $G_\delta$ set.
+\end{theorem}
+\begin{proof}
+    Suppose $\Q$ were a $G_\delta$ set. Then, there would exist a countable collection of open sets $\{U_k\}_{k\in\N}$ such that $\Q = \bigcap\limits_{k\in\N} U_k$. Let $\Q = \{q_1,q_2,\ldots\}$ be an enumeration for $\Q$ and define $V_k = U_k\backslash\{q_k\}$. Then $\{V_k\}$ is a collection of nonempty open sets such that $\bigcap\limits_{n = k}^\infty V_k = \emptyset$.
+
+    Choose some open, bounded interval $J_1$ with nonzero measure in $V_1$, which is known to exist since it is a nonempty open set. This interval obviously contains a nonempty closed interval $I_1$ with nonzero measure. Since $I_1$ and $J_1$ contain infinitely many rationals, their intersection with $V_2$ is nonempty and contains infinitely many rationals. Choose some open interval with nonzero measure in the set $J_1\cap V_2$ and call this $J_2$ and similar to above construct $I_2$ and continue in this fashion.
+
+    We would obtain a descending sequence of closed and bounded intervals $I_1\supseteq I_2\supseteq\cdots$ such that $I_k\subseteq V_k$. Now, due to Cantor's Intersection Theorem, $\bigcap\limits_{k\in\N} I_k\ne\emptyset$ which is a contradiction.
+\end{proof}
