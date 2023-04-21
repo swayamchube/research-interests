@@ -21,9 +21,9 @@ Obviously, every metrizable space satisfies this axiom, since we may take
 \begin{proof}
     \hfill 
     \begin{enumerate}
-        \item Suppose $x\in\overline{A}$. We shall construct a sequence of points in $A$ converging to $x$. Let $\B = \{B_1,B_2,\ldots\}$ be a countable basis at $X$. Let $a_1\in A\cap B_1$. If there is no open set $U_2$ containing $x$ that is contained in $B_1$, define $a_j = a_1$ for all $j\ge 2$. Otherwise, let $B_j$ be an element of $\B$ that is contained in $U_2$, and choose $a_2\in A\cap B_j$ and repeat. This gives rise to a convergent sequence.
+    \item Let $\mathcal B = \{B_1,B_2,\ldots\}$ be a countable basis at $x$. Define the sequence $\{a_n\}_{n = 1}^\infty$ by picking any point $a_n\in A\cap(B_1\cap\cdots\cap B_n)$. It is not hard to see that this sequence converges to $x$.
 
-        \item \textbf{\textcolor{red}{TODO: Fill this up}} 
+    \item Let $A\subseteq X$. Then, for any $x\in\overline A$, there is a sequence $\{a_n\}_{n = 1}^\infty$ of points in $A$ converging to $x$, consequently, $\{f(a_n)\}_{n = 1}^\infty$ is a sequence of points in $f(A)$ converging to $f(x)$. Therefore, $f(x)\in\overline{f(A)}$, and hence, $f(\overline A)\subseteq\overline{f(A)}$ and $f$ is continuous.
     \end{enumerate}
 \end{proof}
 
@@ -125,6 +125,13 @@ Note that each $U_{\alpha_i}$ contains a point $d_{\alpha_in_i}$ of $D_{\alpha_i
 \end{itemize}
 \end{proof}
 
+\begin{proposition}
+    $\R_\ell$ is Lindel\"of.
+\end{proposition}
+\begin{proof}
+    \textcolor{red}{TODO: Add in later}
+\end{proof}
+
 \section{Separation Axioms}
 
 \begin{definition}[Regular Spaces]
@@ -201,6 +208,13 @@ It is not hard to see that
     These are disjoint open sets contain $A$ and $B$ respectively. This concludes the proof.
 \end{proof}
 
+\begin{corollary}
+    Every regular Lindel\"of space is normal.
+\end{corollary}
+\begin{proof}
+    In the same spirit as the above proof.
+\end{proof}
+
 \begin{theorem}
     Every compact Hausdorff space is normal.
 \end{theorem}
@@ -222,14 +236,29 @@ It is not hard to see that
     Every metrizable space is normal.
 \end{theorem}
 \begin{proof}
-    Let $(X,d)$ be a metric space and $A,B$ be two disjoint closed subsets of $X$. 
+    Let $(X,d)$ be a metric space and $A,B$ be two disjoint closed subsets of $X$. For each $a\in A$, there is $\varepsilon_a$ such that $B(a,\varepsilon_a)\cap B = \emptyset$, similarly, for each $b\in B$, there is $\varepsilon_b > 0$ such that $B(b,\varepsilon_b)\cap A = \emptyset$. Let 
+    \begin{equation*}
+        U = \bigcup_{a\in A}B(a,\varepsilon_a/2)\qquad V = \bigcup_{b\in B}B(b,\varepsilon_b/2)
+    \end{equation*}
+    We contend that $U\cap V = \emptyset$. Suppose not, then there is $a\in A$ and $b\in B$ such that $B(a,\varepsilon_a/2)\cap B(b,\varepsilon_b/2)\ne\emptyset$. Then, $d(a,b) < (\varepsilon_a + \varepsilon_b)/2$. But by definition, we must have $d(a,b)\ge\max\{\varepsilon_a,\varepsilon_b\}$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $p: X\to Y$ be a continuous closed surjection. If $X$ is normal, then so is $Y$.
+\end{theorem}
+\begin{proof}
+    Let $A,B$ be disjoint open sets in $Y$. Then $p^{-1}(A)$ and $p^{-1}(B)$ are disjoint closed sets in $X$, consequently, there are disjoint open sets $U$ and $V$ containing $p^{-1}(A)$ and $p^{-1}(B)$ respectively. 
+
+    Now, for each $a\in A$, there is a neighborhood $W_a$ of $a$ such that $p^{-1}(a)\subseteq W_a\subseteq U$. Similarly, there is a $W_b$ for each $b\in B$. Define $W_A = \bigcup\limits_{a\in A} W_a$ and $W_B = \bigcup\limits_{b\in B} W_b$. 
+
+    Then, $p^{-1}(A)\subseteq p^{-1}(W_A)\subseteq U$ and $p^{-1}(B)\subseteq p^{-1}(W_B)\subseteq V$, whence $W_A\cap W_B = \emptyset$ and the conclusion follows.
 \end{proof}
 
 \section{Urysohn's Lemma}
 
-\begin{definition}
+\begin{lemma}[Urysohn]\thlabel{lem:urysohn}
     Let $X$ be a normal space and $A,B\subseteq X$ be two closed sets. Then there is a continuous function $f:X\to[0,1]$ such that $f(A) = \{0\}$ and $f(B) = \{1\}$.
-\end{definition}
+\end{lemma}
 \begin{proof}
     Let $P$ be the countable set of all rational numbers in $[0,1]$. First, define $U_1 = X\backslash B$, which is an open set containing $A$. Due to the normality of $X$, there is an open set $U_0$ containing $A$ such that $\overline{U}_0\subseteq U_1$.
 
@@ -267,6 +296,34 @@ It is not hard to see that
     All that remains is to show that $f$ is continuous. Let $x\in X$ and $(c,d)\in[0,1]$ be an open interval containing $f(x)$. Choose any two rational numbers $p,q$ such that $c < p < f(x) < q < d$. Let us consider the image of the set $Y = U_q\backslash\overline{U}_p$. For all $y\in Y$, $f(y) > p$, while $f(y) < q$, therefore, $f(y)\in(c,d)$, as a result, $f(Y)\subseteq (c,d)$ and $f$ is continuous. This completes the proof.
 \end{proof}
 
+\begin{lemma}[Jones]\thlabel{lem:jones}
+    Let $X$ be a separable and normal space. Then for any set $D\subseteq X$ that is closed and discrete in $X$, we have $2^{|D|}\le 2^\omega$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+    The Sorgenfrey plane, $\R_\ell^2$ is not normal.
+\end{proposition}
+\begin{proof}[Proof 1]
+    Notice that $\Q\times\Q$ is dense in $\R_\ell^2$, which is therefore separable. Consider 
+    \begin{equation*}
+        L = \{x\times(-x)\mid x\in\R\}\subseteq\R_\ell^2
+    \end{equation*}
+    It is not hard to argue that $L$ is closed in $\R_\ell^2$ and has the discrete topology as a subspace of $\R_\ell^2$. Due to \thref{lem:jones}, we see that $\R_\ell^2$ cannot be normal.
+\end{proof}
+\begin{proof}[Proof 2]
+    Let $D = \Q\times\Q$ and $L$ be as defined in the previous proof. Suppose $\R_\ell^2$ were normal. We shall now define a function $f:\mathcal P(L)\to\mathcal P(D)$. Let $A\subseteq L$. Then $A$ is closed in $\R_\ell^2$ since $L$ is discrete and closed in $\R_\ell^2$. If $A = \emptyset$, define $f(A) = \emptyset$. If $A = L$, then define $f(A) = D$. If $\emptyset\subsetneq A\subsetneq L$, then there are disjoint open sets $U_A$ and $V_A$ containing $A$ and $L\backslash A$ respectively. Define $f(A) = D\cap U_A$. 
+
+    We contend that $f$ is an injective function. First, note that for any $\emptyset\subsetneq A\subsetneq L$, $\emptyset\subsetneq f(A)\subsetneq L$ (this is not hard to show). Now, suppose $A,B\subseteq L$ such that $f(A) = f(B)$. If $A = \emptyset$ or $A = L$ then $B = A$. Therefore, we may suppose that $\emptyset\subsetneq A,B\subsetneq L$. Without loss of generality, suppose $A\backslash B\ne\emptyset$. Then, $U_A\cap V_B\ne\emptyset$, consequently, $f(A)\backslash f(B)\ne\emptyset$, which establishes injectivity.
+
+    The contradiction is immediate from a cardinality argument.
+\end{proof}
+
+\begin{corollary}
+    The product of two normal spaces need not be normal. Further, $\R_\ell^2$ is regular but not normal.
+\end{corollary}
+
 \begin{definition}
     If $A$ and $B$ are two subsets of a topological space $X$, and if there is a continuous function $f:X\to[0,1]$ such that $f(A) = \{0\}$ and $f(B) = \{1\}$, we say that $A$ and $B$ \textit{can be separated by a continuous function}.
 \end{definition}
@@ -279,15 +336,27 @@ It is not hard to see that
     A subspace of a completely regular space is regular. A product of completely regular spaces is completely regular.
 \end{theorem}
 \begin{proof}
-    \textbf{\textcolor{red}{TODO: Add in later}}
+    Let $X$ be completely regular and $Y\subseteq X$. Obviously, one point sets are closed in $Y$. Let $x_0\in Y$ and $A$ be a closed set in $Y$ that is disjoint from it. There is a closed set $F$ in $X$ such that $A = F\cap Y$. Then, there is a continuous function $f: X\to[0,1]$ such that $f(x_0) = 1$ and $f(F) = \{0\}$. Then, the restriction of $f$ to $Y$ is the desired continuous function separating $x_0$ and $A$.
+
+    Suppose $\{X_\alpha\}_{\alpha\in J}$ is a collection of completely regular spaces and let $X = \prod_{\alpha\in J} X_\alpha$. Let $\mathbf a = (a_\alpha)_{\alpha\in J}$ and $A$ a closed set in $X$ not containing $\mathbf a$. Then, there is a basis element $\prod_{\alpha\in J} U_\alpha$ containing $\mathbf a$ that is disjoint from $A$. Then, there is a finite set of indices $\{\alpha_1,\ldots,\alpha_n\}$ such that $U_{\alpha_i}\ne X_{\alpha_i}$ for $1\le i\le n$. Since each $X_{\alpha_i}$ is completely regular, there is a continuous function $f_{\alpha_i}: X_{\alpha_i}\to[0,1]$ such that $f(a_{\alpha_i}) = 1$ and $f(X_{\alpha_i}\backslash U_{\alpha_i}) = \{0\}$. Define the continuous function $\Phi: X\to[0,1]$ by 
+    \begin{equation*}
+        f(\mathbf x) = f_{\alpha_1}(\pi_{\alpha_1}(\mathbf x))\cdots f_{\alpha_n}(\pi_{\alpha_n}(\mathbf x))
+    \end{equation*}
+    It is not hard to see that this function separates $\mathbf a$ and $A$.
 \end{proof}
 \begin{corollary}
     A locally compact Hausdorff space is completely regular.
 \end{corollary}
 
 \begin{proposition}
-    Let $X$ be locally compact Hausdorff, $K$ a compact subset and $A$ a disjoint closed subset. Then, there is a continuous function $f: X\to[0,1]$ such that $f(K) = 0$ and $f(A) = 1$.
+    Let $X$ be completely regular and $K,A$ be a disjoint compact-closed pair in $X$. Then, $K$ and $A$ can be separated by a continuous function.
 \end{proposition}
+\begin{proof}
+    For each $x\in K$, there is a continuous function $f_x: X\to[0,1]$ such that $f(x) = 1$ and $f(A) = \{0\}$. Let $U_x := f_x^{-1}((1/2,1])$. Then $\{U_x\}_{x\in K}$ forms an open cover for $K$, therefore has a finite subcover, $\{U_{x_1},\ldots,U_{x_n}\}$. Define $g = \max\{f_{x_1},\ldots,f_{x_n}\}$. Then, $g(x) > 1/2$ for all $x\in K$ and $g(A) = \{0\}$. Finally, define $h = 2\min\{g, 1/2\}$. Then, $h(K) = \{1\}$ and $h(A) = \{0\}$.
+\end{proof}
+\begin{corollary}
+    Let $X$ be locally compact Hausdorff, $K$ a compact subset and $A$ a disjoint closed subset. Then, there is a continuous function separating $K$ and $A$.
+\end{corollary}
 
 \begin{theorem}
     Let $X$ be a locally compact Hausdorff space and $K\subseteq X$ be compact. Let $V$ be an open set containing $K$. Then there is a continuous function $f: X\to[0,1]$ with compact support such that $f(K) = 1$ and $\operatorname{supp}(f)\subseteq V$.
@@ -319,7 +388,35 @@ It is not hard to see that
     
 \end{theorem}
 
+\begin{theorem}[Imbedding Theorem]\thlabel{thm:imbedding-theorem}
+    Let $X$ be Fr\'echet. Suppose $\{f_\alpha\}_{\alpha\in J}$ is an indexed family of continuous functions $f_\alpha: X\to\R$ satisfying the requirement that for each point $x_0\in X$ and each neighborhood $U$ of $x_0$, there is an index $\alpha$ such that $f_\alpha$ is positive at $x_0$ and vanishes outside $U$. Then the function $F: X\to\R^J$ defined by 
+    \begin{equation*}
+        F(x) = (f_\alpha(x))_{\alpha\in J}
+    \end{equation*}
+    is an imbedding of $X$ in $\R^J$. In particular, if $f_\alpha$ maps $X$ into $[0,1]$ for each $\alpha$, then $F$ imbeds $X$ in $[0,1]^J$.
+\end{theorem}
+\begin{proof}
+    That $F$ is a continuous function is obvious. Let $Z = F(X)$. Let $U$ be open in $X$. We shall show that $F(U)$ is open in $Z$. Choose some $z_0\in F(U)$, then, there is some $x_0\in U$ such that $F(x_0) = z_0$. There is some index $\beta$ such that $f_\beta(x_0) > 0$ and $f_\beta$ vanishes outside $U$. Let $W = \pi_\beta^{-1}((0,\infty))\cap Z$. We contend that $z_0\in W\subseteq F(U)$. That $z_0\in W$ is obvious. Now, let $z\in W$, then there is some $x\in X$ such that $F(x) = z$. Since $\pi_\beta(z) > 0$, $f_\beta(x) > 0$ and thus $x\in U$, consequently, $F(x)\in F(U)$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    A space $X$ is completely regular if and only if it is homeomorphic to a subspace of $[0,1]^J$ for some indexing set $J$.
+\end{corollary}
+\begin{proof}
+    Suppose $X$ were completely regular. For each pair $(x,U)$ of a point and an open set $U$ containing $x$, there is a continuous function $f: X\to[0,1]$ such that $f(x) = 1$ and $f(X\backslash U) = \{0\}$. Let $\{f_\alpha\}_{\alpha\in J}$ be the collection of all such continuous functions. Then, due to \thref{thm:imbedding-theorem}, there is an imbedding $F: X\to[0,1]^J$. The converse is obvious.
+\end{proof}
+
+\begin{proposition}
+    A subspace of a normal space need not be normal.
+\end{proposition}
+The following proof uses the forthcoming Tychonoff Theorem.
+\begin{proof}
+    We have seen that $\R_\ell^2$ is not normal. But since $\R_\ell$ is normal and therefore, completely regular, so is $\R_\ell^2$. Consequently, $\R_\ell^2$ is homeomorphic to a subspace of $[0,1]^J$ for some indexing set $J$. Due to the Tychonoff Theorem, $[0,1]^J$ is compact Hausdorff, and thus, normal. This completes the proof.
+\end{proof}
+
 \section{The Urysohn Metrization Theorem}
+
+
 \begin{theorem}[Urysohn Metrization Theorem]
     Every regular space $X$ with a countable basis is metrizable.
 \end{theorem}
@@ -329,13 +426,7 @@ It is not hard to see that
 
     Let $\B = \{B_n\}$ be a countable basis for $X$. Then, for all pairs $(m, n)$ such that $\overline{B}_m\subseteq B_n$, define the function $g_{m,n}:X\to[0,1]$, using Urysohn's Lemma, such that $g_{m,n}(\overline{B}_m) = \{1\}$ and $g_{m,n}(B_n) = \{0\}$. Obviously, the set $\{g_{m,n}\mid m,n\in\N\}$ is countable and it is not hard to see that this is our desired sequence of functions $\{f_n\}$.
 
-    Define now the map $F:X\to\R^\omega$ given by
-    \begin{equation*}
-        F(x) = (f_1(x),f_2(x),\ldots)
-    \end{equation*}
-    We shall now show that $F$ is an imbedding. First, we show that $F$ is injective. Indeed, if $x\ne y$, then we know that there is an open set containing $x$ but not $y$, therefore, there is a function $f_n$ such that $f(x) > 0$ while $f(y) = 0$. As a result, $F(x)\ne F(y)$.
-
-    Since each of the functions $f_i$ are continuous, so is $F$. We need only show now that $F$ maps open sets in $X$ to open sets in $\R^\omega$. Let $Z = F(X)$ and $U$ be an open set in $X$. It suffices to show that for all $x_0\in U$, there is an open set $V$ in $Z$ such that $f(x_0)\in V\subseteq F(U)$. There is $n\in\mathbb{N}$ such that $f_n(x_0) > 0$ and $f_n$ vanishes outside $U$. Let $\pi_n: \R^\omega\to\R$ be the natural projection map. Let $V = \pi_n^{-1}((0,\infty))\cap Z$. Obviously, note that $f(x_0)\in V$. Further, for all $z\in V$, note that there is $x\in X$ such that $z = F(x)$, but since $\pi_n(F(x)) > 0$, we must have that $x\in U$, therefore, $V\subseteq F(U)$. This shows that $F(U)$ is open in $\R^\omega$ and thus, $F$ is an imbedding. This completes the proof.
+    From \thref{thm:imbedding-theorem} and the sequence of functions constructed above, we see that $X$ can be imbedded into $\R^\omega$, and hence, is metrizable.
 \end{proof}
 
 \section{Tietze Extension Theorem}

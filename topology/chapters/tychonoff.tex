@@ -149,17 +149,6 @@ We are now ready to prove the Tychonoff Theorem.
 \end{lemma}
 $Y$ is called the \textbf{compactification induced} by the imbedding $h$.
 
-\begin{theorem}\thlabel{thm:imbedding-theorem}
-    Let $X$ be Fr\'echet. Suppose $\{f_\alpha\}_{\alpha\in J}$ is an indexed family of continuous functions $f_\alpha: X\to\R$ satisfying the requirement that for each point $x_0\in X$ and each neighborhood $U$ of $x_0$, there is an index $\alpha$ such that $f_\alpha$ is positive at $x_0$ and vanishes outside $U$. Then the function $F: X\to\R^J$ defined by 
-    \begin{equation*}
-        F(x) = (f_\alpha(x))_{\alpha\in J}
-    \end{equation*}
-    is an imbedding of $X$ in $\R^J$. In particular, if $f_\alpha$ maps $X$ into $[0,1]$ for each $\alpha$, then $F$ imbeds $X$ in $[0,1]^J$.
-\end{theorem}
-\begin{proof}
-    That $F$ is a continuous function is obvious. Let $Z = F(X)$. Let $U$ be open in $X$. We shall show that $F(U)$ is open in $Z$. Choose some $z_0\in F(U)$, then, there is some $x_0\in U$ such that $F(x_0) = z_0$. There is some index $\beta$ such that $f_\beta(x_0) > 0$ and $f_\beta$ vanishes outside $U$. Let $W = \pi_\beta^{-1}((0,\infty))\cap Z$. We contend that $z_0\in W\subseteq F(U)$. That $z_0\in W$ is obvious. Now, let $z\in W$, then there is some $x\in X$ such that $F(x) = z$. Since $\pi_\beta(z) > 0$, $f_\beta(x) > 0$ and thus $x\in U$, consequently, $F(x)\in F(U)$. This completes the proof.
-\end{proof}
-
     
 \begin{theorem}\thlabel{thm:extension-sc-r}
     Let $X$ be completely regular. Then there is a compactification $Y$ of $X$ having the property that every bounded continuous map $f: X\to\R$ extends uniquely to a continuous map of $Y$ into $\R$.
