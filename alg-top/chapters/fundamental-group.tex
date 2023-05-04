@@ -1,0 +1,262 @@
+\section{Fundamental Groupoid and Group}
+
+\begin{definition}[Homotopy]
+    Let $X$ and $Y$ be topological spaces. A homotopy is a continuous function $H: X\times I\to Y$. A \textit{homotopy} between two functions $f,g: X\to Y$ is a continuous map $H: X\times I\to Y$ such that $H(x,0) = f(x)$ and $H(x, 1) = g(x)$.
+\end{definition}
+
+\begin{definition}[Homotopy of Paths]
+    Let $X$ be a topological space and $f,g: I\to X$ be paths. Then, $f$ and $g$ are said to be \textit{path homotopic} if there is a continuous function $H: I\times I\to X$ such that $H(s,0) = f(s)$ and $H(s,1) = g(s)$ for all $s\in I$. We denote this by $f\psimeq g$.
+\end{definition}
+
+\begin{proposition}
+    The relation $\simeq$ on the set of all paths in $X$ is an equivalence relation.
+\end{proposition}
+
+\begin{proposition}
+    Let $f: I\to X$ be a path and $\varphi: I\to I$ be a continuous function such that $\varphi(0) = 0$ and $\varphi(1) = 1$. Then, $f\psimeq f\circ\varphi$.
+\end{proposition}
+\begin{proof}
+    Define the function $\Phi: I\times I\to X$ by 
+    \begin{equation*}
+        \Phi(s,t) = f(t\varphi(s) + (1 - t)s)
+    \end{equation*}
+    It is not hard to see that $\Phi$ is a path homotopy between $f$ and $f\circ\varphi$.
+\end{proof}
+
+Consider the set of all equivalence classes of paths in $X$ under the equivalence relation $\psimeq$. Define the operation $*$ on pairs of equivalence classes $[f]$ and $[g]$ where $f(1) = g(0)$ by 
+\begin{equation*}
+    [f]*[g] = [f*g]
+\end{equation*}
+where 
+\begin{equation*}
+    (f*g)(t) =
+    \begin{cases}
+        f(2t) & 0\le t\le 1/2\\
+        g(2t - 1) & 1/2 < t\le 1
+    \end{cases}
+\end{equation*}
+
+\begin{proposition}
+    The operation $*$ is associative. That is, 
+    \begin{equation*}
+        [f]*([g]*[h]) = ([f]*[g])*h
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Note that $[f]*([g]*[h])$ is the equivalence class containing the path: 
+    \begin{equation*}
+        \alpha(t) = 
+        \begin{cases}
+            f(2t) & 0\le t\le 1/2\\
+            g(4t - 2) & 1/2 < t\le 3/4\\
+            h(4t - 3) & 3/4 < t\le 1
+        \end{cases}
+    \end{equation*}
+    Consider the piecewise linear function $\varphi: [0,1]\to[0,1]$ that maps $[0,1/2]$ to $[0,1/4]$, $[1/2,3/4]$ to $[1/4,1/2]$ and $[1/2,1]$ to $[3/4,1]$, then through $\alpha\circ\varphi$, the conclusion follows.
+\end{proof}
+
+\begin{definition}[Fundamental Group]
+    Let $\pi_1(X,x_0)$ be the set of equivalence classes of paths $\alpha: I\to X$ with $\alpha(0) = \alpha(1) = x_0$. It is not hard to see from the discussion above that $\pi_1(X,x_0)$ has a group structure. This is known as the \textit{fundamental group}.
+\end{definition}
+
+Let $\catTopp$ denote the category of pointed topological spaces, that is, the category wherein objects are pairs $(X,x_0)$ where $x_0\in X$ and a morphism $f:(X,x_0)\to (Y,y_0)$ is a continuous map $f: X\to Y$ with $f(x_0) = y_0$.
+
+\begin{proposition}
+    Let $f: (X,x_0)\to (Y,y_0)$ be a morphism in $\catTopp$. Then, the map $f_*:\pi_1(X,x_0)\to\pi_1(Y,y_0)$ given by $[\alpha]\mapsto[f\circ\alpha]$ is a homomorphism of groups. Further, if 
+    \begin{equation*}
+        (X,x_0)\stackrel{f}{\longrightarrow}(Y,y_0)\stackrel{g}{\longrightarrow}(Z,z_0)
+    \end{equation*}
+    then $(g\circ f)_* = g_*\circ f_*$.
+\end{proposition}
+\begin{proof}
+    If $H$ is a path homotopy between $\alpha_1$ and $\alpha_2$ in $X$, then $f\circ H$ is a homotopy between $f\circ\alpha_1$ and $f\circ\alpha_2$ in $Y$. Thus, the map $f_*$ is well defined. Next, suppose $[\alpha],[\beta]\in\pi_1(X,x_0)$, then, it is not hard to see that $(f\circ\alpha)*(f\circ\beta) = f\circ(\alpha * \beta)$, consequently, $f_*$ is a homomorphism of groups. The final assertion is obvious from the definition.
+\end{proof}
+
+As a result, we see that $\pi_1$ is a (covariant) functor from $\catTopp$ to $\catGrp$.
+
+\begin{theorem}
+    Let $X$ be path connected and $x_0,x_1\in X$. Let $\alpha: I\to X$ be a path from $x_0$ to $x_1$. Then, the map $\hat\alpha:\pi_1(X,x_0)\to\pi_1(X,x_1)$ given by $[f]\mapsto[\overline\alpha*f*\alpha]$ is a group isomorphism.
+\end{theorem}
+\begin{proof}
+    It is easy to see that $\hat\alpha$ is a homomorphism. The surjectivity and injectivity of this map are obvious.
+\end{proof}
+
+\begin{proposition}
+    Let $X$ be path connected and $h: X\to Y$ be a continuous map. If $x_0,x_1\in X$ with $\alpha: I\to X$ a path between them and $\beta = h\circ\alpha$, then we have the following commutative diagram: 
+    \begin{equation*}
+    \xymatrix {
+        \pi_1(X,x_0)\ar[r]^-{(h_{x_0})_*}\ar[d]_{\hat\alpha} & \pi_1(Y,y_0)\ar[d]^{\hat\beta}\\
+        \pi_1(X,x_1)\ar[r]^-{(h_{x_1})_*} & \pi_1(Y,y_1)
+    }
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $[f]\in\pi_1(X,x_0)$. Then, 
+    \begin{equation*}
+        \hat\beta\circ(h_{x_0})_*([f]) = \hat\beta([h\circ f]) = [\overline\beta * h\circ f * \beta]
+    \end{equation*}
+    and 
+    \begin{equation*}
+        (h_{x_1})_*\circ\hat\alpha([f]) = (h_{x_1})_*([\overline\alpha * f * \alpha]) = [\overline\beta * h\circ f * \beta]
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\section{Computing Fundamental Groups}
+
+\begin{theorem}
+    For $x_0\in X$ and $y_0\in Y$, $\pi_1(X\times Y,  x_0\times y_0)\cong\pi_1(X,x_0)\times\pi_1(Y,y_0)$.
+\end{theorem}
+\begin{proof}
+    Let $p: X\times Y\to X$ and $q: X\times Y\to Y$ be the natural projection maps and $p_*,q_*$ the induced homomorphisms. Let $\Phi:\pi_1(X\times Y,x_0\times y_0)\to\pi_1(X,x_0)\times\pi_1(Y,y_0)$ be the homomorphism given by $\Phi([f]) = (p_*([f]), q_*([f]))$. We shall show that $\Phi$ is both injective and surjective.
+
+    Since $p$ and $q$ are covering maps, both $p_*$ and $q_*$ are injective, consequently, so is $\Phi$. Let $([f],[g])\in\pi_1(X,x_0)\times\pi_1(Y,y_0)$. Consider the function $h: I\to X\times Y$, $h(t) = f(t)\times g(t)$. It is not hard to see that $\Phi([h]) = ([f],[g])$.
+\end{proof}
+
+\begin{corollary}
+    $\pi_1(S^1\times S^1)\cong\Z\times\Z$. Thus, the fundamental group of a torus is isomorphic to $\Z\times\Z$.
+\end{corollary}
+
+
+\section{Retracts and Deformation Retracts}
+
+\begin{definition}[Basepoint Preserving Homotopy]
+    A homotopy $H: (X,x_0)\times I\to(Y,y_0)$ is said to be basepoint preserving if $H(x_0,t) = y_0$ for all $t\in I$.
+\end{definition}
+
+\begin{proposition}
+    Let $H: (X,x_0)\times I\to(Y,y_0)$ be a basepoint preserving homotopy between $\phi: (X,x_0)\to (Y,y_0)$ and $\psi: (X,x_0)\to (Y,y_0)$. Then $\phi_* = \psi_*$.
+\end{proposition}
+\begin{proof}
+    Choose some $[f]\in\pi_1(X,x_0)$. We would like to show that $\phi\circ f$ and $\psi\circ f$ are path homotopic. It is not hard to see that $H\circ f$ is the required homotopy.
+\end{proof}
+
+\begin{definition}[Retract]
+    If $A\subseteq X$, then a retraction of $X$ onto $A$ is a continuous map $r: X\to A$ such that $r\mid_A$ is the identity map of $A$. If such a map $r$ exists then $A$ is a \textit{retract} of $X$.
+\end{definition}
+
+\begin{definition}[Deformation Retract]
+    If $A\subseteq X$, then $A$ is said to be a \textit{deformation retract} of $X$ if there is a map $H: X\times I\to X$ such that $H(\cdot,0) = \mathbf{id}_X$ and $H(x,1)\in A$ for all $x\in X$. Moreover, the restriction $H\mid_{A\times\{1\}} = \mathbf{id}_A$.
+
+    A deformation retract is said to be \textit{strong} if $H(a,t) = a$ for all $a\in A$ and $t\in I$.
+\end{definition}
+
+It is evident, from the definition that if $A$ is a deformation retract of $X$, then it is a retract of $X$.
+
+\begin{theorem}
+    Let $i: A\to X$ be the inclusion map and $i_*:\pi_1(A,a_0)\to\pi_1(X,a_0)$ be the induced homomorphism for some $a_0\in A\subseteq X$. 
+    \begin{enumerate}[label=(\alph*)]
+    \item If $A$ is a retract of $X$, then $i_*$ is a monomorphism 
+    \item If $A$ is a deformation retract of $X$, then $i_*$ is an isomorphism 
+    \end{enumerate}
+    In both the above cases, the basepoint for $X$ is chosen inside $A$.
+\end{theorem}
+\begin{proof}
+\hfill 
+\begin{enumerate}[label=(\alph*)]
+\item Let $r: X\to A$ be the retract. Then $r\circ i = \mathbf{id}_A$. Then $r_*\circ i_* = \mathbf{id}_*$, therefore $i_*$ is injective.
+
+\item Let $H: X\times I\to X$ be the deformation retract and $r: X\to A$ be $H|_{X\times\{1\}}$. Obviously, $r\circ i = \mathbf{id}_A$, consequently, $i_*$ is injective. Let $[f]\in\pi_1(X,a_0)$. Then, $\Phi:I\times I\to X$ given by $\Phi(s,t) = H(f(s),t)$ is a homotopy between $f$ and a loop in $A$. Hence, $i_*$ is surjective and thus, an isomorphism.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Homotopy Equivalence]
+    A continuous map $\varphi: X\to Y$ is said to be a \textit{homotopy equivalence} if there is a map $\psi: Y\to X$ such that $\varphi\circ \psi\simeq\mathbf{id}_Y$ and $\psi\circ \varphi\simeq\mathbf{id}_X$. In this case, the spaces $X$ and $Y$ are said to be \textit{homotopy equivalent} or said to have the same \textit{homotopy type}.
+\end{definition}
+
+\begin{theorem}
+    Let $\varphi: X\to Y$ be a homotopy equivalence. Then, for any $x_0\in X$, the induced homomorphism $\varphi_*:\pi_1(X,x_0)\to(Y,\varphi(x_0))$ is an isomorphism.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\section{Seifert-van Kampen's Theorem}
+
+\begin{theorem}[Siefert-van Kampen]
+    Let $X = U\cup V$ where $U$ and $V$ are open in $X$. Further, suppose $U$, $V$ and $U\cap V$ are nonempty and path connected. Let $H$ be a group, $x_0\in U\cap V$ and 
+    \begin{equation*}
+        \phi_1:\pi_1(U,x_0)\to H\qquad\phi_2:\pi_1(V, x_0)\to H
+    \end{equation*}
+    be homomorphisms. Finally, let $i_1,i_2,j_1,j_2$ be the homomorphisms of fundamental groups induced by inclusion maps. Then, there is a unique map $\Phi:\pi_1(X,x_0)\to H$ such that the following diagram commutes:
+    \begin{equation*}
+        \xymatrix {
+            & \pi_1(U,x_0)\ar[d]^{j_1}\ar[rd]^{\phi_1}\\
+            \pi_1(U\cap V, x_0)\ar[ru]^{i_1}\ar[rd]_{i_2} & \pi_1(X,x_0)\ar@{.>}[r]^-{\Phi} & H\\
+            & \pi_1(V,x_0)\ar[ru]_{\phi_2}\ar[u]_{j_2}
+        }
+    \end{equation*}
+\end{theorem}
+
+Notice how the diagram resembles that of a pushout in a general category and hence, has the universal property and hence, the object, if it exists is unique up to a unique isomorphism. In the special case that $U\cap V$ is simply connected, that is, has a trivial fundamental group, the commutative diagram reduces to that of a coproduct. And it is well known that the coproduct in the category of groups is the free product.
+
+\begin{proof}
+Let $\mathscr L(U,x_0), \mathscr L(V,x_0), \mathscr L(U\cap V, x_0)$ denote the set of loops in $U$, $V$ and $U\cap V$. The path homotopy class of a path $f$ in $X$, $U$, $V$ and $U\cap V$ is denoted by $[f]$, $[f]_U$, $[f]_V$ and $[f]_{U\cap V}$ respectively. The proof proceeds in multiple steps. The main idea is to first define a set map $\rho$ on the set of loops contained completely in either $U$ or $V$, then extend it to a set map $\sigma$ on the set of paths contained completely in either $U$ or $V$ and finally extend it to a set map $\tau$ on the set of all paths in $X$.
+
+Once the map $\tau$ is defined, we shall show that $\tau(f) = \tau(g)$ whenever $f\psimeq g$ and therefore, $\tau$ would descend to a group homomorphism from $\pi_1(X,x_0)$ to $H$.
+
+\begin{description}
+\item[Step 1:] Defining the set map $\rho:\mathscr L(U,x_0)\cup\mathscr L(V,x_0)\to H$.
+
+This has quite a natural definition: 
+\begin{equation*}
+    \rho(f) = 
+    \begin{cases}
+        \phi_1([f]_U) & \text{$f$ is contained completely in $U$}\\
+        \phi_2([f]_V) & \text{$f$ is contained completely in $V$}
+    \end{cases}
+\end{equation*}
+For a loop contained in $U\cap V$, the map $\rho$ is well defined due to the commutativity of the diagram. It is not hard to see that if $f,g\in\mathscr L(U, x_0)$, then $\rho(f * g) = \rho(f)\rho(g)$.
+
+\item[Step 2:] Extend the map $\rho$ to a map $\sigma:\mathscr P(U)\cup\mathscr P(V)\to H$.
+
+For each $x\in X$, fix a path $\alpha_x$ from $x_0$ to $x$ such that whenever $x$ lies in $U$, $V$ or $U\cap V$, $\alpha_x$ lies completely in $U$, $V$ or $U\cap V$ respectively.
+
+Let $f$ be a path from $x_1$ to $x_2$ that lies completely in $U$ or completely in $V$. Define 
+\begin{equation*}
+    \sigma(f) = \rho(\alpha_{x_1} * f * \alpha_{x_2}^{-1})
+\end{equation*}
+
+Now, let $f$ and $g$ be paths completely contained in $U$. If $f\psimeq g$ in $U$, then $\alpha_{x_1} * f * \alpha_{x_2}^{-1}\psimeq\alpha_{x_1} * g * \alpha_{x_2}^{-1}$ in $U$ and from the definition of $\rho$, we see that 
+\begin{equation*}
+    \sigma(f) = \rho(\alpha_{x_1} * f * \alpha_{x_2}^{-1}) = \rho(\alpha_{x_1} * g * \alpha_{x_2}^{-1}) = \sigma(g)
+\end{equation*}
+
+Next, if $f$ is a path from $x_1$ to $x_2$ and $g$ is a path from $x_2$ to $x_3$ (both contained in $U$), then 
+\begin{align*}
+    \sigma(f * g) &= \rho(\alpha_{x_1} * f * g * \alpha_{x_3}^{-1})\\
+    &= \rho(\alpha_{x_1} * f * \alpha_{x_2}^{-1} * \alpha_{x_2} * g * \alpha_{x_3}^{-1})\\ 
+    &= \rho(\alpha_{x_1} * f * \alpha_{x_2}^{-1})\rho(\alpha_{x_2} * g * \alpha_{x_3}^{-1}) = \sigma(f)\sigma(g)
+\end{align*}
+
+\item[Step 3:] Extend the map $\sigma$ to a map $\tau:\mathscr P(X)\to H$
+
+Let $f: I\to X$ be a path. It is not hard to argue, using Lebesgue's Number Lemma, that there is a mesh $\delta$ such that for every partition $0 = s_1 < s_2 < \cdots < s_{n - 1} < s_n = 1$ of $[0,1]$ with mesh less than $\delta$, $f([s_{i}, s_{i + 1}])$ is completely contained in either $U$ or $V$ for $0\le i\le n - 1$.
+
+Denote by $f_i$, the restriction of $f$ to $[s_i, s_{i + 1}]$. Define 
+\begin{equation*}
+    \tau(f, P) = \sigma(f_0)\cdots\sigma(f_{n - 1})
+\end{equation*}
+
+We contend that the map $\tau(f,P)$ is independent of the partition chosen, so long as its mesh is less than $\delta$. To do so, we first show that refining a partition with mesh less than $\delta$ does not change the image under $\tau$, for which, it suffices to show that adding a single point to the partition does not change the image. Indeed, let $c\in (s_i, s_{i + 1})$ be added to the partition. But since $f([s_i, c])$ and $f([c,s_{i + 1}])$ lie completely either in $U$ or in $V$, we have that $\sigma(f|_{[s_i, c]})\sigma(f|_{[c,s_{i + 1}]}) = \sigma(f|_{[s_i, s_{i + 1}]})$ whence the conclusion follows.
+
+Now, let $P_1$ and $P_2$ be two partitions of $[0,1]$ with mesh less than $\delta$. Then $P_1\cup P_2$ is a partition that refines both $P_1$ and $P_2$, consequently, 
+\begin{equation*}
+    \tau(f, P_1) = \tau(f, P_1\cup P_2) = \tau(f, P_2)
+\end{equation*}
+which establishes our claim.
+
+\item[Step 4:] If $f\psimeq g$ in $X$, then $\tau(f) = \tau(g)$.
+
+Let $F: I\times I\to X$ be a path homotopy between $f$ and $g$. Using the Lebesgue Number Lemma, there are partitions $0 = s_0 < s_1 < \cdots < s_{n - 1} < s_n = 1$ and $0 = t_0 < t_1 < \cdots < t_{m - 1} < t_m = 1$ such that $f([s_i,s_{i + 1}]\times[t_i,t_{i + 1}])$ is completely contained in either $U$ or $V$.
+
+\item[Step 5:] $\tau(f * g) = \tau(f)\tau(g)$
+
+Let $P$ be a partition of $f * g$ such that $(f*g)([s_i,s_{i + 1}])$ is completely contained in either $U$ or $V$. Define $P^* = P\cup\{1/2\}$. It is not hard to see, using $P^*$ that $\tau$ is multiplicative.
+
+\item[Step 6:] Constructing the homomorphism $\Phi$.
+
+Restrict the map $\tau$ to $\tau:\mathscr L(X,x_0)\to H$. From \textbf{Step 4}, it follows that there is a map $\Phi:\pi_1(X,x_0)\to H$ and from \textbf{Step 5}, we get that $\Phi$ is a homomorphism.
+\end{description}
+
+The above argument establishes the existence of a group homomorphism $\Phi:\pi_1(X,x_0)\to H$ making the diagram commute. We must now show that the map $\Phi$ is unique. But this follows from the fact that the generators of $\Phi$ are precisely the images of the generators of $\pi_1(U,x_0)$ and $\pi_1(V,x_0)$ under the homomorphisms $j_1$ and $j_2$ respectively.
+\end{proof}

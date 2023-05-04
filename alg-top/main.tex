@@ -1,0 +1,27 @@
+\documentclass[oneside]{report}
+\usepackage{../swayam}
+\usepackage{xspace}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Algebraic Topology}
+\lhead{Swayam Chube}
+\cfoot{\thepage}
+
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\nice}{\textit{unfathomably based}\xspace}
+
+\title{Algebraic Topology}
+\author{Swayam Chube}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{The Fundamental Group}
+\input{chapters/fundamental-group.tex}
+
+\chapter{Covering Spaces}
+\input{chapters/covering-spaces.tex}
+\end{document}

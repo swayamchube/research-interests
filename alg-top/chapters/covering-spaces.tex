@@ -1,0 +1,17 @@
+\begin{definition}[Covering Space]
+    A covering space of a space $X$ is a space $\widetilde X$ together with a map $p:\widetilde X\to X$ satisfying the condition that there is an open cover $\{U_\alpha\}$ of $X$ such that for each $\alpha\in J$, $p^{-1}(U_\alpha)$ is a disjoint union of open sets in $\widetilde X$, each of which is mapped homeomorphically by $p$ to $U_\alpha$.
+\end{definition}
+
+\section{Lifting Properties}
+
+\section{The Universal Cover}
+
+\begin{definition}[Semilocally Simply-Connected]
+    A topological space $X$ is said to be \textit{semilocally simply-connected} if each point $x\in X$ has a neighborhood $U$ such that the inclusion induced homomorphism $i_*:\pi(U, x)\to\pi(X,x)$ is trivial.
+\end{definition}
+
+Henceforth, a topological space is said to be \nice if it is path-connected, locally path-connected and semilocally simply-connected.
+
+\begin{theorem}\thlabel{thm:universal-cover-exists}
+    If $X$ is \nice, then there is a simply connected space $\widetilde X$ and a covering map $p:\widetilde X\to X$.
+\end{theorem}
