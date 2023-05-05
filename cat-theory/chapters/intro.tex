@@ -1,0 +1,94 @@
+\section{Preliminary Definitions}
+
+\begin{definition}[Category]
+    A category $\A$ consists of 
+    \begin{enumerate}
+        \item a collection $\ob(\A)$ of objects 
+        \item for each $A,B\in\ob(\A)$ a collection $\A(A,B)$ of morphisms from $A$ to $B$ 
+        \item for each $A,B,C\in\ob(\A)$, a composition function 
+        \begin{equation*}
+            \circ: \A(B,C)\times\A(A,B)\to\A(A,C)
+        \end{equation*}
+        mapping $(g,f)\mapsto g\circ f$.
+        \item for each $A\in\ob(\A)$, an element $\id_A$ of $\A(A,A)$ called the identity on $A$.
+    \end{enumerate}
+
+    \noindent satisfying the following: 
+    \begin{description}
+        \item[associativity:] for each $f\in\A(A,B)$, $g\in\A(B,C)$ and $h\in\A(C,D)$, we have $(h\circ g)\circ f = h\circ (g\circ f)$
+        \item[identity:] for each $f\in\A(A,B)$, we have $f\circ\id_A = f = \id_B\circ f$
+    \end{description}
+\end{definition}
+
+$\catSet$ is the category of sets with morphisms as set maps.
+
+
+\begin{definition}[Functor]
+    Let $\A$ and $\B$ be categories. A functor $F:\A\to\B$ consists of 
+    \begin{itemize}
+        \item a function $\ob(\A)\to\ob(B)$ written as $A\mapsto F(A)$
+        \item for each $A,A'\in\A$, a function $\A(A,A')\to\B(F(A),F(A'))$, written as $f\mapsto F(f)$
+    \end{itemize}
+
+    \noindent satisfying the following axioms
+    \begin{description}
+        \item[covariancy:] $F(f'\circ f) = F(f')\circ F(f)$ whenever $A\stackrel{f}{\longrightarrow} A'\stackrel{f'}{\longrightarrow}A''$ in $\A$ 
+        \item[identity consistency:] $F(\id_A) = \id_{F(A)}$ whenever $A\in\A$ 
+    \end{description}
+
+    Such a functor is sometimes also called a \textbf{covariant functor}.
+\end{definition}
+
+Let $\catTop_*$ denote the category of topological spaces equipped with a basepoint. Let $\pi$ be the map that maps a pointed topological space $(X,x_0)$ to its fundamental group $\pi(X,x_0)$. We claim that this is a covariant functor. Let $\phi: (X,x_0)\to(Y,y_0)$ be a continuous function. One knows from algebraic topology that the above continuous map induces a homomorphism $\phi_*:\pi(X,x_0)\to\pi(Y,y_0)$ given by $[f]\mapsto[\phi\circ f]$. It is not hard to see that this is a covariant functor.
+
+\begin{definition}[Contravariant Functor]
+    Let $\A$ and $\B$ be categories. A contravariant functor from $\A$ to $\B$ is a functor $F:\A^\op\to\B$.
+\end{definition}
+
+Let $\catTop$ be the category of topological spaces. For a topological space $X$, let $C(X)$ denote the ring of continuous functions $X\to\R$. That is, $C(X)\in\catRing$. We claim that $C(X)$ is a contravariant functor from $\catTop$ to $\catRing$. Indeed, let $f: X\to Y$ be a continuous function. Then, we have the following commutative diagram: 
+\begin{equation*}
+\xymatrix {
+    X\ar[r]^f\ar[rd]_{g\circ f} & Y\ar[d]^g\\
+    & \R
+}
+\end{equation*}
+
+The continuous function $f$ induces a map $f_*: C(Y)\to C(X)$ given by $g\mapsto g\circ f$. It is not hard to see now that the functor $C$ is a contravariant functor from $\catTop$ to $\catRing$ which maps a morphism $f$ to a morphism $f_*$.
+
+
+\begin{definition}[Presheaf]
+    A presheaf is a contravariant functor from $\mathscr A$ to $\catSet$. That is, a functor $F:\A^\op\to\catSet$.
+\end{definition}
+
+Let $X$ be a topological space and let $\mathscr O(X)$ denote the category of open subsets of $X$ with inclusion morphisms. This gives $\mathscr O(X)$ the structure of a poset. Consider now the map $F:\mathscr O(X)^\op\to\catSet$ given by 
+\begin{equation*}
+    F(U) = \left\{\text{continuous functions }U\to\R\right\}
+\end{equation*}
+That this is a functor follows from the fact that if $U\subseteq V$, then the restriction of a continuous function $f: V\to\R$ to $U$ is continuous.
+
+\begin{definition}
+    A functor $F:\mathscr A\to\mathscr B$ is \textit{faithful} if for each $A,A'\in\mathscr A$, the map $\mathscr A(A,A')\to\mathscr B(F(A),F(A'))$ given by $f\mapsto F(f)$ is injective.
+
+    Similarly, it is said to be \textit{full} if the map is surjective.
+\end{definition}
+
+\begin{definition}[Natural Transformation]
+    Let $\mathscr A$ and $\mathscr B$ be categories and let $F, G:\mathscr A\longrightarrow\mathscr B$ be functors. A \textit{natural transformation} $\alpha: F\to G$ is a family $\left(F(A)\stackrel{\eta_A}{\longrightarrow}G(A)\right)_{A\in\mathscr A}$ of maps in $\mathscr B$ such that for every map $A\stackrel{f}{\longrightarrow}A'$ in $\mathscr A$, the following diagram commutes
+    \begin{equation*}
+        \xymatrix{
+            F(A)\ar[r]^{F(f)}\ar[d]_{\eta_A} & F(A')\ar[d]^{\eta_{A'}}\\
+            G(A)\ar[r]_{G(f)} & G(A')
+        }
+    \end{equation*}
+    The maps $\eta_A$ are called the \textit{components} of $\eta$. When $\eta_A$ is an isomorphism for all $A\in\mathscr A$, then $\eta$ is said to be a natural isomorphism.
+\end{definition}
+
+Consider $\catCRing$, the category of commutative rings and $\catMon$, the category of monoids. Consider the covariant functor $M_n:\catCRing\to\catMon$ that maps a commutative ring $R$ to the monoid $M_n(R)$ of $n\times n$ matrices with entries from $R$. 
+
+Consider now the forgetful functor $U:\catCRing\to\catMon$ that maps a ring $R$ to its multiplicative monoid. It is not hard to see that $\det_n$ is a natural transformation from $M_n\to U$.
+
+\section{Adjoints}
+
+\begin{definition}
+    Let $\mathscr A$ and $\mathscr B$ be categories with $F:\mathscr A\to\mathscr B$ and $G:\mathscr B\to\mathscr A$ be functors. Then $F$ is said to be \textit{left adjoint} to $G$ and $G$ is said to be \textit{right adjoint} to $F$ if for all $A\in\mathscr A$ and $B\in\mathscr B$, there is a natural isomorphism
+\end{definition}
