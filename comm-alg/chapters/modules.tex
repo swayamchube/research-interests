@@ -35,30 +35,6 @@ In other words, a module homomorphism is simply an $R$-linear map.
 
 It is not hard to see, using the above proposition and the submodule criteria that the image of an $R$-module under a homomorphism is a submodule.
 
-For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M$ to $N$ by $\Hom_R(M,N)$. When the choice of the ring $R$ is clear from the context, we shall denote this set by $\Hom(M,N)$.
-
-\begin{proposition}
-    Let $M,N$ be $R$-modules. Then $\Hom(M,N)$ forms an $R$-module.
-\end{proposition}
-\begin{proof}
-    It is obvious that $\Hom(M,N)$ has the structure of an abelian group. Define the natural action by $(rf)(x) = rf(x)$. It is not hard to see that this action is well defined.
-\end{proof}
-
-\begin{proposition}
-    Let $\phi: M\to N$ be an $R$-module homomorphism. Then, for every $R$-module $P$, there is an induced $R$-module homomorphism $\overline\phi:\Hom(N,P)\to\Hom(M,P)$ and an induced $R$-module homomorphism $\widetilde\phi:\Hom(P,M)\to\Hom(P,N)$. 
-    
-    Equivalently phrased, $\Hom(-,P)$ is a contravariant functor while $\Hom(P,-)$ is a covariant functor.
-\end{proposition}
-\begin{proof}
-    We shall prove only the first half of the assertion since the second half follows from a similar proof. Define $\overline\phi$ using the following commutative diagram: 
-    \begin{equation*}
-    \xymatrix {
-        M\ar[r]^{\phi}\ar@{.>}[rd]_{f\circ\phi} & N\ar[d]^f\\
-        & P
-    }
-    \end{equation*}
-    To see that this is indeed an $R$-module homomorphism, we need only verify that for all $f,g\in\Hom(N,P)$ and all $r\in R$, $(f + rg)\circ\phi = f\circ\phi + rg\circ\phi$ which is trivial to check.
-\end{proof}
 
 \begin{definition}[Kernel, Cokernel]
     Let $\phi:M\to N$ be an $R$-module homomorphism. We define 
@@ -69,16 +45,29 @@ For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M
 
 For an $R$-module $M$, define the annihilator of $M$ in $R$ as 
 \begin{equation*}
-    \Ann(M) = \{r\in R\mid rx = 0~\forall x\in M\}
+    \Ann_R(M) = \{r\in R\mid rx = 0~\forall x\in M\}
 \end{equation*}
 It is trivial to check that $\Ann(M)$ is a left ideal in $R$, and if $R$ were commutative, it would be an ideal.
+
+\begin{proposition}
+    If $I$ is an ideal contained in $\Ann_A(M)$, then $M$ is naturally an $A/I$-module.
+\end{proposition}
+\begin{proof}
+    Define the action $(a + I)\cdot m = a\cdot m$. It is easy to check that this action is well defined. Further, 
+    \begin{equation*}
+        (a + I)\cdot((b + I)\cdot m) = (a + I)\cdot(bm) = (ab)\cdot m = ((a + I)(b + I))\cdot m
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+In particular, if $I = \mathfrak m$ for some maximal ideal $\mathfrak m$, then $M$ forms a vector space over $A/\mathfrak m$.
 
 \section{Free Modules}
 Throughout this section, $R$ denotes a general ring which need not be commutative. The content of this section is taken from \cite{blyth}. 
 
 We define the free module using a universal property and then provide a construction for it. This should establish uniqueness.
 
-\begin{definition}
+\begin{definition}[Universal Property of Free Modules]
     Let $S$ be a non-empty set. A \textit{free module on $S$} is an $R$-module $F$ together with a mapping $f: S\to F$ such that for every $R$-module $M$ and every set map $g: S\to M$, there is a unique $R$-module homomorphism $h: F\to M$ such that the following diagram commutes: 
     \begin{equation*}
     \xymatrix{
@@ -87,6 +76,28 @@ We define the free module using a universal property and then provide a construc
     }
     \end{equation*}
 \end{definition}
+
+Let $F$ be the set of all set functions $\phi: S\to R$ which takes nonzero values at finitely many elements of $S$. This has the structure of an $R$-module. Define the set map $f: S\to F$ by 
+\begin{equation*}
+    f(s)(t) = 
+    \begin{cases}
+        1 & s = t\\
+        0 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+
+We contend that $(F,f)$ is a free module on $S$. Indeed, let $g: S\to M$ be a set map where $M$ is an $R$-module. Define the linear map $h: F\to M$ by 
+\begin{equation*}
+    h(f(s)) = g(s)
+\end{equation*}
+
+Since every element in $F$ can uniquely be written as a linear combination of elements in $\{f(s)\}_{s\in S}$, we have successfully defined a module homomorphism $h: F\to M$ such that $g = h\circ f$. The uniqueness of this map is quite obvious. Hence, $(F,f)$ is a free module on $S$.
+
+\begin{definition}[Basis]
+    Let $M$ be an $R$-module. Then $S\subseteq M$ is said to be a \textit{basis} if it is linearly independent and generates $M$.
+\end{definition}
+
+It is important to note that not every minimal generating set is a basis. Take for example the $\Z$-module $\Z$. Notice that $\{2,3\}$ is a minimal generating set but is not a basis for it is not linearly independent.
 
 \section{Finitely Generated Modules}
 
@@ -120,15 +131,66 @@ We define the free module using a universal property and then provide a construc
     Let $B$ denote the matrix $(\phi\delta_{ij} - a_{ij})_{1\le i,j\le n}$. Then, multiplying by $\operatorname{adj}(B)$, we see that $\det(B)(x_j) = 0$ for all $1\le j\le n$ where $\det(B)$ is viewed as an element in $\End(M)$ and thus, is the zero map in $\End(M)$. It is not hard to see that $\det(B)$ is in the required form.
 \end{proof}
 
-\begin{lemma}[Nakayama]
+\begin{lemma}[Nakayama]\thlabel{lem:nakayama}
     Let $M$ be a finitely generated module and $\mathfrak a\subseteq\mathfrak R$ be an ideal such that $M = \mathfrak aM$. Then, $M = 0$. 
 \end{lemma}
 \begin{proof}
     Let $\phi = \mathbf{id}$ be the identity homomorphism in $\End(M)$. Using \thref{prop:CH-type}, there are coefficients $a_0,\ldots,a_{n - 1}\in\mathfrak a$ satisfying the statement of the proposition. As a result, $x = 1 + a_{n - 1} + \ldots + a_0$ is the zero endomorphism. But since $a_{n - 1} + \ldots + a_0\in\mathfrak a\subseteq\mathfrak R$, $x$ is a unit and hence, $M = 0$.
 \end{proof}
 
+\begin{corollary}
+    Let $M$ be a finitely generated $A$-module, $N$ a submodule of $M$ and $\mathfrak a\subseteq\mathfrak R$ an ideal. If $M = \mathfrak aM + N$ then $M = N$.
+\end{corollary}
+\begin{proof}
+    We have $M/N = \mathfrak aM/N$, consequently, $M/N = 0$ and $M = N$ due to \thref{lem:nakayama}.
+\end{proof}
+
+\begin{lemma}
+    Let $(A,\mathfrak m)$ be local and $k = A/\mathfrak m$. Let $M$ be a finitely generated $A$-module. Let $\{\overline x_1,\ldots,\overline x_n\}$ be elements in $M/\mathfrak m$ that form a basis for $M/\mathfrak m$ as a $k$-vector space. Then, $\{x_1,\ldots,x_n\}$ generates $M$.
+\end{lemma}
+\begin{proof}
+    Let $N$ be the submodule generated by $\{x_1,\ldots,x_n\}$. Then, the composition $N\hookrightarrow M\twoheadrightarrow M/\mathfrak mM$ is surjective, consequently, $M = N + \mathfrak mM$ whence, it follows that $M = N$.
+\end{proof}
+
 \subsection*{Over a PID}
 Throughout this section, let $R$ denote a principal ideal domain. 
+
+\section{\texorpdfstring{$\Hom$}{} Modules and Functors}
+
+For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M$ to $N$ by $\Hom_R(M,N)$. When the choice of the ring $R$ is clear from the context, we shall denote this set by $\Hom(M,N)$.
+
+\begin{proposition}
+    Let $M,N$ be $A$-modules. Then $\Hom(M,N)$ has the structure of an $A$-module.
+\end{proposition}
+\begin{proof}
+    It is obvious that $\Hom(M,N)$ has the structure of an abelian group. Define the natural action by $(af)(x) = af(x)$. It is not hard to see that this action is well defined.
+\end{proof}
+
+\begin{proposition}
+    Let $\{M_\lambda\}_{\lambda\in\Lambda}$ be a collection of $A$-modules. Then, for any $A$-module $N$, we have a natural isomorphism
+    \begin{equation*}
+        \Hom_A\left(\bigoplus_{\lambda\in\Lambda}M_\lambda, N\right) = \prod_{\lambda\in\Lambda}\Hom_A(M_\lambda,N)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Since the direct sum is the product in $A-\mathbf{Mod}$, the conclusion follows from the universal property.
+\end{proof}
+
+\begin{theorem}
+    Let $\phi: M\to N$ be an $A$-module homomorphism. Then, for every $R$-module $P$, there is an induced $A$-module homomorphism $\overline\phi:\Hom(N,P)\to\Hom(M,P)$ and an induced $A$-module homomorphism $\widetilde\phi:\Hom(P,M)\to\Hom(P,N)$. 
+    
+    Equivalently phrased, $\Hom(-,P)$ is a contravariant functor while $\Hom(P,-)$ is a covariant functor.
+\end{theorem}
+\begin{proof}
+    We shall prove only the first half of the assertion since the second half follows from a similar proof. Define $\overline\phi$ using the following commutative diagram: 
+    \begin{equation*}
+    \xymatrix {
+        M\ar[r]^{\phi}\ar@{.>}[rd]_{f\circ\phi} & N\ar[d]^f\\
+        & P
+    }
+    \end{equation*}
+    To see that this is indeed an $R$-module homomorphism, we need only verify that for all $f,g\in\Hom(N,P)$ and all $r\in R$, $(f + rg)\circ\phi = f\circ\phi + rg\circ\phi$ which is trivial to check.
+\end{proof}
 
 \section{Exact Sequences}
 
@@ -146,33 +208,16 @@ Throughout this section, let $R$ denote a principal ideal domain.
 
 It is not hard to see that the sequence in the definition is short exact if and only if $f$ is injective, $g$ is surjective and $\im f = \ker g$.
 
-\begin{theorem}
-    For all $R$-modules $X$, $\Hom(X,-)$ is a left exact functor. That is, $0\longrightarrow M\longrightarrow N\longrightarrow P$ is exact if and only if $0\longrightarrow\Hom(X,M)\longrightarrow\Hom(X,N)\longrightarrow\Hom(X,P)$ is exact.
-\end{theorem}
-\begin{proof}
-    Consider the following commutative diagram where the row is exact.
-    \begin{equation*}
-    \xymatrix{
-        & & X\ar[ld]_u\ar[d]^v& \\
-        0\ar[r] & M\ar[r]^f & N\ar[r]^g & P
-    }
-    \end{equation*}
-    Let $u\in\ker\overline f$. Since $f$ is injective, it is obvious that $u$ must be the trivail homomorphism. Next, we must show that $\im\overline f = \ker\overline g$. First, note that $\overline f\circ\overline g = \overline{f\circ g} = 0$ since $\Hom(X,-)$ is a covariant functor. Finally, suppose $v\in\ker\overline g$. Then, $g\circ v = 0$, consequently, $\im v\subseteq\im f$. Now, since $f$ is injective, $f^{-1}(\im v)$ is a submodule of $M$ and hence, the map $w: X\to M$ given by $x\mapsto f^{-1}(v(x))$ is well defined and $f\circ w = v$. 
+\subsection{Diagram Chasing Poster Children}
 
-    For the converse, simply note that $\Hom(R,M)$ is isomorphic to $M$.
-\end{proof}
-
-\subsection*{Diagram Chasing}
 
 \section{Tensor Product}
 
-Throughout this section, $R$ denotes a general ring which need not be commutative.
-
 \begin{definition}[Bilinear Map]
-    Let $M, N, P$ be $R$-modules. A map $T: M\times N\to P$ is said to be bilinear if for each $x\in M$, the mapping $T_x: N\to P$ given by $y\mapsto T(x,y)$ is $R$-linear and for each $y\in N$, the mapping $T_y: M\to P$ given by $x\mapsto T(x,y)$ is $R$-linear.
+    Let $M, N, P$ be $A$-modules. A map $T: M\times N\to P$ is said to be bilinear if for each $x\in M$, the mapping $T_x: N\to P$ given by $y\mapsto T(x,y)$ is $A$-linear and for each $y\in N$, the mapping $T_y: M\to P$ given by $x\mapsto T(x,y)$ is $A$-linear.
 \end{definition}
 
-Fix two $R$-modules $M$ and $N$. Let $\mathscr C$ denote the category of bilinear maps $T: M\times N\to P$ where $P$ is any $R$-module. A morphism between two bilinear maps $f: M\times N\to P_1$ and $g: M\times N\to P_2$ in this category is a module homomorphism $\phi: P_1\to P_2$ such that the following diagram commutes: 
+Fix two $A$-modules $M$ and $N$. Let $\mathscr C$ denote the category of bilinear maps $T: M\times N\to P$ where $P$ is any $A$-module. A morphism between two bilinear maps $f: M\times N\to P_1$ and $g: M\times N\to P_2$ in this category is a module homomorphism $\phi: P_1\to P_2$ such that the following diagram commutes: 
 \begin{equation*}
 \xymatrix {
     M\times N\ar[r]^-f\ar[d]_g & P_1\ar@{.>}[ld]^\phi\\
@@ -183,7 +228,7 @@ Fix two $R$-modules $M$ and $N$. Let $\mathscr C$ denote the category of bilinea
 A universal object in $\mathscr C$ is called the tensor product of $M$ and $N$ and is denoted by $M\otimes N$. In other words, the tensor product is an initial object in the category $\mathscr C$.
 
 \begin{definition}[Universal Property of the Tensor Product]
-    Let $M,N,P$ be $R$-modules and $T: M\times N\to P$ be a bilinear map. Then, there is a unique $R$-module homomorphism $\phi: M\otimes N\to P$ such that the following diagram commutes: 
+    Let $M,N,P$ be $A$-modules and $T: M\times N\to P$ be a bilinear map. Then, there is a unique $A$-module homomorphism $\phi: M\otimes N\to P$ such that the following diagram commutes: 
     \begin{equation*}
     \xymatrix {
         M\times N\ar[r]^-T\ar[d]_\varphi & P\\
@@ -196,12 +241,12 @@ Of course, having the universal property would imply that the tensor product, if
 
 \subsection*{Constructing the Tensor Product}
 
-Let $F$ be the free $R$-module on $M\times N$. Let us denote the basis elements of $F$ by $e_{(x,y)}$ where $x\in M$ and $y\in N$. Now, for all $x,x_1,x_2\in M$, $y,y_1,y_2\in N$ and $r\in R$, let $D$ denote the submodule generated by elements of the form: 
+Let $F$ be the free $A$-module on $M\times N$. Let us denote the basis elements of $F$ by $e_{(x,y)}$ where $x\in M$ and $y\in N$. Now, for all $x,x_1,x_2\in M$, $y,y_1,y_2\in N$ and $a\in A$, let $D$ denote the submodule generated by elements of the form: 
 \begin{align*}
     &e_{(x_1 + x_2, y)} - e_{(x_1,y)} - e_{(x_2,y)}\\
     &e_{(x,y_1 + y_2)} - e_{(x,y_1)} - e_{(x,y_2)}\\
-    &e_{(rx,y)} - re_{(x,y)}\\
-    &e_{(x,ry)} - re_{(x,y)}
+    &e_{(ax,y)} - ae_{(x,y)}\\
+    &e_{(x,ay)} - ae_{(x,y)}
 \end{align*}
 
 Let $G = F/D$ and let $\varphi: M\times N\to G$ be the composition of the following maps: 
@@ -221,7 +266,7 @@ Let $T: M\times N\to P$ be a bilinear map. Consider the following commutative di
 To show that existence of $\phi$, we must show that $D\subseteq\ker f$, since we can then finish using the universal property of the kernel. But this is trivial to check and follows from the fact that $T$ is a bilinear map and completes the construction.
 
 \begin{mdframed}
-    Similarly, we define the tensor product for a finite sequence of $R$-modules $\{M_i\}_{i = 1}^n$. That is, given a multilinear map $T:\prod\limits_{i = 1}^n M_i\to P$, there is a unique $R$-module homomorphism $\phi$ such that the following diagram commutes: 
+    Similarly, we define the tensor product for a finite sequence of $A$-modules $\{M_i\}_{i = 1}^n$. That is, given a multilinear map $T:\prod\limits_{i = 1}^n M_i\to P$, there is a unique $A$-module homomorphism $\phi$ such that the following diagram commutes: 
     \begin{equation*}
     \xymatrix{
         M_1\times\cdots\times M_n\ar[r]^-T\ar[d]_\varphi & P\\
@@ -242,18 +287,212 @@ Given two modules $M$ and $N$ with the canonical map $\varphi: M\times N\to M\ot
     \item $M\oplus N\otimes P\cong(M\otimes P)\oplus(N\otimes P)$ 
     \item $A\otimes M\cong M$
     \end{enumerate}
-    Further, in each case, the isomorphism is unique.
 \end{proposition}
 \begin{proof}
-In each case, it suffices to show that both modules have the same universal property, which would imply a unique isomorphism between the two modules.
 \begin{enumerate}[label=(\alph*)]
-\item Consider the map $T: M\times N\to N\times M$ given by $(m,n)\mapsto(n,m)$. Let $\varphi: M\times N\to M\otimes N$ and $\varphi': N\times M\to N\otimes M$ be the canonical morphisms. Consider now the following commutative diagram: 
+\item First, we shall show that there are well defined homomorphisms $M\otimes N\to N\otimes M$ and $N\otimes M\to M\otimes N$ mapping $m\otimes n\mapsto n\otimes m$ and $n\otimes m\mapsto m\otimes n$ respectively. This is best done using the universal property. Let $T: M\times N\to N\times M$ be the isomorphism $m\times n\mapsto n\times m$. Consider now the following commutative diagram: 
 \begin{equation*}
 \xymatrix{
-    M\times N\ar[r]^-T_-\sim\ar[d]_\varphi & N\times M\ar[d]^{\varphi'}\\
-    M\otimes N\ar@<-.5ex>@{.>}[r]_-{\phi} & N\otimes M\ar@<-.5ex>@{.>}[l]_-{\phi'}
+    M\times N\ar[d]_\varphi\ar[r]^-T & N\times M\ar[d]^{\varphi'}\\
+    M\otimes N & N\otimes M
 }
 \end{equation*}
-Define the map $\phi(m\otimes n) = n\otimes m$ and $\phi'(n\otimes m) = m\otimes n$. It is not hard to see that $\phi$ and $\phi'$ make the diagram commute. Further, since $\varphi'\circ T$ is bilinear, $\phi$ is the unique morphism making the diagram commute and similarly for $\phi'$. Finally, since $\phi$ and $\phi'$ are  
+
+Since both $\varphi'$ and $T$ are bilinear, so is $\varphi\circ T$, consequently, there is a unique induced homomorphism $f: M\otimes N\to N\otimes M$ making the diagram commute, consequently, $f(m\otimes n) = \varphi'(T(m\times n)) = n\otimes m$.
+
+Similarly, there is a homomorphism $g: N\otimes M\to M\otimes N$ such that $g(n\otimes m) = m\otimes m$. It is not hard to see that $g\circ f = \mathbf{id}_{M\otimes N}$ and $f\circ g = \mathbf{id}_{N\otimes M}$, consequently, they are isomorphisms.
+
+\item 
+
+\item
+
+\item Consider the map $T: A\times M\to M$ given by $(a,m)\mapsto am$. It is not hard to see that this map is bilinear, consequently, there is a map $f: A\otimes M\to M$ such that the following diagram commutes: 
+\begin{equation*}
+\xymatrix {
+    A\times M\ar[r]^-T\ar[d]_\varphi & M\\
+    A\otimes M\ar@{.>}[ru]_-{f}
+}
+\end{equation*}
+Note that $f(a\otimes m) = am$ by definition. Consider the map $g: M\to A\otimes M$ given by $g(m) = 1\otimes m$. It is not hard to see that $g$ is a well defined module homomorphism. Further, since $f\circ g$ and $g\circ f$ are the identity homomorphisms, they both must be isomorphisms.
 \end{enumerate}
+\end{proof}
+
+\begin{example}
+    Show that $\Z/m\Z\otimes\Z/n\Z\cong\Z/\gcd(m,n)\Z$ for all $m,n\in\N$. In particular, if $m$ and $n$ are coprime, then $\Z/m\Z\otimes\Z/n\Z = 0$.
+\end{example}
+\begin{proof}
+    Consider the module homomorphism $T:\Z\to\Z/m\Z\otimes\Z/n\Z$. 
+\end{proof}
+
+Let $f: M\to M'$ and $g: N\to N'$ be $A$-module homomorphisms. Then, the map $\Phi: M\times N\to M'\otimes N'$ given by $\Phi(m,n) = f(m)\otimes g(n)$. It is not hard to see that $\Phi$ is bilinear. Consequently, it induces a map $f\otimes g: M\otimes N\to M'\otimes N'$ such that 
+\begin{equation*}
+    (f\otimes g)(x\otimes y) = f(x)\otimes g(y)
+\end{equation*}
+
+Further, if $f': M'\to M''$ and $g': N'\to N''$ are $A$-module homomorphisms, then we have another map $f'\otimes g': M'\otimes N'\to M''\otimes N''$ such that 
+\begin{equation*}
+    (f'\otimes g')(x\otimes y) = f'(x)\otimes g'(y)
+\end{equation*}
+
+Now, it is not hard to see that $(f'\circ f')\otimes(g'\circ g)$ and $(f'\otimes g')\circ(f\otimes g)$ agree on the elementary tensors, therefore, agree on all of $M\otimes N$.
+
+\section{Right Exactness}
+
+\begin{proposition}\thlabel{prop:hom-tensor-adjunction}
+    Let $M,N,P$ be $A$-modules. Then, there is a natural isomorphism:
+    \begin{equation*}
+        \Hom_A(M,\Hom_A(N, P))\cong\Hom_A(M\otimes_A N, P)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Consider the map 
+    \begin{equation*}
+        \theta: \Hom_A(M\otimes_A N, P)\longrightarrow\Hom_A(M,\Hom_A(N, P))
+    \end{equation*}
+    given by $\theta(\alpha)(m)(n) = \alpha(m\otimes n)$. Now, pick some $\eta\in\Hom_A(M,\Hom_A(N,P))$. Define the map $\zeta: M\times N\to P$ given by $\zeta(m, n) = \eta(m)(n)$. Obviously, $\zeta$ is bilinear and induces a map $\delta: M\otimes_A N\to P$ such that $\delta(m\otimes n) = \eta(m)(n)$. Call the map sending $\eta\mapsto\delta$ as $\beta$ where 
+    \begin{equation*}
+        \beta: \Hom_A(M,\Hom_A(N, P))\to\Hom_A(M\otimes_A N, P)
+    \end{equation*}
+    and $\beta(\eta)(m\otimes n) = \eta(m)(n)$.
+
+    We contend that $\theta$ and $\beta$ are inverses to one another. Indeed, 
+    \begin{equation*}
+        ((\beta\circ\theta)(\alpha))(m\otimes n) = \theta(\alpha)(m)(n) = \alpha(m\otimes n)
+    \end{equation*}
+    and 
+    \begin{equation*}
+        ((\theta\circ\beta)(\eta))(m)(n) = \beta(\eta)(m\otimes n) = \eta(m)(n)
+    \end{equation*}
+    whence the conclusion follows.
+\end{proof}
+
+In particular, we see that the functor $-\otimes_A N$ is the left adjoint of the functor $\Hom_A(N,-)$, consequently, $\Hom_A(N,-)$ is the right adjoint of $-\otimes_A N$.
+
+\begin{theorem}
+    The functor $-\otimes_A N$ is right exact. That is, given a exact sequence
+    \begin{equation*}
+        M'\stackrel{f}{\longrightarrow}M\stackrel{g}{\longrightarrow}M''\longrightarrow 0
+    \end{equation*}
+    the sequence 
+    \begin{equation*}
+        M'\otimes_A N\stackrel{f\otimes 1}{\longrightarrow}M\otimes_A N\stackrel{g\otimes 1}{\longrightarrow}M''\otimes_A N\longrightarrow 0
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Since the given sequence is exact, so is 
+    \begin{equation*}
+        \Hom_A(M'',\Hom_A(N,P))\stackrel{\overline g}{\longrightarrow}\Hom_A(M,\Hom_A(N,P))\stackrel{\overline f}{\longrightarrow}\Hom_A(M',\Hom_A(N,P))\longrightarrow 0
+    \end{equation*}
+    but from \thref{prop:hom-tensor-adjunction}, so is
+    \begin{equation*}
+        \Hom_A(M''\otimes_A N, P)\longrightarrow\Hom_A(M\otimes_A N, P)\longrightarrow\Hom_A(M'\otimes_A N, P)\longrightarrow 0
+    \end{equation*}
+    Since the above sequence is exact for all modules $P$, we have the desired conclusion.
+\end{proof}
+
+The tensor product is not left exact. Conider the sequence of $\Z$-modules
+\begin{equation*}
+    0\hookrightarrow\Z\stackrel{f}{\longrightarrow}\Z
+\end{equation*}
+where $f(m) = 2m$. Upon tensoring with $\Z/2\Z$, we get the sequence 
+\begin{equation*}
+    0\longrightarrow\Z\otimes_{\Z}\Z/2\Z\stackrel{f\otimes1}{\longrightarrow}\Z\otimes_{\Z}\Z/2\Z
+\end{equation*}
+
+Note that 
+\begin{equation*}
+    (f\otimes 1)(m\otimes\overline n) = 2m\otimes\overline{n} = m\otimes(2\overline n) = m\otimes 0 = 0
+\end{equation*}
+
+Therefore, the sequence cannot be exact.
+
+\section{Flat Modules}
+
+\begin{definition}[Flat Module]
+\end{definition}
+
+\begin{theorem}
+    Let $N$ be a $A$-module. Then, the following are equivalent 
+    \begin{enumerate}[label=(\alph*)]
+        \item $N$ is flat 
+        \item If $0\rightarrow M'\rightarrow M\rightarrow M''\rightarrow 0$ is an exact sequence of $A$-modules, then the tensored sequence 
+        \begin{equation*}
+        0\longrightarrow M'\otimes_A N\stackrel{f\otimes 1}{\longrightarrow} M\otimes_A N\stackrel{g\otimes 1}{\longrightarrow} M''\otimes_A N\longrightarrow 0
+        \end{equation*}
+        is exact.
+        \item If $f: M'\to M$ is injective, then $f\otimes 1: M'\otimes N\to M\otimes N$ is injective 
+        \item If $f: M'\to M$ is injective and $M,M'$ are finitely generated, then $f\otimes_A 1: M'\otimes_A N\to M\otimes_A N$ is injective.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\hfill 
+\begin{enumerate}[label=(\alph*)]
+\item 
+\end{enumerate}
+\end{proof}
+
+\section{Projective Modules}
+
+\begin{theorem}\thlabel{thm:pojective-module-equivalence}
+    For an $A$-module $P$, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+    \item Every map $f: P\to M''$ can be lifted to $\widetilde{f}: P\to M$ in the following commutative diagram: 
+    \begin{equation*}
+    \xymatrix{
+        & P\ar[ld]_{\widetilde f}\ar[d]^f & \\
+        M\ar[r]_g & M''\ar@{->>}[r] & 0
+    }
+    \end{equation*}
+    \item Every short exact sequence $0\rightarrow M'\rightarrow M\rightarrow P\rightarrow 0$ splits 
+    \item There is a module $M$ such that $P\oplus M$ is free 
+    \item The functor $\Hom_A(P,-)$ is exact.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\hfill
+\begin{description}
+\item[$(a)\Longrightarrow(b)$:] Taking $M'' = P$ and $f = \mathbf{id}_P$, we have the desired conclusion. 
+\item[$(b)\Longrightarrow(c)$:] Let $F$ denote the free module on the set $P$. Then, the map $\Phi: F\to P$ given by $\Phi(e_x) = x$ for all $x\in P$ is a surjective $A$-module homomorphism. We have the following short exact sequence: 
+\begin{equation*}
+    0\rightarrow\ker\Phi\stackrel{\iota}{\longrightarrow}F\stackrel{\Phi}{\longrightarrow}P\rightarrow 0
+\end{equation*}
+This is known to split and thus, $F = \psi(P)\oplus\ker\Phi$ where $\psi: P\to F$ is the section.
+
+\item[$(c)\Longrightarrow(d)$:] Let $M'\rightarrow M\rightarrow M''$ be an exact sequence of modules and $K$ be an $A$-module such that $P\oplus K = F\cong A^\Lambda$. Then, the induced sequence 
+\begin{equation*}
+    \prod_{\lambda\in\Lambda}M'\rightarrow\prod_{\lambda\in\Lambda}M\rightarrow\prod_{\lambda\in\Lambda}M''
+\end{equation*}
+is exact. We have seen that there is a natural isomorphism $\Hom_A(A,M)\stackrel{\sim}{\longrightarrow}M$, consequently, there is a natural isomorphism 
+\begin{equation*}
+    \Hom_A(A^{\oplus\Lambda}, M)\stackrel{\sim}{\longrightarrow}\prod_{\lambda\in\Lambda}M
+\end{equation*}
+whence it follows that the sequence 
+\begin{equation*}
+    \Hom_A(A^{\oplus\Lambda}A,M')\rightarrow\Hom_A(A^{\oplus\Lambda}A,M)\rightarrow\Hom_A(A^{\oplus\Lambda},M'')
+\end{equation*}
+But since $\Hom_A(A^{\oplus\Lambda},M)\cong\Hom_A(P,M)\oplus\Hom_A(K,M)$, we have the desired conclusion.
+
+\item[$(d)\Longrightarrow(a)$:] Trivial.
+\end{description}
+\end{proof}
+
+\begin{definition}[Projective Module]
+    An $A$-module $P$ satisfying any one of the four equivalent conditions of \thref{thm:pojective-module-equivalence} is said to be a \textit{projective $A$-module}.
+\end{definition}
+
+In particular, from \thref{thm:pojective-module-equivalence}(c), we see that every free module is projective.
+
+\begin{lemma}
+    A finitely generated projective module $P$ over a local ring $(A,\mathfrak m)$ is free.
+\end{lemma}
+\begin{proof}
+    Let $\{\overline x_1,\ldots,\overline x_n\}$ be a basis for $M/\mathfrak mM$ as a $k$-vector space where $k = A/\mathfrak m$. As we have seen earlier, $\{x_1,\ldots,x_n\}$ generates $M$. Let $F$ be the free module with basis $\{e_1,\ldots,e_n\}$ and $\Phi: F\to M$ be the module homomorphism given by $\Phi(e_i) = x_i$ and $K = \ker\Phi$. Since $M$ is projective, there is a module homomorphism $\psi: M\to F$ satisfying $\Phi\circ\psi = \mathbf{id}_M$ and $F = K\oplus\psi(M)$.
+
+    We contend that $K = \mathfrak mK$. Indeed, let $x\in K$, then $x = \sum r_ie_i$ for a unique choice $\{r_1,\ldots,r_n\}$. Then, $\sum r_ix_i = 0$, consequently, $r_i\in\mathfrak m$ for all $i$. Since $F = K\oplus\psi(M)$, we may write $e_i = u_i + v_i$ for some $u_i\in K$ and $v_i\in\psi(M)$. As a result, 
+    \begin{equation*}
+        x - \sum r_iu_i = \sum r_iv_i\in\ker\Phi\cap\psi(M) = \{0\}
+    \end{equation*}
+    and the conclusion follows.
+
+    Finally due to \thref{lem:nakayama}, we must have that $K = 0$ whence $M$ is free.
 \end{proof}
