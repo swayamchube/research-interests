@@ -1,0 +1,39 @@
+\section{Chain Conditions}
+
+\section{Noetherian Rings}
+
+\begin{lemma}
+    If $A$ is Noetherian and $\phi: A\to B$ is an epimorphism, then $B$ is also Noetherian.
+\end{lemma}
+
+\begin{theorem}[Hilbert Basis Theorem]
+    If $A$ is Noetherian, then so is $A[x]$.
+\end{theorem}
+Note that the converse is also true since $A\cong A[x]/(x)$.
+\begin{proof}
+    We shall show that every ideal in $A[x]$ is finitely generated. Suppose not and let $I\subseteq A[x]$ be an ideal that is not finitely generated. Choose $f_1\in I$ with minimum degree. Now, inductively, choose $f_{k + 1}\in I\backslash(f_1,\ldots,f_k)$ with the minimum degree. Obviously, this process goes on indefinitely, since we have assumed $I$ to not be finitely generated. We now have 
+    \begin{align*}
+        f_1 &= a_1x^{d_1} + \text{lower degree terms}\\
+        f_2 &= a_2x^{d_2} + \text{lower degree terms}\\
+        &\vdots\\
+        f_n &= a_nx^{d_n} + \text{lower degree terms}\\
+        &\vdots
+    \end{align*}
+    with $d_1\le d_2\le\cdots$. We also have the following ascending chain of ideals in $A$, 
+    \begin{equation*}
+        (a_1)\subseteq(a_1,a_2)\subseteq\cdots
+    \end{equation*}
+    Therefore, there is $n\in\N$ such that $(a_1,\ldots,a_n) = (a_1,\ldots,a_n,a_{n + 1})$. Consequently, we may write $a_{n + 1}$ as a linear combination of $a_1,\ldots,a_n$, say 
+    \begin{equation*}
+        a_{n + 1} = b_1a_1 + \cdots + b_na_n
+    \end{equation*}
+    for some $b_1,\ldots,b_n\in A$. Let 
+    \begin{equation*}
+        g = f_{n + 1} - (b_1x^{d_{n + 1} - d_1}f_1 + \cdots + b_nx^{d_{n + 1} - d_n}f_n)
+    \end{equation*}
+    It is not hard to argue that $g\in I\backslash(f_1,\ldots,f_n)$, but $\deg g\le\deg f_{n + 1}$, a contradiction. This completes the proof.
+\end{proof}
+
+An analogous theorem, with an analogous proof is true wherein $A[x]$ is replaced by $A\llbracket x\rrbracket$.
+
+\section{Artinian Rings}
