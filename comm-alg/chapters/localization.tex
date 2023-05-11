@@ -1,0 +1,66 @@
+\section{Rings of Fractions}
+
+Define the relation $\sim_S$ on $A\times S$ by $(a,s)\sim_S(a',s')$ if there is $t\in S$ such that $t(s'a - sa') = 0$. That this is an equivalence relation is easy to verify. We shall use $a/s$ to denote the equivalence class $[(a,s)]$ in $A\times S/\sim_S$.
+
+Consider the operations: 
+\begin{equation*}
+    \frac{a}{s} + \frac{a'}{s'} = \frac{s'a + sa'}{ss'}\qquad\frac{a}{s}\cdot\frac{a'}{s'} = \frac{aa'}{ss'}
+\end{equation*}
+
+It is not hard to see that these are well defined and endow $A\times S/\sim_S$ with a ring structure. We denote this ring by $S^{-1}A$ and is called the \textit{ring of fractions} of $A$ by $S$. 
+
+There is a natural ring homomorphism $\varphi: A\to S^{-1}A$ given by $\varphi(x) = x/1$.
+When $A$ is an integral domain and $S = A\backslash\{0\}$, $S^{-1}A$ is precisely the field of fractions.
+Recall that if $\mathfrak p$ is a prime ideal in $A$, then $S = A\backslash\mathfrak p$ is a multiplicatively closed subset of $A$. We denote the ring $S^{-1}A$ by $A_{\mathfrak p}$.
+
+\begin{theorem}
+    The ring $A_{\mathfrak p}$ is local.
+\end{theorem}
+\begin{proof}
+    Let $S = A\backslash\mathfrak p$ and define
+    \begin{equation*}
+        \mathfrak m = \left\{\frac{a}{s}~\bigg\vert~a\in\mathfrak p,~s\in S\right\}
+    \end{equation*}
+    It is not hard to see that $\mathfrak m$ is an ideal in $A_{\mathfrak p}$. We contend that $\mathfrak m$ is the ideal of non-units in $A_{\mathfrak p}$. Indeed, if $a/s\in\mathfrak m$ is a unit, then there is $b/t\in A_{\mathfrak p}$ such that $(ab)/(st) = 1$, consequently, there is $w\in S$ such that $w(ab - st) = 0$, whence $wst\in\mathfrak p$, a contradiction. 
+
+    On the other hand, if $a/s\notin\mathfrak m$, then $a/s$ is a unit since $(a/s)\cdot(s/a) = 1$. Now, since the collection of all non-units forms an ideal, the ring must be local due to \thref{prop:non-unit-ideal-local}.
+\end{proof}
+
+Similarly, when we let $S = \{a^n\}_{n\ge 0}$ for some $a\in A$, we denote $S^{-1}A$ by $A_a$.
+
+There is a degenerate case, when we allow $0\in S$, notice that the ring $S^{-1}A$ is the zero ring, since for all $a/s\in S^{-1}A$, we have $0(as) = 0$, therefore, $a/s = 0/s$.
+
+\subsection{Universal Property}
+
+Fix a multiplicative subset $S\subseteq A$. Let $\mathscr C$ denote the category with objects as pairs $(\phi, B)$ where $\phi: A\to B$ is a ring homomorphism such that $\phi(s)$ is a unit in $B$ for all $s\in S$. A morphism in this category is a map $f:(\phi, B)\to(\psi, C)$ making the following diagram commute.
+\begin{equation*}
+\xymatrix{
+    A\ar[r]^{\psi}\ar[d]_\phi & C\\
+    B\ar[ru]_f
+}
+\end{equation*}
+
+The ring of fractions is an initial object in this category. Therefore, we have the following universal property. We shall verify in the ``proof'' that our construction of the field of fractions does satisfy this property and is therefore an initial object in $\mathscr C$.
+
+\begin{proposition}
+    Let $f: A\to B$ be a ring homomorphism such that $f(s)$ is a unit in $B$ for all $s\in S$. Then there is a unique ring homomorphism $g: S^{-1}A\to B$ making the following diagram commute 
+    \begin{equation*}
+    \xymatrix{
+        A\ar[r]^f\ar[d]_\varphi & B\\
+        S^{-1}A\ar@{.>}[ru]_-{\exists!g}
+    }
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Define the map $g: S^{-1}A\to B$ by $g(a/s) = g(a)g(s)^{-1}$. To see that this map is well defined, note that if $a/s = a'/s'$, then there is $t\in S$ such that $t(s'a - sa') = 0$, consequently, $g(t)(g(s')g(a) - g(s)g(a')) = 0$. As a result, $g(a)g(s)^{-1} = g(a')g(s')^{-1}$. From this, it follows immediately that $g$ is a ring homomorphism making the diagram commute.
+
+    As for uniqueness, note that for all $a/s\in S^{-1}A$,
+    \begin{equation*}
+        g(a/s) = g(a/1)g(1/s) = g(a/1)g(s/1)^{-1} = f(a)f(s)^{-1}
+    \end{equation*}
+    which is fixed by the choice of $f$. This completes the proof.
+\end{proof}
+
+\section{Modules of Fractions}
+
+Let $M$ be an $A$-module and $S\subseteq A$ be a multiplicatively closed subset. Define the relation $\sim_S$ on $M\times S$ by $(m,s)\sim_S(m',s')$ if and only if there is $t\in S$ such that $t(s'm - sm') = 0$. That this is an equivalence relation is easy to verify. We shall use $m/s$ to denote the equivalence class $[(m,s)]$ in $M\times S/\sim_S$.

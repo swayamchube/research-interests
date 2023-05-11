@@ -1,3 +1,30 @@
 \section{Nilradical and Jacobson radical}
+
+\begin{definition}[Multiplicatively Closed]
+    A subset $S\subseteq A$ is said to be \textit{multiplicatively closed} if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $1\in S$ 
+        \item for all $x,y\in S$, $xy\in S$
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let $S\subsetneq A\backslash\{0\}$ be a multiplicatively closed subset. Then, there is a prime ideal $\mathfrak p$ disjoint from $S$.
+\end{proposition}
+
+\section{Local Rings}
+\begin{definition}
+    A commutative ring $A$ is said to be local if it has a unique maximal ideal.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:non-unit-ideal-local}
+    $A$ is local if and only if the subset of non-units form an ideal.
+\end{proposition}
+
+Obviously, a field $k$ is a local ring. On the other hand, the polynomial ring $k[x]$ is not local, since both $x$ and $1 - x$ are non-units but their sum is a unit. 
+
+We contend that the ring $A = k[x_1,x_2,\ldots]/(x_1,x_2,\ldots)^2$ is local. Indeed, let $\pi$ denote the canonical map $k[x_1,x_2,\ldots]\to A$ and $\mathfrak m$ be maximal in $A$. Then, $\pi^{-1}(\mathfrak m)$ is maximal in $k[x_1,x_2,\ldots]$ and contains $(x_1,x_2,\ldots)^2$, therefore, contains $(x_1,x_2,\ldots)$. But the latter is maximal and therefore, $\pi^{-1}(\mathfrak m) = (x_1,x_2,\ldots)$ whence the maximal ideal is unique. Thus $A$ is local..
+
+
 \section{Operations on Ideals}
 \section{The Zariski Topology}
