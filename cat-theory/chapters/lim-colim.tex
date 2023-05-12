@@ -1,0 +1,63 @@
+\begin{definition}[Diagram]
+    A \textit{diagram} is a functor $D:\mathscr I\to\A$ where $\mathscr I$ is some indexing category. The category $\mathscr I$ is sometimes called the \textit{shape category}.
+\end{definition}
+
+For example, $\mathscr I$ could be given by 
+\begin{equation*}
+    \xymatrix{
+        &\newmoon\ar[d]\\
+        \newmoon\ar[r] & \newmoon
+    }
+\end{equation*}
+The corresponding diagram is called a \textit{pullback diagram}. The dual to this is the \textit{pushout diagram} given by the indexing category: 
+\begin{equation*}
+    \xymatrix {
+        &\newmoon\\
+        \newmoon & \newmoon\ar[l]\ar[u]
+    }
+\end{equation*}
+
+\begin{definition}[Cone]
+    Let $D:\mathscr I\to\A$ be a diagram. A \textit{cone} on $D$ is an object $A\in\A$, the \textit{vertex} of the cone, together with a family 
+    \begin{equation*}
+        \left(A\stackrel{f_I}{\longrightarrow}D(I)\right)_{I\in\mathscr I}
+    \end{equation*}
+    of maps in $\A$ such that for each $I, J\in\ob(\mathscr I)$, and $u\in\mathscr I(I,J)$, the following diagram commutes.
+    \begin{equation*}
+        \xymatrix{
+            & D(I)\ar[dd]^{D(u)}\\
+            A\ar[ru]^{f_I}\ar[rd]_{f_J}\\
+            & D(J)
+        }
+    \end{equation*}
+    We shall denote such a cone by the shorthand $(A, \{f_I\}_{I\in\mathscr I})$.
+\end{definition}
+
+For example, a cone over the a pullback diagram is 
+\begin{equation*}
+    \xymatrix{
+        A\ar@{-->}[r]\ar@{-->}[rd]\ar@{-->}[d] & X\ar[d]\\
+        Y\ar[r] & Z
+    }
+\end{equation*}
+
+\section{Limits}
+
+\begin{definition}[Limit]
+    Let $D:\mathscr I\to\A$ be a diagram. A \textit{limit} of $D$ is a cone $(L, \{p_I\}_{I\in\mathscr I})$ such that for any other cone $(A,\{f_I\}_{I\in\mathscr I})$, there is a unique map $\widetilde f: A\to L$ such that for all $I\in\mathscr I$, $p_I\circ\widetilde f = f_I$. The maps $p_I$ are called the \textit{projections} of the limit.
+\end{definition}
+
+For example, a limit over a pullback diagram is 
+\begin{equation*}
+    \xymatrix{
+        A\ar[rrd]^{f_1}\ar[rdd]_{f_2}\ar@{.>}[rd]|-{\widetilde f}\\
+        & L\ar[r]_-{\pi_1}\ar[d]^{\pi_2} & X\ar[d]\\
+        & Y\ar[r] & Z
+    }
+\end{equation*}
+
+\begin{definition}[Product]
+    Let $\mathscr I$ be a shape category with no morphisms other than the identity morphisms. Then, a \textit{product} in a category $\A$ is a limit over a diagram $D:\mathscr I\to\A$.
+\end{definition}
+
+In particular if $\mathscr I$ is empty, then a limit over a diagram $D:\mathscr I\to\A$ is simply the \textit{final object}.

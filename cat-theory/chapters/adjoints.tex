@@ -1,0 +1,19 @@
+\begin{definition}
+    Let $\A$ and $\B$ be locally small categories and $F: \A\to\B$ and $G:\B\to\A$ be functors. We say that $F$ is \textit{left adjoint} to $G$ and $G$ is \textit{right adjoint} to $F$ if there is a natural isomorphism between (bi)functors $\A^\op\times\B\to\catSet$.
+    \begin{equation*}
+        \Hom_{\B}(F-,-)\cong\Hom_{\A}(-,G-)
+    \end{equation*}
+\end{definition}
+
+Upon unraveling the definition, we see that for every morphism $(f,g): (A,B)\to(A',B')$ in $\A\times\B$, the following diagram commutes: 
+\begin{equation*}
+    \xymatrix{
+    \Hom_{\B}(FA,B)\ar[r]\ar[d]_{\eta_{(A,B)}} & \Hom_{\B}(FA',B')\ar[d]^{\eta_{(A',B')}}\\
+    \Hom_{\A}(A,GB)\ar[r] & \Hom_{\A}(A',GB')\\
+    }
+\end{equation*}
+
+In particular, we require that for each $A\in\A$ and $B\in\B$, there is a set bijection 
+\begin{equation*}
+    \Hom_{\B}(FA,B)\longleftrightarrow\Hom_{\A}(A,GB)
+\end{equation*}
