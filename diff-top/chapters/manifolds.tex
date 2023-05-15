@@ -1,0 +1,31 @@
+\begin{definition}[Locally Euclidean]
+    A topological space $M$ is said to be \textit{locally Euclidean of dimension $n$} if for every point $p\in M$ there is a neighborhood $U$ of $p$, an open subset $V\subseteq\R^n$ and a homeomorphism $\phi: U\to V$.
+
+    The pair $(U,\phi: U\to\R^n)$ is called a \textit{chart}, $U$ is called a \textit{coordinate neighborhood} and $\phi$ a \textit{coordinate map}. We say that a chart $(U,\phi)$ is \textit{centered} at $p\in U$ if $\phi(p) = \mathbf 0$.
+\end{definition}
+
+Recall that for $m\ne n$, nonempty open subsets of $\R^m$ and $\R^n$ are not homeomorphic, consequently, the local dimension is well defined.
+
+\begin{definition}[Manifold]
+    A \textit{topological manifold} is a Hausdorff, second countable, locally Euclidean space. It is said to be of dimension $n$ if it is locally Euclidean of dimension $n$.
+\end{definition}
+
+\begin{definition}[Compatibility of Charts]
+    Two charts $(U,\phi: U\to\R^n)$ and $(V,\psi: V\to\R^n)$ of a topological manifold are said to be \textit{$C^\infty$-compatible} if the two maps 
+    \begin{equation*}
+        \phi\circ\psi^{-1}:\psi(U\cap V)\to\phi(U\cap V),\quad \psi\circ\phi^{-1}:\phi(U\cap V)\to\psi(U\cap V)
+    \end{equation*}
+    are smooth. These two maps are called the \textit{transition functions} between the charts. If $U$ and $V$ are disjoint then the two charts are automatically $C^\infty$-compatible.
+\end{definition}
+
+Henceforth, by compatible charts, we mean $C^\infty$-compatible charts.
+
+\begin{definition}[Atlas]
+    A \textit{$C^\infty$-atlas} on a locally Euclidean space $M$ is a collection $\mathfrak U = \{(U_\alpha,\psi_\alpha)\}_{\alpha\in J}$ of pairwise compatible charts that cover $M$.
+
+    An atlas $\frakM$ on a locally Euclidean spacce is sadi to be \textit{maximal} if it is not contained in a larger atlas.
+\end{definition}
+
+\begin{lemma}
+    Let $\{(U_\alpha,\phi_\alpha)\}$ be an atlas on a locally Euclidean space. If two charts $(V,\psi)$ and $(W,\sigma)$ are both compatible with the atlas $\{(U_\alpha,\phi_\alpha)\}$, then they are compatible with each other.
+\end{lemma}

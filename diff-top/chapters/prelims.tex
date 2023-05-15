@@ -1,0 +1,42 @@
+The coordinates on $\R^n$ are denoted by $x^1,\ldots,x^n$. Let $U\subseteq\R^n$ be open. A real valued function $f: U\to\R$ is said to be $C^k$ at $p\in U$ if its partial derivatives 
+\begin{equation*}
+    \frac{\partial^i f}{\partial x^{i_1}\cdots\partial x^{i_j}}
+\end{equation*}
+of all orders $j\le k$ exist and are continuous at $p$. In particular, $f$ is $C^\infty$ if it is $C^k$ for all $k\ge 0$. Henceforth, we use the term \textit{smooth function} to mean $C^\infty$ function.
+
+\begin{definition}[Diffeomorphism]
+    A smooth map $f: U\subseteq\R^n\to V\subseteq\R^n$ is said to be a \textit{diffeomorphism} if it is bijective and has a smooth inverse.
+\end{definition}
+
+In other words, diffeomorphisms are the isomorphisms in the category of smooth manifolds, $\catMan^\infty$.
+
+\section{Exterior Algebra}
+
+\begin{definition}
+    A $k$-linear function $f: V^n\to\R$ is said to be 
+    \begin{description}
+        \item[symmetric] if for each $\sigma\in\mathfrak S_n$,
+        \begin{equation*}
+            f(v_{\sigma(1)},\ldots,v_{\sigma(n)}) = f(v_1,\ldots,v_n)
+        \end{equation*}
+        \item[alternating] if for each $\sigma\in\mathfrak S_n$,
+        \begin{equation*}
+            f(v_{\sigma(1)},\ldots,v_{\sigma(n)}) = (\sgn\sigma) f(v_1,\ldots,v_n)
+        \end{equation*}
+    \end{description}
+\end{definition}
+
+We denote by $A_n(V)$, the $\R$-vector space of alternating $n$-linear functions on a vector space $V$. These are also called \textit{alternating $n$-tensors} or \textit{multicovectors of degree $n$}.
+
+
+We can symmetrize and alternate operators. Let $f: V^n\to\R$ be an $n$-linear function. Define 
+\begin{align*}
+    \Sym(f)(v_1,\ldots,v_k) = \sum_{\sigma\in\mathfrak S_n}f(v_{\sigma(1)},\ldots,v_{\sigma(n)})\\
+    \Alt(f)(v_1,\ldots,v_k) = \sum_{\sigma\in\mathfrak S_n}(\sgn\sigma)f(v_{\sigma(1)},\ldots,v_{\sigma(n)})
+\end{align*}
+
+It is not hard to see that $\Sym(f)$ is symmetric and $\Alt(f)$ is alternating.
+
+\section{Differential Forms on \texorpdfstring{$\R^n$}{}}
+
+The concept of a differential form is dual to the concept of a vector field. For an open subset $U\subseteq\R^n$, a vector field assigns, to each point in $U$, a vector in the tangent space of the point, similarly, a differential form assigns a covector on the tangent space of the point.
