@@ -64,3 +64,51 @@ The ring of fractions is an initial object in this category. Therefore, we have 
 \section{Modules of Fractions}
 
 Let $M$ be an $A$-module and $S\subseteq A$ be a multiplicatively closed subset. Define the relation $\sim_S$ on $M\times S$ by $(m,s)\sim_S(m',s')$ if and only if there is $t\in S$ such that $t(s'm - sm') = 0$. That this is an equivalence relation is easy to verify. We shall use $m/s$ to denote the equivalence class $[(m,s)]$ in $M\times S/\sim_S$.
+
+It is not hard to see that $S^{-1}M$ forms an $A$-module. Further, it also has the structure of an $S^{-1}A$ module under the action 
+\begin{equation*}
+    \frac{a}{s}\cdot\frac{m}{t} = \frac{a\cdot m}{st}
+\end{equation*}
+
+Let $f: M\to N$ be an $A$-module homomorphism. Consider the map $S^{-1}f: S^{-1}M\to S^{-1}N$ given by 
+\begin{equation*}
+    S^{-1}f\left(\frac{m}{s}\right) = \frac{f(m)}{s}
+\end{equation*}
+
+We must first show that this is well defined. Indeed, if $m/s = m'/s'$, then there is $t\in S$ such that $t(s'm - sm') = 0$, consequently, $t(s'f(m) - sf(m')) = 0$, as a result, $f(m)/s = f(m')/s'$ in $S^{-1}M$. 
+
+We now contend that $S^{-1}f$ is an $S^{-1}A$ module homomorphism. Indeed, we have 
+\begin{equation*}
+    S^{-1}f\left(\frac{m}{s} + \frac{a}{t}\frac{m'}{s'}\right) = S^{-1}f\left(\frac{ts' m + as m'}{sts'}\right) = \frac{f(ts'm + asm')}{sts'} = \frac{ts'f(m) + asf(m')}{sts'} = \frac{f(m)}{s} + \frac{f(m')}{s'}
+\end{equation*}
+
+Finally, let $f: M\to N$ and $g: N\to P$ be $A$-module homomorphisms. Then, 
+\begin{equation*}
+    S^{-1}(g\circ f)\left(\frac{m}{s}\right) = \frac{g(f(m))}{s}\qquad S^{-1}g\left(S^{-1}f\left(\frac{m}{s}\right)\right) = S^{-1}g\left(\frac{f(m)}{s}\right) = \frac{g(f(m))}{s}
+\end{equation*}
+
+\begin{theorem}\thlabel{thm:exactness-of-localization}
+    $S^{-1}:A-\catMod\to S^{-1}A-\catMod$ is an exact functor.
+\end{theorem}
+\begin{proof}
+    Let $M'\stackrel{f}{\longrightarrow}M\stackrel{g}{\longrightarrow}M''$ be an exact sequence. Then, for any $m'/s'\in S^{-1}M'$, we have 
+    \begin{equation*}
+        S^{-1}g\left(S^{-1}f\left(\frac{m'}{s'}\right)\right) = S^{-1}g\left(\frac{f(m')}{s'}\right) = \frac{g(f(m'))}{s'} = 0
+    \end{equation*}
+    As a result, $\im(S^{-1}f)\subseteq\ker(S^{-1}g)$. On the other hand, for $m/s\in\ker S^{-1}g$, we have $g(m)/s = 0$, consequently, there is $t\in S$ such that $tg(m) = 0$, equivalently, $g(tm) = 0$, whence, there is $m'\in M'$ such that $f(m') = tm$. Then, we have 
+    \begin{equation*}
+        f\left(\frac{m'}{st}\right) = \frac{f(m')}{st} = \frac{tm}{st} = \frac{m}{s}
+    \end{equation*}
+    whence, $\ker(S^{-1}g)\subseteq\im(S^{-1}f)$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $N,P,\{M_i\}_{i\in I}$ be submodules of an $A$-module $M$. Then, for a multiplicatively closed $S\subseteq M$,
+    \begin{enumerate}
+        \item $S^{-1}(N\cap P) = S^{-1}N\cap S^{-1}P$
+        \item $\displaystyle S^{-1}\left(\sum_{i\in I}M_i\right) = \sum_{i\in I}S^{-1}M_i$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
