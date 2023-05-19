@@ -1,0 +1,75 @@
+\section{Representable Functors}
+
+\begin{definition}
+    Let $\A$ be a locally small category. Then, for each $A\in\A$, define the functor $H_A:\A^\op\to\catSet$ given by $H_{A}(B) = \A(B,A)$. Similarly, define $H^A:\A\to\catSet$ by $H^A(B) = \A(A,B)$.
+\end{definition}
+
+Notice that $H_\bullet:\A^\op\to[\A^\op,\catSet]$ is a functor. This is known as the \textit{Yoneda Embedding} of $\A$.
+
+
+\section{Yoneda's Lemma}
+
+\begin{theorem}
+    Let $\A$ be a locally small category and $X\in\ob\left([\A^\op,\catSet]\right)$. Then, 
+    $$[\A^\op,\catSet](H_{A}, X) \cong X(A)$$
+    naturally in $A\in\A$ and $X\in[\A^\op,\catSet]$.
+\end{theorem}
+In particular, we are looking at the functors 
+\begin{align*}
+    [\A^\op,\catSet](H_{\bullet_1},\bullet_2): \A^\op\times[\A^\op,\catSet]\to\catSet\\
+    \bullet_2(\bullet_1): \A^\op\times[\A^\op,\catSet]\to\catSet
+\end{align*}
+and would like to show that they are naturally isomorphic.
+
+\begin{proof}
+In other words, for each pair $(A,X)\in\A^\op\times[\A^\op,\catSet]$, we must define a map 
+\begin{equation*}
+    \theta_{A,X}:[\A^\op,\catSet](H_A,X)\to X(A)
+\end{equation*}
+and show that this is a natural bijection. The most natural way to define this map is 
+\begin{equation*}
+    \theta_{A,X}(\alpha) = \alpha_A(\mathbf{id}_A)\qquad\alpha\in[\A^\op,\catSet](H_A,X)
+\end{equation*}
+
+In order to show that $\theta_{A,X}$ is a bijection, we must construct its inverse. Let 
+\begin{equation*}
+    \phi_{A,X}:X(A)\to[\A^\op,\catSet](H_A,X)
+\end{equation*}
+be defined by constructing a natural transformation $\widetilde{x}\in[\A^\op,\catSet](H_A,X)$ for each $x\in X(A)$. In particular, we must define, for each $B\in\A$, a map $\widetilde{x}_B: H_A(B) = \A(B,A)\to X(B)$. We do this by simply choosing $\widetilde{x}_B(f) = (X(f))(x)\in X(B)$ for each $f\in\A(B,A) = \A^\op(A,B)$. Because $X(f)$ is a map from $X(A)$ to $X(B)$ in $\catSet$.
+
+We shall now show that $\widetilde{x}$ is a natural transformation. To do so, we must show that the following square commmutes for each $B,B'\in\ob(\A)$ and $g\in\A^\op(B,B') = \A(B',B)$
+\begin{equation*}
+    \xymatrix{
+        H_A(B) = \A(B,A)\ar[r]^-{H_A(g)}\ar[d]_-{\widetilde{x}_B} & H_A(B') = \A(B',A)\ar[d]^-{\widetilde{x}_{B'}}\\
+        X(B)\ar[r]_{X(g)} & X(B')
+    }
+\end{equation*}
+
+For any $h\in\A(B,A)$, we have $(H_A(g))(f) = f\circ g\in\A(B',A)$. Then, $\widetilde{x}_{B'}(f\circ g) = (X(f\circ g))(x)$. On the other hand, we have 
+\begin{equation*}
+    (X(g))(\widetilde{x}_B(f)) = (X(g))((X(f))(x))
+\end{equation*}
+But by (contravariant) functoriality of $X$, we see that $X(f\circ g) = X(g)\circ X(f)$ and therefore, the square commutes.
+
+Next, we must show that $\theta_{A,X}$ and $\phi_{A,X}$ are inverses to one another, which would establish that they are bijections. Pick some $x\in X(A)$. We must show that $\theta_{A,X}(\phi_{A,X}(x)) = x$. Let us, for the ease of notation, denote $\theta_{A,X} = (\widehat{\cdot})$ and we already have the notation $\phi_{A,X}(x) = \widetilde{x}$.
+
+Pick any $\alpha\in[\A^\op,\catSet](H_A,X)$. Then, $\widetilde{\widehat{\alpha}}$ is an element of $[\A^\op,\catSet](H_A,X)$, therefore, it suffices to show, for all $B\in\ob(\A)$ that $(\widetilde{\widehat{\alpha}}) = \alpha_B$. Indeed, let $f\in H_A(B) = \A^\op(A,B) = \A(B,A)$
+\begin{equation*}
+    (\widetilde{\widehat{\alpha}}_B)(f) = (X(f))(\widehat{\alpha}) = (X(f))(\alpha_A(\mathbf{id}_A))
+\end{equation*}
+
+Now, since $\alpha$ is a natural transformation between the functors $H_A$ and $X$, we have the following commutative diagram:
+\begin{equation*}
+\xymatrix{
+    H_A(A)\ar[r]^{H_A(f)}\ar[d]_{\alpha_A} & H_A(B)\ar[d]^{\alpha_B}\\
+    X(A)\ar[r]_{X(f)} & X(B)
+}
+\end{equation*}
+Therefore, for $\mathbf{id}_A\in H_A(A)$, we have 
+\begin{equation*}
+    (X(f))(\alpha_A(\mathbf{id}_A)) = \alpha_B(\mathbf{id}_A\circ f) = \alpha_B(f)
+\end{equation*}
+and the conclusion follows.
+
+We have now shown that $\theta_{A,X}$ and $\phi_{A,X}$ are bijections. Lastly, we must show that they are natural. \textcolor{red}{TODO: Add in later}
+\end{proof}

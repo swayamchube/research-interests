@@ -144,3 +144,9 @@ That this is a functor follows from the fact that if $U\subseteq V$, then the re
 Consider $\catCRing$, the category of commutative rings and $\catMon$, the category of monoids. Consider the covariant functor $M_n:\catCRing\to\catMon$ that maps a commutative ring $R$ to the monoid $M_n(R)$ of $n\times n$ matrices with entries from $R$. 
 
 Consider now the forgetful functor $U:\catCRing\to\catMon$ that maps a ring $R$ to its multiplicative monoid. It is not hard to see that $\det_n$ is a natural transformation from $M_n\to U$.
+
+\subsection{The Category of Functors}
+
+Let $\A$ and $\B$ be categories. Denote by $[\A,\B]$, the category with objects as functors from $\A$ to $\B$ and morphisms as natural transformations between functors. That this is a category follows from the fact that the composition of two natural transformations is a natural transformation.
+
+In particular, the category $[\A^\op,\catSet]$ is called the \textit{presheaf category} on $\A$.
