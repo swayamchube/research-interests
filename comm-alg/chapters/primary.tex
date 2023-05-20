@@ -1,0 +1,42 @@
+A primary ideal is a generalization of the ideals $p^n\Z$ in $\Z$, as is evident from the following definition.
+
+\begin{definition}[Primary Ideals]
+    An ideal $\frakq\subseteq A$ is said to be \textit{primary} if 
+    \begin{equation*}
+        xy\in\frakq\Longrightarrow x\in\frakq\text{ or }y^n\in\frakq\text{ for some } n > 0
+    \end{equation*}
+\end{definition}
+
+From the definition, we see that every prime ideal is primary. It is not hard to see that $\frakq$ is primary if and only if every zero divisor in $A/\frakq$ is nilpotent.
+
+
+\begin{proposition}
+    If $\frakq$ is primary, then $\sqrt{\frakq}$ is prime. Further, $\sqrt{\frakq}$ is the smallest prime ideal containing $\frakq$.
+\end{proposition}
+\begin{proof}
+    Suppose $xy\in\sqrt{\frakq}$, then there is $n > 0$ such that $x^ny^n\in\frakq$, consequently, there is an $m > 0$ such that $x^n\in\frakq$ or $y^{mn}\in\frakq$, therefore, $x\in\sqrt{\frakq}$ or $y\in\sqrt{\frakq}$, whence $\sqrt{\frakq}$ is prime. The second assertion is trivial.
+\end{proof}
+
+If $\frakq$ is a primary ideal, then $\frakp = \sqrt{\frakq}$ is called the \textit{associated prime ideal} of $\frakq$ and $\frakq$ is said to be \textit{$\frakp$-primary}.
+
+Consider the ring $A = k[x,y]$ and the ideal $\frakq = (x,y^2)$. The quotient ring $A/\frakq$ is isomorphic to $k[y]/(y^2)$ where every zero divisor is nilpotent consequently, $\frakq$ is primary. The radical ideal $\frakp = \sqrt{\frakq} = (x,y)$ is a prime ideal such that $\frakp^2\subsetneq\frakq\subsetneq\frakp$, therefore, $\frakq$ is not a prime power.
+
+On the other hand, consider the ring $A = k[x,y,z]/(xy - z^2)$ and the prime ideal $\frakp = (\overline x,\overline z)\subseteq A$. We contend that $\frakp^2\subseteq A$ is not primary. Indeed, note that $\overline x\overline y = \overline z^2\in\frakp^2$ but $\overline x\notin\frakp^2$ and $\overline y\notin\frakp^2$, and the conclusion follows.
+
+\begin{proposition}
+    If $\sqrt{\fraka}$ is maximal, then $\fraka$ is primary.
+\end{proposition}
+\begin{proof}
+    Let $\frakm = \sqrt{\fraka}$ and $\phi: A\to A/\fraka$ denote the natural map. Then, $\phi(\sqrt{\fraka})$ is the maximal ideal in $A/\fraka$ and is also the nilradical of $A/\fraka$, consequently, $A/\fraka$ is local and every non-unit is nilpotent. Hence, $\fraka$ is primary.
+\end{proof}
+
+\begin{lemma}
+    If $\{\frakq_i\}_{i = 1}^n$ are $\frakp$-primary, then so is $\frakq=\bigcap_{i = 1}^n\frakq_i$.
+\end{lemma}
+\begin{proof}
+    Obviously, 
+    \begin{equation*}
+        \sqrt{\frakq} = \bigcap_{i = 1}^n\sqrt{\frakq_i} = \frakp
+    \end{equation*}
+    Let $xy\in\frakq$. If $y\in\frakp$, then we are done, since $\frakp = \sqrt{\frakq}$. Else, $y^n\notin\frakq_i$ for every positive integer $n$, since $\frakp = \sqrt{\frakq_i}$ whereby $x\in\frakq_i$ for each $1\le i\le n$ and the conclusion follows.
+\end{proof}

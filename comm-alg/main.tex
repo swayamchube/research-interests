@@ -13,6 +13,12 @@
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\coker}{\operatorname{coker}}
 
+\newcommand{\fraka}{\mathfrak a}
+\newcommand{\frakb}{\mathfrak b}
+\newcommand{\frakm}{\mathfrak m}
+\newcommand{\frakp}{\mathfrak p}
+\newcommand{\frakq}{\mathfrak q}
+
 \newcommand{\setItemNumber}[1]{\setcounter{enumi}{\numexpr#1-1\relax}}
 
 \title{Commutative Algebra}
@@ -23,9 +29,7 @@
 \maketitle
 
 \begin{abstract}
-This document mainly contains terse notes of commutative algebra and solutions to exercises from \cite{atiyah-macdonald}. The three main references were \cite{atiyah-macdonald}, \cite{dummit-foote} and \cite{lang}. 
 
-Except for in the chapter on modules, all rings are assumed to be commutative unless stated otherwise. We use a uniform convention to represent a commutative ring with $A$ and a general ring with $R$. Similarly, we represent modules by one of $M, N, P$. A maximal ideal is generally denoted by $\mathfrak m$ while a prime ideal is denoted by $\mathfrak p$.
 \end{abstract}
 
 \tableofcontents
@@ -40,6 +44,9 @@ Except for in the chapter on modules, all rings are assumed to be commutative un
 
 \chapter{Localization}
 \input{chapters/localization.tex}
+
+\chapter{Primary Decomposition}
+\input{chapters/primary.tex}
 
 \chapter{Noetherian and Artinian Rings and Modules}
 \input{chapters/noether-artin.tex}

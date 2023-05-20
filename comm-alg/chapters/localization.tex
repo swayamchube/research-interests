@@ -26,6 +26,13 @@ Recall that if $\mathfrak p$ is a prime ideal in $A$, then $S = A\backslash\math
     On the other hand, if $a/s\notin\mathfrak m$, then $a/s$ is a unit since $(a/s)\cdot(s/a) = 1$. Now, since the collection of all non-units forms an ideal, the ring must be local due to \thref{prop:non-unit-ideal-local}.
 \end{proof}
 
+\begin{proposition}
+    Let $\mathfrak m$ be the unique maximal ideal of $A_{\mathfrak p}$. Then, $A_{\mathfrak p}/\mathfrak m\cong Q(A/\mathfrak p)$ where the latter is the field of fractions of $A/\mathfrak p$.
+\end{proposition}
+\begin{proof}
+    \textcolor{red}{TODO: Add in later}
+\end{proof}
+
 Similarly, when we let $S = \{a^n\}_{n\ge 0}$ for some $a\in A$, we denote $S^{-1}A$ by $A_a$.
 
 There is a degenerate case, when we allow $0\in S$, notice that the ring $S^{-1}A$ is the zero ring, since for all $a/s\in S^{-1}A$, we have $0(as) = 0$, therefore, $a/s = 0/s$.
@@ -64,6 +71,8 @@ The ring of fractions is an initial object in this category. Therefore, we have 
 \section{Modules of Fractions}
 
 Let $M$ be an $A$-module and $S\subseteq A$ be a multiplicatively closed subset. Define the relation $\sim_S$ on $M\times S$ by $(m,s)\sim_S(m',s')$ if and only if there is $t\in S$ such that $t(s'm - sm') = 0$. That this is an equivalence relation is easy to verify. We shall use $m/s$ to denote the equivalence class $[(m,s)]$ in $M\times S/\sim_S$.
+
+As in the previous section, there is a natural $A$-module homomorphism $\varphi: M\to S^{-1}M$ given by $\varphi(m) = m/1$. This map is called the \textit{localization map}.
 
 It is not hard to see that $S^{-1}M$ forms an $A$-module. Further, it also has the structure of an $S^{-1}A$ module under the action 
 \begin{equation*}
@@ -104,11 +113,19 @@ Finally, let $f: M\to N$ and $g: N\to P$ be $A$-module homomorphisms. Then,
 
 \begin{proposition}
     Let $N,P,\{M_i\}_{i\in I}$ be submodules of an $A$-module $M$. Then, for a multiplicatively closed $S\subseteq M$,
-    \begin{enumerate}
+    \begin{enumerate}[label=(\alph*)]
         \item $S^{-1}(N\cap P) = S^{-1}N\cap S^{-1}P$
         \item $\displaystyle S^{-1}\left(\sum_{i\in I}M_i\right) = \sum_{i\in I}S^{-1}M_i$
     \end{enumerate}
 \end{proposition}
 \begin{proof}
-    
+\begin{enumerate}[label=(\alph*)]
+\item We have the exact sequences $0\rightarrow N\cap P\rightarrow N$ and $0\rightarrow N\cap P\rightarrow P$. Due to \thref{thm:exactness-of-localization}, the sequences $0\rightarrow S^{-1}(N\cap P)\rightarrow S^{-1}N$ and $0\rightarrow S^{-1}(N\cap P)\rightarrow S^{-1}N$ are exact, consequently, $S^{-1}(N\cap P)\subseteq S^{-1}N\cap S^{-1}P$.
+
+On the other hand, if $n/s = p/t$ for some $n\in N$, $p\in P$ and $s,t\in S$, there is some $u\in S$ such that $u(tn - sp) = 0$, equivalently, $m = utn = usp\in N\cap P$. Thus, $m/(stu) = n/s = p/t$, and the conclusion follows.
+
+\item Let $\overline M = \sum_{i\in I}M_i$. Then, there is the exact sequence $0\rightarrow M_i\rightarrow \overline M$. Then, due to \thref{thm:exactness-of-localization}, the sequence $0\rightarrow S^{-1}M_i\rightarrow S^{-1}\overline M$ is exact. Consequently, $\displaystyle\sum_{i\in I}S^{-1}M_i\subseteq S^{-1}\overline M$.
+
+On the other hand, any element in $S^{-1}\overline M$ is of the form $(m_{i_1} + \cdots + m_{i_n})/s = m_{i_1}/s + \cdots + m_{i_n}/s$ for some $m_{i_n}\in M_{i_n}$ and $s\in S$. The conclusion follows.
+\end{enumerate}
 \end{proof}
