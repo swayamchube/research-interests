@@ -7,7 +7,12 @@ A primary ideal is a generalization of the ideals $p^n\Z$ in $\Z$, as is evident
     \end{equation*}
 \end{definition}
 
-From the definition, we see that every prime ideal is primary. It is not hard to see that $\frakq$ is primary if and only if every zero divisor in $A/\frakq$ is nilpotent.
+
+From the definition, we see that every prime ideal is primary. It is not hard to see that
+\begin{itemize}
+\item $\frakq$ is primary if and only if every zero divisor in $A/\frakq$ is nilpotent. 
+\item $\frakq$ is primary if and only if $(0)$ is primary in $A/\frakq$.
+\end{itemize}
 
 
 \begin{proposition}
@@ -30,7 +35,7 @@ On the other hand, consider the ring $A = k[x,y,z]/(xy - z^2)$ and the prime ide
     Let $\frakm = \sqrt{\fraka}$ and $\phi: A\to A/\fraka$ denote the natural map. Then, $\phi(\sqrt{\fraka})$ is the maximal ideal in $A/\fraka$ and is also the nilradical of $A/\fraka$, consequently, $A/\fraka$ is local and every non-unit is nilpotent. Hence, $\fraka$ is primary.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\thlabel{lem:intersection-p-primary}
     If $\{\frakq_i\}_{i = 1}^n$ are $\frakp$-primary, then so is $\frakq=\bigcap_{i = 1}^n\frakq_i$.
 \end{lemma}
 \begin{proof}
@@ -39,4 +44,47 @@ On the other hand, consider the ring $A = k[x,y,z]/(xy - z^2)$ and the prime ide
         \sqrt{\frakq} = \bigcap_{i = 1}^n\sqrt{\frakq_i} = \frakp
     \end{equation*}
     Let $xy\in\frakq$. If $y\in\frakp$, then we are done, since $\frakp = \sqrt{\frakq}$. Else, $y^n\notin\frakq_i$ for every positive integer $n$, since $\frakp = \sqrt{\frakq_i}$ whereby $x\in\frakq_i$ for each $1\le i\le n$ and the conclusion follows.
+\end{proof}
+
+\begin{lemma}
+    Let $\frakq$ be a $\frakp$-primary ideal and $x\in A$. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item if $x\in\frakq$, then $(\frakq: x) = (1)$.
+        \item if $x\notin\frakq$, then $(\frakq: x)$ is $\frakp$-primary.
+        \item if $x\notin\frakp$, then $(\frakq: x) = \frakq$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Trivial.
+    \item If $y\in(\frakq:x)$, then $xy\in\frakq$, therefore, $y\in\frakp$. Thus, we have $\frakq\subseteq(\frakq:x)\subseteq\frakp$. Taking radicals, $\frakp\subseteq\sqrt{(\frakq:x)}\subseteq\frakp$, whereby $\sqrt{(\frakq: x)} = \frakp$.
+
+    On the other hand, if $yz\in(\frakq: x)$, then $xyz\in\frakq$. If $z\in\frakp$, then we are done. Else, $xy\in\frakq$ and $y\in(q:x)$ whence $(q: x)$ is $\frakp$-primary.
+    \item If $y\in(q: x)$, then $yx\in\frakq$. Since $x\notin\frakp$, we must have $y\in\frakq$. This completes the proof.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Primary Decomposition]
+    A \textit{primary decomposition} of an ideal $\fraka\subseteq A$ is an expression of $\fraka$ as a \textit{finite} intersection of primary ideals.
+    \begin{equation*}
+        \fraka = \bigcap_{i = 1}^n\frakq_i
+    \end{equation*}
+    The ideal $\fraka$ is said to be \textit{decomposable} if it has a primary decomposition. Moreover, if for all $1\le i\le n$, $\sqrt{\frakq_i}$ are distinct and 
+    \begin{equation*}
+        \bigcap_{j\ne i}\frakq_j\not\subseteq\frakq_i
+    \end{equation*}
+    then the primary decomposition is said to be \textit{minimal}.
+\end{definition}
+
+Using \thref{lem:intersection-p-primary}, it is not hard to see that every decomposable ideal has a minimal decomposition.
+
+\begin{theorem}[First Uniqueness Theorem]\thlabel{thm:first-uniqueness-theorem}
+    Let $\fraka\subseteq A$ be a decomposable ideal and 
+    \begin{equation*}
+        \fraka = \bigcap_{i = 1}^n\frakq_i
+    \end{equation*}
+    be a minimal primary decomposition with $\frakp_i = \sqrt{\frakq_i}$. Then, the $\frakp_i$'s are precisely the prime ideals the occur in the set $\{\sqrt{(\fraka: x)}\mid x\in A\}$.
+\end{theorem}
+\begin{proof}
+    
 \end{proof}

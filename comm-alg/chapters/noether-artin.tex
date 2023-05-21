@@ -3,7 +3,7 @@
 \section{Noetherian Rings}
 
 \begin{lemma}
-    If $A$ is Noetherian and $\phi: A\to B$ is an epimorphism, then $B$ is also Noetherian.
+    If $A$ is Noetherian and $\phi: A\to B$ is a surjective ring homomorphism, then $B$ is also Noetherian.
 \end{lemma}
 
 \begin{theorem}[Hilbert Basis Theorem]
@@ -35,5 +35,36 @@ Note that the converse is also true since $A\cong A[x]/(x)$. The following proof
 \end{proof}
 
 An analogous theorem, with an analogous proof is true wherein $A[x]$ is replaced by $A\llbracket x\rrbracket$.
+
+\subsection{Primary Decomposition}
+
+\begin{definition}[Irreducible]
+    An ideal $\fraka\subseteq A$ is said to be \textit{irreducible} if for all ideals $\frakb,\frakc\subseteq A$,
+    \begin{equation*}
+        \fraka = \frakb\cap\frakc\Longrightarrow \fraka = \frakb\text{ or }\fraka = \frakc
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    In a noethering, every ideal can be expressed as a finite intersection of irreducible ideals.
+\end{lemma}
+\begin{proof}
+    Let $\Sigma$ be the poset of ideals that cannot be expressed as a finite intersection of irreducible ideals in $A$. Suppose $\Sigma$ is nonempty, then every chain in $\Sigma$ is finite (owing to noetherian-ness) whence has an upper bound, thus $\Sigma$ has a maximal element (Zorn's Lemma), say $\fraka$. Note that $\fraka$ cannot be irreducible, therefore, there are ideals $\frakb,\frakc$ properly containing $\fraka$ such that $\fraka = \frakb\cap\frakc$. Due to the maximality of $\fraka$, both $\frakb$ and $\frakc$ can be expressed as a finite intersection of irreducible ideals in $A$, as a result, so can $\fraka$, a contradiction. Thus $\Sigma$ must be empty and the proof is complete.
+\end{proof}
+
+\begin{lemma}
+    Every irreducible ideal in a noethering is primary.
+\end{lemma}
+\begin{proof}
+    Let $\frakq\subseteq A$ be an irreducible ideal. We shall show that $(0)$ is primary in $A/\frakq$, which is equivalent to $\frakq$ being primary. Let $x,y\in A/\frakq$ such that $xy = 0$. If $x\ne 0$, then consider the chain 
+    \begin{equation*}
+        \Ann(y)\subseteq\Ann(y^2)\subseteq\cdots
+    \end{equation*}
+    Since $A/\frakq$ is a noethering, there is a positive integer $n$ such that $\Ann(y^n) = \Ann(y^{n + 1})$. We contend that $(x)\cap(y^n) = 0$. Indeed, if $z\in(x)\cap(y^n)$, then there are $u,v\in A/\frakq$ such that $z = ux = vy^n$. Then,
+    \begin{equation*}
+        vy^{n + 1} = zy = uxy = 0
+    \end{equation*}
+    whence $v\in\Ann(y^{n + 1}) = \Ann(y^n)$, whereby $z = 0$. But since $(0)$ is irreducible and $x\ne 0$, we must have $y^n = 0$ and $(0)$ is primary. This completes the proof.
+\end{proof}
 
 \section{Artinian Rings}

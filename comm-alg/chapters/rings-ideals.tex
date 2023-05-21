@@ -32,7 +32,61 @@ We contend that the ring $A = k[x_1,x_2,\ldots]/(x_1,x_2,\ldots)^2$ is local. In
 
 \section{Operations on Ideals}
 
-\section{Radical Ideals}
+Obviously, the intersection $\fraka\cap\frakb$ of two ideals is an ideal. The sum of ideals is defined as the following collection
+\begin{equation*}
+    \sum_{i\in I}\fraka_i = \left\{\sum_{\text{finite }i\in I}a_i\bigg\vert~a_i\in\fraka_i\right\}
+\end{equation*}
+It is not hard to argue that the sum is the smallest ideal containing the ideals $\{\fraka_i\}_{i\in I}$. The product of two ideals is defined as 
+\begin{equation*}
+    \fraka\frakb = \left\{\sum_{\text{finite}}a_ib_i\bigg\vert~a_i\in\fraka,~b_i\in\frakb\right\}
+\end{equation*}
+Inductively, we may define powers of an ideal as $\fraka^n = \fraka\fraka^{n - 1}$ with the convention that $\fraka^0 = (1) = A$.
+
+\begin{proposition}
+    Let $\fraka,\frakb,\frakc\subseteq A$ be ideals. Then, 
+    \begin{equation*}
+        \fraka(\frakb + \frakc) = \fraka\frakb + \fraka\frakc
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Obviously, $\fraka\frakb\subseteq\fraka(\frakb + \frakc)$ and $\fraka\frakc\subseteq\fraka(\frakb + \frakc)$ and thus, $\fraka\frakb + \fraka\frakc\subseteq\fraka(\frakb + \frakc)$. On the other hand, any element of $\fraka(\frakb + \frakc)$ is a finite sum of the form $\sum_{i} a_i(b_i + c_i)$ which can be rearranged as $\sum_{i} a_ib_i + \sum_{i}a_ic_i\in\fraka\frakb + \fraka\frakc$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    \begin{enumerate}[label=(\alph*)]
+    \item Let $\frakp_1,\ldots,\frakp_n$ be prime ideals and let $\fraka$ be an ideal contained in $\bigcup_{i = 1}^n\frakp_i$. Then $\fraka\subseteq\frakp_i$ for some $1\le i\le n$.
+    \item Let $\fraka_1,\ldots,\fraka_n$ be ideals and let $\frakp$ be a prime ideal containing $\bigcap_{i = 1}^n\fraka_i$. Then $\fraka_i\subseteq\frakp$ for some $i$.
+    \end{enumerate}
+\end{proposition}
+
+For ideals $\fraka,\frakb\subseteq A$, define their ideal quotient as 
+\begin{equation*}
+    (\fraka:\frakb) = \{x\in A\mid x\frakb\subseteq\fraka\}
+\end{equation*}
+
+\begin{proposition}
+    Let $\fraka,\frakb,\frakc\subseteq A$ be ideals. Then 
+    \begin{enumerate}
+        \item $(\fraka:\frakb)\frakb\subseteq\fraka$
+        \item $((\fraka:\frakb):\frakc) = (\fraka:\frakb\frakc)$
+        \item $(\bigcap_{i\in I}\fraka_i:\frakb) = \bigcap_{i\in I}(\fraka_i:\frakb)$
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    If every prime ideal in $A$ is principal, then $A$ is a principal ring.
+\end{proposition}
+\begin{proof}
+    Suppose not. Let $\Sigma$ be the poset of ideals in $A$ that are not principal, ordered by inclusion and $\{\fraka_i\}_{i\in I}$ be a chain in $\Sigma$. Let $\fraka = \bigcup_{i\in I}\fraka_i$. We claim that $\fraka$ is not principal, for if it were, then $\fraka = (a)$ for some $a\in A$. Then, $a\in\fraka_i$ for some $i\in I$ whence $\fraka_i = (a)$, a contradiction. Hence, every chain in $\Sigma$ has an upper bound, therefore, $\Sigma$ has a maximal element, say $\frakp$.
+
+    We contend that $\frakp$ is a prime ideal. Suppose not, then there are $a,b\notin\frakp$ such that $ab\in\frakp$. \textcolor{red}{Add in later}
+\end{proof}
+
+\begin{proposition}
+    Let $A$ be a UFD. Then $A$ is a PID if and only if $\dim A\le 1$.
+\end{proposition}
+
+\subsection{Radical Ideals}
 
 \begin{definition}[Radical Ideal]
     For an ideal $\fraka\subseteq A$, we define its \textit{radical} as 
