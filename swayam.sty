@@ -1,0 +1,188 @@
+\RequirePackage{
+    amsmath, 
+    amsthm, 
+    amssymb, 
+    xcolor, 
+    geometry, 
+    tikz, 
+    hyperref, 
+    mathrsfs,
+    enumitem,
+    fancyhdr,
+    lipsum,
+    mathpazo,
+    nicefrac,
+    wasysym,
+    mathtools
+}
+\RequirePackage[all,cmtip]{xy}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[framemethod = tikz]{mdframed}
+\RequirePackage{theoremref}
+
+\usetikzlibrary{automata, arrows.meta, positioning, cd}
+
+\hypersetup {
+    colorlinks=true,
+}
+
+\geometry{
+    margin=1in,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {\itshape}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                 
+
+
+\theoremstyle{thmstyle}
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem*{cor}{Corollary}
+\newtheorem{ex}{Example}
+
+\newcounter{theorem}[chapter]
+
+\newenvironment{theorem}[1][]{
+	\stepcounter{theorem}
+	\ifstrempty{#1}{
+		\begin{mdframed}[linewidth=1pt,linecolor=blue!10, backgroundcolor=blue!10,]
+		% \bfseries Theorem~\thechapter.\thetheorem.\normalfont
+        \begin{thm}
+    }{
+		\begin{mdframed}[linewidth=1pt,linecolor=blue!10, backgroundcolor=blue!10,]
+		% \bfseries Theorem~\thechapter.\thetheorem~(#1).\normalfont
+        \begin{thm}[#1]
+	}
+}{\end{thm}\end{mdframed}}
+    
+\newenvironment{definition}[1][]{
+    \stepcounter{theorem}
+    \ifstrempty{#1}{
+        \begin{mdframed}[linewidth=1pt, linecolor=gray!15, backgroundcolor=gray!15,]
+        % \bfseries Definition~\thechapter.\thetheorem.\normalfont
+        \begin{defn}
+    }{
+        \begin{mdframed}[linewidth=1pt, linecolor=gray!15, backgroundcolor=gray!15,]
+        % \bfseries Definition~\thechapter.\thetheorem~(#1).\normalfont
+        \begin{defn}[#1]
+    }
+}{\end{defn}\end{mdframed}}
+                        
+\newenvironment{proposition}[1][]{
+    \stepcounter{theorem}
+	\ifstrempty{#1}{
+		\begin{mdframed}[linewidth=1pt, linecolor=blue!10, backgroundcolor=blue!10,]
+		% \bfseries Proposition~\thechapter.\thetheorem.\normalfont
+        \begin{prop}
+	}{
+		\begin{mdframed}[linewidth=1pt, linecolor=blue!10, backgroundcolor=blue!10,]
+		% \bfseries Proposition~\thechapter.\thetheorem~(#1).\normalfont
+        \begin{prop}[#1]
+	}
+}{\end{prop}\end{mdframed}}
+
+\newenvironment{corollary}[1][]{
+	\ifstrempty{#1}{
+		\begin{mdframed}[linewidth=1pt, linecolor=blue!10, backgroundcolor=blue!10,]
+        \begin{cor}
+	}{
+		\begin{mdframed}[linewidth=1pt, linecolor=blue!10, backgroundcolor=blue!10,]
+        \begin{cor}[#1]
+	}
+}{\end{cor}\end{mdframed}}
+    
+\newenvironment{lemma}[1][]{
+	\stepcounter{theorem}
+	\ifstrempty{#1}{
+		\begin{mdframed}[linewidth=0pt, linecolor=yellow, backgroundcolor=yellow!30,]
+		% \bfseries Lemma~\thechapter.\thetheorem.\normalfont
+        \begin{lem}
+	}{
+		\begin{mdframed}[linewidth=0pt, linecolor=yellow, backgroundcolor=yellow!30,]
+        % \bfseries Lemma~\thechapter.\thetheorem~(#1).\normalfont
+        \begin{lem}[#1]
+	}
+}{\end{lem}\end{mdframed}}
+
+\newenvironment{example}[1][]{
+    \ifstrempty{#1}{
+		\begin{mdframed}[linewidth=1pt, linecolor=red!20, backgroundcolor=red!20,]
+		% \bfseries Example.\normalfont
+        \begin{ex}
+	}{
+		\begin{mdframed}[linewidth=1pt, linecolor=red!20, backgroundcolor=red!20,]
+		% \bfseries Example~(#1).\normalfont
+        \begin{ex}[#1]
+	}
+}{\end{ex}\end{mdframed}}
+
+\newenvironment{exercise}{
+	\begin{mdframed}[linewidth=1pt, linecolor=green, backgroundcolor=green!10,]
+    \bfseries Exercise.\normalfont
+}{\end{mdframed}}
+        
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\footrulewidth}{\headrulewidth}
+\setlength{\headheight}{15pt}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\frakM}{\mathfrak{M}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}}
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coker}{\operatorname{coker}}
+
+\newcommand{\fraka}{\mathfrak a}
+\newcommand{\frakb}{\mathfrak b}
+\newcommand{\frakc}{\mathfrak c}
+\newcommand{\frakm}{\mathfrak m}
+\newcommand{\frakp}{\mathfrak p}
+\newcommand{\frakq}{\mathfrak q}
+\newcommand{\frakN}{\mathfrak N}
+\newcommand{\frakR}{\mathfrak R}
