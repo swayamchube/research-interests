@@ -1,0 +1,139 @@
+\begin{definition}[Integral Extension]
+    Let $A\subseteq B$ be a subring. Then, $\alpha\in B$ is said to be \textit{integral} over $A$ if it satisfies a monic polynomial in $A[x]$. The extension $A\hookrightarrow B$ is said to be integral if every element of $B$ is integral over $A$.
+\end{definition}
+
+\begin{theorem}\thlabel{thm:equivalence-integral-extension}
+    Let $A\subseteq B$ be a subring and $\alpha\in B$. Then, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\alpha$ is integral over $A$
+        \item $A[\alpha]$ is a finitely generated $A$-module 
+        \item $A[\alpha]$ is contained in a subring $C$ of $B$ such that $C$ is a finitely generated $A$-module 
+        \item There is a faithful $A[\alpha]$-module $M$ which is finitely generated as an $A$-module.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{description}
+    \item[$(a)\Longrightarrow(b)$:] If $\alpha^n + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0$. Then, it is not hard to argue that $\{1,\alpha,\ldots,\alpha^{n - 1}\}$ generated $A[\alpha]$ over $A$.
+    \item[$(b)\Longrightarrow(c)$:] Take $C = A[\alpha]$ 
+    \item[$(c)\Longrightarrow(d)$:] $C$ is a faithful $A[\alpha]$ module which is a finitely generated $A$-module.
+    \item[$(d)\Longrightarrow(a)$:] Let $\phi: M\to M$ be the map $m\mapsto\alpha\cdot m$. We have $\phi(M)\subseteq AM$, consequently, due to \thref{prop:CH-type} (since $\fraka = A$ is an ideal in $A$), there are $a_i\in A$ such that 
+    \begin{equation*}
+        (\alpha^n + a_{n - 1}\alpha^{n - 1} + \cdots + a_0)\cdot m = 0
+    \end{equation*}
+    for each $m\in M$. But since $M$ is a faithful $A[\alpha]$-module, we must have $\alpha^{n} + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0$, whereby $\alpha$ is integral over $A$.
+\end{description}
+\end{proof}
+
+In particular, from \thref{thm:equivalence-integral-extension}(c), we note that any element in a finite $A$-algebra is integral over $A$.
+
+\begin{proposition}
+    Let $\{\alpha_i\}_{i = 1}^n$ be elements of $B$, each integral over $A$. Then the ring $A[\alpha_1,\ldots,\alpha_n]$ is a finitely generated $A$-module.
+\end{proposition}
+\begin{proof}
+    Denote by $A_k$ the subring $A[x_1,\ldots,x_k]$. We have that $A_{k + 1}$ is a finite $A_k$-algebra, whereby $A_n$ is a finite $A$-algebra, thereby completing the proof.
+\end{proof}
+
+\begin{corollary}
+    The set $C$ of elements of $B$ which are integral over $A$ is a subring of $B$ containing $A$.
+\end{corollary}
+\begin{proof}
+    Let $\alpha,\beta\in C$. Then, $A[\alpha,\beta]$ is a finite $A$-algebra. Now, $A\subseteq A[\alpha - \beta]\subseteq A[\alpha,\beta]$ and $A\subseteq A[\alpha\beta]\subseteq A[\alpha,\beta]$ whereby both $\alpha - \beta,\alpha\beta\in C$ and $C$ is a ring.
+\end{proof}
+
+The set $C$ as defined above is called the \textit{integral closure of $A$ in $B$}. If $C = A$, then $A$ is said to be \textit{integrally closed in $B$}.
+
+\begin{theorem}\thlabel{thm:integral-extension-transitive}
+    Let $A\subseteq B\subseteq C$ such that $B/A$ and $C/B$ are integral extensions. Then $C/A$ is an integral extension.
+\end{theorem}
+\begin{proof}
+    Let $\alpha\in C$. Then, 
+    \begin{equation*}
+        \alpha^n + b_{n - 1}\alpha^{n - 1} + \cdots + b_0 = 0
+    \end{equation*}
+    for some $b_i\in B$. Then, $\alpha$ is integral over $B' = A[b_0,\ldots,b_{n - 1}]$, consequently, $B'[\alpha]$ is a finite $B'$-algebra. But since $B'$ is a finite $A$-algebra, $B'[\alpha]$ is a finite $A$-algebra and $\alpha$ is integral over $A$.
+\end{proof}
+
+\begin{corollary}
+    Let $A\subseteq B$ and $C$ be the integral closure of $A$ in $B$. Then, $C$ is integrally closed in $B$.
+\end{corollary}
+\begin{proof}
+    Let $\alpha\in B$ be integral over $C$. Then, $C[\alpha]$ is integral over $C$, whereby $C[\alpha] = C$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:int-ext-localization}
+    Let $A\subseteq B$ be an integral extension. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item if $\frakb\subseteq B$ is an ideal and $\pi: B\to B/\frakb$ is the canonical surjection, then $B/\frakb$ is integral over $\pi(A)$. In particular, due to the First Isomorphism Theorem, we see that $B/\frakb$ is integral over a copy of $A/\fraka$ where $\fraka = \frakb\cap A$.
+        \item if $S\subseteq A$ is multiplicatively closed, then $S^{-1}B$ is integral over $S^{-1}A$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\beta\in B/\frakb$, then there is some $\alpha\in B$ such that $\pi(\alpha) = \beta$. Then, there are $a_0,\ldots,a_{n - 1}\in A$ such that 
+    \begin{equation*}
+        \alpha^n + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0
+    \end{equation*}
+    whereby 
+    \begin{equation*}
+        \beta^n + \pi(a_{n - 1})\beta^{n - 1} + \cdots + \pi(a_0) = 0
+    \end{equation*}
+    and the conclusion follows. 
+    \item Let $\alpha/s\in S^{-1}B$. Since $\alpha$ is integral over $A$, there are $a_0,\ldots,a_{n - 1}\in A$ such that 
+    \begin{equation*}
+        \alpha^n + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0
+    \end{equation*}
+    then 
+    \begin{equation*}
+        (\alpha/s)^n + (a_{n - 1}/s)(\alpha/s)^{n - 1} + \cdots + a_0/s^n = 0
+    \end{equation*}
+    which completes the proof.
+\end{enumerate}
+\end{proof}
+
+\section{The Cohen-Seidenberg Theorems}
+
+\subsection{Going Up Theorem}
+
+\begin{proposition}
+    Let $A\subseteq B$ be an integral extension of integral domains. Then $A$ is a field if and only if $B$ is a field.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}\thlabel{prop:q-max-iff-p-max}
+    Let $A\subseteq B$ be an integral extension, $\frakq\subseteq B$ a prime ideal and $\frakp = \frakq^c = \frakq\cap A$. Then $\frakq$ is maximal if and only if $\frakp$ is maximal.
+\end{proposition}
+\begin{proof}
+    Due to \thref{prop:int-ext-localization}, $B/\frakq$ is integral over a copy of $A/\frakp$. The conclusion now follows from the above proposition.
+\end{proof}
+
+\begin{proposition}
+    Let $A\subseteq B$ be an integral extension. Let $\frakq,\frakq'\subseteq B$ be prime ideals of $B$ such that $\frakq\subseteq\frakq'$. If $\frakq\cap A = \frakq'\cap A = \frakp$, then $\frakq = \frakq'$.
+\end{proposition}
+\begin{proof}
+    Let $S = A\backslash\frakp$ and treat all rings and ideals as $A$-modules. Then, $S^{-1}A\subseteq S^{-1}B$ is an integral extension and since $\frakq\cap S = \frakq'\cap S = \emptyset$, the ideals $S^{-1}\frakq$ and $S^{-1}\frakq'$ are prime ideals in $B$ such that 
+    \begin{equation*}
+        S^{-1}\frakq\cap S^{-1}A = S^{-1}(\frakq\cap A) = S^{-1}\frakp = S^{-1}(\frakq'\cap A) = S^{-1}\frakq'\cap S^{-1}A
+    \end{equation*}
+    where all the above equalities follow from treating $\frakp,\frakq,\frakq',A$ as $A$-submodules of $B$, in particular, due to \thref{prop:localization-commutes-modules}.
+
+    But note that $S^{-1}\frakp$ is maximal in $A$ whence $S^{-1}\frakq = S^{-1}\frakq'$ due to the previous proposition. But recall that under localization, the contraction after extension of prime ideals is the prime ideal itself, whereby the contraction of $S^{-1}\frakq$ is $\frakq$ whence $\frakq = \frakq'$.
+\end{proof}
+
+\begin{lemma}
+    Let $A\subseteq B$ be rings, $B$ integral over $A$, and let $\frakp$ be a prime ideal of $A$. Then there is a prime ideal $\frakq$ of $B$ such that $\frakq\cap A = \frakp$.
+\end{lemma}
+
+\subsection{Going Down Theorem}
+
+\section{The Nullstellensatz}
+
+We require the following lemma due to Zariski. We shall see an alternate proof of this after looking at valuations.
+
+\begin{lemma}\thlabel{lem:zariski-k-algebra}
+    Let $B$ be a finite $k$-algebra. If $B$ is a field, then it is a finite algebraic extension of $k$.
+\end{lemma}
+
+\begin{theorem}[Hilbert's Nullstellensatz Strong Form]
+    
+\end{theorem}

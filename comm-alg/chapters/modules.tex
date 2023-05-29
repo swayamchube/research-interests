@@ -250,7 +250,7 @@ A universal object in $\mathscr C$ is called the tensor product of $M$ and $N$ a
     \begin{equation*}
     \xymatrix {
         M\times N\ar[r]^-T\ar[d]_\varphi & P\\
-        M\otimes N\ar@{.>}[ru]_{\exists!\phi}
+        M\otimes_A N\ar@{.>}[ru]_{\exists!\phi}
     }
     \end{equation*}
 \end{definition}
@@ -293,7 +293,34 @@ To show that existence of $\phi$, we must show that $D\subseteq\ker f$, since we
     \end{equation*}
 \end{mdframed}
 
-\subsection*{Properties of Tensor Product}
+\begin{proposition}
+    Let $F$ and $G$ be free $A$-modules with basis given by $\{f_i\}_{i\in I}$ and $\{g_j\}_{j\in J}$ respectively. Then, $F\otimes_A G$ is a free $A$-module with basis $\{f_i\otimes g_j\}_{i\in I,~j\in J}$.
+\end{proposition}
+\begin{proof}
+    It is not hard to see that the set $\{f_i\otimes g_j\}_{i\in I,~j\in J}$ is generating for $F\otimes_A G$. Therefore, it suffices to show that this set is linearly independent. Suppose not, then there is a finite linear combination 
+    \begin{equation*}
+        \sum_{i\in I,~j\in J}a_{ij}f_i\otimes g_j = 0
+    \end{equation*}
+    Pick some $i_0\in I$ and $j_0\in J$. Let $\phi: F\times G\to A$ be the bilinear map such that 
+    \begin{equation*}
+        \phi(f_i,g_j) = 
+        \begin{cases}
+            1 & i = i_0\text{ and } j = j_0\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    This induces an $A$-module homomorphism $\varphi: F\otimes G\to A$ such that 
+    \begin{equation*}
+        \varphi(f_i\otimes g_j) = 
+        \begin{cases}
+            1 & i = i_0\text{ and } j = j_0\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    whence, it follows that $a_{i_0j_0} = 0$ and the collection $\{f_i\otimes g_j\}_{i\in I,~j\in J}$ is linearly independent.
+\end{proof}
+
+\subsection{Properties of Tensor Product}
 
 Given two modules $M$ and $N$ with the canonical map $\varphi: M\times N\to M\otimes N$, we denote by $m\otimes n$, the element $\varphi(m,n)$ in $M\otimes N$.
 
@@ -320,6 +347,10 @@ Since both $\varphi'$ and $T$ are bilinear, so is $\varphi\circ T$, consequently
 
 Similarly, there is a homomorphism $g: N\otimes M\to M\otimes N$ such that $g(n\otimes m) = m\otimes m$. It is not hard to see that $g\circ f = \mathbf{id}_{M\otimes N}$ and $f\circ g = \mathbf{id}_{N\otimes M}$, consequently, they are isomorphisms.
 
+\item We shall show $(M\otimes_A N)\otimes_A P\cong M\otimes_A N\otimes_A P$ since the proof of the other isomorphism follows analogously. Fix some $z\in P$ and consider the map $f_z: M\times N\to M\otimes_A N\otimes_A P$ given by $(x,y)\mapsto x\otimes y\otimes z$. This is an $A$-linear map and thus induces a map $g_z: M\otimes_A N\to M\otimes_A N\otimes_A P$ given by $g_z(x\otimes y) = x\otimes y\otimes z$. The map $G: (M\otimes_A N)\times P\to M\otimes_A N\otimes_A P$ given by $G(x\otimes y, z) = g_z(x\otimes y) = x\otimes y\otimes z$ is a well defined $A$-linear map which induces a map $h: (M\otimes_A N)\otimes_A P\to M\otimes_A N\otimes_A P$ given by $(x\otimes y)\otimes z\mapsto x\otimes y\otimes z$.
+
+On the other hand, the map $F: M\times N\times P\to (M\otimes_A N)\otimes_A P$ given by $(x,y,z)\mapsto x\otimes y\otimes z$ is $A$-linear and thus induces a map $f: M\otimes_A N\otimes_A P\to (M\otimes_A N)\otimes_A P$ given by $x\otimes y\otimes z\mapsto(x\otimes y)\otimes z$. Since the maps $f$ and $h$ are inverses to one another for elementary tensors, they are inverses to one another over their respective domains, whereby both are isomorphisms.
+
 \item Define the map $f:\left(\bigoplus_{\i\in I}M_i\right)\times N\to\bigoplus(M_i\otimes_A N)$ by $f((m_i)\otimes n) = (m_i\otimes n)$, which is a bilinear map. This induces a map $\phi:\left(\bigoplus_{i\in I}M_i\right)\otimes_A N\to\bigoplus_{i\in I}(M_i\otimes_A N)$ such that $f((m_i)\otimes n) = (m_i\otimes n)$. 
 
 Now, consider the map $f_i: M_i\times N\to M\otimes N$ given by $f_i(m_i, n) = \iota_i(m_i)\otimes n$. This induces a map $g_i: M_i\otimes_A N\to M\otimes N$ such that $g_i(m_i\otimes n) = \iota_i(m_i)\otimes n$. We may now define a map $\psi:\bigoplus_{i\in I} (M_i\otimes_A N)\to\left(\bigoplus_{i\in I}M_i\right)\otimes_A N$ given by 
@@ -336,7 +367,6 @@ and
 \begin{equation*}
     \phi\circ\psi((m_i\otimes n_i)) = \sum\phi(g_i(m_i\otimes n_i)) = (m_i\otimes n_i)
 \end{equation*}
-\item
 
 \item Consider the map $T: A\times M\to M$ given by $(a,m)\mapsto am$. It is not hard to see that this map is bilinear, consequently, there is a map $f: A\otimes M\to M$ such that the following diagram commutes: 
 \begin{equation*}
@@ -559,3 +589,40 @@ In particular, from \thref{thm:pojective-module-equivalence}(c), we see that eve
 \begin{proof}
     Follows from the fact that free modules are flat and projective modules are direct summands of free modules.
 \end{proof}
+
+\section{Algebras}
+
+\begin{definition}
+    An \textit{$A$-algebra} is a ring homomorphism $\phi: A\to B$. This endows $B$ with the structure of an $A$-module. The algebra is said to be of \textit{finite type} if $B$ is finitely generated as an $A$-module. A homomorphism between algebras $(\phi_1,B_1)$ and $(\phi_2,B_2)$ is a map $\varphi: B_1\to B_2$ making the following diagram commute.
+    \begin{equation*}
+        \xymatrix{
+            A\ar[r]^{\phi_1}\ar[d]_{\phi_2} & B_2\\
+            B_1\ar[ru]_{\varphi}
+        }
+    \end{equation*}
+    This gives rise to a locally small category $A-\catAlg$ with morphisms as defined above.
+\end{definition}
+
+\subsection{Tensor Product of Algebras}
+
+Consider the two $A$-algebras $f: A\to B$ and $f: A\to C$. Then, the map 
+\begin{equation*}
+    \mu: B\times C\times B\times C\to B\otimes_A C
+\end{equation*}
+given by $\mu(b,c,b',c') = bb'\otimes cc'$ is $A$-multilinear, whereby it induces a map 
+\begin{equation*}
+    \mu': B\otimes_A C\otimes_A B\otimes_A C\to B\otimes_A C 
+\end{equation*}
+given by $\mu'(b\otimes c\otimes b'\otimes c') = bb'\otimes cc'$. Let $D = B\otimes_A C$. Then, we have $\mu': D\otimes_A D\to D$ given by $\mu'(b\otimes c,b'\otimes c') = bb'\otimes cc'$.
+
+Let $\varphi: D\times D\to D\otimes_A D$ be the natural map. Then, the composition $\cdot = \mu'\circ\varphi: D\times D\to D$ is given by 
+\begin{equation*}
+    (b\otimes c)\cdot(b'\otimes c') = bb'\otimes cc'
+\end{equation*}
+
+We contend that $(D\otimes_A D,+,\cdot,0\otimes 0, 1\otimes 1)$ is a ring. To do this, we need only verify that multiplication distributes over addition. Indeed, 
+\begin{align*}
+    (b\otimes c)\cdot(b'\otimes c' + b''\otimes c'') &= \mu'\left((b\otimes c)\otimes (b'\otimes c' + b''\otimes c'')\right)\\
+    &= \mu'((b\otimes c\otimes b'\otimes c') + (b\otimes c\otimes b''\otimes c''))\\
+    &= bb'\otimes cc' + bb''\otimes cc''
+\end{align*}

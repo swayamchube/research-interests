@@ -1,5 +1,28 @@
 \section{Chain Conditions}
 
+\begin{proposition}
+    Let $M$ be an $A$-module and $\phi\in\End_A(M)$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $M$ is noetherian and $\phi$ is surjective, then $\phi$ is injective.
+        \item If $M$ is artinian and $\phi$ is injective, then $\phi$ is surjective.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+\item Consider the ascending chain of submodules
+\begin{equation*}
+    \ker\phi\subseteq\ker\phi^2\subseteq\cdots
+\end{equation*}
+Since $M$ is noetherian, there is an index $n$ such that $\ker\phi^n = \ker\phi^{n + 1}$. Let $x\in\ker\phi^n$. Due to the surjectivity of $\phi$, there is $y\in M$ such that $\phi(y) = x$, whence $\phi^{n + 1}(y) = 0$ and $y\in\ker\phi^{n + 1} = \ker\phi^n$. Therefore, $\ker\phi^n = 0$ and $\phi$ is injective.
+
+\item Consider the descending chain of submodules
+\begin{equation*}
+    \im\phi\supseteq\im\phi^2\supseteq\cdots
+\end{equation*}
+Since $M$ is artinian, there is an index $n$ such that $\im\phi^n = \im\phi^{n + 1}$. Then, for every $x\in M$, there is $y\in M$ such that $\phi^n(x) = \phi^{n + 1}(y)$, whence $x = \phi(y)$, this establishes surjectivity.
+\end{enumerate}
+\end{proof}
+
 \section{Noetherian Rings}
 
 \begin{lemma}

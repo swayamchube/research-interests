@@ -37,6 +37,27 @@ Similarly, when we let $S = \{a^n\}_{n\ge 0}$ for some $a\in A$, we denote $S^{-
 
 There is a degenerate case, when we allow $0\in S$, notice that the ring $S^{-1}A$ is the zero ring, since for all $a/s\in S^{-1}A$, we have $0(as) = 0$, therefore, $a/s = 0/s$.
 
+\begin{proposition}\thlabel{prop:localization-of-product}
+    Let $\{A_i\}_{i\in I}$ be a collection of commutative rings and $\{S_i\subseteq A_i\}$ be a collection of multiplicatively closed sets. Then, 
+    \begin{equation*}
+        \left(\prod_{i\in I}S_i\right)^{-1}\left(\prod_{i\in I}A_i\right)\cong\prod_{i\in I}(S_i^{-1}A_i)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Define the map $\phi: \prod_{i\in I}(S_i^{-1}A_i)\to\left(\prod_{i\in I}S_i\right)^{-1}\left(\prod_{i\in I}A_i\right)$ given by 
+    \begin{equation*}
+        \phi\left(\left(\frac{a_i}{s_i}\right)_{i\in I}\right) = \frac{(a_i)_{i\in I}}{(s_i)_{i\in I}}
+    \end{equation*}
+    It is straightforward to argue that this map is well defined and surjective. We now contend that this is an isomorphism, for which it suffices to show that $\ker\phi$ is trivial. Indeed, if $(a_i/s_i)_{i\in I}\in\ker\phi$, then there is $(t_i)_{i\in I}$ such that $(t_ia_i)_{i\in I} = (0)_{i\in I}$ whereby, $t_ia_i = 0$ for each $i$ and $a_i/s_i = 0$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $\{A_i\}$ be a collection of rings then every localization of $\prod_{i\in I}A_i$ is of the form $(A_i)_{\frakp_i}$ for some $i\in I$ where $\frakp_i\subseteq A_i$ is a prime ideal.
+\end{corollary}
+\begin{proof}
+    Follows from the fact that prime ideals in $\prod_{i\in I}A_i$ are of the form $\pi_i^{-1}(\frakp_i)$ where $\frakp_i$ is a prime ideal in $A_i$ and $\pi: \prod_{i\in I}A_i\to A_i$ is the natural projection map.
+\end{proof}
+
 \subsection{Universal Property}
 
 Fix a multiplicative subset $S\subseteq A$. Let $\mathscr C$ denote the category with objects as pairs $(\phi, B)$ where $\phi: A\to B$ is a ring homomorphism such that $\phi(s)$ is a unit in $B$ for all $s\in S$. A morphism in this category is a map $f:(\phi, B)\to(\psi, C)$ making the following diagram commute.
@@ -111,11 +132,12 @@ Finally, let $f: M\to N$ and $g: N\to P$ be $A$-module homomorphisms. Then,
     whence, $\ker(S^{-1}g)\subseteq\im(S^{-1}f)$. This completes the proof.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:localization-commutes-modules}
     Let $N,P,\{M_i\}_{i\in I}$ be submodules of an $A$-module $M$. Then, for a multiplicatively closed $S\subseteq M$,
     \begin{enumerate}[label=(\alph*)]
         \item $S^{-1}(N\cap P) = S^{-1}N\cap S^{-1}P$
         \item $\displaystyle S^{-1}\left(\sum_{i\in I}M_i\right) = \sum_{i\in I}S^{-1}M_i$
+        \item $S^{-1}(M/N)\cong S^{-1}M/S^{-1}N$ as $S^{-1}A$ modules.
     \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -127,5 +149,99 @@ On the other hand, if $n/s = p/t$ for some $n\in N$, $p\in P$ and $s,t\in S$, th
 \item Let $\overline M = \sum_{i\in I}M_i$. Then, there is the exact sequence $0\rightarrow M_i\rightarrow \overline M$. Then, due to \thref{thm:exactness-of-localization}, the sequence $0\rightarrow S^{-1}M_i\rightarrow S^{-1}\overline M$ is exact. Consequently, $\displaystyle\sum_{i\in I}S^{-1}M_i\subseteq S^{-1}\overline M$.
 
 On the other hand, any element in $S^{-1}\overline M$ is of the form $(m_{i_1} + \cdots + m_{i_n})/s = m_{i_1}/s + \cdots + m_{i_n}/s$ for some $m_{i_n}\in M_{i_n}$ and $s\in S$. The conclusion follows.
+
+\item Consider the short exact sequence $0\rightarrow N\rightarrow M\rightarrow M/N\rightarrow 0$. Due to \thref{thm:exactness-of-localization}, we obtain the short exact sequence of $S^{-1}A$-modules $0\rightarrow S^{-1}N\rightarrow S^{-1}M\rightarrow S^{-1}(M/N)\rightarrow 0$ whereby the conclusion follows.
 \end{enumerate}
+\end{proof}
+
+
+\section{Local Properties}
+
+A property $P$ defined on the class of modules is said to be local if for every $A$-module $M$,
+\begin{quotation}
+    $M$ satisfies $P$ if and only if $M_\frakp$ satisfies $P$ for each $\frakp\in\spec A$.
+\end{quotation}
+
+\begin{proposition}
+    Let $M$ be an $A$-module. Then, the following are equivalent: 
+    \begin{enumerate}
+        \item $M = 0$ 
+        \item $M_\frakp = 0$ for each $\frakp\in\spec A$
+        \item $M_\frakm = 0$ for each $\frakm\in\mspec A$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    That $(a)\Longrightarrow(b)\Longrightarrow(c)$ is obvious. We shall show $(c)\Longrightarrow(a)$. 
+\end{proof}
+
+\begin{proposition}
+    ``Being an integral domain'' is \underline{not} a local property. Similarly, ``being noetherian'' is \underline{not} a local property.
+\end{proposition}
+\begin{proof}
+    Let $A$ be a nonzero integral domain and consider the ring $R = A\times A$. This is not an integral domain. Due to \thref{prop:localization-of-product}, every localization of $R$ is isomorphic to $A_{\frakp}$ where $\frakp\in\spec A$, consequently, is an integral domain. 
+
+    As for the second assertion, consider the ring $R = k\times k\times\cdots$ where $k$ is a nonzero field. This is obviously not noetherian due to the following ascending chain of ideals: 
+    \begin{equation*}
+        (0)\times(0)\times\cdots\subsetneq k\times(0)\times\cdots\subsetneq\cdots
+    \end{equation*}
+    But due to \thref{prop:localization-of-product}, every localization is isomorphic to $k$, consequently, is noetherian.
+\end{proof}
+
+\section{Extension and Contraction of Ideals}
+
+\begin{definition}
+    If $\fraka\subseteq A$ is an ideal, $S\subseteq A$ a multiplicatively closed subset and $\varphi: A\to S^{-1}A$ the natural map. Define $S^{-1}\fraka$ to be the extension of $\fraka$ under the natural map $\varphi$.
+\end{definition}
+
+\begin{theorem}
+    Let $S\subseteq A$ be a multiplicatively closed set. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item Every ideal in $S^{-1}A$ is an extended ideal. 
+        \item If $\fraka\subseteq A$ is an ideal, then 
+        \begin{equation*}
+            \fraka^{ec} = \bigcup_{s\in S}(\fraka: s)
+        \end{equation*}
+        Hence, $\fraka^e = (1)$ if and only if $\fraka\cap S\ne\emptyset$ 
+        \item There is a bijection 
+        \begin{equation*}
+            \{\frakp\in\spec A\mid S\cap\frakp = \emptyset\}\leftrightarrow\spec(S^{-1}A)
+        \end{equation*}
+        given by $\frakp\mapsto S^{-1}\frakp$, which is just the extension map.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\fraka\subseteq S^{-1}A$ be an ideal. We shall show that $\fraka^{ce} = \fraka$. We know that $\fraka^{ce}\subseteq\fraka$ therefore, it suffices to show the reverse inclusion. Let $x/s\in\fraka$. Then, $x/1\in\fraka$, and $x\in\fraka^c$. As a result, $x/1\in\fraka^{ce}$ and $x/s\in\fraka^{ce}$, implying the desired conclusion.
+    \item 
+    \item Let $\frakp$ be a prime ideal in $A$ that does not meet $S$. Let $a/s,b/t\in S^{-1}A$ such that $ab/st\in S^{-1}\frakp$, whereby there is an element $p\in\frakp$ and $r\in S$ such that $ab/st = p/r$ whence there is $u\in S$ such that $uabr = ustp$. Since $ur\notin\frakp$, we must have $ab\in\frakp$, consequently, either $a/s\in S^{-1}\frakp$ or $b/t\in S^{-1}\frakp$, implying the desired conclusion.
+
+    Conversely, since the contraction of any prime ideal in $S^{-1}\frakp$ is also a prime ideal not meeting $S$, lest the prime ideal in $S^{-1} A$ contain a unit. Now, if $\frakp$ is a prime ideal, then 
+    \begin{equation*}
+        \frakp\subseteq\frakp^{ec} = \bigcup_{s\in S}(\frakp: s)\subseteq\frakp
+    \end{equation*}
+    On the other hand, from $(a)$, we see that if $\frakq$ is a prime ideal in $S^{-1}A$, then $\frakq^{ce} = \frakq$, whereby the bijection is established.
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    The operation $S^{-1}$ on ideals of $A$ commutes with formation of finite sums, products, intersections and radicals.
+\end{proposition}
+
+\begin{corollary}
+    $S^{-1}(\frakN(A)) = \frakN(S^{-1}A)$
+\end{corollary}
+\begin{proof}
+    Since $\frakN(A) = \sqrt{(0)}$.
+\end{proof}
+
+From the above proposition, we see that ``$\frakN(A) = (0)$'' is a local property.
+
+\begin{proposition}
+    If $M$ is finitely generated, then $S^{-1}\Ann_A(M) = \Ann_A(S^{-1}M)$. 
+\end{proposition}
+\begin{proof}
+    Induction on the number of generators. Sort of straightforward. Use the fact that 
+    \begin{equation*}
+        \Ann(N_1 + N_2) = \Ann(N_1)\cap\Ann(N_2)
+    \end{equation*}
 \end{proof}

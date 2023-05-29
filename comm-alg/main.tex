@@ -2,23 +2,6 @@
 \usepackage{../swayam}
 \usepackage{stmaryrd}
 
-\newcommand{\spec}{\operatorname{spec}}
-\newcommand{\mspec}{\operatorname{m-spec}}
-\newcommand{\Tor}{\operatorname{Tor}}
-\newcommand{\tor}{\operatorname{tor}}
-\newcommand{\Ann}{\operatorname{Ann}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\End}{\operatorname{End}}
-\newcommand{\im}{\operatorname{im}}
-\newcommand{\coker}{\operatorname{coker}}
-
-\newcommand{\fraka}{\mathfrak a}
-\newcommand{\frakb}{\mathfrak b}
-\newcommand{\frakc}{\mathfrak c}
-\newcommand{\frakm}{\mathfrak m}
-\newcommand{\frakp}{\mathfrak p}
-\newcommand{\frakq}{\mathfrak q}
-
 \newcommand{\setItemNumber}[1]{\setcounter{enumi}{\numexpr#1-1\relax}}
 
 \title{Commutative Algebra}
@@ -29,7 +12,7 @@
 \maketitle
 
 \begin{abstract}
-    The term \textit{noethering} is a portmanteau that is used in place of ``noetherian ring'' and is attributed to the accidental genius of \href{https://youtu.be/RrjJfyEF7Ak?t=1259}{Aryaman Maithani}.
+    Throughout this report, unless mentioned otherwise, all rings are assumed to be commutative. The term \textit{noethering} is a portmanteau that is used in place of ``noetherian ring'' and is attributed to the accidental genius of \href{https://youtu.be/RrjJfyEF7Ak?t=1259}{Aryaman Maithani}.
 \end{abstract}
 
 \tableofcontents
@@ -47,6 +30,9 @@
 
 \chapter{Primary Decomposition}
 \input{chapters/primary.tex}
+
+\chapter{Integral Extensions}
+\input{chapters/integral.tex}
 
 \chapter{Noetherian and Artinian Rings and Modules}
 \input{chapters/noether-artin.tex}

@@ -2,6 +2,17 @@
     A sequence $\{\frakp_0,\ldots,\frakp_n\}$ of prime ideals in $A$ is said to be strictly ascending of length $n$ if $\frakp_0\subsetneq\cdots\subsetneq\frakp_n$. The \textit{Krull dimension} of $A$ is defined to be the supremum of the lengths of all strictly ascending sequences of prime ideals in $A$ and is denoted by $\dim A$.
 \end{definition}
 
+\begin{proposition}
+    Let $A$ and $B$ be rings. Then, every prime ideal in $A\times B$ is of the form $\frakp\times B$ where $\frakp\subseteq A$ is a prime ideal or $A\times\frakq$ where $\frakq\subseteq B$ is a prime ideal.
+\end{proposition}
+\begin{proof}
+    It is known that ideals in $A\times B$ are of the form $\fraka\times\frakb$ where $\fraka$ and $\frakb$ are ideals in $A$ and $B$ respectively. Consequently, the quotient 
+    \begin{equation*}
+        A\times B/\fraka\times\frakb\cong A/\fraka\times B/\frakb
+    \end{equation*}
+    For $\fraka\times\frakb$ we require $A/\fraka\times B/\frakb$ to be an integral domain. This is possible if and only if either $\fraka$ is a prime and $\frakb = B$ or $\fraka = A$ and $\frakb$ is a prime. This completes the proof.
+\end{proof}
+
 \section{Nilradical and Jacobson radical}
 
 \begin{definition}[Multiplicatively Closed]
@@ -121,6 +132,27 @@ Obviously, $\fraka\subseteq\sqrt{\fraka}$. From our definition, it is not hard t
 
 For a prime ideal $\frakp$, note that $\sqrt{\frakp} = \frakp$ and due to $(iii)$, $\sqrt{\frakp^n} = \frakp$ for every positive integer $n$. 
 
+\section{Extension and Contraction of Ideals}
+
+\begin{definition}
+    Let $\phi: A\to B$ be a ring homomorphism. If $\fraka\subseteq A$ is an ideal, then we define its extension $\fraka^e = \phi(\fraka)A$. If $\frakb\subseteq B$ is an ideal, then we define its contraction $\frakb^c = \phi^{-1}(\frakb)$.
+\end{definition}
+
+\begin{proposition}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\fraka\subseteq\fraka^{ec}$ and $\frakb\supseteq\frakb^{ce}$ 
+        \item $\frakb^c = \frakb^{cec}$ and $\fraka^{e} = \fraka^{ece}$
+        \item If $C$ is the set of contracted ideals in $A$ and $E$ is the set of extended ideals in $B$, then $\fraka\mapsto\fraka^e$ is a bijection from $C$ to $E$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Trivial.
+    \item We have $\fraka^{e}\subseteq(\fraka^{ec})^e$ and $\fraka^e\supseteq(\fraka^e)^{ce}$. Similarly, $\frakb^c\supseteq (\frakb^c)^{ec}$ and $\frakb^{c}\subseteq(\frakb^{c})^{ec}$ whence $\frakb^c = \frakb^{cec}$.
+    \item Simply note that the maps $\fraka\mapsto\fraka^e$ and $\frakb\mapsto\frakb^c$ from $C$ to $E$ and $E$ to $C$ are inverses to one another.
+\end{enumerate}
+\end{proof}
+
 \section{The Zariski Topology}
 
 \begin{definition}[Prime Spectrum]
@@ -190,7 +222,7 @@ $(\Longrightarrow)$ We shall show that if $\spec A$ is $T_1$, then $\dim A = 0$.
 
 $(\Longleftarrow)$ Suppose $\dim A = 0$. Let $\frakp$ and $\mathfrak q$ be distinct ideals. We contend that there are $f\notin\frakp$ and $g\notin\frakq$ such that $fg$ is contained in every prime ideal in $A$, equivalently, $fg$ is contained in $\mathfrak N(A)$. Suppose not, that is, for every pair $f\notin\frakp$ and $g\notin\frakq$, there is a prime ideal $\frakp$ disjoint from $\{f,g\}$.
 
-Let $X = A\backslash(\frakp\cap\frakq)$. Let $\Sigma$ be the collection of ideals $\mathfrak a$ contained in $\frakp\cap\frakq$ such that for every finite subset $F\subseteq X$, there is a prime ideal $\mathfrak P$ containing $\mathfrak a$ that is disjoint from $F$.
+Let $X = A\backslash(\frakp\cap\frakq)$. Let $\Sigma$ be the collection of ideals $\mathfrak a$ contained in $\frakp\cap\frakq$ such that for every finite subset $F\subseteq X$, there is a prime ideal $\mathfrak P$ containing $\mathfrak a$ that is disjoint from $F$. It is not hard to see that $(0)\in\Sigma$ and that every ascending chain has an upper bound given by the union of all elements in the chain.
 
 Let $J$ be a maximal element in $\Sigma$ whose existence is guaranteed due to Zorn's Lemma. We shall show that $J$ is prime. Indeed, let $xy\in J$ with $y\notin J$. Then, $J + (y)\notin\Sigma$, therefore, there is a finite subset $F_0\subseteq X$ such that for each prime ideal $\mathfrak P$ containing $J + (y)$, $\mathfrak P\cap F_0\ne\emptyset$.
 
