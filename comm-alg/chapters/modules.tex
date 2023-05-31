@@ -2,12 +2,17 @@
 Throughout this section, $R$ denotes a general ring which need not be commutative.
 
 \begin{definition}[Module]
-    A left $R$-module is an abelian group $(M,+)$ along with a ring action, that is, a ring homomorphism $\mu: R\to\End(M)$.
+    A left $R$-module is an abelian group $(M,+)$ along with a ring action, that is, a ring homomorphism $\mu: R\to\End(M)$. Similarly, a right $R$-module is an abelian group $(M,+)$ along with a ring homomorphism $\mu: R^\text{op}\to\End(M)$ where $R^\text{op}$ is the opposite ring.
 \end{definition}
 
 Henceforth, unless specified otherwise, an \textit{$R$-module} refers to a \textit{left $R$-module}. Trivially note that $R$ is an $R$-module, so is any ideal in $R$ and so is every quotient ring $R/I$ where $I$ is an ideal in $R$. When $R$ is a field, an $R$-module is the same as a vector space.
 
 Every abelian group $G$ trivially forms a $\Z$-module. Using this and the forthcoming \textit{Structure Theorem for Finitely Generated Modules over a PID}, we obtain the \textit{Structure Theorem for Finitely Generated Abelian Groups}.
+
+There is also the notion of a bimodule: 
+\begin{definition}
+    For 
+\end{definition}
 
 \begin{definition}[Submodule]
     Let $M$ be an $R$-module. An $R$-submodule of $M$ is a subgroup $N$ of $M$ which is closed under the action of $R$.
@@ -191,7 +196,7 @@ For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M
     \end{equation*}
 \end{proposition}
 \begin{proof}
-    Since the direct sum is the product in $A-\mathbf{Mod}$, the conclusion follows from the universal property.
+    Since the direct sum is the coproduct in $A-\mathbf{Mod}$, the conclusion follows from the universal property.
 \end{proof}
 
 \begin{theorem}
@@ -227,6 +232,29 @@ For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M
 It is not hard to see that the sequence in the definition is short exact if and only if $f$ is injective, $g$ is surjective and $\im f = \ker g$.
 
 \subsection{Diagram Chasing Poster Children}
+Throughout this (sub)section, $A,B,C$ are $R$-modules where $R$ is a commutative ring.
+
+\begin{lemma}[Splitting Lemma]
+    Let $0\longrightarrow A\stackrel{\iota}{\longrightarrow}B\stackrel{\pi}{\longrightarrow}C\longrightarrow 0$ be a short exact sequence. Then the following are equivalent.
+    \begin{enumerate}[label=(\alph*)]
+        \item There is $\varphi: C\to B$ such that $\pi\circ\varphi = \mathbf{id}_C$ 
+        \item There is $\psi: B\to A$ such that $\psi\circ\iota = \mathbf{id}_A$ 
+        \item There is an isomorphism $\Phi: B\to A\oplus C$ making the following diagram commute.
+        \begin{equation*}
+            \xymatrix {
+                0\ar[r] & A\ar[d]_{\mathbf{id}_A}\ar[r]^\iota & B\ar[r]^\pi\ar@{.>}[d]|-{\Phi} & C\ar[d]^{\mathbf{id}_C}\ar[r] & 0\\
+                0\ar[r] & A\ar[r] & A\oplus C\ar[r] & C\ar[r] & 0\\
+            }
+        \end{equation*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+$(a)\implies(b)$. Define $\psi(b) = \iota^{-1}(b - \varphi(\pi(b)))$. That this map is well defined follows from $\im\iota = \ker\pi$ and that it is a homomorphism is trivial. It is not hard to see that $\psi\circ\iota = \mathbf{id}_A$.
+
+$(b)\Longrightarrow(c)$. Define the map $\Phi: B\to A\oplus C$ by $\Phi(b) = (\psi(b), \pi(b - \iota\circ\psi(b)))$. It is trivial to check that this is an $R$-module homomorphism. From the Short Five Lemma, it now follows that $\Phi$ is an isomorphism.
+
+$(c)\Longrightarrow(a)$. Trivial.
+\end{proof}
 
 
 \section{Tensor Product}
@@ -397,6 +425,20 @@ Further, if $f': M'\to M''$ and $g': N'\to N''$ are $A$-module homomorphisms, th
 \end{equation*}
 
 Now, it is not hard to see that $(f'\circ f')\otimes(g'\circ g)$ and $(f'\otimes g')\circ(f\otimes g)$ agree on the elementary tensors, therefore, agree on all of $M\otimes N$.
+
+\subsection{Restriction and Extension of Scalars}
+
+Let $\phi: A\to B$ be a homomorphism of rings. We shall 
+\begin{itemize}
+    \item convert an $B$-module into an $A$-module. This is known as \textit{restriction of scalars}.
+    \item construct from an $A$-module a $B$-module. This is known as \textit{extension of scalars}.
+\end{itemize}
+
+The first is rather easy to do. Begin with an $B$-module $M$ and define the action of $A$ by $a\cdot m = \phi(a)\cdot m$. That this is a valid ring action is easy to verify. As for the second, note that the homomorphism $\phi$ gives $B$ the structure of an $A$-module whereby, we may consider the tensor product of $A$-modules $B\otimes_A M$. Now, for $b,b'\in B$, define 
+\begin{equation*}
+    b'\cdot(b\otimes m) = bb'\otimes m
+\end{equation*}
+It is not hard to see that this is a ring, whereby, $B\otimes_A M$ is also a $B$-module.
 
 \section{Right Exactness}
 
@@ -626,3 +668,49 @@ We contend that $(D\otimes_A D,+,\cdot,0\otimes 0, 1\otimes 1)$ is a ring. To do
     &= \mu'((b\otimes c\otimes b'\otimes c') + (b\otimes c\otimes b''\otimes c''))\\
     &= bb'\otimes cc' + bb''\otimes cc''
 \end{align*}
+
+\section{Structure Theorem for Modules over a PID}
+Throughout this section, let $R$ be a PID.
+
+\begin{lemma}
+    A finitely generated torsion free $R$-module is free.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    Let $E$ be an $R$-module. For $x\in E$, an element $r\in R$ such that $\Ann_R(x) = (r)$ is said to be a \textit{period} of $x$. An element $c\in R$ is said to be an \textit{exponent} for $E$ (resp. for $x$) if $cE = 0$ (resp. $cx = 0$). The elements $x_1,\ldots,x_n\in E$ are said to be \textit{independent} if 
+    \begin{equation*}
+        (x_i)\cap(x_1,\ldots,\widehat{x_i},\ldots,x_n) = 0
+    \end{equation*}
+    In this case, $(x_1,\ldots,x_n) = (x_1)\oplus\cdots\oplus(x_n)$.
+\end{definition}
+
+\begin{remark}
+    In order to show that $x_1,\ldots,x_n$ are independent, it suffices to show that given any linear combination $a_1x_1 + \cdots + a_nx_n = 0$, we must have $a_ix_i = 0$ for all $1\le i\le n$. Further note that the notion of independence is not the same as that of linear independence. That is, we may have an independent set which is not linearly independent, for each element in the set may be torsion.
+\end{remark}
+
+The following lemma essentially states that it is possible to lift an independent set in a quotient module to the original module. 
+
+\begin{lemma}[Lifting Lemma]
+    Let $E$ be a torsion module with exponent $p^r$ for some prime $p\in R$ and $x_1\in E$ be an element of period $p^r$. Let $\overline E = E/(x_1)$ and $\overline y_1,\ldots,\overline y_m$ be independent elements of $\overline E$. Then for each $1\le i\le m$, there is a representative $y_i\in E$ of $\overline y_i$ such that the period of $y_i$ is same as the period of $\overline y_i$. Further, $x_1,y_1,\ldots,y_m$ are independent.
+\end{lemma}
+\begin{proof}
+    Let $\overline y\in\overline E$, then, $\Ann(\overline y)\supseteq\Ann(\overline E)\supseteq(p^r)$ whereby, $\Ann(y) = (p^n)$ for some $n\le r$. Thus, $p^n y \in (x_1)$ whence there is $p^sc\in R$ with $p\nmid c$ such that $p^ny = p^sc x_1$. Now, $p^scx_1$ has period $p^{r - s}$ and thus $y$ has period $p^{n + r - s}$. This immediately implies that $n + r - s\le s$ and equivalently $n\le s$. Consider now the element $z = y - p^{s - n}cx_1$. This is a representative for $\overline y$ and its period is $p^n$. This shows that we may lift the $y_i$'s to $E$.
+
+    Finally, we must show that the liftings are independent. Indeed, suppose 
+    \begin{equation*}
+        ax_1 + a_1y_1 + \cdots + a_my_m = 0
+    \end{equation*}
+    then moving to $\overline{E}$, we have $a_1\overline y_1 + \cdots + a_m\overline y_m = 0$ but since $\overline y_1,\ldots,\overline y_m$ are independent, $a_i\overline y_i = 0$ for each $1\le i\le m$. Now, if $p^{r_i}$ is the period of $\overline y_i$ (we have argued earlier that this must be a power of $p$) and consequently, $p^{r_i}\mid a_i$. This immediately implies that $a_iy_i = 0$ and thus $ax_1 = 0$, which completes the proof.
+\end{proof}
+
+Let $E$ be a finitely generated torsion module. For a prime $p\in R$, define
+\begin{equation*}
+    E[p] = \{x\in E\mid\exists n\in\N,~p^nx = 0\}
+\end{equation*}
+That this is a submodule is easy to verify. Further, it is finitely generated since it is the submodule of a finitely generated module over a PID. Therefore, we may replace $E$ by $E[p]$.
+
+\subsection{The Jordan Canonical Form}
+
+Let $k$ be an algebraically closed field 
