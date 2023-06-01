@@ -692,7 +692,7 @@ Throughout this section, let $R$ be a PID.
 
 The following lemma essentially states that it is possible to lift an independent set in a quotient module to the original module. 
 
-\begin{lemma}[Lifting Lemma]
+\begin{lemma}[Lifting Lemma]\thlabel{lem:lifting-lemma-pid}
     Let $E$ be a torsion module with exponent $p^r$ for some prime $p\in R$ and $x_1\in E$ be an element of period $p^r$. Let $\overline E = E/(x_1)$ and $\overline y_1,\ldots,\overline y_m$ be independent elements of $\overline E$. Then for each $1\le i\le m$, there is a representative $y_i\in E$ of $\overline y_i$ such that the period of $y_i$ is same as the period of $\overline y_i$. Further, $x_1,y_1,\ldots,y_m$ are independent.
 \end{lemma}
 \begin{proof}
@@ -709,7 +709,29 @@ Let $E$ be a finitely generated torsion module. For a prime $p\in R$, define
 \begin{equation*}
     E[p] = \{x\in E\mid\exists n\in\N,~p^nx = 0\}
 \end{equation*}
-That this is a submodule is easy to verify. Further, it is finitely generated since it is the submodule of a finitely generated module over a PID. Therefore, we may replace $E$ by $E[p]$.
+That this is a submodule is easy to verify. Further, it is finitely generated since it is the submodule of a finitely generated module over a PID. 
+
+Let $\Ann(E) = (\alpha)$ where $\alpha = up_1^{t_1}\cdots p_r^{t_r}$ where $u\in R^\times$.
+
+\begin{lemma}
+    \begin{equation*}
+        E\cong\bigoplus_{i = 1}^r E[p_i]
+    \end{equation*}
+\end{lemma}
+
+Since $E[p]$ is finitely generated, we may let $E = E[p]$ henceforth. Since $E[p]$ is finitely generated, take a generating set $\{x_1,\ldots,x_n\}$. Since $(p^m)\subseteq\Ann(x_i)$ for some $m\in\N$, we must have $\Ann(x_i) = (p^{n_i})$ for some $n_i$. As a result, 
+\begin{equation*}
+    \Ann(E)\supseteq\bigcap_{i = 1}^r\Ann(x_i)\ne 0
+\end{equation*}
+whence $\Ann(E) = (p^{n})$ for some positive integer $n$. We shall now show that $E$ has a decomposition. Let $\mathfrak M(E)$ denote the minimum cardinality of a generating set of $E$. Obviously this exists since $E$ has at least one generating set.
+
+Let $x_1\in E$ be an element in a generating set with cardinality $\mathfrak M(E)$ such that $\Ann(x_1)$ divides the annihilator ideal of every other element in the aforementioned generating set. This can be done because the generating set has finite cardinality. 
+
+Let $\overline E = E/(x_1)$. Obviously, $\frakM(\overline E) < \frakM(E)$ whereby, there is a decomposition $\overline E\cong (\overline y_1)\oplus\cdots\oplus(\overline y_m)$ with $(\overline y_i)\cong R/(p^{r_i})$. Due to the \thref{lem:lifting-lemma-pid}, there are corresponding elements $y_1,\ldots,y_m\in E$ such that the period of $y_i$ is that of $\overline y_i$, and $x_1,y_1,\ldots,y_m$ are independent. This shows that the following short exact sequence spilts: 
+\begin{equation*}
+    0\rightarrow(x_1)\rightarrow E\rightarrow\overline E\rightarrow 0
+\end{equation*}
+whence $E\cong(x_1)\oplus(y_1)\oplus\cdots\oplus(y_m)$. This completes the proof of the existence of a decomposition.
 
 \subsection{The Jordan Canonical Form}
 
