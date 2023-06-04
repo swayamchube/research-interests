@@ -1,6 +1,5 @@
 \documentclass[oneside]{report}
 \usepackage{../swayam}
-\usepackage{xspace}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -8,8 +7,7 @@
 \lhead{Swayam Chube}
 \cfoot{\thepage}
 
-\newcommand{\psimeq}{\simeq_p}
-\newcommand{\nice}{\textit{unfathomably based}\xspace}
+\newcommand{\nice}{\underline{\textit{unfathomably based}}\xspace}
 
 \title{Algebraic Topology}
 \author{Swayam Chube}
@@ -24,4 +22,8 @@
 
 \chapter{Covering Spaces}
 \input{chapters/covering-spaces.tex}
+
+\chapter{Homology}
+\input{chapters/homology.tex}
+
 \end{document}

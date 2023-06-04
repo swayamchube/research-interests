@@ -2,7 +2,60 @@
     A covering space of a space $X$ is a space $\widetilde X$ together with a map $p:\widetilde X\to X$ satisfying the condition that there is an open cover $\{U_\alpha\}$ of $X$ such that for each $\alpha\in J$, $p^{-1}(U_\alpha)$ is a disjoint union of open sets in $\widetilde X$, each of which is mapped homeomorphically by $p$ to $U_\alpha$.
 \end{definition}
 
+Notice that for each $x\in X$, the subspace $p^{-1}(x)$ of $\wt X$ has the discrete topology. 
+
+\begin{proposition}
+    Let $p:\wt X\to X$ be a covering map where $X$ is connected. If for some $x\in X$, $|p^{-1}(x)| = n\in\N$, then for all $x'\in X$, $|p^{-1}(x')| = n$.
+\end{proposition}
+\begin{proof}
+    Follows from the fact that the map $x\mapsto|p^{-1}(x)|$ is a continuous map from $X$ to $\N$.
+\end{proof}
+
 \section{Lifting Properties}
+
+\begin{definition}[Lift]
+    Let $f: Y\to X$ be a continuous and $p:\widetilde X\to X$ be a covering map. A \textit{lift} of $f$ is a map $\widetilde f: Y\to\widetilde X$ such that $f = p\circ\widetilde f$. 
+    \begin{equation*}
+        \xymatrix{
+            & {\widetilde X}\ar[d]^p\\
+            Y\ar[r]_f\ar[ru]^{\widetilde f} & X
+        }
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}\thlabel{thm:unique-lifting-connected}
+    Let $Y$ be connected and $p:\widetilde X\to X$ a covering map. If $f: Y\to X$ is a continuous map having two lifts $\widetilde f_1,\widetilde f_2: Y\to\widetilde X$, that agree at some point in $Y$, then they agree on all of $Y$.
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        A = \{y\in Y\mid \widetilde f_1(y) = \widetilde f_2(y)\}
+    \end{equation*}
+    We shall show that $A$ is clopen in $Y$, whence we would be done owing to $A$ being nonempty. Let $y\in A$ and $x = f(y)$. There is a neighborhood $U$ of $x$ such that $p^{-1}(U)$ is a disjoint union of $\{V_\alpha\}$ which are homeomorphically mapped to $U$. Let $V_\beta$ be the one containing $\widetilde x = \widetilde f_1(y) = \widetilde f_2(y)$. Then, due to continuity, there is a neighborhood $N$ of $y$ that is mapped into $V_\beta$ by both $\widetilde f_1$ and $\widetilde f_2$. Then, for all $z\in N$, $p\circ\widetilde f_1(z) = p\circ\widetilde f_2(z)$ but since $p$ is injective on $V_\beta$, we must have $\widetilde f_1(z) = \widetilde f_2(z)$, consequently, $N\subseteq A$ and $A$ is open.
+
+    On the other hand, if $y\notin A$, then $\widetilde f_1(y)$ and $\widetilde f_2(y)$ lie in distinct open sets $V_{\beta_1}$ and $V_{\beta_2}$, consequently, for all $z\in N = \widetilde f_1^{-1}(V_{\beta_1})\cap\widetilde f_2^{-1}(V_{\beta_2})$, $\widetilde f_1(z)\ne\widetilde f_2(z)$, thereby completing the proof.
+\end{proof}
+
+\begin{theorem}[Homotopy Lifting Property]\thlabel{thm:homotopy-lifting}
+    Let $p:\widetilde X\to X$ be a covering map and $F: Y\times I\to X$ a continuous map. Let $\widetilde F_0: Y\to\widetilde X$ be a lift of $F|_{X\times\{0\}}$. Then, there is a unique lift $\widetilde F: Y\times I\to\widetilde X$ of $F$ such that $\widetilde F|_{X\times\{0\}} = \widetilde F_0$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}[Path Lifting]\thlabel{prop:path-lifting}
+    Let $f: I\to X$ be a path and let $x_0 = f(0)$. For any $\widetilde x_0\in p^{-1}(x_0)$, there is a unique lift $\widetilde f: I\to\widetilde X$ such that $\widetilde f(0) = \widetilde x_0$.
+\end{proposition}
+
+\begin{proposition}\thlabel{prop:induced-covering-injective}
+    Let $p:(\widetilde X,\widetilde x_0)\to(X,x_0)$ be a covering map. Then the induced homomorphism $p_*:\pi_1(\widetilde X,\widetilde x_0)\to\pi_1(X,x_0)$ is injective.
+\end{proposition}
+
+\begin{theorem}[Lifting Criterion]\thlabel{thm:lifting-criterion}
+    Let $Y$ be path connected and locally path connected and $p:(\widetilde X,\widetilde x_0)\to(X,x_0)$ be a covering map. Then, for any continuous map $f:(Y,y_0)\to(X,x_0)$, a lift $\widetilde{f}:(Y,y_0)\to(\widetilde X,\widetilde x_0)$ exists if and only if $f_*(\pi_1(Y,y_0))\subseteq p_*(\pi_1(\widetilde X,\widetilde x_0))$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
 
 \section{The Universal Cover}
 
@@ -15,3 +68,135 @@ Henceforth, a topological space is said to be \nice if it is path-connected, loc
 \begin{theorem}\thlabel{thm:universal-cover-exists}
     If $X$ is \nice, then there is a simply connected space $\widetilde X$ and a covering map $p:\widetilde X\to X$.
 \end{theorem}
+\begin{proof}
+Pick a basepoint $x_0\in X$. Define
+\begin{equation*}
+    \widetilde X = \{[\gamma]\mid\gamma: I\to X,~\gamma(0) = x_0\}
+\end{equation*}
+and the function $p:\widetilde X\to X$ by $p([\gamma]) = \gamma(1)$.
+
+Let $\mathscr U$ denote the set of all path connected open sets $U\subseteq X$ such that the homomorphism induced by the inclusion $U\hookrightarrow X$ is trivial. Indeed, if $V\subseteq U\in\mathscr U$ is path connected and open, then the homomorphism induced by the inclusion $V\hookrightarrow X$ is the composition of the homomorphisms induced by $V\hookrightarrow U\hookrightarrow X$ and since the latter is trivial, the composition is trivial, consequently, $V\in\mathscr U$.
+
+We contend that $\mathscr U$ forms a basis for the topology on $X$. Indeed, let $W$ be a neighborhood of $x$, then there is a neighhborhood $U$ of $x$ such that the homomorphism induced by the inclusion $U\hookrightarrow X$ is trivial. Since $X$ is locally path connected, there is a path connected neighborhood $V$ of $x$ that is contained in $U\cap W$, whence the conclusion follows.
+
+We shall now topologize $\widetilde{X}$. Let $\gamma$ be a path in $X$ from $x_0$ and $U\in\mathscr U$ contain $\gamma(1)$. Define the set 
+\begin{equation*}
+    U_{[\gamma]} = \left\{[\gamma * \eta]\mid \eta: I\to U,~\eta(0) = \gamma(1)\right\}
+\end{equation*}
+where the equivalence classes are in $X$. Since $U$ is path connected, $p: U_{[\gamma]}\to U$ is surjective. Moreover, since the homomorphism induced by the inclusion $U\hookrightarrow X$ is trivial, any two paths from $\gamma(1)$ to any point $x\in U$ are homotopic in $X$.
+
+We contend that if $[\gamma']\in U_{[\gamma]}$, then $U_{[\gamma']} = U_{[\gamma]}$. Obviously, there is a path $\eta: I\to U$ such that $\gamma' = \gamma * \eta$, whence it follows that $\gamma' * \mu = \gamma * \eta * \mu$ and thus, $U_{[\gamma']}\subseteq U_{[\gamma]}$. On the other hand, $[\gamma * \mu] = [\gamma * \eta * \overline{\eta} * \mu]$ whereby the conclusion follows.
+
+Next, we claim that the collection $\{U_{\gamma}\}$ forms a basis for a topology on $\widetilde X$. Suppose $[\gamma'']\in U_{[\gamma]}\cap V_{[\gamma']}$ where $U,V\in\mathscr U$, then $U_{[\gamma]} = U_{[\gamma'']}$ and $V_{[\gamma']} = V_{[\gamma'']}$. Since $\mathscr U$ forms a basis, there is $W\in\mathscr U$ such that $W\subseteq U\cap V$, consequently, $W_{[\gamma'']}\subseteq U_{[\gamma'']}\cap V_{[\gamma'']}$. This proves our claim.
+
+Consider the bijection $p: U_{[\gamma]}\to U$, we contend that this is a homeomorphism. For any basis element $V_{[\gamma']}\subseteq U_{[\gamma]}$, we have $p(V_{[\gamma']}) = V$, consequently, $p$ is an open map. On the other hand, if $V\subseteq U$ is an open set, then $p^{-1}(V)\cap U_{[\gamma]} = V_{[\gamma']}$ for some $[\gamma']\in U_{[\gamma]}$ with $\gamma'(1)\in V$. Since $V_{[\gamma']}\subseteq U_{[\gamma']} = U_{[\gamma]}$, we see that the restriction of $p$ is continuous and therefore a homeomorphism.
+
+Using the local formulation of continuity, we have that $p:\widetilde X\to X$ is a continuous map. Any $x\in X$ has a neighborhood $U\in\mathscr U$, consequently, $p^{-1}(U) = \bigcup U_{[\gamma]}$ where $[\gamma]$ ranges over all paths from $x_0$ to some point in $U$. It is not hard to argue that the sets $U_{[\gamma]}$ must partition $p^{-1}(U)$, whereby $p$ is a covering map.
+
+Finally, we must show that $\widetilde X$ is simply connected. Pick the base point $[x_0]\in\widetilde{X}$. First, we show that $\widetilde X$ is path connected. Let $[\gamma]\in\widetilde X$. Define $\gamma_t: I\to X$ by 
+\begin{equation*}
+    \gamma_t(s) = 
+    \begin{cases}
+        \gamma(s) & 0\le s\le t\\
+        \gamma(t) & t < s \le 1
+    \end{cases}
+\end{equation*}
+It suffices to show that the map $\varphi: I\to\widetilde X$ given by $\varphi(t) = [\gamma_t]$ is continuous. Using the Lebesgue Number Lemma, there is a partition $0 = t_0 < t_1 < \cdots < t_n = 1$ such that $\gamma([t_{i - 1}, t_i])\subseteq U_i\in\mathscr U$. Let $p_i: U_{i[\gamma_{t_i}]}\to U_i$ be the restriction of $p$, which is a homeomorphism. Then, for all $t\in[t_{i - 1}, t_i]$, $\varphi(t) = p_i^{-1}(\gamma(t))$ and continuity follows from the Pasting Lemma.
+
+Next, we show $\pi_1(\widetilde X,[x_0]) = 0$. Since $p_*$ is injective, it suffices to show that the image of $p_*$ is trivial. Let $\gamma$ be a loop in the image of $p_*$. Then, the map $t\mapsto[\gamma_t]$ is a lift of $\gamma$ as we have seen earlier and is unique due to \thref{thm:homotopy-lifting}. Now, since the lift is a loop, we must have 
+\begin{equation*}
+    [x_0] = [\gamma_1] = [\gamma]
+\end{equation*}
+consequently, $\gamma$ is nulhomotopic. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Suppose $X$ is \nice. Then for every subgroup $H\subseteq\pi_1(X,x_0)$, there is a covering space $p: (X_H,\widetilde x_0)\to (X,x_0)$  such that $p_*(\pi_1(X_H,\widetilde{x}_0)) = H$.
+\end{theorem}
+
+If $p_1: (\widetilde X_1,\widetilde x_1)\to(X,x_0)$ and $p_2:(\widetilde X_2,\widetilde x_2)\to(X,x_0)$ are covering spaces, then an \textit{isomorphism between} them is a homeomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ such that $p_1 = p_2\circ f$.
+
+\begin{theorem}\thlabel{thm:isomorphism-iff-image-equal}
+    Let $(X, x_0)$ be \underline{path connected and locally path connected} and $p_1:\widetilde X_1\to X$ and $p_2:\widetilde X_2\to X$ be covering spaces. Then, for $\widetilde x_1\in p_1^{-1}(x_0)$ and $\widetilde x_2\in p_2^{-1}(x_0)$, there is an isomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ if and only if $p_{1*}(\pi_1(\widetilde X_1,\widetilde x_1)) = p_{2*}(\pi_1(\widetilde{X}_2, \widetilde x_2))$.
+\end{theorem}
+\begin{proof}
+    We prove the converse, since the forward direction is trivial. Using \thref{thm:lifting-criterion}, there are lifts $\widetilde p_1: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ and $\wt p_2: (\wt X_2,\wt x_2)\to(\wt X_1,\wt x_1)$ of $p_1$ and $p_2$ respectively. This give us $p_1 = p_2\circ\wt p_1$ and $p_2 = p_1\circ\wt p_2$, whereby $p_1\circ(\wt p_2\circ\wt p_1) = p_1$. Note that this implies $\wt p_2\circ\wt p_1$ is a lift of the map $p_1$, but since $\mathbf{id}_{(\wt X_1,\wt x_1)}$ is also a lift, and agree on $\wt x_1$, we must have that $\wt p_2\circ\wt p_1 = \mathbf{id}_{(\wt X_1, \wt x_1)}$ and similarly, $\wt p_1\circ\wt p_2 = \mathbf{id}_{(\wt X_2,\wt x_2)}$. This implies the desired conclusion.
+\end{proof}
+
+Let $X$ be path connected and $p:\wt X\to X$ a path connected covering space. Pick some basepoint $x_0\in X$ and $\wt x_0,\wt x_1\in p^{-1}(x_0)$. Let $\wt\gamma: I\to\wt X$ be a path from $\wt x_0$ to $\wt x_1$ and $\gamma = p\circ\wt\gamma$. Let $H_0 = p_*(\pi_1(\wt X,\wt x_0))$ and $H_1 = p_*(\pi_1(\wt X, \wt x_1))$. Let $g = [\gamma]\in\pi_1(X,x_0)$. 
+
+If $[f]\in\pi_1(\wt X,\wt x_0)$, then $[\overline{\wt\gamma} * f * \wt\gamma]\in\pi_1(\wt X,\wt x_1)$. Consequently, $g^{-1}H_0g\subseteq H_1$. On the other hand, if $[f]\in\pi_1(\wt X,\wt x_1)$, then $[\wt\gamma * f * \overline{\wt \gamma}]\in\pi_1(\wt X,\wt x_1)$. This gives us that $gH_1g^{-1}\subseteq H_0$, in conclusion, $H_1 = g^{-1}H_0g$.
+
+In conclusion, we have proved the following classification theorem.
+
+\begin{theorem}\thlabel{thm:classification-covering-spaces}
+    
+\end{theorem}
+
+\section{Deck Transformations and Covering Space Actions}
+
+\subsection{Deck Transformations}
+\begin{definition}
+    For a covering space $p:\wt X\to X$, the isomorphisms $f: X\to X$ are called \textit{deck transformations}. These form a group $G(\wt X)$ under composition. 
+
+    A covering space $p:\wt X\to X$ is said to be \textit{normal} if for all $x\in X$ and each pair $\wt x,\wt x'\in p^{-1}(x)$, there is a deck transformation that maps $\wt x\mapsto\wt x'$.
+\end{definition}
+
+\begin{remark}\thlabel{rem:deck-single-point-agreement}
+    If $\wt X$ is path connected, then any two deck transformations agreeing on a single point must agree everywhere.
+\end{remark}
+
+\begin{theorem}\thlabel{thm:ftgt-covering-spaces}
+    Let $p: (\wt X,\wt x_0)\to(X,x_0)$ be a path-connected covering space of the path-connected, locally path-connected space $X$, and let $H$ be the subgroup $p_*(\pi_1(\wt X,\wt x_0))$ of $\pi_1(X,x_0)$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item the covering space is normal if and only if $H$ is normal in $\pi_1(X,x_0)$ 
+        \item $G(\wt X)$ is isomorphic to the quotient $N(H)/H$ where $N(H)$ is the normalizer of $H$ in $\pi_1(X,x_0)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Suppose the covering is normal, let $g^{-1}Hg$ be a conjugate of $H$ in $\pi_1(X,x_0)$. Then, there is correspondingly $\wt x_1\in p^{-1}(x_0)$ such that $p_*(\pi_1(\wt X,\wt x_1)) = g^{-1}Hg$. Since the covering is normal, there is a deck transformation $f:\wt X\to\wt X$ taking $\wt x_0$ to $\wt x_1$. From \thref{thm:isomorphism-iff-image-equal}, we must have that $p_*(\pi_1(\wt X,\wt x_0)) = p_*(\pi_1(\wt X,\wt x_1))$, whereby $g^{-1}Hg = H$ and $H\unlhd\pi_1(X,x_0)$.
+
+    Conversely, suppose $H\unlhd\pi_1(X,x_0)$ and let $\wt x_1\in p^{-1}(x_0)$. From \thref{thm:classification-covering-spaces}, we have that $p_*(\pi_1(\wt X,\wt x_1))$ is conjugate to $H$ but since $H$ is normal, the former is equal to $H$. As a result, from \thref{thm:isomorphism-iff-image-equal}, there is a deck transformation taking $x_0$ to $x_1$, consequently, the covering space is normal.
+
+    Note that given $\wt x_0,\wt x_1\in p^{-1}(x_0)$, there is a unique deck transformation taking $\wt x_0$ to $\wt x_1$. Now, given some $[\gamma]\in N(H)$, there is a lift $\wt\gamma: I\to\wt X$ such that $\wt\gamma(0) = \wt x_0$. Define now the function $\phi: N(H)\to G(\wt X)$ by $\phi([\gamma]) = \wt\gamma(1)$. Let $[\gamma],[\delta]\in N(H)$ with $\sigma = \phi([\gamma])$ and $\tau = \phi([\delta])$. Then, it is not hard to see that $\gamma * \delta$ lifts to $\wt\gamma * \sigma(\wt\delta)$, which corresponds to the deck transformation $\sigma\circ\tau$, implying that $\phi$ is a homomorphism. Moreover, $\phi$ is also surjective, for if there is a deck transformation $\sigma$ taking $\wt x_0$ to $\wt x_1$, then $p_*(\pi_1(\wt X,\wt x_1)) = H$. Now, let $\wt\gamma$ be a path in $\wt X$ from $\wt x_0$ to $\wt x_1$ with $\gamma = p\circ\wt\gamma$. This implies $[\gamma]\in N(H)$, consequently, $\phi([\gamma]]) = \sigma$.
+
+    We now contend that $\ker\phi = H$. Obviously $H\subseteq\ker\phi$. On the other hand, if $[\gamma]\in\ker\phi$, then $\gamma$ lifts to a loop based at $\wt x_0$, whereby, $[\gamma]\in H$. The proof is finished by invoking the first isomorphism theorem.
+\end{proof}
+
+\subsection{Covering Space Actions}
+
+\begin{definition}[Covering Space Action]
+    A \textit{group action} of $G$ on a topological space $Y$ is a homomorphism $\varphi: G\to\Aut_{\catTop}(Y)$. A \textit{covering space action} is a group action of $G$ on $Y$ such that for each $y\in Y$, there is a neighborhood $U$ of $y$ such that for all $g_1,g_2\in G$, $g_1U\cap g_2U\ne\emptyset$, if and only if  $g_1 = g_2$.
+\end{definition}
+
+We may rephrase the definition of a covering space action as: 
+\begin{quote}
+    A \textit{covering space action} of $G$ on $Y$ is a group action such that for each $y\in Y$, there is a neighborhood $U$ of $y$ such that for all $g\in G$, $U\cap gU\ne\emptyset$ if and only if $g = 1_G$.
+\end{quote}
+
+\begin{proposition}
+    The group action of the group of deck transformations, $G(\wt X)$, of a covering space $p:\wt X\to X$ is a covering space action.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    Let $G$ act on $Y$ through a covering space action.
+    \begin{enumerate}[label=(\alph*)]
+        \item The quotient map $p: Y\to Y/G$ given by $p(y) = Gy$ is a normal covering space.\footnote{Hence the nomenclature}.
+        \item If $Y$ is path connected, then $G$ is the group of deck transformations of the covering space $p: Y\to Y/G$ 
+        \item If $Y$ is path connected and locally path connected, then $G\cong\pi_1(Y/G, Gy_0)/p_*(\pi_1(Y, y_0))$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $Gy\in Y/G$. Since $G$ acts through a covering space action, there is a neighborhood $U$ of $Y$ such that the collection $\{gU\mid g\in G\}$ is that of disjoint open sets. Obviously, $V = \bigsqcup_{g\in G}gU$ is a saturated open set, whereby, $p(V)$ is open in $Y/G$ and a neighborhood of $Gy$. We contend that the restriction $p: U\to p(V)$ is a homeomorphism. Indeed, if $W\subseteq U$ is open, then $p(W)\subseteq p(V)$ is open, since $p(W) = p\left(\bigsqcup_{g\in G}gW\right)$ and the term within the brackets is a saturated open set. This immediately implies that $p$ is a covering map.
+
+    Furthermore, for any $g_1y,g_2y\in Gy$, there is the action $g_2g_1^{-1}$ taking $g_1y$ to $g_2y$ whereby, the covering space is normal.
+
+    \item Obviously, each element of $G$ is a deck transformation. On the other hand, if $f: Y\to Y$ is a deck transformation, then for any $y\in Y$, $f(y)\in Gy$, whereby, there is $g\in G$ such that $gy = f(y)$. From \thref{rem:deck-single-point-agreement}, we have that $g=f$, implying the desired conclusion. 
+    
+    \item This follows from \thref{thm:ftgt-covering-spaces}.
+\end{enumerate}
+\end{proof}
