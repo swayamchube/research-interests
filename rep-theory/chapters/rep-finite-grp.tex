@@ -1,0 +1,221 @@
+\begin{definition}[Representation]
+    A \textit{representation} of a group $G$ is a homomorphism $$\varphi: G\to\Aut_{\mathbf{Vec}}(V) = \GL(V)$$ for some finite-dimensional non-zero vector space $V$. The dimension of $V$ is called the \textit{degree} of $\varphi$.
+\end{definition}
+
+In particular, from the above definition, we note that $G$ acts on $V$ and the action is compatible with the vector space structure of $V$. In this case, $V$ is called a \textit{$G$-module}. We shall use $\varphi_g$ to denote $\varphi(g)$ and the action of $g$ on $v$ is denoted by $\varphi_g(v)$ or sometimes $g\cdot v$. \textbf{Henceforth, a \underline{representation} refers to a representation $\varphi:G\to\GL(V)$ where $V$ is a finite-dimensional nonzero $\bbC$-vector space.}
+
+\begin{definition}[Direct Sum of Representations]
+    Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ be representations. Then, the map 
+    \begin{equation*}
+        \varphi\oplus\psi: G\to\GL(V\oplus W)
+    \end{equation*}
+    given by 
+    \begin{equation*}
+        \left(\varphi\oplus\psi\right)_g(v,w) = \left(\varphi_g(v),\psi_g(w)\right)
+    \end{equation*}
+    for all $g\in G$ and $(v,w)\in V\oplus W$.
+\end{definition}
+
+Note, for subspaces $V_1$ and $V_2$ of $V$, when we write $V = V_1\oplus V_2$, we mean there is an isomorphism $V_1\oplus V_2\to V$ given by $(v_1,v_2)\mapsto v_1 + v_2$. This is known as the \underline{internal direct sum}.
+
+\begin{definition}[Representation Homomorphism]
+    Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ be representations of a finite group $G$. A \textit{homomorphism of representations} $\varphi$ and $\psi$ is a linear transformation $T: V\to W$ such that the diagram 
+    \begin{equation*}
+        \xymatrix{
+            V\ar[r]^{\varphi_g}\ar[d]_T & V\ar[d]^T\\
+            W\ar[r]_{\psi_g} & W
+        }
+    \end{equation*}
+    commutes for all $g\in G$. The set of all representation homomorphisms from $\varphi$ to $\psi$ is denoted by $\Hom_G(\varphi,\psi)$ and is a $\bbC$-vector space.
+    
+    An \textit{equivalence of representations} is a homomorphism of representations which is also an isomorphism of vector spaces.
+\end{definition}
+
+\begin{proposition}
+    $\Hom_G(\varphi,\psi)$ is a vector subspace of $\Hom(V,W)$.
+\end{proposition}
+\begin{proof}
+    Indeed, if $S,T\in\Hom_G(\varphi,\psi)$ and $a\in\bbC$, then for all $v\in V$ and $g\in G$, 
+    \begin{equation*}
+        (S + aT)(\varphi_g(v)) = S\circ\varphi_g(v) + aS\circ\varphi_g(v) = \varphi_g(S(v)) + \varphi_g(aT(v)) = \varphi_g((S + aT)(v))
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{definition}[$G$-invariant subspace]
+    Let $\varphi: G\to\GL(V)$ be a representation. A subspace $W\le V$ is said to be \textit{$G$-invariant} if for all $g\in G$ and $w\in W$, $\varphi_g(w)\in W$. Or more succinctly, for each $g\in G$, $\varphi_g(W)\le W$. A representation is said to be \textit{irreducible} if has no nonzero proper $G$-invariant subspaces. It is said to be \textit{reducible} otherwise.
+\end{definition}
+
+\begin{proposition}
+    Let $\varphi: G\to\GL(V)$ be reducible and $\psi: G\to\GL(W)$ be equivalent to $\varphi$. Then $\psi$ is reducible.
+\end{proposition}
+\begin{proof}
+    Let $T\in\Hom_G(V,W)$ be a linear isomorphism and $U\le V$ be a nonzero proper $G$-invariant subspace. It is not hard to argue that $T(U)$ is $G$-invariant, consequently $W$ is reducible.
+\end{proof}
+
+\begin{corollary}
+    If a representation is equivalent to an irreducible representation, then it is irreducible.
+\end{corollary}
+
+\begin{lemma}
+    Let $\varphi: G\to\GL(V)$ be a representation and $W\le V$ be a $G$-invariant subspace. Then, the restriction $\varphi|_W: G\to\GL(W)$ is also a representation. This is called a \textbf{subrepresentation} of $\varphi$.
+\end{lemma}
+\begin{proof}
+    Since $\varphi_g(w)\in W$ for each $w\in W$, we see that $\varphi_g|_W$ is a linear transformation $W\to W$ (as it descended from $\varphi_g$). Since $\varphi_g: V\to V$ has a trivial kernel, so does $\varphi_g|_W$, whereby it is a linear isomorphism.
+\end{proof}
+
+\begin{definition}[Decomposable Representation]
+    A representation $\varphi: G\to\GL(V)$ is said to be \textit{decomposable} if there are nonzero $G$-invariant subspaces $V_1,V_2$ of $V$ such that $V = V_1\oplus V_2$.
+\end{definition}
+
+Obviously, every decomposable representation is reducible and equivalently, every irreducible representation is indecomposable.
+
+\begin{proposition}
+    If $\varphi: G\to\GL(V)$ is a decomposable representation with $V = V_1\oplus V_2$, further, if $\varphi_1 = \varphi|_{V_1}$ and $\varphi_2 = \varphi|_{V_2}$, then $\varphi\sim\varphi_1\oplus\varphi_2$.
+\end{proposition}
+\begin{proof}
+    The map $T: V_1\oplus V_2\to V$ given by $T(v_1,v_2) = v_1 + v_2$ is a linear isomorphism. Therefore, for all $g\in G$,
+    \begin{equation*}
+        T((\varphi_1\oplus\varphi_2)_g(v_1,v_2)) = (\varphi_1)_g(v_1) + (\varphi_2)_g(v_2) = \varphi_g(v_1 + v_2) = \varphi_g(T(v_1,v_2))
+    \end{equation*}
+    implying the desired conclusion.
+\end{proof}
+
+\begin{remark}\thlabel{rem:decomposable-equivalent}
+    Inductively, if $V = V_1\oplus\cdots\oplus V_n$ and $\varphi_i = \varphi|_{V_i}$, then $\varphi\sim\bigoplus_{i = 1}^n\varphi_i$.
+\end{remark}
+
+\begin{proposition}
+    Let $\varphi: G\to\GL(V)$ be decomposable and $\psi: G\to\GL(W)$ a representation equivalent to $\varphi$. Then $\psi$ is decomposable.
+\end{proposition}
+\begin{proof}
+    Let $T\in\Hom_G(\varphi,\psi)$ be a linear isomorphism. Further, let $V_1,V_2\le V$ be nonzero proper $G$-invariant subspaces such that $V = V_1\oplus V_2$. Let $W_1 = T(V_1)$ and $W_2 = T(V_2)$. Since $T$ is an isomorphism, $W_1\cap W_2 = 0$ and $W = W_1 + W_2$, whereby $W = W_1\oplus W_2$. Further, for all $g\in G$ and $w_1\in W_1$, there is a unique $v_1\in V_1$ such that $T(v_1) = w_1$ and 
+    \begin{equation*}
+        \psi_g(w_1) = \psi_g(T(v_1)) = T(\varphi_g(v_1))\in W_1
+    \end{equation*}
+    similarly, $W_2$ is also $G$-invariant and $\psi$ is decomposable.
+\end{proof}
+
+\section{Schur's Lemma}
+
+\begin{proposition}
+    Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ be representations and $T\in\Hom_G(\varphi,\psi)$. Then, $\ker T$ and $\im T$ are both $G$-invariant subspaces of $V$ and $W$ respectively.
+\end{proposition}
+\begin{proof}
+    Indeed, for all $g\in G$, $v\in\ker T$ and $w\in\im T$, there is a corresponding $u\in V$ such that $T(u) = w$ and we have 
+    \begin{equation*}
+        T(\varphi_g(v)) = \psi_g(T(v)) = 0\qquad\psi_g(w) = \psi_g(T(u)) = T(\varphi_g(u))\in\im T
+    \end{equation*}
+    implying the desired conclusion.
+\end{proof}
+
+\begin{lemma}[Schur]\thlabel{lem:schur}
+    Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ be irreducible representations and $T\in\Hom_G(\varphi,\psi)$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $T$ is invertible or $T = 0$.
+        \item if $\varphi\not\sim\psi$, then $T = 0$.
+        \item if $V = W$, then $T = \lambda\mathbf{id}_V$ for some $\lambda\in\bbC$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Since $\ker T$ is $G$-invariant, we must have $\ker T\in\{0,V\}$. In the latter case, $T = 0$. In the former case, we must have $\im T\in\{0, W\}$ obviously the former may not hold since $V$ is nonzero, consequently, $\im T = W$ and $T$ is a linear isomorphism.
+
+    \item Immediate from $(a)$. 
+
+    \item Since we are working over an algebraically closed field, $\bbC$, there is $\lambda\in\bbC$ which is an eigenvalue of $T$. Note that $\wt T = T - \lambda\mathbf{id}_V\in\Hom_G(V,V)$ but since $\ker\wt T\ne 0$, we must have $\wt T = 0$ and $T = \lambda\mathbf{id}_V$.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    An irreducible representation of an abelian group has degree $1$, consequently, is a \underline{character}.
+\end{corollary}
+\begin{proof}
+    Let $\rho: G\to\GL(V)$ be an irreducible representation with $G$ an abelian group. Fix some $g\in G$, then for all $h\in G$, the diagram 
+    \begin{equation*}
+        \xymatrix{
+            V\ar[r]^{\rho_h}\ar[d]_{\rho_g} & V\ar[d]^{\rho_g}\\
+            V\ar[r]_{\rho_h} & V
+        }
+    \end{equation*}
+    commutes. Consequently, $\rho_g\in\Hom_G(\rho,\rho)$. From \thref{lem:schur}, $\rho_g = \lambda_g\mathbf{id}_V$. Due to the irreducibility of the representation, we must have $\dim V = 1$.
+\end{proof}
+
+\section{Maschke's Theorem}
+
+\begin{definition}[Completely Reducible]
+    A representation $\varphi: G\to\GL(V)$ is said to be \textit{completely reducible} if there are nonzero proper $G$-invariant subspaces $\{V_i\}_{i = 1}^n$ such that $V = V_1\oplus\cdots\oplus V_n$ and $\varphi|_{V_i}$ is irreducible for all $1\le i\le n$.
+\end{definition}
+
+From \thref{rem:decomposable-equivalent}, we have $\varphi\sim\varphi_{V_1}\oplus\cdots\oplus\varphi_{V_n}$.
+
+\begin{definition}[Unitary Representation]
+    Let $(V,\langle\cdot,\cdot\rangle)$ be an inner product space. A representation $\rho: G\to\GL(V)$ is said to be \textit{unitary} if for all $g\in G$ and $u,v\in V$, 
+    \begin{equation*}
+        \langle u,v\rangle = \langle\rho_g(u),\rho_g(v)\rangle
+    \end{equation*}
+\end{definition}
+
+\begin{remark}\thlabel{rem:vector-space-has-inner-product}
+    If $V$ is a finite dimensional $\bbC$ vector space, then there is a non trivial inner product on $V$. Indeed, pick any basis $\{v_i\}_{i = 1}^n$ for $V$ and define 
+    \begin{equation*}
+        \left\langle\sum_{i = 1}^na_iv_i, \sum_{i = 1}^n b_iv_i\right\rangle = \sum_{i = 1}^n\overline{a_i}b_i
+    \end{equation*}
+    where $\overline z$ is the complex conjugate of $z$.
+\end{remark}
+
+\begin{lemma}\thlabel{lem:unitary-reducible-decomposable}
+    Let $\varphi: G\to\GL(V)$ be a unitary representation. If $\varphi$ is reducible, then it is decomposable.
+\end{lemma}
+\begin{proof}
+    Let $W\le V$ be a nonzero proper $G$-invariant subspace and $W^\perp$ its orthogonal complement. We contend that $W^\perp$ is $G$-invariant. This coupled with $V = W\oplus W^\perp$ would immediately imply the desired conclusion. Indeed, let $w^\perp\in W^\perp$. Then, for all $w\in W$ and $g\in G$, there is $w'\in W$ such that $\rho_g(w') = w$ and 
+    \begin{equation*}
+        \langle w,\rho_g(w^\perp)\rangle = \langle\rho_g(w'),\rho_g(w^\perp)\rangle = \langle w', w^\perp\rangle = 0
+    \end{equation*}
+    which completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Every reducible representation of a finite group $G$ is decomposable.
+\end{proposition}
+\begin{proof}
+    Let $\varphi: G\to\GL(V)$ be a reducible representation. As observed in \thref{rem:vector-space-has-inner-product}, there is an inner product $\langle\cdot,\cdot\rangle$ associated with $V$. We shall construct a $G$-invariant inner product using this. Define, for $u,v\in V$,
+    \begin{equation*}
+        (u,v) = \frac{1}{|G|}\sum_{g\in G}\langle\varphi_g(u),\varphi_g(v)\rangle
+    \end{equation*}
+    Obviously, $(u,u)\ge 0$, $(u,v) = \overline{(v,u)}$ and $(\alpha u + \beta v, w) = \overline\alpha(u, w) + \overline\beta(v, w)$ whereby $(\cdot,\cdot)$ is an inner product. Now, for any $g\in G$, we have 
+    \begin{equation*}
+        (\varphi_g(u),\varphi_g(v)) = \frac{1}{|G|}\sum_{h\in G}\langle\varphi_{hg}(u),\varphi_{hg}(v)\rangle = (u,v)
+    \end{equation*}
+    Upon equipping $V$ with this inner product, $\varphi$ is a unitary representation, and we are done due to \thref{lem:unitary-reducible-decomposable}.
+\end{proof}
+
+\begin{corollary}
+    Let $\varphi: G\to\GL(V)$ be a representation. Then $\varphi$ is either irreducible or decomposable.
+\end{corollary}
+
+\begin{theorem}[Maschke]\thlabel{thm:maschke}
+    Every representation of a finite group is completely reducible.
+\end{theorem}
+\begin{proof}
+    Let $\varphi: G\to\GL(V)$ be a representation. We shall prove this statement by induction on the degree of $\varphi$. The base case with $\deg\varphi = 1$ is trivial. Now suppose $\deg\varphi = n > 1$. If $\varphi$ is irreducible, then we are done. Else, $\varphi$ is reducible and there are nonzero proper $G$-invariant subspaces $U$ and $W$ of $V$ such that $V = U\oplus W$. Now, $\varphi|_U$ and $\varphi|_W$ are subrepresentations with degree strictly less than $n$, and hence the induction hypothesis applies. Consequently, we have decompositions: 
+    \begin{equation*}
+        U = U_1\oplus\cdots\oplus U_m\qquad W = W_1\oplus\cdots\oplus W_n
+    \end{equation*}
+    such that each subrepresentation $\varphi|_{U_i}$ and $\varphi|_{W_i}$ is irreducible. Since 
+    \begin{equation*}
+        V = U\oplus W = U_1\oplus\cdots\oplus U_m\oplus W_1\oplus\cdots\oplus W_n
+    \end{equation*}
+    we see that $\varphi$ is completely reducible. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Uniqueness of decomposition.
+\end{theorem}
+\begin{proof}
+    Suppose there are equivalent decompositions $V_1\oplus\cdots\oplus V_n$ and $W_1\oplus\cdots\oplus W_m$ of a representation $\varphi: G\to\GL(V)$. Consider the composition $V_i\hookrightarrow V_1\oplus\cdots\oplus V_n\stackrel{\mathbf{id}_V}{\longrightarrow}W_1\oplus\cdots\oplus W_m\twoheadrightarrow W_j$ and denote it by $T_{ij}$. We contend that $T_{ij}\in\Hom_G(\varphi|_{V_i},\varphi|_{W_j})$. Indeed, for all $g\in G$ and $v_i\in V_i$, we have 
+    \begin{equation*}
+        T_{ij}(\varphi_g(v_i)) = \pi_j(\varphi_g(v_i)) = \varphi_g(\pi_j(v_i)) = \varphi_g(T_{ij}(v_i))
+    \end{equation*}
+    but since both $\varphi|_{V_i}$ and $\varphi|_{W_j}$ are irreducible representations, $T_{ij}$ is either $0$ or an isomorphism and the latter is possible if and only if $V_i = W_j$. This implies the desired conclusion, since now we have a bijection between the sets $\{V_i\}_{i = 1}^n$ and $\{W_j\}_{j = 1}^n$.
+\end{proof}
