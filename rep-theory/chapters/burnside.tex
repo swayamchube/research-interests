@@ -1,0 +1,34 @@
+\section{Burnside's Theorem on Solvability}
+
+This section requires the reader to have some knowledge of finite \href{https://swayamchube.github.io/research-interests/galois/main.pdf}{Galois Theory}, in particular, that of the Galois Group and the Norm map.
+
+\begin{lemma}
+    Let $\varphi: G\to\GL(d,\bbC)$ be an irreducible representation and $C\subseteq G$ be a conjugacy class such that $\gcd(|C|, d) = 1$. Then, either 
+    \begin{enumerate}[label=(\alph*)]
+        \item For all $g\in C$, there is $\lambda_g\in\bbC^\times$ such that $\varphi_g = \lambda_g\id_{d\times d}$ 
+        \item $\chi_\varphi$ vanishes on $C$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Suppose $(a)$ does not hold, we shall show that $(b)$ holds. For all $g\in G$, $\varphi_g^{|C|} = \id_{d\times d}$ and thus the minimal polynomial of $\varphi_g$ is separable whence it is diagonalizable. Pick some $g\in C$. Since $\varphi_g$ is not a scalar matrix by assumption, it must have distinct eigenvalues\footnote{Else the diagonalization of $\varphi_g$ would be a scalar matrix, forcing $\varphi_g$ to be scalar}. Let $\alpha = \chi_\varphi(g)/d$. Due to \thref{lem:conjugacy-class-algebraic-integer}, $m\chi_\varphi(g)/d$ is an algebraic integer. Since $\gcd(m, d) = 1$, there are positive integers $p, q$ such that $pm + qd = 1$ and thus 
+    \begin{equation*}
+        \frac{\chi_\varphi(g)}{d} = \frac{(pm + qd)\chi_\varphi(g)}{d} = p\frac{m\chi_\varphi(g)}{d} + q\chi_\varphi(g)\in\calA.
+    \end{equation*}
+
+    Further, 
+    \begin{equation*}
+        \alpha = \frac{1}{d}(\lambda_1 + \cdots + \lambda_d)
+    \end{equation*}
+    where $\lambda_1,\ldots,\lambda_d$ are the eigenvalues of $\varphi_g$, with multiplicity. According to our hypothesis, not all the $\lambda_i$'s are equal. Let $n = |G|$. 
+    
+    We shall show that $|N^{\Q(\zeta_n)}_\Q(\alpha)| < 1$. Since every $\lambda_i$ is an $n$-th root of unity, any $\sigma\in\Gal(\Q(\zeta_n)/\Q)$ maps it to another root of unity, and thus, $d\sigma(\alpha)$ is a sum of roots of unity, not all equal, and thus, $|d\sigma(\alpha)| < d$, that is, $|\sigma(\alpha)| < 1$. This immediately gives us that $|N^{\Q(\zeta_n)}_\Q(\alpha)| < 1$.
+
+    Since $N^{\Q(\zeta_n)_\Q(\alpha)}$ is an algebraic integer, owing to it being a product of algebraic integers, and is also a rational number\footnote{Since $N^K_k$ is a multiplicative function from $K$ to $k$}, it must be an integer. But due to the constraint $|N^{\Q(\zeta_n)}_\Q(\alpha)| < 1$, we must have $N^{\Q(\zeta_n)}_\Q(\alpha) = 0$ and thus $\alpha = 0$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $G$ be a finite non-abelian group. Suppose there is a nontrivial conjugacy class $C\ne\{1_G\}$ of prime power order, $p^n$, then $G$ is not simple.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}

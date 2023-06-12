@@ -1,0 +1,422 @@
+Again, throughout this chapter, $G$ denotes a finite group and all vector spaces $V$ are finite dimensional, nonzero and over $\bbC$.
+
+\section{Schur's Orthogonality Relations}
+
+\begin{definition}[Group Algebra]
+    Let $k$ be a field and $G$ a finite group. Define 
+    \begin{equation*}
+        k[G] = \{f\mid f: G\to k\text{ is a morphism in }\catSet\}
+    \end{equation*}
+    Further, define addition and multiplication as 
+    \begin{align*}
+        (f_1 + f_2)(g) &= f_1(g) + f_2(g)\\
+        (cf)(g) &= cf(g)\\
+        (f_1\cdot f_2)(g) &= \sum_{g_1g_2 = g}f_1(g_1)f_2(g_2)
+    \end{align*}
+    Further, if $k = \bbC$, then we may define an inner product as 
+    \begin{equation*}
+        \langle f_1,f_2\rangle = \frac{1}{|G|}\sum_{g\in G}\overline{f_1(g)}f_2(g)
+    \end{equation*}
+    Finally, there is a natural inclusion $\iota: k\hookrightarrow k[G]$ where 
+    \begin{equation*}
+        \iota(c)(g) = 
+        \begin{cases}
+            c & g = 1_G\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ be representations and suppose $T\in\Hom_\bbC(V, W)$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\displaystyle T^\sharp = \frac{1}{|G|}\sum_{g\in G}\psi_{g^{-1}}\circ T\circ\varphi_g\in\Hom_G(\varphi,\psi)$.
+        \item if $T\in\Hom_G(\varphi,\psi)$, then $T^\sharp = T$. 
+        \item the map $P:\Hom_\bbC(V,W)\to\Hom_G(\varphi,\psi)$ defined by $P(T) = T^\sharp$ is a surjective linear transformation.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    The proof of $(a)$ follows from elementary computation. Indeed, for all $v\in V$, we have 
+    \begin{align*}
+        T^\sharp(\varphi_g(v)) &= \frac{1}{|G|}\sum_{h\in G}\psi_{h^{-1}}\circ T\circ\varphi_{hg}(v)\\
+        &=\frac{1}{|G|}\sum_{h\in G}\psi_{gh^{-1}}\circ T\circ\varphi_{h}(v)\\
+        &=\frac{1}{|G|}\sum_{h\in G}\psi_g\circ\psi_{h^{-1}}\circ T\circ\varphi_{h}(v)\\
+        &=\psi_g\circ T^\sharp(v)
+    \end{align*}
+    whence $T^\sharp\in\Hom_G(\varphi,\psi)$.
+
+    Now, if $T\in\Hom_G(\varphi,\psi)$, then $T\circ\varphi_g(v) = \psi_g\circ T(v)$, whereby for all $g\in G$ and $v\in V$,
+    \begin{equation*}
+        T^\sharp(v) = \frac{1}{|G|}\sum_{g\in G}\psi_{g^{-1}}\circ\psi_g\circ T(v) = T(v)
+    \end{equation*}
+    
+    That $P$ is surjective is obvious from $(b)$. It remains to show that it is a linear transformation. Indeed, if $S,T\in\Hom_\bbC(V,W)$ and $a\in\bbC$, then 
+    \begin{align*}
+        (S + aT)^\sharp(v) &= \frac{1}{|G|}\sum_{g\in G}\psi_{g^{-1}}\circ(S + aT)\circ\varphi_g(v)\\
+        &= \frac{1}{|G|}\sum_{g\in G}\psi_{g^{-1}}\circ S\circ\varphi_g(v) + \frac{1}{|G|}\sum_{g\in G}a\psi_{g^{-1}}\circ T\circ\varphi_g(v)\\
+        &= S^\sharp + aT^\sharp
+    \end{align*}
+    implying the desired conclusion.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:sharp-between-irreducible}
+    Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ be irreducible representations of $G$ and let $T: V\to W$ be a linear map. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item if $\varphi\not\sim\psi$, then $T^\sharp = 0$ 
+        \item if $\varphi = \psi$, then $\displaystyle T^\sharp = \frac{\tr(T)}{\deg\varphi}\id_V$
+    \end{enumerate}
+\end{proposition}
+Recall from linear algebra that the \textit{trace} of a linear operator between finite dimensional vector spaces is independent of the choice of a basis, and thus the quantity $\tr(T)$ is unambiguous.
+\begin{proof}
+    Since $T^\sharp\in\Hom_G(\varphi,\psi)$, due to \thref{lem:schur}, we must have $T^\sharp = 0$. On the other hand, if $\varphi = \psi$, then $T^\sharp = \lambda\id_V$ for some $\lambda\in\bbC$. We have 
+    \begin{equation*}
+        \tr(T^\sharp) = \frac{1}{|G|}\sum_{g\in G}\tr\left(\varphi_{g^{-1}}\circ T\circ\varphi_g\right) = \frac{1}{|G|}\sum_{g\in G}\tr\left(T\circ\varphi_g\circ\varphi_{g^{-1}}\right) = \tr(T).
+    \end{equation*}
+    But we also have 
+    \begin{equation*}
+        \tr(T) = \tr(T^\sharp) = \lambda\tr(\id_V) = \lambda\deg\varphi
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+If $\varphi: G\to\GL(n,\bbC)$ is a representation, for $1\le i,j\le n$, define $\varphi_{ij}: G\to\bbC$, a set map by $\varphi_{ij}(g) = (\varphi(g))_{ij}$, which is the $(i,j)$-th entry of the matrix $\varphi_g$. Note that $\varphi_{ij}\in\bbC[G]$ and we shall treat it as such while talking about inner products.
+
+Within the ring $\calM_{mn}(\bbC)$, let $E_{ij}$ denote the matrix with the $(i,j)$-th entry as $1$ and the others as $0$.
+
+\begin{lemma}\thlabel{lem:matrix-sharp-inner-product}
+    Let $\varphi: G\to U(n,\bbC)$ and $\psi: G\to U(n,\bbC)$ be unitary representations. Let $A = E_{kl}\in\calM_{mn}(\bbC)$. Then, $A^\sharp = (\langle\psi_{ki}, \varphi_{lj}\rangle)_{ij}$.
+\end{lemma}
+Note that $\calM_{mn}(\bbC)$ is precisely $\Hom_\bbC(\bbC^n,\bbC^m)$ and thus $A$ represents a linear transformation from $\bbC^n$ to $\bbC^m$ and hence it makes sense to define $A^\sharp$.
+\begin{proof}
+    We have 
+    \begin{align*}
+        A^\sharp &= \frac{1}{|G|}\sum_{g\in G}\psi(g^{-1})E_{kl}\varphi(g)
+    \end{align*}
+    In particular, 
+    \begin{equation*}
+        (A^\sharp)_{ij} = \frac{1}{|G|}\sum_{g\in G}(\psi(g^{-1}))_{ik}(\varphi(g))_{lj} = \sum_{g\in G}\overline{\psi_{ik}(g)}\varphi_{lj}(g)
+    \end{equation*}
+    where the last equality follows since the matrix $\psi(g)$ is unitary, consequently, $\psi(g^{-1}) = \psi(g)^*$.
+\end{proof}
+
+\begin{theorem}[Schur's Orthogonality Relations]\thlabel{thm:schur-orthogonality}
+    Let $\varphi: G\to U(n,\bbC)$ and $\psi: G\to U(m,\bbC)$ be inequivalent irreducible unitary representations. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\langle\psi_{kl},\varphi_{ij}\rangle = 0$ for all $1\le i,j\le n$ and $1\le k,l\le m$.
+        \item 
+        $\displaystyle
+            \langle\varphi_{kl},\varphi_{ij}\rangle = 
+            \begin{cases}
+                1/n & i = k\wedge j = l\\
+                0 & \text{otherwise}
+            \end{cases}
+        $
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    From \thref{lem:matrix-sharp-inner-product}, $\langle\psi_{kl},\varphi_{ij}\rangle = (E_{ki}^\sharp)_{lj}$. But due to \thref{prop:sharp-between-irreducible}, $E_{ki}^\sharp = 0$ whence $(a)$ follows. Similarly, 
+    \begin{equation*}
+        \langle\varphi_{kl},\varphi_{ij}\rangle = (E_{ki}^\sharp)_{lj} = \left(\frac{\tr(E_{ki})}{n}\id_{n}\right)_{lj} = \frac{1}{n}\delta_{ki}\delta_{lj}
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\section{Characters}
+
+\begin{definition}[Character of a Representation]
+    Let $\varphi: G\to\GL(V)$ be a representation. The \textit{character} of $\varphi$ is a function $\chi_\varphi: G\to\bbC$ given by $\chi_\varphi(g) = \tr(\varphi_g)$.
+\end{definition}
+
+In particular, if $\varphi: G\to\GL(n,\bbC)$ is a representation, then 
+\begin{equation*}
+    \chi_\varphi(g) = \sum_{i = 1}^n\varphi_{ii}(g)
+\end{equation*}
+
+\begin{remark}
+    Since $\varphi(1_G) = \id_V$, $\chi_\varphi(1_G) = \tr(\id_V) = \deg\varphi$. Thus, the character encodes information about the degree of a representation.
+\end{remark}
+
+\begin{proposition}
+    If $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ are equivalent representations, then $\chi_\varphi = \chi_\psi$.
+\end{proposition}
+\begin{proof}
+    There is a linear isomorphism $T: V\to W$ such that for all $g\in G$, $\psi_g = T\circ\varphi_gT^{-1}$ and thus 
+    \begin{equation*}
+        \chi_\psi(g) = \tr(T\circ\varphi_gT^{-1}) = \tr(\varphi_g) = \chi_\varphi(g)
+    \end{equation*}
+\end{proof}
+
+\begin{lemma}
+    Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(V)$ be two representations of $G$. Then, 
+    \begin{equation*}
+        \chi_{\varphi\oplus\psi} = \chi_\varphi + \chi_\psi
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    We may suppose without loss of generality that $\varphi: G\to\GL(n,\bbC)$ and $\psi: G\to\GL(m,\bbC)$ for some positive integers $m$ and $n$. Then, $\varphi\oplus\psi: G\to\GL(n + m,\bbC)$ is given by 
+    \begin{equation*}
+        (\varphi\oplus\psi)_g = 
+        \begin{pmatrix}
+            [\varphi_g] & 0\\
+            0 & [\psi_g]
+        \end{pmatrix}
+    \end{equation*}
+    The conclusion is obvious.
+\end{proof}
+
+\begin{proposition}
+    Let $\varphi: G\to\GL(V)$ be a representation of $G$. Then, for all $g,h\in G$, 
+    \begin{equation*}
+        \chi_\varphi(g) = \chi_\varphi(hgh^{-1})
+    \end{equation*}
+    In particular, $\chi_\varphi$ is a function on the conjugacy classes of $G$.
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \chi_\varphi(hgh^{-1}) = \tr(\varphi_{hgh^{-1}}) = \tr(\varphi_h\circ\varphi_g\circ\varphi_{h^{-1}}) = \tr(\varphi_g) = \chi_\varphi(g)
+    \end{equation*}
+\end{proof}
+
+
+\begin{definition}[Class Function]
+    Let $k$ be a field. A function $f: G\to k$ is called a \textit{class function} if $f(g) = f(hgh^{-1})$ for all $g,h\in G$. That is, $f$ is constant on the conjugacy classes of $G$. The space of such functions is denoted by $Z(k[G])$.
+\end{definition}
+
+Note that every character $\chi_\rho$ is an element of $\bbC[G]$, in particular, it lies in $Z(\bbC[G])$.
+
+\begin{proposition}
+    $Z(k[G])$ is the center of the algebra $k[G]$. Consequently, $Z(k[G])$ is a subspace of $k[G]$.
+\end{proposition}
+\begin{proof}
+    Straightforward computation.
+\end{proof}
+
+\begin{corollary}
+    $\dim Z(k[G]) = |\operatorname{cl}(G)|$.
+\end{corollary}
+\begin{proof}
+    Let $C_1,\ldots,C_k$ denote the conjugacy classes of $G$. The functions $\{f_i\}_{i = 1}^k$ form a basis for $Z(k[G])$, where 
+    \begin{equation*}
+        f_i(g) = 
+        \begin{cases}
+            1 & g\in C_i\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    since they are orthonormal and span $Z(k[G])$.
+\end{proof}
+
+\begin{theorem}[First Orthogonality Relations]\thlabel{thm:first-orthogonality}
+    If $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ are irreducible representations, then 
+    \begin{equation*}
+        \langle\chi_\varphi,\chi_\psi\rangle = 
+        \begin{cases}
+            1 & \varphi\sim\psi\\
+            0 & \varphi\not\sim\psi
+        \end{cases}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Without loss of generality, due to \thref{prop:unitary-rep-gl}, we may suppose that $\varphi: G\to U(n,\bbC)$ and $\psi: G\to U(m,\bbC)$ are unitary representations. Note that this does not change the value of the character. We have
+    \begin{align*}
+        \langle\chi_\varphi,\chi_\psi\rangle &= \frac{1}{|G|}\sum_{g\in G}\overline{\chi_{\varphi}(g)}\chi_\psi(g)\\
+        &= \frac{1}{|G|}\sum_{g\in G}\sum_{i = 1}^n\overline{\varphi_{ii}(g)}\sum_{j = 1}^m\psi_{jj}(g)\\
+        &= \sum_{i = 1}^n\sum_{j = 1}^n\frac{1}{|G|}\sum_{g\in G}\overline{\varphi_{ii}(g)}\psi_{jj}(g)\\
+        &= \sum_{i = 1}^n\sum_{j = 1}^m\langle\varphi_{ii}(g),\psi_{jj}(g)\rangle
+    \end{align*}
+
+    If $\varphi\not\sim\psi$, then every term in the sum is zero, whereby $\langle\chi_\varphi,\chi_\psi\rangle = 0$. On the other hand, if $\varphi\sim\psi$, then we may suppose without loss of generality that $\varphi = \psi$, in which case, we have 
+    \begin{equation*}
+        \langle\chi_\varphi,\chi_\varphi\rangle = \sum_{i = 1}^n\sum_{j = 1}^n\frac{1}{|G|}\delta_{ij} = n/|G| = 1
+    \end{equation*}
+    This completes the proof. 
+\end{proof}
+
+\begin{corollary}
+    There are at most $|\cl(G)|$ equivalence classes of irreducible representations.
+\end{corollary}
+
+We have now established that there are finitely many equivalence classes of irreducible representations. Pick a representative from each equivalence class, say $\rho^{(1)},\ldots,\rho^{(s)}$ such that each $\rho^{(i)}: G\to U(\deg\rho^{(i)}, \bbC)$ is a unitary representation\footnote{Recall that this can be done since every representation is equivalent to a unitary representation}. Further, introduce the notation 
+\begin{equation*}
+    n\rho^{(i)} = \underbrace{\rho^{(i)}\oplus\cdots\oplus\rho^{(i)}}_{n-\text{times}}
+\end{equation*}
+
+Then, every representation $\varphi$ of $G$ is equivalent to 
+\begin{equation*}
+    n_1\rho^{(1)}\oplus\cdots\oplus n_s\rho^{(s)}
+\end{equation*}
+and thus 
+\begin{equation*}
+    \chi_\varphi = n_1\chi_{\rho^{(1)}} + \cdots + n_s\chi_{\rho^{(s)}}
+\end{equation*}
+
+The integers $n_i$ may be recovered from $\chi_\varphi$ as 
+\begin{equation*}
+    n_i = \langle\chi_\varphi,\chi_{\rho^{(i)}}\rangle
+\end{equation*}
+
+\section{Regular Representation}
+
+Recall that $\bbC[G]$ is a $\bbC$-vector space with elements of the form 
+\begin{equation*}
+    \sum_{g\in G} c_g g
+\end{equation*}
+
+Define the action of $G$ on $\bbC[G]$ by 
+\begin{equation*}
+    g\cdot\left(\sum_{h\in G} c_g h\right) = \sum_{h\in G}c_h gh = \sum_{h\in G} c_{g^{-1}h}h
+\end{equation*}
+
+It is not hard to verify that $G$ acts through linear isomorphisms, whereby, we have a homomorphism $\Phi: G\to\GL(\bbC[G])$. This representation is called the \textbf{regular representation} of $G$. The degree of this representation is $|G|$.
+
+\begin{proposition}
+    We have 
+    \begin{equation*}
+        \chi_\Phi(g) = 
+        \begin{cases}
+            |G| & g = 1_G\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Consider $\bbC[G]$ with the basis $\{g\mid g\in G\}$. If $g\ne 1_G$, then the matrix of the linear transformation $\Phi_g$ with respect to this basis has no elements on the diagonal, since left multiplication by an element of a group has no fixed points. 
+
+    On the other hand, if $g = 1_G$, then the diagonal of the matrix representation of $\Phi_g$ is composed of only $1$'s, whereby $\tr(\Phi_{1_G}) = |G|$.
+\end{proof}
+
+We shall now represent $\Phi$ as the direct sum of the irreducible representations $\rho^{(1)},\ldots,\rho^{(s)}$. The multiplicity $d_i$ of each $\rho^{(i)}$ may be recovered as 
+
+\begin{equation*}
+    d_i = \langle\chi_\varphi,\chi_{\rho^{(i)}}\rangle = \frac{1}{|G|}\sum_{g\in G}\overline{\chi_\varphi(g)}\chi_{\rho^{(i)}}(g) = \frac{1}{|G|}\overline{\chi_\varphi(1_G)}\chi_{\rho^{(i)}}(1_G) = \deg\rho^{(i)}
+\end{equation*}
+
+Thus, we have 
+\begin{equation*}
+    |G| = \deg\Phi = \sum_{i = 1}^s d_i\deg\rho^{(i)} = \sum_{i = 1}^s(\deg\rho^{(i)})^2 = \sum_{i = }^s d_i^2
+\end{equation*}
+
+\begin{lemma}
+    The set 
+    \begin{equation*}
+        \mathcal B = \{\sqrt{d_k}\rho_{ij}^{(k)}\mid 1\le k\le s,~1\le i,j\le d_k\}
+    \end{equation*}
+    forms an orthonormal basis for $\bbC[G]$.
+\end{lemma}
+\begin{proof}
+    Orthonormality follows from \thref{thm:schur-orthogonality}. On the other hand, since 
+    \begin{equation*}
+        |\mathcal B| = \sum_{i = 1}^s d_i^2 = |G| = \dim\bbC[G]
+    \end{equation*}
+    we have that $\mathcal B$ is a basis.
+\end{proof}
+
+\begin{theorem}
+    $\{\chi_{\rho^{(1)}},\ldots,\chi_{\rho^{(s)}}\}$ forms a basis for $Z(\bbC[G])$.
+\end{theorem}
+\begin{proof}
+    Obviously, the aforementioned characters are orthonormal, and thus linearly independent. We shall show they span $Z(\bbC[G])$. Let $f\in Z(\bbC[G])$ be a class function. Then, there are $c_{ij}^{(k)}$ such that 
+    \begin{equation*}
+        f = \sum_{i,j,k}c_{ij}^{(k)}\rho_{ij}^{(k)}
+    \end{equation*}
+    Since $f$ is a class function, we may write, for all $x\in G$,
+    \begin{align*}
+        f(x) &= \frac{1}{|G|}\sum_{g\in G}f(gxg^{-1})\\
+        &= \frac{1}{|G|}\sum_{g\in G}\sum_{i,j,k}c_{ij}^{(k)}\rho_{ij}^{(k)}(gxg^{-1})\\
+        &= \sum_{i,j,k}c_{ij}^{(k)}\frac{1}{|G|}\left[\sum_{g\in G}\rho_g^{(k)}\rho_x^{(k)}\rho_{g^{-1}}^{(k)}\right]_{ij}\\
+        &= \sum_{i,j,k}c_{ij}^{(k)}\left[(\rho_x^{(k)})^\sharp\right]_{ij}\\
+        &= \sum_{i,j,k}c_{ij}^{(k)}\frac{\tr(\rho_x^{(k)})}{\deg\rho^{(k)}}\delta_{ij}\\
+        &= \sum_{i,j,k}c_{ij}^{(k)}\chi_{\rho^{(k)}}(x)\delta_{ij}
+    \end{align*}
+    whereby $f$ is a linear combination of $\{\chi_{\rho^{(1)}},\ldots,\chi_{\rho^{(s)}}\}$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    There are exactly $|\cl(G)| = \dim Z(\bbC[G])$ inequivalent irreducible representations of $G$.
+\end{corollary}
+
+\begin{definition}[Character Table]
+    Let $G$ be a finite group and $C_1,\ldots,C_s$ the conjugacy classes of $G$ and $\chi_1,\ldots,\chi_s$ the corresponding irreducible characters\footnote{That is, characters of inequivalent irreducible representations}. The \textit{character table} of $G$ is the $s\times s$ matrix $\mathbf X$ with $X_{ij} = \chi_i(C_j)$.
+\end{definition}
+
+We contend that the character table has orthogonal columns. This would imply that the character table $\mathbf X$ is invertible.
+
+\begin{theorem}[Second Orthogonality Theorem]
+    Let $C$ and $C'$ be conjugacy classes of $G$, further, let $g\in C$ and $g'\in C'$. Then, 
+    \begin{equation*}
+        \sum_{i = 1}^s\overline{\chi_i(g)}\chi_i(g') = 
+        \begin{cases}
+            |G|/|C| & C = C'\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $\delta_C$ be the indicator function for the conjugacy class $C$. Then, we have 
+    \begin{align*}
+        \delta_C(g') &= \sum_{i = 1}^s\langle\chi_i,\delta_C\rangle\chi_i(g')\\
+        &= \sum_{i = 1}^s\frac{1}{|G|}\sum_{x\in G}\overline{\chi_i(x)}\delta_C(x)\chi_i(g')\\
+        &= \sum_{i = 1}^s\frac{1}{|G|}\sum_{x\in C}\overline{\chi_i(x)}\chi_i(g')\\
+        &= \sum_{i = 1}^s\frac{|C|}{|G|}\overline{\chi_i(g)}\chi_i(g')
+    \end{align*}
+    The conclusion is now obvious.
+\end{proof}
+
+\section{Dimension Theorem}
+
+Recall from \href{https://swayamchube.github.io/research-interests/comm-alg/main.pdf}{Commutative Algebra} that if $A\subseteq B$ are commutative rings, then the integral closure $C$ of $A$ in $B$ is a subring of $B$ containing $A$.
+
+\begin{definition}[Algebraic Integer]
+    An \textit{algebraic integer} is an element in the integral closure of $\Z$ in $\bbC$, that is, an element in $\bbC$ which is integral over $\Z$. Denote by $\calA$ the ring of algebraic integers.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:y-is-algebraic-integer}
+    An element $y\in\bbC$ is an algebraic integer if and only if there exist $y_1,\ldots,y_n\in\bbC$, not all zero, such that for all $1\le i\le n$,
+    \begin{equation*}
+        yy_i = \sum_{j = 1}^n a_{ij}y_j
+    \end{equation*}
+    for some $a_{ij}\in\Z$.
+\end{lemma}
+\begin{proof}
+    We prove the converse first. Let $A$ denote the matrix $[a_{ij}]_{1\le i,j\le n}$ and $y$ the column vector $\begin{bmatrix}y_1 & \cdots & y_n\end{bmatrix}^T$. According to our assumptions, $AY = yY$, whereby $\det(A - yI) = 0$ whence $y$ is an algebraic integer.
+
+   On the other hand, if $y$ is an algebraic integer, then $y^n + a_{n - 1}y^{n - 1} + \cdots + a_0 = 0$ for integers $a_0,\ldots,a_{n - 1}$. Let $y_i = y^{i - 1}$. Then, we have the relations $yy_i = y_{i + 1}$ for $1\le i\le n - 2$ and 
+   \begin{equation*}
+        yy_{n - 1} = -a_0 - \cdots - a_{n - 1}y^{n - 1}
+   \end{equation*}
+   This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $\chi$ be a character of a group $G$. Then, $\chi(g)$ is an algebraic integer for all $g\in G$.
+\end{proposition}
+\begin{proof}
+    Let $\chi$ be the character associated with a represetnation $\varphi: G\to\GL(n,\bbC)$ for some positive integer $n$. Then, $\varphi_g^{|G|} = \id_{n\times n}$, whereby the eigenvalues of $\varphi_g$ satisfy $\lambda^{|G|} - 1 = 0$, and thus are algebraic integers. Since $\calA$ is a ring, it contains 
+    \begin{equation*}
+        \sum_{i = 1}^n\lambda_i = \tr(\varphi_g) = \chi(g)
+    \end{equation*}
+\end{proof}
+
+\begin{lemma}\thlabel{lem:conjugacy-class-algebraic-integer}
+    Let $\varphi: G\to\GL(V)$ be an irreducible representation of degree $d$. Let $g\in G$ and $m$ the size of the conjugacy class containing $g$. Then, $\dfrac{m}{d}\chi_\varphi(g)$ is an algebraic integer.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[Dimension Theorem]\thlabel{thm:dimension-theorem}
+    Let $\varphi: G\to\GL(V)$ be an irreducible representation of degree $d$. Then $d$ divides $|G|$.
+\end{theorem}
+The main idea is to show that $|G|/d$ is an algebraic integer, and thus lies in $\calA\cap\Z = \Z$. This would finish the proof.
+\begin{proof}
+    We have 
+    \begin{equation*}
+        1 = \langle\chi_\varphi,\chi_\varphi\rangle = \frac{1}{|G|}\sum_{g\in G}\overline{\chi_\varphi(g)}\chi_\varphi(g)
+    \end{equation*}
+    Let $C_1,\ldots,C_s$ be the conjugacy classes of $G$ with sizes $m_1,\ldots,m_s$ respectively. Let $\chi_i$ denote the value of $\chi_\varphi$ on $C_i$. Then,
+    \begin{equation*}
+        |G| = \sum_{i = 1}^s m_i\overline{\chi_i}\chi_i\implies\frac{|G|}{d} = \sum_{i = 1}^s \overline{\chi_i}\left(\frac{m_i}{d}\chi_i\right)
+    \end{equation*}
+    and thus $|G|/d$ is an algebraic integer, whence an integer.
+\end{proof}

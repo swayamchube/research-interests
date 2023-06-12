@@ -1,8 +1,8 @@
 \begin{definition}[Representation]
-    A \textit{representation} of a group $G$ is a homomorphism $$\varphi: G\to\Aut_{\mathbf{Vec}}(V) = \GL(V)$$ for some finite-dimensional non-zero vector space $V$. The dimension of $V$ is called the \textit{degree} of $\varphi$.
+    A \textit{representation} of a group $G$ is a homomorphism $$\varphi: G\to\Aut_{\catVec}(V) = \GL(V)$$ for some finite-dimensional non-zero vector space $V$. The dimension of $V$ is called the \textit{degree} of $\varphi$.
 \end{definition}
 
-In particular, from the above definition, we note that $G$ acts on $V$ and the action is compatible with the vector space structure of $V$. In this case, $V$ is called a \textit{$G$-module}. We shall use $\varphi_g$ to denote $\varphi(g)$ and the action of $g$ on $v$ is denoted by $\varphi_g(v)$ or sometimes $g\cdot v$. \textbf{Henceforth, a \underline{representation} refers to a representation $\varphi:G\to\GL(V)$ where $V$ is a finite-dimensional nonzero $\bbC$-vector space.}
+In particular, from the above definition, we note that $G$ acts on $V$ and the action is compatible with the vector space structure of $V$. In this case, $V$ is called a \textit{$G$-module}. We shall use $\varphi_g$ to denote $\varphi(g)$ and the action of $g$ on $v$ is denoted by $\varphi_g(v)$ or sometimes $g\cdot v$. \textbf{Henceforth, a \underline{representation} refers to a representation $\varphi:G\to\GL(V)$ where $V$ is a finite-dimensional nonzero $\bbC$-vector space and $G$ is a finite group.}
 
 \begin{definition}[Direct Sum of Representations]
     Let $\varphi: G\to\GL(V)$ and $\psi: G\to\GL(W)$ be representations. Then, the map 
@@ -114,7 +114,7 @@ Obviously, every decomposable representation is reducible and equivalently, ever
     \begin{enumerate}[label=(\alph*)]
         \item $T$ is invertible or $T = 0$.
         \item if $\varphi\not\sim\psi$, then $T = 0$.
-        \item if $V = W$, then $T = \lambda\mathbf{id}_V$ for some $\lambda\in\bbC$.
+        \item if $V = W$, then $T = \lambda\id_V$ for some $\lambda\in\bbC$.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -123,7 +123,7 @@ Obviously, every decomposable representation is reducible and equivalently, ever
 
     \item Immediate from $(a)$. 
 
-    \item Since we are working over an algebraically closed field, $\bbC$, there is $\lambda\in\bbC$ which is an eigenvalue of $T$. Note that $\wt T = T - \lambda\mathbf{id}_V\in\Hom_G(V,V)$ but since $\ker\wt T\ne 0$, we must have $\wt T = 0$ and $T = \lambda\mathbf{id}_V$.
+    \item Since we are working over an algebraically closed field, $\bbC$, there is $\lambda\in\bbC$ which is an eigenvalue of $T$. Note that $\wt T = T - \lambda\id_V\in\Hom_G(V,V)$ but since $\ker\wt T\ne 0$, we must have $\wt T = 0$ and $T = \lambda\id_V$.
 \end{enumerate}
 \end{proof}
 
@@ -138,7 +138,7 @@ Obviously, every decomposable representation is reducible and equivalently, ever
             V\ar[r]_{\rho_h} & V
         }
     \end{equation*}
-    commutes. Consequently, $\rho_g\in\Hom_G(\rho,\rho)$. From \thref{lem:schur}, $\rho_g = \lambda_g\mathbf{id}_V$. Due to the irreducibility of the representation, we must have $\dim V = 1$.
+    commutes. Consequently, $\rho_g\in\Hom_G(\rho,\rho)$. From \thref{lem:schur}, $\rho_g = \lambda_g\id_V$. Due to the irreducibility of the representation, we must have $\dim V = 1$.
 \end{proof}
 
 \section{Maschke's Theorem}
@@ -163,6 +163,27 @@ From \thref{rem:decomposable-equivalent}, we have $\varphi\sim\varphi_{V_1}\oplu
     \end{equation*}
     where $\overline z$ is the complex conjugate of $z$.
 \end{remark}
+
+\begin{proposition}\thlabel{prop:unitary-rep-gl}
+    Let $\varphi: G\to\GL(V)$ be a unitary representation, where $V$ is a finite dimensional inner product space. Then, there is an equivalent unitary representation $\psi: G\to\GL(n,\bbC)$.
+\end{proposition}
+\begin{proof}
+    Due to \underline{Gram-Schmidt Orthonormalization}, there is an orthonormal basis $\{v_1,\ldots,v_n\}$. Consider the linear isomorphism $T: V\to\bbC^n$ given by $T(e_i) = v_i$ for $1\le i\le n$. Next, define $\psi: G\to\GL(n,\bbC)$ by $\psi_g(e_i) = T(\varphi_g(v_i))$ for $1\le i\le n$ and extend linearly. First, we must show that $\psi$ is a group homomorphism. Indeed, let $g,h\in G$ and let $\varphi_h(v_i) = \sum_{j = 1}^n a_jv_j$. Then, 
+    \begin{align*}
+        \psi_g(\psi_h(v_i)) &= \psi_g(T(\varphi_h(v_i)))\\
+        &= \psi_g\left(T\left(\sum_{j = 1}^na_jv_j\right)\right)\\
+        &= \sum_{j = 1}^na_j\psi_g(e_j)\\
+        &= \sum_{j = 1}^na_jT(\varphi_g(e_j))\\
+        &= T\left(\varphi_g\left(\sum_{j = 1}^n a_je_j\right)\right)\\
+        &= T(\varphi_g(\varphi_h(v_i))) = \psi_{gh}(v_i).
+    \end{align*}
+
+    Next, we must show that $\psi$ is a unitary representation. For this, it suffices to show that $\psi_g$ conserves the inner product for the standard basis. Indeed, 
+    \begin{equation*}
+        \langle\psi_g(e_i),\psi_g(e_j)\rangle = \langle T(\varphi_g(v_i)), T(\varphi_g(v_j))\rangle = \langle\varphi_g(v_i),\varphi_g(v_j)\rangle = \langle v_i, v_j\rangle = \delta_{ij}
+    \end{equation*}
+    This completes the proof.
+\end{proof}
 
 \begin{lemma}\thlabel{lem:unitary-reducible-decomposable}
     Let $\varphi: G\to\GL(V)$ be a unitary representation. If $\varphi$ is reducible, then it is decomposable.
@@ -213,9 +234,9 @@ From \thref{rem:decomposable-equivalent}, we have $\varphi\sim\varphi_{V_1}\oplu
     Uniqueness of decomposition.
 \end{theorem}
 \begin{proof}
-    Suppose there are equivalent decompositions $V_1\oplus\cdots\oplus V_n$ and $W_1\oplus\cdots\oplus W_m$ of a representation $\varphi: G\to\GL(V)$. Consider the composition $V_i\hookrightarrow V_1\oplus\cdots\oplus V_n\stackrel{\mathbf{id}_V}{\longrightarrow}W_1\oplus\cdots\oplus W_m\twoheadrightarrow W_j$ and denote it by $T_{ij}$. We contend that $T_{ij}\in\Hom_G(\varphi|_{V_i},\varphi|_{W_j})$. Indeed, for all $g\in G$ and $v_i\in V_i$, we have 
+    Suppose there are equivalent decompositions $V_1\oplus\cdots\oplus V_n$ and $W_1\oplus\cdots\oplus W_m$ of a representation $\varphi: G\to\GL(V)$. Consider the composition $V_i\hookrightarrow V_1\oplus\cdots\oplus V_n\stackrel{\id_V}{\longrightarrow}W_1\oplus\cdots\oplus W_m\twoheadrightarrow W_j$ and denote it by $T_{ij}$. We contend that $T_{ij}\in\Hom_G(\varphi|_{V_i},\varphi|_{W_j})$. Indeed, for all $g\in G$ and $v_i\in V_i$, we have 
     \begin{equation*}
         T_{ij}(\varphi_g(v_i)) = \pi_j(\varphi_g(v_i)) = \varphi_g(\pi_j(v_i)) = \varphi_g(T_{ij}(v_i))
     \end{equation*}
-    but since both $\varphi|_{V_i}$ and $\varphi|_{W_j}$ are irreducible representations, $T_{ij}$ is either $0$ or an isomorphism and the latter is possible if and only if $V_i = W_j$. This implies the desired conclusion, since now we have a bijection between the sets $\{V_i\}_{i = 1}^n$ and $\{W_j\}_{j = 1}^n$.
+    but since both $\varphi|_{V_i}$ and $\varphi|_{W_j}$ are irreducible representations, due to \thref{lem:schur}, $T_{ij}$ is either $0$ or an isomorphism and the latter is possible if and only if $V_i = W_j$. This implies the desired conclusion, since now we have a bijection between the sets $\{V_i\}_{i = 1}^n$ and $\{W_j\}_{j = 1}^n$.
 \end{proof}
