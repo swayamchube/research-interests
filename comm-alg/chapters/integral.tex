@@ -1,5 +1,7 @@
 \begin{definition}[Integral Extension]
     Let $A\subseteq B$ be a subring. Then, $\alpha\in B$ is said to be \textit{integral} over $A$ if it satisfies a monic polynomial in $A[x]$. The extension $A\hookrightarrow B$ is said to be integral if every element of $B$ is integral over $A$.
+
+    Similarly, if $\fraka\subseteq A$ is an ideal, then $\alpha\in B$ is said to be \textit{integral} over $\fraka$ if it satisfies a monic polynomial in $A[x]$ with coefficients in $\fraka$.
 \end{definition}
 
 \begin{theorem}\thlabel{thm:equivalence-integral-extension}
@@ -126,14 +128,58 @@ The set $C$ as defined above is called the \textit{integral closure of $A$ in $B
 
 \subsection{Going Down Theorem}
 
-\section{The Nullstellensatz}
+\begin{definition}
+    An integral domain is said to be \textit{normal} if it is integrally closed in its field of fractions.
+\end{definition}
 
-We require the following lemma due to Zariski. We shall see an alternate proof of this after looking at valuations.
+For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$ are the integers.
 
-\begin{lemma}\thlabel{lem:zariski-k-algebra}
-    Let $B$ be a finite $k$-algebra. If $B$ is a field, then it is a finite algebraic extension of $k$.
+\begin{lemma}\thlabel{lem:localization-maps-closure-to-closure}
+    Let $A\subseteq B$ be rings and $C$ the integral closure of $A$ in $B$. Let $S\subseteq A$ be multiplicatively closed. Then $S^{-1}C$ is the integral closure of $S^{-1}A$.
+\end{lemma}
+\begin{proof}
+    Since $C$ is integral over $A$, we have that $S^{-1}C$ is integral over $S^{-1}A$. It remains to show that any element that is integral over $S^{-1}A$ is contained in $S^{-1}C$. Indeed, let $b/s\in S^{-1}B$ be an element in $S^{-1}A$ that is contained in the integral closure. Then, there are $a_i/s_i$ such that 
+    \begin{equation*}
+        (b/s)^n + a_{n - 1}/s_{n - 1}(b/s)^{n - 1} + \cdots + a_0/s_0 = 0
+    \end{equation*}
+    Let $t = s_1\cdots s_{n - 1}$ and multiply the equation throughout by $(st)^n$ to obtain 
+    \begin{equation*}
+        \frac{(bt)^n + b_{n - 1}(bt)^{n - 1} + \cdots + b_0}{1} = 0.
+    \end{equation*}
+    Thus, there is $u\in S$ such that 
+    \begin{equation*}
+        u\left[(bt)^n + b_{n - 1}(bt)^{n - 1} + \cdots + b_0\right] = 0
+    \end{equation*}
+    Again, multiply the equation by $u^{n - 1}$ to obtain 
+    \begin{equation*}
+        (ubt)^n + c_{n - 1}(ubt)^{n - 1} + \cdots + c_0 = 0,
+    \end{equation*}
+    consequently, $ubt$ is integral over $A$, therefore, lies in $C$. As a result, $b/s = (ubt)/(sut)\in S^{-1}C$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be an integral domain and $S\subseteq A$ a multiplicatively closed subset. If $A$ is normal, then $S^{-1}A$ is normal.
+\end{lemma}
+\begin{proof}
+    Let $K$ denote the field of fractions of $A$. Since $A$ is an integral domain, the natural map $A\to S^{-1}A$ is an inclusion. Moreover, the inclusion $A\to K$ maps every element of $A$ to a unit and thus induces an inclusion $S^{-1}A\to K$. We can now treat $A\subseteq S^{-1}A\subseteq K$. Since $K$ is a field, the field of fractions of $S^{-1}A$ must also be contained in $K$. Therefore, it suffices to show that $S^{-1}A$ is integrally closed in $K$. But from \thref{lem:localization-maps-closure-to-closure}, we see that $S^{-1}A$ is the integral closure of $S^{-1}A$ in $S^{-1}K = K$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $A$ be an integral domain. Then, the following are equivalent: 
+    \begin{enumerate}
+        \item $A$ is normal 
+        \item $A_\frakp$ is normal for all $\frakp\in\spec A$ 
+        \item $A_\frakm$ is normal for all $\frakm\in\mspec A$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(a)\implies(b)$ follows from the previous lemma and $(b)\implies(c)$ is obvious. We shall show that $(c)\implies(a)$. Let $K$ be the field of fractions of $A$ and $C$ denote the integral closure of $A$ in $K$. Let $\iota:A\hookrightarrow C$ be the inclusion map. We shall show that $\iota$ is a surjection. Note that both $A$ and $C$ are integral domains and $C_\frakm$ is the integral closure of $A_\frakm$ in $K$ and therefore, in $Q(A_\frakm)$, consequently, $A_\frakm = C_\frakm$ due to $(c)$. As a result, $\iota_\frakm$ is a surjection for all maximal ideals $\frakm$ implying that $\iota$ is a surjection.
+\end{proof}
+
+\begin{lemma}
+    Let $C$ be the integral closure of $A$ in $B$ and let $\fraka\subseteq A$ be an ideal. Then, the integral closure of $\fraka$ in $B$ is $\sqrt{\fraka^e}$ where the extension is taken through the inclusion $A\hookrightarrow C$.
 \end{lemma}
 
-\begin{theorem}[Hilbert's Nullstellensatz Strong Form]
-    
-\end{theorem}
+\begin{proposition}
+    Let $A\subseteq B$ be integral domains with $A$ integrally closed. Let $\alpha\in B$ be integral over an ideal $\fraka$ of $A$. Then $\alpha$ is algebraic over the field of fractions $K$ of $A$. Further, if the minimal polynomial of $\alpha$ over $K$ is given by $x^n + a_{n - 1}x^{n - 1} + \cdots + a_0$, then each $a_i$ is an element of $\sqrt{\fraka}$.
+\end{proposition}

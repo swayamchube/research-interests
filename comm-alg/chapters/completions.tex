@@ -1,0 +1,40 @@
+\section{Completion Abelian Topological Groups}
+Throughout this section, let $G$ denote a \underline{first countable abelian topological group}.
+
+\begin{definition}[Convergence, Cauchy]
+    A sequence $\{x_n\}_{n = 1}^\infty$ of elements of $G$ \textit{converges} to $x\in G$ if for any open neighborhood $U$ of $x$, there is an integer $N\in\N$ such that for all $n\ge N$, $x_n - x\in U$. This is denoted by $x_n\to x$. The sequence is said to be \textit{Cauchy} if for every open neighborhood $U$ of $0$, there is an integer $N\in\N$ such that for all $m,n\ge N$, $x_m - x_n\in U$.
+\end{definition}
+
+\begin{proposition}
+    If $\{x_n\}$ and $\{y_n\}$ are Cauchy sequences, then so is $\{x_n + y_n\}$.
+\end{proposition}
+
+We now define a relation on the set of all Cauchy sequences in $G$, given by 
+\begin{equation*}
+    \{x_n\}\sim\{y_n\}\iff x_n - y_n\to 0
+\end{equation*}
+
+This relation is obviously reflexive and symmetric. We contend that this is also transitive. This follows from the following proposition.
+
+\begin{proposition}
+    If $\{x_n\}\to x$ and $\{y_n\}\to y$ in $G$, then $\{x_n + y_n\}\to x + y$.
+\end{proposition}
+\begin{proof}
+    In $G\times G$, the sequence $\{(x_n, y_n)\}$ converges to $(x, y)$ and since $\varphi: G\times G\to G$ given by $\varphi(g,h) = g + h$ is continuous, we have that $\{x_n + y_n\}$ converges to $x + y$.
+\end{proof}
+
+We now denote the set of equivalence classes of Cauchy sequences in $G$ by $\wh G$. Endow $\wh G$ with an addition operation given by 
+\begin{equation*}
+    [\{x_n\}] + [\{y_n\}] = [\{x_n + y_n\}]
+\end{equation*}
+It is not hard to see that $(\wh G, +)$ is an abelian group. 
+
+For each $U\subseteq G$ a neighborhood containing $0$, define $\wh U$ to be the set of all equivalence classes $[\{x_n\}]$ such that there is a positive integer $N$ such that $x_n\in U$ for all $n\ge N$. This forms a basis around $[\{0\}]$ because $\wh U\cap\wh V = \wh{U\cap V}$ and since $\wh G$ is a topological group, it is homogeneous and this determines the topology on $\wh G$. 
+
+There is also a natural map $\phi: G\to\wh G$ that maps $g\in G$ to the equivalence class $[\{g\}]$. This is obviously a group homomorphism and $\ker\phi = \bigcap U$ where $U$ ranges over all open neighborhoods of $0$ in $U$. Therefore, $\phi$ is injective if and only if $G$ is Hausdorff.
+
+Now, suppose $f: G\to H$ is a continuous homomorphism between abelian topological groups. We contend that $f$ maps Cauchy sequences to Cauchy sequences. Indeed, if $\{x_n\}$ is Cauchy in $G$ and $V$ an open neighborhood of $H$, let $U = f^{-1}(V)$. Then, there is a positive integer $N$ such that for all $n\ge N$, $x_n\in U$, whereby $f(x_n)\in V$.
+
+Therefore, $f$ induces a map $\wh f: \wh G\to\wh H$ given by $f([\{x_n\}]) = [\{f(x_n)\}]$. That $\wh f$ is a homomorphism is obvious. We contend that $\wh f$ is also a continuous map. Indeed, if $\wh V$ is a basis element around $0$, then $\wh f^{-1}(\wh V) = \wh{f^{-1}(V)}$. Since the topology on $\wh H$ is homogeneous, the map $\wh f$ is continuous.
+
+\subsection{Completion Using Inverse Limits}

@@ -65,6 +65,13 @@ It is trivial to check that $\Ann_R(M)$ is a left ideal in $R$, and if $R$ were 
     This completes the proof.
 \end{proof}
 
+\begin{proposition}
+    $N$ is an $A$-submodule of $M$ if and only if it is an $A/\Ann_A(M)$ submodule of $M$.
+\end{proposition}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
 In particular, if $I = \mathfrak m$ for some maximal ideal $\mathfrak m$, then $M$ forms a vector space over $A/\mathfrak m$.
 
 \section{Free Modules}
@@ -213,6 +220,15 @@ For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M
     }
     \end{equation*}
     To see that this is indeed an $R$-module homomorphism, we need only verify that for all $f,g\in\Hom(N,P)$ and all $r\in R$, $(f + rg)\circ\phi = f\circ\phi + rg\circ\phi$ which is trivial to check.
+\end{proof}
+
+\begin{theorem}
+    $\Hom(M,-)$ is a \underline{left exact} functor.
+\end{theorem}
+\begin{proof}
+    Let $0\rightarrow N'\stackrel f\rightarrow N\stackrel g\rightarrow N''$ be an exact sequence. First, we shall show that $\overline f$ is injective. Indeed, let $u\in\ker\overline f$. Then, $f\circ u$ is the zero morphism. But since $f$ is injective, we must have that $u$ is the zero morphism.
+
+    Next, we shall show that $\im\overline f = \ker\overline g$. Obviously, $\overline g\circ\overline f = 0$ and thus it suffices to show $\ker\overline g\subseteq\ker\overline f$. Let $u\in\ker\overline g$. That is, $g\circ u = 0$. Then, we may define $v: M\to N'$ by $v(m) = f^{-1}(u(m))$, which is well defined since $f$ is injective. It is not hard to see that $v$ is a module homomorphism, implying the desired conclusion.
 \end{proof}
 
 \section{Exact Sequences}
@@ -379,7 +395,7 @@ Similarly, there is a homomorphism $g: N\otimes M\to M\otimes N$ such that $g(n\
 
 On the other hand, the map $F: M\times N\times P\to (M\otimes_A N)\otimes_A P$ given by $(x,y,z)\mapsto x\otimes y\otimes z$ is $A$-linear and thus induces a map $f: M\otimes_A N\otimes_A P\to (M\otimes_A N)\otimes_A P$ given by $x\otimes y\otimes z\mapsto(x\otimes y)\otimes z$. Since the maps $f$ and $h$ are inverses to one another for elementary tensors, they are inverses to one another over their respective domains, whereby both are isomorphisms.
 
-\item Define the map $f:\left(\bigoplus_{\i\in I}M_i\right)\times N\to\bigoplus(M_i\otimes_A N)$ by $f((m_i)\otimes n) = (m_i\otimes n)$, which is a bilinear map. This induces a map $\phi:\left(\bigoplus_{i\in I}M_i\right)\otimes_A N\to\bigoplus_{i\in I}(M_i\otimes_A N)$ such that $f((m_i)\otimes n) = (m_i\otimes n)$. 
+\item Define the map $f:\left(\bigoplus_{i\in I}M_i\right)\times N\to\bigoplus(M_i\otimes_A N)$ by $f((m_i)\otimes n) = (m_i\otimes n)$, which is a bilinear map. This induces a map $\phi:\left(\bigoplus_{i\in I}M_i\right)\otimes_A N\to\bigoplus_{i\in I}(M_i\otimes_A N)$ such that $f((m_i)\otimes n) = (m_i\otimes n)$. 
 
 Now, consider the map $f_i: M_i\times N\to M\otimes N$ given by $f_i(m_i, n) = \iota_i(m_i)\otimes n$. This induces a map $g_i: M_i\otimes_A N\to M\otimes N$ such that $g_i(m_i\otimes n) = \iota_i(m_i)\otimes n$. We may now define a map $\psi:\bigoplus_{i\in I} (M_i\otimes_A N)\to\left(\bigoplus_{i\in I}M_i\right)\otimes_A N$ given by 
 \begin{equation*}
@@ -513,7 +529,7 @@ Therefore, the sequence cannot be exact.
 \section{Flat Modules}
 
 \begin{definition}[Flat Module]
-    An $A$-module $M$ is sida to be flat if the functor $-\otimes_A N$ is exact.
+    An $A$-module $M$ is said to be flat if the functor $-\otimes_A N$ is exact.
 \end{definition}
 
 We know that $-\otimes_AN$ is right exact, hence, it suffices to show that the functor is left exact.
@@ -645,6 +661,19 @@ In particular, from \thref{thm:pojective-module-equivalence}(c), we see that eve
     This gives rise to a locally small category $A-\catAlg$ with morphisms as defined above.
 \end{definition}
 
+An $A$-algebra $B$ is said to be \textbf{finite} if it is finitely generated as an $A$-module. On the other hand, it is said to be \textbf{finitely generated} or of \textbf{finite type} if it is the homomorphic image of a polynomial ring $A[x_1,\ldots,x_n]$ for some positive integer $n$.
+
+\begin{proposition}
+    If $C$ is a finite $B$-algebra and $B$ is a finite $A$-algebra, then $C$ is a finite $A$-algebra.
+\end{proposition}
+
+\begin{proposition}
+    If $C$ is a $B$-algebra of finite type and $B$ is an $A$-algebra of finite type, then $C$ is an $A$-algebra of finite type.
+\end{proposition}
+\begin{proof}
+    There is a surjective ring homomorphism $\varphi: A[x_1,\ldots,x_n]\to B$ and a surjective ring homomorphism $\psi: B[y_1,\ldots,y_m]\to C$. It is not hard to see that there is a surjective ring homomorphism $\Phi: A[x_1,\ldots,x_n,y_1,\ldots,y_m]\to C$ thereby completing the proof.
+\end{proof}
+
 \subsection{Tensor Product of Algebras}
 
 Consider the two $A$-algebras $f: A\to B$ and $f: A\to C$. Then, the map 
@@ -736,3 +765,33 @@ whence $E\cong(x_1)\oplus(y_1)\oplus\cdots\oplus(y_m)$. This completes the proof
 \subsection{The Jordan Canonical Form}
 
 Let $k$ be an algebraically closed field 
+
+\section{Finitely Presented Modules}
+
+I need to place this section somewhere nice.
+
+\begin{definition}[Finitely Presented]
+    An $A$-module $M$ is said to be finitely presented if there are positive integers $m$ and $n$ and an exact sequence $A^m\rightarrow A^n\rightarrow M\rightarrow 0$.
+\end{definition}
+
+Obviously, every finitely presented module is finitely generated. Further, if $A$ is a \textit{noethering}, then an $A$-module is finitely generated if and only if it is finitely presented.
+
+\begin{proposition}
+    If $M$ is finitely presented, then for every $A$-module $N$ and multiplicative subset $S$ of $A$, 
+    \begin{equation*}
+        S^{-1}\Hom_A(M,N)\cong\Hom_{S^{-1}A}(S^{-1}M,S^{-1}N)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    There is a natural map $T:S^{-1}\Hom_A(M,N)\to\Hom_{S^{-1}A}(S^{-1}M,S^{-1}N)$ given by $(\phi/s)(m/t) = \phi(m)/st$. We shall show that this map is an isomorphism when $M$ is finitely presented. To do so, we must first show that this is an isomorphism when $M = A^n$ for some positive integer $n$. Indeed, since localization commutes with direct sums, we have 
+    \begin{equation*}
+        S^{-1}\Hom_A(A^{\oplus n}, N)\cong S^{-1}\prod\Hom_A(A,N)\cong\prod\Hom_{S^{-1}A}(S^{-1}A, S^{-1}N)\cong\Hom_{S^{-1}A}(S^{-1}A^{\oplus n}, N).
+    \end{equation*}
+    Since $M$ is finitely presented, we have an exact sequence $A^m\rightarrow A^n\rightarrow M\rightarrow 0$ for some positive integers $m$ and $n$. We have a commutative diagram. 
+    \begin{equation*}
+        \xymatrix{
+            0\ar[r]\ar[d] & S^{-1}\Hom_A(M,N)\ar[r]\ar[d] & S^{-1}\Hom_A(A^n, N)\ar[r]\ar[d]_\sim & S^{-1}\Hom_A(A^m,N)\ar[d]_\sim\\
+            0\ar[r] & \Hom_{S^{-1}A}(S^{-1}M,S^{-1}N)\ar[r] & \Hom_{S^{-1}A}(S^{-1}A^n, S^{-1}N)\ar[r] & \Hom_{S^{-1}A}(S^{-1}A^m,S^{-1}N)\\
+        }
+    \end{equation*}
+\end{proof}

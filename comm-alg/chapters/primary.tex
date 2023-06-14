@@ -1,9 +1,9 @@
 A primary ideal is a generalization of the ideals $p^n\Z$ in $\Z$, as is evident from the following definition.
 
 \begin{definition}[Primary Ideals]
-    An ideal $\frakq\subseteq A$ is said to be \textit{primary} if 
+    An ideal $\frakq\subseteq A$ is said to be \textit{primary} if for every ordered pair $x,y\in A$,
     \begin{equation*}
-        xy\in\frakq\Longrightarrow x\in\frakq\text{ or }y^n\in\frakq\text{ for some } n > 0
+        xy\in\frakq\implies x\in\frakq\text{ or }y^n\in\frakq\text{ for some } n > 0
     \end{equation*}
 \end{definition}
 
@@ -86,5 +86,41 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
     be a minimal primary decomposition with $\frakp_i = \sqrt{\frakq_i}$. Then, the $\frakp_i$'s are precisely the prime ideals the occur in the set $\{\sqrt{(\fraka: x)}\mid x\in A\}$.
 \end{theorem}
 \begin{proof}
-    
+    First, note that 
+    \begin{equation*}
+        \sqrt{(\fraka: x)} = \sqrt{\bigcap_{i = 1}^n(\frakq_i: x)} = \bigcap_{i = 1}^n\sqrt{(\frakq_i: x)} = \bigcap_{x\notin q_i}\frakp_i
+    \end{equation*}
+    Using \thref{prop:prime-containment}, $\sqrt{(\fraka : x)} = \frakp_j$ for some index $j$. 
+
+    Conversely, for every $1\le j\le n$, there is $x_j\in\bigcap_{i\ne j}\frakq_i\backslash\frakq_j$. This obviously exists since the decomposition is minimal. It now follows from \thref{prop:prime-containment} and the decomposition of $\sqrt{(\fraka: x)}$ we derived above that $\sqrt{(\fraka : x)} = \frakp_j$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:min-primes-belonging}
+    Let $\fraka$ be a decomposable ideal. Then any prime ideal $\frakp\supseteq\fraka$ contains a \textit{minimal} prime ideal belonging to $\fraka$, and thus the minimal prime ideals belonging to $\fraka$ are precisely the minimal prime ideals in the set of all prime ideals containing $\fraka$.
+\end{proposition}
+\begin{proof}
+    Let $\frakp$ be a minimal prime ideal containing $\fraka$. Consider a minimal primary decomposition of $\fraka$ given by 
+    \begin{equation*}
+        \frakp\supseteq\fraka = \bigcap_{i = 1}^n\frakq_i.
+    \end{equation*}
+    Let $\frakp_i = \sqrt{\frakq_i}$, then 
+    \begin{equation*}
+        \frakp\supseteq\sqrt{\fraka} = \bigcap_{i = 1}^n\frakp_i
+    \end{equation*}
+    and due to \thref{prop:prime-containment}, there is an index $j$ such that $\frakp\supseteq\frakp_j$ whence $\frakp_j = \frakp$. Thus, every minimal prime ideal containing $\fraka$ belongs to $\fraka$.
+\end{proof}
+
+\begin{proposition}
+    Let $S$ be a multiiplicatively closed subset of $A$ and $\frakq$ be a $\frakp$-primary ideal. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $S\cap\frakp\ne\emptyset$, then $S^{-1}\frakq = S^{-1}A$. 
+        \item If $S\cap\frakp = \emptyset$, then $S^{-1}\frakq$ is $S^{-1}\frakp$-primary and its contraction in $A$ is $\frakq$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(a)$ is trivial. Recall that we have 
+    \begin{equation*}
+        \frakq^{ec} = \bigcup_{s\in S}(\frakq: s) = \bigcup_{s\in S}\frakq
+    \end{equation*}
+    where the last equality follows from the fact that $S\cap\frakq = \emptyset$. It remains to show that $S^{-1}\frakq$ is primary. Indeed, let $x/s\cdot y/t\in S^{-1}\frakq$. Then, there is $z\in\frakq$ and $w,u\in S$ such that $w(xyu - stz) = 0$. But since $wu\notin\frakq$, we must have $xy\in\frakq$, whereby $x\in\frakq$ or $y^n\in\frakq$ for some positive integer $n$, implying that either $x/s\in S^{-1}\frakq$ or $y^n/t^n\in S^{-1}\frakq$. This completes the proof.
 \end{proof}

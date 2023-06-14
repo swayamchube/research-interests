@@ -154,6 +154,29 @@ On the other hand, any element in $S^{-1}\overline M$ is of the form $(m_{i_1} +
 \end{enumerate}
 \end{proof}
 
+\begin{proposition}
+    Let $S\subseteq A$ be a multiplicative subset. Then, there is a natural isomorphism $S^{-1}M\cong S^{-1}A\otimes_A M$.
+\end{proposition}
+\begin{proof}
+    Consider the map $T: S^{-1}A\times M\to S^{-1}M$, given by $T(a/s, m) = am/s$. This is a bilinear map whereby it induces a map $f: S^{-1}A\otimes_A M\to S{-1}M$ given by $f(a/s\otimes m) = am/s$. This is surjective, since $f(1/s\otimes m) = m/s$. We shall show $\ker f = 0$. Indeed, suppose the finite sum $\sum_i a_i/s_i\otimes m_i$ is in $\ker f$. Let $s = \prod_i s_i$ and $t_i = \prod_{j\ne i}s_i$. Then, 
+    \begin{equation*}
+        \sum_{i}a_i/s_i\otimes m_i = 1/s\otimes\left(\sum_i a_it_im_i\right)
+    \end{equation*}
+    The image under $f$ of this tensor is $(\sum_i a_it_im_i)/s$ which is zero, whence there is $u\in S$ such that $u\sum_i a_it_im_i = 0$, but this implies 
+    \begin{equation*}
+        1/s\otimes\left(\sum_i a_it_im_i\right) = 1/su\otimes\left(u\sum_i a_it_im_i\right) = 0
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+\begin{corollary}
+    For every multiplicative subset $S\subseteq A$, $S^{-1}A$ is a flat $A$-module.
+\end{corollary}
+
+\begin{proposition}
+    Let $S\subseteq A$ be a multiplicative subset. Then, there is a natural isomorphism $S^{-1}(M\otimes_A N) = S^{-1}M\otimes_{S^{-1}A}S^{-1}N$.
+\end{proposition}
+\begin{proof}
+\end{proof}
 
 \section{Local Properties}
 
@@ -164,21 +187,51 @@ A property $P$ defined on the class of modules is said to be local if for every 
 
 \begin{proposition}
     Let $M$ be an $A$-module. Then, the following are equivalent: 
-    \begin{enumerate}
+    \begin{enumerate}[label=(\alph*)]
         \item $M = 0$ 
         \item $M_\frakp = 0$ for each $\frakp\in\spec A$
         \item $M_\frakm = 0$ for each $\frakm\in\mspec A$
     \end{enumerate}
 \end{proposition}
 \begin{proof}
-    That $(a)\Longrightarrow(b)\Longrightarrow(c)$ is obvious. We shall show $(c)\Longrightarrow(a)$. 
+    That $(a)\Longrightarrow(b)\Longrightarrow(c)$ is obvious. We shall show $(c)\Longrightarrow(a)$. Suppose not, then there is $x\in M\backslash\{0\}$. Since $\Ann_A(x)$ is a proper ideal in $A$, it is contained in some maximal ideal, say $\frakm$. Since $M_\frakm = 0$, there is $s\in A\backslash\frakm$ such that $sx = 0$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $\phi: M\to N$ be an $A$-module homomorphism. Then, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\phi$ is injective (surjective).
+        \item $\phi_\frakp: M_\frakp\to N_\frakp$ is injective (surjective).
+        \item $\phi_\frakm: M_\frakm\to N_\frakm$ is injective (surjective).
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(a)\implies(b)$ follows from the exactness of localization applied to the exact sequence $0\rightarrow M\rightarrow N$ ($M\rightarrow N\rightarrow 0$) and $(b)\implies (c)$ is trivial. We shall show $(c)\implies(a)$. We have the exact sequence $0\rightarrow \ker \phi\rightarrow M\rightarrow N\rightarrow\coker \phi\rightarrow 0$. Upon localizing, for all maximal ideals $\frakm$, we have the exact sequence 
+    \begin{equation*}
+        0\longrightarrow(\ker\phi)_\frakm\longrightarrow M_\frakm\longrightarrow N_\frakm\longrightarrow(\coker\phi)_\frakm\longrightarrow 0
+    \end{equation*}
+    Since we have $\phi_\frakm$ is injective (surjective), we have $(\ker\phi)_\frakm$ ($(\coker\phi)_\frakm$) is zero for all maximal ideals $\frakm$, whence we are done using  to the previous proposition.
+\end{proof}
+
+\begin{proposition}
+    Let $M$ be a finitely presented $A$-module. Then, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $M$ is projective
+        \item $M_\frakp$ is projective for all $\frakp\in\spec A$ 
+        \item $M_\frakm$ is projective for all $\frakp\in\mspec A$ 
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(a)\implies(b)$. If $M$ is projective, there is a positive integer $n$ and an $A$-module $N$ such that $M\oplus N\cong A^n$. As a result, $M_\frakp\oplus M_\frakp\cong A_\frakp^{\oplus n}$ and is projective. 
+
+    $(c)\implies(a)$. 
 \end{proof}
 
 \begin{proposition}
     ``Being an integral domain'' is \underline{not} a local property. Similarly, ``being noetherian'' is \underline{not} a local property.
 \end{proposition}
 \begin{proof}
-    Let $A$ be a nonzero integral domain and consider the ring $R = A\times A$. This is not an integral domain. Due to \thref{prop:localization-of-product}, every localization of $R$ is isomorphic to $A_{\frakp}$ where $\frakp\in\spec A$, consequently, is an integral domain. 
+    Let $A$ be a nonzero integral domain and consider the ring $R = A\times A$. This is not an integral domain. Due to \thref{prop:localization-of-product}, every localization of $R$ is isomorphic to $A_{\frakp}$ for some $\frakp\in\spec A$, consequently, is an integral domain. 
 
     As for the second assertion, consider the ring $R = k\times k\times\cdots$ where $k$ is a nonzero field. This is obviously not noetherian due to the following ascending chain of ideals: 
     \begin{equation*}
