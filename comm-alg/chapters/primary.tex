@@ -118,9 +118,37 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
     \end{enumerate}
 \end{proposition}
 \begin{proof}
-    $(a)$ is trivial. Recall that we have 
+    $(a)$ is trivial. $(b):$ Recall that we have 
     \begin{equation*}
         \frakq^{ec} = \bigcup_{s\in S}(\frakq: s) = \bigcup_{s\in S}\frakq
     \end{equation*}
     where the last equality follows from the fact that $S\cap\frakq = \emptyset$. It remains to show that $S^{-1}\frakq$ is primary. Indeed, let $x/s\cdot y/t\in S^{-1}\frakq$. Then, there is $z\in\frakq$ and $w,u\in S$ such that $w(xyu - stz) = 0$. But since $wu\notin\frakq$, we must have $xy\in\frakq$, whereby $x\in\frakq$ or $y^n\in\frakq$ for some positive integer $n$, implying that either $x/s\in S^{-1}\frakq$ or $y^n/t^n\in S^{-1}\frakq$. This completes the proof.
 \end{proof}
+
+\begin{definition}[Isolated Set of Associated Primes]
+    A set $\Sigma$ of prime ideals associated with $\fraka$ is said to be \emph{isolated} if it satisfies the following condition: 
+    \begin{quote}
+        if $\frakp'$ is a prime ideal belonging to $\fraka$ with $\frakp'\subseteq\frakp$ for some $\frakp\in\Sigma$, then $\frakp'\in\Sigma$
+    \end{quote}
+\end{definition}
+
+\begin{theorem}[Second Uniqueness Theorem]\thlabel{thm:second-uniqueness-theorem}
+    Let $\fraka$ be a decomposable ideal with a primary decomposition $\fraka = \bigcap_{i = 1}^n\frakq_i$. Let $\sqrt{\frakq_i} = \frakp_i$. Suppose $\Sigma = \{\frakp_{i_1},\ldots,\frakp_{i_m}\}$ is an isolated set of associated primes of $\fraka$, then $\bigcap_{j = 1}^m\frakq_{i_j}$ is independent of the chosen decomposition.
+\end{theorem}
+\begin{proof}
+    Let $S = A\backslash\bigcup_{j = 1}^m\frakp_{i_j}$. Then, $\frakp_k\cap S = \emptyset$ if and only if $\frakp_k\subseteq\bigcap_{j = 1}^m\frakp_j$ whence due to \thref{prop:prime-containment}, there is a prime $\frakp_{i_t}$ containing $\frakp_k$ and equivalently, $\frakp_k\in\Sigma$. 
+
+    Whence, upon localizing with $S$, we have 
+    \begin{equation*}
+        S^{-1}\fraka = \bigcap_{i = 1}^n S^{-1}\frakq_i = \bigcap_{j = 1}^m S^{-1}\frakq_{i_j}
+    \end{equation*}
+    Contracting both sides, we have 
+    \begin{equation*}
+        \fraka^{ec} = \left(\bigcap_{j = 1}^m S^{-1}\frakq_{i_j}\right) = \bigcap_{j = 1}^m\frakq_{i_j}^{ec} = \bigcap_{j = 1}^m\frakq_{i_j}
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    In particular, the primary ideals which correspond to the minimal primes associated to $\fraka$ are uniquely determined.
+\end{corollary}

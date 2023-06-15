@@ -115,7 +115,7 @@ Obviously, $\fraka\subseteq\sqrt{\fraka}$. From our definition, it is not hard t
         \item $\sqrt{\sqrt{\fraka}} = \sqrt{\fraka}$
         \item $\sqrt{\fraka\frakb} = \sqrt{\fraka\cap\frakb} = \sqrt{\fraka}\cap\sqrt{\frakb}$
         \item $\sqrt{\fraka^n} = \sqrt{\fraka}$ for every $n\in\N$
-        \item $\sqrt{\fraka + \frakb} = \sqrt{\sqrt{a} + \sqrt{b}}$
+        \item $\sqrt{\fraka + \frakb} = \sqrt{\sqrt{\fraka} + \sqrt{\frakb}}$
     \end{enumerate}
 \end{proposition}
 \begin{proof}
@@ -129,8 +129,20 @@ Obviously, $\fraka\subseteq\sqrt{\fraka}$. From our definition, it is not hard t
     \item Obviously, $\sqrt{\fraka + \frakb}\subseteq\sqrt{\sqrt{\fraka} + \sqrt{\frakb}}$. On the other hand, note that $\sqrt{\fraka + \frakb}$ is a radical ideal containing $\sqrt{\fraka}$ and $\sqrt{\frakb}$, therefore, contains $\sqrt{\fraka} + \sqrt{\frakb}$. Hence, $\sqrt{\fraka + \frakb}\supseteq\sqrt{\sqrt{\fraka} + \sqrt{\frakb}}$ and the conclusion follows.
 \end{enumerate}
 \end{proof}
+\begin{corollary}
+    Ideals $\fraka$ and $\frakb$ are comaximal if and only if $\sqrt{\fraka}$ and $\sqrt{\frakb}$ are comaximal.
+\end{corollary}
 
 For a prime ideal $\frakp$, note that $\sqrt{\frakp} = \frakp$ and due to $(iii)$, $\sqrt{\frakp^n} = \frakp$ for every positive integer $n$. 
+
+\begin{proposition}
+    Let $\fraka\subseteq A$ be an ideal with maximal radical. Then $A/\fraka$ is a local ring of dimension $0$.
+\end{proposition}
+\begin{proof}
+    Let $\overline\frakm$ be a maximal ideal in $A/\fraka$. Since $\overline\frakm$ is prime, its preimage in $A$ is a prime ideal $\frakm$ containing $\fraka$, thus, it must contain $\sqrt{\fraka}$, which is maximal, whence $\frakm = \sqrt{\fraka}$. Consequently $\overline\frakm = \sqrt{\fraka}/\fraka$ and is uniquely determined.
+
+    On the other hand, if $\overline\frakp$ is a prime ideal in $A/\fraka$, using a similar argument as above, one may conclude that $\overline\frakp$ is maximal and thus $\dim(A/\fraka) = 0$.
+\end{proof}
 
 \section{Extension and Contraction of Ideals}
 

@@ -39,7 +39,7 @@ The proof is omitted owing to its triviality.
     Since the poset of $A/\Ann_A(M)$-submodules of $M$ is the same as the poset of $A$-submodules of $M$, the conclusion follows.
 \end{proof}
 
-\begin{lemma}[2/3-lemma]
+\begin{lemma}[2/3-lemma]\thlabel{lem:2-3-noether-artin}
     Consider the short exact sequence $0\rightarrow M'\rightarrow M\rightarrow M''\rightarrow 0$. Then $M$ is noetherian (resp. artinian) if and only if both $M'$ and $M''$ are noetherian (resp. artinian).
 \end{lemma}
 \begin{proof}
@@ -60,6 +60,15 @@ The proof is omitted owing to its triviality.
 \end{proposition}
 \begin{proof}
     $A/\fraka$ is a noetherian (resp. artinian) $A$-module and thus a noetherian (resp. artinian) $A/\fraka$-module.
+\end{proof}
+
+\begin{proposition}
+    Let $A$ be a noetherian (resp. artinian) ring and $M$ a finitely generated $A$-module. Then, $M$ is noetherian (resp. artinian).
+\end{proposition}
+\begin{proof}
+    Let $\{m_1,\ldots,m_n\}$ be a set of generators of $M$. Then, there is a surjection $A^n\twoheadrightarrow M$ given by 
+    \[(a_1,\ldots,a_n)\mapsto a_1m_1 + \cdots + a_nm_n.\] 
+    Since $A^n$ is a noetherian (resp. artinian) $A$-module, so is $M$.
 \end{proof}
 
 \begin{proposition}
@@ -85,16 +94,24 @@ Since $M$ is artinian, there is an index $n$ such that $\im\phi^n = \im\phi^{n +
 \end{enumerate}
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\thlabel{lem:noether-iff-artin}
     Supose there is a sequence of maximal ideals $\frakm_1,\ldots,\frakm_n$ in $A$ such that $(0) = \frakm_1\cdots\frakm_n$. Then, $A$ is a noethering if and only if it is artinian.
 \end{lemma}
 \begin{proof}
-    Suppose $A$ is a noethering. Consider the $A/\frakm_i$ module $\frakm_1\cdots\frakm_{i - 1}/\frakm_1\cdots\frakm_i$
+    Suppose $A$ is noetherian. We have the chain of ideals 
+    \begin{equation*}
+        A\supseteq\frakm_1\supseteq\dots\supseteq\frakm_1\cdots\frakm_n = 0
+    \end{equation*}
+    Note that each factor $\frakm_1\cdots\frakm_{i - 1}/\frakm_1\cdots\frakm_i$ is a noetherian $A$-module and thus a noetherian $k_i = A/\frakm_i$-module and thus a $k_i$-vector space satisfying a.c.c whence it satisfies d.c.c and is an artinian $A/\frakm_i$-module whence an artinian $A$-module. We now have a short exact sequence 
+    \begin{equation*}
+        0\longrightarrow\frakm_1\cdots\frakm_{i + 1}\longrightarrow\frakm_1\cdots\frakm_i\longrightarrow\frakm_1\cdots\frakm_{i + 1}/\frakm_1\cdots\frakm_i\longrightarrow 0
+    \end{equation*}
+    Inducting downwards from $\frakm_1\cdots\frakm_n = (0)$ (which is clearly artinian) with the repeated usage of \thref{lem:2-3-noether-artin}, we are done.
 \end{proof}
 
 \section{Noetherian Rings}
 
-Recall that $A$ is a noetherian ring if it is a noetherian $A$-module.
+Recall that $A$ is a noetherian ring if it is a noetherian $A$-module. One must take note that a noethering need not have finite Krull dimension\footnote{Nagata is to blame for this monster} on the other hand, it is not even true that local rings with dimension zero are noetherian. In particular, consider the ring $R = k[x_1,x_2,\ldots]/(x_1,x_2^2,\ldots)$. Obviously $A$ is not noetherian, owing to the strictly increasing sequence of ideals $(\overline{x_1})\subsetneq(\overline{x_1},\overline{x_2})\subsetneq\cdots$. Now, let $\overline\frakp$ be a prime ideal in $R$. Then, the preimage of $\overline\frakp$ under the natural projection, say $\frakp$ is a prime ideal containing $(x_1,x_2^2,\ldots)$ and thus contains its radical, $(x_1,x_2,\ldots)$. Since the latter is a maximal ideal, so is $\frakp$ and hence so is $\overline\frakp$. This establishes that $\dim A = 0$. Finally, to see that this ring is local, use a similar argument as before to conclude that the preimage of any maximal ideal is the ideal $(x_1,x_2,\ldots)$.
 
 \begin{lemma}
     If $A$ is Noetherian and $\phi: A\to B$ is a surjective ring homomorphism, then $B$ is also Noetherian.
@@ -111,6 +128,17 @@ Recall that $A$ is a noetherian ring if it is a noetherian $A$-module.
 \end{proof}
 
 But recall, as we have seen earlier, that being a noethering is not a local property, a counterexample to which is an infinite product of fields.
+
+\begin{lemma}
+    if $A$ is a noethering and $\fraka\subseteq A$ is an ideal, then there is a positive integer $n$ such that $(\sqrt{\fraka})^n\subseteq\fraka$.
+\end{lemma}
+\begin{proof}
+    Let $\sqrt{\fraka} = \{x_1,\ldots,x_n\}$. Then, for each index $1\le i\le n$, there is a positive integer $m_i$ such that $x_i^{m_i}\in\fraka$. Let $N = \sum_{i = 1}^n n_i$. Then,
+    \begin{equation*}
+        (\sqrt{\fraka})^N = \left(\sum_{i = 1}^n(x_i)\right)^N
+    \end{equation*}
+    since multiplication of ideal distributes over multiplication, every element in the above expansion would be of the form $(x_1)^{r_1}\cdots(x_n)^{r_n}$ with $\sum_{i = 1}^n r_i = N$. But since $(x_i)^{m_i}\in\fraka$, we have the desired conclusion.
+\end{proof}
 
 \begin{theorem}[Hilbert Basis Theorem]
     If $A$ is Noetherian, then so is $A[x]$.
@@ -173,6 +201,8 @@ while the latter obviously is noetherian.
     Consequently, $A/\Ann_A(M)$ is a noetherian $A$-module and thus a noetherian $A/\Ann_A(M)$-module, whence a noethering.
 \end{proof}
 
+An analogous result does \textbf{not} hold for Artinian modules (rings). Consider the module $M = \bm{\mu}[p^\infty]$ for some prime $p$ as an abelian group. This is an artinian module but not noetherian as we have seen earlier. It is not hard to see that $\Ann_\Z(M) = (0)$ whence $\Z/\Ann_\Z(M) = \Z$ which is not artinian, as we have seen earlier.
+
 \begin{lemma}[Artin-Tate Lemma]\thlabel{lem:artin-tate}
     Let $A\subseteq B\subseteq C$ be rings with $A$ noetherian, and $C$ an $A$-algebra of finite type. If either 
     \begin{enumerate}[label=(\alph*)]
@@ -209,6 +239,21 @@ while the latter obviously is noetherian.
         p + x = b_1p_1 + \cdots + b_np_n + cx
     \end{equation*}
     for some $b_1,\ldots,b_n,c\in A$, consequently, $p\in\fraka$. Thus, $\fraka = \frakp$, which is a contradiction to the choice of $\frakp$. Hence, $\Sigma$ is empty and $A$ is a noethering.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:noether-ideal-contains-pp}
+    A nonzero ideal in a noethering contains a product of prime ideals.
+\end{proposition}
+\begin{proof}
+    Suppose not. Let $\Sigma$ be the set of all ideals which do not contain a product of prime ideals. According to our assumption, $\Sigma$ is non-empty and thus contains a maximal element\footnote{This does not require Zorn, since we are in a noethering}, say $\fraka$. Since $\fraka\in\Sigma$, it cannot be prime, thus, there are $x,y\notin\fraka$ with $xy\in\fraka$. Since $\fraka + (x)$ and $\fraka + (y)$ strictly contain $\fraka$, they are not in $\Sigma$ whence there are prime ideals $\frakp_1,\ldots,\frakp_n$ and $\frakq_1,\ldots,\frakq_m$ such that 
+    \begin{equation*}
+        \frakp_1\cdots\frakp_n\subseteq\fraka + (x)\qquad\frakq_1\cdots\frakq_m\subseteq\fraka + (y)
+    \end{equation*}
+    and thus
+    \begin{equation*}
+        \frakp_1\cdots\frakp_n\frakq_1\cdots\frakq_m\subseteq(\fraka + (x))(\fraka + (y)) = \fraka^2 + \fraka((x) + (y)) + (xy)\subseteq\fraka
+    \end{equation*}
+    a contradiction.
 \end{proof}
 
 \subsection{Primary Decomposition}
@@ -249,6 +294,17 @@ while the latter obviously is noetherian.
     Since $A$ is noetherian, the ideal $(0)$ has a primary decomposition and the minimal primes belonging to $(0)$ are precisely the minimal primes in $A$ and thus are finite.
 \end{proof}
 
+\begin{proof}[\underline{Alternate Proof to \thref{prop:noether-ideal-contains-pp}}]
+    Let $\fraka\subseteq A$ be a nonzero ideal. Then, it has a primary decomposition, whereby $\sqrt{\fraka}$ can be written as an intersection of prime ideals, say $\frakp_1\cap\cdots\cap\frakp_n$. We have $\frakp_1\cdots\frakp_n\subseteq\frakp_1\cap\cdots\cap\frakp_n$ since the product of ideals is contained in their intersection. Finally, since every ideal in a noethering contains a power of its radical, there is a positive integer $m$ such that 
+    \begin{equation*}
+        (\frakp_1\cdots\frakp_n)^m\subseteq\sqrt{\fraka}^m\subseteq\fraka
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+% \begin{lemma}
+%     Let $A$ be a noetherian domain with $\dim A = 1$. Then every nonzero ideal in $A$ can be uniquely expressed as a product of primary ideals whose radicals are distinct.
+% \end{lemma}
 
 \section{Artinian Rings}
 
@@ -299,4 +355,22 @@ Recall that $A$ is artinian if it is an artinian module over itself.
     $A$ is artinian if and only if it is a noethering with krull dimension zero.
 \end{theorem}
 \begin{proof}
+    $(\implies)$. Obviously $\dim A = 0$. We know that $A$ has finitely many maximal ideals $\frakm_1,\cdots\frakm_n$ the intersection of which is the Jacobson radical, which, in this case, is equal to the nilradical. Further, since the maximal ideals are comaximal, we have 
+    \begin{equation*}
+        \frakN(A) = \frakm_1\cdots\frakm_n
+    \end{equation*}
+    But since $\frakN(A)$ is nilpotent, there is a positive integer $k$ such that $\frakm_1^k\cdots\frakm_n^k = 0$, thus due to \thref{lem:noether-iff-artin}, $A$ is noetherian.
+
+    $(\impliedby)$. Since $A$ is a noethering, the $(0)$ ideal has a primary decomposition, whence $(0) = \bigcap_{i =  1}^n\frakq_i$ whereby $\frakN(A) = \bigcap_{i = 1}^n\frakp_i$ where each prime $\frakp_i$ is maximal owing to the krull dimension. Thus, $\frakN(A) = \frakp_1\cdots\frakp_n$. Since in a noetherian ring, the nilradical is nilpotent, there is a positive integer $k$ such that 
+    \begin{equation*}
+        (0) = \frakN(A)^k = \frakp_1^k\cdots\frakp_n^k.
+    \end{equation*}
+    We are now done due to \thref{lem:noether-iff-artin}.
+\end{proof}
+
+\begin{theorem}[Structure Theorem of Artinian Rings]\thlabel{thm:structure-theorem-artin}
+    Let $A$ be an artinian ring. Then, there are artinian local rings $A_1,\ldots,A_n$ such that $A\cong A_1\oplus\cdots\oplus A_n$. Further, the $A_i$'s are unique up to isomorphism.
+\end{theorem}
+\begin{proof}
+    
 \end{proof}
