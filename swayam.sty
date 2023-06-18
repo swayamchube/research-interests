@@ -2,6 +2,7 @@
     amsmath, 
     amsthm, 
     amssymb, 
+    amsfonts,
     xcolor, 
     geometry, 
     tikz, 
@@ -10,25 +11,34 @@
     enumitem,
     fancyhdr,
     lipsum,
-    mathpazo,
     nicefrac,
     wasysym,
-    mathtools
+    mathtools,
+    xspace,
+    anyfontsize,
+    % titlesec
 }
-\RequirePackage[all,cmtip]{xy}
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[T1]{fontenc}
+\RequirePackage{theoremref} % For referencing theorems
 \RequirePackage[framemethod = tikz]{mdframed}
-\RequirePackage{theoremref}
+\usetikzlibrary{automata, arrows.meta, positioning, cd} % good ol' Theoretical CS 
+\RequirePackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
 
-\usetikzlibrary{automata, arrows.meta, positioning, cd}
+% Input and Fonts
+\RequirePackage[utf8]{inputenc}
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathpazo}
+\RequirePackage{bm}
+% \RequirePackage{euler}
+
 
 \hypersetup {
-    colorlinks=true,
+    colorlinks=true, % because why not?
 }
 
 \geometry{
-    margin=1in,
+    margin=1in, % uniformity 
 }
 
 \newtheoremstyle{thmstyle}%               % Name
@@ -56,6 +66,7 @@
 \newtheorem{thm}{Theorem}[chapter]
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
+\newtheorem{remark}{Remark}[section]
 
 \theoremstyle{defstyle}
 \newtheorem{defn}[thm]{Definition}
@@ -142,6 +153,8 @@
 	\begin{mdframed}[linewidth=1pt, linecolor=green, backgroundcolor=green!10,]
     \bfseries Exercise.\normalfont
 }{\end{mdframed}}
+
+% \titleformat{\section}[block]{\Large\filcenter\bfseries\sffamily}{\S\thesection.}{0.25cm}{\Large}
         
 \renewcommand{\qedsymbol}{$\blacksquare$}
 \renewcommand{\emptyset}{\varnothing}
@@ -154,6 +167,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\bbC}{\mathbb{C}}
+\newcommand{\calA}{\mathcal{A}}
 \newcommand{\frakM}{\mathfrak{M}}
 
 % Categories
@@ -166,6 +180,20 @@
 \newcommand{\catMod}{\mathbf{Mod}}
 \newcommand{\catMon}{\mathbf{Mon}}
 \newcommand{\catMan}{\mathbf{Man}}
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}}
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\chr}{\operatorname{char}}
 
 % Commutative and Homological Algebra
 \newcommand{\spec}{\operatorname{spec}}
@@ -175,14 +203,19 @@
 \newcommand{\Ann}{\operatorname{Ann}}
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\End}{\operatorname{End}}
-\newcommand{\im}{\operatorname{im}}
 \newcommand{\coker}{\operatorname{coker}}
 
-\newcommand{\fraka}{\mathfrak a}
-\newcommand{\frakb}{\mathfrak b}
-\newcommand{\frakc}{\mathfrak c}
-\newcommand{\frakm}{\mathfrak m}
-\newcommand{\frakp}{\mathfrak p}
-\newcommand{\frakq}{\mathfrak q}
-\newcommand{\frakN}{\mathfrak N}
-\newcommand{\frakR}{\mathfrak R}
+\newcommand{\fraka}{\mathfrak a} % ideal
+\newcommand{\frakb}{\mathfrak b} % ideal
+\newcommand{\frakc}{\mathfrak c} % ideal
+\newcommand{\frakm}{\mathfrak m} % maximal ideal
+\newcommand{\frakp}{\mathfrak p} % prime ideal
+\newcommand{\frakq}{\mathfrak q} % qrime ideal
+\newcommand{\frakN}{\mathfrak N} % nilradical 
+\newcommand{\frakR}{\mathfrak R} % jacobson radical
+
+% Miscellaneous
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}

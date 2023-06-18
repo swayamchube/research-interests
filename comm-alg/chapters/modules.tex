@@ -648,6 +648,32 @@ In particular, from \thref{thm:pojective-module-equivalence}(c), we see that eve
     Follows from the fact that free modules are flat and projective modules are direct summands of free modules.
 \end{proof}
 
+\section{Injective Modules}
+
+\begin{theorem}[Baer's Criterion]\thlabel{thm:baer}
+    Let $Q$ be an $A$-module. Then $Q$ is injective if and only if for every ideal $\fraka$ of $A$, every $A$-module homomorphism $f:\fraka\to Q$ can be extended to an $A$-module homomorphism $\wt f: A\to Q$.
+\end{theorem}
+\begin{proof}
+    $(\implies)$ Trivial.
+
+    $(\impliedby)$ Let $M\subseteq N$ be $A$-modules. It suffices to show that every $A$-module homomorphism $f: M\to Q$ can be extended to an $A$-module homomorphism $f: N\to Q$. We shall first show that given $x\in N\backslash M$, the map $f$ can be extended to a map $f': M + (x)\to Q$. Indeed, let $\fraka = (M : x)$. Consider the map $g:\fraka\to Q$ given by $g(a) = f(ax)$. This is obviously an $A$-module homomorphism and according to the hypothesis, can be extended to an $A$-module homomorphism $\wt g: A\to Q$. Using this, we may define 
+    \begin{equation*}
+        f'(m + ax) = f(m) + \wt g(x)~\forall a\in A.
+    \end{equation*}
+    It is straightforward to check that this is an $A$-module homomorphism which extends $f$.
+
+    Now, let $(\Sigma,\leqq)$ denote the poset of maps $\phi: M'\to Q$ where $M\le M'\le N$ are $A$-modules with the relation $\phi\leqq\psi$ if $\psi$ is an extension of $\phi$. It is not hard to argue that every chain in $\Sigma$ has an upper bound. Thus, due to Zorn, there is a maximal element $\wt f: M'\to Q$ for some $M\le M'\le N$. If $M'\ne N$, then by choosing some $x\in N\backslash M'$, we may extend the map $\wt f$ to a map from $M' + (x)$ to $Q$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a PID. Then, $M$ is an injective $R$-module if and only if it is divisible.
+\end{proposition}
+\begin{proof}
+    Suppose $M$ is injective. Let $a\in A\backslash\{0\}$ and $x\in M$. Then, the map $f:(a)\to M$ which maps $a\mapsto x$ can be extended to a map from $A$ to $M$. If $f(1) = y$, then $ay = x$ whence $M$ is divisible.
+
+    Conversely, if $M$ is divisible, then given any map $f: (a)\to M$, if $f(a) = x$, then there is $y\in M$ such that $ay = M$. Now, the map $\wt f: A\to M$ given by $f(1) = y$ extends $f$ whereby $M$ is injective. This completes the proof.
+\end{proof}
+
 \section{Algebras}
 
 \begin{definition}

@@ -302,9 +302,14 @@ An analogous result does \textbf{not} hold for Artinian modules (rings). Conside
     This completes the proof.
 \end{proof}
 
-% \begin{lemma}
-%     Let $A$ be a noetherian domain with $\dim A = 1$. Then every nonzero ideal in $A$ can be uniquely expressed as a product of primary ideals whose radicals are distinct.
-% \end{lemma}
+\begin{lemma}\thlabel{lem:noether-dim1-ideal-pp}
+    Let $A$ be a noetherian domain with $\dim A = 1$. Then every nonzero ideal in $A$ can be uniquely expressed as a product of primary ideals whose radicals are distinct.
+\end{lemma}
+\begin{proof}
+    Let $\fraka\subseteq A$ be a nonzero ideal. This has a primary decomposition with the associated primes being maximal and thus comaximal. Thus, the primary ideals in the decomposition are also comaximal. From \thref{thm:chinese-remainder}, we have that $\fraka$ is in fact the product of the aforementioned primary ideals.
+
+    On the other hand, suppose $\fraka = \frakq_1\cdots\frakq_n$ where $\frakp_i = \sqrt{\frakq_i}$ are distinct. Since $\dim A = 1$, the ideals $\frakp_i$ are maximal whence $\frakq_i$ are comaximal. Invoking \thref{thm:chinese-remainder}, we see that $\fraka = \bigcap_{i = 1}^n\frakq_i$ is a primary decomposition. Further, since $\frakp_i$ are also the minimal primes associated with $\fraka$, due to \thref{thm:second-uniqueness-theorem}, the $\frakq_i$'s are unique.
+\end{proof}
 
 \section{Artinian Rings}
 

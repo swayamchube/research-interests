@@ -13,6 +13,14 @@
     For $\fraka\times\frakb$ we require $A/\fraka\times B/\frakb$ to be an integral domain. This is possible if and only if either $\fraka$ is a prime and $\frakb = B$ or $\fraka = A$ and $\frakb$ is a prime. This completes the proof.
 \end{proof}
 
+\begin{theorem}[Chinese Remainder Theorem]\thlabel{thm:chinese-remainder}
+    Let $\{\fraka_i\}_{i = 1}^n$ be comaximal ideals in $A$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\displaystyle\bigcap_{i = 1}^n\fraka_i = \prod_{i = 1}^n\fraka_i$ 
+        \item $\displaystyle A\Big/\bigcap_{i = 1}^n\fraka_i\cong\prod_{i = 1}^n A/\fraka_i$
+    \end{enumerate}
+\end{theorem}
+
 \section{Nilradical and Jacobson radical}
 
 \begin{definition}[Multiplicatively Closed]
