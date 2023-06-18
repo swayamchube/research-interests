@@ -1,0 +1,59 @@
+\begin{definition}
+    Let $E/k$ be a finite extension and $[E:k]_s = r$ and let $\sigma_1,\ldots,\sigma_r$ be distinct embeddings of $E$ in an algebraic closure $k^a$ of $k$. We define the \textit{norm} and \textit{trace} of $\alpha\in E$ as 
+    \begin{align*}
+        N_{E/k}(\alpha) = N^E_k(\alpha) = \left(\prod_{j = 1}^r\sigma_j\alpha\right)^{[E:k]_i}\\
+        \Tr_{E/k}(\alpha) = \Tr^E_k(\alpha) = [E:k]_i\sum_{j = 1}^r\sigma_j\alpha
+    \end{align*}
+\end{definition}
+
+Notice that if $E/k$ were not separable, then $\chr k > 0$ and would be a prime, say $p$. Further, $[E:k]_i = p^\nu$ for some $\nu\ge 1$, consequently, $\Tr^E_k(\alpha) = 0$ (since $\chr E = \chr k = p$).
+
+\begin{proposition}
+    Let $E/k$ be a finit extension such that $E = k(\alpha)$ for some $\alpha\in E$. If 
+    \begin{equation*}
+        p(x) = x^n + a_{n - 1}x^{n - 1} + \cdots + a_0
+    \end{equation*}
+    is the minimal polynomial of $\alpha$ over $k$, then 
+    \begin{equation*}
+        N^E_k(\alpha) = (-1)^na_0\qquad \Tr^E_k(\alpha) = -a_{n - 1}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    This follows from the fact that the minimal polynomial splits as 
+    \begin{equation*}
+        p(x) = \left((x - \alpha_1)\cdots(x - \alpha_r)\right)^{[E:k]_i}
+    \end{equation*}
+    whence the conclusion follows.
+\end{proof}
+
+\begin{proposition}
+    Let $E/k$ be a finite extension. Then the norm $N^E_k: E^\times\to k^\times$ is a multiplicative homomorphism and the trace $\Tr^E_k: E\to k$ is an additive homomorphism. Further, if we have a tower of finit extensions $k\subseteq F\subseteq E$, then 
+    \begin{equation*}
+        N^E_k = N^F_k\circ N^E_F\qquad \Tr^E_k = \Tr^F_k\circ\Tr^E_F
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    First, we must show that $N^E_k$ is a map $E^\times\to k^\times$ and $\Tr^E_k$ is a map $E\to k$. Recall that for $\alpha\in E$, $\beta = \alpha^{[E:k]_i}$ is separable over $k$ and thus $N^E_k$, which is the product of all the conjugates of $\beta$ is also separable since all conjugates lie in $k^\sep$. Now, let $\sigma: k^a\to k^a$ be a homomorphism fixing $k$. Then, it is not hard to see that $\sigma(\beta) = \beta$ and thus $[k(\beta):k]_s = 1$ but since $\beta$ is separable, we have $[k(\beta):k] = 1$ and $\beta\in k$. A similar argument can be applied to the trace.
+
+    Let $\{\sigma_i\}$ be the set of distinct embeddings of $E$ into $k^a$ fixing $F$ and $\{\tau_j\}$ be the set of distinct embeddings of $F$ into $k^a$ fixing $k$. Extend each $\tau_j$ to a homomorphism $k^a\to k^a$. 
+    
+    We contend that the set of all distinct embeddings of $E$ into $k^a$ fixing $k$ is precisely $\{\tau_j\circ\sigma_i\}$. Obviously, every element of the aforementioned family is distinct and is an embedding of $E$ into $k^a$ fixing $k$. Now, let $\sigma: E\to k^a$ be an embedding of $E$ into $k^a$. Then, the restriction $\sigma|_F$ is equal to (the restriction of) some $\tau_j$, whereby $\tau_j^{-1}\sigma$ fixes $F$ whereby it is equal to some $\sigma_i$. Thus every embedding of $E$ into $k^a$ over $k$ is of the form $\tau_j\circ\sigma_i$.
+
+    Finally, we have 
+    \begin{align*}
+        \left(\prod_{i,j}(\tau_j\circ\sigma_i)(\alpha)\right)^{[E:F]_i[F:k]_i} = \left(\prod_{j}\tau_j\left(\prod_{i}\sigma_i(\alpha)\right)^{[E:F]_i}\right)^{[F:k]_i} = N^F_k\circ N^E_F(\alpha)\\
+        [E:F]_i[F:k]_i\sum_{i,j}\tau_j\circ\sigma_i(\alpha) = [F:k]_i\sum_j\tau_j\left([E:F]_i\sum_{i}\sigma_i(\alpha)\right)
+    \end{align*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{theorem}
+    Let $E/k$ be a finite extension and $\alpha\in E$. Let $m_\alpha: E\to E$ be the linear transformation given by $m_\alpha(x) = \alpha x$. Then, 
+    \begin{equation*}
+        N^E_k(\alpha) = \det(m_\alpha)\qquad \Tr^E_k(\alpha) = \operatorname{tr}(m_\alpha)
+    \end{equation*}
+\end{theorem}
+Note that we may unambiguously write $\det(m_\alpha)$ and $\operatorname{tr}(m_\alpha)$ since both these quantities do not depend on the choice of a basis, since similar matrices have the same determinant and trace.
+\begin{proof}
+
+\end{proof}

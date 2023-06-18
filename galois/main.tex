@@ -1,10 +1,9 @@
-\documentclass[11pt]{report}
+\documentclass{report}
 
-\usepackage{../../swayam}
-\newcommand{\chr}{\operatorname{char}}
-\newcommand{\Gal}{\operatorname{Gal}}
-\newcommand{\Aut}{\operatorname{Aut}}
+\usepackage{../swayam}
+\usepackage{bm}
 \newcommand{\sep}{\text{sep}}
+\newcommand{\F}{\mathbb F}
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 \title{Field and Galois Theory}
@@ -20,44 +19,40 @@
 
 \tableofcontents
 
-\newpage
-
 \chapter{Algebraic Extensions}
 \input{sections/alg-extensions.tex} 
-
-\newpage
 
 \chapter{Algebraic Closure}
 \input{sections/alg-closure.tex}
 
-\newpage
-
 \chapter{Normal Extensions}
 \input{sections/normal-extensions.tex}
-
-\newpage
 
 \chapter{Separable Extensions}
 \input{sections/sep-extensions.tex}
 
-\newpage 
-
 \chapter{Inseparable Extensions}
 \input{sections/insep-extensions.tex}
-
-\newpage
 
 \chapter{Finite Fields}
 \input{sections/finite-fields.tex}
 
-\newpage 
-
 \chapter{Galois Extensions}
 \input{sections/galois-extensions.tex}
+
+\chapter{Cyclotomic Extensions}
+\input{sections/cyclotomic.tex}
+
+\chapter{Norm and Trace}
+\input{sections/norm-trace.tex}
+
+\chapter{Cyclic Extensions}
+\input{sections/cyclic.tex}
 
 \chapter{Infinite Galois Theory}
 \input{sections/inf-galois.tex}
 
-\chapter{Inverse Galois Theory}
-\input{sections/inv-galois.tex}
+
+% \chapter{Inverse Galois Theory}
+% \input{sections/inv-galois.tex}
 \end{document}

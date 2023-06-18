@@ -1,0 +1,27 @@
+\begin{definition}
+    Let $k$ be a field. A \textit{root of unity} in $k$ is an element $\zeta\in k$ such that $\zeta^n = 1$ for some $n\in\N$.
+\end{definition}
+
+Now, if $n > 1$ is an integer not divisible by$ \chr k$, then the polynomial $x^n - 1$ is separable, and hence, in $k^a$, has $n$ distinct roots. It is not hard to see that these form a group under multiplication. Since this is a finite multiplicative subgroup of a field, it must be cyclic. A generator for this group is called a \textit{primitive $n$-th root of unity}. We use $\bm{\mu}_n$ to denote the group of $n$-th roots of unity in $k^a$.
+
+From the previous paragraph, we see that if $\gcd(\chr k, n) = 1$, then $k(\zeta)$ is a splitting field for $x^n - 1$ and $\zeta$ is separable over $k$, therefore, $k(\zeta)/k$ is Galois.
+
+\begin{proposition}
+    Let $\gcd(\chr k, n) = 1$. If $\zeta$ is a primitive $n$-th root of unity, then $k(\zeta)/k$ is an abelian extension.
+\end{proposition}
+\begin{proof}
+    Define the map $\psi:\Gal(k(\zeta)/k)\to\Aut(\bm\mu_n)$ by $\sigma\mapsto\sigma|_{\bm\mu_n}$. Note that $\Aut(\bm\mu_n)\cong\left(\Z/n\Z\right)^\times$, further, it is not hard to see that $\psi$ is injective and the conclusion follows.
+\end{proof}
+
+Note that although we have shown $\Gal(k(\zeta)/k)$ to be embeddable into $(\Z/n\Z)^\times$, the map may not be a surjection take for example $k = \R$ and $\zeta = \exp(2\pi i/5)$. Then, $k(\zeta) = \bbC$, and $\Gal(k(\zeta)/k)\cong\{\pm 1\}$.
+
+\begin{proposition}
+    Let $\zeta$ be a primitive $n$-th root of unity over $\Q$. Then, 
+    \begin{equation*}
+        [\Q(\zeta):\Q] = \varphi(n)
+    \end{equation*}
+    and consequently, the map $\psi:\Gal(\Q(\zeta)/\Q)\to(\Z/n\Z)^\times$ is an isomorphism.
+\end{proposition}
+\begin{proof}
+    \textcolor{red}{TODO: Add in later}
+\end{proof}

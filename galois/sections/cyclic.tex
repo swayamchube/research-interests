@@ -1,0 +1,39 @@
+\begin{definition}
+    A Galois extension $K/k$ is said to be \emph{cyclic} if $\Gal(K/k)$ is a cyclic group. Similarly, it is said to be \emph{abelian} if $\Gal(K/k)$ is abelian.
+\end{definition}
+
+\begin{theorem}[Linear Independence of Characters]\thlabel{thm:lin-ind-characters}
+    
+\end{theorem}
+
+\begin{theorem}[Hilbert's Theorem 90]\thlabel{thm:hilbert-90}
+    Let $K/k$ be a cyclic degree $n$ extension with galois group $G$. Let $\sigma\in G$ be a generator and $\beta\in K$. The norm $N^K_k(\beta) = 1$ if and only if there is $\alpha\in K^\times$ such that $\beta = \alpha/\sigma(\alpha)$
+\end{theorem}
+\begin{proof}
+    $\implies$ Suppose $N^K_k(\beta) = 1$. We have a set of distinct characters $\{\id,\sigma,\ldots,\sigma^{n - 1}\}$ from $K^\times\to K^\times$. Then, due to \thref{thm:lin-ind-characters}, the set map 
+    \begin{equation*}
+        \tau = \id + \beta\sigma + (\beta\sigma(\beta))\sigma^2 + \cdots + (\beta\sigma(\beta)\cdots\sigma^{n - 2}(\beta))\sigma^{n - 1}
+    \end{equation*}
+    is nonzero, whereby, there is $\theta\in K^\times$ such that $\alpha = \tau(\theta)\ne 0$. Notice that 
+    \begin{equation*}
+        \sigma(\alpha) = \sigma(\theta) + (\sigma(\beta))\sigma^2(\theta) + \cdots + (\sigma(\beta)\sigma^2(\beta)\cdots\sigma^{n - 1}(\beta))\sigma^n(\theta)
+    \end{equation*}
+    Since $N^K_k(\beta) = 1$, we have 
+    \begin{equation*}
+        \beta\sigma(\beta)\cdots\sigma^{n - 1}(\beta) = 1
+    \end{equation*}
+    whence, we have $\sigma(\alpha) = \alpha/\beta$ and the conclusion follows.
+
+    $\impliedby$ This is trivial enough.
+\end{proof}
+
+\begin{example}
+    Find all rational points on the curve $x^2 + y^2 = 1$.
+\end{example}
+\begin{proof}
+    This reduces to finding all elements $\alpha\in\Q[i]$ with $N^{\Q[i]}_\Q(\alpha) = 1$. Any element $\alpha$ of $\Q[i]$ may be written as $(a + bi)/c$. Due to \thref{thm:hilbert-90}, there is an element $\alpha\in\Q[i]$, such that $N^{\Q[i]}_\Q(\alpha) = 1$. Using the general form of elements in $\Q[i]$, we have 
+    \begin{equation*}
+        \alpha = \frac{a + bi}{a - bi} = \frac{(a^2 - b^2) + 2abi}{a^2 + b^2}
+    \end{equation*}
+    this completes the proof.
+\end{proof}
