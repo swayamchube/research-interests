@@ -1,48 +1,78 @@
-\section{General Valuation Rings}
+\section{General Valuations and Valuation Rings}
 
 \begin{definition}[Valuation]
     A \emph{valuation} on a field $K$ is a map $v: K\to\Gamma\cup\{\infty\}$ where $\Gamma$ is an ordered abelian group such that for all $x,y\in K$,
     \begin{enumerate}
-        \item $v(xy) = v(x) + v(y)$
-        \item $v(x + y)\ge\min\{v(x), v(y)\}$
+        \item $v(xy) = v(x) + v(y)$, that is, the restriction $v: K^\times\to\Gamma$ is a group homomorphism,
+        \item $v(x + y)\ge\min\{v(x), v(y)\}$.
     \end{enumerate}
     The set 
     \begin{equation*}
         A = \{x\in K^\times\mid v(x)\ge 0\}
     \end{equation*}
-    is called the \emph{valuation ring} of $K$ with respect to the valuation $v$.
+    is called the \emph{valuation ring} of $K$ with respect to the valuation $v$. Simply stating ``$A$ is a valuation ring'' means $A$ is a valuation ring of $K = Q(A)$.
 \end{definition}
 
 That the set $A$ forms a ring follows from the fact that it is closed under addition, multiplication and subtraction.
 
 \begin{proposition}
-    Let $B$ be an integral domain and $K = Q(B)$, its field of fractions. Then, $B$ is a \emph{valuation ring} of $K$ if for every $x\in K\backslash\{0\}$, we have $x\in B$ or $x^{-1}\in B$.
+    Let $A$ be an integral domain and $K = Q(A)$, its field of fractions. Then, $A$ is a \emph{valuation ring} of $K$ iff for every $x\in K\backslash\{0\}$, we have $x\in A$ or $x^{-1}\in A$.
 \end{proposition}
 \begin{proof}
-    Follows from the fact that $0 = v(1) = v(xx^{-1}) = v(x) + v(x^{-1})$.
+    The forward direction from the fact that $0 = v(1) = v(xx^{-1}) = v(x) + v(x^{-1})$. Conversely, let $\Gamma = K^\times/A^\times$ and $\pi: K^\times\onto\Gamma$ the natural projection. Define an order on $\Gamma$ as follows 
+    \begin{itemize}
+        \item Every element in $G$ is of the form $\pi(x)$ for $x\in K^\times$. According to the given hypothesis, $x\in A$ or $x^{-1}\in A$. In the former case, let $\pi(x)\ge 1_\Gamma$ and in the latter, $\pi(x) < 1_\Gamma$.
+        \item To see that this is well defined, suppose $x,y\in K$ with $x/y\in A^\times$, then if $x\in A$ then $y = xu\in A$ where $u\in A^\times$, on the other hand, if $x^{-1}\in A$, then $y^{-1} = ux^{-1}\in A$ where $u\in A^\times$.
+        \item This extends to a total order on $\Gamma$ by $\pi(x)\ge\pi(y)$ if and only if $\pi(xy^{-1})\ge 1_\Gamma$, that is, $xy^{-1}\in A$.
+    \end{itemize}
+
+    We now contend that $\pi$ is a valuation with valuation ring $A$. Since $\pi$ is a homomorphism, it suffices to check $\pi(x + y)\ge\min\{\pi(x),\pi(y)\}$. Indeed, suppose $\pi(x)\ge\pi(y)$, which is equivalent to stating $x/y\in A$. Then, $1 + x/y\in A$, consequently 
+    \begin{equation*}
+        \pi(x + y) = \pi(y(1 + x/y)) = \pi(y)\pi(1 + x/y)\ge\pi(y).
+    \end{equation*}
+    This completes the proof.
 \end{proof}
 
 \begin{proposition}
-    Let $B$ be a valuation ring. Then 
+    Let $A$ be a valuation ring. Then 
     \begin{enumerate}[label=(\alph*)]
-        \item $B$ is a local ring. 
-        \item $B$ is normal.
+        \item $A$ is a local ring. 
+        \item $A$ is normal.
     \end{enumerate}
 \end{proposition}
 \begin{proof}
 \begin{enumerate}[label=(\alph*)]
-    \item We shall show that the nonunits in $B$ form an ideal. Let $\frakm$ be the set of nonunits in $B$ and choose $x\in\frakm\backslash\{0\}$, $b\in B$. Then, $bx\ne 0$ since $x$ is not a zero divisor. We contend that $bx$ is a nonunit. For if not, then $b(bx)^{-1}$ would be an inverse of $x$.
+    \item We shall show that the nonunits in $A$ form an ideal. Let $\frakm$ be the set of nonunits in $A$ and choose $x\in\frakm\backslash\{0\}$, $b\in A$. Then, $bx\ne 0$ since $x$ is not a zero divisor. We contend that $bx$ is a nonunit. For if not, then $b(bx)^{-1}$ would be an inverse of $x$.
 
-    Next, let $x,y\in\frakm\backslash\{0\}$. According to the given condition, either $x/y$ or $y/x$ are in $B$. Without loss of generality, suppose $x/y\in B$. Then $x + y = y(1 + x/y)\in\frakm$ from the conclusion of the previous paragraph. Thus $\frakm$ is an ideal and $B$ is local.
+    Next, let $x,y\in\frakm\backslash\{0\}$. According to the given condition, either $x/y$ or $y/x$ are in $A$. Without loss of generality, suppose $x/y\in A$. Then $x + y = y(1 + x/y)\in\frakm$ from the conclusion of the previous paragraph. Thus $\frakm$ is an ideal and $A$ is local.
 
-    \item Indeed, let $\alpha\in K$ be integral over $B$. If $\alpha\in B$, there is nothing to prove. If not, then it satisifes an equation of the form 
+    \item Indeed, let $\alpha\in K$ be integral over $A$. If $\alpha\in A$, there is nothing to prove. If not, then it satisifes an equation of the form 
     \begin{equation*}
         \alpha^n + b_{n - 1}\alpha^{n - 1} + \cdots + b_1\alpha + b_0
     \end{equation*}
-    Upon multiplying by $\alpha^{-(n - 1)}$, we can represent $\alpha$ as a sum of elements in $B$, consequently, is an element of $B$, a contradiction.
+    Upon multiplying by $\alpha^{-(n - 1)}$, we can represent $\alpha$ as a sum of elements in $A$, consequently, is an element of $A$, a contradiction.
 \end{enumerate}
 \end{proof}
 
+\begin{proposition}
+    Let $A$ be a valuation ring. Then the ideals in $A$ are totally ordered.
+\end{proposition}
+\begin{proof}
+    Suppose not. Then, there are two distinct ideals $\fraka,\frakb$ with $\fraka\not\subseteq\frakb$ and $\frakb\not\subseteq\fraka$ whence we can pick $a\in\fraka\backslash\frakb$ and $b\in\frakb\backslash\fraka$. Since either $a/b\in A$ or $b/a\in A$, we must have $a|b$ or $b|a$. Without loss of generality, suppose $b|a$. Then, $a\in(b)\subseteq\frakb$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{definition}[B\'ezout Ring]
+    A ring is said to be a \emph{B\'ezout ring} if every finitely generated ideal is principal.
+\end{definition}
+
+\begin{proposition}
+    A ring is a valuation ring if and only if it is a local B\'ezout domain.
+\end{proposition}
+\begin{proof}
+    Let $A$ be a valuation ring and $\fraka = (a_1,\ldots,a_n) = (a_1) + \cdots + (a_n)$. Since ideals in a valuation ring are totally ordered, there is an index $i$ such that $(a_j)\subseteq(a_i)$ for $1\le j\le n$, consequently, $\fraka = (a_i)$.
+
+    Conversely, let $A$ be a local B\'ezout Domain and $x = a/b\in K = Q(A)$. If either $a$ or $b$ is a unit, then either $x$ or $x^{-1}\in A$. Then, there is $c\in A$ such that $(c) = (a,b)$ whence there are $a',b'\in A$ such that $a = ca'$ and $b = cb'$. Let $u\in A$ be such that $(u) = (a',b')$. Then, $(cu') = (c)$ whence $u$ is a unit. If neither $a'$ or $b'$ is a unit, then $(1) = (a',b') = (a') + (b')\subseteq\frakm$, a contradiction. Thus, either $a|b$ or $b|a$ which completes the proof.
+\end{proof}
 
 \section{Discrete Valuation Rings}
 
@@ -52,8 +82,8 @@ That the set $A$ forms a ring follows from the fact that it is closed under addi
 
 First, since $A$ is a valuation ring of its field of fractions, say $K$, it is local and normal, i.e. integrally closed in $K$. Further, the maximal ideal $\frakm$ in $A$ is the set of all $x\in A$ with \underline{positive} valuations.
 
-\begin{proposition}
-    Let $A$ be a DVR. Then, $A$ is a noetherian local domain of Krull dimension $1$ such that every non-zero ideal is a power of the unique maximal ideal.
+\begin{proposition}\thlabel{prop:dvr-is-local-pid}
+    Let $A$ be a DVR. Then, $A$ is a local PID.
 \end{proposition}
 \begin{proof}
     Let $\frakm_k = \{x\in A\mid v(x)\ge k\}$. We first show that $\frakm_k$ is an ideal. Indeed, for all $x,y\in\frakm_k$, 
@@ -66,14 +96,13 @@ First, since $A$ is a valuation ring of its field of fractions, say $K$, it is l
 
     Notice that these ideals form a descending chain 
     \begin{equation*}
-        \frakm = \frakm_1\supseteq\frakm_2\supseteq\cdots
+        \frakm = \frakm_1\supseteq\frakm_2\supseteq\cdots.
     \end{equation*}
-    whereby any ascending chain must be finite and $A$ is noetherian.
 
-    Choose some $a\in A$ with $v(a) = 1$, which exists due to the surjectivity of $v$. Then, $\frakm = (a)$ and consequently, $\frakm_k = (a^k) = \frakm^k$. From this, we may conclude that $\frakm$ is the unique non-zero prime ideal in $A$ and every other ideal is a power of $\frakm$. This also establishes the result about the Krull dimension.
+    Choose some $a\in A$ with $v(a) = 1$, which exists due to the surjectivity of $v$. Then, $\frakm = (a)$ and consequently, $\frakm_k = (a^k) = \frakm^k$. From this, we may conclude that $\frakm$ is the unique non-zero prime ideal in $A$ and every other ideal is a power of $\frakm$ and also principal. Thus $A$ is a local PID.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\thlabel{thm:dvr-equivalence}
     Let $A$ be a noetherian local domain of Krull dimension $1$, $\frakm$ its maximal ideal and $k = A/\frakm$ its residue field. Then the following are equivalent: 
     \begin{enumerate}[label=(\alph*)]
         \item $A$ is a discrete valuation ring.
@@ -99,13 +128,27 @@ First, since $A$ is a valuation ring of its field of fractions, say $K$, it is l
     \begin{equation*}
         \dim_k(\overline\frakm/\overline\frakm^2) = \dim_k(\frakm/\frakm^2) = 1
     \end{equation*}
-    whence, due to \texttt{<insert reference>}, every ideal in $A/\frakm^n$ is principal, in particular, $\overline\fraka$ is principal. \textcolor{red}{TODO: complete this argument}
+    whence, due to \texttt{<insert reference>}, every ideal in $A/\frakm^n$ is principal, in particular, $\overline\fraka$ is principal. \todo{Complete This Argument}
 
     $(e)\implies(f)$. Due to \thref{lem:nakayama}, $\frakm\supsetneq\frakm^2$, hence there is $x\in\frakm\backslash\frakm^2$. According to our hypothesis, $(x) = \frakm^n$ for some positive integer $n$. Due to our choice of $x$, we must have $n = 1$, whence $\frakm = (x)$. The conclusion now follows. 
 
     $(f)\implies(a)$. We shall explicitly create a valuation. First, note that we have $\frakm = (x)$ due to maximality and due to Nakayama's Lemma, $\frakm^k\ne\frakm^{k + 1}$ for if not, then $\frakm^k = 0$ whereby, $\frakm = 0$, upon taking radicals, a contradiction. 
 
     For each $a\in A$, $(a) = (x^k)$ for a unique $k$, since $(x^n)\supsetneq(x^{n + 1})$. Define $v(a) = k$ and extend it to $K = Q(A)$ by defining $v(a/b) = v(a) - v(b)$. This is obviously a well defined valuation and $v(a/b)\ge 0$ if and only if $(a) = (x^n)$ and $(b) = (x^m)$ for $n\ge m$, whence $a\in (b)$ and $a/b\in A$. Thus $A$ is the valuation ring of $K$ with respect to $v$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    $A$ is a DVR if and only if $A$ is a local PID which is not a field.
+\end{proposition}
+\begin{proof}
+    If $A$ is a local PID which is not a field, then it is a noetherian local domain of Krull dimension $1$ with a principal maximal ideal. From \thref{thm:dvr-equivalence}, we have that $A$ is a DVR. Putting this together with \thref{prop:dvr-is-local-pid}, we have the desired conclusion.
+\end{proof}
+
+\begin{proposition}
+    Let $A$ be a valuation ring that is not a field. Then $A$ is a DVR if and only if $A$ is noetherian.
+\end{proposition}
+\begin{proof}
+    It suffices to show the converse. Since $A$ is noetherian, every ideal is finitely generated and thus principal. Hence, $A$ is a DVR.
 \end{proof}
 
 \section{Dedekind Domains}
@@ -132,15 +175,74 @@ First, since $A$ is a valuation ring of its field of fractions, say $K$, it is l
     From \thref{lem:noether-dim1-ideal-pp}, every ideal in a noetherian domain of Krull dimension $1$ has a unique factorization as a product of prime ideals. Then, from \thref{thm:dedekind-domain-equivalence} and \thref{thm:chinese-remainder}, the conclusion follows.
 \end{proof}
 
+\begin{proposition}
+    Let $A$ be a Dedekind domain and $\fraka\subseteq A$ a nonzero ideal. Then, $A/\fraka$ is a principal ring.
+\end{proposition}
+\begin{proof}
+    The ideal $\fraka$ has a prime factorization $\fraka = \frakp_1^{n_1}\cdots\frakp_s^{n_s}$ with $A/\fraka\cong\bigoplus_{i = 1}^s A/\frakp_i^{n_i}$. We shall show that each factor $A/\frakp_i^{n_i}$ is a principal ring, by showing that for every prime ideal $\frakp$, the ring $\overline A = A/\frakp^n$ is principal for every positive integer $n$.
+
+    First, note that $\overline A$ must be artinian and local as we have argued in the previous chapters. Hence, due to \thref{lem:artin-local-pir}, it suffices to show that the maximal ideal in $\overline A$ is principal. Note that the maximal ideal in $\overline A$ is given by $p/\frakp^n$. If $n = 1$, then $A/\frakp^n$ is a field and there is nothing to prove. Now, suppose $n\ge 2$. Let $\overline p$ denote the maximal ideal $\frakp/\frakp^n$ in $A$. Then, $\overline\frakp^2 = \frakp^2/\frakp^n$, which may not be equal to $\overline{\frakp}$ due to \thref{lem:nakayama}.
+
+    Choose some $\overline a\in\overline\frakp\backslash\overline\frakp^2$. We contend that $\overline\frakp = (\overline a)$. Let $a\in A$ be an element mapping to $\overline a$ under the projectio $A\twoheadrightarrow A/\frakp^n$. Then, $(a)\supseteq\frakp^n$, consequently, $\sqrt{(a)} = \frakp$ is maximal and thus $(a)$ is $\frakp$-primary, whence a power of $\frakp$. Since we chose $\overline{a}$ in $\overline\frakp\backslash\overline{\frakp}^2$, we must have $(a) = \frakp$ which completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Every ideal in a Dedekind domain is generated by at most two elements.
+\end{corollary}
+\begin{proof}
+    \todo{Easy write up. Stop being lazy}
+\end{proof}
+
 \begin{theorem}
     The ring of integers $\mathcal{O}_K$ in an \underline{algebraic number field}\footnote{An algebraic number field is a finite field extension of $\Q$} $K\supseteq\Q$ is a Dedekind domain.
 \end{theorem}
 \begin{proof}
+    \todo{Read the section on valuations and then add this}
+\end{proof}
 
+\begin{proposition}
+    Let $A$ be a Dedekind domain and $\fraka,\frakb,\frakc\subseteq A$ be ideals. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\fraka\cap(\frakb + \frakc) = \fraka\cap\frakb + \fraka\cap\frakc$ and
+        \item $\fraka + \frakb\cap\frakc = (\fraka + \frakb)\cap(\fraka + \frakc)$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    
 \end{proof}
 
 \section{Fractional Ideals}
 
+
 \begin{definition}
-    Let $A$ be an integral domain. A \emph{fractional ideal} of $A$ is a nonzero $A$-submodule of $K = Q(A)$, the field of fractions such that there is $d\in A$ with $d\fraka\subseteq A$.
+    Let $A$ be an integral domain. A \emph{fractional ideal} of $A$ is a nonzero $A$-submodule $M$ of $K = Q(A)$, the field of fractions such that there is $d\in A$ with $dM\subseteq A$.
 \end{definition}
+
+The ideals contained in $A$ are now called ``integral ideals''. Obviously, every integral ideal is fractions. 
+
+\begin{itemize}
+    \item It is not hard to see that every finitely generated $A$-submodule $M$ of $K$ is fractional, for if it is generated by $x_1/y_1,\ldots,x_n/y_n$, then choosing $y = \prod_{i = 1}^n y_i$, we have $yM\subseteq A$.
+
+    \item On the other hand, if $A$ is noetherian and $M$ a fractional ideal, then there is some $d\in A$ such that $dM\subseteq A$ and is an ideal, say $\fraka\subseteq A$. Thus $M = d^{-1}\fraka$ and is a finitely generated $A$-module.
+\end{itemize}
+
+\begin{definition}
+    Let $A$ be an integral domain. An $A$-submodule $M$ of $K = Q(A)$ is said to be \emph{invertible} if there is an $A$-submodule $N$ of $K$ with $MN = A$. 
+\end{definition}
+
+For an $A$-submodule $M$ of $K$, recall that we had defined the colon operator as
+\begin{equation*}
+    (A:M) = \{x\in K\mid xM\subseteq A\}.
+\end{equation*}
+It is not hard to see that $(A:M)$ is an $A$-submodule of $K$.
+
+\begin{proposition}
+    Let $A$ be an integral domain and $M$ an invertible ideal of $A$. Then, $M^{-1} = (A:M)$.
+\end{proposition}
+\begin{proof}
+    Let $N$ denote the inverse of $M$. Then 
+    \begin{equation*}
+        N\subseteq (A:M) = (A:M)MN\subseteq AN = N.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
