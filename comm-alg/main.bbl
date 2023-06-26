@@ -1,3 +1,13 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{Lan02}
+
+\bibitem[AM69]{AM69}
+Michael Atiyah and Ian MacDonald.
+\newblock {\em Introduction to Commutative Algebra}.
+\newblock CRC Press, 1969.
+
+\bibitem[Lan02]{Lan02}
+Serge Lang.
+\newblock {\em Algebra}.
+\newblock Springer Science \& Business Media, 2002.
 
 \end{thebibliography}
