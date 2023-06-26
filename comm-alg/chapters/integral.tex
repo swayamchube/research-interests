@@ -96,7 +96,7 @@ The set $C$ as defined above is called the \textit{integral closure of $A$ in $B
 
 \subsection{Going Up Theorem}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:int-ext-field-field}
     Let $A\subseteq B$ be an integral extension of integral domains. Then $A$ is a field if and only if $B$ is a field.
 \end{proposition}
 \begin{proof}
@@ -183,3 +183,102 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
 \begin{proposition}
     Let $A\subseteq B$ be integral domains with $A$ integrally closed. Let $\alpha\in B$ be integral over an ideal $\fraka$ of $A$. Then $\alpha$ is algebraic over the field of fractions $K$ of $A$. Further, if the minimal polynomial of $\alpha$ over $K$ is given by $x^n + a_{n - 1}x^{n - 1} + \cdots + a_0$, then each $a_i$ is an element of $\sqrt{\fraka}$.
 \end{proposition}
+
+\section{Noether's Normalization Lemma}
+
+\begin{lemma}\thlabel{lem:towards-noether-normalization}
+    Let $k$ be a field and $F\in k[X_1,\dots,X_n]$ a non-constant polynomial. Then there is a $k$-algebra automorphism 
+    \begin{equation*}
+        \varphi: k[X_1,\dots,X_n]\to k[X_1,\dots,X_n]
+    \end{equation*}
+    such that $\varphi(X_n) = X_n$ and 
+    \begin{equation*}
+        \varphi(F) = aX_n^d + f_{d - 1}X_n^{d - 1} + \cdots + f_1X_n + f_0
+    \end{equation*}
+    where $f_i\in k[X_1,\dots,X_{n - 1}]$ for $1\le i\le d - 1$.
+\end{lemma}
+\begin{proof}
+    We shall pick an automorphism of the form $\varphi(X_i) = X_i + X_n^{t_i}$ for some positive integer $t_i$ for each $1\le i\le n - 1$. We shall choose these $t_i$'s at the end of the proof.
+
+    First, note that for $1\le i\le n - 1$, $\varphi(X_i - X_n^{t_i}) = X_i$ whence $\varphi$ is a surjection. Since $k[X_1,\dots,X_n]$ is a noethering, $\varphi$ is an isomorphism.
+
+    Let $\Lambda\subseteq\N^n$ be a finite subset such that 
+    \begin{equation*}
+        F = \sum_{\alpha\in\Lambda}a_\alpha X^\alpha
+    \end{equation*}
+    where $a_\alpha\in k^\times$ for each $\alpha\in\Lambda$. For each $\alpha\in\Lambda$, define $\omega(\alpha) = t_1\alpha_1 + \cdots + t_{n - 1}\alpha_{n - 1} + \alpha_n$.
+
+    Choose a positive integer $N$ greater than 
+    \begin{equation*}
+        \max_{\alpha\in\Lambda}\max_{1\le i\le n}\alpha_i
+    \end{equation*}
+    and set $t_i = N^i$ for $1\le i\le n - 1$. It is not hard to see that all the $\omega(\alpha)$'s are distinct. 
+
+    We have 
+    \begin{equation*}
+        \varphi(F) = \sum_{\alpha\in\Lambda}\left(a_\alpha\prod_{i = 1}^{n - 1}(X_i + X_n^{t_i})^{\alpha_i}\right)X_n^{\alpha_n}
+    \end{equation*}
+    and since the $\omega(\alpha)$'s are distinct, there is a unique term in the above expansion that contributes to the term with maximum exponent of $X_n$ whence the coefficient of this term is a constant in $K^\times$. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Noether Normalization]\thlabel{thm:noether-normalization}
+    Let $k$ be a field and $A$ a finitely generated $k$-algebra. Then, there are $z_1,\dots,z_m\in A$ such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item $z_1,\dots,z_m$ are algebraically independent over $k$\footnote{$m = 0$ is permitted}. That is, the evaluation map 
+        \begin{equation*}
+            \mathbf{ev}: k[X_1,\dots,X_m]\onto k[z_1,\dots,z_m]
+        \end{equation*}
+        from the ring of polynomials in $m$ variables over $k$ is an isomorphism. 
+        \item $A$ is integral over $k[z_1,\dots,z_m]$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We shall prove this statement by induction on the cardinality $n$ of the smallest generating set of $A$ as a $k$-algebra. The base case with $n = 0$ is trivial. Since $A$ is a finitely generated $k$-algebra, there is a surjective ring homomomrphism 
+    \begin{equation*}
+        \pi: k[X_1,\dots,X_n]\onto A.
+    \end{equation*}
+    Choose a non-constant polynomial $G\in\ker\pi$. Due to \thref{lem:towards-noether-normalization}, there is an automorphism $\varphi$ of $k[X_1,\dots,X_n]$ which sends $G$ to a polynomial $F$ of the form 
+    \begin{equation*}
+        aX_n^d + f_{d - 1}X_n^{d - 1} + \cdots + f_1X_n + f_0
+    \end{equation*}
+    where $a\in k^\times$. We now have the following sequence of ring homomorphisms
+    \begin{equation*}
+        k[X_1,\dots,X_n]\stackrel{\varphi^{-1}}{\longrightarrow}k[X_1,\dots,X_n]\stackrel{\pi}{\longrightarrow} A
+    \end{equation*}
+    with $F\in\ker(\pi\circ\varphi^{-1})$. Let $x_i = (\pi\circ\varphi^{-1})(X_i)$, then, $F(x_1,\dots,x_n) = 0$. That is, 
+    \begin{equation*}
+        x_n^d + a^{-1}f_{d - 1}(x_1,\dots,x_{n - 1})x_n^{d - 1} + \cdots + a^{-1}f_0(x_0,\dots,x_{n - 1}) = 0,
+    \end{equation*}
+    and thus, $x_n$ is algebraic over $B = k[x_1,\dots,x_{n - 1}]$. Due to the induction hypothesis, there are algebraically independent $z_1,\dots,z_m\in B$ such that $B$ is integral over $k[z_1,\dots,z_m]$. 
+
+    We have shown that $x_n$ is integral over $B$ and thus $B\subseteq A$ is an integral extension whence $k[z_1,\dots,z_m]\subseteq A$ is an integral extension. This completes the proof.
+\end{proof}
+
+We are now ready to draw a plethora of corollaries from the above result.
+
+\begin{lemma}[Zariski's Lemma]
+    Let $K/k$ be an extension of fields such that $K$ is a finitely generated $k$-algebra. Then, $K/k$ is a finite extension.
+\end{lemma}
+\begin{proof}
+    According to \thref{thm:noether-normalization}, there are $z_1,\dots,z_m\in K$ such that $K$ is integral over $k[z_1,\dots,z_m]$, which is an integral domain whence a field due to \thref{prop:int-ext-field-field}. We note that $m$ may not be positive since a polynomial ring can never be a field. Hence, $K/k$ is algebraic and since $K$ is a finitely generated $k$-algebra, the extension $K/k$ must be finite.
+\end{proof}
+
+\begin{theorem}[Hilbert's Nullstellensatz, Weak Form]
+    Let $k$ be an algebraically closed field. Then, any maximal ideal in $k[x_1,\dots,x_n]$ is of the form $(x_1 - a_1,\dots,x_n - a_n)$.
+\end{theorem}
+\begin{proof}
+    It suffices to show the converse. Let $\frakm$ be a maximal ideal in $k[x_1,\dots,x_n]$. We now have a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            k\ar@{^(->}[r]^-{\iota}\ar[rd]_-{\varphi} & k[x_1,\dots,x_n]\ar@{->>}[d]^-{\pi}\\
+            & k[x_1,\dots,x_n]/\frakm = K
+        }
+    \end{equation*}
+    where $\varphi := \pi\circ\iota$.
+
+    The map $\varphi$ gives $K$ the structure of a finitely generated $k$-algebra and thus $\varphi$ is surjective (since $k$ is algebraically closed). Let $\pi(x_i) = a_i$ for $1\le i\le n$. Due to the surjectivity of $\varphi$, for each $a_i$, there is some $a_i'\in k$ with $\varphi(a_i') = a_i$ whence $\pi(x_i - a_i') = 0$ and 
+    \begin{equation*}
+        (x_1 - a_1',\dots,x_n - a_n')\subseteq\frakm.
+    \end{equation*}
+    But since the former is a maximal ideal, we must have equality.
+\end{proof}

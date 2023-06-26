@@ -16,6 +16,7 @@
     mathtools,
     xspace,
     anyfontsize,
+    todonotes,
     % titlesec
 }
 \RequirePackage{theoremref} % For referencing theorems
@@ -70,8 +71,8 @@
 
 \theoremstyle{defstyle}
 \newtheorem{defn}[thm]{Definition}
-\newtheorem*{cor}{Corollary}
-\newtheorem{ex}{Example}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{ex}[thm]{Example}
 
 \newcounter{theorem}[chapter]
 
@@ -185,6 +186,7 @@
 \newcommand{\catVec}{\mathbf{Vec}}
 
 % Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
 \newcommand{\Aut}{\operatorname{Aut}}
 \newcommand{\GL}{\operatorname{GL}}
 \newcommand{\im}{\operatorname{im}}
@@ -193,7 +195,9 @@
 \newcommand{\cl}{\mathbf{cl}}
 \newcommand{\Gal}{\operatorname{Gal}}
 \newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\chr}{\operatorname{char}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
 
 % Commutative and Homological Algebra
 \newcommand{\spec}{\operatorname{spec}}
@@ -219,3 +223,5 @@
 \newcommand{\wt}[1]{\widetilde{#1}}
 \newcommand{\wh}[1]{\widehat{#1}}
 \newcommand{\calM}{\mathcal{M}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
