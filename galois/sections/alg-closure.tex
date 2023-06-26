@@ -45,3 +45,32 @@ Since an algebraically closed and algebraic extension of $k$ is determined upto 
 \begin{definition}[Conjugates]
     Let $E/k$ be an algebraic extension contained in an algebraic closure $k^a$. Then, the distinct roots of the minimal polynomial of $\alpha$ over $k$ are called the \textit{conjugates} of $\alpha$. In particular, two roots of the same minimal polynomial over $k$ are said to be \textit{conjugate} to one another.
 \end{definition}
+
+Here's a nice exercise from \cite{DF04}.
+
+\begin{example}
+    A field is said to be \emph{formally real} if $-1$ cannot be expressed as a sum of squares in it. Let $k$ be a formally real field with $k^a$ its algebraic closure. If $\alpha\in k^a$ with odd degree over $k$, then $k[\alpha]$ is also formally real.
+\end{example}
+\begin{proof}
+    Suppose not. Let $\alpha\in k^a$ be such that $k[\alpha]$ is not formally real and $[k[\alpha]:k]$ is minimum, greater than $1$. Then, there are elements $\gamma_1,\dots,\gamma_m\in k[\alpha]$ such that $\sum_{i = 1}^m\gamma_i^2 = -1$. We may choose polynomials $p_i(x)\in k[x]$ such that $p_i(\alpha) = \gamma_i$ with $\deg p_i(\alpha) < [k[\alpha]:k]$.
+
+    Let $f(x)\in k[x]$ be the irreducible polynomial of $\alpha$ over $k$. We have 
+    \begin{equation*}
+        p_1(\alpha)^2 + \cdots + p_m(\alpha)^2 = -1
+    \end{equation*}
+    and thus, $\alpha$ is a root of the polynomial $p_1(x)^2 + \cdots + p_m(x)^2 + 1$. Thus, there is a polynomial $g(x)\in k[x]$ such that 
+    \begin{equation*}
+        p_1(x)^2 + \cdots + p_m(x)^2 + 1 = f(x)g(x).
+    \end{equation*}
+    Notice that the degree of the left hand side is even and less than $2\deg f$ whence $\deg g < \deg f$ and is odd.
+
+    Further, note that $g(x)$ may not have a root in $k$ lest $-1$ be written as a sum of squares in $k$. Consider now the factorization of $g(x)$ as a product of irreducibles: 
+    \begin{equation*}
+        g(x) = h_1(x)\cdots h_n(x).
+    \end{equation*}
+    Equating degrees, we see that there is an index $j$ such that $\deg h_j$ is odd. Let $\beta$ be a root of $h_j$ in $k^a$. Then, $[k[\beta]:k] = \deg h_j\le \deg g < \deg f$ and 
+    \begin{equation*}
+        p_1(\beta)^2 + \cdots + p_m(\beta)^2 + 1 = f(\beta)g(\beta) = 0
+    \end{equation*}
+    whence $k[\beta]$ is not formally real and contradicts the choice of $\alpha$.
+\end{proof}
