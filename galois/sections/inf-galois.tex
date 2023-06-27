@@ -64,3 +64,86 @@ We state the main theorem of this chapter below. We shall prove it in parts and 
 
     Since there is some $\alpha\in F$ that is not fixed by $\sigma$ but fixed under $H$, we must have that $\sigma\notin\Gal(K/K^H)$. This completes the proof.
 \end{proof}
+
+\section{Galois Groups as Inverse Limits}
+
+Let $K/k$ be a Galois extension, not necessarily finite. Let 
+\begin{equation*}
+    \Sigma = \left\{\Gal(F/k)\mid F/k\text{ is finite Galois}\right\}
+\end{equation*}
+be a poset with restriction maps
+\begin{equation*}
+    \pi^E_F:\Gal(E/k)\onto\Gal(F/k).
+\end{equation*}
+which are continuous maps between topological groups where $\Gal(E/k)$ and $\Gal(F/k)$ have the discrete topology.
+
+This gives $\Sigma$ the implicit structure of a categorical \emph{diagram}. We contend that $\Gal(K/k)$ is the inverse limit\footnote{This is the categorical limit} over this diagram in the category of topological groups, $\catTopGrp$.
+
+First, we shall show that there is a cone $(\Gal(K/k),\varphi)$ on the diagram $\Sigma$. Indeed, for every finite Galois subextension, define 
+\begin{equation*}
+    \varphi_F: \Gal(K/k)\onto\Gal(F/k)
+\end{equation*}
+as the restriction map $\sigma\mapsto\sigma|_F$. Recall that $\Gal(F/k)$ has the discrete topology, whereby the preimage of $\sigma\in\Gal(F/k)$ is $\sigma\Gal(K/F)$ which is a basic open set in $\Gal(K/k)$ whence the restriction map is continuous and thus a morphism in $\catTopGrp$.
+
+It is not hard to see that the diagram 
+\begin{equation*}
+    \xymatrix {
+        \Gal(E/k)\ar@{->>}[rr]^{\pi^E_F} & & \Gal(F/k)\\
+        & \Gal(K/k)\ar@{->>}[lu]^{\varphi_E}\ar@{->>}[ru]_{\varphi_F} &
+    }
+\end{equation*}
+commutes.
+
+Now let $(G,\psi)$ be another cone on the diagram $\Sigma$ where $G$ is a topological group we shall show that there is a unique morphism of cones $\Phi: (G,\psi)\to(\Gal(K/k),\phi)$. That is, a unique continuous group homomorphism that makes 
+\begin{equation*}
+    \xymatrix {
+        \Gal(E/k)\ar@{->>}[rr]^{\pi^E_F} & & \Gal(F/k)\\
+        & G\ar@{.>}[d]\ar@{->}[lu]^{\psi_E}\ar@{->}[ru]_{\psi_F} &\\
+        & \Gal(K/k)\ar@{->>}[luu]^{\varphi_E}\ar@{->>}[ruu]_{\varphi_F} &
+    }
+\end{equation*}
+commute.
+
+Pick some $g\in G$. Let $\alpha\in K$ and $L\subseteq K$ be the normal closure of $k(\alpha)$ in $K$. Then, $L/k$ is finite Galois. Now, define 
+\begin{equation*}
+    \sigma(\alpha) = \psi_L(g)(\alpha).
+\end{equation*}
+
+We shall show that $\sigma$ is indeed an automorphism. Let $\alpha,\beta\in K$ and $L$ be the normal closure of $k(\alpha,\beta)$ in $K$. This is a finite Galois extension of $k$ that contains the normal closures of $k(\alpha)$, $k(\beta)$ and $k(\alpha\beta)$, say $M, N, P$ respectively. Then, 
+\begin{align*}
+    \sigma(\alpha\beta) &= \psi_P(g)(\alpha\beta)\\
+    &= \psi_L(g)(\alpha\beta)\\
+    &= \psi_L(g)(\alpha)\psi_L(g)(\beta)\\
+    &= \psi_M(\alpha)\psi_N(\beta)\\
+    &= \sigma(\alpha)\sigma(\beta).
+\end{align*}
+and similarly, one may show that $\sigma(\alpha + \beta) = \sigma(\alpha) + \sigma(\beta)$ thus $\sigma\in\Hom(K,K)$ which fixes $k$.
+
+Lastly, we must show that $\sigma$ is surjective. Let $\beta\in K$ and $N$ the normal closure of $k(\beta)$ in $K$. Then, there is some $\alpha\in N$ such that $\psi_N(g)(\alpha) = \beta$. Let $M$ be the normal closure of $k(\alpha)$ in $K$. Then $M\subseteq N$, whence 
+\begin{equation*}
+    \sigma(\alpha) = \psi_M(g)(\alpha) = \psi_N(g)(\alpha) = \beta.
+\end{equation*}
+Thus, $\sigma\in\Gal(K/k)$ and set $\Phi(g) = \sigma$.
+
+Let $g,h\in G$, $\Phi(g) = \sigma$, $\Phi(h) = \tau$ and $\alpha\in K$. Let $M$ be the normal closure of $k(\alpha)$ in $K$. Then 
+\begin{equation*}
+    \Phi(gh)(\alpha) = \psi_M(gh)(\alpha) = \psi_M(g)\circ\psi_M(h)(\alpha) = \sigma\circ\tau(\alpha)
+\end{equation*}
+and thus $\Phi(gh) = \sigma\circ\tau$ and $\Phi$ is a group homomorphism.
+
+Finally, we must show that $\Phi$ is continuous, for which it suffices to show that the preimage of a basic open set in $\Gal(K/k)$ is open in $G$.
+
+Let $\sigma\in\Gal(K/k)$ and $F/k$ an intermediate finite Galois extension of $k$. We have 
+\begin{align*}
+    \Phi^{-1}(\sigma\Gal(K/F)) &= \{g\in G\mid \Phi(g)\in\sigma\Gal(K/F)\}\\
+    &= \{g\in G\mid \Phi(g)|_F = \sigma|_F\}\\
+    &= \{g\in G\mid \psi_F(g) = \sigma|_F\}\\
+    &= \psi_F^{-1}(\sigma|_F)
+\end{align*}
+which is open in $G$ since $\Gal(F/k)$ has the discrete topology whence $\Phi$ is continuous. 
+
+This finishes the proof and shows that $\Gal(K/k)$ is the inverse limit $\varprojlim\Gal(F/k)$, and is a profinite group since every topological group in the inverse limit is a finite group with the discrete topology.
+
+\begin{corollary}
+    $\Gal(\overline\F_p/\F_p) = \wh\Z$.
+\end{corollary}

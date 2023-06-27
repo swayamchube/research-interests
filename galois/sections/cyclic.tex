@@ -3,8 +3,22 @@
 \end{definition}
 
 \begin{theorem}[Linear Independence of Characters]\thlabel{thm:lin-ind-characters}
-    
+    Let $G$ be a group (monoid) and $K$ a field. If $\sigma_1,\dots,\sigma_n: G\to K^\times$ are distinct group homomorphisms. Then, 
+    \begin{equation*}
+        c_1\sigma_1 + \cdots + c_n\sigma_n = 0 \iff c_1 = \dots = c_n = 0
+    \end{equation*}
 \end{theorem}
+
+\begin{corollary}\thlabel{cor:non-zero-trace-exists}
+    Let $K/k$ be a Galois extension. Then, there is $\alpha\in K$ such that $\Tr^K_k(\alpha)\ne0$.
+\end{corollary}
+\begin{proof}
+    Suppose not. If $\Gal(K/k) = \{\sigma_1,\dots,\sigma_n\}$, then 
+    \begin{equation*}
+        \sigma_1 + \dots + \sigma_n = 0
+    \end{equation*}
+    on $K$, a contradiction to \thref{thm:lin-ind-characters}. 
+\end{proof}
 
 \begin{theorem}[Hilbert's Theorem 90]\thlabel{thm:hilbert-90}
     Let $K/k$ be a cyclic degree $n$ extension with galois group $G$. Let $\sigma\in G$ be a generator and $\beta\in K$. The norm $N^K_k(\beta) = 1$ if and only if there is $\alpha\in K^\times$ such that $\beta = \alpha/\sigma(\alpha)$
@@ -36,4 +50,48 @@
         \alpha = \frac{a + bi}{a - bi} = \frac{(a^2 - b^2) + 2abi}{a^2 + b^2}
     \end{equation*}
     this completes the proof.
+\end{proof}
+
+\begin{theorem}[Additive Hilbert's Theorem 90]
+    Let $K/k$ be a cyclic Galois extension with $\Gal(K/k) = \langle\sigma\rangle$ and $\beta\in K$. Then $\Tr^K_k(\beta) = 0$ iff there is $\alpha\in K$ such that $\beta = \alpha - \sigma(\alpha)$.
+\end{theorem}
+\begin{proof}
+    Due to \thref{cor:non-zero-trace-exists}, there is some $\theta\in K$ with $\Tr^K_k(\theta)\ne0$. Consider $\alpha\in K$ given by 
+    \begin{equation*}
+        \alpha = \frac{1}{\Tr^K_k(\theta)}\left(\beta\sigma(\theta) + (\beta + \sigma(\beta))\sigma^2(\theta) + \dots + (\beta + \dots + \sigma^{n - 2}(\beta))\sigma^{n - 1}(\theta)\right).
+    \end{equation*}
+    We have 
+    \begin{align*}
+        \sigma(\alpha) &= \frac{1}{\Tr^K_k(\theta)}\left(\sigma(\beta)\sigma^2(\theta) + (\sigma(\beta) + \sigma^2(\beta))\sigma^3(\theta) + \dots + (\sigma(\beta) + \dots + \sigma^{n - 1}(\beta))\sigma^n(\theta)\right)\\
+        &= \alpha - \beta\frac{1}{\Tr^K_k(\theta)}\left(\sigma(\theta) + \dots + \sigma^n(\theta)\right)\\
+        &= \alpha - \beta
+    \end{align*}
+
+    The converse is trivial.
+\end{proof}
+
+\begin{theorem}[Artin-Schreier]
+    Let $k$ be a field of characteristic $p > 0$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $K/k$ be a cyclic extension of degree $p$. Then there is $\alpha\in K$ such that $K = k(\alpha)$ and $\alpha$ is a root of $f(x) = x^p - x - a$ for some $a\in k$. Further, $K$ is the splitting field of $f(x)$ over $k$.
+
+        \item 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\Gal(K/k) = \langle\sigma\rangle$, since it is a group of prime order. We have $\Tr^K_k(-1) = p\cdot(-1) = 0$ whence there is $\alpha\in K$ such that $-1 = \alpha - \sigma(\alpha)$, equivalently, $\sigma(\alpha) = \alpha + 1$. Let $a = \alpha^p - \alpha$. Then,
+    \begin{equation*}
+        \sigma(a) = \sigma(\alpha^p - \alpha) = \sigma(\alpha)^p - (\alpha + 1) = \alpha^p + 1 - (\alpha + 1) = a.
+    \end{equation*}
+    Thus, $\sigma^n(a) = a$ for $1\le n\le p$, consequently, $a\in K^{\Gal(K/k)} = k$. 
+
+    Note that for $1\le m\ne n\le p$, we have 
+    \begin{equation*}
+        \sigma^m(\alpha) = \alpha + m\ne\alpha + n = \sigma^n(\alpha).
+    \end{equation*}
+    Thus, $p\le [k(\alpha):k]_s\le[k(\alpha):k]\le[K:k] = p$ whence $[k(\alpha):k] = p$ and $K = k(\alpha)$.
+
+    \item \qedhere
+\end{enumerate}
 \end{proof}
