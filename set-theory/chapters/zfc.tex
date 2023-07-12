@@ -1,0 +1,180 @@
+\section{Axioms of Set Theory}
+
+We shall discuss Zermelo-Fraenkel Set Theory, which is a first order theory, with signature $\mathsf{ZF} = (\emptyset, \{\in\})$. That is, there are no function symbols and the only predicate is the ``belongs to'' relation.
+\begin{enumerate}[label=\bfseries ZF\arabic*]
+    \setcounter{enumi}{-1}
+    \item (Nonempty Domain) There is at least one set.
+    \begin{equation*}
+        \exists x(x = x)
+    \end{equation*}
+    This axiom is redundunt since \textbf{ZF7} guarantees the existence of an infinite set and thus the domain of discourse must be nonempty.
+    
+    \item (Extensionality) Informally speaking, a set is determined uniquely by its elements.
+    \begin{equation*}
+        \forall x\forall y(\forall z(z\in x\Longleftrightarrow z\in y)\Longrightarrow x = y)
+    \end{equation*}
+
+    \item (Foundation/Regularity) This states that any nonempty set contains an element that is disjoint from it.
+    \begin{equation*}
+        \forall x\left[\exists y(y\in x)\Longrightarrow\exists y(y\in x\wedge\neg\exists z(z\in x\wedge z\in y))\right]
+    \end{equation*}
+
+    \item (Comprehension) Informally speaking, this axiom allows us to define sets in the set-builder notation. Let $\phi$ be a valid first order formula with free variables $w_1,\ldots,w_n,x,z$. Then 
+    \begin{equation*}
+        \forall z\forall w_1,\ldots,w_n\exists y\forall x\left(x\in y\Longleftrightarrow x\in z\wedge\phi\right)
+    \end{equation*}
+    Notice how this is the same as writing 
+    \begin{equation*}
+        y = \left\{x\in z\mid\phi\right\}
+    \end{equation*}
+
+    \item (Pairing) Informally, this states that given two sets $x$ and $y$, there is a set $z = \{x, y\}$.
+    \begin{equation*}
+        \forall x\forall y\exists z\forall w(w\in z\Longleftrightarrow(w = x\vee w = y))
+    \end{equation*}
+
+    \item (Union) This axiom allows us to take a union of a collection of sets.
+    \begin{equation*}
+        \forall\mathscr F\exists A\forall y(x\in y\wedge y\in\mathscr F\Longrightarrow x\in A)
+    \end{equation*}
+
+    \item (Replacement Scheme) Let $\phi$ be a valid formula without $Y$ as a free variable. Then, 
+    \begin{equation*}
+        \forall A(\forall x\in A~\exists!y~\phi(x,y)\Longrightarrow\exists Y~\forall x\in A~\exists y\in Y\phi(x,y))
+    \end{equation*}
+    Informally speaking, this allows us to replace the elements of a set to obtain a new set.
+
+    \item (Infinity) There is an infinite inductive set.
+    \begin{equation*}
+        \exists x(\emptyset\in x\wedge\forall y\in x(S(y)\in x))
+    \end{equation*}
+
+    \item (Power Set) Every set has a set containing all its subsets. It is important to note that this need not be \textbf{the} power set.
+    \begin{equation*}
+        \forall x\exists y\forall z(z\subseteq x\Longrightarrow z\in y)
+    \end{equation*}
+\end{enumerate}
+
+We have been a bit sloppy in stating the axioms. Notice that our signature does not contain a predicate $\subseteq$ or the successor function $S$, neither do we know, a priori, of the existence of \textbf{the} empty set.
+
+To define the formula $\subseteq(x,y)$, use 
+\begin{equation*}
+    \subseteq(x,y) := \forall z(z\in x\Longrightarrow z\in y)
+\end{equation*}
+
+As for the successor function, given any set $x$, using \textbf{ZF4}, there is a set $y = \{x\}$. Using \textbf{ZF5}, we may define $S(y) := x\cup y$. Finally, using \textbf{ZF0} and \textbf{ZF3}, we know of the existence of the empty set as 
+\begin{equation*}
+    \exists x(x = x\wedge\exists y\forall z(z\in x\Longleftrightarrow z\in y\wedge z\ne z))
+\end{equation*}
+Further, due to \textbf{ZF1}, the empty set is unique.
+
+\section{Consequences of the Axioms}
+
+\begin{theorem}
+    There is no universal set. That is, 
+    \begin{equation*}
+        \neg\exists z\forall x(x\in z)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+If there were a universal set, then using \textbf{ZF3}, we may construct the set $y = \{x\in z\mid x\notin x\}$. Then, it is not hard to argue that 
+\begin{equation*}
+    y\in y\iff y\notin y,
+\end{equation*}
+a contradiction.
+\end{proof}
+
+\begin{definition}[Power Set]
+    Let $x$ be a set. Due to \textbf{ZF8}, there is a set $z$ containing all the subsets of $x$. Using Comprehension, we may construct
+    \begin{equation*}
+        \mathscr P(x) := \{y\in z\mid y\subseteq x\}.
+    \end{equation*}
+    This is known as the \textbf{power set} of $x$.
+\end{definition}
+
+\begin{definition}
+    Let $\mathscr F$ denote a set. Let $A$ be a set satisfying \textbf{ZF5}. Define 
+    \begin{equation*}
+        \bigcup\mathscr F := \{x\in A\mid\exists y\in\mathscr F(x\in y)\}
+    \end{equation*}
+    and 
+    \begin{equation*}
+        \bigcap\mathscr F := \{x\in A\mid\forall y\in\mathscr F(x\in y)\}.
+    \end{equation*}
+\end{definition}
+
+\section{Relations, Functions and Well Ordering}
+
+\begin{definition}[Ordered Pair]
+    For sets $x,y$, define the ordered pair $\langle x,y\rangle$ by 
+    \begin{equation*}
+        \langle x,y\rangle := \{\{x\}, \{x,y\}\}.
+    \end{equation*}
+    The set on the right is constructed by using the pairing axiom twice.
+\end{definition}
+
+\begin{definition}[Cartesian Product]
+    Let $A$ and $B$ be sets. Using Replacement, we may define, for each $y\in B$, 
+    \begin{equation*}
+        A\times\{y\} := \{z\mid\exists x\in A (z = \langle x,y\rangle)\}.
+    \end{equation*}
+    Again, by Replacement, define the set 
+    \begin{equation*}
+        \mathscr F := \{z\mid\exists y\in B(z = A\times\{y\})\}.
+    \end{equation*}
+    Finally, define 
+    \begin{equation*}
+        A\times B := \bigcup\mathscr F.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Relation, Function]
+    Let $A$ be a set. A relation $R$ on $A$ is a subset of $A\times A$. Define the domain and range of a relation as 
+    \begin{equation*}
+        \dom(R) := \{x\in A\mid\exists y(\langle x, y\rangle\in R)\}\qquad\ran(R) := \{y\mid\exists x(\langle x, y\rangle\in R)\}.
+    \end{equation*}
+    We write $x R y$ to denote $\langle x,y\rangle\in R$.
+
+    A relation $f$ is said to be a function if 
+    \begin{equation*}
+        \forall x\in\dom(f)\exists! y\in\ran(f)(\langle x,y\rangle\in f).
+    \end{equation*}
+    We use $f: A\to B$ to denote a function $f$ with $\dom(f) = A$ and $\ran(f)\subseteq B$.
+\end{definition}
+
+\begin{definition}[Total Ordering, Well Ordering]
+    A \emph{total ordering} is a pair $\langle A, R\rangle$ where $A$ is a set and $R$ is a relation that is irreflexive, transitive and satisfies trichotomy. 
+
+    We say $R$ \emph{well-orders} $A$ if $\langle A,R\rangle$ is a total ordering and every non empty subset of $A$ has an $R$-least element.
+\end{definition}
+
+We use $\pred(A,x,R)$ to denote the set $\{y\in A\mid y R x\}$.
+
+\begin{lemma}
+    Let $\langle A, R\rangle$ be a well-ordering. Then for all $x\in A$, $\langle A, R\rangle\not\cong\langle\pred(A,x,R), R\rangle$.
+\end{lemma}
+\begin{proof}
+    Suppose $\langle A, R\rangle\cong\langle\pred(A,x,R), R\rangle$ and let $f: A\to \pred(A,x,R)$ be the order isomorphism. Let $x$ be the $R$-least element of the set 
+    \begin{equation*}
+        \{y\in A\mid f(y)\ne y\},
+    \end{equation*}
+    which obviously exists since the aforementioned set is nonempty. If $x R f(x)$, there is some $y\in A$ with $y R x$ and $f(y) = x\ne y$ a contradiction to the choice of $x$. On the other hand, if $f(x) R x$, then $f(f(x))\ne f(x)$ since $f$ is injective, a contradiction to the choice of $x$. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:well-orders-comparable}
+    Let $\langle A, R\rangle$ and $\langle B, S\rangle$ be two well-orderings. Then exactly one of the following holds: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\langle A, R\rangle\cong\langle B, S\rangle$.
+        \item $\exists y\in B\left(\langle A, R\rangle\cong\langle\pred(B,y,S), S\rangle\right)$.
+        \item $\exists x\in A\left(\langle\pred(A,x,R), R\rangle\cong\langle B, S\rangle\right)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        f := \{\langle v, w\rangle\mid v\in A,~w\in B,~\langle\pred(A,v,R), R\rangle\cong\langle\pred(B,w,S), S\rangle\}.
+    \end{equation*}
+    Due to the preceeding lemma, if $\langle v_1,w\rangle, \langle v_2,w\rangle\in f$, then $v_1 = v_2$. Similarly, if $\langle v,w_1\rangle, \langle v,w_2\rangle\in f$, then $w_1 = w_2$. Hence, $f$ is an injective function.
+
+    It is not hard to argue that $f$ is an order isomorphism from an initial segment of $A$ to an initial segment of $B$. Both these segments may not be proper else we could find another isomorphism from an initial segment of $A$ to an initial segment of $B$ by extending one of the isomorphisms in $f$. This completes the proof.
+\end{proof}

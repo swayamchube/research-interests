@@ -1,0 +1,108 @@
+\section{Transitive Sets}
+
+\begin{definition}
+    A set $x$ is said to be \emph{transitive} if 
+    \begin{equation*}
+        \forall y\forall z(z\in y\wedge y\in x\implies z\in x).
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    A set $x$ is transitive if and only if 
+    \begin{equation*}
+        \forall y(y\in x\implies y\subseteq x).
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Suppose $x$ is transitive and $y\in x$. Since for all $z\in y$, $z\in x$, we must have $y\subseteq x$. The converse is trivial.
+\end{proof}
+
+\begin{proposition}
+    If $x$ is a transitive set, then so is $x\cup\{x\}$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+    If $x$ is a transitive set, then so is $\mathscr P(x)$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+    If $\mathscr F$ is a family of transitive sets, then so is $\bigcup\mathscr F$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}\thlabel{prop:element-transitive}
+    If $x$ is a transitive set, then so is every $z\in x$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\section{Ordinals}
+
+\begin{definition}[Ordinal]
+    A set $x$ is said to be an \emph{ordinal} if it is transitive and well ordered by $\in$. That is, the pair $\langle x,\in_x\rangle$ is a well ordering, where 
+    \begin{equation*}
+        \in_x := \{\langle v,w\rangle\in x\times x\mid v\in w\}.
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Properties of Ordinals]\thlabel{thm:properties-ordinals}\hfill
+\begin{enumerate}[label=(\alph*)]
+    \item If $x$ is an ordinal and $y\in x$, then $y$ is an ordinal and $y = \pred(x, y)$.
+    \item If $x\cong y$ are ordinals, then $x = y$. 
+    \item If $x,y$ are ordinals, then exactly one of the following is true: $x = y$, $x\in y$ or $y\in x$. 
+    \item If $C$ is a nonempty set of ordinals, then $\exists x\in C~\forall y\in C(x\in y\vee x = y)$. That is, every nonempty set of ordinals has a minimum element.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Due to \thref{prop:element-transitive}, $y$ is a transitive and owing to it being the subset of a well ordered set, it is well ordered too, hence an ordinal.
+
+    \item Let $f: x\to y$ be an isomorphism. Let 
+    \begin{equation*}
+        A := \{z\in x\mid f(z)\ne z\}.
+    \end{equation*}
+    Suppose $A$ is nonempty, then it has a least element, say $w\in x$. If $v\in w$, then $v = f(v)\in f(w)$ whence $w\subseteq f(w)$. On the other hand, if $v\in f(w)$, then there is some $u\in w$ such that $v = f(u) = u\in w$ and thus $f(w) = w$, a contradiction. 
+
+    \item Follows from \thref{thm:well-orders-comparable}.
+
+    \item First note that it suffices to find $x\in C$ with $x\cap C = \emptyset$ for if $y\in C$ is another ordinal with $x\ne y$, then $y\notin x$ lest $x\cap C\ne\emptyset$.
+
+    Pick any $x\in C$. If $x\cap C = \emptyset$, then we are done. Else, let $x'\in x\cap C$ be the $\in$-least element. It is not hard to argue that $x'\cap C = \emptyset$ and we are done.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    If $A$ is a transitive set of ordinals, then $A$ is an ordinal.
+\end{lemma}
+\begin{proof}
+    We must first show that the membership relation $\in_A$ is a linear order. This follows from \thref{thm:properties-ordinals} (c) and the fact that $A$ is a transitive set. Lastly, to see that $A$ is well ordered, simply invoke \thref{thm:properties-ordinals} (d).
+\end{proof}
+
+\begin{theorem}
+    If $\langle A, R\rangle$ is a well ordering, then there is a \underline{unique} ordinal $C$ such that $\langle A, R\rangle\cong C$.
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{align*}
+        B &:= \{a\in A\mid\exists x_a(x_a\text{ is an ordinal }\wedge\langle\pred(A,a,R), R\rangle\cong x_a)\},\\
+        f &:= \{\langle b, x_b\rangle\mid b\in B\}.
+    \end{align*}
+    First, note that for all $b\in B$, $x_b$, since it exists must be unique and thus $f$ is a well defined function with $\dom(f) = B$.
+
+    Let $C = \ran(f)$. We contend that $C$ is an ordinal. Let $y\in x\in C$ and $a\in B$ be such that $g:\pred(A,a,R)\to x$ is an isomorphism. Then, there is some $b\in\pred(A,a,R)$ with $g(b) = y$. It is not hard to see that the restriction $g:\pred(A,b,R)\to y$ is an isomorphism whence $y\in C$ and thus $C$ is an ordinal due to the preceeding lemma.
+
+    The function $f: B\to C$ is obviously a surjection. We contend that it is an isomorphism. Indeed, let $a,b\in B$ with $a R b$ and $g: \pred(A,b,R)\to x_b$ be \emph{the} isomorphism. If $y = g(a)$, then the restriction $g:\pred(A,a,R)\to y$ is an isomorphism whence $f(a) = y\in x = f(b)$ and $f$ is an order isomorphism.
+
+    Suppose $B\ne A$. Let $b\in A\backslash B$ be the $R$-least element. Then, $\pred(A,b,R)\subseteq B$. Now suppose $B\ne\pred(A,b,R)$, consequently, there is some $b'\in B\backslash\pred(A,b,R)$, then $bRb'$ and if there is an order isomorphism from $\pred(A,b',R)$ to some ordinal $x$, then there must be one from $\pred(A,b,R)$ as we have argued earlier, a contradiction. 
+    
+    Thus, either $B = A$ or $B = \pred(A,b,R)$ for some $b\in A$. In the latter case, the function $f$ is an order isomorphism between $\pred(A,b,R)$ and an ordinal $C$ whence $b\in B$, a contradiction. Thus $B = A$ and the proof is complete.
+\end{proof}
+
+\begin{definition}
+    If $\langle A, R\rangle$ is a well ordering, then $\type(A,R)$ is the unique ordinal $C$ such that $\langle A, R\rangle\cong C$.
+\end{definition}

@@ -19,7 +19,9 @@
     todonotes,
     fancyhdr,
     lastpage,
-    stmaryrd
+    stmaryrd,
+    commath,
+    float       % because vanilla LaTeX loses its mind trying to place my floats
     % titlesec
 }
 \RequirePackage{theoremref} % For referencing theorems
@@ -34,6 +36,8 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{mathpazo}
 \RequirePackage{bm}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+\SetSymbolFont{wasy}{bold}{U}{wasy}{m}{n}
 % \RequirePackage{euler}
 
 
@@ -176,15 +180,17 @@
 % Categories
 \newcommand{\catTopp}{\mathbf{Top}_*}
 \newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
 \newcommand{\catSet}{\mathbf{Set}}
 \newcommand{\catTop}{\mathbf{Top}}
 \newcommand{\catRing}{\mathbf{Ring}}
-\newcommand{\catCRing}{\mathbf{CRing}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
 \newcommand{\catMod}{\mathbf{Mod}}
 \newcommand{\catMon}{\mathbf{Mon}}
-\newcommand{\catMan}{\mathbf{Man}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
 \newcommand{\catAlg}{\mathbf{Alg}}
-\newcommand{\catRep}{\mathbf{Rep}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
 \newcommand{\catVec}{\mathbf{Vec}}
 
 % Group and Representation Theory
@@ -207,9 +213,16 @@
 \newcommand{\Tor}{\operatorname{Tor}}
 \newcommand{\tor}{\operatorname{tor}}
 \newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
 \newcommand{\Hom}{\operatorname{Hom}}
 \newcommand{\End}{\operatorname{End}}
 \newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
 
 \newcommand{\fraka}{\mathfrak a} % ideal
 \newcommand{\frakb}{\mathfrak b} % ideal
@@ -220,6 +233,14 @@
 \newcommand{\frakN}{\mathfrak N} % nilradical 
 \newcommand{\frakR}{\mathfrak R} % jacobson radical
 
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+
 % Miscellaneous
 \newcommand{\psimeq}{\simeq_p}
 \newcommand{\wt}[1]{\widetilde{#1}}
@@ -227,11 +248,5 @@
 \newcommand{\calM}{\mathcal{M}}
 \newcommand{\onto}{\twoheadrightarrow}
 \newcommand{\into}{\hookrightarrow}
-
-% Page Style 
-% \renewcommand{\footrulewidth}{0pt}
-% \renewcommand{\headrulewidth}{0pt}
-% \cfoot{\sffamily{\thepage~/~\pageref{LastPage}}}
-% \lhead{}
-% \rhead{}
-% \pagestyle{fancy}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
