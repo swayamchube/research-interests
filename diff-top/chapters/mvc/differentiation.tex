@@ -1,0 +1,242 @@
+\begin{definition}
+    A function $f: U\subseteq\R^n\to\R^m$ is said to be \emph{differentiable} at $a\in U$ if there is a linear transformation $T:\R^n\to\R^m$ such that 
+    \begin{equation*}
+        \lim_{h\to\zero}\frac{\|f(a + h) - f(a) - T(h)\|}{\|h\|} = 0
+    \end{equation*}
+    The linear transformation $T$ is called the \emph{derivative} of $f$ at $a$ and is denoted by $Df(a):\R^n\to\R^m$.
+\end{definition}
+
+The following proposition establishes the \underline{uniqueness of the derivative} at a point, if it exists.
+
+\begin{proposition}
+    Let $f:U\subseteq\R^n\to\R^m$ be differentiable at $a\in U$. Then, there is a unique linear transformation $T:\R^n\to\R^m$ such that 
+    \begin{equation*}
+        \lim_{h\to\zero}\frac{\|f(a + h) - f(a) - T(h)\|}{\|h\|} = 0
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $\mu,\lambda: \R^n\to\R^m$ be two linear transformations satisfying the requirements. Then, we have 
+    \begin{equation*}
+        \|\lambda(h) - \mu(h)\|\le\|f(a + h) - f(a) - \mu(h)\| + \|f(a + h) - f(a) - \lambda(h)\|
+    \end{equation*}
+    Consequently, 
+    \begin{equation*}
+        \lim_{h\to\zero}\frac{\|\lambda(h) - \mu(h)\|}{\|h\|}\le\lim_{h\to\zero}\frac{\|\lambda(h) - \mu(h)\|\le\|f(a + h) - f(a) - \mu(h)\|}{\|h\|} + \frac{\|f(a + h) - f(a) - \lambda(h)\|}{\|h\|} = 0
+    \end{equation*}
+    Now, let $x\in\R^n$. Then, 
+    \begin{equation*}
+        0 = \lim_{t\to 0}\frac{\|\mu(tx) - \lambda(tx)\|}{\|tx\|} = \frac{\|\mu(x) - \lambda(x)\|}{\|x\|}
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}[Chain Rule]\thlabel{thm:chain-rule}
+    Let $f:\R^n\to\R^m$ and $g:\R^m\to\R^p$ be functions differentiable at $a$ and $b = f(a)$ respectively. Then, the composition $g\circ f:\R^n\to\R^p$ is differentiable at $a$ and 
+    \begin{equation*}
+        D(g\circ f)(a) = Dg(f(a))\circ Df(a) = Dg(b)\circ Df(a)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}\thlabel{prop:diff-iff-each-component}
+    Let $f:\R^n\to\R^m$ be given by $f = (f_1,\ldots,f_m)$. Then $f$ is differentiable if and only if each $f_i:\R^n\to\R$ is differentiable and 
+    \begin{equation*}
+        Df(a) = 
+        \begin{bmatrix}
+            Df_1(a) \\ \vdots \\ Df_m(a)
+        \end{bmatrix}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Suppose $f$ is differentiable and $\pi_i$ denote the projection on the $i$-th coordinate. Since $\pi_i$ is differentiable, so is $f_i = \pi_i\circ f$. Conversely suppose each $f_i$ is differentiable and let 
+    \begin{equation*}
+        A = 
+        \begin{bmatrix}
+            Df_1(a) \\ \vdots \\ Df_m(a)
+        \end{bmatrix}
+    \end{equation*}
+    Then, for $h = (h_1,\dots,h_n)\in\R^n$, we have 
+    \begin{align*}
+        \frac{\|f(a + h) - f(a) - Ah\|}{\|h\|} &= \frac{\left\|
+            \begin{bmatrix}
+                f_1(a + h) - f_1(a) - Df_1(a)h\\
+                \vdots\\
+                f_m(a + h) - f_m(a) - Df_m(a)h\\
+            \end{bmatrix}
+        \right\|}{\|h\|}\\
+        &\le\sum_{i = 1}^m\frac{\|f_i(a + h) - f(a) - Df_i(a)(h)\|}{\|h\|}
+    \end{align*}
+    whence the limit tends to $0$ as $h\to\zero$ which completes the proof.
+\end{proof}
+
+\begin{definition}[Partial Derivatives]
+    Let $f:\R^n\to\R$ and $a\in\R^n$. The limit 
+    \begin{equation*}
+        \lim_{h\to 0}\frac{f(a_1,\ldots,a_i + h,\ldots,a_n) - f(a_1,\ldots,a_n)}{h}
+    \end{equation*}
+    if it exists is called the \emph{$i$-th partial derivative of $f$ at $a$} and is denoted by $D_if(a)$. We also define \emph{mixed partial derivatives} of $f$ at $a$ by 
+    \begin{equation*}
+        D_{i,j}f(a) = D_i(D_jf)(a).
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    Let $f:\R^n\to\R^m$ and $a\in\R$. If $D_{i,j}f$ and $D_{j,i}f$ are continuous in an open set containing $a$, then 
+    \begin{equation*}
+        D_{i,j}f(a) = D_{j,i}f(a)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    The proof uses Fubini's Theorem and is therefore postponed.
+\end{proof}
+
+\begin{lemma}
+    Let $A\subseteq\R^n$ be a closed rectangle. If the maximum (resp. minimum) of $f: A\to\R$ occurs at a point $a$ in the interior of $A$ and $D_if(a)$ exists, then $D_if(a) = 0$.
+\end{lemma}
+\begin{proof}
+    Let $a = (a_1,\ldots,a_n)$ and $h_i(x) = f(a_1,\ldots,a_{i - 1}, x, a_{i + 1},\ldots,a_n)$. Then $h_i$ has a maximum (resp. minimum) at $a_i$, is defined in an open interval containing $a_i$ and is differentiable at $a_i$, whence from the calculus of a single variable, we see that $0 = h_i'(a_i) = D_if(a)$, which completes the proof.
+\end{proof}
+
+\begin{theorem}
+    If $f:\R^n\to\R^m$ is differentiable at $a\in\R^n$ and is given by $f = (f_1,\ldots,f_m)$, then $D_jf_i(a)$ exists for $1\le i\le m$ and $1\le j\le n$ and $Df(a)$ is the $m\times n$ matrix $\left[D_jf_i(a)\right]_{i,j}$.
+\end{theorem}
+\begin{proof}
+    Since $f$ is differentiable, $Df(a)$ is the matrix obtained by stackig $Df_i(a)$ as rows. Therefore, it suffices to prove the statement of the theorem in the case $m = 1$, that is $f:\R^n\to\R$ is given to be differentiable. 
+    
+    Consider the map $h:\R\to\R^n$ given by 
+    \begin{equation*}
+        h(x) = (a_1,\ldots,x,\ldots,a_n).
+    \end{equation*}
+    Then, due to \thref{thm:chain-rule},
+    \begin{equation*}
+        D_jf(a) = D(f\circ h)(a_j) = Df(h(a_j))Dh(a_j) = Df(a)
+        \begin{bmatrix}
+            0\\\vdots\\ 1\\\vdots\\ 0
+        \end{bmatrix}.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $f:\R^n\to\R^m$ and $a\in\R^n$ with $f = (f_1,\ldots,f_m)$. If there is an open set $U$ containing $a$ on which $D_jf_i$ exists and is continuous at $a$ for $1\le i\le m$ and $1\le j\le n$, then $f$ is differentiable at $a$.
+\end{theorem}
+\begin{proof}
+    Due to \thref{prop:diff-iff-each-component}, we may suppose that $m = 1$. Let $r > 0$ such that $B(a,r)\subseteq U$ and $h$ be sufficiently small such that $a + h\in B(a,r)$. Then, 
+    \begin{equation*}
+        f(a + h) - f(a) = f(a_1 + h_1,\dots,a_n) - f(a_1,\dots,a_n) + \cdots + f(a_1 + h_1,\dots,a_n + h_n) - f(a_1 + h_1,\dots,a_{n - 1} + h_{n - 1}, a_n)
+    \end{equation*}
+    Using the mean value theorem, we have 
+    \begin{equation*}
+        f(a_1 + h_1,\dots,a_i + h_i,\dots,a_n) - f(a_1 + h_1,\dots,a_{i - 1} + h_{i - 1},\dots,a_n) = h_i D_if(c_i)
+    \end{equation*}
+    where $c_i = (a_1 + h_1,\dots,b_i,a_{i + 1},\dots,a_n)\in B(a,r)$ for some $b_i\in(a_i,a_i + h_i)$. 
+    
+    Let $\varepsilon > 0$ be given. Using uniform continuity on some (bounded) closed (and therefore compact) rectangle contained in $U$, we may choose an $r > 0$ such that whenever $|x - y|\le r$, $|D_if(x) - D_if(y)| < \varepsilon/n$ for each $1\le i\le n$. Note that this can be done because all the $D_i$'s are continuous on $U$. Then, we have, for any $\|h\| < r$,
+    \begin{align*}
+        \frac{\left\|f(a + h) - f(a) - \sum_{i = 1}^n h_iD_if(a)\right\|}{\|h\|} &= \frac{\left\|\sum_{i = 1}^nh_iD(c_i) - \sum_{i=1}^nh_iD_if(a)\right\|}{\|h\|}\\
+        &\le\sum_{i = 1}^n\frac{\|h_i(D_if(c_i) - D_if(a))\|}{\|h\|}\\
+        &\le \sum_{i = 1}^n\|D_if(c_i) - D_if(a)\| < \varepsilon
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\section{Inverse and Implicit Function Theorem}
+
+\begin{lemma}\thlabel{lem:inverse-function-lemma}
+    
+\end{lemma}
+
+\begin{theorem}[Inverse Function Theorem]\thlabel{thm:inverse-function}
+    Let $f:U\subseteq\R^n\to\R^n$ be continuously differentiable and $a\in U$ such that $\det(Df(a))\ne 0$. Then, there is an open set $V$ containing $a$ and an open set $W$ containing $f(a)$ such that the restriction $f: V\to W$ is a diffeomorphism.
+\end{theorem}
+\begin{proof}
+    Upon composing $f$ with a suitable linear transformation\footnote{We may do this as $\det Df(a)\ne 0$.}, we may suppose, without loss of generality that $Df(a) = \id_{n\times n}$. Then, we have 
+    \begin{equation*}
+        0 = \lim_{h\to\zero}\frac{\|f(a + h) - f(a) - h\|}{\|h\|}
+    \end{equation*}
+    and thus, we may shrink $U$ to a small enough open set such that $f(x)\ne f(a)$ for all $x\in U$. Since $f$ is continuously differentiable, the function $\det Df(x)$ is a continuous function, and since $\det Df(a)\ne 0$, we may shrink $U$ further such that $\det Df(x)\ne 0$ for all $x\in U$.
+
+    Using the continuity and therefore uniform continuity of $D_jf_i$ for each pair $i,j$, we may choose a closed rectangle $A$ in $U$ such that for all $x,y\in A$, 
+    \begin{equation*}
+        |D_jf_i(x) - D_jf_i(y)| < \frac{1}{2n^2}.
+    \end{equation*}
+
+    Consider now the function $g(x) = f(x) - x$. This is also continuously differentiable and for $x,y\in A$,
+    \begin{equation*}
+        |D_jg_i(x) - D_jg_i(y)| = |D_jf_i(x) - D_jf_i(y)| < \frac{1}{2n^2}
+    \end{equation*}
+    Thus, using \thref{lem:inverse-function-lemma}, we have for $x_1,x_2\in A$,
+    \begin{equation*}
+        \|(f(x_1) - f(x_2)) - (x_1 - x_2)\| = \|(f(x_1) - x_1) - (f(x_2) - x_2)\| = \|g(x_1) - g(x_2)\|\le\frac{1}{2}\|x_1 - x_2\|,
+    \end{equation*}
+    consequently,
+    \begin{equation*}
+        \|f(x_1) - f(x_2)\|\ge\frac{1}{2}\|x_1 - x_2\|
+    \end{equation*}
+    Thus $f$ restricted to $A$ is an injective map.
+
+    Let $\gamma$ denote the boundary of $A$. Since $f(\gamma)$ is a compact set not containing $f(a)$, there is $d > 0$ such that for all $x\in\gamma$, $|f(a) - f(x)|\ge d$. Let $W = B(f(a), d/2)$. We contend that for every $y\in W$, there is a \emph{unique} $x\in A$ such that $f(x) = y$.
+
+    Indeed, consider the function
+    \begin{equation*}
+        h(x) = \|f(x) - y\|^2 = \sum_{i = 1}^n |f_i(x) - y_i|^2.
+    \end{equation*}
+    Since $f$ is a continuous function, so is $h$ and since $A$ is compact, there is a point $x_0\in A$ at which $h$ attains its minimum. First, notice that $x_0$ may not lie on $\gamma$ since for all $x\in\gamma$, by construction, we have $\|f(a) - y\| < d/2 < \|f(x) - y\|$. 
+
+    Since $x_0$ lies in the interior of $A$ and the partials $D_jh$ exist for all $j$, we have 
+    \begin{equation*}
+        0 = D_jh(x_0) = 2\sum_{i = 1}^n(f_i(x_0) - y_i)D_jf_i(x_0).
+    \end{equation*}
+    Equivalently, we may write this in matrix form as 
+    \begin{equation*}
+        0 = 
+        \begin{bmatrix}
+            D_1f_1(x_0) & \cdots & D_1f_n(x_0)\\
+            \vdots & \ddots & \vdots\\
+            D_nf_1(x_0) & \cdots & D_nf_n(x_0)
+        \end{bmatrix}
+        \begin{bmatrix}
+            f_1(x_0) - y_1\\
+            \vdots\\
+            f_n(x_0) - y_n
+        \end{bmatrix} 
+        = 
+        Df(x_0)
+        \begin{bmatrix}
+            f_1(x_0) - y_1\\
+            \vdots\\
+            f_n(x_0) - y_n
+        \end{bmatrix} 
+        .
+    \end{equation*}
+    We have $\det Df(x_0)\ne 0$ since $x_0\in A\subseteq U$, and thus $f_i(x_0) = y_i$, equivalently, $f(x_0) = y$. The uniqueness follows from the injectivity of $f$ on $A$.
+
+    Let $V = f^{-1}(W)\cap\operatorname{int}(A)$. Henceforth, we work with the restriction $f: V\to W$, which we have shown to be a continuously differentiable bijection. It remains to show that the inverse is continuously differentiable. Let $p: W\to V$ denote the inverse of $f$. Then, we have 
+    \begin{equation*}
+        \|p(y_1)-p(y_2)\|\le 2\|y_1 - y_2\|
+    \end{equation*}
+    for all $y_1,y_2\in W$ whence continuity of $p$ follows. It remains to show the differentiability of $p$. \todo{$p$ is differentiable}
+\end{proof}
+
+We note that the condition on the continuity of the derivative cannot be dropped from the hypothesis of \thref{thm:inverse-function}. Indeed, consider the function $f:\R\to\R$ given by 
+\begin{equation*}
+    f(x) = 
+    \begin{cases}
+        \frac{x}{2} + x^2\sin\left(\frac{1}{x}\right) & x \ne 0\\
+        0 & x = 0
+    \end{cases}
+\end{equation*}
+This is differentiable on $\R$ with $f'(0)\ne 0$, but the derivative, 
+\begin{equation*}
+    f'(x) = 
+    \begin{cases}
+        \frac{1}{2} - \cos\left(\frac{1}{x}\right) + 2x\sin\left(\frac{1}{x}\right) & x\ne 0\\
+        \frac{1}{2} & x = 0
+    \end{cases}
+\end{equation*}
+is not continuous at $x = 0$. For sufficiently large $N$, consider the point $x_N = 2/(2N + 1)\pi$. It is not hard to argue that $f'(x_N) < 0$ whence $f$ is not injective in any neighborhood containing $0$. Thus it may not have an inverse, let alone a differentiable one.
+
+\begin{theorem}[Implicit Function Theorem]
+\end{theorem}
+\todo{Add in later}

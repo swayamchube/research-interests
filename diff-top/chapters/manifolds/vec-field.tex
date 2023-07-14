@@ -1,0 +1,20 @@
+\begin{definition}[Vector Field]
+    Let $M$ be a smooth manifold with or without boundary. A \emph{vector field on $M$} is a continuous section $X:M\to TM$ of the map $\pi: TM\onto M$. 
+
+    A vector field is said to be \emph{smooth} if the section $X: M\to TM$ is a smooth map of manifolds. A \emph{rough} vector field is simply a section $X: M\to TM$ which need not be continuous. The value of a vector field at a point is denoted by either $X(p)$ or $X_p$.
+
+    The support of $X$ is defined to be 
+    \begin{equation*}
+        \Supp X = \overline{\{p\in M\mid X_p\ne 0\}}.
+    \end{equation*}
+    A vector field is said to be \emph{compactly supported} if $\Supp X\subseteq M$ is compact.
+\end{definition}
+
+\begin{mdframed}
+    In other words, a section $X: M\to TM$ is said to be a 
+    \begin{description}
+        \item[vector field] if it is a morphism in $\catTop$.
+        \item[smooth vector field] if it is a morphism in $\catDiff$.
+        \item[rough vector field] if it is a morphism in $\catSet$.
+    \end{description}
+\end{mdframed}

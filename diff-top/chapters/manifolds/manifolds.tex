@@ -1,0 +1,226 @@
+\section{Topological manifolds}
+
+\begin{definition}[Locally Euclidean]
+    A topological space $X$ is said to be \emph{locally Euclidean of dimension $n$} if every $x\in X$ has a neighborhood $U\subseteq X$ that is homeomorphic to an open subset of $\R^n$.
+\end{definition}
+
+\begin{definition}[Manifold]
+    A \emph{topological manifold of dimension $n$} is a topological space which is Hausdorff, second countable and locally Euclidean of dimension $n$.
+\end{definition}
+
+\begin{remark}
+    Recall from Algebraic Topology, that an open subset of $\R^n$ is homeomorphic to an open subset of $\R^m$ only if $m = n$. This is proved using the \emph{Excision Theorem}. Therefore, the dimension of a manifold is unambiguously defined.
+\end{remark}
+
+\begin{definition}[Chart]
+    Let $M$ be a topological $n$-manifold. A \emph{coordinate chart} on $M$ is a pair $(U,\varphi)$ where $U$ is an open set of $M$ and $\varphi: U\to\wh U$ is a homeomorphism from $U$ to an open subset $\wh U = \varphi(U)\subseteq\R^n$. The chart $(U,\varphi)$ is said to be \emph{centered} at $p\in M$ if $\varphi(p) = 0$.
+
+    If $\wh U$ is an open ball in $\R^n$ then $U$ is said to be a \emph{coordinate ball}, and similarly, if $\wh U$ is an open cube in $\R^n$, then $U$ is said to be a \emph{coordinate cube}.
+
+    The map $\varphi$ is called a \emph{local coordinate map} and the component functions $(x^1,\dots,x^n)$ of $\varphi$ defined by $\varphi(p) = (x^1(p),\dots,x^n(p))$ are called \emph{local coordinates} on $U$.
+
+    An \emph{atlas} $\mathscr A$ is a collection $\{(U_i,\varphi_i)\}_{i\in I}$ such that $\{U_i\}_{i\in I}$ forms an open cover of $M$.
+\end{definition}
+
+\begin{example}[The Product Manifold]
+    Let $M_1,\ldots,M_k$ be topological manifolds of dimensions $n_1,\ldots,n_k$ respectively. Then, the topological space $M_1\times\cdots\times M_k$ is Hausdorff and second countable. Further, let $\mathbf p = (p_1,\ldots,p_k)\in M_1\times\cdots\times M_k$. Then, for each index $j$, there is a coordinate chart $(U_j,\varphi_j)$ containing $p_j$. It is not hard to argue that 
+    \begin{equation*}
+        \varphi_1\times\cdots\times\varphi_k: M_1\times\cdots\times M_k\to\R^{n_1 + \cdots + n_k}
+    \end{equation*}
+    is an embedding and thus $M_1\times\cdots\times M_k$ is a manifold of dimension $n_1 + \cdots + n_k$.
+\end{example}
+
+From the above example, we see that the $n$-dimensional torus $\mathbb T^n = \underbrace{\mathbb S^1\times\cdots\times\mathbb S^1}_{n\text{-times}}$ is an $n$-dimensional topological manifold.
+
+\subsection{Some Topological Properties}
+
+\begin{lemma}
+    Manifolds are locally compact Hausdorff.
+\end{lemma}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
+\begin{lemma}
+    Manifolds are paracompact.
+\end{lemma}
+\begin{proof}
+    Every regular Lindel\"of space is paracompact.
+\end{proof}
+
+\section{Smooth Structure}
+
+\begin{definition}[Smooth Atlas]
+    Let $M$ be a topological $n$-manifold. The charts $(U,\varphi)$ and $(V,\psi)$ on $M$ are said to be \emph{smoothly compatible} if 
+    \begin{equation*}
+        \psi\circ\varphi^{-1}:\varphi(U\cap V)\subseteq\R^n\to\psi(U\cap V)\subseteq\R^n
+    \end{equation*}
+    is a diffeomorphism. An atlas $\mathscr A$ is said to be a \emph{smooth atlas} if any two charts in $\mathscr A$ are smoothly compatible. An atlas $\mathscr A$ is said to be \emph{maximal} if it is a maximal element in the poset of all atlases on $M$.
+\end{definition}
+
+
+\begin{definition}[Smooth Manifold]
+    Let $M$ be a topological $n$-manifold. A \emph{smooth structure} on $M$ is a maximal smooth atlas. A \emph{smooth manifold} is a pair $(M,\mathscr A)$ where $M$ is a topological manifold and $\mathscr A$ is a smooth structure on $M$.
+\end{definition}
+
+\begin{remark}
+    There exist topological manifolds that admit no smooth structures at all. There is one such compact $10$-dimensional manifold due to Kervaire.
+\end{remark}
+
+\begin{proposition}
+    Let $M$ be a topological manifold. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Every smooth atlas $\mathscr A$ for $M$ is contained in a unique maximal smooth atlas. 
+        \item Two smooth atlases for $M$ determine the same smooth structure if and only if their union is a smooth atlas\footnote{This is equivalent to requiring the charts in both the atlases to be compatible with one another.}.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\overline\scrA$ denote the set of all charts on $M$ which are smoothly compatible with every chart in $\scrA$. This obviously contains $\scrA$. We contend that this is a smooth structure on $M$. 
+
+    Let $(U,\varphi)$ and $(V,\psi)$ be two elements of $\overline\scrA$ we shall show that they are smoothly compatible. We need only check this when both are not in $\scrA$. We shall show that $\psi\circ\varphi^{-1}$ is smooth. The same proof would show that $\varphi\circ\psi^{-1}$ is smooth whereby both are diffeomorphisms.
+
+    Let $x\in\varphi(U\cap V)$. Then there is a unique $p\in U\cap V$ with $\varphi(p) = x$. Let $(W,\theta)$ be a chart in $\scrA$ with $x\in W$. Since this chart is smoothly compatible with $(U,\varphi)$ and $(V,\psi)$, the maps 
+    \begin{equation*}
+        \psi\circ\theta^{-1}:\theta(W\cap V)\to\psi(W\cap V)\quad\text{and}\quad\theta\circ\varphi^{-1}:\varphi(W\cap U)\to\theta(W\cap U)
+    \end{equation*}
+    are smooth, whence the composition 
+    \begin{equation*}
+        \psi\circ\varphi^{-1} = (\psi\circ\theta^{-1})\circ(\theta\circ\varphi^{-1})
+    \end{equation*}
+    is smooth on a neighborhood of $x$. Since this is true for all $x\in\varphi(U\cap V)$, we have that $\overline\scrA$ is a smooth atlas. 
+
+    Now, if $\scrB$ is any other smooth atlas containing $\scrA$, then every chart in $\scrB$ is smoothly compatible with every chart in $\scrA$ whence $\scrB\subseteq\overline\scrA$. This proves both uniqueness and maximality.
+
+    \item Let $\scrA$ and $\scrB$ be the two atlases on $M$. Due to $(a)$, $\overline{\scrA\cup\scrB}$ is a smooth structure containing $\scrA$ and $\scrB$. Due to uniqueness of the smooth structure, we are done.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+    It is \emph{not necessary} that a topological manifold admits exactly one smooth structure. Take for example the topological manifold $\R$ and two homeomorphisms $\id_\R$ and $\psi:\R\to\R$ given by $\psi(x) = x^3$. We have two atlases $\{\id_\R\}$ and $\{\psi\}$ on $\R$, and thus they give rise to two smooth structures on $\R$. We note that these structures are not the same since $\id_\R$ and $\psi$ are not smoothly compatible. Indeed, $\id_\R\circ\psi^{-1}:\R\to\R$ is the map $x\mapsto x^{1/3}$ which is not smooth.
+\end{remark}
+
+\begin{definition}
+    If $M$ is a smooth manifold, any chart $(U,\varphi)$ contained in the given maximal smooth atlas is called a \emph{smooth chart} and the corresponding coordinate map $\varphi$ is called a \emph{smooth coordinate map}. 
+    
+    A \emph{smooth coordinate domain} is the domain of some smooth coordinate chart. A \emph{smooth coordinate ball} is a smooth coordinate domain whose image under a smooth coordinate map is a ball in Euclidean space.
+
+    A set $B\subseteq M$ is called a \emph{regular coordinate ball} if there is a smooth coordinate ball $B'\supseteq\overline B$ and a smooth coordinate map $\varphi: B'\to\R^n$ such that or some positive reals $r < r'$, 
+    \begin{equation*}
+        \varphi(B) = B(0,r),\quad\varphi(\overline B) = \overline{B(0,r)},\quad\varphi(B') = B(0, r').
+    \end{equation*}
+    In particular, every regular coordinate ball is \emph{precompact} in $M$.
+\end{definition}
+
+\begin{proposition}
+    Every smooth manifold has a countable basis of regular coordinate balls.
+\end{proposition}
+\begin{proof}
+    It suffices to ind a basis of regular coordinate balls since a countable basis can then be extracted from it, as is well known. For any $p\in M$, let $\varphi_p: U_p\to\wh U_p$ be a smooth coordinate map with $p\in U_p$. Let $r_p > 0$ be such that $B(\varphi_p(p), r_p)\subseteq\wh U_p$. It is not hard to see that the collection 
+    \begin{equation*}
+        \left\{\varphi_p^{-1}(B(\varphi_p(p), r))\mid 0 < r < r_p,~p\in M\right\}
+    \end{equation*}
+    forms a basis and each element is a regular coordinate ball. This completes the proof.
+\end{proof}
+
+\begin{lemma}[Smooth Manifold Chart Lemma]\thlabel{lem:smooth-manifold-chart-lemma}
+    Let $M$ be a set, and suppose a collection $\{(U_\alpha,\varphi_\alpha)\}$ is given such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item Each $\varphi_\alpha: U_\alpha\to\wh U_\alpha\subseteq\R^n$ is a bijection where $\wh U_\alpha$ is an open subset of $\R^n$. 
+        \item For each $\alpha,\beta$, the sets $\varphi_\alpha(U_\alpha\cap U_\beta)$ and $\varphi_\beta(U_\alpha\cap U_\beta)$ are open in $\R^n$.
+        \item Whenever $U_\alpha\cap U_\beta\ne\emptyset$, the map $\varphi_\beta\circ\varphi_\alpha^{-1}:\varphi_\alpha(U_\alpha\cap U_\beta)\to\varphi_\beta(U_\alpha\cap U_\beta)$ is smooth.
+        \item A countable subcollection of $\{U_\alpha\}$ covers $M$.
+        \item Whenever $p\ne q$ are distinct points in $M$, either there is some $U_\alpha$ containing both $p$ and $q$ or there exist disjoint sets $U_\alpha, U_\beta$ with $p\in U_\alpha$ and $q\in U_\beta$.
+    \end{enumerate}
+    Then $M$ has a unique smooth manifiold structure such that each $(U_\alpha,\varphi_\alpha)$ is a smooth chart.
+\end{lemma}
+\begin{proof}
+    We begin by first topologizing $M$. Let 
+    \begin{equation*}
+        \mathcal B := \{\varphi_\alpha^{-1}(V)\mid V\subseteq\wh U_\alpha\text{ is open}\}.
+    \end{equation*}
+    We contend that $\mathcal B$ forms a basis for some topology on $M$. Indeed, let $V\subseteq\wh U_\alpha$ and $W\subseteq\wh U_\beta$ be open sets and $p\in\varphi_\alpha^{-1}(V)\cap\varphi_\beta^{-1}(W)$. We have 
+    \begin{equation*}
+        \varphi_\alpha^{-1}(V)\cap\varphi_\beta^{-1}(W) = \varphi_\alpha^{-1}(V\cap(\varphi_\beta\circ\varphi_\alpha^{-1})^{-1}(W))
+    \end{equation*}
+    which is an element of $\mathcal B$ since $\varphi_\beta\circ\varphi_\alpha^{-1}$ is a smooth and thus continuous map.
+
+    Along with this topology, each $\varphi_\alpha$ is an open continuous map which is also a bijection on $\wh U_\alpha$ whence it is a homeomorphism. That $M$ is Hausdorff follows almost immediately from $(e)$. Indeed, let $p\ne q\in M$. If there are disjoint $U_\alpha, U_\beta$ containing $p$ and $q$ respectively, then we have a separation. If not, then $p,q\in U_\alpha$ for some $\alpha$. Let $V, W$ be a separation of $\varphi_\alpha(p),\varphi_\alpha(q)$ in $\wh U_\alpha$, then $\varphi_\alpha^{-1}(V)$ and $\varphi_\alpha^{-1}(W)$ forms a separation of $p,q$ in $U_\alpha$. 
+
+    Next, we must show that $M$ is second countable. Note that each $U_\alpha$ is second countable, owing to it being homeomorphic to an open subset of $\R^n$, and since a countable number of $U_\alpha$'s cover $M$, we have that $M$ is second countable.
+
+    Finally, (c) guarantees that the collection $\{(U_\alpha,\varphi_\alpha)\}$ is a smooth atlas and is therefore contained in a unique smooth structure. This completes the proof.
+\end{proof}
+
+The above lemma will be useful in defining the tangent bundle on a smooth manifold.
+
+\section{Manifolds with Boundary}
+
+\begin{definition}[Manifold with Boundary]
+    An \emph{$n$-dimensional manifold with boundary} is a second countable Hausdorff space $M$ in which every point has a neighborhood homeomorphic either to an open subset of $\R^n$ or an open subset of $\bbH^n$ in the subspace topology.
+
+    A \emph{chart on $M$} is a pair $(U,\varphi)$ where $U\subseteq M$ is an open subset and $\varphi:U\to\wh U$ is a homeomorphism onto either an open subset of $\R^n$ or an open subset of $\bbH^n$. In the former case, the chart is called an \emph{interior chart} and in the latter case, it is called a \emph{boundary chart}.
+
+    A point $p\in M$ is called an \emph{interior point of $M$} if it is in the domain of some interior chart and similarly, it is called a \emph{boundary point of $M$} if it is in the domain of a boundary chart $(U,\varphi)$ such that $\varphi(p)\in\partial\bbH^n$.
+
+    The set of all interior points in $M$ is denoted by $\Int M$ and the set of all boundary pionts in $M$ is denoted by $\partial M$.
+\end{definition}
+
+\begin{remark}
+    From the above definitions, it is obvious that every manifold is a manifold with boundary but the converse is not true. This is illustrated in the following theorem, whose proof we postpone. \todo{Add link to proof} In particular, if the boundary of a manifold with boundary is nontrivial, then it is not a manifold.
+\end{remark}
+
+\begin{theorem}[Topological Invariance of Boundary]
+    Let $M$ be a topological manifold with boundary. Then, $M = \partial M\sqcup\Int M$. That is, the boundary and interior of $M$ are disjoint sets whose union is all of $M$.
+\end{theorem}
+
+\begin{proposition}
+    Let $M$ be a topological $n$-manifold with boundary. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\Int M$ is an open subset of $M$ and a topological $n$-manifold. 
+        \item $\partial M$ is a closed subset of $M$ and a topological $(n - 1)$-manifold. 
+        \item $M$ is a topological manifold if and only if $\partial M = \emptyset$. 
+        \item If $n = 0$, then $\partial M = \emptyset$ and $M$ is a $0$-manifold.
+    \end{enumerate}
+\end{proposition}
+
+\section{Smooth Maps}
+
+\begin{definition}
+    Let $M$ and $N$ be smooth manifolds with or without boundary and $A\subseteq M$. A map $F:A\to N$ is said to be \emph{smooth on $A$} if for every $p\in A$ there is an open neighborhood $W\subseteq M$ and a smooth map $\wt F: W\to N$ whose restriction to $W\cap A$ agrees with $F$.
+\end{definition}
+
+\section{Partition of Unity}
+
+\begin{definition}[Partition of Unity]
+    Let $M$ be a topological space and $\mathscr U$ an open cover of $M$ indexed by a set $J$. A \emph{partition of unity subordinate to $\mathscr U$} is an indexed family $(\psi_{\alpha})$ of continuous functions $\psi_\alpha: M\to\R$ with the following properties: 
+    \begin{enumerate}
+        \item $0\le\psi_\alpha(x)\le 1$ for all $\alpha\in J$ and $x\in M$. 
+        \item $\Supp(\psi_\alpha)\subseteq U_\alpha$ or each $\alpha\in J$
+        \item The set $\{\Supp(\psi_\alpha)\}$ is locally finite.
+        \item $\sum_{\alpha\in J}\psi_\alpha(x) = 1$ for all $x\in M$.
+    \end{enumerate} 
+    A partition of unity is said to be \emph{smooth} if each $\psi_\alpha$ is a smooth function.
+\end{definition}
+
+\begin{theorem}
+    Let $M$ be a smooth manifold with or without boundary and $\mathscr U = (U_\alpha)_{\alpha\in J}$ be an indexed open cover of $M$. Then there is a smooth partition of unity subordinate to $\mathscr U$.
+\end{theorem}
+
+\begin{definition}[Bump function]
+    Let $M$ be a topological space, $A\subseteq M$ a closed subset and $U\subseteq M$ an open subset containing $A$. A continuous function $\psi: M\to\R$ is called a \emph{bump function for $A$ supported in $U$} if $0\le\psi\le 1$ on $M$, $\psi|_A = 1$ and $\Supp\psi\subseteq U$.
+\end{definition}
+
+\begin{proposition}
+    Let $M$ be a smooth manifold with or without boundary. For any closed subset $A\subseteq M$ and any open subset $U\subseteq M$ containing $A$, there is a smooth bump function or $A$ supported in $U$.
+\end{proposition}
+\begin{proof}
+    The collection $\{U,M\backslash A\}$ is an open cover of $M$ and thus has a smooth partition of unity $\{\psi_1,\psi_2\}$ subordinate to it with $\Supp(\psi_1)\subseteq U$ and $\psi_1 + \psi_2 = 1$ on $M$. Since $\Supp(\psi_2)\subseteq M\backslash A$, we have $\psi_2|_A = 0$ whence $\psi_1|_A = 1$ and thus $\psi_1$ is the desired smooth bump function.
+\end{proof}
+
+\begin{lemma}[Extension Lemma for Smooth Maps into $\R^k$]
+    Let $M$ be a smooth manifold with or without boundary, $A\subseteq M$ a closed subset and $f: A\to\R^k$ a smooth function. For any open subset $U$ containing $A$, there is a smooth function $\wt f: M\to\R^k$ such that $\wt f|_A = f$ and $\Supp f \subseteq U$.
+\end{lemma}
+\begin{proof}
+    For each $a\in A$, by definition, there is an open neighborhood $W_a$ of $a$ and a function $\wt f_p: $\todo{Complete proof. Simple application of POU}
+\end{proof}

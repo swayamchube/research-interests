@@ -1,0 +1,39 @@
+\section{Maps of Constant Rank}
+
+\begin{definition}
+    Let $F: M\to N$ be a map between smooth manifolds with or without boundary. For a point $p\in M$, define the \emph{rank of $F$ at $p$} to be the rank of the linear transformation $dF_p: T_pM\to T_{F(p)}N$. If $F$ has the same rank $r$ at all points in $M$, then it is said to have \emph{constant rank} and we write $\rank F = r$.
+
+    The map $F$ is called a \emph{smooth submersion} if $\rank F = \dim N$ and a \emph{smooth immersion} if $\rank F = \dim M$.
+\end{definition}
+
+\begin{proposition}
+    Let $F: M\to N$ be a smooth map between smooth manifolds with or without boundary and $p\in M$. If $dF_p$ is a surjection, then $p$ has a neighborhood $U$ such that $F|_U$ is a submersion. If $dF_p$ is an injection, then $p$ has a neighborhood $U$ such that $F|_U$ is an immersion.
+\end{proposition}
+
+\begin{definition}[Local Diffeomorphism]
+    A map $F: M\to N$ between smooth manifolds with or without boundary is called a \emph{local diffeomorphism} if every $p\in M$ has a neighborhood $U$ such that $F(U)$ is open in $N$ and the restriction $F|_U: U\to F(U)$ is a diffeomorphism.
+\end{definition}
+
+\begin{theorem}[Inverse Function Theorem for Manifolds]\thlabel{thm:inverse-function-manifold}
+    Let $F:M\to N$ be a smooth map between smooth manifolds (without boundary). If $p\in M$ is a point such that $dF_p$ is invertible, then there are neighborhoods $U_0$ of $p$ and $V_0$ of $F(p)$ such that $F|_{U_0}: U_0\to V_0$ is a diffeomorphism.
+\end{theorem}
+\begin{proof}
+    Let $(U,\varphi)$ and $(V,\psi)$ be smooth charts for $M$ and $N$ centered at $p$ and $F(p)$ respectively. Then, 
+    \begin{equation*}
+        \wh F := \psi\circ F\circ\varphi^{-1}: \wh U = \varphi(U)\subseteq\R^n\to\wh V = \psi(V)\subseteq\R^n
+    \end{equation*}
+    is a smooth map with $\wh F(0) = 0$. Since $\varphi$ and $\psi$ are diffeomorphisms, the linear transformations $d(\varphi^{-1})_0$ and $d\psi_{F(p)}$ are invertible and thus the composition 
+    \begin{equation*}
+        d\wh F_p = d\psi_{F(p)}\circ dF_p\circ d(\varphi^{-1})_0
+    \end{equation*}
+    is invertible. Thus, due to \thref{thm:inverse-function}, there are open subsets $\wh U_0\subseteq\wh U$ and $\wh V_0\subseteq\wh V$ such that the restriction $\wh F|_{\wh V_0}: \wh U_0\to\wh V_0$ is a diffeomorphism. Let $U_0 := \varphi^{-1}(\wh U_0)$ and $V_0 := \psi^{-1}(\wh V_0)$. Then, $F$ restricts to a diffeomorphism of $U_0$ to $V_0$. This completes the proof.
+\end{proof}
+
+\subsection{The Rank Theorems}
+
+\begin{theorem}[Local Rank Theorem]\thlabel{thm:rank-theorem-manifolds}
+    Let $F: M\to N$ be a smooth map between smooth manifolds (without boundary) of dimensions $m$ and $n$ respectively with constant rank $r$. For each $p\in M$, there exist smooth charts $(U,\varphi)$ for $M$ centered at $p$ and $(V,\psi)$ or $N$ centered at $F(p)$ such that $F(U)\subseteq V$ in which $F$ has a coordinate representation of the form 
+    \begin{equation*}
+        \wh (x^1,\dots,x^r,x^{r + 1},\dots,x^m) = (x^1,\dots,x^r,0,\dots,0).
+    \end{equation*}
+\end{theorem}

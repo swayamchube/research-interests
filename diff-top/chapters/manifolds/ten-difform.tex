@@ -1,0 +1,69 @@
+Throughout this chapter, all vector spaces are assumed to be over $\R$. They will usually be finite dimensional but we shall explicitly mention this in order to avoid confusion.
+
+\section{Tensors}
+
+\begin{definition}
+    Let $V_1,\dots,V_k$ and $W$ be vector spaces. A map $F: V_1\times\dots\times V_k\to W$ is said to be alternating if for each $1\le i\le k$, 
+    \begin{equation*}
+        F(v_1,\dots,av_i + a'v_i',\dots,v_k) = a_iF(v_1,\dots,v_i,\dots,v_k) + a_i'F(v_1,\dots,v_i',\dots,v_k).
+    \end{equation*}
+    We denote by $\mathscr L(V_1,\dots,V_k;W)$ the set of all multilinear maps from $V_1\times\dots\times V_k\to W$.
+\end{definition}
+
+For linear map $f_i: V_i\to\R$ for $1\le i\le k$, define the multilinear map 
+\begin{equation*}
+    f_1\otimes\dots\otimes f_k: V_1\times\dots\times V_k\to\R
+\end{equation*}
+by $(f_1\otimes\dots\otimes f_k)(v_1,\dots,v_k) = f_1(v_1)\cdots f_k(v_k)$. This notation is a consequence of the forthcoming \thref{thm:tensor-dual-multilinear}.
+
+\begin{remark}[Constructing the Tensor Product]
+    In this remark we recall a construction from module theory. Let $V_1,\dots,V_k$ be vector spaces. Let $\mathfrak F(V_1\times\dots\times V_k)$ denote the free vector space on $V_1\times\dots\times V_k$. Let $W$ denote the subspace spanned by elements 
+    \begin{align*}
+        & \mathbf{e}_{(v_1,\dots,v_i + v_i',\dots,v_k)} - \mathbf{e}_{(v_1,\dots,v_k)} - \mathbf{e}_{(v_1,\dots,v_i',\dots,v_k)}\\
+        & \mathbf{e}_{(v_1,\dots,av_i,\dots,v_k)} - a\mathbf{e}_{(v_1,\dots,v_k)}
+    \end{align*}
+    for $1\le i\le k$ and $a\in\R$. Then, the vector space $\mathfrak{F}(V_1\times\dots\times V_k)/W$ is called the \emph{tensor product of $V_1,\dots,V_k$} and is denoted by $V_1\otimes\dots\otimes V_k$. The tensor product has the property that every multilinear map from $V_1\times\dots\times V_k$ factors through it.
+\end{remark}
+
+\begin{theorem}\thlabel{thm:tensor-dual-multilinear}
+    Let $V_1,\dots,V_k$ be finite dimensional vector spaces. Then, there is a natural isomorphism 
+    \begin{equation*}
+        V_1^*\otimes\dots\otimes V_k^*\cong\mathscr L(V_1,\dots,V_k; \R).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Consider the map $\Phi: V_1^*\times\dots\times V_k^*\to\mathscr L(V_1,\dots,V_k;\R)$ given by 
+    \begin{equation*}
+        \Phi(f_1,\dots,f_k)(v_1,\dots,v_k) = f_1(v_1)\cdots f_k(v_k).
+    \end{equation*}
+    It is not hard to see that $\Phi$ is a multilinear map. Thus, this induces a map $$\varphi: V_1^*\otimes\cdots\otimes V_k^*\to\mathscr L(V_1,\dots,V_k;\R).$$ 
+    
+    The fact that $\varphi$ is an isomorphism follows from the fact that it maps the basis of $V_1^*\otimes\dots\otimes V_k^*$ to the basis of $\mathscr L(V_1\times\dots\times V_k,\R)$.
+\end{proof}
+
+\subsection{Covariant and Contravariant Tensors}
+
+\begin{definition}[Covariant, Contravariant Tensor]
+    Let $V$ be a finite dimensional vector space. If $k$ is a positive integer, a \emph{covariant $k$-tensor on $V$} is an element of the $k$-fold tensor product $T^k(V^*) = \underbrace{V^*\otimes\dots\otimes V^*}_{k-\text{times}}$. The number $k$ is called the \emph{rank} of the aforementioned covariant tensor.
+
+    Similarly, a \emph{contravariant $k$-tensor on $V$} is an element of the $k$-fold tensor product $T^k(V) = \underbrace{V\otimes\cdots\otimes V}_{k-\text{times}}$. Again, the number $k$ is called the \emph{rank} of the contravariant tensor.
+\end{definition}
+
+Due to the natural isomorphism of \thref{thm:tensor-dual-multilinear}, we may identify a covariant $k$-tensor as a multilinear map $V_1\times\dots\times V_k\to\R$ and similarly, we may identify a contravariant $k$-tensor as a multilinear map $V_1^*\times\dots\times V_k^*\to\R$. We shall switch between these identifications to suit our needs.
+
+\subsection{Symmetric and Alternating Tensors}
+
+\begin{definition}[Symmetric, Alternating Tensor]
+    Let $V$ be a finite dimensional vector space. A covariant $k$-tensor $\alpha$ on $V$ is said to be \emph{symmetric} if for every $\sigma\in\mathscr S_k$,
+    \begin{equation*}
+        \alpha(v_1,\dots,v_k) = \alpha(v_{\sigma(1)},\dots,v_{\sigma(k)}).
+    \end{equation*}
+
+    Similarly, it is said to be \emph{alternating} if 
+    \begin{equation*}
+        \alpha(v_1,\dots,v_k) = \sgn(\sigma)\alpha(v_{\sigma(1)},\dots,v_{\sigma(k)}).
+    \end{equation*}
+\end{definition}
+
+\subsection{Tensor Fields on a Manifold}
+

@@ -1,9 +1,8 @@
 \documentclass{report}
 \usepackage{../swayam}
 
-\newcommand{\sgn}{\operatorname{sgn}}
-\newcommand{\Sym}{\operatorname{Sym}}
-\newcommand{\Alt}{\operatorname{Alt}}
+\newcommand{\zero}{\mathbf{0}}
+\newcommand{\rank}{\operatorname{rank}}
 
 \title{Differential Topology}
 \author{Swayam Chube}
@@ -13,11 +12,29 @@
 \maketitle
 \tableofcontents
 
-\setcounter{chapter}{-1}
+\part{Multivariable Calculus}
+\chapter{Differentiation}
+\input{chapters/mvc/differentiation.tex}
 
-\chapter{Preliminaries}
-\input{chapters/prelims.tex}
+\chapter{Integration}
+\input{chapters/mvc/integration.tex}
 
-\chapter{Manifolds}
-\input{chapters/manifolds.tex}
+\part{Manifolds}
+\chapter{Smooth Manifolds}
+\input{chapters/manifolds/manifolds.tex}
+
+\chapter{Tangent Spaces}
+\input{chapters/manifolds/tangent.tex}
+
+\chapter{Submersions and Immersions}
+\input{chapters/manifolds/sub-imm.tex}
+
+\chapter{Vector Fields}
+\input{chapters/manifolds/vec-field.tex}
+
+\chapter{Vector Bundles}
+\input{chapters/manifolds/bundles.tex}
+
+\chapter{Tensors and Differential Forms}
+\input{chapters/manifolds/ten-difform.tex}
 \end{document}

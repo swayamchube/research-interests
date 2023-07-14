@@ -1,0 +1,224 @@
+\section{Tangent Vectors}
+\subsection{On \texorpdfstring{$\R^n$}{Rn}}
+
+\begin{definition}
+    Let $a\in\R^n$. A map $w: C^\infty(\R^n)\to\R$ is said to be a \emph{derivation at $a$} if it is linear over $\R$ and satisfies the product rule: 
+    \begin{equation*}
+        w(fg) = f(a)w(g) + g(a)w(f).
+    \end{equation*}
+    Denote by $T_a\R^n$ the set of all derivations of $C^{\infty}(\R^n)$ at $a$. This is obviously a vector space under the operations: 
+    \begin{equation*}
+        (w_1 + w_2)(f) = w_1(f) + w_2(f)\quad\text{and}\quad (cw)(f) = cw(f)
+    \end{equation*}
+    for all $w_1,w_2\in T_a\R^n$ and $c\in\R$.
+\end{definition}
+
+\begin{lemma}
+    Suppose $a\in\R^n$, $w\in T_a\R^n$ and $f,g\in C^\infty(\R^n)$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $f$ is a constant function, then $w(f) = 0$. 
+        \item If $f(a) = g(a) = 0$, then $w(fg) = 0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $f\equiv c\in\R$. First, consider the constant function $g\equiv 1\in\R$. Note that $g = g^2$ and thus 
+    \begin{equation*}
+        w(g) = w(g^2) = g(a)w(g) + g(a)w(g) = 2w(g)
+    \end{equation*}
+    whence $w(g) = 0$ and $w(f) = cw(g) = 0$.
+
+    \item Trivial.\qedhere
+\end{enumerate}
+\end{proof}
+
+For a vector $v\in\R^n$ and a point $a\in\R^n$, let $D_v|_a$ denote the \emph{directional derivative} at $a$ in the direction of $v$, which is given by 
+\begin{equation*}
+    \frac{\dif}{\dif t}f(a + vt)\big|_{t = 0}
+\end{equation*}
+
+It is not hard to see that $D_v|_a\in T_a\R^n$. Indeed, if $f,g\in C^\infty(\R^n)$, we have 
+\begin{align*}
+    D_v|_a(fg) &= \frac{\dif}{\dif t}\left(f(a + vt)g(a + vt)\right)\big|_{t = 0} \\
+    &= f(a)\frac{\dif}{\dif t}g(a + vt)\big|_{t = 0} + g(a)\frac{\dif}{\dif t}f(a + vt)\big|_{t = 0} \\
+    &= f(a)D_v|_a(g) + g(a)D_v|_{a}(f).
+\end{align*}
+
+\begin{proposition}
+    The map $v_a\mapsto D_v|_a$ is an isomorphism of vector spaces from $\R^n_a\to T_a\R^n$.
+\end{proposition}
+\begin{proof}
+    Call this map $\Phi$. The fact that $\Phi$ is a linear transformation follows from 
+    \begin{equation*}
+        D_v|_a(f) = v\cdot\nabla(f)(a).
+    \end{equation*}
+
+    Next, we shall show that it is injective. Let $v_a\in\R^n_a$ such that $D_v|_a\equiv 0$. Consider the function $\pi_j: \R^n\to\R$ which is the projection on the $j$-th coordinate. This is obviously in $C^\infty(\R^n)$. Then, we have 
+    \begin{equation*}
+        0 = D_v|_{a}(\pi_j) = \frac{\dif}{\dif t}(a^{j} + v^{j}t) = v^j
+    \end{equation*}
+    whence $v = 0$ and the kernel of $\Phi$ is trivial.
+
+    Lastly, we must show that $\Phi$ is a surjection. Let $w\in T_a\R^n$ and $f\in C^\infty(\R^n)$. Due to \todo{Reference Taylor's Theorem}, we may write 
+    \begin{equation*}
+        f(x) = f(a) + \sum_{i = 1}^n\frac{\partial f}{\partial x^{i}}(a)(x^i - a^i) + \sum_{j = 1}^n\sum_{i = 1}^n(x^i - a^i)(x^j - a^j)\int_{0}^1(1 - t)\frac{\partial^2 f}{\partial x^i\partial x^j}(a + t(x - a))~\dif t.
+    \end{equation*} 
+    Evaluating this at $x = a$, we have that 
+    \begin{equation*}
+        w(f)(a) = \sum_{i = 1}^n\frac{\partial f}{\partial x^i}(a)w(x^{i}) = D_v|_a(f)
+    \end{equation*}
+    where $v = (w(x^1),\dots,w(x^n))$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    For $a\in\R^n$, the $n$ derivations 
+    \begin{equation*}
+        \frac{\partial}{\partial x^1}\big|_{a},\dots,\frac{\partial }{\partial x^n}\big|_a
+    \end{equation*}
+    form a basis for $T_a\R^n$, which therefore has dimension $n$.
+\end{corollary}
+
+\subsection{On a Manifold}
+
+\begin{definition}
+    Let $M$ be a smooth manifold with or without boundary and let $p\in M$. A linear map $w: C^\infty(M)\to\R$ is said to be a \emph{derivation at $p$} if it obeys the product rule:
+    \begin{equation*}
+        v(fg) = f(p)v(g) + g(p)v(f)\quad\text{for all }f,g\in C^\infty(M).
+    \end{equation*}
+    The set of all derivations of $C^\infty(M)$ at $p$, denoted by $T_pM$ is a vector space called the \emph{tangent space to $M$ at $p$}. An element of $T_pM$ is called a \emph{tangent vector to $M$ at $p$}.
+\end{definition}
+
+\begin{lemma}
+    Let $M$ be a smooth manifold with or without boundary, $p\in M$, $w\in T_pM$and $f,g\in C^\infty(M)$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $f$ is a constant function then $w(f) = 0$. 
+        \item If $f(p) = g(p) = 0$, then $w(fg) = 0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Same as the proof for $\R^n$.
+\end{proof}
+
+\begin{lemma}
+    Let $p\in M$ and $f,g\in C^\infty(M)$ such that $f = g$ in some open neighborhood of $p$. Then, for any $v\in T_pM$, $v(f) = v(g)$.
+\end{lemma}
+\begin{proof}
+    Let $h = f - g\in C^\infty(M)$ and $p\subseteq U$ be a neighborhood on which $h$ vanishes. The collection $\{M\backslash\{p\}, U\}$ is an open cover of $M$ whence there is a smooth partition of unity $\{\psi,\psi'\}$ subordinate to it. 
+
+    Note that for all $x\in M\backslash U$, $\psi(x) = 1$ and $\psi'(x) = 0$ whence $\psi\cdot h = h$ on all of $M$ and $\psi(p) = 0 = h(p)$ and thus 
+    \begin{equation*}
+        0 = v(\psi\cdot h) = v(h) = v(f) - v(g).\qedhere
+    \end{equation*}
+\end{proof}
+
+\section{Differential of a Smooth Map}
+
+\begin{definition}[Differential]\thlabel{def:differential}
+    Let $M$ and $N$ be smooth manifolds with or without boundary and $F: M\to N$ a smooth map. For each $p\in M$, the \emph{differential of $F$ at $p$} is the map 
+    \begin{equation*}
+        dF_p: T_pM\to T_{F(p)}N
+    \end{equation*}
+    given by 
+    \begin{equation*}
+        dF_p(v)(f) = v(f\circ F)
+    \end{equation*}
+    for all $f\in C^\infty(N)$.
+\end{definition}
+
+\begin{proposition}
+    The map $dF_p: T_pM\to T_{F(p)}N$ is a linear transformation.
+\end{proposition}
+\begin{proof}
+    Let $v\in T_pM$. Then, for $f,g\in C^\infty(N)$ and $c\in\R$, we have 
+    \begin{equation*}
+        dF_p(v)(f + cg) = v((f + cg)\circ F) = v(f\circ F + cg\circ F) = v(f\circ F) + v(cg\circ F) = v(f\circ F) + cv(g\circ F),
+    \end{equation*}
+    and 
+    \begin{align*}
+        dF_p(v)(fg) &= v((fg)\circ F)\\
+        &= v((f\circ F)(g\circ F)) \\
+        &= (f\circ F)(p)v(g\circ F) + (g\circ F)(p)v(f\circ F)\\
+        &= f(F(p))v(g\circ F) + g(F(p))v(f\circ F).
+    \end{align*}
+    Thus $dF_p(v)$ is indeed a derivation on $N$ at $p$.
+
+    Next, we must show that $dF_p$ is a linear transformation. Indeed, if $v,w\in T_pM$ and $c\in\R$, we have for all $f\in C^\infty(N)$, 
+    \begin{equation*}
+        dF_p(v + cw)(f) = (v + cw)(f\circ F) = v(f\circ F) + cw(f\circ F) = dF_p(v) + cdF_p(w).
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:differential-functor}
+    Let $M,N$ and $P$ be smooth manifolds with or without boundary, let $F:M\to N$ and $G:N\to P$ be smooth maps and let $p\in M$.
+    \begin{enumerate}[label=(\alph*)]
+        \item $d(G\circ F)_p = dG_{F(p)}\circ dF_p: T_pM\to T_{G\circ F(p)}P$.
+        \item $d(\id_M)_p = \id_{T_pM}: T_pM\to T_pM$.
+        \item If $F$ is a diffeomorphism, then $dF_p: T_pM\to T_{F(p)}N$ is an isomorphism, and $(dF_p)^{-1} = d(F^{-1})_{F(p)}$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item This is almost \emph{by definition}. Let $f\in C^\infty(P)$ and $v\in T_pM$. Then, 
+    \begin{equation*}
+        d(G\circ F)_p(v)(f) = v(f\circ G\circ F) = v((f\circ G)\circ F)
+    \end{equation*}
+    and 
+    \begin{equation*}
+        dG_{F(p)}(dF_p(v))(f) = dF_p(v)(f\circ G) = v(f\circ G\circ F).
+    \end{equation*}
+
+    \item For any $v\in T_pM$ and $f\in C^\infty(M)$, 
+    \begin{equation*}
+        d(\id_M)_p(v)(f) = v(f\circ\id_M) = v(f).
+    \end{equation*}
+
+    \item Let $G = F^{-1}$. From (a) and (b), 
+    \begin{equation*}
+        \id_{T_pM} = dG_{F(p)}\circ dF_p,
+    \end{equation*}
+    whence the conclusion follows.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{mdframed}
+    In particular, \thref{prop:differential-functor} shows that the map $T: \catDiff_*\to\catVec$ which maps 
+    \begin{equation*}
+        (M,p)\mapsto T_pM\quad\text{and}\quad \left[F: (M, p)\to (N, F(p))\right]\mapsto\left[dF_p: T_pM\to T_{F(p)}N\right]
+    \end{equation*}
+    is a \emph{covariant functor}. We shall see a similar functor from $\catDiff$ to $\catDiff$ in an upcoming section.
+\end{mdframed}
+
+\begin{lemma}
+    Let $M$ be a smooth manifold with or without boundary, let $U\subseteq M$ be an open subset (and thus a manifold in its own right) and let $\iota: U\into M$ be the inclusion map. For every $p\in U$, the differential $d\iota_p: T_pU\to T_pM$ is an isomorphism of vector spaces.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{proposition}
+    Let $M$ be a smooth $n$-manifold (without boundary). Then for any $p\in M$, $T_pM$ is an $n$-dimensional vector space.
+\end{proposition}
+\begin{proof}
+    Let $(U,\varphi)$ be a smooth chart containing $p$. Due to the preceeding lemma, $T_pU$ is isomorphic to $T_pM$ as vector spaces. Thus, it suffices to show that $T_pU$ is an $n$-dimensional vector space. We have a diffeomorphism $\varphi: U\to\wh U\subseteq\R^n$ whence $d\varphi_p: T_pU\to T_{\varphi(p)}\wh U$ is an isomorphism of vector spaces but since the latter is isomorphic to $\R^n$ (as a vector space) as we have seen earlier, we are done.
+\end{proof}
+
+\section{The Tangent Bundle}
+
+\begin{definition}[Tangent Bundle]
+    Let $M$ be a smooth manifold with or without boundary. The \emph{tangent bundle of $M$}, denoted by $TM$ is defined as 
+    \begin{equation*}
+        TM = \coprod_{p\in M} T_pM.
+    \end{equation*}
+    This is equipped with the natural projection $\pi: TM\to M$ which maps every vector in $T_pM$ to $p\in M$.
+\end{definition}
+
+\begin{mdframed}[frametitle={\centering Topology on $TM$ for a manifold.}, frametitlerule=true, frametitlealignment=\centering]
+    Let $M$ be a smooth manifold (without boundary). We shall use \thref{lem:smooth-manifold-chart-lemma} to construct a smooth structure on $TM$. Let $(U,\varphi)$ be a smooth chart for $M$
+\end{mdframed}
+
+\begin{definition}[Global Differential]
+    Let $M$ and $N$ be smooth manifold with or without boundary and Let $F: M\to N$ be a smooth map. The \emph{global differential} or \emph{global tangent map} is a map $dF: TM\to TN$ which maps $v\in T_pM$ to $dF_p(v)\in T_{F(p)}N$.
+\end{definition}
+
+In other words, the global differential obtained by simply stitching together the $dF_p$'s for all $p\in M$.

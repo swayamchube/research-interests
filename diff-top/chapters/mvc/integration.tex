@@ -1,0 +1,279 @@
+\begin{definition}[Oscillation]
+    Let $f:A\subseteq\R^n\to\R$ be bounded and $a\in A$. For every $\delta > 0$, define 
+    \begin{equation*}
+        M(a,f,\delta) = \sup\{f(x)\mid x\in A,~\|x - a\| < \delta\}\qquad
+        m(a,f,\delta) = \inf\{f(x)\mid x\in A,~\|x - a\| < \delta\}
+    \end{equation*}
+    The \emph{oscillation} of $f$ at $a$ is defined by 
+    \begin{equation*}
+        o(f,a) = \lim_{\delta\to0}(M(a,f,\delta) - m(a,f,\delta))
+    \end{equation*}
+\end{definition}
+
+We impose the boundedness condition on $f$ to make sure that both $M(a,f,\delta)$ and $m(a,f,\delta)$ are well defined real numbers. Note that upon fixing $a$, the function $M(a,f,\cdot)$ is a decreasing function of $\delta > 0$ and $m(a,f,\cdot)$ is an increasing function of $\delta > 0$ whereby, the limit exists, since $M(a,f,\cdot) - m(a,f,\cdot)$ is a decreasing function of $\delta$ and is bounded below by $0$.
+
+\begin{proposition}
+    A bounded function $f: A\subseteq\R^n\to\R$ is continuous at $a\in A$ if and only if $o(f,a) = 0$.
+\end{proposition}
+\begin{proof}
+    Suppose $f$ is continuous at $a$. Then, for every $\varepsilon > 0$, there is a $\delta>0$ such that $|f(x) - f(a)| < \varepsilon$ whenever $\|x - a\| < \delta$ and $x\in A$. Then, for all such $x$, $M(a,f,\delta) - m(a,f,\delta) < 2\varepsilon$, consequently, $o(f,a) = 0$.
+
+    Conversely, suppose $o(f,a) = 0$. Let $\varepsilon > 0$ be given. Then, there is a $\delta > 0$ such that  $M(a,f,\delta) - m(a,f,\delta) < \varepsilon$. Then, for all $x\in A$ with $\|x - a\| < \delta$, we have 
+    \begin{equation*}
+        -\varepsilon < -(M(a,f,\delta) - m(a,f,\delta))\le f(x) - f(a)\le M(a,f,\delta) - m(a,f,\delta) < \varepsilon.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $A\subseteq\R^n$ be closed. If $f: A\to\R$ is a bounded function and $\varepsilon > 0$, then the set $B = \{x\in A\mid o(f,x)\ge\varepsilon\}$ is closed.
+\end{theorem}
+\begin{proof}
+    We shall show that $\R^n\backslash B$ is open. If $x\in\R^n\backslash B$ and $x\notin A$, then there is trivially an open rectangle containing $x$ disjoint from $A$ and thus from $B$. On the other hand, if $x\in A$, then there is a $\delta > 0$ such that $M(x,f,\delta) - m(x,f,\delta) < \varepsilon$. Let $C$ be an open rectangle contained in the open ball $B(x,\delta)$ in $\R^n$ (this may contain points not in $A$). Let $y\in C\cap A$. Choose $\delta'$ such that $B(y,\delta')\subseteq C$. Then, $M(y,f,\delta') < M(x,f,\delta)$ and $m(y,f,\delta')\ge m(x,f,\delta)$ whence $M(y,f,\delta') - m(y,f,\delta') < \varepsilon$ and $y\notin B$. This completes the proof.
+\end{proof}
+
+\section{The Setup}
+
+We borrow the idea of partitions from the Riemann Integral of a function of one variable.
+\begin{definition}[Partition]
+    Let $A\subseteq\R^n$ be a closed rectangle, i.e. $A = [a_1,b_1]\times\dots\times[a_n,b_n]$. A partition of $A$ is a collection $P = (P_1,\dots,P_n)$ where each $P_i$ given by $a = t^{(i)}_0 < t^{(i)}_1 < \dots < t^{(i)}_{m_i} = b$ is a partition of the interval $[a_i,b_i]$.
+
+    Rectangles of the form 
+    \begin{equation*}
+        [t^{(1)}_{r_i}, t^{(1)}_{r_i + 1}]\times\dots\times[t^{(n)}_{r_n}, t^{(n)}_{r_n + 1}]
+    \end{equation*}
+    are called \emph{subrectangles of the partition $P$}. The collection of subrectangles of $P$ is denoted by $\mathscr S(P)$. A partition $P' = (P_1',\dots,P_n')$ is said to \emph{refine} $P$ if each $P_i'$ refines $P_i$.
+\end{definition}
+
+\begin{definition}[Integral]
+    Let $f: A\subseteq\R^n\to\R$ be a bounded function on a closed rectangle $A$ and let $P$ be a partition of $A$. For each $S\in\mathscr S(P)$ define 
+    \begin{equation*}
+        m_S(f) := \inf\{f(x)\mid x\in S\}\quad\text{and}\quad M_S(f) := \sup\{f(x)\mid x\in S\}.
+    \end{equation*}
+    Using this, we define the \emph{upper and lower sums of $f$ for the partition $P$} as 
+    \begin{equation*}
+        L(f,P) := \sum_{S\in\mathscr S(P)}m_S(f)v(S)\quad\text{and}\quad U(f,P) := \sum_{S\in\mathscr S(P)}M_S(f)v(S).
+    \end{equation*}
+
+    The function $f$ is said to be \emph{integrable over $A$} if 
+    \begin{equation*}
+        \mathbf L\int_A f := \sup_{P\in\mathscr P(A)} L(f,P) = \inf_{P\in\mathscr P(A)} U(f,P) =: \mathbf U\int_A f.
+    \end{equation*}
+    This common value is called the \emph{integral of $f$ over $A$} and is denoted by either 
+    \begin{equation*}
+        \int_A f \quad\text{or}\quad\int_A f(x^1,\dots,x^n)~dx^1\cdots dx^n.
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    Let $f: A\to\R$ where $A\subseteq\R$ is a closed rectangle and $P, P'\in\mathscr P(A)$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $P'$ refines $P$, then $L(f,P)\le L(f,P')$ and $U(f,P')\le U(f,P)$.
+        \item $L(f,P')\le U(f,P)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Straightforward computation.
+    \item Let $P'' = P\cup P' := (P_1\cup P_1',\dots,P_n\cup P_n')$. Then $P''$ refines both $P$ and $P'$ whence 
+    \begin{equation*}
+        L(f,P')\le L(f,P'')\le U(f,P'')\le U(f,P).
+    \end{equation*}
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Let $A\subseteq\R^n$ be a closed rectangle and $f: A\to\R$ a bounded function. Then $f$ is integrable if and only if for every $\varepsilon > 0$, there is $P\in\mathscr P(A)$ such that $U(f,P) - L(f,P) < \varepsilon$.
+\end{proposition}
+\begin{proof}
+    Suppose $f$ is integrable. Then, there are partitions $P,P'\in\mathscr P(A)$ such that 
+    \begin{equation*}
+        \int_A f - \frac{\varepsilon}{2} < L(f,P)\le U(f,P') < \int_A f + \frac{\varepsilon}{2}.
+    \end{equation*}
+    Let $P''\in\mathscr P$ refine both $P$ and $P'$. Then, 
+    \begin{equation*}
+        \int_A f - \frac{\varepsilon}{2} < L(f,P)\le L(f,P'')\le U(f,P'')\le U(f,P') < \int_A f + \frac{\varepsilon}{2}
+    \end{equation*}
+    whence $U(f,P'') - L(f,P'') < \varepsilon$. The converse is trivial to prove.
+\end{proof}
+
+\begin{lemma}
+    Let $A\subseteq\R$ be a closed rectangle, $f: A\to\R$ a bounded function and $\varepsilon > 0$ such that $o(f, x) < \varepsilon$ for all $x\in A$. Then there is a partition $P\in\mathscr P(A)$ such that $U(f,P) - L(f,P) < \varepsilon v(A)$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Integration over Jordan measurable sets]
+    Let $C\subseteq\R^n$ be a Jordan measurable set and $f: A\to\R^n$ a bounded function on a closed rectangle $A$ containing $C$. Then, we \emph{define} 
+    \begin{equation*}
+        \int_C f = \int_A \chi_C\cdot f.
+    \end{equation*}
+\end{definition}
+
+\section{Fubini's Theorem}
+
+\begin{theorem}[Fubini]
+    Let $A\subseteq\R^n$ and $B\subseteq\R^m$ be closed rectangles and $f: A\times B\to R$ be a bounded integrable function. Denote by $g_x$ the function $f(x,\cdot): B\to\R$ and let 
+    \begin{equation*}
+        \mathfrak L(x) = \mathbf L\int_B g_x\quad\text{and}\quad\mathfrak U(x) = \mathbf U\int_B g_x.
+    \end{equation*}
+    Then $\mathfrak L, \mathfrak U: A\to\R$ are integrable and 
+    \begin{equation*}
+        \int_A \mathfrak L = \int_{A\times B} f = \int_A \mathfrak U.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $P$ be a partition of $A\times B$. Then, $P$ is of the form $(P_A, P_B)$ where $P_A$ is a partition of $A$ and $P_B$ is a partition of $B$. Then, every subrectangle in $\mathscr S(P)$ is of the form $S_A\times S_B$ where $S_A\in\mathscr S(P_A)$ and $S_B\in\mathscr S(P_B)$.
+    \begin{align*}
+        L(f, P) &= \sum_{S\in\mathscr S(P)} m_S(f)v(S)\\
+        &= \sum_{S_A\in\mathscr S(P_A)}\sum_{S_B\in\mathscr S(P_B)} m_{S_A\times S_B}(f)v(S_A\times S_B)\\
+        &= \sum_{S_A\in\scrS(P_A)}\left(\sum_{S_B\in\scrS(P_B)} m_{S_A\times S_B}(f)v(S_B)\right)v(S_A)\\
+        &\le \sum_{S_A\in\scrS(P_A)}\left(\sum_{S_B\in\scrS(P_B)}m_{S_B}(g_x)v(S_B)\right)v(S_A)\\
+        &\le\sum_{S_A\in\scrS(P_A)}\left(\mathbf L\int_B g_x\right) v(S_A) = \sum_{S_A\in\scrS(P_A)}\mathfrak L(x)v(S_A)
+    \end{align*}
+    for all $x\in S_A$. Therefore, 
+    \begin{equation*}
+        L(f,P)\le\sum_{S_A\in\scrS(P_A)}m_{S_A}\left(\mathfrak L(x)\right)v(S_A) = L(\mathfrak L, P_A).
+    \end{equation*}
+    Using a similar argument, we obtain $U(f,P)\ge U(\mathfrak U, P_A)$ whence 
+    \begin{equation*}
+        L(f,P)\le L(\mathfrak L, P_A)\le \underbrace{U(\mathfrak L, P_A)\le U(\mathfrak U, P_A)}_{\mathfrak L\le\mathfrak U\text{ for all } x\in A}\le U(f, P).
+    \end{equation*}
+    Since $f$ is integrable, for every $\varepsilon > 0$, there is a partition $P$ of $A\times B$ such that $U(f,P) - L(f,P) < \varepsilon$ whence $U(\mathfrak L, P_A) - L(\mathfrak L, P_A) < \varepsilon$, implying that $\mathfrak L$ is integrable over $A$ and 
+    \begin{equation*}
+        \int_{A\times B} f = \int_A\mathfrak L.
+    \end{equation*}
+    A similar argument can be applied for $\mathfrak U$. This completes the proof.
+\end{proof}
+
+\section{Partitions of Unity}
+
+\subsection{The Bump Function}
+
+Let $f: \R\to\R$ be given by 
+\begin{equation*}
+    f(x) = 
+    \begin{cases}
+        \exp\left(-\frac{1}{x^2}\right) & x > 0\\
+        0 & x \le 0
+    \end{cases}
+    .
+\end{equation*}
+
+It is not hard to argue that $f\in C^\infty(\R)$. Consider now $g: \R\to\R$ given by 
+\begin{equation*}
+    g(x) = f(1 - x)f(1 + x).
+\end{equation*}
+
+Then $g\in C^\infty(\R)$ and $g$ is nonzero only on $(-1,1)$ and is positive there. Define 
+\begin{equation*}
+    h(x) = \frac{\int_0^x g\left(\frac{x + 1}{2}\right)~dx}{\int_0^1g\left(\frac{x + 1}{2}\right)~dx}.
+\end{equation*}
+Then $h\in C^\infty(\R)$ such that $h(x) = 0$ for all $x\le 0$ and $h(x) = 1$ for all $x\ge 1$.
+
+Let now $U\subseteq\R^n$ be open and $C\subseteq U$ a compact subset. For each $a\in C$, there is an $\varepsilon_a > 0$ such that the cube 
+\begin{equation*}
+    a\in \underbrace{[a_1 - \varepsilon_a,a_1 + \varepsilon_a]\times\dots\times[a_n - \varepsilon_a, a_n + \varepsilon_a]}_{Q_a}\subseteq U.
+\end{equation*}
+
+Consider the function $F_a: \R^n\to\R^n$ given by 
+\begin{equation*}
+    F_a(x) = \prod_{i = 1}^n f\left(\frac{x_i - a_i}{\varepsilon_a}\right).
+\end{equation*}
+
+Then, $F_a(x) > 0$ for all $x\in\Int Q_a$ and $F_a(x) = 0$ for all $x\notin Q_a$. The collection $\{\Int Q_a\}_{a\in C}$ forms an open cover of $C$ whence has a finite subcover, say $\{Q_{a_1},\dots,Q_{a_m}\}$. Let 
+\begin{equation*}
+    F(x) = \sum_{i = 1}^m F_{a_i}(x).
+\end{equation*}
+
+Then, $F(x) > 0$ for all $x\in C$ and $F(x) = 0$ for all $x\notin Q := \bigcup_{i = 1}^m Q_{a_i}$, which is a closed (in fact, compact) set contained in $U$.
+
+Let $\delta := \inf_{x\in C} F(x)$. Since $C$ is compact, this minimum is achieved somewhere in $C$ and thus is nonzero. Consider the composition $G: \R^n\to\R^n$ given by
+\begin{equation*}
+    G(x) := h\left(F(x)/\delta\right).
+\end{equation*}
+Then $G(x)$ is a $C^\infty$ function such that 
+\begin{itemize}
+    \item $G(x) = 1$ for all $x\in C$, 
+    \item $G(x) = 0$ for all $x\notin Q$,
+    \item and thus $\Supp(G)\subseteq Q\subseteq U$ is a compact set.
+\end{itemize}
+
+This is called the \emph{bump function}.
+
+\subsection{Constructing Partitions of Unity}
+
+\begin{lemma}
+    Let $U\subseteq\R^n$ be an open set. Then, there is an ascending chain of compact sets $K_1\subseteq K_2\subseteq\cdots$ such that $K_i\subseteq\Int K_{i + 1}$ and $\displaystyle U\subseteq\bigcup_{i = 1}^\infty K_i$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    Let $A\subseteq\R^n$ and $\mathscr U$ be an open cover of $A$. Then, there is a collection $\Phi$ of $C^\infty(\R)$ functions with the following properties: 
+    \begin{enumerate}[label=(\alph*)]
+        \item For each $x\in A$ and $\varphi\in\Phi$, $0\le\varphi(x)\le 1$. 
+        \item For each $\varphi\in\Phi$, there is an open set $U\in\mathscr U$ such that $\Supp(\varphi)\subseteq U$.
+        \item The collection $\{\Supp(\varphi)\mid \varphi\in\Phi\}$ is a locally finite collection of compact sets.
+        \item For each $x\in A$, $\sum_{\varphi\in\Phi}\varphi(x) = 1$. This makes sense since only finitely many of the $\varphi$ are nonzero for any $x\in A$.
+    \end{enumerate}
+    Such a collection is called a \underline{partition of unity for $A$ subordinate to $\mathscr U$}.
+\end{theorem}
+\begin{proof}
+There are three steps in this proof. First, we construct a partition of unity in the case when $A$ is compact. Then, for an open $A$, we use the compact exhaustion of $A$ to construct a partition of unity and finally, the case for an arbitrary $A$ follows immediately, as we shall see.
+\begin{description}
+    \item[Case 1.]  $A$ is compact. 
+    
+
+    \item[Case 2.] $A$ is open.
+
+    \item[Case 3.] $A$ is arbitrary.
+    \qedhere
+\end{description}
+\end{proof}
+
+\begin{remark}\thlabel{rem:pou-countable}
+Since $\R^n$ is second countable, every open cover of $A$ can be reduced to a countable open cover of $A$ whence we may choose our partition of unity to contain only countably many terms.
+\end{remark}
+
+\begin{definition}[Extended Integral]
+    An open cover $\mathscr U$ of an open set $A\subseteq\R^n$ is said to be \emph{admissible} if each $U\in\mathscr U$ is contained in $A$. Let $f: A\to\R$ be such that for all $x\in A$, $f$ is bounded in some open set containing $x$ and the set of discontinuities of $f$ in $A$ has measure $0$, then, $f$ is said to be \emph{integrable in the extended sense} if the sum 
+    \begin{equation*}
+        \int_{\varphi\in\Phi}\varphi\cdot|f|
+    \end{equation*}
+    converges for some countable partition of unity subordinate to $\mathscr U$. The integral of $f$ is now defined as 
+    \begin{equation*}
+        \sum_{\varphi\in\Phi}\int_A\varphi\cdot f.
+    \end{equation*} 
+    Recall that due to \thref{rem:pou-countable}, we know that every admissible open cover admits a countable partition of unity subordinate to it.
+\end{definition}
+
+\begin{theorem}
+    Let $A\subseteq\R^n$ be open, $f: A\to\R$ be a function.
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $\Psi$ be another partition of unity subordinate to an admissible cover $\mathscr V$ of $A$, then $\displaystyle\sum_{\psi\in\Psi}\int_A\psi\cdot|f|$ also converges and 
+        \begin{equation*}
+            \sum_{\varphi\in\Phi}\int_A \varphi\cdot f = \sum_{\psi\in\Psi}\int_A\psi\cdot F.
+        \end{equation*}
+
+        \item If $A$ and $f$ are bounded, then $f$ is integrable in the extended sense. 
+
+        \item If $A$ is Jordan-measurable and $f$ is bounded, then this definition of $\int_A f$ agrees with the old one.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\section{Change of Variables}
+
+\begin{theorem}
+    Let $A\subseteq\R^n$ be an open set and $g: A\to\R^n$ an injective, continuously differentiable function such that $\det(Dg(x))\ne0$ for all $x\in A$. If $f: g(A)\to\R$ is integrable, then 
+    \begin{equation*}
+        \int_{g(A)} f = \int_A (f\circ g)|\det Dg|
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    \todo{Add in later}
+\end{proof}
