@@ -1,10 +1,32 @@
-\begin{definition}
-    Let $k$ be a field. A \textit{root of unity} in $k$ is an element $\zeta\in k$ such that $\zeta^n = 1$ for some $n\in\N$.
+\begin{definition}[Root of Unity]
+    Let $k$ be a field. A \textit{root of unity} over $k$ is an element $\zeta\in k^a$ such that $\zeta^n = 1$ for some $n\in\N$.
 \end{definition}
 
-Now, if $n > 1$ is an integer not divisible by$ \chr k$, then the polynomial $x^n - 1$ is separable, and hence, in $k^a$, has $n$ distinct roots. It is not hard to see that these form a group under multiplication. Since this is a finite multiplicative subgroup of a field, it must be cyclic. A generator for this group is called a \textit{primitive $n$-th root of unity}. We use $\bm{\mu}_n$ to denote the group of $n$-th roots of unity in $k^a$.
+\begin{mdframed}
+    Consider the polynomial $x^n - 1$ with $\gcd(\chr k, n) = 1$. In this case, the polynomial is separable over $k$ and thus has distinct roots. Let $Z_n = \{z_1,\dots,z_n\}$ denote the distinct roots. It is not hard to see that $Z_n\subseteq k^\times$ forms a multiplicative group. Since every finite multiplicative subgroup of a field is cyclic, so is $Z_n$. A generator for the group $Z_n$ is called a \textbf{primitive $n$-th root of unity}. Obviously, there are $\varphi(n)$ such primitive $n$-th roots of unity.
 
-From the previous paragraph, we see that if $\gcd(\chr k, n) = 1$, then $k(\zeta)$ is a splitting field for $x^n - 1$ and $\zeta$ is separable over $k$, therefore, $k(\zeta)/k$ is Galois.
+    Consider now the case $\gcd(\chr k, n)\ne 1$. Let $\chr k = p > 0$. Then, there is a positive integer $r$ such that $n = p^rm$ with $p\nmid m$. Then, 
+    \begin{equation*}
+        x^n - 1 = \left(x^m - 1\right)^{p^r}
+    \end{equation*}
+    and thus every $n$-th root of unity is an $m$-th root of unity, whence it suffices to study polynomials of the form $(x^n - 1)$ with $\gcd(\chr k, n) = 1$.
+\end{mdframed}
+
+\begin{proposition}
+    Every root of unity is a primitive $n$-th root of unity for some positive integer $n$.
+\end{proposition}
+\begin{proof}
+    Let $\zeta$ be a root of unity and let $n$ be the smallest positive integer such that $\zeta^n = 1$. Consider the subgroup $\langle\zeta\rangle\le Z_n$. If the order of this subgroup is $m$, then $\zeta^m = 1$ whence $m\ge n$ and thus $m = n$ and the conclusion follows.
+\end{proof}
+
+As a result, need only concern ourselves with primitive $n$-th roots of unity with $\gcd(\chr k, n) = 1$.
+
+\begin{proposition}
+    Let $k$ be a field and $\zeta_n\in k^a$ a primitive $n$-th root of unity such that $\gcd(n,\chr k) = 1$. Then, $k(\zeta_n)/k$ is a Galois extension.
+\end{proposition}
+\begin{proof}
+    Since $\zeta_n$ is a generator for $Z_n$, $k(\zeta_n)$ is the splitting field of $x^n - 1$ over $k$ and thus a normal extension of $k$. Further, since $x^n - 1$ is a separable polynomial over $k$, so is the extension $k(\zeta_n)/k$ whence it is Galois.
+\end{proof}
 
 \begin{proposition}
     Let $\gcd(\chr k, n) = 1$. If $\zeta$ is a primitive $n$-th root of unity, then $k(\zeta)/k$ is an abelian extension.
@@ -23,5 +45,5 @@ Note that although we have shown $\Gal(k(\zeta)/k)$ to be embeddable into $(\Z/n
     and consequently, the map $\psi:\Gal(\Q(\zeta)/\Q)\to(\Z/n\Z)^\times$ is an isomorphism.
 \end{proposition}
 \begin{proof}
-    \textcolor{red}{TODO: Add in later}
+
 \end{proof}

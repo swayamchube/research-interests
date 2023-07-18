@@ -3,46 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: alpha.bst
-Reallocating 'name_of_file' (item size: 1) to 4 items.
-Database file #1: ref.bib
-You've used 1 entry,
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+Database file #1: ../references.bib
+You've used 2 entries,
             2543 wiz_defined-function locations,
-            566 strings with 4515 characters,
-and the built_in function-call counts, 364 in all, are:
-= -- 32
-> -- 19
-< -- 0
-+ -- 6
-- -- 6
-* -- 24
-:= -- 71
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 6
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 15
-empty$ -- 26
-format.name$ -- 7
-if$ -- 71
+            572 strings with 4591 characters,
+and the built_in function-call counts, 632 in all, are:
+= -- 55
+> -- 27
+< -- 1
++ -- 8
+- -- 8
+* -- 37
+:= -- 116
+add.period$ -- 6
+call.type$ -- 2
+change.case$ -- 10
+chr.to.int$ -- 2
+cite$ -- 2
+duplicate$ -- 31
+empty$ -- 51
+format.name$ -- 11
+if$ -- 126
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 2
-newline$ -- 8
-num.names$ -- 3
-pop$ -- 7
+missing$ -- 4
+newline$ -- 13
+num.names$ -- 6
+pop$ -- 16
 preamble$ -- 1
-purify$ -- 7
+purify$ -- 13
 quote$ -- 0
-skip$ -- 13
+skip$ -- 23
 stack$ -- 0
-substring$ -- 7
-swap$ -- 1
-text.length$ -- 0
-text.prefix$ -- 0
+substring$ -- 14
+swap$ -- 2
+text.length$ -- 1
+text.prefix$ -- 1
 top$ -- 0
-type$ -- 4
+type$ -- 8
 warning$ -- 0
-while$ -- 3
-width$ -- 2
-write$ -- 16
+while$ -- 5
+width$ -- 3
+write$ -- 28

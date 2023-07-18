@@ -74,3 +74,25 @@ Here's a nice exercise from \cite{DF04}.
     \end{equation*}
     whence $k[\beta]$ is not formally real and contradicts the choice of $\alpha$.
 \end{proof}
+
+The proof of the next theorem requires some tools from later chapters. 
+
+\begin{theorem}
+    Let $K/k$ be an algebraic extension such that every non-constant polynomial in $k[x]$ has a root in $K$. Then, $K$ is algebraically closed.
+\end{theorem}
+\begin{proof}
+    Let $\alpha\in k^a$. We shall show that $\alpha\in K$ which would imply the desired conclusion. Let $f(x)\in k[x]$ be the minimal polynomial of $\alpha$ over $k$ and $F\subseteq k^a$ be the splitting field of $f(x)$ over $k$, which is obviously a finite extension.
+
+    Due to \thref{lem:normal-compositum-of-sep-insep}, there are subfields $F_0$ and $E$ of $F$ such that $F = F_0E$, $E/k$ is purely inseparable and $F_0$ is the separable closure of $k$ in $F$. Since $F_0/k$ is a finite separable extension, due to \thref{thm:primitive-element-theorem}, there is some $\beta\in F_0$ such that $F_0 = k(\beta)$. 
+
+    Let $g(x)$ be the minimal polynomial of $\beta$ over $k$ and $\beta'\in K$ be a root of $g(x)$. Since $g(x)$ is the minimal polynomial of $\beta'$ and is separable since $\beta$ is separable over $k$, we have that $\beta'\in F_0 = k(\beta)$ and thus 
+    \begin{equation*}
+        F_0 = \underbrace{k(\beta) = k(\beta')}_{\text{due to a dimension argument}}\subseteq K.
+    \end{equation*}
+
+    $E/k$ is finite, it has a basis, say $\gamma_1,\dots,\gamma_n$. The minimal polynomial of $\gamma_i$ is of the form $(x - \gamma_i)^{p^{r_i}}$ and thus has a single root, whence, $\gamma_i\in K$. Thus $E\subseteq K$. As a result, 
+    \begin{equation*}
+        F = F_0E\subseteq K
+    \end{equation*}
+    and thus $\alpha\in K$ thereby completing the proof.
+\end{proof}

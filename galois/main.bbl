@@ -1,8 +1,13 @@
-\begin{thebibliography}{DF04}
+\begin{thebibliography}{Lan02}
 
 \bibitem[DF04]{DF04}
 David~S. Dummit and Richard~M. Foote.
 \newblock {\em Abstract algebra}.
 \newblock Wiley, New York, 3rd ed edition, 2004.
+
+\bibitem[Lan02]{Lan02}
+Serge Lang.
+\newblock {\em Algebra}.
+\newblock Springer Science \& Business Media, 2002.
 
 \end{thebibliography}
