@@ -1,0 +1,51 @@
+\begin{lemma}\thlabel{lem:converge-compact-subset}
+    Let $\Omega\subseteq\bbC$ be an open set and $f_n:\Omega\to\bbC$ be a sequence of holomorphic functions converging uniformly on every compact subset of $K$ to a function $f: \Omega\to\bbC$. Then $f$ is holomorphic and the sequence $\{f_n'\}$ converges uniformly on every compact subset of $\Omega$ to $f'$.
+\end{lemma}
+
+\section{Weierstrass' Theorem}
+
+\begin{theorem}
+    Let $\{f_n\}_{n = 1}^\infty$ be a sequence of holomorphic functions on an open set $\Omega\subseteq\bbC$. If there is a sequence of positive constants $\{c_n\}$ such that 
+    \begin{equation*}
+        \sum_{n = 1}^{\infty}c_n < \infty\quad\text{ and }\quad|f_n(z) - 1|\le c_n~\forall z\in\Omega
+    \end{equation*}
+    then 
+    \begin{enumerate}[label=(\alph*)]
+        \item The product $\displaystyle\prod_{n = 1}^\infty f_n(z)$ converges uniformly in $\Omega$ to a holomorphic function $F: \Omega\to\bbC$. 
+        \item If $f_n(z)$ does not vanish for any $n$, then 
+        \begin{equation*}
+            \frac{F'(z)}{F(z)} = \sum_{n = 1}^\infty\frac{f_n'(z)}{f_n'(z)}
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Define $a_n:\Omega\to\bbC$ given by $a_n(z) = f_n(z) - 1$. First, by disregarding finitely many terms of the product, we may suppose without loss of generality that $c_n < 1/2$. For any $N\in\N$, we have 
+    \begin{equation*}
+        \prod_{n = 1}^N(1 + a_n(z)) = \prod_{n = 1}^ne^{\log(1 + a_n(z))} = e^{\sum_{n = 1}^N\log(1 + a_n(z))}.
+    \end{equation*}
+    In the above manipulation, we take $\log$ to be the principal branch of the logarithm which makes sense since for all $z\in\Omega$, $1 + a_n(z)\in B(1,1/2)\subseteq\bbC\backslash\{z\in\R\mid z < 0\}$.
+
+    Now, it is not hard to see, using the power series expansion of the principal branch of $\log$ that $|\log(1 + z)|\le 2|z|$ if $|z| < 1/2$, and thus $|\log(1 + a_n(z))|\le 2|a_n(z)|\le 2c_n$ on $\Omega$. Let $b_N(z) = \sum_{n = 1}^N\log(1 + a_n(z))$. Since $|b_n(z)|$ is bounded on $\Omega$ and converges uniformly to some analytic function $b:\Omega\to\bbC$.
+
+    The sequence $e^{b_n}$ converges pointwise to $e^b$ but since this is a uniformly bounded sequence, the convergence is uniform and $e^b$ is analytic. This proves $(a)$.
+
+    Define $G_n(z) = \prod_{k = 1}^nf_k(z)$. Then, using the product rule,
+    \begin{equation*}
+        \frac{G_n'(z)}{G_n(z)} = \sum_{k = 1}^n\frac{f_n'(z)}{f_n(z)}.
+    \end{equation*}
+    We have shown in part $(a)$ that $G_n$ converges uniformly to $F$. Let $K\subseteq\Omega$ be a compact subset. Due to \thref{lem:converge-compact-subset}, $G_n'$ converges uniformly to $F'$ on $K$. Further, since $1/G_n$ is uniformly bounded, above on $K$\footnote{This is because each $f_n$ does not vanish on $K$ and eventually, $|f_n| < 1$ since the sum of $c_n$'s converges.} and thus $G_n'/G_n$ converges to $F'/F$ uniformly on $K$ which finishes the proof.
+\end{proof}
+
+\begin{definition}
+    Define the entire maps $E_n:\bbC\to\bbC$ for $n\ge 0$ by 
+    \begin{equation*}
+        E_0(z) = 1 - z \qquad E_n(z) = (1 - z)\exp\left(z + \frac{z^2}{2} + \cdots + \frac{z^n}{n}\right)~\text{ for } n\ge 1
+    \end{equation*}
+    These are called the \emph{elementary factors}.
+\end{definition}
+
+\begin{theorem}[Weierstrass]
+    Given any sequence $\{a_n\}_{n = 1}^\infty$ of complex numbers with $|a_n|\to\infty$ as $n\to\infty$, there exists an entire function $f$ vanishing at exactly $\{a_n\}_{n = 1}^\infty$ and nowhere else. Any other such entire function is of the form $f(z)e^{g(z)}$ where $g$ is entire.
+\end{theorem}
+
+\paragraph{First, we prove the second part of the theorem.} Let $f_1,f_2$ be two entire functions satisfying the statement of the theorem. Then, $f_2/f_1$ has removable singularities at each $a_n$ whence is entire. Using this entire function, 

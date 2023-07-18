@@ -252,14 +252,14 @@ The next example has a rather unmotivated solution but we present it anyways sin
     \end{equation*}
 \end{corollary}
 
-\begin{theorem}[Rouch\'e]
+\begin{theorem}[Rouch\'e]\thlabel{thm:rouche}
     Suppose $f$ and $g$ are meromorphic in the region $G$ and $\overline B(a,R)\subseteq G$. If $f$ and $g$ have no zeros or poles on the circle $\gamma:= \{z: |z - a| = R\}$ and $|f(z) - g(z)| < |g(z)|$ on $\gamma$, then 
     \begin{equation*}
         Z_f - P_f = Z_g - P_g
     \end{equation*}
     where $Z_f,Z_g$ denote the zeros of $f$ and $g$ in $B(a,R)$ and $P_f,P_g$ denote the poles of $f$ and $g$ in $B(a,R)$.
 \end{theorem}
-\begin{proof}
+\begin{proof}[First Proof]
     First, note that 
     \begin{equation*}
         \left|1 - \frac{f(z)}{g(z)}\right| < 1
@@ -271,16 +271,45 @@ The next example has a rather unmotivated solution but we present it anyways sin
     The conclusion follows.
 \end{proof}
 
-We conclude this chapter with a beautiful problem from \cite{ahlfors}.
+\begin{proof}[Proof 2]
+    Define the function $h_t(z) = tf(z) + (1 - t)g(z)$ for all $t\in[0,1]$. Then, $h_0(z) = g(z)$ and $h_1(z) = f(z)$, further, note that on $\gamma$,
+    \begin{equation*}
+        |h_t(z)| = |g(z) + t(f(z) - g(z))| > 0.
+    \end{equation*}
+    Let 
+    \begin{equation*}
+        n_t = \frac{1}{2\pi i}\int_\gamma\frac{h_t'(z)}{h(z)}~dz
+    \end{equation*}
+    Then, $n_t$ is obviously an integer. We contend that the map $t\mapsto n_t$ is continuous. Indeed, $h_t'(z)/h_t(z)$ is a joint continuous function of $t$ and $z$ since both the numerator and denominator are continuous in $t$ and $z$, and the denominator does not vanish on $\gamma$ as we have argued above. 
 
-\begin{theorem}
-Let $f$ be a non-constant entire function. Then the following are equivalent: 
-\begin{enumerate}[label=(\alph*)]
-\item $f$ has no essential singularity at $\infty$ 
-\item $f$ is proper 
-\item $f$ is a polynomial
-\end{enumerate}
-\end{theorem}
-\begin{proof}
-    \textcolor{red}{TODO: Add in later}
+    Now, since $n_t$ only takes integral values, it must be a constant function of $t$ and the conclusion follows.
 \end{proof}
+
+We now give an alternate proof of the open mapping theorem using \thref{thm:rouche}
+
+\begin{proof}[Alternate proof of \thref{thm:open-mapping}]
+    \todo{Add proof}
+\end{proof}
+
+\newpage
+\section{Runge's Theorem}
+
+This section is taken from \cite{conway}.
+
+\begin{theorem}\thlabel{thm:runge}
+    Let $K\subseteq\bbC$ be compact and $E\subseteq\bbC_\infty\backslash K$ which meets every component of $\bbC_\infty\backslash K$. If $f$ is analytic in an open set $\Omega$ containing $K$ and $\varepsilon > 0$, then there is a rational function $R(z)$ with poles only in $E$ such that 
+    \begin{equation*}
+        |f(z) - R(z)| < \varepsilon
+    \end{equation*}
+    for all $z\in K$.
+\end{theorem}
+
+We prove this result through a series of lemmas. The setup is as mentioned in the statement of \thref{thm:runge} and shall not be repeated.
+
+\begin{lemma}
+    There are straight line segments $\gamma_1,\dots,\gamma_n$ in $\Omega\backslash K$ such that 
+    \begin{equation*}
+        f(z) = \sum_{k = 1}^n\frac{1}{2\pi i}\int_{\gamma_k}\frac{f(w)}{w - z}~dw
+    \end{equation*}
+    for all $z\in K$. The line segments form a finite number of closed polygons.
+\end{lemma}

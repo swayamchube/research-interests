@@ -1,0 +1,210 @@
+\begin{definition}[Conformal Map]
+    A \textit{conformal map} is a bijective holomorphis function $f: U\to V$ where $U$ and $V$ are open sets in $\bbC$. In this case, $U$ and $V$ are said to be conformally equivalent.
+\end{definition}
+
+We have seen, as a corollary to \thref{thm:open-mapping}, that a bijective holomorphic function has a holomorphic inverse. That is, $f^{-1}: V\to U$ is also conformal.
+
+\begin{example}
+    Define $\mathbb H$ to be the upper half plane, that is, the set of complex numbers with positive imaginary part. We contend that $\mathbb H$ is conformally equivalent to $\mathbb D$, the unit disk. Consider the map $F:\mathbb D\to\mathbb H$ given by
+    \begin{equation*}
+        F(z) = i\frac{1 - z}{1 + z}
+    \end{equation*}
+    Indeed, for $z = u + iv$, we have 
+    \begin{align*}
+        \operatorname{Im}(F(z)) &= \operatorname{Re}\left(\frac{1 - u - iv}{1 + u + iv}\right)\\
+        &= \frac{1 - u^2 - v^2}{(1 + u)^2 + v^2} > 0
+    \end{align*}
+    Define the map $G:\mathbb H\to\mathbb D$ given by
+    \begin{equation*}
+        F(z) = \frac{i - z}{i + z}
+    \end{equation*}
+    It is not hard to see that $F\circ G = \mathbf{id}_{\mathbb H}$ and $G\circ F = \mathbf{id}_{\mathbb D}$. This completes the proof.
+\end{example}
+
+\section{Schwarz Lemma and applications}
+
+\begin{lemma}[Schwarz]\thlabel{lem:schwarz}
+    Let $f:\mathbb D\to\mathbb D$ be holomorphic with $f(0) = 0$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+    \item $|f(z)|\le|z|$ for all $z\in\mathbb D$.
+    \item if for some $z_0\ne 0$ we have $|f(z_0)| = |z_0|$, then $f$ is a rotation.
+    \item $|f'(0)|\le 1$ and if equality holds, then $f$ is a rotation.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    The function $f(z)/z$ has a removable singularity at $0$, and consequently is holomorphic on $\mathbb D$. Pick some $0 < r < 1$. Then, for all $|z| = r$, we have 
+    \begin{equation*}
+        \left|\frac{f(z)}{z}\right|\le\frac{1}{r}
+    \end{equation*}
+    Then, due to the maximum modulus principle, $|f(z)/z|\le 1/r$ for all $z\in\mathbb D$ whence $(a)$ follows. 
+
+    As for $(b)$, we would have $|f(z_0)/z_0| = 1$ for some $z_0\in\mathbb D\backslash\{0\}$, and due to the maximum modulus principle, $f(z)/z$ must be constant, and the conclusion follows.
+
+    Finally, for $(c)$, note that $g(0) = f'(0)$, consequently, if $g(0) = 1$, then due to the maximum modulus principle, $g$ is constant, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $f:\mathbb D\to\mathbb D$ be a holomorphic function. If $f$ is non-constant, then it has atmost one fixed point.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Automorphisms of \texorpdfstring{$\mathbb D$}{} and \texorpdfstring{$\mathbb H$}{}}
+
+Throughout this section, an \textit{automorophism} of a domain $U$ refers to a conformal map $f: U\to U$. 
+
+\subsubsection*{Disk}
+
+First, we shall study the automorphisms of $\mathbb D$. Pick some $\alpha\in\mathbb D$ and consider the map $\psi_\alpha:\mathbb D\to\mathbb D$ given by
+\begin{equation*}
+    \psi_\alpha(z) = \frac{\alpha - z}{1 - \overline{\alpha}z}.
+\end{equation*}
+
+Notice that both maps $z\mapsto\alpha - z$ and $z\mapsto 1 - \overline{\alpha}z$ are holomorphic and since $|\alpha| < 1$, their quotient is also holomorphic on $\mathbb D$. Finally, for any $z\in\mathbb D$, 
+\begin{align*}
+    |\psi_\alpha(z)|^2 &= \left|\frac{\alpha - z}{1 - \overline{\alpha}z}\right|^2\\
+    &= \frac{\overline\alpha\alpha + \overline zz - \overline\alpha z - \overline z\alpha}{1 - \overline\alpha z - \overline z\alpha + \overline\alpha\alpha\overline zz}\\
+    &= 1 - \frac{(1 - \overline\alpha\alpha)(1 - \overline zz)}{1 - \overline\alpha z - \overline z\alpha + \overline\alpha\alpha\overline zz} < 1
+\end{align*}
+whence $\psi_\alpha$ is a biholomorphic map from $\mathbb D$ to $\mathbb D$. These are called the \textbf{``Blaschke Factors''}. These are automorphisms of order two, that is, $\psi_\alpha\circ\psi_\alpha = \id_{\mathbb D}$.
+
+\begin{theorem}
+    Let $f:\mathbb D\to\mathbb D$ be a holomorphic automorphism. Then there is $\theta\in\R$ and $\alpha\in\mathbb D$ such that 
+    \begin{equation*}
+        f(z) = e^{i\theta}\psi_\alpha(z)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Since $f$ is bijective, there is a unique $\alpha\in\mathbb D$ such that $f(\alpha) = 0$. Define $g = f\circ\psi_\alpha$. Then $g:\mathbb D\to\mathbb D$ is a biholomorphic map such that $g(0) = 0$. We shall show that $g$ is a rotation. Let $h:\mathbb D\to\mathbb D$ be the inverse of $g$, which is also biholomorphic. We have due to \thref{lem:schwarz}, that $|g(z)|\le|z|$ and $|h(z)|\le|z|$ for all $z\in\mathbb D$. Putting these two together, we have 
+    \begin{equation*}
+        |z| = |h\circ g(z)|\le |g(z)|\le|z|\qquad\forall~z\in\mathbb D
+    \end{equation*}
+    Thus, $|g(z)| = |z|$ for all $z\in\mathbb D$, whence, due to \thref{lem:schwarz}, $g$ is a rotation and the proof is complete.
+\end{proof}
+
+\subsection{Upper Half Plane}
+
+\section{The Riemann Mapping Theorem}
+
+\begin{theorem}[Riemann]
+    Suppose $\Omega\subseteq\bbC$ is open and simply connected. Given $z_0\in\Omega$, there is a unique conformal map $F:\Omega\to\mathbb D$ such that $F(z_0) = 0$ and $F'(z_0) > 0$.
+\end{theorem}
+
+\subsection{Montel's Theorem}
+
+\begin{definition}
+    Let $G\subseteq\bbC$ be open. A family $\mathcal F$ of holomorphic functions on $G$ is said to be \textit{normal} if every sequence in $\mathcal F$ has a subsequence that converges uniformly on every compact subset of $G$.
+
+    The family $\mathcal F$ is said to be \textit{uniformly bounded on compact subsets of} $G$ if for each compact set $K\subseteq G$, there is $M > 0$ such that $|f(z)|\le M$ for all $z\in K$ and $f\in\mathcal F$.
+
+    The family $\mathcal F$ is said to be \textit{equicontinuous} on a compact set $K\subseteq G$, for every $\varepsilon > 0$, there is $\delta > 0$ such that whenever $w,z\in K$ with $|z - w| < \delta$, $|f(z) - f(w)| < \varepsilon$ for all $f\in\mathcal F$.
+\end{definition}
+
+Note that there is a more general definition of equicontinuity, but in the case of a compact metric space, it is equivalent to the above.
+
+\begin{theorem}[Montel]\thlabel{thm:montel}
+    Suppose $\mathcal F\subseteq H(\bbC)$ is a family of holomorphic functions on $G\subseteq\bbC$ that is uniformly bounded on compact subsets of $G$. Then,
+    \begin{enumerate}[label=(\alph*)]
+    \item $\mathcal F$ is equicontinuous on every compact subset of $G$ 
+    \item $\mathcal F$ is a normal family
+    \end{enumerate}
+\end{theorem}
+
+Note that $(b)$ is a consequence of the Arzel\`a-Ascoli Theorem from topology, a proof of which can be found in \href{https://swayamchube.github.io/research-interests/topology/main.pdf}{this} document.
+
+\begin{definition}
+    A sequence $\{K_\ell\}_{\ell = 1}^\infty$ of compact subsets of $G$ is said to be an \textit{exhaustion} if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $K_\ell$ is contained in the interior of $K_{\ell + 1}$ for all $\ell\in\N$
+        \item Any compact set $K\subseteq G$ is contained in $K_\ell$ for some $\ell$. In particular, 
+        \begin{equation*}
+            G = \bigcup_{\ell = 1}^\infty K_\ell
+        \end{equation*}
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}\thlabel{lem:exhaustion-exists}
+    Any open set $G\subseteq\bbC$ has an exhaustion.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{proof}[Proof of \thref{thm:montel}]
+\begin{enumerate}[label=(\alph*)]
+\item Ket $K\subseteq G$ be compact. Now, there is $\delta > 0$ such that for all $z\in K$, $B(z,\delta)\subseteq G$. Let $r = \delta/3$. For $a,b\in K$ with $|a - b| < r$, we have 
+\begin{align*}
+    f(a) - f(b) &= \frac{1}{2\pi i}\int_{|z - a| = 2r}f(z)\left(\frac{1}{z - a} - \frac{1}{z - b}\right)~dz
+\end{align*}
+Consequently, we have 
+\begin{equation*}
+    |f(a) - f(b)| \le\frac{1}{2\pi}\int_{|z - a| = 2r}|f(z)|\frac{|a - b|}{|z - a||z - b|}~|dz|
+\end{equation*}
+We now use the inequality $|z - b|\ge r$ and $|a - b|\le r$, which gives us 
+\begin{equation*}
+    |f(a) - f(b)|\le\frac{1}{2\pi}\cdot 4\pi r\cdot\frac{M|a - b|}{2r^2} = \frac{M|a - b|}{r}
+\end{equation*}
+
+Since this inequality holds for every $f\in\mathcal F$, we have equicontinuity.
+
+\item Let $\{K_n\}_{n = 1}^\infty$ be an exhaustion of $G$ and $\{f_n\}_{n = 1}^\infty$ a sequence of functions in $\mathcal F$. We now work inductively by repeatedly applying Arzel\`a's theorem. 
+
+First, there is a subsequence $\{g_{n,1}\}_{n = 1}^\infty$ of $\{f_n\}_{n = 1}^\infty$ that converges uniformly on $K_1$. From this subsequence, extract $\{g_{n,2}\}_{n = 1}^\infty$ that converges uniformly on $K_2$ and continue in this fashion. It is not hard to show that $\{g_{n,n}\}_{n = 1}^\infty$ converges uniformly on every compact subset of $G$. This completes the proof.
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Let $G\subseteq\bbC$ be a region and $\{f_n\}_{n = 1}^\infty$ a sequence of holomorphic functions that converge uniformly on every compact subset of $G$ to the function $f: G\to\bbC$. Then $f$ is holomorphic. Further, if each $\{f_n\}$ is injective, then $f$ is either injective or constant.
+\end{proposition}
+\begin{proof}
+    The holomorphicity of $f$ follows from \thref{thm:morera}. We shall show that $f$ is injective. Suppose there are two distinct $z_1,z_2\in G$ such that $f(z_1) = f(z_2)$. Define the function $g: G\to\bbC$ by $g(z) = f(z) - f(z_1)$. Then, define the sequence of functions $\{g_n\}_{n = 1}^\infty$ by $g_n(z) = f_n(z) - f_n(z_1)$. Obviously, $g_n$ converges to $g$ uniformly on every compact subset of $G$. If $g$ is not identically zero, then there $z_2$ is an isolated zero, due to the Identity Theorem. Therefore, we may choose a circle $\gamma$ centered at $z_2$ such that the only zero of $g$ in the interior of $\gamma$ is $z_2$.
+
+    Then, we have 
+    \begin{equation*}
+        1 = \frac{1}{2\pi i}\int_\gamma\frac{g'(z)}{g(z)}~dz
+    \end{equation*}
+
+    Since $g$ does not vanish on $\gamma$, and $g_n\to g$ uniformly on $\gamma$, we must have that $1/g_n\to 1/g$ uniformly on $\gamma$. Further, $g_n'\to g'$ uniformly on $\gamma$. Therefore, 
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma\frac{g_n'(z)}{g(z)}~dz\to\frac{1}{2\pi i}\int_\gamma\frac{g'(z)}{g(z)}~dz
+    \end{equation*}
+    but this is absurd since every integral on the left is zero. This completes the proof.
+\end{proof}
+
+\subsection{Proof of the Riemann Mapping Theorem}
+
+\begin{enumerate}[label=\bfseries Step \Roman*.]
+\item We shall show that $\Omega$ is conformally equivalent to an open subset of $\mathbb D$.
+
+Since $\Omega$ is a proper subset of $\bbC$, there is some $\alpha\in\bbC\backslash\Omega$. Define the holomorphic function $f(z) = \log(z - \alpha)$, which makes sense since $z - \alpha$ never vanishes on $\Omega$.
+
+Now, pick some point $w\in\Omega$. We contend that $f(w) + 2\pi i$ is contained in an open disk that is disjoint from $f(\Omega)$. For if not, then there is a sequence $\{z_n\}_{n = 1}^\infty$ of points in $\Omega$ that converge to $f(w) + 2\pi i$. Since $e^z$ is a continuous function, we see that $z_n$ must converge to $w$, which would imply that $f(z_n)$ converges to $f(w)$, a contradiction.
+
+Now, consider the map $F:\Omega\to\bbC$
+\begin{equation*}
+    F(z) = \frac{1}{f(z) - (f(w) + 2\pi i)}
+\end{equation*}
+
+First, for each $z\in\Omega$, since $|f(z) - (f(w) + 2\pi i)|$ is bounded from below, $|F(z)|$ is bounded. Further, since $f$ is injective, so is $F$. By translation and scaling of $F$, since it is bounded, we may embed $\Omega$ into $\mathbb D$.
+
+\item  In this step we shall construct our candidate for the required biholomorphic map.
+
+Now, we may suppose without loss of generality that $\Omega$ is a domain contained in $\mathbb D$. We shall now construct a conformal map from $\Omega$ to $\mathbb D$. Define 
+\begin{equation*}
+    \mathcal F = \{f: \Omega\to\mathbb D\mid f\text{ is holomorphic, injective and }f(0) = 0\}
+\end{equation*}
+
+Obviously, $\mathcal F$ is nonempty, since it contains the identity map and by construction, $\mathcal F$ is uniformly bounded. Due to \thref{prop:cauchy-estimate}, we see that $|f'(0)|$ must also be bounded for every $f\in\mathcal F$.
+
+Let $s = \displaystyle\sup_{f\in\mathcal F}|f'(0)|$
+
+\item We shall show that our chosen candidate $f:\Omega\to\mathbb D$ is in fact a biholomorphic map.
+
+According to our construction, $f$ is injective. It suffices to show that it is surjective. Suppose not and there is $\alpha\in\mathbb D$ which is not in the image of $f$. Let $\psi_\alpha$ be the Blaschke factor and consider the composition $\psi_\alpha\circ f: \Omega\to\mathbb D$. This is a holomorphic injective function whose image does not contain the origin. Let $U = (\psi_\alpha\circ f)(\Omega)$. Since $U$ is open, simply connected (owing to it being a biholomorphic image of $\Omega$) and does not contain the origin, we may define a complex logarithm on $U$, whence by composing, we can define a holomorphic function $g: U\to\bbC$ given by 
+\begin{equation*}
+    g(z) = e^{\frac{1}{2}\log z}
+\end{equation*}
+
+Now, consider the function 
+\end{enumerate}

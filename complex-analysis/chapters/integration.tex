@@ -602,7 +602,7 @@ which is obviously not possible.
 \end{corollary}
 
 \begin{proposition}[Cauchy's Estimate]\thlabel{prop:cauchy-estimate}
-    Let $f$ be analtic in $B(a,R)$ and suppose $f(z)\le m$ for all $z\in B(a,R)$. Then 
+    Let $f$ be analtic in $B(a,R)$ and suppose $|f(z)|\le M$ for all $z\in B(a,R)$. Then 
     \begin{equation*}
         |f^{(n)}(a)|\le\frac{n!M}{R^n}
     \end{equation*}
@@ -682,6 +682,14 @@ We may now prove the fundamental theorem of algebra:
 \end{theorem}
 \begin{proof}
     Suppose not. Then, $f(z) = \frac{1}{p(z)}$ is entire. Since $\lim\limits_{z\to\infty} p(z) = \infty$, $\lim\limits_{z\to\infty} f(z) = 0$. Therefore, there is $\varepsilon$ such that whenever $|z| > \varepsilon$, $|f(z)| < 1$. This immediately implies that $f$ is bounded on $\bbC$, consequently is constant. A contradiction.
+\end{proof}
+
+Let us look at another application of Liouville's Theorem. 
+\begin{example}
+    Let $f$ be an entire function with $\Re(f)$ bounded above. Then, $f$ is constant.
+\end{example}
+\begin{proof}
+    Consider the entire function $g(z) = \exp(f(z))$. Since $|g(z)| = |\exp(\Re(f(z)))|$, it is bounded and therefore, constant. Hence, $f(z)$ takes values in a discrete set and owing to it being a continuous map, it must be constant.
 \end{proof}
 
 \begin{theorem}
@@ -1015,3 +1023,32 @@ In particular, if $m\ge 1$, then for each $\zeta\in B(\alpha,\delta)$, there is 
 \begin{proof}
     From \thref{thm:open-mapping}, it is immediate that $f$ is a homeomorphism. Let $g = f^{-1}$. We have $g\circ f = \mathbf id$, from which the conclusion follows.
 \end{proof}
+
+\section{The Complex Logarithm}
+
+In this section, we shall construct the complex logarithm, which is an inverse function to the analytic function $\exp:\bbC\to\bbC$. In particular, we shall prove a more general theorem, which would immediately imply the existence of the complex logarithm. 
+
+\begin{theorem}
+    Let $\Omega\subseteq\bbC$ be a simply connected region and $f:\Omega\to\bbC$ be an analytic function which does not vanish on $\Omega$. Then, there is an analytic function $g:\Omega\to\bbC$ such that $f(z) = e^{g(z)}$ for all $z\in\Omega$.
+\end{theorem}
+\begin{proof}
+    Fix a basepoint $z_0\in\Omega$ and define 
+    \begin{equation*}
+        g(z) = \int_{\gamma}\frac{f'(z)}{f(z)}~dz + c_0
+    \end{equation*}
+    where $\gamma$ is any path from $z_0$ to $z$ and $c_0\in\bbC$ is such that $e^{c_0} = f(z_0)$, which exists since $f$ does not vanish on $\Omega$. Further, since $f'/f$ is analytic on $\Omega$, the function $g$ is analytic on $\Omega$. 
+
+    Consider the analytic function $h = fe^{-g}$ on $\Omega$. Differentiating this function, we have 
+    \begin{equation*}
+        h'(z) = f'(z)e^{-g(z)} - f(z)g'(z)e^{-g(z)} = 0
+    \end{equation*}
+    whence $h$ is constant on $\Omega$. Since $h(z_0) = 1$, we are done.
+\end{proof}
+
+Note that the domain being simply connected is essential lest there be an analytic function $g:\bbC\backslash\{0\}\to\bbC$ such that $e^{g(z)} = 1/z$, which is a contradiction, since the integral of the former over the unit circle is zero while the integral of the latter is $2\pi i$.
+
+With the above theorem in hand, we may define arbitrary powers of an analytic function on a simply connected region. Indeed, let $\alpha\in\R$, then, we may define 
+\begin{equation*}
+    z^\alpha = e^{\alpha\log z}
+\end{equation*}
+where $\log$ is a branch of the logarithm in the aforementioned simply connected region.
