@@ -8,7 +8,7 @@ Notice that for each $x\in X$, the subspace $p^{-1}(x)$ of $\wt X$ has the discr
     Let $p:\wt X\to X$ be a covering map where $X$ is connected. If for some $x\in X$, $|p^{-1}(x)| = n\in\N$, then for all $x'\in X$, $|p^{-1}(x')| = n$.
 \end{proposition}
 \begin{proof}
-    Follows from the fact that the map $x\mapsto|p^{-1}(x)|$ is a continuous map from $X$ to $\N$.
+    The map $x\mapsto|p^{-1}(x)|$ is locally constant and thus continuous. Owing to $X$ being connected and $\N$ having the discrete topology, the aforementioned map must be constant.
 \end{proof}
 
 \section{Lifting Properties}
@@ -40,22 +40,64 @@ Notice that for each $x\in X$, the subspace $p^{-1}(x)$ of $\wt X$ has the discr
     Let $p:\widetilde X\to X$ be a covering map and $F: Y\times I\to X$ a continuous map. Let $\widetilde F_0: Y\to\widetilde X$ be a lift of $F|_{X\times\{0\}}$. Then, there is a unique lift $\widetilde F: Y\times I\to\widetilde X$ of $F$ such that $\widetilde F|_{X\times\{0\}} = \widetilde F_0$.
 \end{theorem}
 \begin{proof}
+    The first step is to define a lift $\wt F$ on the strip $N\times I$ where $N$ is a neighborhood of some point $y\in Y$. 
+
+    Fix some $y_0\in Y$. Each point $y_0\times t$ has a neighborhood $N_t\times(a_t,b_t)$ which maps maps into an evenly covered neighborhood of $F(y_0\times t)$. Note that the strip $\{y_0\}\times I$ is compact and is thus covered by finitely many of the $N_t$'s, whence we may choose a neighborhood $N$ of $y_0$ in $Y$ and a partition $0 = t_0 < t_1 < \dots < t_n = 1$ such that each $N\times [t_i, t_{i + 1}]$ is contained in $N_t\times(a_t,b_t)$ for some $t\in I$.
+
+    Now suppose $\wt F$ has been constructed on $N\times[0,t_i]$. We already have a lift for $N\times\{0\}$ and this is our base case. The space $N\times[t_i, t_{i + 1}]$ is mapped into an evenly covered neighborhood $U$ by $F$. Let $\wt U\subseteq\wt X$ be the unique open set in $\wt X$ containing the point $\wt F(y_0\times t_i)$. There is a neighborhood $N'$ of $y_0$ such that $N'\times\{t_i\}$ is mapped into $\wt U$ by $\wt F$. Replace $N$ by $N'$ henceforth. The composition $p^{-1}\circ F$ now lifts $F$ on $N'\times[t_i, t_{i + 1}]$ and since it agrees with $\wt F$ on $N'\times\{t_i\}$, we have an extension to $\wt F$ on $N\times[0, t_{i + 1}]$, which is continuous due to the Pasting Lemma.
+
+    Now, for each $y\in Y$, we have constructed a lift $\wt F_y$ on $N_y\times I$ where $N_y$ is some neighborhood of $y$. We must now argue that we can indeed paste these lifts together. Let $y\in N_{y'}\cap N_{y''}$. Since $\{y\}\times I$ is connected and $\wt F_{y'}$ and $\wt F_{y''}$ are two lifts which agree at $y\times 0\in\{y\}\times I$, both the lifts must agree throughout due to \thref{thm:unique-lifting-connected}. This also establishes the uniqueness of the lift $\wt F$ whereby completing the proof.
 \end{proof}
 
-\begin{proposition}[Path Lifting]\thlabel{prop:path-lifting}
+\begin{corollary}[Path Lifting]\thlabel{corr:path-lifting}
     Let $f: I\to X$ be a path and let $x_0 = f(0)$. For any $\widetilde x_0\in p^{-1}(x_0)$, there is a unique lift $\widetilde f: I\to\widetilde X$ such that $\widetilde f(0) = \widetilde x_0$.
-\end{proposition}
+\end{corollary}
+
+\begin{corollary}[Path Homotopy Lifting]\thlabel{corr:path-homotopy-lifting}
+    Let $H: I\times I\to X$ be a path homotopy. Then, the unique lift $\wt H: I\times I\to\wt X$, is also a path homotopy.
+\end{corollary}
+\begin{proof}
+    Since the image $\wt H(\{0\}\times I)$ is connected and a subset of the discrete fiber of $p^{-1}(\wt H(0\times 0))$, it must be a single point. Similarly argue for the image $\wt H(\{1\}\times I)$. This completes the proof.
+\end{proof}
 
 \begin{proposition}\thlabel{prop:induced-covering-injective}
     Let $p:(\widetilde X,\widetilde x_0)\to(X,x_0)$ be a covering map. Then the induced homomorphism $p_*:\pi_1(\widetilde X,\widetilde x_0)\to\pi_1(X,x_0)$ is injective.
 \end{proposition}
+\begin{proof}
+    It suffices to show that $\ker p_*$ is trivial. Indeed, let $f: I\to\wt X$ be such that $p_*([f]) = 1_{\pi_1(X,x_0)}$. Thus, there is a path homotopy $F: I\times I\to X$ such that $F|_{I\times\{1\}}$ is the constant map at $x_0$ while $F|_{I\times\{0\}}$ is the map $p\circ f$.
+    \begin{equation*}
+        \xymatrix {
+            & \wt X\ar[d]^{p}\\
+            I\times I\ar[r]_-{F}\ar[ru]^-{\wt F} & X
+        }
+    \end{equation*}
+    We have a lift $\wt F: I\times\{0\}\to\wt X$ of the bottom edge given by $\wt F(t\times 0) = f(t)$ and due to \thref{thm:homotopy-lifting}, this can be extended to a lift $\wt F: I\times I\to\wt X$. Consider the connected subspace $Y = \{0\}\times I\cup I\times\{1\}\cup\{1\}\times I$ of $I\times I$. The restriction $\wt F|_{Y}$ maps into $p^{-1}(x_0)$, which has the discrete topology, whereby the restriction must be a constant map equal to $\wt x_0$ since $\wt F(0\times 0) = \wt x_0$. Thus, $\wt F$ must be a path homotopy between $f$ and the constant path $\wt x_0$, thereby completing the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $\wt X$ and $X$ be path connected spaces with a covering map $p:(\wt X, \wt x_0)\to(X,x_0)$. Then, there is a bijection between the right cosets of $H = p_*(\pi_1(\wt X, \wt x_0))$ and $p^{-1}(x_0)$.
+\end{proposition}
+\begin{proof}
+    \todo{right coset to $p^{-1}$ bijection}
+\end{proof}
 
 \begin{theorem}[Lifting Criterion]\thlabel{thm:lifting-criterion}
     Let $Y$ be path connected and locally path connected and $p:(\widetilde X,\widetilde x_0)\to(X,x_0)$ be a covering map. Then, for any continuous map $f:(Y,y_0)\to(X,x_0)$, a lift $\widetilde{f}:(Y,y_0)\to(\widetilde X,\widetilde x_0)$ exists if and only if $f_*(\pi_1(Y,y_0))\subseteq p_*(\pi_1(\widetilde X,\widetilde x_0))$.
 \end{theorem}
 \begin{proof}
-    
+    The forward direction is trivial, we shall prove the converse. Let $y\in Y$ and $\gamma$ denote a path from $y_0$ to $y$ in $Y$. The image $f\circ\gamma$ is a path in $X$ beginning at $x_0$ and has a lift $\wt{f\circ\gamma}$ to a path in $\wt X$ beginning at $\wt x_0$. Define the map $\wt f: Y\to\wt X$ by $\wt f(y) = \wt{f\circ\gamma}(1)$. 
+
+    First, we must show that this is a well defined map, independent of the choice of $\gamma$. Indeed, let $\gamma'$ be another path in $Y$ from $y_0$ to $y$. Then, $\gamma'\ast\overline\gamma$ is a loop in $\gamma'$ based at $y_0$, whence $f\circ(\gamma'\ast\overline\gamma)$ is a loop in $X$ based at $x_0$. We must now show that this can be lifted to a \emph{loop}\footnote{We can always lift this to a path but that will not suffice in this case} in $\wt X$ based at $\wt x_0$. 
+
+    According to our hypothesis, $\left[{f\circ\gamma'} * \overline{{f\circ\gamma}}\right]\in p_\ast(\pi_1(\wt X,\wt x_0))$ whence there is a path homotopy $H: I\times I\to X$ between $p\circ\wt h$ and ${f\circ\gamma'} * \overline{{f\circ\gamma}}$ where $\wt h$ is a loop in $\wt X$. Due to \thref{corr:path-homotopy-lifting}, this lifts to a homotpy of paths in $\wt X$. Due to the uniqueness of path lifting, $\wt H$ is a path homotopy between the loop $\wt h$ and some other loop $\wt\alpha$ in $\wt X$ that maps to ${f\circ\gamma'} * \overline{{f\circ\gamma}}$ under $p$. 
+
+    Considering the first and second halves of $\wt\alpha$, we see that they are $\wt{f\circ\gamma'}$ and $\overline{\wt{f\circ\gamma'}}$ respectively. Therefore, $\wt{f\circ\gamma'}(1) = \wt{f\circ\gamma}(1)$ and the map $\wt f$ is well defined.
+
+    Finally, we must show that $\wt f$ is continuous. Let $y\in Y$ and $U\subseteq X$ be an evenly covered open neighborhood of $f(y)$. Choose an open path connected neighborhood $V$ of $y$ that is contained in $p^{-1}(U)$. Let $\wt U$ be the open set in $\wt X$ that is homeomorphically mapped to $U$ by $p$ and contains $\wt f(y)$. We shall show that $\wt f(V)\subseteq\wt U$, which would imply $\wt f|_V = p^{-1}\circ f$, thereby implying local continuity and thus the continuity of $\wt f$.
+
+    First, fix some path $\gamma$ from $y_0$ to $y$ in $Y$. Let $y'\in V$ and choose some path $\eta$ from $y$ to $y'$ contained in $V$. The path $\gamma\ast\eta$ is a path from $y_0$ to $y'$. The composition $p^{-1}\circ\eta$ is a path from $\wt f(y)$ in $\wt U$, moreover, the composition $\wt{f\circ\gamma} * p^{-1}\circ\eta$ is a path from $\wt x_0$ lifting $\gamma*\eta$, whence $p^{-1}\circ\eta(1) = \wt f(1)$ and $\wt f(V)\subseteq\wt U$. This completes the proof.
 \end{proof}
+
 
 \section{The Universal Cover}
 
@@ -117,37 +159,77 @@ consequently, $\gamma$ is nulhomotopic. This completes the proof.
 If $p_1: (\widetilde X_1,\widetilde x_1)\to(X,x_0)$ and $p_2:(\widetilde X_2,\widetilde x_2)\to(X,x_0)$ are covering spaces, then an \textit{isomorphism between} them is a homeomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ such that $p_1 = p_2\circ f$.
 
 \begin{theorem}\thlabel{thm:isomorphism-iff-image-equal}
-    Let $(X, x_0)$ be \underline{path connected and locally path connected} and $p_1:\widetilde X_1\to X$ and $p_2:\widetilde X_2\to X$ be covering spaces. Then, for $\widetilde x_1\in p_1^{-1}(x_0)$ and $\widetilde x_2\in p_2^{-1}(x_0)$, there is an isomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ if and only if $p_{1*}(\pi_1(\widetilde X_1,\widetilde x_1)) = p_{2*}(\pi_1(\widetilde{X}_2, \widetilde x_2))$.
+    Let $(X, x_0)$ be \ul{path connected and locally path connected} and $p_1:\widetilde X_1\to X$ and $p_2:\widetilde X_2\to X$ be covering spaces. Then, for $\widetilde x_1\in p_1^{-1}(x_0)$ and $\widetilde x_2\in p_2^{-1}(x_0)$, there is an isomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ if and only if $p_{1*}(\pi_1(\widetilde X_1,\widetilde x_1)) = p_{2*}(\pi_1(\widetilde{X}_2, \widetilde x_2))$.
 \end{theorem}
 \begin{proof}
     We prove the converse, since the forward direction is trivial. Using \thref{thm:lifting-criterion}, there are lifts $\widetilde p_1: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ and $\wt p_2: (\wt X_2,\wt x_2)\to(\wt X_1,\wt x_1)$ of $p_1$ and $p_2$ respectively. This give us $p_1 = p_2\circ\wt p_1$ and $p_2 = p_1\circ\wt p_2$, whereby $p_1\circ(\wt p_2\circ\wt p_1) = p_1$. Note that this implies $\wt p_2\circ\wt p_1$ is a lift of the map $p_1$, but since $\mathbf{id}_{(\wt X_1,\wt x_1)}$ is also a lift, and agree on $\wt x_1$, we must have that $\wt p_2\circ\wt p_1 = \mathbf{id}_{(\wt X_1, \wt x_1)}$ and similarly, $\wt p_1\circ\wt p_2 = \mathbf{id}_{(\wt X_2,\wt x_2)}$. This implies the desired conclusion.
 \end{proof}
 
-Let $X$ be path connected and $p:\wt X\to X$ a path connected covering space. Pick some basepoint $x_0\in X$ and $\wt x_0,\wt x_1\in p^{-1}(x_0)$. Let $\wt\gamma: I\to\wt X$ be a path from $\wt x_0$ to $\wt x_1$ and $\gamma = p\circ\wt\gamma$. Let $H_0 = p_*(\pi_1(\wt X,\wt x_0))$ and $H_1 = p_*(\pi_1(\wt X, \wt x_1))$. Let $g = [\gamma]\in\pi_1(X,x_0)$. 
+\begin{theorem}
+    Let $X$ be \ul{path connected and locally path connected}. Then, there is a bijection between the isomorphism classes of path connected covering spaces $p:\wt X\to X$  (ignoring basepoints) and conjugacy classes of subgroups of $\pi_1(X)$\footnote{The basepoint can be ignored since $X$ is path connected.}.
+\end{theorem}
+\begin{proof}
+    Fix, once and for all, a basepoint $x_0\in X$ and let $G = \pi_1(X,x_0)$. Suppose we have an isomorphism of covering spaces (ignoring basepoints)
+    \begin{equation*}
+        \xymatrix {
+            {\wt X_1}\ar[rr]^f\ar[rd]_{p_1} && {\wt X_2}\ar[ld]^{p_2}\\
+            & X & 
+        }
+    \end{equation*}
+    given by the above diagram with the basepoints $\wt x_1\in p_1^{-1}(x_0)$ and $\wt x_2\in p_2^{-1}(x_0)$. Then, due to the commutativity of the diagram, we have 
+    \begin{equation*}
+        (p_1)_\ast(\pi_1(\wt X_1,\wt x_1)) = (p_2)_\ast\circ f_\ast(\pi_1(\wt X_1, \wt x_1)) = (p_2)_\ast(\pi_1(\wt X_2, \wt x_2)).
+    \end{equation*}
 
-If $[f]\in\pi_1(\wt X,\wt x_0)$, then $[\overline{\wt\gamma} * f * \wt\gamma]\in\pi_1(\wt X,\wt x_1)$. Consequently, $g^{-1}H_0g\subseteq H_1$. On the other hand, if $[f]\in\pi_1(\wt X,\wt x_1)$, then $[\wt\gamma * f * \overline{\wt \gamma}]\in\pi_1(\wt X,\wt x_1)$. This gives us that $gH_1g^{-1}\subseteq H_0$, in conclusion, $H_1 = g^{-1}H_0g$.
+    We now contend that changing the basepoint in a covering space $p:\wt X\to X$ conjugates the image under $p_\ast$. Indeed, let $\wt x_0,\wt x_1\in p^{-1}(x_0)$ where $x_0$ is the chosen basepoint of $X$ and let $\wt\gamma$ be a path from $\wt x_0$ to $\wt x_1$. Let $H_i = p_\ast(\pi_1(\wt X,\wt x_i))$ and let $g = p_\ast([\wt\gamma])$.
+
+    If $\wt f$ is a loop in $\wt X$ based at $\wt x_0$, then 
+    \begin{equation*}
+        g^{-1}p_\ast([\wt f])g = p_\ast([\overline{\wt\gamma} * \wt f * \wt\gamma])\in H_1
+    \end{equation*}
+    and thus, $g^{-1}H_0g\subseteq H_1$. Similarly, one can show that $gH_1g^{-1}\subseteq H_0$, implying that $H_0$ and $H_1$ are conjugate subgroups of $G$.
+
+    Conversely, suppose $p_1: (\wt X_1,\wt x_1)\to(X,x_0)$ and $p_2: (\wt X_2,\wt x_2)\to(X,x_0)$ are covering maps with $H_i = (p_1)_\ast(\pi_1(\wt X_i,\wt x_i))$ and there is $g\in G$ such that $H_2 = g^{-1}H_1g$. Let $\gamma$ be a loop in the equivalence class corresponding to $g$, then this has a lift $\wt\gamma$ in $\wt X_1$ and let $\wt y_1 = \wt\gamma(1)\in p_1^{-1}(x_0)$. 
+
+    It is not hard to see that $(p_1)_\ast(\pi_1(\wt X_1, \wt y_1)) = H_2$ whence there is a basepoint preserving isomorphism (since the covering spaces are path connected) $f:(\wt X_1,\wt y_1)\to(\wt X_2,\wt x_2)$ thereby proving the theorem.
+\end{proof}
 
 In conclusion, we have proved the following classification theorem.
 
 \begin{theorem}\thlabel{thm:classification-covering-spaces}
-    
+    Let $X$ be \nice and $x_0\in X$ a chosen basepoint. Then there is a bijection between the set of basepoint preserving isomorphism classes of path connected covering spaces and the set of subgroups of $\pi_1(X,x_0)$. 
+
+    On the other hand, if basepoints are ignored, then there is a bijecion between the isomorphism classes of covering spaces of $X$ and conjugacy classes of subgroups of $\pi_1(X,x_0)$.
 \end{theorem}
+
+\subsection{\texorpdfstring{$n$}{n}-sheeted coverings}
+\todo{n sheeted coverings}
 
 \section{Deck Transformations and Covering Space Actions}
 
 \subsection{Deck Transformations}
-\begin{definition}
+\begin{definition}[Deck Transformations, Normal Coverings]
     For a covering space $p:\wt X\to X$, the isomorphisms $f: X\to X$ are called \textit{deck transformations}. These form a group $G(\wt X)$ under composition. 
 
     A covering space $p:\wt X\to X$ is said to be \textit{normal} if for all $x\in X$ and each pair $\wt x,\wt x'\in p^{-1}(x)$, there is a deck transformation that maps $\wt x\mapsto\wt x'$.
 \end{definition}
 
-\begin{remark}\thlabel{rem:deck-single-point-agreement}
-    If $\wt X$ is path connected, then any two deck transformations agreeing on a single point must agree everywhere.
-\end{remark}
+\begin{proposition}\thlabel{prop:deck-action-free}
+    Let $\wt X$ be connected. Then, $G(\wt X)$ acts freely on $\wt X$. In particular, a deck transformation, in this case, is completely determined by where it sends a single point.
+\end{proposition}
+\begin{proof}
+    Let $f\in G(\wt X)$ have a fixed point $\wt x_0$. Then, this is a lift for $p:(\wt X, \wt x_0)\to(X,x_0)$ as seen from the following diagram. 
+    \begin{equation*}
+        \xymatrix {
+            & (\wt X, \wt x_0)\ar[d]^p\\
+            (\wt X,\wt x_0)\ar[r]_p\ar[ru]^{f,\id} & (X,x_0)
+        }
+    \end{equation*}
+    But since $f$ and $\id$ agree at $\wt x_0$, they must agree everywhere due to \thref{thm:unique-lifting-connected}.
+\end{proof}
 
 \begin{theorem}\thlabel{thm:ftgt-covering-spaces}
-    Let $p: (\wt X,\wt x_0)\to(X,x_0)$ be a path-connected covering space of the path-connected, locally path-connected space $X$, and let $H$ be the subgroup $p_*(\pi_1(\wt X,\wt x_0))$ of $\pi_1(X,x_0)$. Then, 
+    Let $p: (\wt X,\wt x_0)\to(X,x_0)$ be a path-connected covering space of the \ul{path-connected, locally path-connected} space $X$, and let $H$ be the subgroup $p_*(\pi_1(\wt X,\wt x_0))$ of $\pi_1(X,x_0)$. Then, 
     \begin{enumerate}[label=(\alph*)]
         \item the covering space is normal if and only if $H$ is normal in $\pi_1(X,x_0)$ 
         \item $G(\wt X)$ is isomorphic to the quotient $N(H)/H$ where $N(H)$ is the normalizer of $H$ in $\pi_1(X,x_0)$.
@@ -178,7 +260,7 @@ We may rephrase the definition of a covering space action as:
     The group action of the group of deck transformations, $G(\wt X)$, of a covering space $p:\wt X\to X$ is a covering space action.
 \end{proposition}
 \begin{proof}
-    
+    \todo{deck transformations are covering space actions}
 \end{proof}
 
 \begin{theorem}
@@ -186,7 +268,7 @@ We may rephrase the definition of a covering space action as:
     \begin{enumerate}[label=(\alph*)]
         \item The quotient map $p: Y\to Y/G$ given by $p(y) = Gy$ is a normal covering space.\footnote{Hence the nomenclature}.
         \item If $Y$ is path connected, then $G$ is the group of deck transformations of the covering space $p: Y\to Y/G$ 
-        \item If $Y$ is path connected and locally path connected, then $G\cong\pi_1(Y/G, Gy_0)/p_*(\pi_1(Y, y_0))$.
+        \item If $Y$ is \ul{path connected and locally path connected}, then $G\cong\pi_1(Y/G, Gy_0)/p_*(\pi_1(Y, y_0))$.
     \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -195,8 +277,18 @@ We may rephrase the definition of a covering space action as:
 
     Furthermore, for any $g_1y,g_2y\in Gy$, there is the action $g_2g_1^{-1}$ taking $g_1y$ to $g_2y$ whereby, the covering space is normal.
 
-    \item Obviously, each element of $G$ is a deck transformation. On the other hand, if $f: Y\to Y$ is a deck transformation, then for any $y\in Y$, $f(y)\in Gy$, whereby, there is $g\in G$ such that $gy = f(y)$. From \thref{rem:deck-single-point-agreement}, we have that $g=f$, implying the desired conclusion. 
+    \item Obviously, each element of $G$ is a deck transformation. On the other hand, if $f: Y\to Y$ is a deck transformation, then for any $y\in Y$, $f(y)\in Gy$, whereby, there is $g\in G$ such that $g(y) = f(y)$. From \thref{prop:deck-action-free}, we have that $g=f$, implying the desired conclusion. 
     
-    \item This follows from \thref{thm:ftgt-covering-spaces}.
+    \item This follows from \thref{thm:ftgt-covering-spaces}.\qedhere
 \end{enumerate}
 \end{proof}
+
+\begin{example}[Fundamental group of $\RP^n$]
+    Let $n\ge 2$. Consider the action of $\Z/2\Z$ on $S^n$ wherein the nontrivial action is given by $x\mapsto -x$. Obviously this is a covering space action, whereby 
+    \begin{equation*}
+        \Z/2\Z\cong\pi_1(\RP^n, x_0)/p_\ast(\pi_1(S^n, s_0))\cong\pi_1(\RP^n, x_0)
+    \end{equation*}
+    where $x_0$ is the orbit of $s_0$ and we're done.
+
+    Now, consider the case $n = 1$. We know that $\RP^1$ is homeomorphic to the circle and thus has fundamental group isomorphic to $\Z$.
+\end{example}

@@ -55,8 +55,24 @@ where
     Consider the piecewise linear function $\varphi: [0,1]\to[0,1]$ that maps $[0,1/2]$ to $[0,1/4]$, $[1/2,3/4]$ to $[1/4,1/2]$ and $[1/2,1]$ to $[3/4,1]$, then through $\alpha\circ\varphi$, the conclusion follows.
 \end{proof}
 
+\begin{proposition}
+    Let $f: I\to X$ be a path and $\overline f: I\to X$ be given by $\overline f(t) = f(1 - t)$ for $t\in I$. Then $f\ast\overline f$ is path homotopic to the constant path at $x_0$.
+\end{proposition}
+\begin{proof}
+    Define the homotopy 
+    \begin{equation*}
+        H(s,t) = 
+        \begin{cases}
+            f(2s) & 0\le s\le\frac{1}{2}(1 - t)\\
+            f(1 - t) & \frac{1}{2}(1 - t)\le s\le \frac{1}{2}(1 + t)\\
+            \overline f(2s - 1) & \frac{1}{2}(1 + t)\le s\le 1
+        \end{cases}.
+    \end{equation*}
+    Then, $H(\cdot, 0) = f\ast\overline f$ and $H(\cdot, 1)$ is the constant path at $x_0$ which completes the proof.
+\end{proof}
+
 \begin{definition}[Fundamental Group]
-    Let $\pi_1(X,x_0)$ be the set of equivalence classes of paths $\alpha: I\to X$ with $\alpha(0) = \alpha(1) = x_0$. It is not hard to see from the discussion above that $\pi_1(X,x_0)$ has a group structure. This is known as the \textit{fundamental group}.
+    Let $\pi_1(X,x_0)$ be the set of equivalence classes of paths $\alpha: I\to X$ with $\alpha(0) = \alpha(1) = x_0$. Then, $\pi_1(X,x_0)$ forms a group under the operation $\ast$. This is known as the \emph{fundamental group} of $X$ based at $x_0$.
 \end{definition}
 
 Let $\catTopp$ denote the category of pointed topological spaces, that is, the category wherein objects are pairs $(X,x_0)$ where $x_0\in X$ and a morphism $f:(X,x_0)\to (Y,y_0)$ is a continuous map $f: X\to Y$ with $f(x_0) = y_0$.
@@ -102,77 +118,30 @@ As a result, we see that $\pi_1$ is a (covariant) functor from $\catTopp$ to $\c
     This completes the proof.
 \end{proof}
 
-\section{Computing Fundamental Groups}
-
-\begin{theorem}
-    For $x_0\in X$ and $y_0\in Y$, $\pi_1(X\times Y,  x_0\times y_0)\cong\pi_1(X,x_0)\times\pi_1(Y,y_0)$.
-\end{theorem}
-\begin{proof}
-    Let $p: X\times Y\to X$ and $q: X\times Y\to Y$ be the natural projection maps and $p_*,q_*$ the induced homomorphisms. Let $\Phi:\pi_1(X\times Y,x_0\times y_0)\to\pi_1(X,x_0)\times\pi_1(Y,y_0)$ be the homomorphism given by $\Phi([f]) = (p_*([f]), q_*([f]))$. We shall show that $\Phi$ is both injective and surjective.
-
-    Since $p$ and $q$ are covering maps, both $p_*$ and $q_*$ are injective, consequently, so is $\Phi$. Let $([f],[g])\in\pi_1(X,x_0)\times\pi_1(Y,y_0)$. Consider the function $h: I\to X\times Y$, $h(t) = f(t)\times g(t)$. It is not hard to see that $\Phi([h]) = ([f],[g])$.
-\end{proof}
-
-\begin{corollary}
-    $\pi_1(S^1\times S^1)\cong\Z\times\Z$. Thus, the fundamental group of a torus is isomorphic to $\Z\times\Z$.
-\end{corollary}
-
-
 \section{Retracts and Deformation Retracts}
 
-\begin{definition}[Basepoint Preserving Homotopy]
-    A homotopy $H: (X,x_0)\times I\to(Y,y_0)$ is said to be basepoint preserving if $H(x_0,t) = y_0$ for all $t\in I$.
+\begin{definition}
+    A \emph{retraction} of a space $X$ onto a subspace $A$ is a map $r: X\to X$ such that $\im(r) = A$ and $r|_A = \id_A$. A \emph{deformation retraction} is a homotopy $H: X\times I\to X$ between $\id_X$ and a retraction $r$ from $X$ onto $A$. That is, $H|_{X\times\{0\}} = \id_X$ and $H|_{X\times\{1\}} = r$. A deformation retract is said to be \emph{strong} if $H|_{A\times\{t\}} = \id_A$ for all $t\in I$.
 \end{definition}
 
 \begin{proposition}
-    Let $H: (X,x_0)\times I\to(Y,y_0)$ be a basepoint preserving homotopy between $\phi: (X,x_0)\to (Y,y_0)$ and $\psi: (X,x_0)\to (Y,y_0)$. Then $\phi_* = \psi_*$.
+    If a space $X$ retracts onto a subspace $A$ and $x_0\in A$, then the homomorphism $i_\ast:\pi_1(A,x_0)\to\pi_1(X,x_0)$ induced by the inclusion $i: A\to X$ is injective. If $A$ isa  deformation retract of $X$, then $i_\ast$ is an isomorphism.
 \end{proposition}
 \begin{proof}
-    Choose some $[f]\in\pi_1(X,x_0)$. We would like to show that $\phi\circ f$ and $\psi\circ f$ are path homotopic. It is not hard to see that $H\circ f$ is the required homotopy.
-\end{proof}
+    Let $r: X\to A$ denote the (restriction of the) retraction of $X$ onto $A$. Then, $r\circ i = \id_A$ whence $r_\ast\circ i_\ast = \id_{\pi_1(A,x_0)}$ whence $i_\ast$ must be injective. 
 
-\begin{definition}[Retract]
-    If $A\subseteq X$, then a retraction of $X$ onto $A$ is a continuous map $r: X\to A$ such that $r\mid_A$ is the identity map of $A$. If such a map $r$ exists then $A$ is a \textit{retract} of $X$.
-\end{definition}
-
-\begin{definition}[Deformation Retract]
-    If $A\subseteq X$, then $A$ is said to be a \textit{deformation retract} of $X$ if there is a map $H: X\times I\to X$ such that $H(\cdot,0) = \mathbf{id}_X$ and $H(x,1)\in A$ for all $x\in X$. Moreover, the restriction $H\mid_{A\times\{1\}} = \mathbf{id}_A$.
-
-    A deformation retract is said to be \textit{strong} if $H(a,t) = a$ for all $a\in A$ and $t\in I$.
-\end{definition}
-
-It is evident, from the definition that if $A$ is a deformation retract of $X$, then it is a retract of $X$.
-
-\begin{theorem}
-    Let $i: A\to X$ be the inclusion map and $i_*:\pi_1(A,a_0)\to\pi_1(X,a_0)$ be the induced homomorphism for some $a_0\in A\subseteq X$. 
-    \begin{enumerate}[label=(\alph*)]
-    \item If $A$ is a retract of $X$, then $i_*$ is a monomorphism 
-    \item If $A$ is a deformation retract of $X$, then $i_*$ is an isomorphism 
-    \end{enumerate}
-    In both the above cases, the basepoint for $X$ is chosen inside $A$.
-\end{theorem}
-\begin{proof}
-\hfill 
-\begin{enumerate}[label=(\alph*)]
-\item Let $r: X\to A$ be the retract. Then $r\circ i = \mathbf{id}_A$. Then $r_*\circ i_* = \mathbf{id}_*$, therefore $i_*$ is injective.
-
-\item Let $H: X\times I\to X$ be the deformation retract and $r: X\to A$ be $H|_{X\times\{1\}}$. Obviously, $r\circ i = \mathbf{id}_A$, consequently, $i_*$ is injective. Let $[f]\in\pi_1(X,a_0)$. Then, $\Phi:I\times I\to X$ given by $\Phi(s,t) = H(f(s),t)$ is a homotopy between $f$ and a loop in $A$. Hence, $i_*$ is surjective and thus, an isomorphism.
-\end{enumerate}
+    Now, let $H: X\times I\to X$ be a deformation retraction of $X$ onto $A$. It suffices to show that $i_\ast$ is surjective. Indeed, let $f: I\to X$ be a loopt based at $x_0$. Then, the map $\Phi: I\times I\to X$ given by $\Phi(s,t) = H(f(s), t)$ is a path homotopy between $f$ and $g = H|_{I\times\{1\}}$. Since $g\in\pi_1(A, x_0)$, we see that $i_*$ must be surjective.
 \end{proof}
 
 \begin{definition}[Homotopy Equivalence]
-    A continuous map $\varphi: X\to Y$ is said to be a \textit{homotopy equivalence} if there is a map $\psi: Y\to X$ such that $\varphi\circ \psi\simeq\mathbf{id}_Y$ and $\psi\circ \varphi\simeq\mathbf{id}_X$. In this case, the spaces $X$ and $Y$ are said to be \textit{homotopy equivalent} or said to have the same \textit{homotopy type}.
+    A continuous map $f: X\to Y$ is said to be a \emph{homotopy equivalence} if there is a continuous map $g: Y\to X$ such that $g\circ f$ is homotopic to $\id_X$ and $f\circ g$ is homotopic to $\id_Y$.
 \end{definition}
 
-\begin{theorem}
-    Let $\varphi: X\to Y$ be a homotopy equivalence. Then, for any $x_0\in X$, the induced homomorphism $\varphi_*:\pi_1(X,x_0)\to(Y,\varphi(x_0))$ is an isomorphism.
-\end{theorem}
-\begin{proof}
-\end{proof}
+\section{van Kampen's Theorem}
 
-\section{Seifert-van Kampen's Theorem}
+The following formulation has been taken from \cite{munkrestopology}
 
-\begin{theorem}[Siefert-van Kampen]
+\begin{theorem}[van Kampen]\thlabel{thm:van-kampen-version-1}
     Let $X = U\cup V$ where $U$ and $V$ are open in $X$. Further, suppose $U$, $V$ and $U\cap V$ are nonempty and path connected. Let $H$ be a group, $x_0\in U\cap V$ and 
     \begin{equation*}
         \phi_1:\pi_1(U,x_0)\to H\qquad\phi_2:\pi_1(V, x_0)\to H
@@ -260,3 +229,37 @@ Restrict the map $\tau$ to $\tau:\mathscr L(X,x_0)\to H$. From \textbf{Step 4}, 
 
 The above argument establishes the existence of a group homomorphism $\Phi:\pi_1(X,x_0)\to H$ making the diagram commute. We must now show that the map $\Phi$ is unique. But this follows from the fact that the generators of $\Phi$ are precisely the images of the generators of $\pi_1(U,x_0)$ and $\pi_1(V,x_0)$ under the homomorphisms $j_1$ and $j_2$ respectively.
 \end{proof}
+
+\subsection{Alternate Formulation of van Kampen's Theorem}
+
+The following formulation and proof has been taken from \cite{hatcheralgtop}. The upshot of this formulation is that it gives a recipe for computing the presentation of the fundamental group which is hard to see from the previous formulation.
+
+Let $X$ be a topological space and $\{A_\alpha\}_{\alpha\in J}$ be an open cover of path connected subspaces of $X$. Let $x_0\in X$ be a basepoint such that $x_0\in A_\alpha$ for each $\alpha\in J$. The inclusion $A_\alpha\into X$ induces a group homomorphism $j_\alpha: \pi_1(A_\alpha)\to\pi_1(X)$ where we have dropped the basepoint to avoid clutter. Similarly, the inclusion $A_\alpha\cap A_\beta\into A_\alpha$ induces a group homomorphism $i_{\alpha\beta}:\pi_1(A_\alpha\cap A_\beta)\to\pi_1(A_\alpha)$.
+
+Due to the Universal Property of Free Products, the group homomorphisms $j_\alpha$ induce a group homomorphism 
+\[
+    \Phi:\ast_{\alpha\in J}\pi_1(A_\alpha)\to\pi_1(X).
+\]
+
+\begin{proposition}\thlabel{prop:van-kampen-prop-1}
+    If each intersection $A_\alpha\cap A_\beta$ is path connected, then $\Phi$ is surjective.
+\end{proposition}
+\begin{proof}[Sketch of Proof]
+    The proof of surjectivity follows the same proof of \textbf{Step2} in the proof of \thref{thm:van-kampen-version-1}. It suffices to show that any element in $\pi_1(X)$ can be represented as the product of finitely many elements of $j_\alpha\left(\pi_1(A_\alpha)\right)$. 
+
+    Take any loop $f: I\to X$ based at $x_0$ and then using the Lebesgue Number Lemma, find a partition $0\le t_0 < \dots < t_n = 1$ of $I$ such that the image $f([t_i, t_{i + 1}])$ is completely contained in some $A_\alpha$ for each $0\le i\le n - 1$. Now, join the endpoints of each such path to $x_0$, which can be done since each $A_\alpha\cap A_\beta$ is path connected. This immediately gives us a decomposition of $[f]$.
+\end{proof}
+
+\begin{proposition}
+    If in addition to the hypothesis of \thlabel{prop:van-kampen-prop-1}, each intersection $A_\alpha\cap A_\beta\cap A_\gamma$ is path connected, then the kernel of the surjection $\Phi$ is generated by the set 
+    \begin{equation*}
+        \left\{i_{\alpha\beta}(\omega)i_{\beta\alpha}(\omega)^{-1}\big\vert~\omega\in\pi_1(A_\alpha,A_\beta)\text{ for all }\alpha,\beta\in J\right\}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    \todo{Proof of general van kampen}
+\end{proof}
+
+\section{Applications of van Kampen's Theorem}
+
+\todo{Applications of van kampen}
