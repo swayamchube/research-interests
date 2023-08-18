@@ -53,6 +53,11 @@ We shall discuss Zermelo-Fraenkel Set Theory, which is a first order theory, wit
     \begin{equation*}
         \forall x\exists y\forall z(z\subseteq x\Longrightarrow z\in y)
     \end{equation*}
+
+    \item (Choice) Informally, given a collection of nonempty sets $X$, there is a choice function that chooses one element from each set in $X$.
+    \begin{equation*}
+        \forall X\left(\emptyset\notin X\implies\exists f: X\to\bigcup X,~\forall x\in X(f(x)\in x)\right).
+    \end{equation*}
 \end{enumerate}
 
 We have been a bit sloppy in stating the axioms. Notice that our signature does not contain a predicate $\subseteq$ or the successor function $S$, neither do we know, a priori, of the existence of \textbf{the} empty set.

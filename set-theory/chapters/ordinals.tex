@@ -72,7 +72,7 @@
 
     \item First note that it suffices to find $x\in C$ with $x\cap C = \emptyset$ for if $y\in C$ is another ordinal with $x\ne y$, then $y\notin x$ lest $x\cap C\ne\emptyset$.
 
-    Pick any $x\in C$. If $x\cap C = \emptyset$, then we are done. Else, let $x'\in x\cap C$ be the $\in$-least element. It is not hard to argue that $x'\cap C = \emptyset$ and we are done.
+    Pick any $x\in C$. If $x\cap C = \emptyset$, then we are done. Else, let $x'\in x\cap C$ be the $\in$-least element. It is not hard to argue that $x'\cap C = \emptyset$ and we are done.\qedhere
 \end{enumerate}
 \end{proof}
 
@@ -103,6 +103,242 @@
     Thus, either $B = A$ or $B = \pred(A,b,R)$ for some $b\in A$. In the latter case, the function $f$ is an order isomorphism between $\pred(A,b,R)$ and an ordinal $C$ whence $b\in B$, a contradiction. Thus $B = A$ and the proof is complete.
 \end{proof}
 
-\begin{definition}
+\begin{definition}[Type of a Well Ordering]
     If $\langle A, R\rangle$ is a well ordering, then $\type(A,R)$ is the unique ordinal $C$ such that $\langle A, R\rangle\cong C$.
 \end{definition}
+
+Henceforth, we use Greek letters $\alpha,\beta,\gamma,\dots$ to vary over ordinals. That is, saying $\forall\alpha(\dots)$ is equivalent to saying $\forall x(x\text{ is an ordinal }\dots)$. Further, since the ordinals are well ordered, we write $\alpha < \beta$ to denote $\alpha\in\beta$ and similarly, $\alpha\le\beta$ means $\alpha\in\beta\vee\alpha = \beta$.
+
+\begin{definition}
+    Let $X$ be a set of ordinals. Define 
+    \begin{equation*}
+        \sup(X) := \bigcup X\quad\text{and}\quad\min(X) := \bigcap X.
+    \end{equation*}
+    Further, for an ordinal $\alpha$, let $S(\alpha)$ denote the set $\alpha\cup\{\alpha\}$.
+\end{definition}
+
+\begin{lemma}
+\begin{enumerate}[label=(\alph*)]
+    \item $\forall\alpha,\beta(\alpha\le\beta\iff\alpha\subseteq\beta)$.
+    \item If $X$ is a set of ordinals, $\sup(X)$ is the least ordinal $\ge$ all elements of $X$ and if $X\ne\emptyset$, $\min(X)$ is the least ordinal in $X$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item The forward direction is obvious. Suppose $\alpha\subseteq\beta$. If $\alpha = \beta$, then we are done. If not, let $\gamma$ be the $<$-least element of $\beta\backslash\alpha$. We contend that $\gamma = \alpha$. Indeed, if $x\in\gamma$, then $x\notin\beta\backslash\alpha$ lest we contradict the minimality of $\gamma$ consequently, $x\in\alpha$ whence $\gamma\subseteq\alpha$. On the other hand, since $\alpha = \pred(\beta,\alpha)$, we have $\alpha\le\gamma$ and thus $\alpha\subseteq\gamma$. This shows that $\alpha = \gamma\in\beta$ and the conclusion follows.
+
+    \item \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    For an ordinal $\alpha$, $S(\alpha)$ is an ordinal, $\alpha < S(\alpha)$ and 
+    \begin{equation*}
+        \forall\beta(\beta < S(\alpha) \iff \beta\le\alpha).
+    \end{equation*}
+\end{lemma}
+
+\begin{definition}[Successor, Limit Ordinal]
+    An ordinal $\alpha$ is said to be a \emph{successor ordinal} if there is an ordinal $\beta$ such that $\alpha = S(\beta)$. On the other hand, $\alpha$ is said to be a \emph{limit ordinal} if $\alpha\ne\emptyset$ and $\alpha$ is not a successor ordinal.
+\end{definition}
+
+\section{Transfinite Induction and Recursion}
+
+\subsection{Classes but informally}
+
+Informally speaking, a class is any collection of the form 
+\begin{equation*}
+    \{x\mid \phi(x)\}
+\end{equation*}
+where $\phi(x)$ is a well defined first order formula. As we have seen earlier, the class 
+\begin{equation*}
+    \{x\mid x = x\}
+\end{equation*}
+is not a set. A \emph{proper class} is a class which is not a set. One uses boldface letters to denote classes. 
+
+\begin{definition}
+    Denote 
+    \begin{equation*}
+        \mathbf{V} := \{x\mid x = x\}\qquad\mathbf{ON} := \{x\mid x\text{ is an ordinal}\}.
+    \end{equation*}
+\end{definition}
+
+To be completely formal, a class is simply a first order formula with one or more free variables. For example, the class of all ordinals can be thought of as the formula 
+\begin{equation*}
+    \ON(x) = x \text{ is an ordinal.}
+\end{equation*}
+
+We can extend this to define functions between classes $\mathbf A$ and $\mathbf B$. A function $\mathbf F:\mathbf A\to\mathbf B$ is given by a first order logic formula in two variables $\mathbf F(x,y)$ such that 
+\begin{equation*}
+    \forall x~\mathbf A(x)\implies\exists!y~\left(\mathbf B(y)\wedge\mathbf F(x,y)\right).
+\end{equation*}
+
+\begin{theorem}[Transfinite Induction on $\mathbf{ON}$]\thlabel{thm:transfinite-induction}
+    If $\mathbf C\subseteq\ON$ and $\mathbf C\ne\emptyset$, then $\mathbf C$ has a least element.
+\end{theorem}
+\begin{proof}
+    The proof is exactly like \thref{thm:properties-ordinals} (d).
+\end{proof}
+
+One must note that there is a significant difference between \thref{thm:properties-ordinals} (d) and \thref{thm:transfinite-induction}. The former is a single provable statement in \textsf{ZFC} while the latter is a theorem schema which represents an infinite collection of theorems. In particular, suppose the class $\mathbf C$ corresponded to a formula $\mathbf C(x,z_1,\dots,z_n)$, then \thref{thm:transfinite-induction} in this case says the following: 
+\begin{align*}
+    \forall z_1,\dots,z_n\big\{\left[\forall x(\mathbf C(x,z_1,\dots,z_n)\implies x\text{ is an ordinal})\wedge\exists x\mathbf C(x,z_1,\dots,z_n)\right]\\
+    \implies\left[\exists x\left(\mathbf C(x,z_1,\dots,z_n)\wedge\forall y(\mathbf C(y,z_1,\dots,z_n)\implies y\ge x)\right)\right]\big\}.
+\end{align*}
+
+And \thref{thm:transfinite-induction} specifies one such formula for each well-formed sentence $\mathbf C$.
+
+\begin{theorem}[Transfinite Recursion on $\ON$]\thlabel{thm:transfinite-recursion}
+    If $\mathbf F: \V\to\V$, then there is a unique $\mathbf G:\ON\to\V$ such that 
+    \begin{equation*}
+        \forall\alpha\left(\mathbf G(\alpha) = \mathbf F(\mathbf G\restrict\alpha)\right).
+    \end{equation*}
+\end{theorem}
+The formal restatement of the above in terms of first order logic is the following: 
+\begin{equation*}
+    \forall x\exists!y~\mathbf F(x,y)\implies\left[\forall\alpha\exists!y~\mathbf G(\alpha, y)\wedge\forall\alpha\exists x\exists y\left(\mathbf G(\alpha, y)\wedge\mathbf F(x,y)\wedge x = \mathbf G\restrict\alpha\right)\right]
+\end{equation*}
+where 
+\begin{equation*}
+    (x = \mathbf G\restrict\alpha) := \mathsf{function}(x)\wedge\dom(x) = \alpha\wedge\left(\forall\beta\in\dom(x)~\mathbf G(\beta,x(\beta))\right).
+\end{equation*}
+Similarly, one can encode the uniqueness condition.
+
+\begin{proof}
+    
+\end{proof}
+
+\section{Ordinal Arithmetic}
+\subsection*{Addition}
+
+\begin{definition}[Ordinal Addition]
+    If $\alpha,\beta$ are ordinals, then define $\alpha + \beta = \type(\alpha\times\{0\}\cup\beta\times\{1\},R)$ where 
+    \begin{align*}
+        R = \left\{\langle\langle\xi,0\rangle,\langle\eta,0\rangle\rangle\mid \xi < \eta < \alpha\right\}\cup\left\{\langle\langle\xi,0\rangle,\langle\eta,1\rangle\rangle\mid\xi < \eta < \beta\right\}\cup\left[(\alpha\times\{0\})\times(\beta\times\{1\})\right].
+    \end{align*}
+\end{definition}
+
+Informally speaking, we construct a new ordinal $\alpha + \beta$ by first ``placing'' $\alpha$ is a line and then placing $\beta$ after it linearly. This is best visualized when $\alpha$ and $\beta$ are finite ordinals.
+
+To see that $R$ indeed gives $\alpha\times\{0\}\cup\beta\times\{1\}$ the structure of a well order, let $S$ be a nonempty subset. If $S\cap\alpha\times\{0\}$ is nonempty, then the minimal element of $S$ exists and is the minimal element of $S\cap\alpha\times\{0\}$. On the other hand, if $S\cap\alpha\times\{0\} = \emptyset$, the minimal element of $S$ exists and is the minimal element of $S\cap\beta\times\{1\}$. 
+
+\begin{lemma}
+    For ordinals $\alpha,\beta,\gamma$,
+    \begin{enumerate}[label=(\alph*)]
+        \item $\alpha + (\beta + \gamma) = (\alpha + \beta) + \gamma$.
+        \item $\alpha + 0 = \alpha$.
+        \item $\alpha + 1 = S(\alpha)$.
+        \item $\alpha + S(\beta) = S(\alpha + \beta)$.
+        \item If $\beta$ is a limit ordinal, then $\alpha + \beta = \sup\{\alpha + \xi\mid \xi < \beta\}$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We shall only prove (e) since the others are straightforward. First, note that $\alpha + \beta\ge\alpha + \xi$ for every $\xi < \beta$, which is easy to see by setting up an obvious order preserving injection. \todo{complete this argument}
+\end{proof}
+
+\begin{remark}
+    One must note that ordinal addition is \textbf{not commutative}. Indeed, 
+    \begin{equation*}
+        1 + \omega = \sup\{1 + n\mid n < \omega\} = \omega
+    \end{equation*}
+    while 
+    \begin{equation*}
+        \omega + 1 = S(\omega)\ne\omega
+    \end{equation*}
+    where the last ``non-equality'' follows from the axiom of foundation. Thus, $1 + \omega\not\cong\omega + 1$.
+\end{remark}
+
+\subsection*{Multiplication}
+
+\begin{definition}
+    If $\alpha,\beta$ are ordinals, define $\alpha\cdot\beta = \type(\beta\times\alpha, R)$ where $R$ is the dictionary order, given by 
+    \begin{equation*}
+        R = \left\{\langle\langle\xi,\eta\rangle,\langle\xi',\eta'\rangle\rangle~\big\vert~\xi < \xi'\vee (\xi = \xi'\wedge\eta < \eta')\right\}.
+    \end{equation*}
+\end{definition}
+
+We must first check that $R$ is indeed a well ordering. That it is a strict linear order is clear. Let $S\subseteq\beta\times\alpha$ be a nonempty subset. Let $S_1$ be the projection of $S$ onto $\beta$. This has a minimum element, say $\xi$. Consider now the set of all $\eta\in\alpha$ such that $\langle\xi,\eta\rangle\in S$. This is a nonempty subset of $\alpha$ and thus has a minimum element, say $\delta$. Then, $\langle\xi,\delta\rangle$ is a minimum element of $S$.
+
+\begin{lemma}
+    For ordinals $\alpha,\beta,\gamma$, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\alpha\cdot(\beta\cdot\gamma) = (\alpha\cdot\beta)\cdot\gamma$.
+        \item $\alpha\cdot 0 = 0$.
+        \item $\alpha\cdot 1 = \alpha$. 
+        \item $\alpha\cdot S(\beta) = \alpha\cdot\beta + \alpha$. 
+        \item If $\beta$ is a limit ordinal, then $\alpha\cdot\beta = \sup\{\alpha\cdot\xi\mid\xi < \beta\}$. 
+        \item $\alpha\cdot(\beta + \gamma) = \alpha\cdot\beta + \alpha\cdot\gamma$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    \todo{Proof of ordinal multiplication}
+\end{proof}
+
+\subsection*{Exponentiation}
+
+\begin{definition}
+    For ordinals $\alpha,\beta$, we define $\alpha^\beta$ by recursion on $\beta$ as 
+    \begin{itemize}
+        \item $\alpha^0 = 1$. 
+        \item $\alpha^{\beta + 1} = \alpha^\beta\cdot\beta$. 
+        \item If $\beta$ is a limit ordinal, $\alpha^\beta = \sup\{\alpha^\xi\mid\xi < \beta\}$. 
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    Interestingly,
+    \begin{equation*}
+        2^\omega = \sup\{2^n\mid n < \omega\} = \omega.
+    \end{equation*}
+\end{remark}
+
+\section{Equivalent forms of the Axiom of Choice}
+
+\begin{theorem}[Well Ordering Theorem]\thlabel{thm:well-ordering}
+    For every nonempty set $A$, there is a relation $R\subseteq A\times A$ such that $R$ well orders $A$.
+\end{theorem}
+
+\subsection*{AC \texorpdfstring{$\implies$}{} WO}
+
+Let $A$ be a set. We shall explicitly construct a well ordering on $X$ using the Axiom of Choice. First, let $f:\calP(A)\backslash\{\emptyset\}\to A$ be a choice function and extend it to $f:\calP(A)\to A\coprod\{\emptyset\}$ by defining $f(\emptyset) = \emptyset$. We shall now use transfinite recursion to define a function $F$ on the ordinals as follows: 
+\begin{align*}
+    F(0) &:= f(A)\\ 
+    F(\alpha) &:= f\left(\left\{x\in A\mid\forall\beta\in\alpha(F(\beta)\ne x)\right\}\right).
+\end{align*}
+
+First, note that if $F(\alpha) = F(\beta)\ne\emptyset$, then $\alpha = \beta$. Next, we contend that there must be an ordinal $\alpha$ with $F(\alpha) = \emptyset$. For if not, then we may apply the axiom of replacement and that of comprehension to obtain a set of all ordinals, a contradiction to the Burali-Forti paradox.
+
+Let $\mathbf C$ denote the class of all ordinals $\alpha$ with $F(\alpha) = \emptyset$. Due to \thref{thm:transfinite-induction}, there is a minimal such ordinal, say $\alpha_0$, then 
+\begin{equation*}
+    f\left(\left\{x\in A\mid\forall\beta\in\alpha_0(F(\beta)\ne x)\right\}\right) = \emptyset\implies\left\{x\in A\mid\forall\beta\in\alpha_0(F(\beta)\ne x)\right\} = \emptyset.
+\end{equation*}
+
+Let $G: A\to\alpha_0$ denote the inverse function of $F$. Define the relation $R\subseteq A\times A$ by 
+\begin{equation*}
+    R := \{\langle x,y\rangle\mid G(x)\in G(y)\}.
+\end{equation*}
+
+That this is a well ordering is easy to see.
+
+\subsection*{WO \texorpdfstring{$\implies$}{} AC}
+
+This direction, on the other hand, is much easier. Let $X$ denote a collection of sets and let $Y = \bigcup X$. Let $R$ be a well ordering on $Y$. Define the function $f: X\to Y$ by $f(x) = \min(x)$, the $R$-least element, which can be chosen since $Y$ has been well ordered and $x\subseteq Y$.
+
+\subsection*{AC \texorpdfstring{$\implies$}{} Zorn}
+
+Let $X$ be a set and $P = (X,\leqq)$ be a poset on it such that every chain in $P$ has an upper bound. Let $f: \mathscr P(X)\backslash\{\emptyset\}\to X$ be a choice function. 
+
+Suppose $P$ has no maximal element. Then, every chain in $P$ must have a strict upper bound. Let $\mathscr C$ be the set of all chains in $P$. Let $g: \mathscr C\to\mathscr P(X)$ map a chain in $P$ to the set of all \emph{strict} upper bounds. Consequently, $g(C)\ne\emptyset$ for every chain $C$ in $P$.
+
+We shall define a class function $F:\ON\to X$ using transfinite recursion. Begin with $F(0) = F(X)$. Now, for any ordinal $\alpha\in\ON$, let $C_\alpha$ denote the chain $\{F(\beta)\mid \beta < \alpha\}$ and define 
+\begin{equation*}
+    F(\alpha) := f(g(C_\alpha)).
+\end{equation*}
+
+It is not hard to see that $F(\alpha) = F(\beta)$ if and only if $\alpha = \beta$ whence we may use Replacement to obtain a \emph{set} of all ordinals, which is absurd.
+
+\subsection*{Zorn \texorpdfstring{$\implies$}{} AC}
+
+Let $X$ be a collection of sets and $Y = \bigcup X$. Let $P$ be the poset of pairs $(S, f)$ where $S\subseteq X$ and $f: S\to Y$ is a function with $f(s)\in s$ for each $s\in S$. We say $(S, f)\leqq(S',f')$ if $S\subseteq S'$ and $f'\restrict_S = f$. 
+
+Let $C = \{(S_\alpha, f_\alpha)\}$ be a chain in $P$. Define the function $f:S := \bigcup_{\alpha} S_\alpha\to Y$ by $f(x) := f_\alpha(x)$ if $x\in S_\alpha$. Then, $(S, f)$ is an upper bound for the chain $C$. Thus, due to Zorn's Lemma, $P$ contains a maximal element, say $(\wt S, F)$. We contend that $\wt S = X$. For if not, then there is $x\in X\backslash\wt S$ and the function $F$ can be extended to $\wt S\cup\{x\}$ by simply choosing an element of $x$ and assigning it to $x$ under $F$. This contradicts the maximality of $(\wt S, F)$ and hence, $F$ is the desired choice function.

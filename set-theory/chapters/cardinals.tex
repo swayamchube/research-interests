@@ -1,0 +1,180 @@
+\begin{definition}
+    Sets $A$ and $B$ are said to be \emph{equinumerous} if there is a bijection $f: A\to B$. This is denoted by $A\approx B$. On the other hand, if there is an injection $f: A\to B$, it is denoted by $A\preceq B$. We write $A\prec B$ if $A\preceq B$ and $B\not\preceq A$.
+\end{definition}
+
+\begin{theorem}[Cantor-Schr\"oder-Bernstein]\thlabel{thm:cantor-schroder-bernstein}
+    $A\preceq B\wedge B\preceq A\implies A\approx B$.
+\end{theorem}
+
+\begin{definition}
+    For a set $A$, $|A|$ is the least $\alpha$ such that $\alpha\approx A$.
+    $\alpha$ is a \emph{cardinal} if and only if $\alpha = |\alpha|$.
+\end{definition}
+
+From \thref{thm:well-ordering}, there is a well ordering $R$ on $A$ and thus an ordinal $\alpha$ with an order preserving bijection between $\langle A,R\rangle$ and $\alpha$, in particular, $A\approx\alpha$. Thus, $|A|$ is defined for every set. Further, note that $\alpha$ is a cardinal if and only if $\forall\beta < \alpha(\beta\not\approx\alpha)$ and for any ordinal $\alpha$, $|\alpha|\le\alpha$.
+
+\begin{lemma}
+    If $|\alpha|\le\beta\le\alpha$, then $|\beta| = |\alpha|$.
+\end{lemma}
+\begin{proof}
+    Since $\beta\le\alpha$, we have $\beta\subseteq\alpha$ and thus $\beta\preceq\alpha$. On the other hand, $|\alpha|\subseteq\beta$. Composing this inclusion with the bijection $\alpha\approx|\alpha|$, we have $\alpha\preceq\beta$. We are done due to \thref{thm:cantor-schroder-bernstein}.
+\end{proof}
+
+\begin{lemma}
+    If $n\in\omega$, then 
+    \begin{enumerate}[label=(\alph*)]
+        \item $n\not\approx n + 1$. 
+        \item $\forall\alpha(\alpha\approx n\implies\alpha = n)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Suppose not. Pick the smallest $n\in\omega$ such that $n\approx n + 1$. Note that $n\ne 0$. We have an injective function $f: n + 1\to n$. Composing appropriately, we may suppose that $f(n) = n - 1$ where $n\in n + 1$ and $n - 1\in n$. The restriction $f\restrict_n$ is an injective function from $n$ to $n - 1$ whence by \thref{thm:cantor-schroder-bernstein}, $n - 1\approx n$, a contradiction. 
+
+    \item If $n < \alpha$, then $n + 1\le\alpha$ whence $n + 1\preceq\alpha$. On the other hand, $\alpha\approx n < n + 1$, consequently $\alpha\approx n + 1$, a contradiction to (a). 
+
+    Now suppose $\alpha < n$. Then, $|n| = |\alpha|\le\alpha\le\alpha + 1\le n$, consequently, $|\alpha + 1| = |n|$. But since $\alpha + 1\approx n + 1$, we have $n + 1\approx n$, a contradiction to (a). Thus $\alpha = n$. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    $\omega$ is a cardinal and so is every ordinal $n < \omega$.
+\end{corollary}
+
+\begin{definition}
+    $A$ is \emph{finite} if and only if $|A| < \omega$. $A$ is \emph{countable} if and only if $|A|\le\omega$. We use the shorthand \emph{infinite} to mean ``not finite'' and \emph{uncountable} to mean ``not countable''.
+\end{definition}
+
+\begin{definition}[Cardinal Arithmetic]
+    For cardinals $\kappa$ and $\lambda$, define 
+    \begin{equation*}
+        \kappa\oplus\lambda := |\kappa\times\{0\}\cup\lambda\times\{1\}|,\quad\kappa\otimes\lambda := |\kappa\times\lambda|.
+    \end{equation*}
+\end{definition}
+
+Unlike ordinal arithmetic, the operations $\oplus$ and $\otimes$ are commutative, which is obvious from the definition above. Furthermore, note that 
+\begin{equation*}
+    |\kappa + \lambda| = |\lambda + \kappa| = \kappa\oplus\lambda\quad\text{ and }\quad|\kappa\cdot\lambda| = |\lambda\cdot\kappa| = \kappa\otimes\lambda.
+\end{equation*}
+
+\begin{lemma}
+    For $m,n\in\omega$, $n\oplus m = n + m < \omega$ and $n\otimes m = n\cdot m < \omega$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{proposition}
+    Every infinite cardinal is a limit ordinal.
+\end{proposition}
+\begin{proof}
+    Suppose $\kappa = \alpha + 1$ is a cardinal. Then, $\alpha$ is not a finite ordinal, that is, $\omega < \alpha$ and thus there is an ordinal $\beta$ such that $\alpha = \omega + \beta$. Consequently, $1 + \alpha = 1 + \omega + \beta = \omega + \beta$ as we have seen previously that $1 + \omega = \omega$. Consequently, 
+    \begin{equation*}
+        |\kappa| = |\alpha + 1| = |1 + \alpha| = |\alpha|,
+    \end{equation*}
+    a contradiction to the fact that $\kappa$ is a cardinal.\todo{if $\alpha\le\beta$ there is an ordinal $\delta$ such that $\beta = \alpha + \delta$.}
+\end{proof}
+
+\begin{theorem}[Tarski]
+    If $\kappa$ is an infinite cardinal, then $\kappa\otimes\kappa = \kappa$.
+\end{theorem}
+\begin{proof}
+    We shall prove this statement by transfinite induction on $\kappa$. That this statement holds for $\kappa = \omega$ is well known. Suppose now that $\kappa > \omega$ and the statement holds for each cardinal $\lambda < \kappa$.
+
+    Note that for an infinite ordinal $\alpha < \kappa$, we have $|\alpha| < \kappa$ and thus 
+    \begin{equation*}
+        |\alpha\times\alpha| = |\alpha|\otimes|\alpha| = |\alpha| < \kappa.
+    \end{equation*}
+
+    Let $\prec$ denote the strict lexicographic ordering on $\kappa\times\kappa$. Define the relation $\unlhd$ on $\kappa\times\kappa$ by $\langle\alpha,\beta\rangle\unlhd\langle\gamma,\delta\rangle$ if and only if 
+    \begin{equation*}
+        \max\{\alpha,\beta\} < \max\{\gamma,\delta\}\text{ or }\max\{\alpha,\beta\} = \max\{\gamma,\delta\}\text{ and }\langle\alpha,\beta\rangle\prec\langle\gamma,\delta\rangle.
+    \end{equation*}
+    That this relation is an ordering is immediate from the definition. We shall now show that this is a well ordering. Let $S\subseteq\kappa\times\kappa$ be nonempty. Using Replacement, construct the set $S'$ which consists of $\max\{\alpha,\beta\}$ for all $\langle\alpha,\beta\rangle\in S$. Since $S'\subseteq\kappa$, it contains a minimum element, say $\alpha_0$. Using Comprehension, construct the set $S''$ consisting of all pairs $\langle\alpha,\beta\rangle$ such that $\max\{\alpha,\beta\} = \alpha_0$. Now, $S''\subseteq\kappa\times\kappa$, and under the lexicographic order, it has a minimum element, which is also the minimum element of $S$ under the ordering $\unlhd$.
+
+    Given any $\langle\alpha,\beta\rangle\in\kappa\times\kappa$, the set of all pairs preceeding it in $\langle\kappa\times\kappa,\unlhd\rangle$ is a subset of 
+    \begin{equation*}
+        (\max\{\alpha,\beta\} + 1)\times(\max\{\alpha,\beta\} + 1)
+    \end{equation*}
+    Since $\kappa$ is a limit ordinal, we have $\max\{\alpha,\beta\} + 1 < \kappa$ and due to the induction hypothesis, the cardinality of the above set is strictly smaller than $\kappa$ whence $|\kappa\times\kappa|\le\kappa$. There is an obvious injection from $\kappa$ into $\kappa\times\kappa$, forcing $|\kappa\times\kappa| = \kappa$ due to \thref{thm:cantor-schroder-bernstein}.
+\end{proof}
+
+\begin{corollary}
+    Let $\kappa,\lambda$ be infinite cardinals. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\kappa\oplus\lambda = \kappa\otimes\lambda = \max\{\kappa,\lambda\}$,
+        \item $|\kappa^{<\omega}| = \kappa$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[Cantor]
+    $\forall X\left(X\prec\mathscr P(X)\right)$.
+\end{theorem}
+\begin{proof}
+    Suppose not, then $X\approx\mathscr P(X)$ for some $X$, which follows from \thref{thm:cantor-schroder-bernstein} and the fact that there is a canonical injection from $X$ to $\mathscr P(X)$. Let $f:X\to\mathscr P(X)\to X$ be a bijection. Using Comprehension, construct the set 
+    \begin{equation*}
+        S := \{x\in X\mid x\notin f(x)\}\subseteq X.
+    \end{equation*}
+    Let $s\in X$ be the unique element such that $f(s) = S$. Then, 
+    \begin{equation*}
+        s\in S\iff s\notin S,
+    \end{equation*}
+    a contradiction.
+\end{proof}
+
+\begin{theorem}
+    $\forall\alpha\exists\kappa\left(\kappa > \alpha\text{ is a cardinal}\right)$ is true in \textsf{ZF}.
+\end{theorem}
+If we were to work in \textsf{ZFC} then we could just well order $\mathscr P(\alpha)$ and consider its cardinality.
+\begin{proof}
+    The statement is obvious for finite cardinals. Suppose now that $\alpha\ge\omega$. Let 
+    \begin{align*}
+        W := \{R\in\mathscr P(\alpha\times\alpha)\mid R \text{ well orders }\alpha\}
+        S := \{\type(\langle\alpha, R\rangle)\mid R\in W\}.
+    \end{align*}
+    Let $\beta = \sup(S)$. We contend that $\beta$ is a cardinal and $\beta > \alpha$. First, note that if $\delta\in W$, then $S(\delta)\in W$, consequently, $\beta\notin W$. Further, $\beta\not\approx\alpha$ lest one could find a well ordering on $\alpha$ which is in order preserving bijection with $\beta$. Suppose $\beta$ were not a cardinal. Then, there is some $\gamma < \beta$ with $\gamma\approx\beta$. By definition, there is $\eta$ such that $\gamma\le\eta < \beta$ with $\eta\in W$, consequently, $\eta\approx\beta$ but $\alpha\approx\eta$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{definition}[Successor, Limit Cardinals]
+    Let $\alpha$ be an ordinal. Denote by $\alpha^+$ the smallest \emph{cardinal} strictly greater than $\alpha$. A cardinal $\kappa$ is said to be a \emph{successor cardinal} if $\kappa = \alpha^+$ for some $\alpha$. On the other hand, if $\kappa > \omega$ and is not a successor cardinal, then $\kappa$ is said to be a \emph{limit cardinal}.
+\end{definition}
+
+\begin{definition}[Aleph Numbers]
+    Define the numbers $\aleph_\alpha$ by transfinite recursion on $\alpha$.
+    \begin{enumerate}[label=(\alph*)]
+        \item $\aleph_0 := \omega$.
+        \item $\aleph_{\alpha + 1} = (\aleph_\alpha)^+$.
+        \item For a limit ordinal $\lambda$, define $\aleph_\lambda := \sup\{\aleph_\alpha\mid \alpha < \lambda\}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+\begin{enumerate}[label=(\alph*)]
+    \item Each $\aleph_\alpha$ is a cardinal.
+    \item Every infinite cardinal is equal to $\aleph_\alpha$ for some $\alpha$.
+    \item If $\alpha < \beta$, then $\aleph_\alpha < \aleph_\beta$. 
+    \item $\aleph_\alpha$ is a limit cardinal ifa nd only if $\alpha$ is a limit ordinal. 
+    \item $\aleph_\alpha$ is a successor cardinal if and only if $\alpha$ is a successor ordinal.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+    All of these follow immediately from the definition above.
+\end{proof}
+
+\begin{remark}
+    One often writes $\omega_\alpha$ in place of $\aleph_\alpha$. We adopt both conventions and use them interchangeably.
+\end{remark}
+
+\begin{lemma}
+    If there is a surjective function $f:X\to Y$, then $|Y|\le|X|$.
+\end{lemma}
+\begin{proof}
+    Consider the set 
+    \begin{equation*}
+        S = \{f^{-1}(y)\mid y\in Y\},
+    \end{equation*}
+    which can be constructed using Replacement. Let $g: Y\to S$ be given by $g(y) = f^{-1}(y)$ and $F$ be a choice function on $S$. Then, the composition $F\circ g$ is an injective function from $Y$ to $X$, implying the desired conclusion.
+\end{proof}
