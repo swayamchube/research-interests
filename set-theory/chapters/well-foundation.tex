@@ -1,0 +1,104 @@
+Throughout this chapter, we shall work in $\mathsf{ZF}^-$, which is $\mathsf{ZF}$ without the axiom of foundation.
+\begin{definition}
+    By transfinite recursion, deifne $R(\alpha)$ for each $\alpha\in\ON$ by 
+    \begin{enumerate}[label=(\alph*)]
+        \item $R(0) = \emptyset$, 
+        \item $R(\alpha + 1) = \mathscr P(R(\alpha))$, 
+        \item $R(\alpha) = \bigcup_{\lambda < \alpha} R(\lambda)$ when $\lambda$ is a limit ordinal.
+    \end{enumerate}
+    Finally, define the first order formula 
+    \begin{equation*}
+        \WF(x) := \exists\alpha(x\in R(\alpha)).
+    \end{equation*}
+    We denote by $\WF$ the class corresponding to the above formula.
+\end{definition}
+
+\begin{lemma}
+    For each $\alpha$, 
+    \begin{enumerate}
+        \item $R(\alpha)$ is transitive. 
+        \item $\forall\xi\le\alpha(R(\xi)\subseteq R(\alpha))$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We prove both statements by transfinite induction on $\alpha$. The base case with $\alpha = 0$ is trivial. Suppose $\alpha = \beta + 1$. Since $R(\beta)$ is transitive, so is its power set as we have seen earlier and obviously $R(\beta)\subseteq R(\alpha)$ since $R(\beta)\in R(\alpha)$. Finally, suppose $\alpha$ is a limit ordinal. Then, (b) is immediate and (a) follows from the fact taht the union of transitive sets is transitive.
+\end{proof}
+
+\begin{remark}
+    As a consequence of the definition of $\WF$, for any $x\in\WF$, the least $\alpha$ for which $x\in R(\alpha)$ must be a \ul{successor ordinal}.
+\end{remark}
+
+\begin{definition}
+    If $x\in\WF$, then $\rank(\alpha)$ is the \emph{least} $\beta$ such tdhat $x\in R(\beta + 1)$.
+\end{definition}
+
+\begin{lemma}
+    For any $\alpha$, 
+    \begin{equation*}
+        R(\alpha) = \{x\in\WF\mid \rank(x) < \alpha\}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{lemma}
+    If $y\in\WF$, then 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\forall x\in y(x\in\WF\wedge\rank(x) < \rank(y))$, and 
+        \item $\rank(y) = \sup\{\rank(x) + 1\mid x\in y\}$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Let $\alpha = \rank(y)$. Then, $y\in R(\alpha + 1) = \mathscr P(R(\alpha))$ and thus $y\subseteq\mathscr R(\alpha)$, consequently, $x\in R(\alpha)$ and $\rank(x) < \alpha$.
+
+    As for the second part, let $\alpha = \sup\{\rank(x) + 1\mid x\in y\}$. From (a), we know that $\alpha\le\rank(y)$. Further, each $x\in y$ has rank $< \alpha$ and thus $y\subseteq R(\alpha)$ whence $y\in R(\alpha + 1)$, consequently, $\rank(y)\le\alpha$.
+\end{proof}
+
+\begin{corollary}
+    There is no $x\in\WF$ such that $x\in x$.
+\end{corollary}
+\begin{proof}
+    If this were true, then $\rank(x) < \rank(x)$, a contradiction.
+\end{proof}
+
+\begin{lemma}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\forall\alpha\in\ON(\alpha\in\WF\wedge\rank(\alpha) = \alpha)$.
+        \item $\forall\alpha\in\ON(R(\alpha)\cap\ON = \alpha)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We shall prove (a) using transfinite induction on $\alpha$. That (a) holds for $\alpha = 0$ is trivial. Now suppose (a) holds for each $\beta < \alpha$. Then, we have 
+    \begin{equation*}
+        \rank(\alpha) = \sup\{\rank(\beta) + 1\mid\beta < \alpha\} = \sup\{\beta\mid\beta < \alpha\} = \alpha
+    \end{equation*}
+    which proves (a). It is easy to see that (b) is immediate from (a).
+\end{proof}
+
+% \begin{lemma}
+%     If $x\in\WF$, then 
+% \end{lemma}
+
+\begin{lemma}
+    $\forall x(x\in\WF\iff x\subseteq\WF)$.
+\end{lemma}
+\begin{proof}
+    The forward direction follows from the transitivity of $\WF$. As for the reverse direction, let $x\subseteq\WF$ and let 
+    \begin{equation*}
+        \alpha = \sup\{\rank(y) + 1\mid y\in x\}.
+    \end{equation*}
+    Then, $x\subseteq R(\alpha)$, consequently, $x\in R(\alpha + 1)$.
+\end{proof}
+
+\begin{lemma}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\forall n\in\omega(|R(n)| < \omega)$.
+        \item $|R(\omega)| = \omega$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    (a) is immediate from induction on $n$. Obviously, $\omega\subseteq R(\omega)$. On the other hand, note that $R(\omega)$ is a countable union of countable sets and is thus countable.
+\end{proof}
+
+\section{Well Founded Relations}

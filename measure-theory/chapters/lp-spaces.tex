@@ -21,6 +21,25 @@ This shows that if $[f],[g]\in L^p(E)$, then so does $[f + g]$.
 
 A function $f\in\mathcal F$ is said to be \textit{essentially bounded} if there is $M\ge 0$, called an \textit{essential upper bound} for $f$, for which $|f(x)|\le M$ for almost all $x\in E$. It is not hard to show that $L^\infty(E)$ is an $\R$-vector space. In conclusion, all the $L^p$ spaces are $\R$-vector spaces for $1\le p < \infty$.
 
+\subsection{\texorpdfstring{$L^\infty$ Spaces}{}}
+
+Let $E\subseteq\R$ be measurable. Define the function $\|\cdot\|_{\infty}: L^\infty(E)$ by 
+\begin{equation*}
+    \|[f]\|_\infty = \inf\{M\mid\text{$M$ is an essential upper bound for $f$}\}.
+\end{equation*}
+
+That this function is well defined on the equivalence classes is not hard to show. We now contend that $\|\cdot\|_\infty$ gives $L^\infty(E)$ the structure of a normed vector space. 
+
+\begin{lemma}
+    $\|f\|_\infty$ is an essential upper bound for $f$.
+\end{lemma}
+\begin{proof}
+    \todo{Add in later}
+\end{proof}
+
+As a consequence$\|f\|_\infty + \|g\|_\infty$ is an essential upper bound for $f + g$ on $E$ whence $\|f + g\|_\infty\le\|f\|_\infty + \|g\|_\infty$. In conclusion, the pair $(L^\infty(E),\|\cdot\|_\infty)$ forms a normed $\R$-vector space.
+
+
 \section{Some Inequalities}
 
 \begin{theorem}[Young]
@@ -96,6 +115,21 @@ Note, if $p,q > 1$ are such that $\frac{1}{p} + \frac{1}{q} = 1$, then $p$ and $
     That it forms an $\R$-vector space has been established. Further, due to Minkowski's Inequality, we conclude that $\|\cdot\|_p$ is indeed a norm on $L^p(E)$.
 \end{proof}
 
+\begin{proposition}
+    Let $E\subseteq\R$ have finite measure and $1\le p\le q\le\infty$. Then, $L^q(E)\subseteq L^p(E)$.
+\end{proposition}
+\begin{proof}
+    Let $f\in L^q(E)$ and define 
+    \begin{equation*}
+        A = \{x\in E\colon |f(x)|\le 1\}\qquad B = \{x\in E\colon |f(x)| > 1\}.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \|f\|_p^p\int_E|f|^p = \int_A |f|^p + \int_B |f|^p\le\int_A 1 + \int_B |f|^q\le m(A) + \|f\|_q^q < \infty
+    \end{equation*}
+    and the conclusion follows. 
+\end{proof}
+
 \section{Riesz-Fischer Theorem}
 
 \begin{definition}[Rapidly Cauchy Sequences]
@@ -145,4 +179,96 @@ Now, due to the above inequality, we see that $f - f_n\in L^p(E)$, therefore, $f
 \end{theorem}
 \begin{proof}
     We have shown that every Cauchy sequence in a normed vector space has a rapidly Cauchy subsequence, and from the above result, that subsequence must converge. Hence, every Cauchy sequence in $L^p(E)$ has a convergent subsequence, consequently the Cauchy sequence must converge\footnote{This is a well known result}.
+\end{proof}
+
+\section{Separability and Approximation}
+
+\begin{proposition}
+    Let $E\subseteq\R$ be measurable and $1\le p\le\infty$. Then the subspace of simple functions in $L^p(E)$ is dense in $L^p(E)$.
+\end{proposition}
+\begin{proof}
+\begin{description}
+    \item[Case 1: $1\le p < \infty$.] Let $f\in L^p(E)$. Due to the Simple Approximation Theorem, there is a sequence of simple functions $\{\varphi_n\}_{n = 1}^\infty$ converging to $f$ with $|\varphi_n|\le f$ for all $n\in\N$. We have 
+    \begin{equation*}
+        |f - \varphi_n|^p\le 2^p\max\{|f|^p,|\varphi_n|^p\} = 2^p|f|^p.
+    \end{equation*}
+    Then, due to the Dominated Convergence Theorem, we have 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_E|f - \varphi_n|^p = 0,
+    \end{equation*}
+    and the conclusion follows.
+
+    \item[Case 2: $p = \infty$.]\qedhere
+\end{description}
+\end{proof}
+
+\section{The Riemann Lebesgue Theorem}
+
+\begin{lemma}\thlabel{lem:continuous-dense-lp}
+    Let $I = [a,b]\subseteq\R$ be a compact interval. Then, $C(I)$ is dense in $L^p(I)$ for $1\le p\le\infty$.
+\end{lemma}
+Note that on an interval $I$, an equivalence class in $L^p(I)$ containing a continuous function is a singleton.
+\begin{proof}
+    \underline{\bfseries Case 1: $p < \infty$.} Let $f\in L^p(I)$. Define, for every positive integer $n$,
+    \begin{equation*}
+        I\supseteq E_n = \{x\in I\colon |f(x)|\le n\}
+    \end{equation*}
+    and $f_n := f\chi_{E_n}$. First, we have $|f_n|\le|f|$ on $I$ whence $f_n\in L^p(I)$ for every positive integer $n$. Furthermore, 
+    \begin{equation*}
+        |f - f_n|^p\le 2^p\max\{|f|^p, |f_n|^p\}\le 2^{p + 1}|f|^p.
+    \end{equation*}
+    Whereby due to the Lebesgue Dominated Convergence Theorem, 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_I |f - f_n|^p = 0.
+    \end{equation*}
+
+    Let now $\varepsilon > 0$ be given. Choose a positive integer $N$ such that $\|f - f_N\|_p < \varepsilon/2$ and let 
+    \begin{equation*}
+        \delta = \frac{\varepsilon^p}{2^p(2N)^p}.
+    \end{equation*}
+    Due to \thref{thm:lusin}, there is a continuous function $g: I\to\R$ that disagrees with $f_N$ on a subset say $E\subseteq I$ of measure less than $\delta$. Apply the transformations: 
+    \begin{equation*}
+        g\mapsto\min\{g, N\}\mapsto\max\{g,-N\}.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \|f_N - g\|_p^p = \int_E|f_N - g|^p\le\int_E(2N)^p\le\left(\frac{\varepsilon}{2}\right)^p.
+    \end{equation*}
+
+    Thus, 
+    \begin{equation*}
+        \|f - g\|\le\|f - f_N\|_p + \|f_N - g\|_p < \varepsilon.
+    \end{equation*}
+
+    \underline{\bfseries Case 1: $p = \infty$.}
+\end{proof}
+
+\begin{theorem}[Riemann-Lebesgue]
+    Let $I = [a,b]\subseteq\R$ be a compact interval and $f\in L^1(I)$. Then, 
+    \begin{equation*}
+        \lim_{n\to\infty}\int_I f(x)\sin(nx) = 0\quad\text{ and }\quad\lim_{n\to\infty}\int_I f(x)\cos(nx) = 0
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    The result is clear\footnote{Straightforward computation} for monomials of the form $x^n$ and thus is true for polynomials. Let $\varepsilon > 0$ be given and $f\in L^1(I)$. Due to \thref{lem:continuous-dense-lp}, there is a continuous function $g: I\to\R$ such that 
+    \begin{equation*}
+        \int_I|f(x) - g(x)| < \frac{\varepsilon}{3}.
+    \end{equation*}
+    In accordance with the Weierstrass Approximation Theorem, there is a polynomial $p(x)$ such that 
+    \begin{equation*}
+        \left|g(x) - P(x)\right| < \frac{\varepsilon}{3(b - a)}.
+    \end{equation*}
+    Then, we have 
+    \begin{align*}
+        \left|\int_I f(x)\sin(nx)\right| &\le\left|\int_I(f(x) - P(x))\sin(nx)\right| + \left|\int_I P(x)\sin(nx)\right|\\
+        &\le\int_I |f(x) - P(x)||\sin(nx)| + \left|\int_I P(x)\sin(nx)\right|\\
+        &\le\int_I|f(x) - P(x)| + \left|\int_I P(x)\sin(nx)\right|\\
+        &\le\int_I|f(x) - g(x)| + \int_I|g(x) - P(x)| + \left|\int_I P(x)\sin(nx)\right|
+    \end{align*}
+
+    We may now pick a positive integer $N$ such that for all $n\ge N$, 
+    \begin{equation*}
+        \left|\int_I P(x)\sin(nx)\right| < \frac{\varepsilon}{3}
+    \end{equation*}
+    and the conclusion follows.
 \end{proof}

@@ -8,6 +8,8 @@
 \newcommand{\type}{\operatorname{type}}
 \newcommand{\ON}{\mathbf{ON}}
 \newcommand{\V}{\mathbf{V}}
+\newcommand{\WF}{\mathbf{WF}}
+\newcommand{\rank}{\operatorname{rank}}
 
 \title{Set Theory}
 \author{Swayam Chube}
@@ -15,6 +17,11 @@
 
 \begin{document}
 \maketitle
+
+\begin{abstract}
+    The main reference for this was \cite{kunen}.
+\end{abstract}
+
 \tableofcontents
 
 \chapter{The Zermelo-Fraenkel Axioms}
@@ -25,4 +32,10 @@
 
 \chapter{Cardinal Numbers}
 \input{chapters/cardinals.tex}
+
+\chapter{Well Founded Sets}
+\input{chapters/well-foundation.tex}
+
+\bibliographystyle{alpha}
+\bibliography{../references.bib}
 \end{document}

@@ -1,0 +1,62 @@
+\begin{lemma}[Lubell-Yamamoto-Meshalkin]
+    Let $n$ be a positive integer and $\mathcal{F}$ be a family of subsets of $\{1,\ldots,n\}$ such that no set in $\mathcal{F}$ is contained in some other set in $\mathcal{F}$. Then, 
+    \begin{equation*}
+        \sum_{A\in\mathcal{F}}\frac{1}{\binom{n}{|A|}}\le1
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $\mathcal{F} = \{A_1,\ldots,A_m\}$ and $\pi_i$ be the set of all permutations of $\{1,\ldots,n\}$ such that the first $|A_i|$ elements of $\pi_i$ are the elements of $A_i$. It is not hard to see that $|\pi_i| = |A_i|!(n - |A_i|)!$. Further, we note that any permutation $\sigma$ of $\{1,\ldots,n\}$ may be in at most one of the $\pi_i$'s. Thus, double counting the pairs $(\pi_i,\sigma)$, we obtain:
+    \begin{equation*}
+        \sum_{i=1}^m|A_i|!(n - |A_i|)!\le n!
+    \end{equation*}
+    and we have the desired conclusion.
+\end{proof}
+
+\begin{theorem}[Bollob\'as, 1965]
+    Let $\{A_1,\ldots, A_m\}$ and $\{B_1,\ldots,B_m\}$ be two families of subsets of $\{1,\ldots,n\}$ such that 
+    \begin{itemize}
+        \item $A_i\cap B_i = \emptyset$ for all $1\le i\le m$
+        \item $A_i\cap B_j = \emptyset$ for all $1\le i, j\le m$ and $i\ne j$
+    \end{itemize}
+    Then 
+    \begin{equation*}
+        \sum_{i=1}^m\frac{1}{\binom{|A_i| + |B_i|}{|A_i|}}\le 1
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $\pi_i$ be the set of all permutations of $\{1,\ldots,n\}$ such that the elements of $A_i$ occur before the elements of $B_i$ (note that this is possible since $A_i\cap B_i = \emptyset$). Then 
+    \begin{equation*}
+        |\pi_i| = \binom{n}{|A_i| + |B_i|}\cdot|A_i|!\cdot|B_i|!\cdot(n - |A_i| - |B_i|)! = \frac{n!}{\binom{|A_i| + |B_i|}{|A_i|}}
+    \end{equation*}
+
+    Finally, we note that for $i\ne j$, $\pi_i\cap\pi_j=\emptyset$, which is not hard to show. This implies that 
+    \begin{equation*}
+        \sum_{i=1}^m|\pi_i|\le n!
+    \end{equation*}
+    giving us the desired conclusion.
+\end{proof}
+
+\begin{lemma}
+    Let $\mathcal{F}$ be an $r$-uniform family of sets. Such that the intersection of any $k$ sets, with $k\le r + 1$ is non-empty. Then, the intersection of all sets in $\mathcal{F}$ is non-empty.
+\end{lemma}
+\begin{proof}
+    Suppose not. Let $\mathcal{F} = \{A_1,\ldots,A_m\}$ be a minimal counter-example to the statement. Obviously, $m\ge r + 2$ and for each $i$, $\bigcup_{j\ne i} A_j$ is non-empty (since $\mathcal{F}$ is a minimal counter-example) and thus, let $b_i$ be one such element in said intersection. Suppose all $b_i$'s are distinct. Then, $\{b_2,\ldots,b_m\}\subseteq A_1$, implying that $|A_1|\ge m - 1\ge r + 1$, which is not possible. Thus, there must exist indices $i$ and $j$ with $i\ne j$ such that $b_i = b_j$. It is not hard to conclude from here that all sets in $\mathcal{F}$ must contain $b_i$.
+\end{proof}
+
+\begin{theorem}[Erd\"os-Ko-Rado, 1961]
+    Let $n$ be a positive integer, $X$ be an $n$-element set and $k\le n/2$ be a positive integer. Further, let $\mathcal{F}$ be a $k$-uniform, intersecting family of subsets of $X$. Then 
+    \begin{equation*}
+        |\mathcal{F}|\le\binom{n - 1}{k - 1}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $\mathcal{F} = \{A_1,\ldots,A_m\}$. Without loss of generality, let $X = \{1,\ldots,n\}$ and $\pi_i$ be the set of all cyclic permutations of $X$ in which the elements of $A_i$ occur consecutively. Of course, $|\pi_i| = k!(n - k)!$ for each $1\le i\le m$. Further, we note that any cyclic permutation of $X$ may occur in at most $k$ of the $\pi_i$'s. (This is an interesting argument). Then, double counting the pair $(C,\pi_i)$ where $C$ is a cyclic permutation, we have 
+    \begin{equation*}
+        m\cdot k!(n - k)!\le k\cdot(n - 1)!
+    \end{equation*}
+    this completes the proof.
+\end{proof}
+
+\begin{theorem}[Benny Sudakov]
+    Let $\mathscr{A} = \{A_1,\ldots,A_m\}$ and $\mathscr{B} = \{B_1,\ldots,B_p\}$ be families of distinct subsets of $\{1,\ldots,n\}$ such that $|A_i\cap B_j|$ is an odd number for all permissible $i$ and $j$. Then $mp\le 2^{n - 1}$.
+\end{theorem}

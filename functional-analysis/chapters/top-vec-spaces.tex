@@ -1,0 +1,323 @@
+\section{Normed Vector Spaces}
+
+\begin{definition}[Vector Space]
+    A vector space $V$ over a field $k$ is an Abelian group $(V,+)$ along with an action of the field $k$ satisfying 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\alpha(u + v) = \alpha u + \alpha v$ for all $\alpha\in k$ and $u,v\in V$ 
+        \item $1v = v$ for all $v\in V$ where $1$ is the multiplicative identity in $k$
+        \item $(\alpha\beta)v = \alpha(\beta v)$ for all $\alpha,\beta\in k$ and $v\in V$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[Linear Independence]
+    A finite subset $S$ of a $k$-vector space $V$ is said to be linearly independent if 
+    \begin{equation*}
+        \sum_{s\in S}\alpha_s s = 0\Longleftrightarrow\alpha_s = 0~\forall s\in S
+    \end{equation*}
+    An infinite subset $T$ of $V$ is said to be linearly independent if every finite subset is linearly independent.
+\end{definition}
+
+\begin{definition}[Norm, Normed Space]
+    For a $\K$-vector space $X$, a norm is a continuous function $\|\cdot\|:\K\to\R$ satisfying the following 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\|x\|\ge 0$ for all $x\in X$ and $\|x\| = 0$ if and only if $x = \mathbf 0$.
+        \item $\|\alpha x\| = |\alpha|\|x\|$ for all $\alpha\in\K$ 
+        \item $\|x + y\|\le \|x\| + \|y\|$ for all $x,y\in X$
+    \end{enumerate}
+    A vector space equipped with a norm is called a \textit{normed space}.
+\end{definition}
+
+\begin{proposition}
+    Let $V$ be a normed $\K$-vector space. Then the function $d:V\times V\to[0,\infty)$ given by $d(x,y) = \|x - y\|$ is a metric.
+\end{proposition}
+\begin{proof}
+    It suffices to verify the triangle inequality, 
+    \begin{equation*}
+        d(x,y) + d(y,z) = \|x - y\| + \|y - z\|\ge\|(x - y) + (y - z)\| = \|x - z\|
+    \end{equation*}
+    and the conclusion follows.
+\end{proof}
+
+\begin{mdframed}
+    It is important to keep in mind that every norm induces a metric but the converse is not true. Take for example the discrete metric on $\R$. Obviously, $\R$ is an $\R$-vector space but is not normed, for 
+    \begin{equation*}
+        \|2  - 0\| = 1\ne 2 = 2\|1 - 0\|
+    \end{equation*}
+\end{mdframed}
+
+\begin{definition}[Equivalence of Norms]
+    Two norms $\|\cdot\|_{(1)}$ and $\|\cdot\|_{(2)}$ on a $\K$-vector space $V$ are said to be \textit{equivalent} if there are positive constants $C_1$ and $C_2$ such that 
+    \begin{equation*}
+        \|v\|_{(1)}\le C_1\|v\|_{(2)}\text{ and }\|v\|_{(2)}\le C_2\|v\|_{(1)}~\forall v\in V
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    The \textit{equivalence of norms} relation is indeed an equivalence relation.
+\end{proposition}
+\begin{proof}
+    Reflexivity follows from taking $C_1 = C_2 = 1$ and symmetry is implicit in the definition. As for transitivity, suppose 
+    \begin{align*}
+        \|v\|_{(1)}\le C_1\|v\|_{(2)}\text{ and }\|v\|_{(2)}\le C_2\|v\|_{(1)}~\forall v\in V\\
+        \|v\|_{(2)}\le C_1\|v\|_{(3)}\text{ and }\|v\|_{(3)}\le D_2\|v\|_{(2)}~\forall v\in V
+    \end{align*}
+    Then, $\|v\|_{(1)}\le C_1D_1\|v\|_{(3)}$ and $\|v\|_{(3)}\le C_2D_2\|v\|_{(1)}$ for all $v\in V$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Equivalent norms induce the same topology.
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{theorem}
+    Let $V$ be a finite dimensional $K$-vector space. Then all norms on $V$ are equivalent.
+\end{theorem}
+\begin{proof}
+    We shall show all norms are equivalent to the $\ell_1$-norm. Let $\|\cdot\|$ be an arbitrary norm and $\{e_1,\ldots,e_n\}$ be a (finite) basis for $V$. First, we shall show that the norm function $\|\cdot\|$ is continuous under the $\ell_1$-norm $\|\cdot\|_1$. Let $\varepsilon > 0$ be given. Let $v,v'\in V$ and have representations $v = \alpha_1e_1 + \cdots + \alpha_ne_n$ and $v' = \alpha_1'e_1 + \cdots + \alpha_n'v_n$. Then, due to the triange inequality, we have 
+    \begin{equation*}
+        |\|v\| - \|v'\||\le\|v-v'\| = \left\|\sum_{i = 1}^n(\alpha_i - \alpha_i')e_i\right\|\le\sum_{i = 1}^n|\alpha_i - \alpha_i'|\|e_i\|\le\|v - v'\|_1\max_{1\le i\le n}\|e_i\|
+    \end{equation*}
+    Let $\delta = \varepsilon/\max\limits_{1\le i\le n}\|e_i\|$. As a result, whenever $\|v - v'\|_1 < \delta$, we have $|\|v\| - \|v'\|| < \varepsilon$, implying continuity.
+
+    Since the unit sphere under the $\ell_1$-norm is compact and $\|\cdot\|$ is continuous, due to the extreme value theorem, there are positive reals $C_1$ and $C_2$ such that 
+    \begin{equation*}
+        C_1 = \min_{\|v\|_1 = 1}\|v\|\qquad C_2 = \max_{\|v\|_1 = 1}\|v\|
+    \end{equation*}
+    Finally, for any $v\in V\backslash\{0\}$, let $u = v/\|v\|_1$. Then $\|v\| = \|v\|_1\|u\|$ and thus, 
+    \begin{equation*}
+        C_1\|v\|_1\le\|v\|\le C_2\|v\|_1
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\section{Banach Spaces}
+\begin{definition}[Banach Space]
+    A \textit{Banach Space} is a normed space which is complete with respect to the induced metric.
+\end{definition}
+
+For a metric space $X$, we denote $\mathcal C_\infty(X)$ by the set of all bounded functions $f: X\to\bbC$. That this is a $\K$-vector space is trivial. We define the norm 
+\begin{equation*}
+    \|f\| = \sup_{x\in X} |f(x)|
+\end{equation*}
+This norm is well defined since we are considering the set of all bounded functions. That this is a norm is now trivial to check.
+
+\begin{theorem}
+    Let $X$ be a metric space. Then $\mathcal C_\infty(X)$ is a Banach space.
+\end{theorem}
+\begin{proof}
+    Let $\{f_n\}$ be a Cauchy sequence in $\mathcal C_\infty(X)$ under the $\sup$-norm. Then, it follows that for any $x\in X$, the sequence $\{f_n(x)\}$ is Cauchy and hence has a limit, say $f(x)$. This defines a function $f: X\to\bbC$. We shall show that $f\in\mathcal C_\infty(X)$. 
+
+    First, to see the boundedness of $f$, note that there is $N\in\N$ such that for all $m\ge N$, $\|f_m - f_N\| < 1$. As a result, $\|f_m\| < \|f_N\| + 1$ for all $m\ge N$. As a result, $\|f\|\le\|f_N\| + 1$ and $f$ is bounded.
+
+    To see that $f$ is continuous, we shall show that $f_n\to f$ uniformly, and we would be done due to the uniform limit theorem. Let $\varepsilon > 0$ be given. Then, there is some $N\in\N$ such that for all $m,n\ge N$, $\|f_m - f_n\| < \varepsilon/2$. Taking the limit $m\to\infty$, we have that for all $n\ge N$, $\|f - f_n\|\le\varepsilon/2 < \varepsilon$ and thus the convergence is uniform and $f$ is continuous. This completes the proof.
+\end{proof}
+
+\begin{mdframed}
+    We now show an example of a normed space which is not Banach. Take for example the $\R$-vector space $\R^\infty$, the set of all sequences which are eventually $0$. Consider the sequence $\{\mathbf x_n\}$ given by 
+    \begin{equation*}
+        \mathbf x_n(m) = 
+        \begin{cases}
+            \frac{1}{m} & m\le n\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    That this is a Cauchy sequence under the $\sup$-norm is trivial. But the limit of such a sequence is not in $\R^\infty$ which is not hard to argue.
+\end{mdframed}
+
+\begin{definition}
+    For a normed $\K$-vector space $V$ and a sequence $\{v_n\}$ in $V$, the series $\sum_{n = 1}^\infty v_n$ is said to be summable if the partial sums converge. Similarly, it is said to be absolutely summable if the sequence of partial sums $\{\sum_{k = 1}^n \|v_k\|\}$ converges.
+\end{definition}
+
+\begin{theorem}
+    A normed $\K$-vector space $V$ is Banach if and only if every absolutely summable series is summable.
+\end{theorem}
+\begin{proof}
+    The forward direction of the assertion is trivial, we shall show the converse. Let $V$ be such that every absolutely summable series is summable and let $\{v_n\}$ be a Cauchy sequence in $V$. Then, by definition, for all $k\in\N$, there is $N_k\in\N$ such that whenever $m,n\ge N_k$, $\|v_m - v_n\| < 2^{-k}$. Further, one may choose the $N_k$'s in strictly increasing order. Define the sequence $\{u_n\}$ by $u_n = v_{N_{n + 1}} - v_{N_{n - 1}}$ for all $n\in\N$. Then, the series $\{u_n\}$ is absolutely summable and therefore summable. Let $w = \sum_{n = 1}^\infty u_n$ and define $v = w + v_{N_1}$. We shall show that $v_n\to v$. Indeed, for any $n,k\in\N$, we have 
+    \begin{equation*}
+        \|v - v_n\| = \|w - (v_{N_k} - v_{N_1}) + (v_{N_k} - v_n)\|\le\|w - (v_{N_k} - v_{N_1})\| + \|v_{N_k} - v_n\|
+    \end{equation*}
+    First, note that $v_{N_k} - v_{N_1}$ is the $(k - 1)$-th partial sum. Let $\varepsilon > 0$ be given. Then, there is large enough $k$ such that $\|w - (v_{N_k} - v_{N_1})\| < \varepsilon/2$ and $\|v_{N_k} - v_n\| < \varepsilon/2$ for all $n\ge N_k$. The conclusion follows.
+\end{proof}
+
+\section{Operators and Functionals}
+
+\begin{definition}[Linear Operator]
+    Let $V, W$ be $\K$-vector spaces. A linear operator is a map $T: V\to W$ such that 
+    \begin{equation*}
+        T(a_1v_1 + a_2v_2) = a_1T(v_1) + a_2T(v_2)\quad\forall v_1,v_2\in V,~a_1,a_2\in\K
+    \end{equation*}
+\end{definition}
+
+We shall mainly concern ourselves with continuous linear operators, that is, linear operators such that $T^{-1}(U)$ is open in $V$ for all open sets $U$ in $W$\footnote{This is just the topological definition of a continuous function}.
+
+\begin{proposition}
+    Let $V$ and $W$ be normed $\K$-vector spaces. The following are equivalent to the continuity of a linear operator $T: V\to W$.
+    \begin{enumerate}[label=(\alph*)]
+    \item For every convergent sequence $v_n\to v$ in $V$, the sequence $T(v_n)$ converges to $T(v)$ in $W$ 
+    \item For each open set $U$ in $W$, $T^{-1}(U)$ is open in $V$ 
+    \item For each closed set $A$ in $W$, $T^{-1}(A)$ is closed in $V$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Straightforward definition pushing.
+\end{proof}
+
+\begin{definition}[Bounded Linear Operator]
+    A linear operator $T: V\to W$ between two normed $\K$-vector spaces is said to be \textit{bounded} if there is a constant $C\ge 0$ such that 
+    \begin{equation*}
+        \|T(v)\|_W\le C\|v\|_V\quad\forall v\in V
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    A linear map $T:V\to W$ between two normed $\K$-vector spaces is continuous if and only if it is bounded in the sense that there exists a constant $C\ge 0$ such that 
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+As a result, we see that the set of all continuous operators is the same as the set of all bounded operators. We denote this set by $\mathcal B(V,W)$. 
+
+\begin{proposition}
+    Let $V$ and $W$ be normed $\K$-vector spaces. Then, the function $\|\cdot\|:\mathcal B(V,W)\to[0,\infty)$ given by 
+    \begin{equation*}
+        \|T\| = \sup_{\|v\| = 1}\|T(v)\|
+    \end{equation*}
+    is a norm. As a result, $\mathcal B(V,W)$ is a normed vector space.
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{theorem}
+    Let $W$ be a $\K$-Banach space and $V$ a normed $\K$-vector space. Then, $\mathcal B(V,W)$ with the aforementioned norm is a Banach space.
+\end{theorem}
+\begin{proof}
+    Let $\{T_n\}$ be a Cauchy sequence of linear operators in $\mathcal B(V,W)$. Then, for each $v\in V$, $\{T_n(v)\}$ is a Cauchy sequence and therefore converges in $W$ (since it is Banach). Define the map $T: V\to W$ by $T(v) = \lim_{n\to\infty} T_n(v)$. We shall first show that $T$ is a linear operator and then show that it is bounded, which would imply the completeness of $\mathcal B(V,W)$.
+
+    Let $a_1,a_2\in\K$ and $v_1,v_2\in V$. Now, since each sequence $\{T_n(v_1)\}$ and $\{T_n(v_2)\}$ is Cauchy, so is $\{T_n(a_1v_1 + a_2v_2) = a_1T(v_1) + a_2T(v_2)\}$, and converges to $a_1T(v_1) + a_2T(v_2)$, which shows that $T$ is a linear operator.
+
+    To see boundedness, note that every Cauchy sequence is bounded, therefore, there is some $C > 0$ such that $\|T_n\| < C$ for all $n\in\N$. As a result, for all $v\in V$, 
+    \begin{equation*}
+        \|T_n(v)\|\le\|T_n\|\|v\|\le C\|v\|
+    \end{equation*}
+    In the limit $n\to\infty$, we note that $\|T(v)\|\le C\|v\|$ and the conclusion follows.
+\end{proof}
+\begin{corollary}
+    The dual space of a normed space is a Banach space.
+\end{corollary}
+
+\section{Subspaces and Quotients}
+
+\begin{definition}[Subspaces]
+    A subspace $W$ of a $\K$-vector space $V$ is a $\K$-vector space such that $W\subseteq V$. If $V$ is a normed space, then the restriction of the same norm to $W$ is a norm on $W$ and therefore $W$ obtains a natural structure of a normed vector space.
+\end{definition}
+
+The quotient follows naturally if one is familiar with modules. Since both $V$ and $W$ are $\K$-modules, so is the quotient module $V/W$ and is consequently a vector space.
+
+\begin{definition}[Seminorm]
+    
+\end{definition}
+
+\section{Uniform Boundedness and Open Mapping Theorems}
+
+\begin{theorem}[Uniform Boundedness Principle/Banach-Steinhaus Theorem]
+    Let $B$ be a Banach space and suppose $\{T_n\}$ is a sequence of bounded linear operators $T_n: B\to V$ where $V$ is a normed space. Suppose that for each $b\in B$, the set $\{T_n(b)\mid n\in\N\}$ is bounded, then $\sup\limits_{n\in\N}\|T_n\|$ is finite.
+\end{theorem}
+\begin{proof}
+    Define for every $N\in\N$,
+    \begin{equation*}
+        S_N := \left\{b\in B\colon \|b\|\le 1~\text{and}~\|T_n(b)\|_V\le N,~\forall n\in\N\right\}.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        S_N = \bigcap_{n = 1}^\infty T_n^{-1}(\overline{B_V(0,N)})\cap\overline{B_B(0,1)}
+    \end{equation*}
+    and is closed. Since $\{T_n(b)\}$ is bounded for every $b\in B$, we have 
+    \begin{equation*}
+        \overline{B_B(0,1)} = \bigcup_{n = 1}^\infty S_n.
+    \end{equation*}
+    Due to the Baire Category Theorem, there is some $N\in\N$ such that $S_N$ has a nonempty interior whence contains a closed ball of the form $\overline{B(v,\delta)}$ for some $\delta > 0$.
+
+    Let $w\in B$ with $\|w\| = \delta$. Then, $v + w\in\overline{B(v,\delta)}$ and thus $\|T_n(v + w)\|\le N$ for every positive integer $n$. Consequently, for each $n\in\N$,
+    \begin{equation*}
+        \|T_n(w)\|\le\|T(v + w)\| + \|T(v)\|\le 2N.
+    \end{equation*}
+    Therefore, $\|T_n\|\le 2N/\|w\| = 2N/\delta$ for every positive integer $n$, thereby completing the proof.
+\end{proof}
+
+
+\begin{theorem}[Open Mapping Theorem/Banach-Schauder Theorem]\thlabel{thm:open-mapping}
+    Let $B_1, B_2$ be Banach spaces. If $T: B_1\to B_2$ is a continuous linear operator, then $T$ is an open map.
+\end{theorem}
+\begin{proof}
+We shall denote open balls in $B_i$ by $B_i(v, r)$ for $i\in\{1,2\}$. The main idea of the proof is to show that $0$ lies in the interior of $T(B_1(0,1))$. It is not hard to argue that this would finish the proof. We shall proceed in two steps.
+\begin{description}
+    \item[Step I:] $0$ lies in the interior of $\overline{T(B_1(0,1))}$.
+
+    \item[Step II:] $0$ lies in the interior of $T(B_1(0,1))$.
+
+    From the conclusion of \textbf{Step I}, we see that for every $v\in B_2$ with $\|v\| = \delta$, there is a sequence $\{u_n\}$ in $B_1(0,1)$ such that $\{T(u_n)\}$ converges to $v$. In particular, for every $v\in B_2$ with $\|v\| = \delta$, there is $u\in B_1$ with $\|v - T(u)\| < \frac{1}{2}\|v\|$. 
+
+    Now, pick any $v\in B_2$. Then, $v' = \delta v/\|v\|\in B_2$ with $\|v'\| = \delta$ whence there is $u'\in B_1$ with $\|u'\| < 1$ such that $\|v' - T(u')\| < \|v'\|/2$. Multiplying with $\|v\|/\delta$ we see that there is $u\in B_1$ with $\|u\| < C\|v\|$ such that $\|v - T(u)\| < \|v\|/2$ where $C = 1/\delta$.
+
+    Let $w_1 := w\in B_2(0,1)$. Pick some $u_1 := u\in B_1$ such that $\|w_1 - T(u_1)\| < \|w\|/2$. Define $w_2 : = w_1 - T(u_1)$ and proceed similarly to obtain a sequence $\{u_n\}_{n = 1}^\infty$. Note that 
+    \begin{equation*}
+        \|u_j\|\le C\|w_{j - 1}\| = C2^{-(j - 1)}\|w\|.
+    \end{equation*}
+    Thus, the sequence $\{u_n\}$ is absolutely summable. Furthermore, 
+    \begin{equation*}
+        w - T\left(\sum_{j = 1}^n u_j\right) = w_1 - \sum_{j = 1}^n (w_j - w_{j + 1}) = w_{n + 1}.
+    \end{equation*}
+    Define $u := \sum_{j = 1}^\infty u_n$. Then $T(u) = w$ and 
+    \begin{equation*}
+        \|u\|\le\sum_{n = 1}^\infty C2^{-(n - 1)}\|w\| = 2C\|w\|.
+    \end{equation*}
+
+    In conclusion, every $w\in B_2(0,1)$ is the image of some $u\in \overline{B_1(0,2C)}\subseteq B_1(0, 3C)$. Upon scaling, every $w\in B_2(0, 1/3C)$ is the image of some $u\in B_1(0,1)$ and thus $0$ lies in the interior of $T(B_1(0,1))$ whereby completing the proof.\qedhere
+\end{description}
+\end{proof}
+
+\begin{example}
+    Let $B$ be a $\K$-vector space and $\|\cdot\|_1$ and $\|\cdot\|_2$ be two norms on $B$ that give it the structure of a Banach space. Suppose there is $K > 0$ such that $\|\cdot\|_1\le K\|\cdot\|_2$. Then, $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent norms.
+\end{example}
+\begin{proof}
+    Consider $\id: (B,\|\cdot\|_2)\to(B,\|\cdot\|_1)$. This is a bounded linear operator and thus continuous. Due to \thref{thm:open-mapping}, $\id$ is a homeomorphism and the conclusion follows.
+\end{proof}
+
+\begin{theorem}[Closed Graph Theorem]
+    Let $B_1$ and $B_2$ be Banach spaces and $T: B_1\to B_2$ a linear operator. Then $T$ is continuous if and only if 
+    \begin{equation*}
+        \Gr(T) = \{x\times T(x)\mid x\in B_1\}\subseteq B_1\times B_2
+    \end{equation*}
+    is closed.
+\end{theorem}
+\begin{proof}
+    The forward direction is trivial, since $B_2$ is Hausdorff. Conversely, suppose $\Gr(T)\subseteq B_1\times B_2$ is closed, then it is a Banach space. Consider the following commutative diagram: 
+    \begin{equation*}
+        \xymatrix {
+            B_1\times B_2\ar@{->>}[r]^-{\pi_2} & B_2\\
+            B_1\ar[u]^S\ar[ru]_T &
+        }
+    \end{equation*}
+    where $S: B_1\to B_2\times B_2$ is given by $x\mapsto x\times T(x)$. Let $\pi_1:\Gr(T)\onto B_1$ denote the natural projection, which is continuous and $\pi_1\circ S = \id_{B_1}$. Further, since $\pi_1$ is a bijection, due to \thref{thm:open-mapping}, both $\pi_1$ and $S$ are homeomorphisms. In particular, $S$ is continuous. If $\iota: \Gr(T)\into B_1\times B_2$ is the inclusion map, then $T = \pi_2\circ\iota\circ S$ is continuous, being the composition of continuous functions. This completes the proof.
+\end{proof}
+
+\section{Hahn-Banach Theorem}
+
+\begin{lemma}
+    Let $V$ be a normed vector space, $M\subseteq V$ a vector subspace, $u: M\to\bbC$ be a linear map such that $|u(t)|\le C\|t\|_V$ for all $t\in M$ and finally, let $x\notin M$. Denote by $M'$ the vector subspace $M + x\bbC$. Then there exists $u': M'\to\bbC$ such that $u'|_M = u$ and $|u'(t + ax)|\le C\|t + ax\|_V$ for all $t\in M$ and $a\in\bbC$.
+\end{lemma}
+\begin{proof}
+    \todo{Long ass proof}
+\end{proof}
+
+From the above lemma, we have the ``Hahn-Banach Theorem''.
+
+\begin{theorem}[Hahn-Banach]
+    Let $V$ be a normed vector space, $M\subseteq V$ a vector subspace and $u: M\to\bbC$ be a linear map such that $|u(t)|\le C\|t\|_V$ for all $t\in M$. Then there is a continuous linear functional $U: V\to\bbC$ such that $U|_M = u$ and $\|U\|\le C$.
+\end{theorem}
+\begin{proof}
+    Standard application of Zorn's Lemma.
+\end{proof}

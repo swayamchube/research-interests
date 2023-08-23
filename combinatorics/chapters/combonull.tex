@@ -1,0 +1,70 @@
+\begin{theorem}[Alon-Tarsi, 1992]
+Let $\mathbb{F}$ be a field and $f\in\mathbb{F}[x_1,\ldots,x_n]$. Suppose $\deg(f) = d = \sum_{i=1}^nd_i$ and the coefficient of $\prod_{i=1}^nx_i^{d_i}$ is non-zero. Let $L_1,\ldots,L_n$ be subsets of $\mathbb{F}$ with $|L_i| > d_i$. Then there exist $a_i\in L_i$ for each $i$ such that $f(a_1,\ldots,a_n)\ne0$.
+\end{theorem}
+\begin{proof}
+    The proof is by induction on $n$. The base case with $n = 1$ follows from the fact that a polynomial of degree $n$ may have at most $n$ zeros in a field, counting multiplicity. Suppose now that $n > 1$. Let us assume that $|L_n| = d_n + 1$. Define the polynomial $h(x)$ as follows:
+    \begin{equation*}
+        \prod_{t\in L_n}(x_n - t) = x^{d_n + 1} - h(x)
+    \end{equation*}
+    One notes that for all $t\in L_n$, $h(t) = t^{d_n + 1}$. Let us now define $\tilde{f}$ as the remainder obtained on dividing $f$ by $x_n^{d_n + 1} - h(x_n)$. We first note that the coefficient of $\prod_{i=1}^nx_i^{d_i}$ does not change. Further, the degree of $x_n$ in any term in $\tilde{f}$ is at most $d_n$. We may now group the terms of $\tilde{f}$ with respect to powers of $x_n$, that is 
+    \begin{equation*}
+        \tilde{f}(x_1,\ldots,x_{n - 1}) = \sum_{i=0}^{d_n}g_i(x_1,\ldots,x_{n-1})x_n^i
+    \end{equation*}
+    Let us now focus on $g_{d_n}(x_1,\ldots,x_{n-1})$, in which the coefficient of the term $\prod_{i=1}^{n - 1}x_i^{d_i}$ is equal to the coefficient of the term $\prod_{i=1}^{n}x_i^{d_i}$ in $\tilde{f}(x_1,\ldots,x_n)$, which we have concluded to be non-zero. Therefore, due to the induction hypothesis, there must exist $a_1\in L_1,\cdots,a_{n-1}\in L_{n - 1}$ such that $g_{d_n}(a_1,\ldots,a_{n - 1})\ne0$. Finally, we can choose a suitable $x_n$ in $L_n$ such that the polynomial 
+    \begin{equation*}
+        \sum_{i=0}^{d_n}g_i(a_1,\ldots,a_{n-1})x_n^i
+    \end{equation*}
+    is non-zero, since its leading coefficient is non-zero. This finishes the proof.
+\end{proof}
+
+\begin{theorem}[Cauchy-Davenport]
+    Let $p$ be a prime and $A,B\subseteq\mathbb{Z}_p$. Then 
+    \begin{equation*}
+        |A + B|\ge\min\{p, |A| + |B| - 1\}
+    \end{equation*}
+    where 
+    \begin{equation*}
+        A + B = \{a + b\mid a\in A,~b\in B\}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    First, suppose $|A| + |B| > p$. Then, for any $g\in\mathbb{Z}_p$, the sets $A$, $g - B$ must intersect. Suppose now that $|A| + |B|\le p$. Assume for the sake of contradiction that the cardinality of $C = A + B$ is less than $|A| + |B| - 1$. Consider the polynoimal:
+    \begin{equation*}
+        f(x, y) = \prod_{c\in C}(x + y - c)
+    \end{equation*}
+    the degree of this polynoimal is $|C|\le |A| + |B| - 2$, as a result, there exist $t_A, t_B\in\mathbb{Z}$ such that $t_A + t_B = |C|$, $t_A\le|A| - 1$, $t_B\le|B| - 1$ and the coefficient of $x^{t_A}y^{t_B}$ is non-zero, this is because any binomial coefficient of the form $\binom{|C|}{x}$ is not divisible by $p$. Then, due to the Combinatorial Nullstellensatz, there exists $(a,b)\in A\times B$ such that $f(a,b)\ne0$, a contradiction. This finishes the proof.
+\end{proof}
+
+\begin{example}[IMO 2007/6]
+    Let $n$ be a positive integer. Consider 
+    \begin{equation*}
+        S = \{(x, y, z)\mid x,y,z\in\{0,1,\ldots,n\},~x + y + z > 0\}
+    \end{equation*}
+    as a set of $(n + 1)^3 - 1$ points in the three-dimensional space. Determine the smallest possible number of planes, the union of which contains $S$ but does not include $(0,0,0)$.
+\end{example}
+\begin{proof}
+    The answer is $3n$, with the planes being $x + y + z = i$ for $1\le i\le 3n$. Suppose $k < 3n$ is achievable by the set of planes $\{a_ix + b_iy + c_iz - d_i = 0\}$. Consider now the polynomial:
+    \begin{equation*}
+        P(x, y, z) = \alpha\prod_{i=1}^n(x - i)(y - i)(z - i) - \prod_{i=1}^k(a_ix + b_iy + c_iz - d_i)
+    \end{equation*}
+    with $\alpha$ chosen such that $P(0, 0, 0) = 0$. First, note that $\deg(P) = 3n$, since we have assumed $k < 3n$ and the coefficient of $x^ny^nz^n$ is $\alpha\ne 0$ since none of the $d_i$'s can be zero. Then, due to the Combinatorial Nullstellensatz on the three sets $L_x = L_y = L_z = \{0,\ldots,n\}$, we may conclude that there is a solution to $P(x, y, z)\ne 0$ in $L_x\times L_y\times L_z$, a contradiction.
+\end{proof}
+
+\begin{theorem}[Erd\"os-Heillbronn]
+    Let $p$ be a prime and $A\subseteq\mathbb{Z}_p$. Then 
+    \begin{equation*}
+        |A \widehat{+} A|\ge\min\{p, 2|A| - 3\}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We may suppose that $2a - 3 < p$ where $a = |A|$ and let $C = A \widehat{+} A$ with $|C| = m$. Consider the polynoimal 
+    \begin{equation*}
+        f(x,y) = (x - y)\prod_{c\in C}(x + y - c)
+    \end{equation*}
+    of degree $m + 1$. The coefficient of $x^{a - 1}y^{m - a + 2}$ is 
+    \begin{equation*}
+        \binom{m}{a - 2} - \binom{m}{a - 1} = \left(\frac{m - 2a + 3}{m - a + 2}\right)\binom{m}{a - 2}
+    \end{equation*}
+
+    Now, suppose that $m < 2a - 3$, then the coefficient is non-zero and $m - a + 2 < a - 1 < a$. As a result, there is a solution $(a_1, a_2)$ such that $f(a_1, a_2)\ne0$ and thus $a_1\ne a_2$. A contradiction. This finishes the proof.
+\end{proof}

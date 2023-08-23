@@ -1,0 +1,174 @@
+This chapter is mainly taken from \cite{weibel}.
+
+\section{Basic Definitions}
+
+\begin{definition}
+    A \emph{chain complex} $C$ of $R$-modules is a family $\{C_n\}_{n\in\Z}$ of $R$-modules, together with $R$-module homomorphisms $d_n: C_n\to C_{n - 1}$ such that the composition $d_{n}\circ d_{n - 1} = 0$ for each $n\in\Z$. Define the \emph{$n$-th homology module} of $C$ to be 
+    \begin{equation*}
+        H_n(C) := \ker(d_n)/\im(d_{n + 1}).
+    \end{equation*}
+
+    A \emph{morphism} of chain complexes $u: C\to D$ is a collection of $R$-module homomorphisms $u_n: C_n\to D_n$ such that the following diagram commutes 
+    \begin{equation*}
+        \xymatrix {
+            \cdots\ar[r]^{d_{n + 2}} & C_{n + 1}\ar[d]^{u_{n + 1}}\ar[r]^{d_{n + 1}} & C_n\ar[d]^{u_n}\ar[r]^{d_n} & \cdots\\
+            \cdots\ar[r]_{d_{n + 2}} & D_{n + 1}\ar[r]_{d_{n + 1}} & D_n\ar[r]_{d_n} & \cdots
+        }.
+    \end{equation*}
+    We denote the category of chain complexes of $R$-modules by $\catCh(R-\catMod)$.
+\end{definition}
+
+\begin{proposition}
+    A morphism $u: C\to D$ of chain complexes induces a sequence of $R$-module homomorphisms between the homology modules, denoted by $u_\ast$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    An $\mathbf{Ab}$-category is a locally small category $\scrA$ in which $\Hom(A,B)$ has the structure of an abelian group for all $A,B\in\scrA$ and composition of morphisms distributes over addition. That is, given a diagram 
+    \begin{equation*}
+        \xymatrix {
+            A\ar[r]^f & B\ar@<-0.5ex>[r]_{g}\ar@<0.5ex>[r]^{g'} & C\ar[r]^h & D
+        },
+    \end{equation*}
+    we have $h\circ(g + g')\circ f = h\circ g\circ f + h\circ g'\circ f$ in $\Hom(A,D)$.
+
+    An \emph{additive functor} $F:\scrA\to\scrB$ is a functor between $\mathbf{Ab}$-categories such that the induced map $\Hom(A,A')\to\Hom(FA,FA')$ is a group homomorphism.
+
+    An \emph{additive category} is an $\mathbf{Ab}$-category $\scrA$ with a null (zero) object and a product $A\times B$ for every pair $A,B\in\scrA$.
+\end{definition}
+
+\begin{proposition}
+    In an additive category, finite products are the same as finite coproducts.
+\end{proposition}
+\begin{proof}
+    Let $A,B\in\scrA$ have a product $A\times B\in\scrA$ with maps $p: A\times B\to A$ and $q: A\times B\to B$. Consider the pair of maps $\id_A: A\to A$ and $0: A\to B$. This induces a unique map $i: A\to A\times B$ such that $p\circ i = \id_A$ and $q\circ i = 0$. Similarly, there is a map $j: B\to A\times B$ such that $p\circ j = 0$ and $q\circ j = \id_B$. Note that 
+    \begin{equation*}
+        p\circ(i\circ p + j\circ q) = p \qquad q\circ(i\circ p + j\circ q) = q
+    \end{equation*}
+    whence $i\circ p + j\circ q = \id_{A\times B}$.
+
+    We contend that the pair $(i,j)$ defines a coproduct of $A, B$. Indeed, if $D\in\scrA$ with maps $f: A\to D$ and $g: B\to D$, set $d = f\circ p + g\circ q: A\times B\to D$. We have 
+    \begin{equation*}
+        d\circ i = (f\circ p + g\circ q)\circ i = f\circ p\circ i + g\circ q\circ i = f
+    \end{equation*}
+    and similarly, $d\circ j = g$. It now remains to show the uniqueness of $d$. Suppose $d': A\times B\to D$ is a morphism, then 
+    \begin{equation*}
+        (d - d')\circ\id_{A\times B} = (d - d')\circ(i\circ p + j\circ q) = 0
+    \end{equation*}
+    whereby completing the proof. 
+\end{proof}
+
+\begin{definition}[Kernel, Cokernel]
+    Let $\scrA$ be an additive category. A \emph{kernel} of a morphism $f: B\to C$ is defined to be a map $i: A\to B$ such that $f\circ i = 0$ and for every other morphism $j: D\to B$ with $f\circ j = 0$, there is a unique morphism $u: D\to A$ such that $j = i\circ u$. This is expressed in the following diagram.
+    \begin{equation*}
+        \xymatrix {
+            & B\ar[rd]^f & \\
+            & A\ar[u]^i\ar[r]_0 & C\\
+            D\ar[ruu]^j\ar@{.>}[ru]|-{\exists! u}\ar[rru]_0 & & 
+        }
+    \end{equation*}
+
+    Similarly, a \emph{cokernel} of $f: B\to C$ is defined to be a map $p: C\to A$ such that $p\circ f = 0$ and for any morphism $q: C\to D$ with $q\circ f = 0$, there is a unique map $u: A\to D$ such that $q = u\circ p$. This is expressed in the following diagram.
+    \begin{equation*}
+        \xymatrix {
+            & B\ar[rd]^f\ar[d]_0\ar[ldd]_0 & \\
+            & A\ar@{.>}[ld]|-{\exists!u} & C\ar[l]^p\ar[lld]^q\\
+            D & & 
+        }
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    A kernel is always monic and a cokernel is always epic.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    An \emph{abelian category} is an additive category $\scrA$ such that 
+    \begin{enumerate}
+        \item every morphism in $\scrA$ has a kernel and a cokernel,
+        \item every monic in $\scrA$ is the kernel of its cokernel and
+        \item every epi in $\scrA$ is the cokernel of its kernel.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[Freyd-Mitchell Embedding Theorem]
+    Let $\scrA$ be a \underline{small} abelian category. Then, there is a ring $R$ and a full, faithful and exact functor $F:\scrA\to R-\catMod$.
+\end{theorem}
+
+In particular, what this means is that in all diagram chases involving objects in a general abelian category, we may treat the objects as elements in $R-\catMod$ for some ring $R$, which makes our life much easier.
+
+\begin{definition}
+    Let $C$ and $D$ be chain complexes. Two chain maps $f,g: C\to D$ are said to be \emph{chain homotopic} if there are $R$-module homomorphisms $h_n: C_n\to D_{n + 1}$ such that 
+    \begin{equation*}
+        f_n - g_n = d_{n + 1}\circ h_n + h_{n - 1}\circ d_n.
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    If $f,g: C\to D$ are chain homotopic, then $f_\ast = g_\ast$.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Some Diagram Chasing}
+
+\begin{theorem}[Snake Lemma]\thlabel{lem:snake}
+    Let $A,B,C,A',B',C'$ be $R$-modules that fit into the following commutative diagram
+    \begin{equation*}
+        \xymatrix {
+            & \ker\alpha\ar[d]\ar@{.>}[r] & \ker\beta\ar[d]\ar@{.>}[r] & \ker\gamma\ar[d]\\
+            & A\ar[r]^f\ar[d]_\alpha & B\ar[r]^g\ar[d]_\beta & C\ar[r]\ar[d]_\gamma & 0\\
+            0\ar[r] & A'\ar[r]_{f'}\ar[d] & B'\ar[r]_{g'}\ar[d] & C'\ar[d] &\\
+            & \coker\alpha\ar@{.>}[r] & \coker\beta\ar@{.>}[r] & \coker\gamma
+        }
+    \end{equation*}
+    with exact rows. Then, there is a map $\partial:\ker\gamma\to\coker\alpha$ which makes the induced sequence 
+    \begin{equation*}
+        \ker\alpha\to\ker\beta\to\ker\gamma\stackrel{\partial}{\longrightarrow}\coker\alpha\to\coker\beta\to\coker\gamma
+    \end{equation*}
+    exact. Further, if $f$ is injective, then so is the induced map $\ker\alpha\to\ker\beta$ and if $g'$ is surjective, then so is the induced map $\coker\beta\to\coker\gamma$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{corollary}[Five Lemma]
+    Consider the following commutative diagram
+    \begin{equation*}
+        \xymatrix {
+            A\ar[d]_\alpha\ar[r] & B\ar[d]_\beta\ar[r] & C\ar[d]_\gamma\ar[r] & D\ar[d]_\delta\ar[r] & E\ar[d]_\eta\\
+            A'\ar[r] & B'\ar[r] & C'\ar[r] & D'\ar[r] & E'
+        }
+    \end{equation*}
+    with exact rows. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\beta,\delta$ are injective and $\alpha$ is surjective, then $\gamma$ is injective.
+        \item If $\beta,\delta$ are surjective and $\eta$ is injective, then $\gamma$ is surjective.
+    \end{enumerate}
+\end{corollary}
+
+\begin{theorem}\thlabel{thm:ses-to-les}
+    Let $0\to A\stackrel{f}{\longrightarrow}B\stackrel{g}{\longrightarrow}C\to 0$ be a short exact sequence of chain complexes. Then, there is a long exact sequence of homology groups given by 
+    \begin{equation*}
+        \cdots\to H_n(A)\to H_n(B)\to H_n(C)\stackrel{\delta}{\longrightarrow} H_{n - 1}(A)\to H_{n - 1}(B)\to H_{n - 1}(C)\to\cdots
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Note that the kernel of the map $d: A_n\to Z_{n - 1}A$ contains $d(A_{n - 1})$, therefore, we have an induced map $\wt d: A_n/d(A_{n + 1})\to Z_{n - 1}A$ given by $d(a_n + d(A_{n + 1})) = d(a_n)$ for all $a_n\in A_n$. Note that $\ker\wt d = H_n(A)$ and $\coker\wt d = H_{n - 1}(A)$. Similarly, define $\wt d$ for the chain complexes $B$ and $C$. 
+
+    We now have a commutative diagram
+    \begin{equation*}
+        \xymatrix {
+            & A_n/d(A_{n + 1})\ar[r]\ar[d]_{\wt d} & B_n/d(B_{n + 1})\ar[r]\ar[d]_{\wt d} & C_n/d(C_{n + 1})\ar[r]\ar[d]_{\wt d} & 0\\
+            0\ar[r] & Z_{n - 1}(A)\ar[r] & Z_{n - 1}(B)\ar[r] & Z_{n - 1}(C) & 
+        }
+    \end{equation*}
+    with exact rows. The conclusion now follows from \thref{lem:snake}
+\end{proof}
+
+\section{Derived Functors}

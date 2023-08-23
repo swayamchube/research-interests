@@ -1,0 +1,355 @@
+\documentclass{amsart}
+
+\RequirePackage{
+    amsmath, 
+    amsthm, 
+    amssymb, 
+    amsfonts,
+    xcolor, 
+    geometry, 
+    tikz, 
+    hyperref, 
+    mathrsfs,
+    enumitem,
+    fancyhdr,
+    lipsum,
+    nicefrac,
+    wasysym,
+    mathtools,
+    xspace,
+    anyfontsize,
+    todonotes,
+    fancyhdr,
+    lastpage,
+    stmaryrd,
+    commath,
+    float       % because vanilla LaTeX loses its mind trying to place my floats
+    % titlesec
+}
+\RequirePackage{theoremref} % For referencing theorems
+\RequirePackage[framemethod = tikz]{mdframed}
+\usetikzlibrary{automata, arrows.meta, positioning, cd} % good ol' Theoretical CS 
+\RequirePackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+
+% Input and Fonts
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathpazo}
+% \RequirePackage{euler}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+\SetSymbolFont{wasy}{bold}{U}{wasy}{m}{n}
+% \RequirePackage{euler}
+
+
+\hypersetup {
+    colorlinks=true, % because why not?
+}
+
+\geometry{
+    margin=1in, % uniformity 
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {\itshape}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                 
+
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}{Remark}[section]
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\footrulewidth}{\headrulewidth}
+\setlength{\headheight}{15pt}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+\newcommand{\fraka}{\mathfrak a} % ideal
+\newcommand{\frakb}{\mathfrak b} % ideal
+\newcommand{\frakc}{\mathfrak c} % ideal
+\newcommand{\frakm}{\mathfrak m} % maximal ideal
+\newcommand{\frakp}{\mathfrak p} % prime ideal
+\newcommand{\frakq}{\mathfrak q} % qrime ideal
+\newcommand{\frakN}{\mathfrak N} % nilradical 
+\newcommand{\frakR}{\mathfrak R} % jacobson radical
+
+% Algebraic Geometry 
+\newcommand{\bbA}{\mathbb A}
+\newcommand{\calO}{\mathcal O}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrG}{\mathscr G}
+\newcommand{\Top}{\mathfrak{Top}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+
+% Miscellaneous
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\op}{\text{op}}
+
+\title{Derived Categories}
+\author{Swayam Chube}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Lecture 1}
+
+\begin{definition}
+    $f: X\to Y$ is a \emph{quasi-isomorphism} if $H^n(f): H^n(X)\to H^n(Y)$ is an isomorphism for all $n\in\Z$.
+\end{definition}
+
+
+\newcommand{\Mor}{\operatorname{Mor}}
+\newcommand{\ob}{\operatorname{ob}}
+
+\begin{definition}
+    Let $\mathcal C$ be a category. We say that $\mathcal C$ is an \emph{additive category} if it satisfies the following: 
+    \begin{enumerate}
+        \item For all $A,B\in\ob(\mathcal C)$, the sets $\Hom_{\mathcal C}(A,B)$ is an abelian group.
+        \item If $f: A\to B$, $g_1,g_2: B\to C$ and $h: C\to D$ are morphisms. Then, 
+        \begin{equation*}
+            h\circ(g_1 + g_2)\circ f = h\circ g_1\circ f + h\circ g_2\circ f.
+        \end{equation*}
+        \item There is a zero object in $\mathcal C$, that is, there is an object which is both the initial and terminal object.
+        \item Finite products and finite coproducts exist in this category.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[$R$-additive category]
+    Let $R$ be a commutative ring and $\mathcal C$ an additive category. We say that $\mathcal C$ is an $R$-category if 
+    \begin{enumerate}
+        \item for all $A,B\in\ob(\mathcal C)$, $\Hom_{\mathcal C}(A,B)$ is an $R$-module. 
+        \item For $\in\Hom(A,B)$, $g_1,g_2\in\Hom(B,C)$ and $h\in\Hom(C,D)$, 
+        \begin{align*}
+            (r_1g_1 + r_2g_2)\circ(sf) = (r_1s)g_1\circ f + (r_2s)g_2\circ f\\
+            sh\circ(r_1g_1 + r_2g_2) = (sr_1)h\circ g_1 + (sr_2)h\circ g_2.
+        \end{align*}
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Let $\mathcal C,\mathcal D$ be $R$-additive categories and $F:\mathcal C\to\mathcal D$ a functor. We say $F$ is $R$-linear if the map 
+    \begin{equation*}
+        \Hom_{\mathcal C}(A,B)\to\Hom_{\mathcal D}(F(A), F(B))
+    \end{equation*}
+    is $R$-linear.
+\end{definition}
+
+
+\begin{definition}
+    Let $\mathcal A$ be an abelian category and $\mathcal C = \operatorname{ch}(\mathcal A)$, the category of chain complexs on $\mathcal A$. Let $C,D\in\ob(\mathcal C)$ be chain complexes and $f,g: C\to D$ be co-chain maps. We say that $f$ is homotopic to $g$, written $f\simeq g$ if if there are maps $s_n: C^n\to D^{n - 1}$ such that 
+    \begin{equation*}
+        f_n - g_n = s_{n + 1}\circ d_n^C + d_{n - 1}^D\circ s_n.
+    \end{equation*}
+    If $f\simeq 0$, then we say $f$ is nulhomotopic. Denote by $I(C,D)$ the collection of nulhomotpic maps.
+\end{definition}
+
+\begin{remark}
+    If $u: B\to C$ and $v: D\to E$ are co-chain maps and $f: C\to D$ is nulhomotopic, then $f\circ u$ and $v\circ f$ are also nulhomotopic. 
+\end{remark}
+
+\begin{definition}[Homotopy Category]
+    
+\end{definition}
+
+Let $R$ be a commutative ring and $C$ an additive $R$-category with $\Sigma:\mathcal C\to\mathcal C$ is an invertible functor, that is, an equivalence of categories
+
+\begin{definition}
+    A candidate triangle in $\mathcal C$ with respect to $\Sigma$ is a diagram of the form 
+    \begin{equation*}
+        \xymatrix {
+            X\ar[r]^u & Y\ar[r]^v & Z\ar[r]^w & \Sigma X
+        }
+    \end{equation*}
+    such that $v\circ u = w\circ v = 0$.
+
+    A morphism $\eta:(X,Y,Z,u,v,w)\to (X',Y',Z',u',v',w')$ is a triple $f,g,h$ such that the following diagram commutes: 
+    \begin{equation*}
+        \xymatrix {
+            X\ar[d]_f\ar[r]^u & Y\ar[d]_g\ar[r]^v & Z\ar[d]_h\ar[r]^w & \Sigma X\ar[d]_{\Sigma f}\\
+            X'\ar[r]_{u'} & Y'\ar[r]_{v'} & Z'\ar[r]_{w'} & \Sigma X'
+        }
+    \end{equation*}
+\end{definition}
+
+\begin{definition}[Pre-triangulated Category]
+    Let $\mathcal C$ be an additive $R$-category, $\Sigma$ an equivalence of categories $\mathcal C\to\mathcal C$. A \textbf{class} of candidate triangles with respect to $\Sigma$, called \emph{distinguished triangles}.
+    \begin{enumerate}
+        \item The candidate triangle $X\stackrel{\id}{\longrightarrow}X\to0\to\Sigma X$ is distinguished.
+        \item If $(X,Y,Z,u,v,w)$ is distinguished and $(X',Y',Z',u',v',w')$ is a candidate triangle such that there is an isomorphism between them, then the latter is also a distinguished triangle.
+        \item Let $u: X\to Y$ be any morphism. Then, there exists a distinguished triangle fo the form 
+        \begin{equation*}
+            \xymatrix {
+                X\ar[r]^u & Y\ar[r] & Z\ar[r] & \Sigma X.
+            }
+        \end{equation*}
+        \item (Rotation of Triangles) If $X\stackrel{u}{to}Y\stackrel{v}{\to} Z\stackrel{w}{\to}\Sigma X$ is a distinguished triangle, then so are 
+        \begin{equation*}
+            \xymatrix {
+                Y\ar[r]^v & Z\ar[r]^w & \Sigma X\ar[r]^{-\Sigma u} & \Sigma Y\\
+                \Sigma^{-1}Z\ar[r]^{-\Sigma^{-1}w} & X\ar[r]^u & Y\ar[r]^v & Z
+            }
+        \end{equation*}
+        \item For any commutative diagram of the form 
+        \begin{equation*}
+            \xymatrix {
+                X\ar[r]^u\ar[d]_f & Y\ar[r]^v\ar[d]_g & Z\ar[r]\ar@{.>}[d]_{\exists h} & \Sigma X\ar[d]_{\Sigma f}\\
+                X'\ar[r]_{u'} & Y'\ar[r]_{v'} & Z'\ar[r]_{w'} & \Sigma X'
+            }
+        \end{equation*}
+    \end{enumerate}
+\end{definition}
+
+\begin{proposition}
+    Let $\mathcal C$ be a pre triangulated category and let 
+    \begin{equation*}
+        \xymatrix {
+            X\ar[r]^u & Y\ar[r]^v & Z\ar[r]^w & \Sigma X
+        }
+    \end{equation*}
+    be a triangle and $U\in\ob(\mathcal C)$. Then, the sequence 
+    \begin{equation*}
+        \xymatrix {
+            \Hom(U,X)\ar[r]^{f_\ast} & \Hom(U,Y)\ar[r]^{g_\ast} & \Hom(U,Z)
+        }
+    \end{equation*}
+    is exact.
+\end{proposition}
+\begin{proof}
+    That $\im f_\ast\subseteq\ker g_\ast$ is straightforward. Conversely, suppose $t\in\ker g_\ast$, that is, $g\circ t = 0$. Consider now the commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            U\ar[r]\ar[d] & 0\ar[r]\ar[d] & \Sigma^{-1}U\ar[r]\ar@{.>}[d] & \Sigma^{-1}U\ar[d]^{\Sigma^{-1}t}\\
+            Y\ar[r]_g & Z\ar[r]_h & \Sigma^{-1}X\ar[r]_{\Sigma^{-1}f} & \Sigma^{-1}Y
+        }
+    \end{equation*}
+\end{proof}
+
+A similar result holds for $\Hom(-,U)$.
+
+\begin{proposition}
+    Consider the commutative diagram: 
+    \begin{equation*}
+        \xymatrix {
+            X\ar[d]_f\ar[r] & Y\ar[d]_g\ar[r] & Z\ar[d]_h\ar[r] & \Sigma X\ar[d]_{\Sigma f}\\
+            X'\ar[r] & Y'\ar[r] & Z'\ar[r] & \Sigma X'
+        }
+    \end{equation*}
+    If $f$ and $g$ are isomorphisms, then so is $h$.
+\end{proposition}
+\begin{proof}
+    Hom the entire thing using $\Hom(Z',-)$ and then use the five lemma to see that $h_\ast: \Hom(Z',Z)\to\Hom(Z',Z')$ is an isomorphism and thus, there is $\theta: Z'\to Z'$ such that $h\circ\theta = \id_{Z'}$.
+
+    Similarly, using $\Hom(-,Z)$, there is $\delta: Z'\to Z$ such that $\delta\circ h = \id_Z$ whence $h$ is an isomorphism.
+\end{proof}
+
+\newcommand{\cone}{\operatorname{cone}}
+
+\begin{definition}
+    Let $\mathcal A$ be an abelian category and $K(A)$ be the \emph{homotopy category}. Let $f: B\to C$ be a chain map. The \emph{cone of $f$} is defined as 
+    \begin{equation*}
+        \cone(f)^n := B^{n + 1}\oplus C^n
+    \end{equation*}
+    and the boundary maps are given by $\partial^n(b,c) = \left(-\partial_{n + 1}^B(b), \partial_n^C(c) - f(b)\right)$. \textcolor{red}{Show that this is a complex}.
+\end{definition}
+
+\begin{definition}[Shift of a Complex]
+    Let $C$ be a co-chain complex and $m$ an integer. Define the complex $C[m]$ by $C[m]^n = C^{m + n}$ and the map $d: C[m]^n\to C[m]^{n + 1}$ is given by $(-1)^md^{n + m}$.
+\end{definition}
+
+\begin{proposition}
+    There is a short exact sequence of the form 
+\end{proposition}
+
+\end{document}

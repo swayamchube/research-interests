@@ -1,0 +1,200 @@
+\documentclass{amsart}
+
+\RequirePackage{
+    amsmath, 
+    amsthm, 
+    amssymb, 
+    amsfonts,
+    xcolor, 
+    geometry, 
+    tikz, 
+    hyperref, 
+    mathrsfs,
+    enumitem,
+    fancyhdr,
+    lipsum,
+    nicefrac,
+    wasysym,
+    mathtools,
+    xspace,
+    anyfontsize,
+    todonotes,
+    fancyhdr,
+    lastpage,
+    stmaryrd,
+    commath,
+    float       % because vanilla LaTeX loses its mind trying to place my floats
+    % titlesec
+}
+\RequirePackage{theoremref} % For referencing theorems
+\RequirePackage[framemethod = tikz]{mdframed}
+\usetikzlibrary{automata, arrows.meta, positioning, cd} % good ol' Theoretical CS 
+\RequirePackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+
+% Input and Fonts
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathpazo}
+% \RequirePackage{euler}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+\SetSymbolFont{wasy}{bold}{U}{wasy}{m}{n}
+% \RequirePackage{euler}
+
+
+\hypersetup {
+    colorlinks=true, % because why not?
+}
+
+\geometry{
+    margin=1in, % uniformity 
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {\itshape}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                 
+
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}{Remark}[section]
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\footrulewidth}{\headrulewidth}
+\setlength{\headheight}{15pt}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+\newcommand{\fraka}{\mathfrak a} % ideal
+\newcommand{\frakb}{\mathfrak b} % ideal
+\newcommand{\frakc}{\mathfrak c} % ideal
+\newcommand{\frakm}{\mathfrak m} % maximal ideal
+\newcommand{\frakp}{\mathfrak p} % prime ideal
+\newcommand{\frakq}{\mathfrak q} % qrime ideal
+\newcommand{\frakN}{\mathfrak N} % nilradical 
+\newcommand{\frakR}{\mathfrak R} % jacobson radical
+
+% Algebraic Geometry 
+\newcommand{\bbA}{\mathbb A}
+\newcommand{\calO}{\mathcal O}
+\newcommand{\scrF}{\mathscr F}
+\newcommand{\scrG}{\mathscr G}
+\newcommand{\Top}{\mathfrak{Top}}
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+
+% Miscellaneous
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\op}{\text{op}}
+
+
+
+
+\title{Algebraic Geometry}
+\author{Swayam Chube}
+\date{\today}
+
+\begin{document}
+\begin{abstract}
+  These are terse ``notes'' in algebraic geometry which I've made for fun. I don't intend for these to be useful to anyone but myself. These are mostly drawn from a combination of \cite{vakil-foag} through self-teaching along with some discussions with other students. I do not prove all results and use quite a few blackboxes from commutative algebra. Most results can be found with proof in \cite{AM69} or \cite{Lan02} as I shall reference them throughout the text.
+\end{abstract}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Sheaves}
+\input{sections/sheaves.tex}
+
+\newpage
+\bibliographystyle{alpha}
+\bibliography{../../references.bib}
+\end{document}

@@ -22,6 +22,10 @@
     An \emph{atlas} $\mathscr A$ is a collection $\{(U_i,\varphi_i)\}_{i\in I}$ such that $\{U_i\}_{i\in I}$ forms an open cover of $M$.
 \end{definition}
 
+\begin{remark}
+    Instead of specifying a chart $(U,\varphi)$ we might as well specify the coordiante functions $(U,(x^1,\dots,x^n))$. Both these formulations are equivalent since one can be recovered from the other.
+\end{remark}
+
 \begin{example}[The Product Manifold]
     Let $M_1,\ldots,M_k$ be topological manifolds of dimensions $n_1,\ldots,n_k$ respectively. Then, the topological space $M_1\times\cdots\times M_k$ is Hausdorff and second countable. Further, let $\mathbf p = (p_1,\ldots,p_k)\in M_1\times\cdots\times M_k$. Then, for each index $j$, there is a coordinate chart $(U_j,\varphi_j)$ containing $p_j$. It is not hard to argue that 
     \begin{equation*}
@@ -185,6 +189,10 @@ The above lemma will be useful in defining the tangent bundle on a smooth manifo
 \end{proposition}
 
 \section{Smooth Maps}
+
+\begin{definition}
+    If $M$ is a smooth $n$-manifold (without boundary), 
+\end{definition}
 
 \begin{definition}
     Let $M$ and $N$ be smooth manifolds with or without boundary and $A\subseteq M$. A map $F:A\to N$ is said to be \emph{smooth on $A$} if for every $p\in A$ there is an open neighborhood $W\subseteq M$ and a smooth map $\wt F: W\to N$ whose restriction to $W\cap A$ agrees with $F$.

@@ -1,0 +1,27 @@
+\begin{definition}[Tensor]
+    Let $V$ be an $\R$-vector space. A function $T:V^k\to\R$ is called \textit{multilinear} if for each $i$ with $1\le i\le k$ we have 
+    \begin{align*}
+        T(v_1,\ldots,v_i + v_i',\ldots,v_k) &= T(v_1,\ldots,v_i,\ldots,v_k) + T(v_1,\ldots,v_i',\ldots, v_k)\\
+        T(v_1,\ldots,av_i,\ldots,v_k) &= aT(v_1,\ldots,v_i,\ldots,v_k)
+    \end{align*}
+
+    A multilinear function is called a $k$-tensor on $V$ and the set of all $k$-tensors, denoted by $\mathfrak{J}^k(V)$ becomes an $\R$-vector space
+\end{definition}
+
+\begin{definition}[Tensor Product]
+    Let $V$ be an $\R$-vector space. For $S\in\mathfrak{J}^k(V)$ and $T\in\mathfrak{J}^l(V)$, we define the \textit{tensor product} $S\otimes T\in\mathfrak{J}^{k + l}(V)$ in the most obvious sense.
+\end{definition}
+
+Obviously, $S\otimes T\ne T\otimes S$. Furthermore, one notes that $\mathfrak{J}^1(V) = V^*$, the dual space. Recall that for finite dimensional spaces, $\dim V^* = \dim V$.
+
+\begin{theorem}
+    Let $v_1,\ldots v_n$ be a basis for $V$ and let $\varphi_1,\ldots\varphi_n$ be the dual basis, $\varphi_i(v_j) = \delta_{ij}$. Then the set of all $K$-fold tensor products 
+    \begin{equation*}
+        \varphi_{i_1}\otimes\cdots\otimes\varphi_{i_k}\qquad 1\le i_1,\ldots,i_k\le n
+    \end{equation*}
+    is a basis for $\mathfrak{J}^k(v)$ which therefore has dimension $n^k$.
+\end{theorem}
+\begin{proof}
+    Straightforward
+\end{proof}
+

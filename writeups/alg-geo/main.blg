@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: alpha.bst
+Reallocating 'name_of_file' (item size: 1) to 21 items.
+Database file #1: ../../references.bib
+Warning--empty publisher in vakil-foag
+You've used 3 entries,
+            2543 wiz_defined-function locations,
+            574 strings with 4677 characters,
+and the built_in function-call counts, 891 in all, are:
+= -- 74
+> -- 35
+< -- 2
++ -- 11
+- -- 10
+* -- 49
+:= -- 158
+add.period$ -- 9
+call.type$ -- 3
+change.case$ -- 13
+chr.to.int$ -- 3
+cite$ -- 4
+duplicate$ -- 47
+empty$ -- 76
+format.name$ -- 15
+if$ -- 177
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 6
+newline$ -- 18
+num.names$ -- 9
+pop$ -- 28
+preamble$ -- 1
+purify$ -- 19
+quote$ -- 0
+skip$ -- 33
+stack$ -- 0
+substring$ -- 22
+swap$ -- 3
+text.length$ -- 2
+text.prefix$ -- 2
+top$ -- 0
+type$ -- 12
+warning$ -- 1
+while$ -- 7
+width$ -- 4
+write$ -- 37
+(There was 1 warning)

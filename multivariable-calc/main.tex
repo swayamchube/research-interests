@@ -1,0 +1,47 @@
+\documentclass[12pt, oneside]{report}
+
+\usepackage[]{amsmath, amsthm, amssymb, xcolor, geometry, hyperref, mathrsfs,mathpazo, mdframed}
+
+\usepackage[T1]{fontenc}
+
+\hypersetup {
+    colorlinks=true,
+}
+
+\title{Multivariable Calculus}
+\author{Swayam Chube}
+\date{\today}
+
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem*{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defi}[thm]{Definition}
+
+\newenvironment{theorem}{\begin{mdframed}\begin{thm}}{\end{thm}\end{mdframed}}
+\newenvironment{proposition}{\begin{mdframed}\begin{prop}}{\end{prop}\end{mdframed}}
+\newenvironment{lemma}{\begin{mdframed}\begin{lem}}{\end{lem}\end{mdframed}}
+\newenvironment{corollary}{\begin{mdframed}\begin{cor}}{\end{cor}\end{mdframed}}
+\newenvironment{definition}{\begin{mdframed}\begin{defi}}{\end{defi}\end{mdframed}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{document}
+    \maketitle 
+    \tableofcontents
+    \setcounter{chapter}{-1}
+    \chapter{Preliminaries}
+    \input{chapters/preliminaries.tex}
+    \chapter{Differentiation}
+    \input{chapters/differentiation.tex}
+    \chapter{Integration}
+    \input{chapters/integration.tex}
+    \chapter{Integration on Chains}
+    \input{chapters/integration-chains.tex}
+\end{document}

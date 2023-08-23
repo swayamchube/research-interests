@@ -1,0 +1,352 @@
+\section{Multiple Integrals}
+\begin{definition}[Partition]
+    A \textit{partition} of a rectangle $\mathcal{R} = [a_1,b_1]\times\cdots\times[a_n,b_n]$ is a collection $P = (P_1,\ldots,P_n)$ where each $P_i$ is a partition of the interval $[a_i,b_i]$. A partition divides $\mathcal{R}$ into \textit{subrectangles}.
+\end{definition}
+
+\begin{definition}[Refinement]
+    A partition $P'$ of $\mathcal{R}$ is said to refine $P$ if every subrectangle of $P'$ is contained in a subrectangle of $P$.
+\end{definition}
+
+\begin{definition}[Upper and Lower Sums]
+    Let $\mathcal{R}(P)$ denote the subrectangles induced by $P$. Further, for each subrectangle $S$, let $m_S(f)$ and $M_S(f)$ denote the minimum and maximum values taken by $f$ on $S$ respectively. Then, we define 
+    \begin{equation*}
+        L(f,P) = \sum_{S\in\mathcal{R}(P)}m_S(f)v(S)\qquad U(f,P) = \sum_{S\in\mathcal{R}(P)}M_S(f)v(S)
+    \end{equation*}
+    as the lower and upper sums of $f$ for $P$ respectively.
+\end{definition}
+
+\begin{lemma}
+    Suppose the partition $P'$ refines $P$ over $\mathcal{R}$. Then, 
+    \begin{equation*}
+        L(f,P)\le L(f,P') \qquad\text{and}\qquad U(f,P')\le U(f,P)
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Obviously, for each $S\in\mathcal{R}(P')$, there is a unique $\mathscr{C}(S)\in\mathcal{R}(P)$ containing it. Therefore, 
+    \begin{equation*}
+        L(f,P') = \sum_{S\in\mathcal{R}(P')}m_S(f)v(S)\ge\sum_{S\in\mathcal{R}(P')}m_{\mathscr{C}(S)}(f)v(S) = L(f,P)
+    \end{equation*}
+    and similarly, for the upper sum.
+\end{proof}
+
+\begin{corollary}
+    If $P$ and $P'$ are any two partitions, then $L(f,P')\le U(f,P)$.
+\end{corollary}
+\begin{proof}
+    Let $P''$ be a partition which refines both $P$ and $P'$. Then, 
+    \begin{equation*}
+        L(f,P')\le L(f,P'')\le U(f,P'')\le U(f,P)
+    \end{equation*}
+\end{proof}
+
+\begin{definition}
+    Let $f:A\subseteq\R^n\to\R$ be a function where $A$ is a closed rectangle. Let $\mathscr{P}$ be the set of all possible partitions of $A$. Then $f$ is said to be integrable over $A$ if 
+    \begin{equation*}
+        \sup_{P\in\mathscr{P}}L(f,P) = \inf_{P\in\mathscr{P}}U(f,P)
+    \end{equation*}
+    and this common value is said to be the \textit{integral} of $f$ over $A$ and is often denoted by $\int_A f~d\mathbf{x}$.
+\end{definition}
+
+\begin{definition}[Measure Zero]
+    A suset $A$ of $\R^n$ has measure $0$ if for every $\varepsilon > 0$, there is a countable cover $\{U_1, U_2,\ldots\}$ of $A$ by closed/open rectangles such that $\sum_{i = 1}^\infty v(U_i) < \varepsilon$.
+\end{definition}
+
+\begin{proposition}
+    If $A = \bigcup_{i = 1}^\infty A_i$ and each $A_i$ has measure $0$, then $A$ has measure $0$.
+\end{proposition}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
+\begin{definition}[Content Zero]
+    A subset $A$ of $\R^n$ has content$0$ if for every $\varepsilon > 0$, there is a finite cover $\{U_1,\ldots,U_n\}$ of $A$ by closed/open rectangles such that $\sum_{i = 1}^n v(U_i) < \varepsilon$.
+\end{definition}
+
+A set $A$ with content $0$ obviously has measure $0$.
+
+\begin{proposition}
+    If $A$ is compact and has measure $0$, then $A$ has content $0$.
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{definition}[Oscillation]
+    Let $f:A\subseteq\R^n\to\R$ be a function. Define 
+    \begin{align*}
+        M(a,f,\delta) &= \sup\{f(x): x\in A,~\|x - a\| < \delta\}\\
+        m(a,f,\delta) &= \inf\{f(x): x\in A,~\|x - a\| < \delta\}
+    \end{align*}
+
+    The \textit{oscillation} $o(f,a)$ of $f$ at $a$ is defined by 
+    \begin{equation*}
+        o(f,a) = \lim_{\delta\to0}M(a,f,\delta) - m(a,f,\delta)
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    Let $A$ be a closed rectangle and let $f:A\to\R$ be a bounded function such that $o(f,x) < \varepsilon$ for all $x\in A$. Then there is a partition $P$ of $A$ with $U(f,P) - L(f, P) < \varepsilon\cdot v(A)$.
+\end{lemma}
+\begin{proof}
+    Using the definition of a limit, for each $x\in A$, there is an open set $U_x$ containing $x$ such that $M_{U_x}(f) - m_{U_x}(f) < \varepsilon$. Since $A$ is compact, there is $\{U_1,\ldots, U_m\}\subseteq\{U_x\mid x\in A\}$ that forms a finite subcover for $A$.
+
+    Now, choose a partition $P$ of $A$ such that for all subrectangles $S\in P$, there is an open set $U_j$ containing it. Then, we may trivially note that 
+    \begin{equation*}
+        M_S(f) - m_S(f) < M_{U_j}(f) - m_{U_j}(f) < \varepsilon
+    \end{equation*}
+
+    The conclusion is now obvious.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a closed rectangle and $f:A\to\R$ a bounded function. Let $B = \{x\mid\text{$f$ is not continuous at $x$}\}$. Then $f$ is integrable if and only if $B$ is a set of measure $0$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+
+\begin{definition}[Characteristic Function]
+    If $C\subseteq\R^n$, the \textit{characteristic function} of $C$ is defined as 
+    \begin{equation*}
+        \chi_C = 
+        \begin{cases}
+            1 & x\in C\\
+            0 & x\notin C
+        \end{cases}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    Let $A$ be a closed rectangle and $C\subseteq A$. Then, $\chi_C:A\to\R$ is integrable if and only if $\partial C$ has measure $0$.
+\end{theorem}
+\begin{proof}
+    It is not hard to argue that 
+    \begin{equation*}
+        \partial C = \{x\mid \text{$\chi_C$ is not continuous at $x$}\}
+    \end{equation*}
+    This implies the desired conclusion.
+\end{proof}
+
+
+\begin{definition}[Jordan Measurable, Content]
+    A bounded set $C$ whose boundary has measure $0$ is called \textit{Jordan-measurable}. The integral $\int_C1$ is called the \textit{content} of $C$ or the \textit{volume} of $C$.
+\end{definition}
+
+\subsection{Properties of Integrals}
+
+In what follows $A\subseteq\R^n$ is a closed rectangle.
+
+\begin{proposition}
+    Let $f,g:A\to\R$ be bounded integrable functions. Then $f + g$ and $cf$ are integrable for all $c\in\R$.
+\end{proposition}
+\begin{proof}
+    Obviously, $f + g$ is bounded. Using the integrability of $f$ and $g$, there are partitions $P_f$ and $P_g$ of $A$ such that $U(f,P_f) - L(f,P_f) < \varepsilon/2$ and $U(g,P_g) - L(g,P_g) < \varepsilon/2$. Let $P$ be a partition of $A$ that refines both $P_f$ and $P_g$. Then, 
+    \begin{align*}
+        U(f + g,P) - L(f + g, P) &= \sum_{S\in P}(M_S(f + g) - m_S(f + g))v(S)\\
+        &\le\sum_{S\in P}(M_S(f) + M_S(g) - m_S(f) - m_S(g))v(S)\\
+        &= \left(U(f, P) - L(f, P)\right) - \left(U(g, P) - L(g, P)\right)v(S)\\
+        &< \varepsilon
+    \end{align*}
+    Therefore, $f + g$ is integrable.
+
+    The assertion regarding $cf$ is trivial.
+\end{proof}
+
+The converse of the statement regarding $f + g$ is obviously not true. Since $\mathbf{0} = \chi_{\Q\cap[0,1]} + (-\chi_{\Q\cap[0,1]})$ but neither oef the functions on the right hand side of the equality are integrable.
+
+\begin{lemma}
+    Let $f:A\to\R$ be a bounded integrable function. Then $|f|$ is integrable.
+\end{lemma}
+\begin{proof}
+    Obviously $|f|$ is bounded. Since $f$ is integrable, there is a partition $P$ of $A$ with $U(f, P) - L(f,P) < \varepsilon$. Then, 
+    \begin{align*}
+        U(|f|, P) - L(|f|, P) &= \sum_{S\in P}(M_S(|f|) - m_S(|f|))v(S)\\
+        &\le\sum_{S\in P}(M_S(f) - m_S(f))v(S)\\
+        &< \varepsilon
+    \end{align*}
+    Therefore $|f|$ is integrable.
+\end{proof}
+
+\begin{lemma}
+    Let $f:A\to\R$ be a bounded integrable function. Then $f^2$ is integrable.
+\end{lemma}
+\begin{proof}
+    Let $T = \sup_{x\in A}f(x)$. Using the integrability of $f$, there is a partition $P$ of $A$ such that $U(f,P) - L(f,P) < \varepsilon/2T$. As a result, we have 
+    \begin{align*}
+        U(f^2, P) - L(f^2, P) &= \sum_{S\in P}(M_S(f^2) - m_S(f^2))v(S)\\
+        &\le\sum_{S\in P}2T(M_S(f) - m_S(f))v(S)\\
+        &<2T\cdot\frac{\varepsilon}{2T} = \varepsilon
+    \end{align*}
+
+    This completes the proof.
+\end{proof}
+
+The converse is not true. Consider the function $\theta:[0,1]\to\R$ given by
+\begin{equation*}
+    \theta(x) = 
+    \begin{cases}
+        1 & x\in\Q\\
+        -1 & \text{otherwise}
+    \end{cases}
+\end{equation*}
+
+Then $f$ is not integrable but $f^2 = \mathbf{1}$ is.
+
+\begin{proposition}
+    Let $A\subseteq\R$ be a closed rectangle and $f,g:A\to\R$ be bounded and integrable. Then, $f\cdot g$ is integrable.
+\end{proposition}
+\begin{proof}
+    Obviously, $f\cdot g$ is bounded. Since we may write 
+    \begin{equation*}
+        fg = \frac{1}{4}\left((f + g)^2 - (f - g)^2\right)
+    \end{equation*}
+    it follows that $fg$ is integrable.
+\end{proof}
+
+\hrulefill
+
+\begin{theorem}[Fubini]
+    Let $A\subseteq\R^n$ and $B\subseteq\R^m$ be closed rectangles, and let $f:A\times B\to\R$ be integrable. For $x\in A$, let $g_x:B\to\R$ be defined by $g_x(y) = f(x,y)$ and let 
+    \begin{align*}
+        \mathfrak{L}(x) &= \mathbf{L}\int_Bg_x = \mathbf{L}\int_Bf(x,y)~dy\\
+        \mathfrak{U}(x) &= \mathbf{U}\int_Bg_x = \mathbf{U}\int_Bf(x,y)~dy
+    \end{align*}
+
+    Then $\mathfrak{L}$ and $\mathfrak{U}$ are integrable on $A$ and 
+    \begin{align*}
+        \int_{A\times B}f &= \int_A\mathfrak{L} = \int_A\left(\mathbf{L}\int_B f(x,y)~dy\right)~dx\\
+        \int_{A\times B}f &= \int_A\mathfrak{U} = \int_A\left(\mathbf{U}\int_B f(x,y)~dy\right)~dx
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    Let $P_A$ be a partition of $A$ and $P_B$ be a partition of $B$. Then $P = P_A\times P_B$ is a partition of $A\times B$. Now, note that 
+    \begin{align*}
+        L(f,P) &= \sum_{S\in P}m_S(f)v(S)\\
+               &= \sum_{S_A\in P_A}\sum_{S_B\in P_B}m_{S_A\times S_B}(f)v(S_A\times S_B)\\
+               &\le\sum_{S_A\in P_A}\left(\sum_{S_B\in P_B}m_{S_A\times S_B}(f)v(S_B)\right)v(S_A)\\
+    \end{align*}
+
+    Now, for any $x\in S_A$, 
+    \begin{equation*}
+        \sum_{S_B\in P_B} m_{S_A\times S_B}(f)v(S_B)\le\sum_{S_B\in P_B}m_{S_B}(g_x)v(S_B)\le\mathbf{L}\int_Bg_x = \mathfrak{L}(x)
+    \end{equation*}
+
+    Therefore,
+    \begin{equation*}
+        L(f,P)\le L(\mathfrak{L},P_A)
+    \end{equation*}
+
+    Similarly, we obtain
+    \begin{equation*}
+        U(f,P)\ge U(\mathfrak{U}, P_A)
+    \end{equation*}
+
+    Consequently, we obtain
+    \begin{equation*}
+        L(f,P)\le L(\mathfrak{L}, P_A)\le U(\mathfrak{L}, P_A)\le U(\mathfrak{U}, P_A)\le U(f,P)
+    \end{equation*}
+    and we have the desired conclusion.
+\end{proof}
+
+\begin{enumerate}
+    \item In the case when $f$ is a continuous function over the closed rectangle $A\times B$, we trivially note that $g_x$ is also a continuous function from over $B$ and is therefore integrable. As a result, 
+    \begin{equation*}
+        \mathbf{L}\int_Bg_x = \mathbf{U}\int_Bg_x
+    \end{equation*} 
+    and we may write 
+    \begin{equation*}
+        \int_{A\times B}f = \int_A\int_Bf(x,y)
+    \end{equation*}
+
+    \item Consider the function: 
+    \begin{equation*}
+        f(x,y) = 
+        \begin{cases}
+            \frac{x^2 - y^2}{(x^2 + y^2)^2} & (x,y)\ne(0,0)\\
+            0 & (x,y) = (0,0)
+        \end{cases}
+    \end{equation*}
+    and let us attempt to calculate $\int_{[0,1]\times[0,1]}f$.
+
+    We have 
+    \begin{equation*}
+        \mathfrak{L}(x) = \mathfrak{U}(x) = 
+        \begin{cases}
+            \frac{1}{1 + x^2} & x\ne 0\\
+            \text{undefined} & x = 0
+        \end{cases}
+    \end{equation*}
+    and similarly, 
+    \begin{equation*}
+        \mathfrak{L}(y) = \mathfrak{U}(y) = 
+        \begin{cases}
+            -\frac{1}{1 + y^2} & y\ne0\\
+            \text{undefined} & y = 0
+        \end{cases}
+    \end{equation*}
+
+    Therefore, 
+    \begin{equation*}
+        \int_{0}^1\int_{0}^1f(x,y)~dy~dx = \frac{\pi}{4}
+        \qquad
+        \int_{0}^1\int_{0}^1f(x,y)~dx~dy = -\frac{\pi}{4}
+    \end{equation*}
+
+    As a result, both the integrals exist but the function is not integrable over $[0,1]\times[0,1]$.
+\end{enumerate}
+
+The above theorem is best elucidated using an example. Define 
+\begin{equation*}
+    D = \{(x,y)\in[0,1]\times[0,1]\mid y\le x^2\}
+\end{equation*}
+
+Let us attempt to evaluate $\int_{D}xy$. First, we must rewrite this as an integral over a rectangle. Let $A = [0,1]\times[0,1]$. Then, we wish to evaluate the integral 
+\begin{equation*}
+    \int_A xy\chi_D(x,y)
+\end{equation*}
+
+Then, $g_x:[0,1]\to\R$ is given by
+\begin{equation*}
+    g_x(y) = 
+    \begin{cases}
+        xy & y\le x^2\\
+        0 & y > x^2
+    \end{cases}
+\end{equation*}
+
+It is not hard to see that $g_x(y)$ is integrable. Therefore, 
+\begin{equation*}
+    \mathfrak{L}(x) = \mathbf{L}\int_{[0,1]}g_x = \mathbf{U}\int_{[0,1]}g_x = \mathfrak{U}(x) = x\int_{0}^{x^2}y~dy = \frac{1}{2}x^5
+\end{equation*}
+
+Finally, 
+\begin{equation*}
+    \int_{A}xy\chi_D(x,y) = \int_{[0,1]}\frac{1}{2}x^5 = \frac{1}{12}
+\end{equation*}
+
+\section{Partitions of Unity}
+
+\begin{theorem}
+    Let $A\subseteq\R^n$ and let $\mathcal{O}$ be an open cover of $A$. Then there is a collection $\Phi$ of $C^\infty$ functions $\varphi$ defined in an open set containing $A$ with the following properties 
+    \begin{enumerate}
+        \item For each $x\in A$ we have $0\le\varphi(x)\le 1$ 
+        \item For each $x\in A$ there is an open set $V$ containing $x$ such that all but finitely many $\varphi\in\Phi$ are $0$ on $V$ 
+        \item For each $x\in A$ we have $\sum_{\varphi\in\Phi}\varphi(x) = 1$ 
+        \item For each $\varphi\in\Phi$ there is an open set $U$ in $\mathcal{O}$ such that $\varphi = 0$ outside of some closed set contained in $U$.
+    \end{enumerate}
+
+    A collection $\Phi$ satisfying $1$ to $3$ is called a $C^\infty$ partition of unity for $A$. If $\Phi$ also satisfies $4$, it is said to be subordinate to the cover $\mathcal{O}$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[Change of Variables]
+    Let $A\subseteq\R^n$ be an \textbf{open} set and $g:A\to\R^n$ be a $1-1$, continuously differentiable function such that $\deg g'(x)\ne 0$ for all $x\in A$. If $f:g(A)\to\R$ is integrable, then 
+    \begin{equation*}
+        \int_{g(A)}f = \int_{A}(f\circ g)|\det g'|
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    \textcolor{red}{TODO: Add in proof}
+\end{proof}

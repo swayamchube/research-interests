@@ -1,0 +1,273 @@
+Schr\"odinger's Equation is still
+\begin{equation*}
+    i\hbar\frac{\partial\Psi}{\partial t} = \widehat{H}\Psi
+\end{equation*}
+where the Hamiltonian is now 
+\begin{equation*}
+    \frac{1}{2m}\left(p_x^2 + p_y^2 + p_z^2\right) + V
+\end{equation*}
+Consequently, we have 
+\begin{equation*}
+    \widehat{H} = -\frac{\hbar^2}{2m}\left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}\right) + V
+\end{equation*}
+and thus,
+\begin{equation*}
+    i\hbar\frac{\partial\Psi}{\partial t} = -\frac{\hbar^2}{2m}\nabla^2\Psi + V\Psi
+\end{equation*}
+where $\nabla^2$ is the Laplacian. Also, the wave is now normalized as 
+\begin{equation*}
+    \iiint_{\mathbb{R}^3}\left|\Psi(\mathbf{r}, t)\right|^2~d^3\mathbf{r} = 1
+\end{equation*}
+
+If the potential function is independent of time, there will be a complete set of stationary states,
+\begin{equation*}
+    \Psi_n(\mathbf{r},t) = \psi_n(\mathbf{r})e^{-iE_nt/\hbar}
+\end{equation*}
+where the spatial wave function $\psi_n$ satisfies the \textit{Time Independent Schr\"odinger Equation},
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\nabla^2\psi + V\psi = E\psi
+\end{equation*}
+and thus, the general solution to the time-dependent Schr\"odinger equation is 
+\begin{equation*}
+    \Psi(\mathbf{r},t) = \sum_n c_n\psi_n(\mathbf{r})e^{-iE_nt/\hbar}
+\end{equation*}
+as before.
+
+\section{Separation of Variables}
+We shall solve the Time Independent Schr\"odinger Equation in spherical coordinates, $(\mathbf{r},\theta,\phi)$. The Laplacian takes the following form
+\begin{equation*}
+    \nabla^2\equiv\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial}{\partial r}\right) + \frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial}{\partial\theta}\right) + \frac{1}{r^2\sin^2\theta}\left(\frac{\partial^2}{\partial\phi^2}\right)
+\end{equation*}
+
+We look for solutions of a separable form and hope that they form a basis,
+\begin{equation*}
+    \psi(r,\theta,\phi) = R(r)Y(\theta,\phi)
+\end{equation*}
+
+Substituting the above and simplifying, we obtain
+\begin{equation*}
+    \left\{\frac{1}{R}\frac{d}{dr}\left(r^2\frac{dR}{dr}\right) - \frac{2mr^2}{\hbar^2}(V(r) - E)\right\} + \frac{1}{Y}\left\{\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right) + \frac{1}{\sin^2\theta}\frac{\partial^2 Y}{\partial\phi^2}\right\}=0
+\end{equation*}
+Notice that the first term is a function of only $r$ while the second is a function of only $\theta$ and $\phi$, thus both must be constants. Let us denote this constant by $l(l + 1)$, where $l\in\mathbb{C}$. We are now left with:
+\begin{align*}
+    \frac{1}{R}\frac{d}{dr}\left(r^2\frac{dR}{dr}\right) - \frac{2mr^2}{\hbar^2}(V(r) - E) = l(l + 1)\\
+    \frac{1}{Y}\left\{\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right) + \frac{1}{\sin^2\theta}\frac{\partial^2 Y}{\partial\phi^2}\right\} = -l(l + 1)
+\end{align*}
+
+\subsection{Angular Equation}
+Multiply out $Y\sin^2\theta$ to obtain 
+\begin{equation*}
+    \sin\theta\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right) + \frac{\partial^2 Y}{\partial\phi^2} = -l(l + 1)Y\sin^2\theta
+\end{equation*}
+
+We attempt to separate variables again, this time, let 
+\begin{equation*}
+    Y(\theta,\phi) = \Theta(\theta)\Phi(\phi)
+\end{equation*}
+
+Substituting the above and dividing by $\Theta\Phi$, we obtain
+\begin{equation*}
+    \left\{\frac{1}{\Theta}\left[\sin\theta\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)\right] + l(l + 1)\sin^2\theta\right\} + \frac{1}{\Phi}\frac{d^2\Phi}{d\phi^2} = 0
+\end{equation*}
+
+Again, the first term is a function of only $\theta$ and the second is a function of only $\phi$ and therefore must be constants. We shall denote this constant by $m^2$, where $m\in\mathbb{C}$. This gives us 
+\begin{align*}
+    \frac{1}{\Theta}\left[\sin\theta\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right)\right] + l(l + 1)\sin^2\theta &= m^2\\
+    \frac{1}{\Phi}\frac{d^2\Phi}{d\phi^2} &= -m^2
+\end{align*}
+
+The second differential equation is trivially solvable and obtain $\Phi(\phi) = e^{im\phi}$. A trivial boundary condition on $\Phi$ is given by 
+\begin{equation*}
+    \Phi(\phi + 2\pi) = \Phi(\phi)
+\end{equation*}
+from which it follows that $m\in\mathbb{Z}$. Next, solving the equation in $\theta$,
+\begin{equation*}
+    \sin\theta\frac{d}{d\theta}\left(\sin\theta\frac{d\Theta}{d\theta}\right) + (l(l + 1)\sin^2\theta - m^2)\Theta = 0
+\end{equation*}
+This does not have simple solution. The most general solution is given by 
+\begin{equation*}
+    \Theta(\theta) = AP_l^m(\cos\theta)
+\end{equation*}
+where $P_l^m$ is the \textit{associated Legendre Function}, defined by 
+\begin{equation*}
+    P_l^m(x) = (1-x^2)^{|m|/2}\frac{d^{|m|}}{dx^{|m|}}P_l(x)
+\end{equation*}
+where $P_l(x)$ is the $l$-th \textit{Legendre Polynomial}, defined by 
+\begin{equation*}
+    P_l(x) = \frac{1}{2^ll!}\frac{d^l}{dx^l}(x^2-1)^l
+\end{equation*}
+It is important to note here that the equation for $\theta$ is a Second Order Differential Equation and therefore, must have two linearly independent solutions. We only consider one of them because the other blows up at $\theta\in\{0,\pi\}$.
+
+% TODO: Add some more information on Legendre Polynomials 
+
+\subsubsection*{Legendre Polynomials}
+This is a digression, in attempt to elucidate a few properties of Legendre Polynomials. I present first, three equivalent definitions
+\begin{equation*}
+    \frac{1}{\sqrt{1-2xt+t^2}} = \sum_{n=0}^\infty P_n(x)t^n
+\end{equation*}
+\begin{equation*}
+    (n + 1)P_{n+1}(x) = (2n + 1)xP_n(x) - nP_{n-1}(x)
+\end{equation*}
+with the base cases $P_0(x) = 1$ and $P_1(x) = x$.
+\begin{equation*}
+    (1-x^2)P_n''(x) - 2xP_n'(x) + n(n+1)P_n(x) = 0
+\end{equation*}
+which leads us to the Rodrigues' Formula:
+\begin{equation*}
+    P_n(x) = \frac{1}{2^nn!}\frac{d^n}{dx^n}(x^2 - 1)^n
+\end{equation*}
+
+The Legendre Polynomials are known to be \textit{orthogonal} in the vector space of polynomials equipped with the integral inner product. That is,
+\begin{equation*}
+    \int_{-1}^1P_m(x)P_n(x)~dx = \frac{2}{m + n + 1}\delta_{mn}
+\end{equation*}
+where $\delta_{mn}$ is the Kronecker-Delta, which can be proved using the Principle of Mathematical Induction.
+
+\hrulefill
+
+Coming back, we normalize the angular and radial wave functions separately and obtain:
+\begin{equation*}
+    Y_l^m(\theta,\phi) = \varepsilon_m\sqrt{\frac{(2l + 1)}{4\pi}\frac{(l - |m|)!}{(l + |m|)!}}e^{im\phi}P_l^m(\cos\theta)
+\end{equation*}
+where 
+\begin{equation*}
+    \varepsilon_m = 
+    \begin{cases}
+        (-1)^m & m\ge0\\
+        1 & m\le0
+    \end{cases}
+\end{equation*}
+This gives an added condition:
+\begin{equation*}
+    \int_0^{2\pi}\int_0^\pi Y_l^m(\theta,\phi)^*Y_{l'}^{m'}(\theta,\phi)\sin\theta~d\theta d\phi = \delta_{ll'}\delta_{mm'}
+\end{equation*}
+which implies orthogonality. 
+
+\subsection{Radial Equation}
+Note that the angular part of the wave function $Y(\theta,\phi)$ is the same for all spherically symmetric potentials. The potential function $V(\mathbf{r})$ affects only the \textit{radial} part of the wave function,
+\begin{equation*}
+    \frac{1}{R}\frac{d}{dr}\left(r^2\frac{dR}{dr}\right) - \frac{2mr^2}{\hbar^2}(V(r) - E) = l(l + 1)
+\end{equation*}
+Performing the substitution $u = rR$, we obtain
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\frac{d^2u}{dr^2} + \left[V + \frac{\hbar^2}{2m}\frac{l(l + 1)}{r^2}\right]u = Eu
+\end{equation*}
+This is identical in form to the one-dimensional Schr\"odinger equation with the \textit{effective potential}
+\begin{equation*}
+    V_\text{eff} = V + \frac{\hbar^2}{2m}\frac{l(l + 1)}{r^2}
+\end{equation*}
+the extra term in the above equation is known as the \textit{centrifugal term}. The normalization condition is given by 
+\begin{equation*}
+    \int_0^\infty |u|^2~dr = 1
+\end{equation*}
+
+\section{The Hydrogen Atom}
+In this case, we know $V(r)$ explicitly:
+\begin{equation*}
+    V(r) = -\frac{e^2}{4\pi\varepsilon_0}\frac{1}{r}
+\end{equation*}
+and the radial equation becomes:
+\begin{equation*}
+    -\frac{\hbar^2}{2m}\frac{d^2u}{dr^2} + \left[-\frac{e^2}{4\pi\varepsilon_0}\frac{1}{r} + \frac{\hbar^2}{2m}\frac{l(l + 1)}{r^2}\right]u = Eu
+\end{equation*}
+
+Let now, 
+\begin{equation*}
+    \kappa = \frac{\sqrt{-2mE}}{\hbar}
+\end{equation*}
+and 
+\begin{equation*}
+    \rho = \kappa r \qquad\text{and}\qquad \rho_0 = \frac{me^2}{2\pi\varepsilon_0\hbar^2\kappa}
+\end{equation*}
+so that 
+\begin{equation*}
+    \frac{d^2 u}{d\rho^2} = \left[1 - \frac{\rho_0}{\rho} + \frac{l(l + 1)}{\rho^2}\right]u
+\end{equation*}
+
+We shall attempt to look for solutions of the form:
+\begin{equation*}
+    u(\rho) = \rho^{l + 1}e^{-\rho}v(\rho)
+\end{equation*}
+The process after this requires us to expand $v(\rho)$ as a formal series:
+\begin{equation*}
+    v(\rho) = \sum_{j=0}^\infty c_j\rho^j
+\end{equation*}
+and we would like to determine the coefficients $\langle c_0, c_1,\ldots\rangle$. Substituting this into the differential equation, we obtain:
+\begin{equation*}
+    c_{j + 1} = \left\{\frac{2(j + l + 1) - \rho_0}{(j + 1)(j + 2l + 2)}\right\}c_j
+\end{equation*}
+
+Let us examine the above recursion for $j >> 1$:
+\begin{equation*}
+    c_{j + 1}\asymp
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Angular Momentum}
+It is well known that 
+\begin{equation*}
+    \mathbf{L} = \mathbf{r}\times\mathbf{p}
+\end{equation*}
+In cartesian coordinates, this looks like
+\begin{equation*}
+    L_x = yp_z - zp_x \qquad L_y = zp_x - xp_z \qquad L_z = xp_y - yp_x
+\end{equation*}
+and the corresponding quantum operators can be obtained by performing the usual substitution $p_x\mapsto -i\hbar\partial/\partial x$ and so on. Then, one can obtain:
+\begin{equation*}
+    [L_x, L_y] = i\hbar L_z \qquad [L_y, L_z] = i\hbar L_x \qquad [L_z, L_x] = i\hbar L_y
+\end{equation*}
+
+Now, since $L_x$, $L_y$ and $L_z$ are \textit{incompatible observables}, according to the generalized uncertainty principle, 
+\begin{equation*}
+    \sigma_{L_x}\sigma_{L_y}\ge\frac{\hbar}{2}|\langle L_z\rangle|
+\end{equation*}
+It is therefore futile to look for states that are simultaneously eigenfunctions of $L_x$ and $L_y$. Consider the operator $L^2 \equiv L_x^2 + L_y^2 + L_z^2$, the square of the total angular momentum. The commutator 
+\begin{align*}
+    [L^2, L_x] &= [L_x^2, L_x] + [L_y^2, L_x] + [L_z^2, L_x]\\
+    &= L_y[L_y, L_x] + [L_y, L_x]L_y + L_z[L_z, L_x] + [L_z, L_x]L_z\\
+    &= i\hbar(-L_yL_z - L_zL_y + L_zL_y + L_yL_z)\\
+    &= 0
+\end{align*}
+And thus, $L^2$ commutes with $L_x$, $L_y$ and $L_z$, and consequently, 
+\begin{equation*}
+    [L^2, \mathbf{L}] = 0
+\end{equation*}
+Therefore, $L^2$ is compatible with each component of $\mathbf{L}$ and we can hope to find simultaneous eigenstates of $L^2$ and $L_z$:
+\begin{equation*}
+    L^2f = \lambda f\qquad\text{and}\qquad L_zf = \mu f
+\end{equation*}

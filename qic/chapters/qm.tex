@@ -1,0 +1,358 @@
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\bra}[1]{\langle#1|}
+\section{Linear Algebra Primer}
+I shall highlight only the notations and important results without spending far too long on rigorous proofs. The standard notation for a vector is $\ket{\psi}$ which is sometimes called a \textit{ket}. We would mainly be interested in the study of \textit{finite dimensional} vector spaces. 
+
+A \textit{linear operator} between vector spaces $V$ and $W$ is defined to be any function $A:V\to W$ that is linear in its inputs, that it
+\begin{equation*}
+    A\left(\sum_i a_i\ket{v_i}\right) = \sum_i a_iA\left(\ket{v_i}\right)
+\end{equation*}
+The composition of the linear operators $A:V\to W$ and $B:W\to X$ is given by $BA$.
+
+Now suppose $\left\{\ket{v_i}\right\}_{i=1}^m$ and $\left\{\ket{w_i}\right\}_{i=1}^n$ are basis for $V$ and $W$ respectively. Then, there exist complex numbers $A_{ij}$ for each $1\le i\le n$ and $1\le j\le m$ such that 
+\begin{equation*}
+    A\ket{v_j} = \sum_{i=1}^nA_{ij}\ket{w_i}
+\end{equation*}
+
+The \textit{Pauli Matrices} are $2\times 2$ complex matrices defined as:
+\begin{equation*}
+    \sigma_0\equiv I\equiv 
+    \begin{bmatrix}
+        1 & 0\\ 0 & 1
+    \end{bmatrix}
+\end{equation*}
+\begin{equation*}
+    \sigma_1\equiv X\equiv 
+    \begin{bmatrix}
+        0 & 1\\ 1 & 0
+    \end{bmatrix}
+\end{equation*}
+\begin{equation*}
+    \sigma_2\equiv Y\equiv 
+    \begin{bmatrix}
+        0 & -i\\ i & 0
+    \end{bmatrix}
+\end{equation*}
+\begin{equation*}
+    \sigma_2\equiv Y\equiv 
+    \begin{bmatrix}
+        1 & 0\\ 0 & -1
+    \end{bmatrix}
+\end{equation*}
+
+An \textit{inner product} over a vector space $V$ is simply a function $\langle\cdot,\cdot\rangle:V\times V\to\mathbb{C}$ satisfying the following:
+\begin{enumerate}
+    \item It is linear in its second argument. That is,
+    \begin{equation*}
+        \left\langle\ket{v_i},\sum_i\lambda_i\ket{w_i}\right\rangle = \sum_{i}\lambda_i\langle\ket{v_i},\ket{w_i}\rangle
+    \end{equation*}
+    \item $\langle\ket{v},\ket{w}\rangle = \langle\ket{w},\ket{v}\rangle^*$
+    \item $\langle\ket{v},\ket{v}\rangle\ge0$ with equality if and only if $v = 0$.
+\end{enumerate}
+A vector space equipped with an inner product is said to be an \textit{inner product space}. Note that over finite dimensional comoplex vector spaces, a \textit{Hilbert Space} is the same as an inner product space.
+
+For an orthonormal basis of vectors $\{\ket{i}\}$, any arbitrary vector $\ket{v}$ may be written as $\sum_iv_i\ket{i}$ for some set of complex numbers $v_i$. Obviously, we have $\langle i|v\rangle = v_i$ and also, 
+\begin{equation*}
+    \sum_i\ket{i}\bra{i} = I
+\end{equation*}
+This is known as the \textit{completeness relation}. Then, for any linear operator $A:V\to W$, we may write:
+\begin{align*}
+    A &= I_WAI_V\\
+    &= \sum_i\sum_j \ket{w_j}\bra{w_j}A\ket{v_i}\bra{v_i}\\
+    &= \sum_i\sum_j \bra{w_j}A\ket{v_i}\ket{w_j}\bra{v_i}
+\end{align*}
+which is its representation in \textit{outer product form}. Here, $\{\ket{v_i}\}$ is the input basis while $\{\ket{w_j}\}$ is the output basis. 
+
+An \textit{eigenvector} of a linear operator $A$ on a vector space is a non-zero vector $\ket{v}$ such that $A\ket{v} = v\ket{v}$ where $v\in\mathbb{C}$ is known as the \textit{eigenvalue} of $A$ corresponding to $\ket{v}$. The \textit{eigenspace} corresponding to an eigenvalue $v$ is the set of eigenvectors of $A$ having eigenvalue $v$.
+
+A \textit{diagonal representation} for $A$ is a representation of the form 
+\begin{equation*}
+    A = \sum_i\lambda_i\ket{i}\bra{i}
+\end{equation*}
+where the vectors $\ket{i}$ form an orthonormal set of eigenvectors for $A$ with corresponding eigenvalues $\lambda_i$. These are also known as \textit{orthonormal decompositions}. When an eigenspace is more than one-dimensional, we say that it is \textit{degenerate}. 
+
+There exists a unique linear operator $A^\dagger$ such that for all $\ket{v},\ket{w}\in V$, 
+\begin{equation*}
+    \langle\ket{v}, A\ket{w}\rangle = \langle A^\dagger\ket{v}, \ket{w}\rangle
+\end{equation*}
+This linear operator is known as the \textit{adjoint} or \textit{Hermitian conjugate} of $A$. Obviously, that would mean, $(AB)^\dagger = B^\dagger A^\dagger$. By convension, if $\ket{v}$ is a vector, then we define $\ket{v}^\dagger = \bra{v}$. Finally, we also note that $(A^\dagger)^\dagger = A$. An operator $A$ whose adjoint is $A$ is known as a \textit{Hermitian} or \textit{self-adjoint} operator.
+
+Let $V$ be an $n$-dimensional vector space and $W$ be a $k$-dimensional vector subspace of $V$. Such that $\ket{1},\ldots,\ket{k}$ is an orthonormal basis for $W$ and $\ket{1},\ldots,\ket{n}$ is an orthonormal subspace for $V$. Then, by definition,
+\begin{equation*}
+    P \equiv \sum_{i=1}^k\ket{i}\bra{i}
+\end{equation*}
+is the \textit{projector} onto the subspace $W$. It isn't hard to see that $P^\dagger = P$ and thus $P$ is Hermitian, further, $P^2 = P$. The orthogonal complement of $P$ is the operator $Q \equiv I - P$ which is a projector onto the vector space spanned by $\ket{k + 1},\ldots,\ket{n}$.
+
+An operator $A$ is said to be \textit{normal} if $AA^\dagger = A^\dagger A$. It is obvious that a Hermitian operator is normal. A normal operator is Hermitian if and only if it has all real eigenvalues\footnote{This follows trivially from the Spectral Decomposition Theorem}
+
+\begin{theorem}[Spectral Decomposition]
+    An operator $M$ on a vector space $V$ is \textit{normal} if and only if it is \textit{diagonal} with respect to some orthonormal basis for $V$.
+\end{theorem}
+
+An operator $U$ is said to be \textit{unitary} if $U^\dagger U = I$. All eigenvalues of a unitary matrix have modulus $1$.
+
+A special subclass of Hermitian operators is the \textit{positive operators} which are such that for any vector $\ket{v}$, $\langle\ket{v},A\ket{v}\rangle$ is a real, non-negative number. If $\langle\ket{v},A\ket{v}\rangle$ is strictly positive for all non-zero $\ket{v}$, then $A$ is \textit{positive definite}. \textcolor{red}{One can show that every positive operator is necessarily Hermitian}.
+
+The \textit{tensor product} is a way of putting vector spaces stogether to form larger vector spaces. This is useful in understanding the quantum mechanics of multiparticle systems. If $V$ and $W$ are vector spaces of dimension $m$ and $n$ respectively, then $V\otimes W$, read \textit{$V$ tensor $W$}, is an $mn$ dimensional vector space. The elements of $V\otimes W$ are linear combinations of `tensor products' $\ket{v}\otimes\ket{w}$ of elements $\ket{v}\in V$ and $\ket{w}\in W$. By definition, the tensor product satisfies the following properties:
+\begin{enumerate}
+    \item For any scalar $z$, 
+    \begin{equation*}
+        z(\ket{v}\otimes\ket{w}) = (z\ket{v})\otimes\ket{w} = \ket{v}\otimes(z\ket{w})
+    \end{equation*}
+    \item For $\ket{v_1},\ket{v_2}\in V$,
+    \begin{equation*}
+        (\ket{v_1} + \ket{v_2})\otimes\ket{w} = \ket{v_1}\otimes\ket{w} + \ket{v_2}\otimes\ket{w}
+    \end{equation*}
+    \item For $\ket{w_1},\ket{w_2}\in W$, 
+    \begin{equation*}
+        \ket{v}\otimes(\ket{w_1} + \ket{w_2}) = \ket{v}\otimes\ket{w_1} + \ket{v}\otimes\ket{w_2}
+    \end{equation*}
+\end{enumerate}
+
+Suppose $A$ and $B$ are linear operators on $V$ and $W$ respectively. Then we may define a linear operator $A\otimes B$ on $V\otimes W$ given by the equation
+\begin{equation*}
+    (A\otimes B)\left(\sum_ia_i\ket{v_i}\otimes\ket{w_i}\right) \equiv\sum_ia_iA\ket{v_i}\otimes B\ket{w_i}
+\end{equation*}
+It is easy to see that $A\otimes B$ is a well defined linear operator. We may also define an inner product on $V\otimes W$ as 
+\begin{equation*}
+    \left\langle\sum_ia_i\ket{v_i}\otimes\ket{w_i},\sum_jb_j\ket{v_j'}\otimes\ket{w_j'}\right\rangle = \sum_i\sum_j\overline{a_i}b_j\langle v_i|v_j'\rangle\langle w_i|w_j'\rangle
+\end{equation*}
+Again, it is easy to see that the above is a well defined inner product. The abstract notion of a tensor product can be moved to a convenient matrix representation known as the \textit{Kronecker product}. Suppose $A$ is an $m\times n$ matrix and $B$ is a $p\times q$ matrix, then we have 
+\begin{equation*}
+    A\otimes B = 
+    \begin{bmatrix}
+        A_{11}B & \ldots & A_{1n}B\\
+        \vdots & \ddots & \vdots\\
+        A_{m1}B & \ldots & A_{mn}B
+    \end{bmatrix}
+\end{equation*}
+which is an $mp\times nq$ matrix. Finally, we mention the useful notation $\ket{\psi}^{\otimes k}$ which means $\ket{\psi}$ tensored with itself $k$ times.
+
+A function $f:\mathbb{C}\to\mathbb{C}$ may be extended on normal matrices. We know that any normal operator has a spectral decomposition. Let 
+\begin{equation*}
+    A = \sum_a a\ket{a}\bra{a}
+\end{equation*}
+Then, define 
+\begin{equation*}
+    f(A) = \sum_a f(a)\ket{a}\bra{a}
+\end{equation*}
+This procedure may be used to define the square root of a positive operator, the logarithm of a positive definite operator or the exponential of a normal operator.
+
+Another important matrix function is the \textit{trace} of a matrix, which is defined to be the sum of its diagonal elements. The trace can be shown to be \textit{cyclic}, that is $\operatorname{tr}(AB) = \operatorname{tr}(BA)$. It then follows that the trace is invariant under the \textit{unitary similarity transform}, $A\mapsto UAU^\dagger$ for a unitary matrix $U$. This ensures that the trace of an operator is well defined.
+
+The \textit{commutator} between two operators $A$ and $B$ is defined to be 
+\begin{equation*}
+    [A, B] = AB - BA
+\end{equation*}
+while the \textit{anti-commutator} is defined to be 
+\begin{equation*}
+    \{A, B\} = AB + BA
+\end{equation*}
+
+If $[A,B] = 0$, then we say $A$ \textit{commutes} with $B$, similarly, if $\{A, B\} = 0$, then we say that $A$ \textit{anti-commutes} with $B$.
+
+\begin{theorem}[Simultaneous Diagonalization]
+    Suppose $A$ and $B$ are Hermitian operators. Then $[A,B] = 0$ if and only if there exists an orthonormal basis such that both $A$ and $B$ are diagonal with respect to that basis. We say that $A$ and $B$ are \textit{simultaneously diagonalizable} in this case.
+\end{theorem}
+
+\begin{theorem}[Polar Decomposition]
+    Let $A$ be a linear operator on a vector space $V$. Then there exists unitary $U$ and positive operators $J$ and $K$ such that 
+    \begin{equation*}
+        A = UJ = KU
+    \end{equation*}
+    where the unique positive operators $J$ and $K$ satisfying these equations are defined by $J \equiv\sqrt{A^\dagger A}$ and $K\equiv\sqrt{AA^\dagger}$.
+\end{theorem}
+
+We call $A = UJ$ the \textit{left polar decomposition} of $A$ and $A = KU$ the \textit{right polar decomposition} of $A$. As a corollary of the above theorem, we have the \textit{Singular Value Decomposition}.
+\begin{corollary}
+    Let $A$ be a square matrix. Then there exist unitary matrices $U$ and $V$ and a diagonal matrix $D$ with non-negative entries such that 
+    \begin{equation*}
+        A = UDV
+    \end{equation*}
+    The diagonal elements of $D$ are called the \textit{singular values} of $A$.
+\end{corollary}
+
+\section{Postulates of Quantum Mechanics}
+\begin{mdframed}
+    \textbf{Postulate 1.} Associated with any isolated physical system is a complex vector space with inner product (that is, Hilbert space) known as the \textit{state space} of the system. The system is completely described by its \textit{state vector} which is a vector in the system's state space.
+\end{mdframed}
+
+\begin{mdframed}
+    \textbf{Postulate 2.} The evolution of a \textit{closed} quantum system is described by a \textit{unitary transformation}. That is, the state $\ket{\psi}$ of the system at time $t_1$ is related to the state $\ket{\psi'}$ of the system at time $t_2$ by a unitary operator $U$ which depends only on the times $t_1$ and $t_2$,
+    \begin{equation*}
+        \ket{\psi'} = U\ket{\psi}
+    \end{equation*}
+\end{mdframed}
+
+The above postulate may be rephrased as follows:
+\begin{mdframed}
+    \textbf{Postulate 2'.} The time evolution of the state of a closed quantum system is described by the \textit{Schr\"odinger equation}
+    \begin{equation*}
+        i\hbar\frac{d\ket{\psi}}{dt}=H\ket{\psi}
+    \end{equation*}
+    where $H$ is the Hamiltonian operator, which is Hermitian.
+\end{mdframed}
+
+Because the Hamiltonian is Hermitian, it has a spectral decomposition:
+\begin{equation*}
+    H = \sum_E E\ket{E}\bra{E}
+\end{equation*}
+The states $\ket{E}$ are conventionally referred to as \textit{energy eigenstates} or sometimes as \textit{stationary states}. The reason for this is because their only cahnge in time is:
+\begin{equation*}
+    \ket{E} \mapsto \exp(-iEt/\hbar)\ket{E}
+\end{equation*}
+One notes that this transformation does not change the fact that $\ket{E}$ are orthonormal. Let us now try to represent the unitary operator $U(t_1,t_2)$ in terms of $H$. Since the vectors $\ket{E}$ form an orthonormal basis for the Hilbert space, there exist constants $c_E$ such that 
+\begin{equation*}
+    \ket{\psi(t_1)} = \sum_Ec_E\ket{E}
+\end{equation*}
+consequently, we may write:
+\begin{equation*}
+    \ket{\psi(t_2)} = \sum_Ec_E\exp\left[-\frac{iE(t_2-t_1)}{\hbar}\right]\ket{E}
+\end{equation*}
+As a result, we may write:
+\begin{equation*}
+    U(t_1,t_2) = \exp\left[-\frac{iH(t_2-t_1)}{\hbar}\right]
+\end{equation*}
+It is easy to verify that $U$ is indeed unitary. This establishes the equivalence between the two phrasings of \textbf{Postulate 2}.
+
+\begin{mdframed}
+    \textbf{Postulate 3.} Quantum measurements are described by a collection $\{M_m\}$ of \textit{measurement operators}. These are operators acting on the state space of the system being measured. The index $m$ refers to the measurement outcomes that may occur. If the state of the system is $\ket{\psi}$ immediately before the measurement, then the probability that the result $m$ occurs is given by 
+    \begin{equation*}
+        p(m) = \langle\psi|M_m^\dagger M_m|\psi\rangle
+    \end{equation*}
+    and the state of the system after the measurement is 
+    \begin{equation*}
+        \frac{M_m\ket{\psi}}{\sqrt{\langle\psi|M_m^\dagger M_m|\psi\rangle}}
+    \end{equation*}
+    The measurement operators satisfy the completeness equation,
+    \begin{equation*}
+        \sum_m M_m^\dagger M_m = I
+    \end{equation*}
+\end{mdframed}
+
+The completeness relation then implies:
+\begin{equation*}
+    1 = \sum_m p(m) = \sum_m\langle\psi|M_m^\dagger M_m|\psi\rangle
+\end{equation*}
+
+Further, we can show that \textit{measurements cascade}. That is, if $\{L_l\}$ and $\{M_m\}$ are two sets of measurement operators, then a measurement defined by the measurement operators $L$ followed by a measurement defined by the measurement operators $M$ is physically equivalent to a single measurement defined by the measurement operators $\{N_{lm}\}$ with the representation $N_{lm} = M_mL_l$.
+
+\subsection*{Distinguishing Quantum States}
+\subsection*{Projective Measurements}
+\begin{definition}[Projective Measurement]
+    A projective measurement is described by an \textit{observable}, $M$, a Hermitian operator on the state space of the system being observed. The observable has a spectral decomposition 
+    \begin{equation*}
+        M = \sum_m mP_m
+    \end{equation*}
+    where $P_m$ is the projector onto the eigenspace of $M$ with eigenvalue $m$. The possible outcomes of the measurement correspond to the eigenvalues $m$ of the observable. Upom measurement, the probability of getting $m$ is given by 
+    \begin{equation*}
+        p(m) = \langle\psi|P_m|\psi\rangle
+    \end{equation*}
+    Given that the outcome $m$ occurred, the state of the system immediately after the measurement is 
+    \begin{equation*}
+        \frac{P_m|\psi\rangle}{\sqrt{p(m)}}
+    \end{equation*}
+\end{definition}
+
+Projective measurements are the most popular version of measurements described in most introductory books on Quantum Mechanics. This is because projective measurements have nice properties. For example:
+\begin{align*}
+    \mathbb{E}[M] &= \sum_m mp(m)\\
+    &= \sum_m m\langle\psi|P_m|\psi\rangle\\
+    &= \langle\psi|\left(\sum_m m|P_m|\right)|\psi\rangle\\
+    &= \langle\psi|M|\psi\rangle
+\end{align*}
+
+\subsection*{POVM Measurements}
+% TODO: Add in later 
+
+\begin{mdframed}
+    \textbf{Postulate 4.} The state space of a composite physical system is the tensor product of the state spaces of the component physical systems. Moreover, if we have systems numbered 1 through $n$, and system number $i$ is prepared in the state $\ket{\psi_i}$, then the joint state of the total system is $\ket{\psi_1}\otimes\cdots\otimes\ket{\psi_n}$.
+\end{mdframed}
+
+\section{The Density Operator}
+Suppose a quantum system is in one of a number of states $\ket{\psi_i}$ with respective probabilities $p_i$. We hsall call $\{p_i,\ket{\psi_i}\}$ an \textit{ensemble of pure states}. The density operator for the system is defined by the equation
+\begin{equation*}
+    \rho \equiv \sum_i p_i\ket{\psi_i}\bra{\psi_i}
+\end{equation*}
+This operator is also known as the \textit{density matrix}. If we allow this system to evolve, then there exists a unitary matrix $U$ such that $\ket{\psi_i}\mapsto U\ket{\psi_i}$. And thus, $\rho\mapsto U\rho U^\dagger$.
+
+Suppose now, we would like to perform a measurement described by measurement operators $M_m$. If the initial state was $\ket{\psi_i}$, then the probability of getting result $m$ is 
+\begin{equation*}
+    p(m\mid i) = \langle\psi_i|M_m^\dagger M_m|\psi_i\rangle = \operatorname{tr}(M_m^\dagger M_m\ket{\psi_i}\bra{\psi_i})
+\end{equation*}
+Then we may compute:
+\begin{align*}
+    p(m) &= \sum_i p(m\mid i)p(i)\\
+    &= \sum_i p(i)\operatorname{tr}(M_m^\dagger M_m\ket{\psi_i}\bra{\psi_i})\\
+    &= \operatorname{tr}(M_m^\dagger M_m\rho)
+\end{align*}
+
+If the initial state was $\ket{\psi_i}$, then the state after obtaining the result $m$ is 
+\begin{equation*}
+    \ket{\psi_i^m} = \frac{M_m\ket{\psi_i}}{\sqrt{\langle\psi_i|M_m^\dagger M_m|\psi_i}}
+\end{equation*}
+
+The density operator after obtaining a measurement of $m$ is given by (after some simplifications)
+\begin{equation*}
+    \rho_m = \sum_i p(i\mid m)\ket{\psi_i^m}\bra{\psi_i^m} = \frac{M_m\rho M_m^\dagger}{\operatorname{tr}(M_m^\dagger M_m\rho)}
+\end{equation*}
+
+A quantum system whose state is known exactly is said to be in a \textit{pure state}. In this case, the density operator is $\rho = \ket{\psi}\bra{\psi}$. Otherwise, $\rho$ is in a mixed state. It can be shown that $\rho$ corresponds to a pure state if and only if $\operatorname{tr}(\rho^2) = 1$. Else $\operatorname{tr}(\rho^2) < 1$ and it corresponds to a mixed state.
+
+\begin{theorem}[Characterization of Density Operators]
+    An operator $\rho$ is the density operator associated to some ensemble $\{p_i,\ket{\psi_i}\}$ if and only if 
+    \begin{enumerate}
+        \item (Trace Condition) $\rho$ has trace equal to one 
+        \item (Positivity Condition) $\rho$ is a positive operator
+    \end{enumerate}
+\end{theorem}
+
+We may now reformulate the postulates as follows
+
+\begin{mdframed}
+    \textbf{Postulate 1.} Associated with any isolated physical system is a complex vector space with inner product (that is, a Hilbert space) known as the \textit{state space} of the system. The system is completely described by its \textit{density operator}, which is a positive operator $\rho$ with trace one, acting on the state space of the system. If a quantum system is in the state $\rho_i$ with probability $p_i$, then the density operator of the system is $\sum_i p_i\rho_i$.
+
+    \bigskip 
+
+    \noindent\textbf{Postulate 2.} The evolution of a closed quantum system is described by a \textit{unitary transformation}. That is, $\rho$ at a time $t_1$ is related to $\rho'$ at a time $t_2$ by a unitary operator $U$ which depends only on times $t_1$ and $t_2$
+    \begin{equation*}
+        \rho' = U\rho U^\dagger
+    \end{equation*}
+
+    \bigskip
+
+    \noindent\textbf{Postulate 3.} Quantum measurements are described by a collection $\{M_m\}$ of \textit{measurement operators}. These are operators acting on the state space of teh system being measured. The index $m$ refers to the measurement outcome. If the state of tue system is $\rho$ immediately before the measurement, then the probability that the result $m$ occurs is given by 
+    \begin{equation*}
+        p(m) = \operatorname{tr}(M_m^\dagger M_m\rho)
+    \end{equation*}
+    and the state of the system after the measurement is 
+    \begin{equation*}
+        \frac{M_m\rho M_m^\dagger}{\operatorname{tr}(M_m^\dagger M_m\rho)}
+    \end{equation*}
+    The measurement operators satisfy the \textit{completeness equation},
+    \begin{equation*}
+        \sum_m M_m^\dagger M_m = I
+    \end{equation*}
+
+    \bigskip
+
+    \noindent\textbf{Postulate 4.} The state space of a composite physical system is the tensor product of the state spaces of the component physical systems. Moreover, if we have systems numbered $1$ through $n$ and the system number $i$ is prepared in the state $\rho_i$, then the joint state of the total system is $\rho_1\otimes\cdots\otimes\rho_n$.
+\end{mdframed}
+
+It is important to note that \textit{different ensembles} can give rise to the same density matrix. For example, consider the density matrix 
+\begin{equation*}
+    \rho = \frac{3}{4}\ket{0}\bra{0} + \frac{1}{4}\ket{1}\bra{1}
+\end{equation*}
+which is the density matrix corresponding to the ensemble 
+\begin{equation*}
+    \left\{\left(\frac{3}{4}, \ket{0}\right),\left(\frac{1}{4}, \ket{1}\right)\right\}
+\end{equation*}
+But, consider the following states:
+\begin{align*}
+    \ket{a} &= \sqrt{\frac{3}{4}}\ket{0} + \sqrt{\frac{1}{4}}\ket{1}\\
+    \ket{b} &= \sqrt{\frac{3}{4}}\ket{0} - \sqrt{\frac{1}{4}}\ket{1}
+\end{align*}
+Then, the same density operator corresponds to the ensemble
+\begin{equation*}
+    \left\{\left(\frac{1}{2},\ket{a}\right),\left(\frac{1}{2},\ket{b}\right)\right\}
+\end{equation*}

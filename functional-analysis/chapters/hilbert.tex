@@ -1,0 +1,237 @@
+\section{Inner Product or pre-Hilbert Spaces}
+
+\begin{definition}[Inner Product Space]
+    An \emph{inner product space} $H$ is a $\bbC$-vector space along with a \emph{Hermitian inner product} $\langle\cdot,\cdot\rangle: H\times H\to\bbC$ such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\lambda_1v_1 + \lambda_2v_2, w\rangle = \lambda_1\langle v_1,w\rangle + \lambda_2\langle v_2,w\rangle$ for all $\lambda_1,\lambda_2\in\bbC$ and $v_1,v_2,w\in H$,
+        \item $\langle v,w\rangle = \overline{\langle w,v\rangle}$ for all $v,w\in H$,
+        \item for each $v\in H$, $\langle v,v\rangle\ge 0$ and $\langle v,v\rangle = 0$ if and only if $v = 0$.
+    \end{enumerate}
+    An inner product space is also called a \emph{pre-Hilbert space}.
+\end{definition}
+
+\begin{theorem}[Cauchy-Schwarz Inequality]
+    Let $H$ be an inner product space. Then, for all $u,v\in H$, 
+    \begin{equation*}
+        |\langle u,v\rangle|\le\|u\|\|v\|
+    \end{equation*}
+    where $\|u\| = \sqrt{\langle u,u\rangle}$.
+\end{theorem}
+\begin{proof}
+    Using positive definiteness, for all $t\in\R$, we have 
+    \begin{equation*}
+        0\le\langle u + tv, u + tv\rangle = \|u\|^2 + 2\Re\langle u,v\rangle t + t^2\|v\|^2.
+    \end{equation*}
+    This is a quadratic polynomial in $t$ whence its determinant is non-positive. Thus, 
+    \begin{equation*}
+        |\Re\langle u,v\rangle|\le\|u\|\|v\|
+    \end{equation*}
+    for all $u,v\in H$. Let $z = \langle u,v\rangle/|\langle u,v\rangle|$. Then, 
+    \begin{equation*}
+        \|u\|\|v\| = \|u\|\|zv\|\ge\Re\langle u,zv\rangle = \Re\left(\overline{z}\langle u,v\rangle\right) = |\langle u,v\rangle|.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}
+    The function $\|\cdot\|: H\to\R$ given by $\|u\| = \sqrt{\langle u,u\rangle}$ is a norm.
+\end{proposition}
+\begin{proof}
+    It suffices to verify the triangle inequality. Indeed, for $u,v\in H$, due to the Cauchy-Schwarz inequality, we have 
+    \begin{equation*}
+        (\|u\| + \|v\|)^2 = \|u\|^2 + 2\|u\|\|v\| + \|v\|^2\ge \|u\|^2 + 2\Re\langle u,v\rangle + \|v\|^2 = \langle u + v, u + v\rangle = \|u + v\|.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{definition}
+    Elements $u,v\in H$ are said to be \emph{orthogonal} if $\langle u,v\rangle = 0$. This is denoted by $u\perp v$, which is obviously a reflexive relation. A sequence $\{e_n\}_{n = 1}^\infty$ is said to be \emph{orthonormal} if 
+    \begin{equation*}
+        \langle e_m, e_n\rangle = \delta_{mn}.
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}[Bessel's Inequality]\thlabel{thm:bessel-inequality}
+    If $\{e_n\}_{n = 1}^\infty$ is an orthonormal sequence in an inner product space $H$, then for any $u\in H$, 
+    \begin{equation*}
+        \sum_{n = 1}^\infty |\langle u, e_n\rangle|^2\le \|u\|^2.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Define $\displaystyle u_n := \sum_{i = 1}^n \langle u, e_i\rangle e_i$. Then, 
+    \begin{equation*}
+        \langle u, u_n\rangle = \sum_{i = 1}^n\langle u, e_i\rangle^2 = \langle u_n,u_n\rangle\implies \langle u - u_n, u_n\rangle = 0.
+    \end{equation*}
+    We have 
+    \begin{align*}
+        \|u\|^2 &= \langle (u - u_n) + u_n, (u - u_n) + u_n\rangle\\
+        &= \|u - u_n\|^2 + \langle u - u_n, u_n\rangle + \langle u_n, u - u_n\rangle + \|u_n\|^2\\
+        &= \|u - u_n\|^2 + \|u_n\|^2\\
+        &\ge\|u_n\|^2 = \sum_{i = 1}^n|\langle u, e_i\rangle|^2.
+    \end{align*}
+    Since the last inequality holds for all $n\in\N$, it holds in the limit $n\to\infty$ and the conclusion follows.
+\end{proof}
+
+\section{Hilbert Spaces}
+
+\begin{definition}[Hilbert Space]
+    A \emph{Hilbert space} is an inner product space that is complete with respect to the norm induced by the inner product.
+\end{definition}
+
+\begin{definition}[Maximal Orthonormal Sequence]
+    An orthonormal sequence $\{e_i\}$ (finite or infinite) in an inner product space is said to be \emph{maximal} if it is maximal with respect to \underline{subsequence inclusion}.
+\end{definition}
+
+It is not hard to see that an orthonormal sequence $\{e_i\}$ is maximal if and only if 
+\begin{equation*}
+    \langle u, e_i\rangle = 0,~\forall i\implies u = 0.
+\end{equation*}
+for if not, then the sequence $(u/\|u\|, e_1,e_2,\dots)$ is an orthonormal sequence containing $\{e_i\}_{i = 1}^\infty$ as a subsequence.
+
+\begin{lemma}\thlabel{lem:separable-implies-orthonormal-basis}
+    If a Hilbert space $H$ is separable, then it contains a maximal orthonormal subset.
+\end{lemma}
+\begin{proof}
+    Let $\{v_i\}_{i = 1}^\infty$ be a countable dense subset of $H$. We shall use the Gram-Schmidt Orthonormalization process to construct a maximal orthonormal sequence. Let $e_1 = v_1/\|v_1\|$ and 
+    \begin{equation*}
+        e_{n + 1} = \frac{v_{n + 1} - \sum_{j = 1}^n\langle v_{n + 1}, e_j\rangle e_j}{\left\|v_{n + 1} - \sum_{j = 1}^n\langle v_{n + 1}, e_j\rangle e_j\right\|}.
+    \end{equation*}
+    It is not hard to argue that for all positive integers $n$, 
+    \begin{equation*}
+        \Span(e_1,\dots,e_n) = \Span(v_1,\dots,v_n)
+    \end{equation*}
+    and $\{e_i\}_{i = 1}^\infty$ is an orthonormal sequence by construction. We contend that this is a maximal orthonormal sequence. Indeed, suppose $u\in H$ with $u\perp e_i$ for each $i\in\N$, we shall show that $u = 0$.
+
+    Since $\{v_i\}_{i = 1}^\infty$ is dense in $H$, there is a sequence $\{w_i\}_{j = 1}^\infty$ converging to $u$ such that each $w_k$ is some $v_j$ and thus a finite linear combination of the $e_i$'s. Due to \thref{thm:bessel-inequality}, 
+    \begin{equation*}
+        \|w_k\|^2 = \sum_{i = 1}^\infty|\langle w_k, e_i\rangle|^2 = \sum_{i = 1}^\infty |\langle u - w_k, e_i\rangle|^2\le\|u - w_k\|^2.
+    \end{equation*}
+    Consequently, $\|w_k\|^2\to 0$ as $k\to\infty$ whence $u = 0$ and thus the sequence $\{e_i\}$ is a maximal orthonormal sequence in $H$.
+\end{proof}
+
+\begin{definition}[Orthonormal Basis]
+    A maximal orthonormal sequence in a separable Hilbert space is also called an \emph{orthonormal basis}.
+\end{definition}
+
+
+\begin{theorem}
+    If $\{e_i\}$ (finite or infinite) is an orthonormal basis in a Hilbert space, then for any $u\in H$, the `Fourier-Bessel series' 
+    \begin{equation*}
+        \sum_{i = 1}^\infty\langle u, e_i\rangle e_i
+    \end{equation*}
+    converges to $u$.
+\end{theorem}
+\begin{proof}
+    If $\{e_i\}$ is a finite sequence then the conclusion is obvious. Suppose now that the sequence is infinite. Let 
+    \begin{equation*}
+        u_n = \sum_{i = 1}^n\langle u, e_i\rangle e_i.
+    \end{equation*}
+    We contend that $\{u_n\}$ forms a Cauchy sequence. Let $\varepsilon > 0$ be given. Due to \thref{thm:bessel-inequality}, there is a positive integer $N$ such that 
+    \begin{equation*}
+        \sum_{k = N + 1}^\infty|\langle u, e_k\rangle|^2 < \varepsilon^2.
+    \end{equation*}
+
+    If $m,n\ge N$, with $m < n$, then 
+    \begin{equation*}
+        \|u_n - u_m\|^2 = \sum_{i = m + 1}^n|\langle u,e_i\rangle|^2\le\sum_{i = m + 1}^\infty|\langle u, e_i\rangle|^2\le\sum_{i = N + 1}^\infty|\langle u, e_i\rangle|^2 < \varepsilon^2
+    \end{equation*}
+    whence the conclusion follows. Since $H$ is complte, there is some $w\in H$ to which the partial sums $\{u_n\}$ converge. We shall show that $w - u$ is orthogonal to each $e_i$. Indeed, for $n\ge i$, due to \thref{thm:bessel-inequality},
+    \begin{equation*}
+        |\langle w - u_n, e_i\rangle|\le\|w - u_n\|
+    \end{equation*}
+    whence $\displaystyle\lim_{n\to\infty}\langle w - u_n, e_i\rangle = 0$. Consequently, 
+    \begin{equation*}
+        \langle w, e_i\rangle = \lim_{n\to\infty}\langle u_n, e_i\rangle = \langle u, e_i\rangle\implies\langle w - u, e_i\rangle = 0.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}\thlabel{corr:orthonormal-basis-implies-separable}
+    If a Hilbert space $H$ contains an orthonormal basis $\{e_{i}\}$, then $H$ is separable.
+\end{corollary}
+
+\begin{definition}[Convex]
+    A subset $C\subseteq V$ of a normed vector space is said to be \emph{convex} if whenever $v_1,v_2\in C$, then $\frac{1}{2}(v_1 + v_2)\in C$.
+\end{definition}
+
+\begin{proposition}
+    Let $C\subseteq H$ be a subset of a Hilbert space which is nonempty, closed and convex. Then there is a unique $v\in C$ such that $\displaystyle\|v\| = \inf_{u\in C}\|u\|$.
+\end{proposition}
+\begin{proof}
+    Let $d = \inf_{u\in C}\|u\|$. Then, there is a sequence $\{u_n\}_{n = 1}^\infty$ in $C$ such that $\|u_n\|\to d$ as $n\to\infty$. We contend that the sequence $\{u_n\}$ is Cauchy. Indeed, for $m,n\in\N$, we have, due to the Paralellogram Law: 
+    \begin{equation*}
+        \|v_m - v_n\|^2 = 2\|v_m\|^2 + 2\|v_n\|^2 - \|v_m + v_n\|^2 = 2\left(\|v_m\|^2 + \|v_n\|^2 - 2\left\|\frac{v_m + v_n}{2}\right\|^2\right).
+    \end{equation*}
+    We may now pick $N\in\N$ such that for all $m,n\ge N$, such that for all $n\ge N$, $\|v_n\|^2 < d^2 + \varepsilon^2/4$. Further, note that $(v_m + v_n)/2\in C$ due to convexity. Then for $m,n\ge N$,
+    \begin{equation*}
+        \|v_m - v_n\|^2 < \left(d^2 + \frac{\varepsilon^2}{4} + d^2 + \frac{\varepsilon^2}{4} - 2d^2\right) = \varepsilon^2
+    \end{equation*}
+    which implies the desired conclusion. Since $H$ is complete, this sequence converges to some $v\in H$ and since $\|\cdot\|: V\to\R$ is a continuous function, we have 
+    \begin{equation*}
+        \|v\| = \lim_{n\to\infty}\|v_n\| = d.
+    \end{equation*}
+
+    We shall now show uniqueness. Suppose $v, v'\in C$ with $d = \|v\| = \|v'\|$. Then, 
+    \begin{equation*}
+        \|v - v'\|^2 = 2\|v\|^2 + 2\|v'\|^2 - 4\left\|\frac{v + v'}{2}\right\|^2\le 0
+    \end{equation*}
+    whence $v = v'$. This completes the proof.
+\end{proof}
+
+\subsection{Orthocomplements and Projections}
+
+\begin{proposition}
+    If $W\subseteq H$ is a vector subspace of a Hilbert space, then 
+    \begin{equation*}
+        W^\perp = \{u\in H\mid u\perp w,~\forall w\in W\}
+    \end{equation*}
+    is a closed vector subspace of $H$ with $W\cap W^\perp = \{0\}$. Moreover, if $W$ is also a closed subspace, then $H = W\oplus W^\perp$.
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        W^\perp = \bigcap_{w\in W}\left\{v\in H\mid\langle v, w\rangle = 0\right\} = \bigcap_{w\in W}T_w^{-1}(\{0\})
+    \end{equation*}
+    which is obviously closed. That it is a subspace is trivial to check. If $u\in W\cap W^\perp$, then $\langle u,u\rangle = 0$ whence $u = 0$.
+
+    Finally, suppose $W$ is a closed subspace of $H$. If $W = H$, then $W^\perp = 0$ and $H = W\oplus W^\perp$ and there is nothing more to prove. Let now $u\in H\backslash W$. Consider the closed convex subset $u + W$ of $H$. There is a unique $v\in C$ such that $\|v\| = \inf_{u'\in C}\|u'\|$. We contend that $v\in W^\perp$.
+
+    Indeed, let $\lambda\in\bbC$ and $w\in W\backslash\{0\}$. Then, 
+    \begin{equation*}
+        \|v\|^2\le\|v + \lambda w\|^2 = \|v\|^2 + 2\Re(\lambda\langle v,w\rangle) + |\lambda|^2\|w\|^2 \implies 2\Re(\lambda\langle v,w\rangle) + |\lambda|^2\|w\|^2\ge 0.
+    \end{equation*}
+    Suppose $\langle v,w\rangle \ne 0$. Then, choose $\lambda = t\overline{\langle v,w\rangle}/|\langle v,w\rangle|$. Then, we have, for all $t\in\R_{\ge 0}$, 
+    \begin{equation*}
+        2t|\langle v,w\rangle| + t\|w\|^2\ge 0.
+    \end{equation*}
+    This is possible if and only if $\langle v,w\rangle = 0$. Therefore, for any $u\in H\backslash W$, there is $v\in W^\perp$ such that $u + w = v$ for some $w\in W$ whence $u = v + (-w)$, consequently, $H = W\oplus W^\perp$.
+\end{proof}
+
+\subsection{Riesz Representation Theorem}
+
+\begin{theorem}[Riesz]
+    Let $H$ be a Hilbert space and $T: H\to\bbC$ a continuous functional. Then there is a unique $\phi\in H$ such that for each $v\in H$, 
+    \begin{equation*}
+        T(v) = \langle v,\phi\rangle.
+    \end{equation*}
+    Further, $\|T\| = \|\phi\|$.
+\end{theorem}
+\begin{proof}
+    If $T = 0$, then $\phi = 0$ works and is the only choice since $0 = T(\phi) = \langle\phi,\phi\rangle$. Now, suppose $T\ne 0$. Then, $\ker T$ is a closed subspace of $H$ and thus has an orthogonal complement. Choose some $v\in(\ker T)^\perp$ with $\|v\| = 1$ and let $\phi = \overline{T(v)}v$. We shall show that this choice of $\phi$ works.
+
+    Let $u\in H$. Then, $T\left(u - \dfrac{T(u)}{T(v)}v\right) = 0$ whence $u - \dfrac{T(u)}{T(v)}v\in\ker T$ and thus 
+    \begin{align*}
+        \langle u, \phi\rangle &= \left\langle u - \frac{T(u)}{T(v)}v,\phi\right\rangle + \left\langle\frac{T(u)}{T(v)}v,\phi\right\rangle\\
+        &= \frac{T(u)}{T(v)}\langle v,\phi\rangle = T(u).
+    \end{align*}
+    This proves the existence part. Now, suppose $\phi,\phi'$ represent $T$. Then, 
+    \begin{align*}
+        \langle\phi - \phi', \phi - \phi'\rangle &= \langle\phi,\phi\rangle  - \langle\phi',\phi\rangle - \langle\phi,\phi'\rangle + \langle\phi',\phi'\rangle\\
+        &= T(\phi) - T(\phi') - T(\phi) + T(\phi') = 0
+    \end{align*}
+    whence uniqueness follows.
+
+    Finally, let $u\in H$ with $\|u\| = 1$. Then, 
+    \begin{equation*}
+        \|T(u)\| = |\langle u,\phi\rangle|\le\|u\|\|\phi\| = \|\phi\|
+    \end{equation*}
+    and since $T(\phi/\|\phi\|) = \|\phi\|$, we have the desired conclusion.
+\end{proof}

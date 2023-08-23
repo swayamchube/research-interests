@@ -193,7 +193,7 @@ It is not hard to see that $D_v|_a\in T_a\R^n$. Indeed, if $f,g\in C^\infty(\R^n
     Let $M$ be a smooth manifold with or without boundary, let $U\subseteq M$ be an open subset (and thus a manifold in its own right) and let $\iota: U\into M$ be the inclusion map. For every $p\in U$, the differential $d\iota_p: T_pU\to T_pM$ is an isomorphism of vector spaces.
 \end{lemma}
 \begin{proof}
-    
+    Suppose $v\in T_pU$ such that $d\iota_p(v) = 0\in T_pM$. Let $B$ be a regular coordinate ball contained in $U$, so that is, $\overline B\subseteq U$. \todo{Complete this}
 \end{proof}
 
 \begin{proposition}
@@ -202,6 +202,25 @@ It is not hard to see that $D_v|_a\in T_a\R^n$. Indeed, if $f,g\in C^\infty(\R^n
 \begin{proof}
     Let $(U,\varphi)$ be a smooth chart containing $p$. Due to the preceeding lemma, $T_pU$ is isomorphic to $T_pM$ as vector spaces. Thus, it suffices to show that $T_pU$ is an $n$-dimensional vector space. We have a diffeomorphism $\varphi: U\to\wh U\subseteq\R^n$ whence $d\varphi_p: T_pU\to T_{\varphi(p)}\wh U$ is an isomorphism of vector spaces but since the latter is isomorphic to $\R^n$ (as a vector space) as we have seen earlier, we are done.
 \end{proof}
+
+\todo{Add analogous result for manifolds with boundary.}
+
+\subsection{Computation in coordinates}
+
+Let $M$ be a smooth manifold (without boundary) and $p\in M$. Let $(U,\varphi)$ be a chart whose domain contains $p$ with coordinate functions $x^1,\dots,x^n$. We have seen in this section that $d\varphi_p: T_pM\to T_{\varphi(p)}\R^n$ as vector spaces. If we denote by 
+\begin{equation*}
+    \frac{\partial}{\partial x^1}\bigg\vert_{\varphi(p)},\dots,\frac{\partial}{\partial x^n}\bigg\vert_{\varphi(p)}
+\end{equation*}
+a basis of $T_{\varphi(p)}M$, then their preimages under $d\varphi_p$ form a basis for $T_pM$. We denote these by 
+\begin{equation*}
+    \frac{\partial}{\partial x^1}\bigg\vert_{p},\dots,\frac{\partial}{\partial x^n}\bigg\vert_p.
+\end{equation*}
+
+Thus, any $v\in T_pM$ can be represented as 
+\begin{equation*}
+    v = \sum_{i = 1}^n v^i\frac{\partial }{\partial x^i}\bigg\vert_{p}
+\end{equation*}
+where the $v^i$'s are caled the \emph{components of $v$} with respect to the coordinate basis. It is important to note that this representation is dependent on the coordinate basis and thus the chart chosen.
 
 \section{The Tangent Bundle}
 
@@ -213,8 +232,19 @@ It is not hard to see that $D_v|_a\in T_a\R^n$. Indeed, if $f,g\in C^\infty(\R^n
     This is equipped with the natural projection $\pi: TM\to M$ which maps every vector in $T_pM$ to $p\in M$.
 \end{definition}
 
-\begin{mdframed}[frametitle={\centering Topology on $TM$ for a manifold.}, frametitlerule=true, frametitlealignment=\centering]
-    Let $M$ be a smooth manifold (without boundary). We shall use \thref{lem:smooth-manifold-chart-lemma} to construct a smooth structure on $TM$. Let $(U,\varphi)$ be a smooth chart for $M$
+\begin{mdframed}[frametitle={\centering $TM$ is a smooth $2n$-manifold}, frametitlerule=true, frametitlealignment=\centering]
+    Let $M$ be a smooth manifold (without boundary). We shall use \thref{lem:smooth-manifold-chart-lemma} to construct a smooth structure on $TM$. Let $(U,\varphi)$ be a smooth chart for $M$ with coordinate functions $x^1,\dots,x^n$. Define the map 
+    \begin{equation*}
+        \wt\varphi: \pi^{-1}(U)\to\R^{2n}
+    \end{equation*}
+    by 
+    \begin{equation*}
+        \wt\varphi\left(\sum_{i = 1}^n v^i\frac{\partial}{\partial x^i}\bigg\vert_p\right) = \left(x^1(p),\dots,x^n(p),v^1,\dots,v^n\right).
+    \end{equation*}
+    It is not hard to see that $\im\wt\varphi = \varphi(U)\times\R^n$, which is an open subset of $\R^{2n}$. This map is a bijection since it has an explicit inverse given by 
+    \begin{equation*}
+        \wt\varphi^{-1}\left(\mathbf x, v^1,\dots,v^n\right) = \sum_{i = 1}^n v^i\frac{\partial}{\partial x^i}\bigg\vert_{\varphi^{-1}(\mathbf x)}.
+    \end{equation*}
 \end{mdframed}
 
 \begin{definition}[Global Differential]

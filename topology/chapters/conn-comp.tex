@@ -170,6 +170,32 @@ This definition is extended to subspaces through the following lemma:
     Suppose $Y$ is compact and $\{A_\alpha\}$ is a covering of $Y$ by sets open in $X$. Then, the collection $\{A_\alpha\cap Y\}$ is a covering of $Y$ by sets open in $Y$ and therefore has a finite subcollection $\{A_{\alpha_1}\cap Y,\ldots, A_{\alpha_n}\cap Y\}$ that covers $Y$. As a result, $\{A_{\alpha_1},\ldots,A_{\alpha_n}\}$ is a finite subcollection of open sets in $X$ that cover $Y$. The converse follows similarly.
 \end{proof}
 
+\begin{theorem}[Alexander Subbase Theorem]
+    Let $\mathcal S$ be a subbasis for the topology on $X$. Then, $X$ is compact if and only if every open cover of $X$ by elements in $\mathcal S$ has a finite subcover.
+\end{theorem}
+\begin{proof}
+    We shall show the reverse direction since the forward one is immediate. Suppose $X$ were not compact. Then, there is an open cover $\mathscr A$ of $X$ with no finite subcover. Let $\Sigma$ be the collection of all open covers of $X$ containing $\mathscr A$ with no finite subcovers. It is not hard to show that $\Sigma$ forms a poset under inclusion where every chain has an upper bound. Consequently, due to Zorn's Lemma, $\Sigma$ contains a maximal element, say $\mathscr U$.
+
+    We contend that $\mathcal S\cap\mathscr U$ is an open cover for $X$. Suppose not, then there is $x\in X$ not covered by $\mathcal S\cap\mathscr U$. Since $\mathscr U$ is an open cover, there is $U\in\mathscr U$ containing $x$. Using the fact that $\mathcal S$ is a subbasis, there is a finite collection $\{S_1,\ldots,S_n\}$ of elements in $\mathcal S$ such that $x\in S_1\cap\cdots\cap S_n\subseteq U$. 
+
+    Suppose none of the $S_i$'s belong to $\mathscr U$, then, due to maximality, $\mathscr U\cup\{S_i\}$ would admit a finite subcover, $\{V_{i,1},\ldots,V_{i,n_i}\}\cup\{S_i\}$. It is not hard to see that 
+    \begin{equation*}
+        \bigcup_{i = 1}^n\{V_{i,1},\ldots,V_{i,n_i}\}\cup\{U\}
+    \end{equation*}
+    is an open cover of $X$, contradicting the construction of $\mathscr U$.
+
+    Hence, there is an index $1\le j\le n$ such that $S_j\in\mathscr U$ and thus, $X$ is covered by $\mathcal S\cap\mathscr U$. But since $\mathcal S\cap\mathscr U\subseteq\mathcal S$, it has a finite subcover, contradicting the construction of $\mathscr U$. Thus, $X$ is compact.
+\end{proof}
+\begin{proof}[Alternate Proof Using Ultrafilters]
+    Suppose $X$ is not compact. Then there is an ultrafilter $\mathscr F$ on $X$ that does not converge. We contend that $\mathcal S\backslash\mathscr F$ is an open cover for $X$. Let $x\in X$. Then, there is a neighborhood $U$ of $x$ not in $\mathscr F$. Since $\mathcal S$ forms a subbasis, there is a finite collection $S_1,\ldots,S_n$ in $\mathcal S$ such that $x\in S_1\cap\cdots\cap S_n\subseteq U$ whence, $S_1\cap\cdots\cap S_n\notin\mathscr F$. Obviously, there is $S_i$ such that $S_i\notin\mathscr F$, lest $S_1\cap\cdots\cap S_n\in\mathscr F$. Thus, $x\in S_i\in\mathcal S\backslash\mathscr F$, implying that the latter is a cover.
+
+    According to our hypothesis, there is a finite subcollection $\{S_1,\ldots,S_n\}\subseteq\mathcal S\backslash\mathscr F$ that covers $X$, consequently, 
+    \begin{equation*}
+        \bigcap_{i = 1}^n(X\backslash S_i) = \emptyset
+    \end{equation*}
+    which is absurd since $X\backslash S_i\in\mathscr F$, and $\mathscr F$ has the finite intersection property.
+\end{proof}
+
 \begin{theorem}
     Every closed subspace of a compact space is compact.
 \end{theorem}

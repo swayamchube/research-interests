@@ -1,0 +1,73 @@
+\section{Vitali and Lebesgue's Theorems}
+
+\begin{definition}[Vitali Covering]
+    A colection $\mathcal F$ of closed, bounded, nondegenerate intervals is said to cover a set $E$ \emph{in the sense of Vitali} if for each $x\in E$ and $\varepsilon > 0$, there is an interval $I\in F$ containing $x$ with $\ell(I) < \varepsilon$.
+\end{definition}
+
+We introduce a bit of notation at this point. For an interval $I$ and a positive real number $r$, let $r * I$ denote the dialation of the interval $I$ about the midpoint of $I$ by a factor of $r$.
+
+\begin{lemma}[Vitali's Covering Lemma]
+    Let $E\subseteq\R$ have finite \emph{outer measure} and $\mathcal F$ a collection of closed, bounded intervals that covers $E$ in the sense of Vitali. Then for each $\varepsilon > 0$, there is a finite \emph{disjoint} subcollection $\{I_k\}_{k = 1}^n$ of $\mathcal F$ for which 
+    \begin{equation*}
+        m^*\left(E\backslash\bigcup_{k = 1}^n I_k\right) < \varepsilon.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Since $m^*(E) < \infty$, there is an open set $\mathcal O$ containing $E$ with $m(\mathcal O) < \infty$. Consider 
+    \begin{equation*}
+        \wt{\mathcal F} = \{I\in\mathcal F\mid I\subseteq\mathcal O\}.
+    \end{equation*}
+    It is not hard to argue that $\wt{\mathcal F}$ covers $E$ in the sense of Vitali. Henceforth, let $\mathcal F = \wt{\mathcal F}$. 
+
+    Pick some interval $I_1\in\mathcal F$. We shall construct a sequence of disjoint intervals $\{I_n\}$ inductively. Suppose $I_1,\dots,I_n$ have been chosen for some positive integer $n$. Suppose $E\backslash\bigcup_{k = 1}^n I_k\ne\emptyset$, for if not, then we are done and the Lemma is proved. Define 
+    \begin{equation*}
+        \mathcal F_n = \left\{I\in\mathcal F\bigg\vert I\cap\bigcup_{k = 1}^n I_k = \emptyset\right\}.
+    \end{equation*}
+    It is not hard to see that 
+    \begin{equation*}
+        E\backslash\bigcup_{k = 1}^n I_k\subseteq\bigcup_{I\in\mathcal F_n} I
+    \end{equation*}
+    and thus the collection $\mathcal F_n$ is nonempty. Let 
+    \begin{equation*}
+        s_n = \sup_{I\in\mathcal F_n}\ell(I).
+    \end{equation*}
+    Note that $s_n\le m(\mathcal O) < \infty$. Choose an interval $I_{n + 1}\in\mathcal F_n$ such that $s_n/2 < \ell(I_{n + 1})\le s_n$. This finishes the inductive definition of the sequence $\{I_n\}_{n = 1}^\infty$ which is a countable disjoint collection of $\mathcal F$. Further, for each positive integer $n$, 
+    \begin{equation*}
+        \ell(I_{n + 1}) > \ell(I)/2 \quad\text{ if $I\in\mathcal F$ and } I\cap\bigcup_{k = 1}^n I_k = \emptyset.
+    \end{equation*}
+
+    We now contend that for every positive integer $n$, 
+    \begin{equation*}
+        E\backslash\bigcup_{k = 1}^n E_k\subseteq\bigcup_{k = n + 1}^\infty 5 * I_k.
+    \end{equation*}
+    Let $x\in E\backslash\bigcup_{k = 1}^n E_k$ and let $I$ be an interval in $\mathcal F_n$. First, note that $I$ must have a nonempty intersection with some $I_k$ for if not, then for every positive integer $k$, $I\cap\bigcup_{j = 1}^k I_k = \emptyset$ whence $\ell(I_{k + 1}) > \ell(I)/2$. This is a contradiction since 
+    \begin{equation*}
+        \infty > m(\mathcal O)\ge m\left(\bigcup_{n = 1}^\infty I_n\right) = \sum_{n = 1}^\infty\ell(I_n).
+    \end{equation*}
+    Let $N$ be the smallest positive integer such that $I\cap I_N\ne\emptyset$. Obviously, $N > n$. Again, since $I\cap\bigcup_{k = 1}^{N - 1} I_k = \emptyset$, we have $\ell(I_N) > \ell(I)/2$. Hence, the distance from $x$ to the midpoint of $I_N$ is at most 
+    \begin{equation*}
+        \ell(I) + \frac{1}{2}\ell(I_N) < \frac{5}{2}\ell(I_N).
+    \end{equation*}
+    Consequently, $x\in 5 * I_N\subseteq\bigcup_{k = n + 1}^\infty 5 * I_k$ thereby proving our claim.
+
+    Finally, since the sum $\sum_{k = 1}^\infty\ell(I_k)$ converges, we may pick a positive ingeter $n$ such that the sum $$\sum_{k = n + 1}^\infty\ell(I_k) < \varepsilon/5$$ and thus 
+    \begin{equation*}
+        m^*\left(E\backslash\bigcup_{k = 1}^n I_k\right)\le m\left(\bigcup_{k = n + 1}^\infty 5 * I_k\right) = 5\sum_{k = n + 1}^\infty\ell(I_k) < \varepsilon.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{definition}[Lebesgue Derivative]
+    Let $f$ be a real valued function and $x$ an interior point of its domain. Define the \emph{upper and lower derivatives} of $f$ at $x$ by 
+    \begin{equation*}
+        \overline Df(x) := \lim_{h\to 0^+}\left(\sup_{0 < |t|\le h}\frac{f(x + t) - f(x)}{t}\right),\qquad
+        \underline Df(x) := \lim_{h\to 0^+}\left(\inf_{0 < |t|\le h}\frac{f(x + t) - f(x)}{t}\right).
+    \end{equation*}
+    If $\overline Df(x) = \underline Df(x)$, we say that $f$ is \emph{Lebesgue differentiable} at $x$ and denote by $f'(x)$ the common value o the upper and lower derivatives.
+\end{definition}
+
+\begin{proposition}
+    Let $f:(a,b)\to\R$ be a real valued function. Then $f$ is Lebesgue differentiable at $x$ if and only if it is differentiable at $x$.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}

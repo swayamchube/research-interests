@@ -1,0 +1,333 @@
+\newcommand{\0}{\mathbf{0}}
+\begin{definition}[Differentiable]
+    A function $f:\R^n\to\R^m$ is \textit{differentiable} at $a\in\R^n$ if there is a linear transformation $\lambda:\R^n\to\R^m$ such that 
+    \begin{equation*}
+        \lim_{h\to\mathbf{0}}\frac{\|f(a + h) - f(a) - \lambda(h)\|}{\|h\|} = 0
+    \end{equation*}
+    where $h\in\R^n$. \textit{The} linear transformation $\lambda$ is then denoted by $Df(a)$ and called the \textit{derivative} of $f$ at $a$.
+\end{definition}
+
+
+We shall now show that the aforementioned linear transformation is unique: 
+\begin{proposition}
+    If $f:\R^n\to\R^m$ is differentiable at $a\in\R^n$, then there is a unique linear transformation $\lambda:\R^n\to\R^m$ such that 
+    \begin{equation*}
+        \lim_{h\to\mathbf{0}}\frac{\|f(a + h) - f(a) - \lambda(h)\|}{\|h\|} = 0
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Define $d(h) = f(a + h) - f(a)$. Further, let $\mu:\R^n\to\R^m$ be a linear transformation satisfying the differentiability condition. We then have 
+    \begin{align*}
+        \lim_{h\to \0}\frac{\|\lambda(h) - \mu(h)\|}{\|h\|} &= \lim_{h\to 0}\frac{\|\lambda(h) - d(h) + d(h) - \mu(h)\|}{\|h\|}\\
+        &\le\lim_{h\to\0}\frac{\|\lambda(h) - d(h)\|}{\|h\|} + \lim_{h\to\0}\frac{\|d(h) - \mu(h)\|}{\|h\|} = 0
+    \end{align*}
+    
+    Let $x\in\R^n$. Then, for all $t\in\R$, $\lambda(tx) = t\lambda(x)$ and $\mu(tx) = t\mu(x)$. Therefore, 
+    \begin{equation*}
+        0 = \lim_{t\to\0}\frac{\|\lambda(tx) - \mu(tx)\|}{\|tx\|} = \frac{\|\lambda(x) - \mu(x)\|}{\|x\|}
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+Since $Df(a)$ is a linear transformation, it can be given by a matrix multiplication in $\R^{m\times n}$.
+
+\begin{definition}[Jacobian Matrix]
+    The matrix of $Df(a):\R^n\to\R^m$ with respect to the standard ordered basis of $\R^n$ and $\R^m$ is called the \textit{Jacobian Matrix} of $f$ at $a$.
+\end{definition}
+
+\begin{theorem}[Chain Rule]
+    If $f:\R^n\to\R^m$ is differentiable at $a$ and $g:\R^m\to\R^p$ is differentiable at $f(a)$, then the composition $g\circ f:\R^n\to\R^p$ is differentiable at $a$ and 
+    \begin{equation*}
+        D(g\circ f)(a) = Dg(f(a))\circ Df(a)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $b = f(a)$, $\lambda = Df(a)$ and $\mu = Dg(f(a))$. Further, define: 
+    \begin{enumerate}
+        \item $\varphi(x) = f(x) - f(a) - \lambda(x - a)$ where $\varphi:\R^n\to\R^m$
+        \item $\psi(x) = g(x) - g(b) - \mu(x - b)$ where $\psi:\R^m\to\R^p$
+        \item $\rho(x) = g\circ f(x) - g\circ f(a) - \mu\circ\lambda(x - a)$ where $\rho:\R^n\to\R^p$
+    \end{enumerate}
+
+    Note that 
+    \begin{align*}
+        \rho(x) &= g(f(x)) - g(b) - \mu(\lambda(x - a))\\
+        &= g(f(x)) - g(b) - \mu(f(x) - f(a) - \varphi(x))\\
+        &= \underbrace{g(f(x)) - g(b) - \mu(f(x) - b)} - \mu(\varphi(x))\\
+        &= \psi(f(x)) + \mu(\varphi(x))
+    \end{align*}
+
+    Let $\varepsilon > 0$ be given. Then, there is $\delta$ such that $\|\psi(f(x))\| < \varepsilon\|f(x) - b\|$ whenever $\|f(x) - b\| < \delta$. Now, since $f$ is differentiable at $a$, there is $\delta_1$ such that $\|f(x) - b\| < \delta$ whenever $\|x - a\| < \delta_1$. 
+
+    As a result, whenever $\|x - a\| < \delta_1$, 
+    \begin{align*}
+        \|\psi(f(x))\| &< \varepsilon\|f(x) - b\|\\
+        &= \varepsilon\|\varphi(x) + \lambda(x - a)\|\\
+        &\le \varepsilon\left(\|\varphi(x)\| + M\|x - a\|\right)
+    \end{align*}
+    for some $M\in\R^+$.
+
+    It is now obvious that 
+    \begin{equation*}
+        \lim_{x\to a}\frac{\|\psi(f(x))\|}{\|x - a\|} = 0
+    \end{equation*}
+
+    Finally, it is not hard to see that 
+    \begin{equation*}
+        \lim_{x\to a}\frac{\|\mu(\varphi(x))\|}{\|x - a\|} = \lim_{x\to a}\frac{\|\mu(\psi(x)-\psi(a))\|}{\|\psi(x) - \psi(a)\|}\frac{\|\psi(x) - \psi(a)\|}{\|x - a\|}\le M'\lim_{x\to a}\frac{\|\psi(x) - \psi(a)\|}{\|x - a\|} = 0
+    \end{equation*}
+
+    Therefore, 
+    \begin{equation*}
+        \lim_{x\to a}\frac{\|\rho(x)\|}{\|x - a\|} = 0
+    \end{equation*}
+\end{proof}
+
+\begin{proposition}
+    Let $f:\R^n\to\R^m$ with $f\equiv(f_1,\ldots,f_m)$ and $a\in\R^n$. Then $f$ is differentiable at $a$ if and only if each $f_i$ is, and 
+    \begin{equation*}
+        Df(a) = 
+        \begin{pmatrix}
+            Df_1(a)\\\vdots\\Df_m(a)
+        \end{pmatrix}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    If $f$ is differentiable at $a$, then $f_i\equiv\pi_i\circ f$ is trivially differentiable at $a$. Conversely, suppose each $f_i$ is differentiable. Then, let $\lambda:\R^n\to\R^m$ denote the linear transformation given by the matrix 
+    \begin{equation*}
+        \lambda \equiv 
+        \begin{pmatrix}
+            Df_1(a)\\\vdots\\ Df_m(a)
+        \end{pmatrix}
+    \end{equation*}
+
+    Then, 
+    \begin{align*}
+        \lim_{h\to\0}\frac{\|f(a + h) - f(a) - \lambda(h)\|}{\|h\|} &\le\lim_{h\to\0}\sum_{i = 1}^m\frac{\|f_i(a + h) - f_i(a) - Df_i(a)h\|}{\|h\|}\\
+        &= 0
+    \end{align*}
+    This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    If $f,g:\R^n\to\R$ are differentiable at $a$, then 
+    \begin{align*}
+        D(f + g)(a) &= Df(a) + Dg(a)\\
+        D(f\cdot g)(a) &= g(a)Df(a) + f(a)Dg(a)
+    \end{align*}
+    Moreover, if $g(a)\ne0$, then 
+    \begin{equation*}
+        D(f/g)(a) = \frac{g(a)Df(a) - f(a)Dg(a)}{g(a)^2}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Let $h = f + g$ and $\lambda = Df(a) + Dg(a)$. Then, 
+    \begin{align*}
+        &\lim_{h\to\0}\frac{\|f(a + h) - f(a) + g(a + h) - g(a) - Df(a)(h) - Dg(a)(h)\|}{\|h\|}\\
+        &\le\lim_{h\to\0}\frac{\|f(a+h) - f(a) - Df(a)(h)\|}{\|h\|} + \lim_{h\to\0}\frac{\|g(a + h) - g(a) - Dg(a)(h)\|}{\|h\|}\\
+        &= 0
+    \end{align*}
+
+    Let $h = f\cdot g$ and $\lambda = g(a)Df(a) + f(a)Dg(a)$. There is a significant amount of algebraic manipulation involved here: 
+    \begin{align*}
+        &\|f(a+h)g(a+h) - f(a)g(a) - g(a)Df(a)(h) - f(a)Dg(a)(h)\|\\
+        &\le\|(g(a+h)-g(a))(f(a+h)-f(a))\| + \|f(a)(g(a+h)-g(a)-Dg(a)(h))\|\\
+        &+\|g(a)(f(a+h)-f(a)-Df(a)(h))\|
+    \end{align*}
+    This immediately implies the desired conclusion.
+
+    \textcolor{red}{TODO: Write up the thing for f/g}
+\end{proof}
+
+\begin{definition}[Partial Derivative]
+    Let $f:\R^n\to\R$ and $a\in\R^n$. Then, the limit 
+    \begin{equation*}
+        \lim_{h\to\0}\frac{f(a_1,\ldots,a_i+h,\ldots,a_n) - f(a_1,\ldots,a_n)}{h}
+    \end{equation*}
+    if it exists is called the $i$-th partial derivative of $f$ at $a$ and is denoted by $D_if(a)$.
+\end{definition}
+
+We denote $D_j(D_if)(x)$ as $D_{i,j}f(x)$. It is important to remember that this notation reverses the order of $i$ and $j$. Derivatives such as $D_{i,j}f$ are called \textit{second-order} or \textit{mixed} partial derivatives of $f$.
+
+\begin{theorem}
+    Let $f:\R^n\to\R$ be differentiable. If $D_{i,j}f$ and $D_{j,i}f$ exist and are continuous in an open set containing $a$, then 
+    \begin{equation*}
+        D_{i,j}f(a) = D_{j,i}f(a)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    This proof requires Fubini's Theorem. Suppose $D_{i,j}f(a) - D_{j,i}f(a)\ne0$. Without loss of generality, suppose $D_{i,j}f(a) - D_{j,i}f(a) > 0$. Let $\varepsilon > 0$. Using continuity, there is an open set $U$ containing $a$ such that $D_{i,j}f(x) - D_{j,i}f(x) > \varepsilon$ for all $x\in U$. Let $A$ be a closed rectangle contained in $A$.
+
+    But, due to Fubini's Theorem, 
+    \begin{equation*}
+        \int_AD_{i,j}f(x) - D_{j,i}f(x) = \idotsint D_{i,j}f(x) - \idotsint D_{j,i}f(x) = 0
+    \end{equation*}
+    A contradiction.
+\end{proof}
+
+\begin{proposition}
+    If $f:\R^n\to\R^m$ is differentiable at $a\in\R^n$, then $D_jf_i(a)$ exists for $1\le i\le m$ and $1\le j\le n$ and $f'(a)$ is the $m\times n$ matrix $\left[D_jf_i(a)\right]_{m\times n}$
+\end{proposition}
+\begin{proof}
+    That each partial $D_jf_i(a)$ exists is immediate from the fact that $f$ is differentiable. Define the function $h_i:\R\to\R^n$ given by $h_i(x) = (a_1,\ldots,x,\ldots,a_n)$ where $x$ occurs at the $i$-th position. Then, by definition, we have that $D_if(a) = D(f\circ h_i)(a_i)$. And due to the chain rule, 
+    \begin{equation*}
+        D_if(a) = D(f\circ h_i)(a) = Df(h_i(a_i))Dh(a_i) = Df(a)
+        \begin{pmatrix}
+            0\\\vdots\\1\\\vdots\\0
+        \end{pmatrix}
+    \end{equation*}
+    This immediately implies the desired conclusion.
+\end{proof}
+
+In conclusion, 
+\begin{equation*}
+    \text{Differentiable at $a$}\Longrightarrow\text{Partials exist at $a$}
+\end{equation*}
+
+\begin{theorem}[Differentiability Theorem]
+    If $f:\R^n\to\R^m$, then $Df(a)$ exists if all $D_jf_i(x)$ exist in an open set containing $a$ and if each function $D_jf_i$ is continuous at $a$. Such a function $f$ is called \textbf{continuously differentiable}.
+\end{theorem}
+\begin{proof}
+    Recall that due to a preceeding theorem, $f$ is differentiable if and only if each $f_i$ is differentiable and its derivative is given by stacking the derivatives of all the respective functions. Therefore, it suffices to show this in the case when $m = 1$. Now, 
+    \begin{align*}
+        f(a +h) - f(a) &= f(a_1 + h_1,a_2,\ldots,a_n) - f(a_1,\ldots,a_n)\\
+                       &+ f(a_1 + h_1, a_2 + h_2, a_3,\ldots, a_n) - f(a_1 + h_1,a_2,\ldots,a_n)\\
+                       &+ f(a_1 + h_1,\ldots, a_n + h_n) - f(a_1 + h_1,\ldots,a_{n - 1} + h_{n - 1}, a_n)
+    \end{align*}
+
+    Now, due to the Mean Value Theorem, there are real numbers $b_i$ such that 
+    \begin{align*}
+        &f(a_1 + h_1,\ldots,a_i + h_i,a_{i + 1},\ldots,a_n) - f(a_1 + h_1,\ldots,a_i,\ldots,a_n)\\
+        &= h_iD_if(a_1 + h_1,\ldots, b_i,\ldots, a_n)
+    \end{align*}
+
+    We now have 
+    \begin{align*}
+        &\lim_{h\to\0}\frac{|f(a + h) - f(a) - \sum_{i = 1}^nD_if(a)h_i|}{\|h\|}\\
+        &= \lim_{h\to\0}\frac{\left|\sum_{i = 1}^n\left(D_if(c_i) - D_if(a)\right)h_i\right|}{\|h\|}\\
+        &\le\lim_{h\to\0}\sum_{i = 1}^n\frac{|D_if(c_i) - D_if(a)||h_i|}{\|h\|}\\
+        &\le\lim_{h\to\0}\sum_{i = 1}^n|D_if(c_i) - D_if(a)| = 0
+    \end{align*}
+
+    This completes the proof.
+\end{proof}
+
+\begin{definition}[Directional Derivative]
+    Let $f:\R^n\to\R$. For $v\in\R^n$, the limit 
+    \begin{equation*}
+        \lim_{h\to0}\frac{f(a + hv) - f(a)}{h}
+    \end{equation*}
+    if it exists, is denoted by $D_vf(a)$ and is called the \textit{directional derivative} of $f$ at $a$ in the direction $v$.
+\end{definition}
+
+\begin{lemma}
+    Let $f:\R^n\to\R$ and $a\in\R^n$. If $f$ is differentiable at $a$, then $D_vf(a) = Df(a)(v)$.
+\end{lemma}
+\begin{proof}
+    By definition, we have that 
+    \begin{equation*}
+        0 = \lim_{h\to0}\frac{f(a + hv) - f(a) - Df(a)(hv)}{h} = \lim_{h\to0}\frac{f(a + hv) - f(a)}{h} - Df(a)(v)
+    \end{equation*}
+    and we have the desired conclusion.
+\end{proof}
+
+\section{Counterexamples}
+
+\subsection*{Partials but not Differentiable}
+
+Consider the function $f:\R^2\to\R$ given by 
+\begin{equation*}
+    f(x,y) = 
+    \begin{cases}
+        \frac{x^2y}{x^2 + y^2} & (x,y)\ne(0,0)\\
+        0 & (x,y) = (0,0)
+    \end{cases}
+\end{equation*}
+
+We first show that $f$ is continuous at $(0,0)$. Indeed,
+\begin{equation*}
+    \lim_{(h,k)\to\0}\frac{h^2k}{h^2 + k^2}\le\lim_{(h,k)\to\0}k = 0
+\end{equation*}
+
+Next, note that both the partials exist and 
+\begin{align*}
+    D_xf(\0) &= 
+    \begin{cases}
+        \frac{2xy^3}{(x^2 + y^2)^2} & (x,y)\ne(0,0)\\
+        0 & (x,y) = (0,0)
+    \end{cases}\\
+    D_yf(\0) &= 
+    \begin{cases}
+        \frac{x^2(x^2 - y^2)}{(x^2 + y^2)^2} & (x,y)\ne(0,0)\\
+        0 & (x,y) = (0,0)
+    \end{cases}
+\end{align*}
+
+We shall now show that the function is not differentiable at $(0,0)$. Suppose it were. Then, the derivative $Df(a)$ would be given by 
+\begin{equation*}
+    Df(\0) = \begin{pmatrix} D_xf(0) & D_yf(0)\end{pmatrix} = \begin{pmatrix}0 & 0\end{pmatrix}
+\end{equation*}
+
+Therefore, one would expect,
+\begin{equation*}
+    \lim_{h\to\0}\frac{f(h)}{\|h\|} = 0
+\end{equation*}
+But note that 
+\begin{equation*}
+    \lim_{h\to 0}\frac{f(h,h)}{h} = \frac{1}{2}
+\end{equation*}
+a contradiction. 
+
+\subsection*{Directional Derivatives but not Continuous}
+Consider the function $f:\R^2\to\R$ given by 
+\begin{equation*}
+    f(x,y) = 
+    \begin{cases}
+        \frac{xy^2}{x^2 + y^4} & (x,y)\ne(0,0)\\
+        0 & (x,y) = (0,0)
+    \end{cases}
+\end{equation*}
+
+We shall first show that the directional derivatives exist at $\0$. Indeed, for $\mathbf{v} = (a,b)$, with $a\ne 0$,
+\begin{equation*}
+    \lim_{h\to0}\frac{f(ha,hb)}{h\sqrt{a^2 + b^2}} = \lim_{h\to0}\frac{ab^2}{(a^2 + h^2b^4)} = \frac{b^2}{a}
+\end{equation*}
+On the other hand,
+\begin{equation*}
+    \lim_{h\to0}\frac{f(0,h)}{h} = 0
+\end{equation*}
+
+But, $f$ is not continuous at $\0$, since it takes the value $\frac{1}{2}$ for each point on the parabola $y^2 = x$.
+
+\subsection*{Continuous and Directional Derivatives but not Differentiable}
+Consider the function $f:\R^2\to\R$ given by 
+\begin{equation*}
+    f(x,y) = 
+    \begin{cases}
+        \frac{y}{|y|}\sqrt{x^2 + y^2} & y\ne 0\\
+        0 & y = 0
+    \end{cases}
+\end{equation*}
+
+The continuity at $\0$ is obvious. Let $\mathbf{v} = (a,b)$ with $b\ne 0$. Then, the directional derivative of $f$ at $\0$ in the direction of $v$ is given by 
+\begin{equation*}
+    \lim_{h\to0}\frac{f(ah, bh)}{h} = \frac{bh}{|bh|}\frac{|h|}{h}\sqrt{a^2 + b^2} = \frac{b}{|b|}\sqrt{a^2 + b^2}
+\end{equation*}
+
+On the other hand, if $b = 0$, then $D_{\mathbf{v}}f(\0)$ is just $0$. 
+
+We shall now show that teh function is not differentiable at $(0,0)$. Suppose it were. Then, the derivative $Df(\0)$ would be given by 
+\begin{equation*}
+    Df(\0) = \begin{pmatrix}0 & 1\end{pmatrix}
+\end{equation*}
+
+Therefore, one would expect 
+\begin{equation*}
+    0 = \lim_{(h,k)\to\0}\frac{f(h,k) - k}{\sqrt{h^2 + k^2}}
+\end{equation*}
+
+But note that 
+\begin{equation*}
+    \lim_{h\to0}\frac{f(h,h) - h}{h\sqrt{2}} = 1 - \frac{1}{\sqrt{2}}
+\end{equation*}
+a contradiction.

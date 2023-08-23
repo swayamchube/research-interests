@@ -1,0 +1,56 @@
+\section{Nets}
+
+\begin{definition}[Directed Set, Net, Cofinal]
+    A \textit{directed set} is a reflexive and transitive relation $(I,\le)$ such that for all $\alpha,\beta\in I$, there is $\gamma\in I$ such that $\alpha\le\gamma$ and $\beta\le\gamma$.
+    A subset $J\subseteq I$ is said to be \textit{cofinal} in $I$ if for every $\alpha\in I$, there is $\beta\in J$ such that $\alpha\le\beta$.
+\end{definition}
+
+\begin{proposition}
+    If $J$ is cofinal in $(I,\le)$, then $(J,\le)$ is a directed set.
+\end{proposition}
+\begin{proof}
+    Obviously, $(J,\le)$ is a reflexive and transitive relation. Let $\alpha,\beta\in J$, then there is $\gamma\in I$ such that $\alpha,\beta\le\gamma$. Now, there is $\delta\in J$ such that $\gamma\le\delta$ and the conclusion follows.
+\end{proof}
+
+\begin{definition}[Net, Convergence]
+    A \textit{net} is a function from a directed set $(I,\le)$ to a topological space $X$. A net $(x_\alpha)_{\alpha\in I}$ is said to \textit{converge} to $x\in X$ if for each neighborhood $U$ of $x$, there is $\alpha\in I$ such that 
+    \begin{equation*}
+        \alpha\le\beta\Longrightarrow x_\beta\in U
+    \end{equation*}
+\end{definition}
+
+Notice that the convergence in the case of nets reduces to the convergence of sequences when $(I,\le) = (\N,\le)$ with the standard total ordering.
+
+\begin{lemma}
+    If $X$ is Hausdorff, then a net in $X$ converges to at most one point.
+\end{lemma}
+\begin{proof}
+    Suppose $(x_\alpha)_{\alpha\in I}$ converges to at least two distinct points $x_1,x_2$. Then, there are disjoint neighborhoods $U$ and $V$ of $x_1$ and $x_2$ respectively. There is an index $\alpha\in I$ such that $x_t\in U$ whenever $\alpha\le t$ and $\beta\in I$ such that $x_t\in V$ whenever $\beta\le t$.
+
+    There is $\gamma\in I$ such that $\alpha,\beta\le\gamma$, consequently, $x_\gamma\in U\cap V = \emptyset$, a contradiction.
+\end{proof}
+
+\begin{theorem}
+    Let $A\subseteq X$. Then $x\in\overline A$ if and only if there is a net of point of $A$ converging to $x$.
+\end{theorem}
+\begin{proof}
+    Suppose $x\in\overline A$. Let $\mathscr U$ be the set of all neighborhoods of $x$. Define $U\le V$ in $\mathscr U$ if $U\supseteq V$. For each $U\in\mathscr U$, pick some $x_U\in U\cap A$. This is a net in $X$ that converges to $x$. The converse is trivial.
+\end{proof}
+
+\begin{theorem}
+    A function $f: X\to Y$ is continuous if and only if it maps convergent nets to convergent nets.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    Let $\mathbf x: (I,\le)\to X$ be a net. If $(K,\le)$ is a directed set and $f: (K,\le)\to(I,\le)$ is an order preserving map such that $f(K)$ is cofinal in $I$, then $f\circ\mathbf x: K\to X$ is called a \textit{subnet} of $(x_\alpha)_{\alpha\in I}$.
+\end{definition}
+
+\begin{proposition}
+    If $(x_\alpha)_{\alpha\in I}$ is a net converging to $x$, then every subnet converges to $x$.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}

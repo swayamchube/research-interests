@@ -1,0 +1,26 @@
+\section{Orientation of Vector Spaces}
+
+\begin{definition}
+    Let $V$ be a finite dimensional vector space. We say that two ordered bases $(E_1,\dots, E_n)$ and $(\wt E_1,\dots,\wt E_n)$ are \emph{consistently oriented} if the linear transformation $T: V\to V$ given by $T(E_i) = \wt E_i$ has positive determinant.
+\end{definition}
+
+Let $\mathscr B$ be the set of all basis of a finite dimensional vector space $V$. Define the relation $\sim$ on $\mathscr B$ by $B\sim\wt B$ if and only if both are consistently oriented. It is not hard to see that this is an equivalence relation and the number of equivalence classes is precisely $2$.
+
+\begin{definition}
+    An \emph{orientation} for $V$ is defined by specifying either one of the two equivalence classes. A vector space together with a choice of orientation is called an \emph{oriented vector space}. If $V$ is oriented, then any ordered basis $(E_1,\dots, E_n)$ that is in the given orientation is said to be \emph{positively oriented} and any basis that is not in the given orientation is said to be \emph{negatively oriented}.
+\end{definition}
+
+\section{Orientation of Manifolds}
+
+\begin{definition}
+    For a smooth manifold with or without boundary, we define a \emph{pointwise orientation} on $M$ to be a choice of orientation of each tangent space.
+
+    If $(E_i)_{i = 1}^n$ is a local frame for $TM$, we say that $(E_i)_{i = 1}^n$ is positively oriented if $(E_1|_p,\dots,E_n|_p)$ is a positively oriented basis for $T_pM$ for each $p\in U$. A negatively oriented frame is defined analogously.
+
+    A pointwise orientation of $M$ is said to be \emph{continuous} if every point of $M$ is in the domain of an oriented local frame. An \emph{orientation of $M$} is a continuous pointwise orientation and $M$ is said to be \emph{orientable} if there exists such an orientation.
+\end{definition}
+
+
+\begin{theorem}
+    Let $M$ be a smooth $n$-manifold with or without boundary. Any non-vanishing $n$-form $\omega$ on $M$ determines a unique orientation of $M$ for which $\omega(p)$ is positively oriented for each $p\in M$. Conversely, if $M$ is given an orientation, then there is a smooth nonvanishing $n$-form on $M$ that is positively oriented at each point.
+\end{theorem}

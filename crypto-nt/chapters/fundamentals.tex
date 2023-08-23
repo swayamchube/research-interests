@@ -1,0 +1,388 @@
+\newcommand{\ord}{\operatorname{ord}}
+\section{Arithmetic Functions}
+The main takeaway from this section will be the \textit{M\"obius Inversion Formula}.
+\begin{definition}
+    A function $f:\mathbb{N}\to\mathbb{C}$ is said to be an \textit{arithmetic function} or a \textit{number-theoretic function}.
+\end{definition}
+
+\begin{definition}
+    A real, arithmetic function $f$ is said to be \textit{multiplicative} if for all $m,n\in\mathbb{N}$ with $\gcd(m,n) = 1$,
+    \begin{equation*}
+        f(m)f(n) = f(mn)
+    \end{equation*}
+
+    On the other hand, if for all $m,n\in\mathbb{N}$, 
+    \begin{equation*}
+        f(m)f(n) = f(mn)
+    \end{equation*}
+    then $f$ is said to be \textit{completely multiplicative}.
+\end{definition}
+Obviously, every completely multiplicative function is multiplicative.
+
+\begin{definition}[Dirichlet Product]
+    Let $f$ and $g$ be arithmetic functions. Then, the \textit{Dirichlet product}, or the \textit{Dirichlet convolution} of $f$ and $g$, denoted by $f*g:\mathbb{N}\to\mathbb{C}$ is defined as 
+    \begin{equation*}
+        (f*g)(n) = \sum_{d\mid n} f(d)g\left(\frac{n}{d}\right)
+    \end{equation*}
+    or may be equivalently written as:
+    \begin{equation*}
+        \sum_{d_1d_2 = n}f(d_1)g(d_2)
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    The \textit{Dirichlet product} is associative and commutative. That is, 
+    \begin{equation*}
+        (f*g)*h = f*(g*h) \qquad\text{and}\qquad f*g = g*f
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{theorem}
+    If $f$ is an arithmetic function with $f(1)\ne 0$, then there is a unique arithmetic function $f^{-1}$, called the Dirichlet inverse of $f$ such that 
+    \begin{equation*}
+        f * f^{-1} = f^{-1} * f = \nu
+    \end{equation*}
+    Moreover, $f^{-1}$ is given by the formulas
+    \begin{equation*}
+        f^{-1}(1) = \frac{1}{f(1)} \qquad f^{-1}(n) = \frac{-1}{f(1)}\sum_{\substack{d\mid n\\ d < n}}f\left(\frac{n}{d}\right)f^{-1}(d)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Trivial
+\end{proof}
+
+\begin{theorem}
+    If $f$ is multiplicative and if $g$ is given by 
+    \begin{equation*}
+        g(n) = \sum_{d|n} f(d)
+    \end{equation*}
+    then $g$ is also multiplicative.
+\end{theorem}
+\begin{proof}
+    For $m,n\in\mathbb{N}$, such that $\gcd(m,n) = 1$, we have 
+    \begin{align*}
+        g(m)g(n) &= \sum_{d\mid m}f(d)\sum_{d'\mid n}f(d')\\
+        &= \sum_{d\mid m}\sum_{d'\mid n}f(d)f(d')\\
+        &= \sum_{d\mid mn}f(d)\\
+        &= g(mn)
+    \end{align*}
+    Where the second last equality follows from the fact that any divisor of $mn$ can be broken into two parts, one being a divisor of $m$ and the other of $n$, since $\gcd(m,n) = 1$.
+\end{proof}
+
+\begin{theorem}
+    If $f$ and $g$ are multiplicative, then so is their \textit{Dirichlet product},
+    \begin{equation*}
+        F(n) = \sum_{d\mid n}f(d)g\left(\frac{n}{d}\right)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Similar to the previous proof and hence omitted.
+\end{proof}
+
+\begin{theorem}
+    If $f * g$ and $g$ are multiplicative, then so is $f$.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+As a corollary, we have that if $g$ is multiplicative then so is $g^{-1}$.
+
+\begin{definition}
+    Let $n\in\mathbb{N}$. Then the arithmetic functions $\tau(n)$ and $\sigma(n)$ are defined as follows:
+    \begin{equation*}
+        \tau(n) = \sum_{d\mid n}1 \qquad \sigma(n) = \sum_{d\mid n}d
+    \end{equation*}
+    In other words, $\tau(n)$ is the number of positive divisors of $n$ and $\sigma(n)$ is the sum of all the positive divisors of $n$.
+\end{definition}
+
+\begin{theorem}
+    Let $n$ be a positive integer. Then, 
+    \begin{enumerate}
+        \item $\tau(n)$ is multiplicative.
+        \item If $n$ is a prime, say $p$, then $\tau(p) = 2$. If $n$ is a prime power $p^\alpha$, then $\tau(p^\alpha) = p^\alpha + 1$.
+        \item If $n$ is a composite number of the form $n = p_1^{\alpha_1}\cdots p_k^{\alpha_k}$, then
+        \begin{equation*}
+            \tau(n) = \prod_{i=1}^k(\alpha_i + 1)
+        \end{equation*}
+        \item The product of all divisors of a number $n$ is 
+        \begin{equation*}
+            \prod_{d\mid n}d = n^{\tau(n)/2}
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \hfill 
+    \begin{enumerate}
+        \item Since the function $f(n) = 1$ is multiplicative, it follows that $\tau(n)$ is also multiplicative 
+        \item Trivial 
+        \item Trivial
+        \item Simply note that 
+        \begin{align*}
+            n^{\tau(n)} &= \prod_{d\mid n}n\\
+            &= \prod_{d\mid n}d\left(\frac{n}{d}\right)\\
+            &= \prod_{d\mid n}d\prod_{d'\mid n}d'\\
+            &= \left(\prod_{d\mid n}d\right)^2
+        \end{align*}
+        which gives us the desired conclusion.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Let $n$ be a positive integer. Then 
+    \begin{enumerate}
+        \item $\sigma(n)$ is multiplicative.
+        \item If $n$ is a prime, say $p$,, then $\sigma(p) = p + 1$. More generally, if $n$ is a prime power $p^\alpha$, then
+        \begin{equation*}
+            \sigma(p^\alpha) = \frac{p^{\alpha + 1} - 1}{p - 1}
+        \end{equation*}
+        \item If $n$ is a composite number of the form $n = p_1^{\alpha_1}\cdots p_k^{\alpha_k}$, then
+        \begin{equation*}
+            \sigma(n) = \prod_{i=1}^k\frac{p_i^{\alpha_i + 1} - 1}{p_i - 1}
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \hfill 
+    \begin{enumerate}
+        \item Since the function $f(n) = n$ is multiplicative, it follows that $\sigma(n)$ is also multiplicative 
+        \item Trivial 
+        \item Trivial 
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Let $n$ be a positive integer. Eulers's totient $\phi$-function is defined to be the number of positive integers $k$ less than $n$ which are relatively prime to $n$:
+    \begin{equation*}
+        \phi(n) = \sum_{\substack{0\le k < n\\\gcd(k,n) = 1}}1
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    For any positive integer $n$,
+    \begin{equation*}
+        \sum_{d\mid n}\phi(d) = n
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $n_d$ denote the number of elements in $[n]$ having a greatest common divisor of $d$ with $n$. Then 
+    \begin{equation*}
+        n = \sum_{d\mid n}n_d = \sum_{d\mid n}\phi\left(\frac{n}{d}\right) = \sum_{d\mid n}\phi(d)
+    \end{equation*}
+\end{proof}
+
+\begin{theorem}
+    Let $n$ be a positive integer. Then,
+    \begin{enumerate}
+        \item $\phi(n)$ is multiplicative 
+        \item If $n$ is a prime, say $p$, then $\phi(p) = p -1$. Conversely, if $p$ is a positive integer with $\phi(p) = p - 1$, then $p$ is prime. Further, if $n$ is a prime power $p^\alpha$ with $\alpha > 1$, then $\phi(p^\alpha) = p^\alpha - p^{\alpha - 1}$ 
+        \item If $n$ is a composite number of the form $n = p_1^{\alpha_1}\cdots p_k^{\alpha_k}$, then 
+        \begin{equation*}
+            \phi(n) = n\prod_{i=1}^k\left(1 - \frac{1}{p_i}\right)
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \hfill 
+    \begin{enumerate}
+        \item \textcolor{red}{Find an elegant proof to this part}
+        \item Trivial
+        \item Trivial
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Let $n$ be a positive integer. Then the \textit{M\"obius $\mu$ function} $\mu(n)$ is defined as 
+    \begin{equation*}
+        \mu(n) = 
+        \begin{cases}
+            1 & n = 1\\
+            0 & \text{$n$ is not square free}\\
+            (-1)^k & n = p_1\cdots p_k \text{ where $p_i$'s are primes}
+        \end{cases}
+    \end{equation*}
+\end{definition}
+
+\begin{theorem}
+    Let $n$ be a positive integer. Then 
+    \begin{enumerate}
+        \item $\mu(n)$ is multiplicative
+        \item Let 
+        \begin{equation*}
+            \nu(n) = \sum_{d\mid n}\mu(d)
+        \end{equation*}
+        then, 
+        \begin{equation*}
+            \nu(n) = 
+            \begin{cases}
+                1 & n = 1\\
+                0 & n > 1
+            \end{cases}
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \hfill
+    \begin{enumerate}
+        \item Trivial 
+        \item Note that for a prime $p$, and $\alpha \ge 1$, we have 
+        \begin{align*}
+            \nu(p^\alpha) &= \sum_{d\mid p^\alpha}\mu(d)\\
+            &= \mu(1) + \mu(p)\\
+            &= 0
+        \end{align*}
+        And we are done due to multiplicativity.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[M\"obius Inversion Formula]
+    If $f$ is any arithmetic function and if 
+    \begin{equation*}
+        g(n) = \sum_{d\mid n}f(d)
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        f(n) = \sum_{d\mid n}\mu\left(\frac{n}{d}\right)g(d) = \sum_{d\mid n}\mu(d)g\left(\frac{n}{d}\right)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We have 
+    \begin{align*}
+        \sum_{d\mid n}\mu(d)g\left(\frac{n}{d}\right) &= \sum_{d\mid n}\mu(d)\sum_{a\mid n/d}f(a)\\
+        &= \sum_{d\mid n}\sum_{a\mid n/d}\mu(d)f(a)\\
+        &= \sum_{a\mid n}\sum_{d\mid n/a}\mu(d)f(a)\\
+        &= \sum_{a\mid n}f(a)\nu\left(\frac{n}{a}\right)\\
+        &= f(n)
+    \end{align*}
+\end{proof}
+
+Conversely, the following is also true:
+\begin{theorem}[Converse of M\"obius Inversion]
+    Let $g$ be an arithmetic function and 
+    \begin{equation*}
+        f(n) = \sum_{d\mid n}\mu\left(\frac{n}{d}\right)g(d) = \sum_{d\mid n}\mu(d)g\left(\frac{n}{d}\right)
+    \end{equation*}
+    then 
+    \begin{equation*}
+        g(n) = \sum_{d\mid n}f(d)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    We have 
+    \begin{align*}
+        \sum_{d\mid n}f(d) &= \sum_{d\mid n}\sum_{a\mid d}\mu\left(\frac{d}{a}\right)g(a)\\
+        &= \sum_{a\mid n}\sum_{\lambda\mid n/a}\mu(\lambda)g(a)\\
+        &= \sum_{a\mid n}g(a)\nu\left(\frac{n}{a}\right)\\
+        &= g(n)
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    Let $f$ be multiplicative. Then $f$ is \textit{completely multiplicative} if and only if 
+    \begin{equation*}
+        f^{-1}(n) = \mu(n) f(n)
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Suppose $f$ is multiplicative.Obviously, $f(1) = 1$, and thus $f^{-1}(1) = 1 = \mu(1)f(1)$. We shall now induct on $n$ with that as our base case. We have,
+    \begin{align*}
+        f^{-1}(n) &= -\sum_{\substack{d\mid n\\d < n}}f\left(\frac{n}{d}\right)\mu(d)f(d)\\
+        &= -f(n)\sum_{\substack{d\mid n\\d < n}}\mu(d)\\
+        &= (\mu(n) - \nu(n))f(n)
+    \end{align*}
+
+    Since we are given $f$ is multiplicative, it suffices to show that $f(p^\alpha) = f(p)^\alpha$ for each prime $p$. Since we know that 
+    \begin{equation*}
+        \nu(n) = f*f^{-1} = \sum_{d\mid n}\mu(d)f(d)f\left(\frac{n}{d}\right)
+    \end{equation*}
+    taking $n = p^\alpha$ in the above equation, we obtain
+    \begin{equation*}
+        f(p^\alpha) = f(p)f(p^{\alpha - 1})
+    \end{equation*}
+    and the conclusion is obvious.
+\end{proof}
+
+\begin{theorem}
+    For any positive integer $n$, 
+    \begin{equation*}
+        \phi(n) = n\sum_{d\mid n}\frac{\mu(d)}{d}
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let $f(n) = n$ for all positive integers $n$. Then
+    \begin{equation*}
+        f(n) = \sum_{d\mid n}\phi(n)
+    \end{equation*}
+    and due to the M\"obius inversion formula, we have 
+    \begin{equation*}
+        \phi(n) = \sum_{d\mid n}\mu(d)\frac{n}{d} = n\sum_{d\mid n}\frac{\mu(d)}{d}
+    \end{equation*}
+\end{proof}
+
+\begin{definition}[Von Mangoldt Function]
+    Let $n$ be a positive integer. Then, we define the \textit{Von Mangoldt function} as
+    \begin{equation*}
+        \Lambda(n) = 
+        \begin{cases}
+            \log p & n = p^m\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+\end{definition}
+
+It is not hard to show that 
+\begin{equation*}
+    (\Lambda * 1)(n) = \sum_{d\mid n}\Lambda(d) = \log n
+\end{equation*}
+
+\begin{theorem}
+    For any positive integer $n$, we have 
+    \begin{equation*}
+        \Lambda(n) = -\sum_{d\mid n}\mu(d)\log d
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Trivially follows from the M\"obius inversion formula.
+\end{proof}
+
+\begin{definition}[Liouville Function]
+    Let $n$ be a positive integer. Then, we define the \textit{Liouville function} as 
+    \begin{equation*}
+        \lambda(n) = 
+        \begin{cases}
+            1 & n = 1\\
+            (-1)^{\alpha_1 + \ldots + \alpha_k} & n = p_1^{\alpha_1}\ldots p_k^{\alpha_k}
+        \end{cases}
+    \end{equation*}
+\end{definition}
+
+It is evident from definition that the Liouville function is \textit{completely multiplicative}.
+\begin{theorem}
+    For any positive integer $n$, we have 
+    \begin{equation*}
+        \sum_{d\mid n} \lambda(d) = 
+        \begin{cases}
+            1 & \text{$n$ is a perfect square}\\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    Further, $\lambda^{-1}(n) = |\mu(n)|$.
+\end{theorem}
+\begin{proof}
+    We may trivially conclude that $\sum_{d\mid n}\lambda(d)$ is also multiplicative. Thus, it suffices to evaluate it at prime powers. 
+    \begin{equation*}
+        \sum_{d\mid p^\alpha}\lambda(d) = 
+        \begin{cases}
+            0 & \text{$\alpha$ is odd}\\
+            1 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    Conversely, we have that 
+    \begin{equation*}
+        \lambda^{-1}(n) = \mu(n)\lambda(n) = 
+    \end{equation*}
+\end{proof}
+
+\section{Averages of Arithmetic Functions}

@@ -1,40 +1,302 @@
-\section{Completion Abelian Topological Groups}
-Throughout this section, let $G$ denote a \underline{first countable abelian topological group}.
+\section{Filtrations of Rings and Modules}
 
-\begin{definition}[Convergence, Cauchy]
-    A sequence $\{x_n\}_{n = 1}^\infty$ of elements of $G$ \textit{converges} to $x\in G$ if for any open neighborhood $U$ of $x$, there is an integer $N\in\N$ such that for all $n\ge N$, $x_n - x\in U$. This is denoted by $x_n\to x$. The sequence is said to be \textit{Cauchy} if for every open neighborhood $U$ of $0$, there is an integer $N\in\N$ such that for all $m,n\ge N$, $x_m - x_n\in U$.
+\begin{definition}[Filtered Ring]
+    A \emph{filtered ring} $A$ is a ring $A$ together with a family $(A_n)_{n\ge 0}$ of additive subgroups of $A$ satisfying the conditions: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $A_0 = A$,
+        \item $A_{n + 1}\subseteq A_n$ for all $n\ge 0$,
+        \item $A_mA_n\subseteq A_{m + n}$ for all $m,n\ge 0$.
+    \end{enumerate}
+\end{definition}
+
+Substituting $m = 0$ In the last condition, we get $AA_n\subseteq A_n$ for all $n\ge 0$ whence each $A_n$ is in fact an ideal in $A$.
+
+\begin{example}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\fraka\subseteq A$ be an ideal. Then, $A_n = \fraka^n$ for $n\ge 0$ gives the \emph{$\fraka$-adic filtration} on $A$.
+    \item Let $B\subseteq A$ be a subring. Then, given any filtration $(A_n)_{n\ge 0}$ on $A$, the sequence $(B\cap A_n)_{n\ge 0}$ is a filtration on $B$, called the \emph{induced filtration on $B$}.
+\end{enumerate}
+\end{example}
+
+\begin{definition}[Filtered Module]
+    Let $A$ be a filtered ring with filtration $(A_n)_{n\ge 0}$. A \emph{filtered $A$-module} $M$ is an $A$-module $M$ together with a family $(M_n)_{n\ge 0}$ of additive subgroups of $M$ satisfying: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $M_0 = M$,
+        \item $M_{n + 1}\subseteq M_n$ for all $n\ge 0$,
+        \item $A_mM_n\subseteq M_{m + n}$ for all $m,n\ge 0$.
+    \end{enumerate}
+\end{definition}
+
+Substituting $m = 0$ in the last condition, we obtain $AM_n\subseteq M_n$ for all $n\ge 0$ whence each $M_n$ is an $A$-submodule of $M$.
+
+\begin{example}
+\begin{enumerate}[label=(\alph*)]
+    \item A filtered ring is a filtered module over itself (with the filtration being the same).
+    \item Let $\fraka\subseteq A$ be an ideal, then the sequence $(\fraka^nM)_{n\ge 0}$ of $A$-submodules of $M$ forms a filtration on $M$, called the \emph{$\fraka$-adic filtration}.
+    \item More generally, given a filtration $(A_n)_{n\ge 0}$ on a ring $A$, define $M_n := A_nM$, which gives $M$ the structure of a filtered $A$-module.
+    \item Let $M$ be a filtered $A$-module and $N$ an $A$-submodule of $M$. Then, we have an \emph{induced filtration} on $N$ and $M/N$ given by 
+    \begin{equation*}
+        (N\cap M_n)_{n\ge 0}\quad\text{and}\quad\left(\frac{N + M_n}{N}\right)_{n\ge 0}
+    \end{equation*}
+    respectively.
+\end{enumerate}
+\end{example}
+
+\begin{definition}
+    Let $M$ and $N$ be filtered $A$-modules (over a filtered ring). A \emph{homomorphism of filtered modules} is an $A$-module homomorphism $f: M\to N$ such that $f(M_n)\subseteq N_n$ for all $n\ge 0$.
+\end{definition}
+
+\begin{definition}
+    A filtration $(M_n)_{n\ge 0}$ of an $A$-module $M$ is said to be an \emph{$\fraka$-filtration} if $\fraka M_n\subseteq M_{n + 1}$ for all $n\ge 0$. And a \emph{stable $\fraka$-filtration} if there is a positive integer $N$ such that $\fraka M_n = M_{n + 1}$ for $n\ge N$.
+\end{definition}
+
+\begin{definition}[Graded Ring]
+    A \emph{graded ring} is a ring $A$ together with a family $(A_n)_{n\ge 0}$ of additive subgroups such that $A = \bigoplus_{n\ge 0} A_n$ and $A_mA_n\subseteq A_{m + n}$ for all $m,n\ge 0$. A nonzero element of $A_n$ is said to be a \emph{homogeneous element of degree $n$}.
 \end{definition}
 
 \begin{proposition}
-    If $\{x_n\}$ and $\{y_n\}$ are Cauchy sequences, then so is $\{x_n + y_n\}$.
-\end{proposition}
-
-We now define a relation on the set of all Cauchy sequences in $G$, given by 
-\begin{equation*}
-    \{x_n\}\sim\{y_n\}\iff x_n - y_n\to 0
-\end{equation*}
-
-This relation is obviously reflexive and symmetric. We contend that this is also transitive. This follows from the following proposition.
-
-\begin{proposition}
-    If $\{x_n\}\to x$ and $\{y_n\}\to y$ in $G$, then $\{x_n + y_n\}\to x + y$.
+    Let $A = (A_n)_{n\ge 0}$ be a graded ring with the specified grading. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $A_0$ is a subring, 
+        \item $A$ is an $A_0$-module, 
+        \item $A_n$ is an $A_0$-submodule for all $n\ge 0$.
+    \end{enumerate}
 \end{proposition}
 \begin{proof}
-    In $G\times G$, the sequence $\{(x_n, y_n)\}$ converges to $(x, y)$ and since $\varphi: G\times G\to G$ given by $\varphi(g,h) = g + h$ is continuous, we have that $\{x_n + y_n\}$ converges to $x + y$.
+\begin{enumerate}[label=(\alph*)]
+    \item 
+\end{enumerate}
 \end{proof}
 
-We now denote the set of equivalence classes of Cauchy sequences in $G$ by $\wh G$. Endow $\wh G$ with an addition operation given by 
-\begin{equation*}
-    [\{x_n\}] + [\{y_n\}] = [\{x_n + y_n\}]
-\end{equation*}
-It is not hard to see that $(\wh G, +)$ is an abelian group. 
+\begin{definition}
+    Let $A$ be a graded ring. A \emph{graded $A$-module} is an $A$-module $M$ together with a family $(M_n)_{n\ge 0}$ of subgroups of $M$ such that $M = \bigoplus_{n\ge 0} M_n$ and $A_m M_n\subseteq M_{m + n}$. A nonzero element of $M_n$ is said to be a \emph{homogeneous element of degree $n$}.
+\end{definition}
 
-For each $U\subseteq G$ a neighborhood containing $0$, define $\wh U$ to be the set of all equivalence classes $[\{x_n\}]$ such that there is a positive integer $N$ such that $x_n\in U$ for all $n\ge N$. This forms a basis around $[\{0\}]$ because $\wh U\cap\wh V = \wh{U\cap V}$ and since $\wh G$ is a topological group, it is homogeneous and this determines the topology on $\wh G$. 
+\begin{definition}
+    If $M$ and $N$ are graded $A$-modules, then a \emph{homomorphism of graded $A$-modules} is an $A$-module homomorphism $f: M\to N$ such that $f(M_n)\subseteq N_n$ for all $n\ge 0$.
+\end{definition}
 
-There is also a natural map $\phi: G\to\wh G$ that maps $g\in G$ to the equivalence class $[\{g\}]$. This is obviously a group homomorphism and $\ker\phi = \bigcap U$ where $U$ ranges over all open neighborhoods of $0$ in $U$. Therefore, $\phi$ is injective if and only if $G$ is Hausdorff.
+\begin{proposition}
+    Let $A = \bigoplus_{n\ge0} A_n$ be a graded ring. Then, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $A$ is a Noetherian ring. 
+        \item $A_0$ is noetherian and $A$ is an $A$-algebra of finite type.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $\implies$ 
+\end{proof}
 
-Now, suppose $f: G\to H$ is a continuous homomorphism between abelian topological groups. We contend that $f$ maps Cauchy sequences to Cauchy sequences. Indeed, if $\{x_n\}$ is Cauchy in $G$ and $V$ an open neighborhood of $H$, let $U = f^{-1}(V)$. Then, there is a positive integer $N$ such that for all $n\ge N$, $x_n\in U$, whereby $f(x_n)\in V$.
+\begin{definition}[Rees Algebra]
+    Let $\fraka\subseteq A$ be an ideal. Define the \emph{Rees algebra} to be 
+    \begin{equation*}
+        A^\ast := \bigoplus_{n\ge 0}\fraka^n
+    \end{equation*}
+    where element multiplication is the analogue of polynomial multiplication. That is, represent every element of $A^\ast$ as a polynomial
+    \begin{equation*}
+        a_0 + a_1T + \dots + a_nT^n
+    \end{equation*}
+    in some indeterminate $T$, where $a_i\in\fraka^i$. It is now easy to see how multiplication is defined. The identity element is simply given by $(1,0,\dots)$ or in the polynomial notation, simply the monomial $1$. This gives $A^\ast$ the structure of a commutative ring.
+\end{definition}
 
-Therefore, $f$ induces a map $\wh f: \wh G\to\wh H$ given by $f([\{x_n\}]) = [\{f(x_n)\}]$. That $\wh f$ is a homomorphism is obvious. We contend that $\wh f$ is also a continuous map. Indeed, if $\wh V$ is a basis element around $0$, then $\wh f^{-1}(\wh V) = \wh{f^{-1}(V)}$. Since the topology on $\wh H$ is homogeneous, the map $\wh f$ is continuous.
+\begin{definition}
+    Let $M$ be a filtered $A$-module with filtration $(M_n)_{n\ge 0}$ over $A$ with the $\fraka$-adic filtration for some ideal $\fraka\subseteq A$. Define 
+    \begin{equation*}
+        M^\ast := \bigoplus_{n\ge 0} M_n.
+    \end{equation*}
+    As in the definition of the Rees algebra, we view elements of $M^\ast$ as formal polynomials 
+    \begin{equation*}
+        m_0 + m_1T + \dots + m_nT^n
+    \end{equation*}
+    in some indeterminate $T$, where $m_i\in M_i$. This has a natural action of the Rees algebra, $A^\ast$, by polynomial multiplication, which is well defined, since $\fraka^iM_j\subseteq M_{i + j}$ due to the filtered structure of $M$. This structure also shows that $M^\ast$ is a graded $A^\ast$-module with the above grading.
+\end{definition}
 
-\subsection{Completion Using Inverse Limits}
+\begin{proposition}
+    $A$ is a noethering if and only if $A^\ast$ is a noethering.
+\end{proposition}
+\begin{proof}
+    The converse is obvious since $A$ can be realized as a quotient of $A^\ast$. Suppose $A$ is a noethering. Then, $\fraka$ is finitely generated, say $\fraka = (a_1,\dots,a_n)$. Consider the map $\varphi: A[x_1,\dots,x_n]\to A[T]$ mapping $x_i\mapsto x_iT$ (this map exists due to the universal property of the polynomial ring). It is not hard to see that $\im\varphi = A^\ast\subseteq A[T]$, whence we are done due to \thref{thm:hilbert-basis}.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:before-artin-rees}
+    Let $A$ be a noethering, $M$ a finitely generated $A$-module and $(M_n)_{n\ge 0}$ an $\fraka$-filtration of $M$. Then, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $M^*$ is a finitely generated $A^*$-module. 
+        \item The filtration $(M_n)_{n\ge 0}$ is $\fraka$-stable.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Since $M$ is a finitely generated module over a noethering, it is a noetherian $A$-module whence each $M_n$ is finitely generated. Let 
+    \begin{equation*}
+        Q_n := \bigoplus_{k = 1}^n M_kT^k
+    \end{equation*}
+    be an $A$-module and $M_n^\ast$ be the $A^\ast$-module generated by it. Note that $M_n^\ast$ is finitely generated since each $M_k$ is finitely generated. Further, these form an ascending chain 
+    \begin{equation}\label{eq:ascending-m-ast}
+        \left(M_0^\ast\subseteq M_1^\ast\subseteq\cdots\right)\subseteq M^\ast\tag{$\dagger$}
+    \end{equation}
+    Recall that $A^\ast$ is noetherian. Thus, $M^\ast$ is finitely generated if and only if $M^\ast$ is noetherian if and only if \eqref{eq:ascending-m-ast} stabilizes if and only if $M^\ast = M_{n_0}^\ast$ for some $n_0\in\N$. Now, let $n\ge n_0$. Let $m_{n + 1}\in M_{n + 1}$. Then, $m_{n + 1}T^{n + 1}\in M_{n + 1}^\ast = M_n^\ast$ and thus 
+    \begin{equation*}
+        m_{n + 1}T^{n + 1} = \sum_{k = 1}^r P^A_k(T)P^M_k(T)
+    \end{equation*}
+    where each $P^A_k$ is a polynomial in $A^\ast$ while $P^M_k$ is a polynomial in $Q_n$. Looking at the coefficient of $T^{n + 1}$, we see that $m_{n + 1}\in\fraka M_n$ whence $M_{n + 1} = \fraka M_n$ whereby the filtration $(M_n)_{n\ge 0}$ is stable. The converse is obvious and thus this is an equivalence thereby completing the proof.
+\end{proof}
+
+\begin{lemma}[Artin-Rees Lemma]\thlabel{lem:artin-rees}
+    Let $A$ be a noethering, $\fraka\subseteq A$ an ideal, $M$ a finitely-gennerated $A$-module, $(M_n)_{n\ge 0}$ a stable $\fraka$-filtration of $M$. If $M'$ is an $A$-submodule of $M$, then $(M'\cap M_n)_{n\ge 0}$, the induced filtration on $M'$ is a stable $\fraka$-filtration of $M'$.
+\end{lemma}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \fraka(M'\cap M_n)\subseteq\fraka M'\cap\fraka M_n\subseteq M'\cap M_{n + 1}
+    \end{equation*}
+    whence the induced filtration $(M'\cap M_n)_{n\ge 0}$ is an $\fraka$-filtration. Consider $M'^\ast$ induced by this filtration. This is an $A^\ast$-submodule of $M^\ast$. Due to \thref{prop:before-artin-rees}, $M^\ast$ is a finitely generated $A^\ast$-module whence is noetherian and thus $M'^\ast$ is a finitely generated $A^\ast$-module. Again, \thref{prop:before-artin-rees}, the filtration $(M'\cap M_n)_{n\ge 0}$ is $\fraka$-stable. This completes the proof.
+\end{proof}
+
+\begin{corollary}[Krull's Intersection Theorem]
+    Let $A$ be a noethering and $\fraka\subseteq\frakR(A)$ a proper ideal. Let $M$ be a finitely generated $A$-module. Then $\bigcap_{n\ge 0}\fraka^nM=0$.
+\end{corollary}
+\begin{proof}
+    Let $N := \bigcap_{n\ge 0}\fraka^n M$. Then, $\fraka^nM\cap N = N$ for all $n\in\N$. The filtration $\fraka^nM$ is $\fraka$-stable and thus, so is the induced filtration on $N$. But this means $(N)_{n\ge 0}$ is a stable $\fraka$-filtration, implying that $\fraka N = N$ and thus $N = 0$ from \thref{lem:nakayama}.
+\end{proof}
+
+
+\section{Completion}
+
+\begin{definition}
+    An \emph{inverse system} of $A$-modules is a collection of $A$-modules $(M_n)_{n\ge 0}$ and homomorphisms $(\theta_n)_{n\ge 1}$ where $\theta_n: M_n\to M_{n - 1}$. If $\theta_n$ is surjective for all $n$, then the system is said to be a \emph{surjective system}.
+
+    The \emph{inverse limit} of this system is the \emph{categorical limit} over the diagram 
+    \begin{equation*}
+        M_0\stackrel{\theta_1}{\longleftarrow} M_1\stackrel{\theta_2}{\longleftarrow} M_2\stackrel{\theta_3}{\longleftarrow}\cdots
+    \end{equation*}
+    in $A-\catMod$.
+\end{definition}
+
+\begin{example}
+    Suppose we have a filtration $M = M_0\supseteq M_1\supseteq\cdots$, then we have an inverse system $(M/M_n)_{n\ge 0}$ with 
+    \begin{equation*}
+        \theta_{n + 1}: M/M_{n + 1}\onto M/M_n
+    \end{equation*}
+    being the natural map $x + M_{n + 1}\mapsto x + M_n$. Moreover, this is a \emph{surjective system}.
+\end{example}
+
+\begin{proposition}
+    The inverse limit of an inverse system $((M_n)_{n\ge 0}, (\theta_n)_{n\ge1})$ exists and is unique upto unique isomorphism.
+\end{proposition}
+\begin{proof}
+    It suffices to show existence since the ``unique upto unique isomorphism'' simply follows from the fact that the inverse limit is a ``universal object''.
+
+    Let $N := \prod_{i\ge 0} M_i$ and $\pi_i: N\to M_i$ denote the projection. Let 
+    \begin{equation*}
+        M := \{(x_i)_{i\ge 0}\in N\mid \theta_{i + 1}(x_{i + 1}) = x_i\text{ for all }i\ge 0\}.
+    \end{equation*}
+    That this is a submodule is easy to verify. This is called the submodule of \emph{coherent sequences}. Next, define $f_i: M\to N_i$ by the restriction $f_i = \pi_i|_M$. We contend that 
+    \begin{equation*}
+        M = \limit_n M_n.
+    \end{equation*}
+    Indeed, let $P$ be another $A$-module with maps $g_i: P\to M_i$ such that $\theta_{i + 1}\circ g_{i + 1} = g_{i}$ for all $i\ge 0$. Define the map $h: P\to M$ by $h(p) = (g_0(p),g_1(p),\dots)$. Since this sequence is coherent, it is a valid map into $M$. Morover, for any $a\in A$, and $p,p'\in P$,
+    \begin{equation*}
+        h(p + ap') = (g_i(p) + ag_i(p')) = (g_i(p)) + a(g_i(p')) = h(p) + ah(p')
+    \end{equation*}
+    and thus, $h$ is an $A$-module homomorphism. Finally, 
+    \begin{equation*}
+        f_i\circ h(p) = f_i((g_j(p))_{i\ge 0}) = g_i(p)
+    \end{equation*}
+    as desired.
+\end{proof}
+
+\subsection*{Topological Interlude}
+
+\begin{definition}
+    Let $G$ be a topological abelian group. A \emph{fundamental system} of neighborhoods of $\{0\}$ is a descending chain of subgroups 
+    \begin{equation*}
+        G = G_0\supseteq G_1\supseteq\cdots.
+    \end{equation*}
+    such that $U\subseteq G$ is a neighborhood of $0$ if and only if it contains some $G_n$.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:filtration-induces-topology}
+    Let $G$ be an abelian group and $G=G_0\supseteq G_1\supseteq\cdots$ be a descending chain of subgroups of $G$. The collection 
+    \begin{equation*}
+        \scrB := \{g + G_i\mid g\in G\}
+    \end{equation*}
+    forms a basis for a topology on $G$. Under this topology, $G$ is a topological group.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}
+    A sequence $(x_n)$ in a topological abelian group $G$ is said to be \emph{Cauchy} if for every open neighborhood $U$ of $0$, there is a positive integer $N$ such that $x_n - x_m\in U$ for all $m,n\ge N$.
+\end{definition}
+
+We shall now construct the completion of a group using Cauchy sequences.
+\begin{itemize}
+    \item Define a relation on the set of all Cauchy sequences in $G$ by $(x_n)\sim (y_n)$ if and only if $x_n - y_n\to 0$ as $n\to\infty$.
+    \item That this is an equivalence relation is easy to see, for if $(x_n)\sim(y_n)$ and $(y_n)\sim(z_n)$, then 
+    \begin{equation*}
+        \lim_{n\to\infty}(x_n - z_n) = \lim_{n\to\infty}\left((x_n - y_n) + (y_n - z_n)\right) = \lim_{n\to\infty}(x_n - y_n) + \lim_{n\to\infty}(y_n - z_n) = 0.
+    \end{equation*}
+    \item Let $\wh G$ denote the equivalence classes under the above relation. Define the operation $[(x_n)] + [(y_n)] = [(x_n + y_n)]$. It is not hard to verify that this is well defined and endows $\wh G$ with the structure of an abelian group.
+\end{itemize}
+
+\begin{proposition}
+    Let $\varphi: G\to\wh G$ denote the map $g\mapsto[(g)]$, the equivalence class of the constant sequence. This is a homomorphism of groups and $\ker\varphi = \bigcap U$ where the intersection ranges over all neighborhoods of $0$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\subsection*{Back to Completions}
+
+Let $M$ be a filtered module with filtration $(M_n)_{n\ge 0}$ over a filtered ring $A$ with filtration $(A_n)_{n\ge 0}$. In accordance with \thref{prop:filtration-induces-topology}, both $M$ and $A$ have the structure of abelian topological groups.
+
+\begin{proposition}
+    Under the aforementioned induced topology, $A$ is a topological ring and $M$ is a topological module.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+We now have a topology on the module $M$ whence, we can form its completion, $\wh M$, as outlined in the previous (sub)section.
+\begin{itemize}
+    \item Let $(x_n)$ be Cauchy in $M$ and $a\in A$, in particular, let $a\in A_{m_0}$. Let $U$ be a neighborhood of $0$, which contains $M_{n_0}$ for some positive integer $n_0$. Then, there is a positive integer $n_1$ such that for all $m,n\ge n_1$, $x_m - x_n\in M_{n_0}$, whereby $a(x_m - x_n)\in A_{m_0}M_{n_0}\subseteq M_{n_0}\subseteq U$.
+
+    \item Further, if $(x_n)\sim (y_n)$ and $a\in A$, we must have $(ax_n)\sim (ay_n)$ using a similar argument as above.
+\end{itemize}
+
+Thus $\wh M$ is also an $A$-module. \textcolor{red}{Note that we haven't yet defined a topology on $\wh M$.}
+
+\begin{proposition}
+    $\displaystyle\wh M\cong\limit_n M/M_n$ as $A$-modules.
+\end{proposition}
+\begin{proof}
+    We shall define a map $\displaystyle\alpha: \wt M:=\limit_{n}M/M_n\to\wh M$. Let $(y_n)\in\wt M$ be a coherent sequence. For each $n\ge 0$, pick any $x_n\in M_n$ such that $\pi_n(x_n) = y_n$ where $\pi_n: M\to M/M_n$ is the natural projection. First, note that \todo{complete this}
+\end{proof}
+
+Now, let $A$ be a filtered ring, which can be regarded as a filtered module over itself. Then, $\wh A$ is an $A$-module. There is a natural product on this module, which can be seen easily using coherent sequences. Thus, $\wh A$ is an $A$-algebra, in particular, a ring in its own right.
+
+\begin{definition}
+    Given inverse systems $(M_n,\theta_n)$ and $(M_n',\theta_n')$, a \emph{morphism of inverse systems} $f: (M_n')_n\to (M_n)_n$ is a family of maps $f_n: M_n'\to M_n$ for $n\ge 0$ such that the diagram 
+    \begin{equation*}
+        \xymatrix {
+            M_n'\ar[d]_{f_n} & M_{n + 1}'\ar[d]^{f_{n + 1}}\ar[l]_{\theta_{n + 1}'}\\
+            M_n & M_{n + 1}\ar[l]_{\theta_{n + 1}}
+        }
+    \end{equation*}
+    commutes for all $n\ge 0$. Exactness of such a sequence has the obvious definition.
+\end{definition}
+
+A morphism as above induces a map $\displaystyle f_\ast: \limit_n M_n'\to\limit_n M_n$ given by $(x_n)\mapsto (f_n(x_n))$. The commutativity of the diagram ensures that the sequence on the right is coherent.
+
+\begin{proposition}
+    Let $0\to\{A_n\}\to\{B_n\}\to\{C_n\}\to0$ be an exact sequence of inverse systems. Then 
+    \begin{equation*}
+        0\to\limit A_n\to\limit B_n\to\limit C_n
+    \end{equation*}
+    is exact. Further, if $\{A_n\}$ is a surjective system, then 
+    \begin{equation*}
+        0\to\limit A_n\to\limit B_n\to\limit C_n\to 0
+    \end{equation*}
+    is exact.
+\end{proposition}
+\begin{proof}
+\end{proof}

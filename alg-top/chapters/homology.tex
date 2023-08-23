@@ -1,0 +1,138 @@
+\section{The Setup}
+
+\begin{definition}[Standard and Singular $n$-simplices]
+    The standard $n$-simplex, denoted $\Delta^n\subseteq\R^{n + 1}$ is given by 
+    \begin{equation*}
+        \Delta^n := \{(x_0,\dots,x_n)\in\R^{n + 1}\mid x_0 + \dots + x_n = 1\}.
+    \end{equation*}
+    Denote the $n + 1$ vertices of $\Delta^n$ by $v^n_0,\dots,v^n_n$ where $v^n_i = (0,\dots, 1,\dots, 0)$ in which $1$ occurs at the $i$-th position. Further, define the $i$-th face map $\frakf_i^n: \Delta^n\to\Delta^{n + 1}$ for $0\le i\le n + 1$, first on the vertices of $\Delta^n$ by 
+    \begin{equation*}
+        \frakf_i^n(v_j^n) =
+        \begin{cases}
+            v_j^{n + 1} & j < i\\
+            v_{j + 1}^{n + 1} & j\ge i
+        \end{cases}
+    \end{equation*}
+    and then extend linearly to all of $\Delta^n$.
+
+    Given a topological space $X$, a \emph{singular $n$-simplex} in $X$ is a continuous map $\sigma: \Delta^n\to X$. Denote by $S_n(X)$, the set of all singular $n$-simplices in $X$ and let $C_n(X)$ denote the \emph{free abelian group} on $S_n(X)$.
+\end{definition}
+
+\begin{definition}[The Singular Complex]
+    Let $X$ be a topological space. Define the map $\partial_n: C_n(X)\to C_{n - 1}(X)$ by first defining it on $S_n(X)$, 
+    \begin{equation*}
+        \partial_n(\sigma) = \sum_{i = 0}^n(-1)^i\sigma\circ\frakf_i^{n - 1}
+    \end{equation*}
+    and then extending to all of $C_n(X)$ using the universal property of free modules.
+\end{definition}
+
+\begin{remark}
+    One can check that if $i\le j\le n$, then $\frakf_i^n\circ\frakf_j^{n - 1} = \frakf_{j + 1}^n\circ\frakf_i^{n - 1}$.
+\end{remark}
+
+\begin{proposition}
+    $\partial_n\circ\partial_{n + 1} = 0$ for $n\ge 1$.
+\end{proposition}
+\begin{proof}
+    It suffices to check this on $S_{n + 1}(X)$, the generator of $C_{n + 1}(X)$. Indeed, 
+    \begin{align*}
+        \partial_n\circ\partial_{n + 1}(\sigma) &= \sum_{i = 0}^{n + 1}(-1)^i\partial_n(\sigma\circ\frakf_i^{n})\\
+        &= \sum_{i = 0}^{n + 1}(-1)^i\sum_{j = 0}^n(-1)^j\sigma\circ\frakf_i^n\circ\frakf_j^{n - 1}\\
+        &= \sum_{i = 0}^{n + 1}\sum_{j = 0}^{i - 1}(-1)^{i + j}\sigma\circ\frakf_i^n\circ\frakf_j^{n - 1} + \sum_{i = 0}^{n + 1}\sum_{j = i}^{n}(-1)^{i + j}\sigma\circ\frakf_i^n\circ\frakf_j^{n - 1}\\
+        &= \sum_{i = 0}^{n + 1}\sum_{j = 0}^{i - 1}(-1)^{i + j}\sigma\circ f_i^n\circ f_j^{n - 1} + \sum_{i = 0}^{n}\sum_{j = i}^{n}\sigma\circ f^n_{j + 1}\circ f_i^{n - 1} = 0\qedhere.
+    \end{align*}
+\end{proof}
+
+\begin{definition}[Singular Homology Groups]
+    For a topological space $X$, the homology groups corresponding to the singular chain complex $C_\bullet(X)$ are called the \emph{singular homology groups}.
+\end{definition}
+
+\begin{mdframed}
+    Let $X$ be a topological space. The standard $0$-simplex is just the point $x = 1$ in $\R^1$. Thus, $S_0(X)$ can be identified with the underlying set of $X$, consequently, $C_0(X)$ can be identified with the free abelian group on $X$. Define the map $\varepsilon: S_0(X)\to\Z$ by $\varepsilon(x) = 1$ for each $x\in X$ and extend this to $C_0(X)$ through the universal property. It is evident that the map $\varepsilon: C_0(X)\to\Z$ is a surjection. Furthermore, $\varepsilon\circ\partial_1 = 0$, and thus, we may augment the singular chain complex as follows: 
+    \begin{equation*}
+        \xymatrix {
+            \cdots \ar[r]^-{\partial_2} & C_1(X)\ar[r]^-{\partial_1} & C_0(X)\ar[r]^-{\varepsilon} & \Z\ar[r] & 0
+        }
+    \end{equation*}
+    which we denote by $\wt C_\bullet(X)$ and the corresponding homology groups by $\wt H_n(X)$ which are called the \emph{reduced homology groups}. Note that $H_n(X) = \wt H_n(X)$ for $n > 0$ therefore, the only difference observed is in $\wt H_0(X)$.
+\end{mdframed}
+
+\section{Some Functorial Properties}
+
+Let $f: X\to Y$ and $g: Y\to Z$ be continuous maps. There is an induced map $f_n: S_n(X)\to S_n(Y)$ given by $\sigma\mapsto f\circ\sigma$. This can be extended to a map $f_n: C_n(X)\to C_n(Y)$ through the universal property of free modules as follows.
+\begin{equation*}
+    \xymatrix {
+        S_n(X)\ar@{^{(}->}[d]\ar[r]^{f_n} & S_n(Y)\ar@{^{(}->}[d]\\
+        C_n(X)\ar@{.>}[r]_{\exists! f_n} & C_n(Y)
+    }
+\end{equation*}
+
+We denote the sequence of maps $\{f_n\}_{n = 0}^\infty$ by $f_\sharp$.
+
+\begin{proposition}
+    Given the setup as above, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $f_\sharp: C_\bullet(X)\to C_\bullet(Y)$ is a chain map.
+        \item $g_\sharp\circ f_\sharp = (g\circ f)_\sharp$.
+        \item If $\id: X\to X$ is the identity map, then $\id_\sharp$ is a collection of identity maps on $C_n(X)$ for each nonnegative integer $n$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item We need to show that $\partial^Y_{n + 1}\circ f_{n + 1} = f_n\circ\partial^X_n: C_{n + 1}(X)\to C_n(Y)$. It suffices to check the equality on elements of $S_{n + 1}(X)$, owing to the universal property. Indeed, for $\sigma\in S_{n + 1}(X)$, we have 
+
+    \begin{align*}
+        \partial_{n + 1}^Y(f\circ\sigma) = \sum_{i = 0}^{n + 1}(-1)^i f\circ\sigma\circ\frakf^n_i\\
+        f_n\circ\partial_{n + 1}^{X}(\sigma) = f_n\left(\sum_{i = 0}^{n + 1}(-1)^i\sigma\circ\frakf_i^{n}\right) = \sum_{i = 0}^{n + 1}(-1)^i f\circ\sigma\circ\frakf_i^n.
+    \end{align*}
+    
+    \item Since $g_n\circ f_n = (g\circ f)_n$ on the elements of $S_n(X)$, the equality must hold on all of $C_n(X)$. We are implicitly using the universal property here.
+
+    \item Trivial.\qedhere
+\end{enumerate}
+\end{proof}
+
+Since $f_\sharp$ is a chain map, it induces a group homomorphism $H_n(X)\to H_n(Y)$ on the homology groups, which we denote by $f_\ast$ or $(f_\ast)_n$. We shall try to avoid the latter for the sake of brevity.
+
+\todo{$f_\ast$ is functorial}.
+
+\begin{mdframed}
+    We shall establish some notation to make our life easier. If $p_0,\dots,p_k\in\R^k$ are points, then we denote by $[p_0,\dots,p_k]$ the unique linear map $\tau:\Delta^k\to\R^k$ that maps $v^k_i\mapsto p_i$. In particular, this map is given by 
+    \begin{equation*}
+        \alpha_0 v^k_0 + \dots + \alpha_kv^k_k\mapsto \alpha_0p_0 + \dots + \alpha_{k}p_k.
+    \end{equation*}
+
+    Now, let $A\subseteq\R^n$ be a convex subset. Given a map $\sigma: A\to X$ and $p_0,\dots,p_k\in A$, we denote by $\sigma|_{[p_0,\dots,p_k]}$ the composition $\sigma\circ[p_0,\dots,p_k]$.
+\end{mdframed}
+
+\begin{theorem}
+    Let $f,g: X\to Y$ be homotopic maps. Then, $f_\ast = g_\ast$.
+\end{theorem}
+\begin{proof}
+    We have a map $F: X\times I\to Y$ such that $F|_{X\times\{0\}} = f$ and $F|_{X\times\{1\}} = g$. We shall construct a chain homotopy $P: C_\bullet(X)\to C_\bullet(Y)$ between the maps $f$ and $g$. \todo{chain homotopy. only computation remains}
+\end{proof}
+
+\begin{corollary}
+    Let $f: X\to Y$ be a homotopy equivalence. Then, $f_\ast$ is an isomorphism of groups.
+\end{corollary}
+\begin{proof}
+    There is a continuous map $g: Y\to X$ such that $g\circ f\simeq\id_X$ and $f\circ g\simeq\id_Y$. Thus, $g_\ast\circ f_\ast = \id_\ast$ and $f_\ast\circ g_\ast = \id_\ast$. The conclusion follows.
+\end{proof}
+
+\begin{definition}[Relative Homology Groups]
+    Let $X$ be a topological space and $A\subseteq X$ a subspace. There is a canonical inclusion $\iota_n: C_n(A)\into C_n(X)$. Denote by $C_n(X,A)$ the abelian group $\coker\iota_n$. There is an induced map $\partial_n:\coker\iota_n\to\coker\iota_{n - 1}$ giving us a chain complex $C_\bullet(X,A)$. The homology groups corresponding to this chain complex are called \emph{relative homology groups} and denoted by $H_n(X,A)$.
+\end{definition}
+
+We now have a short exact sequence of chain complexes
+\begin{equation*}
+    \xymatrix {
+        0\ar[r] & C_\bullet(A)\ar[r]^\iota & C_\bullet(X)\ar[r] & C_\bullet(X,A)\ar[r] & 0
+    }
+\end{equation*}
+which, due to \thref{thm:ses-to-les} gives us a long exact sequence of homology groups
+\begin{equation*}
+\xymatrix@R-2pc{
+    \cdots\ar[r] & H_n(A)\ar[r] & H_n(X)\ar[r] & H_n(X,A)\ar[r] & H_{n - 1}(A)\ar[r] & \cdots\\
+    & & &  \cdots\ar[r] & H_0(X,A)\ar[r] & 0
+}
+\end{equation*}

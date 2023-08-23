@@ -181,8 +181,18 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
 \end{lemma}
 
 \begin{proposition}
-    Let $A\subseteq B$ be integral domains with $A$ integrally closed. Let $\alpha\in B$ be integral over an ideal $\fraka$ of $A$. Then $\alpha$ is algebraic over the field of fractions $K$ of $A$. Further, if the minimal polynomial of $\alpha$ over $K$ is given by $x^n + a_{n - 1}x^{n - 1} + \cdots + a_0$, then each $a_i$ is an element of $\sqrt{\fraka}$.
+    Let $A\subseteq B$ be integral domains with $A$ integrally closed. Let $\alpha\in B$ be integral over an ideal $\fraka$ of $A$. Then $\alpha$, viewed as an element of $Q(B)\supseteq Q(A)$ is algebraic over the field of fractions $K$ of $A$. Further, if the minimal polynomial of $\alpha$ over $K$ is given by $x^n + a_{n - 1}x^{n - 1} + \cdots + a_0$, then each $a_i$ is an element of $\sqrt{\fraka}$.
 \end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}[Going Down Theorem]
+    Let $A\subseteq B$ be an integral extension of integral domains with $A$ integrally closed. Suppose $\frakp_1\supseteq\dots\supseteq\frakp_n$ are prime ideals in $A$ and correspondingly $\frakq_1\supseteq\dots\supseteq\frakq_m$ are prime ideals in $B$ with $m < n$ and $\frakq_i\cap A = \frakp_i$ for $1\le i\le m$, then there are prime ideals $\frakq_{m + 1}\supseteq\frakq_{n}$ with $\frakq_m\supseteq\frakq_{m + 1}$ such that $\frakq_i\cap A = \frakp_i$ for $m < i\le n$.
+\end{theorem}
+\begin{proof}
+    It suffices to prove this in the case $m = 1$ and $n = 2$. Let $\iota: A\into B$ denote the inclusion map, $S$ denote the set $B\backslash\frakq_1$ and $\varphi: B\to B_{\frakq_1}$ denote the localization map. Let $\frakP$ denote the ideal $S^{-1}(B\frakp_2)$. First, we shall show that $\iota^{-1}(\varphi^{-1}(\frakP)) = \frakp_2$.
+\end{proof}
 
 \section{Noether's Normalization Lemma}
 

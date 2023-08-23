@@ -155,8 +155,23 @@ consequently, $\gamma$ is nulhomotopic. This completes the proof.
 \begin{theorem}
     Suppose $X$ is \nice. Then for every subgroup $H\subseteq\pi_1(X,x_0)$, there is a covering space $p: (X_H,\widetilde x_0)\to (X,x_0)$  such that $p_*(\pi_1(X_H,\widetilde{x}_0)) = H$.
 \end{theorem}
+\begin{proof}
+    For $[\gamma],[\gamma']\in\wt X$, define the relation $[\gamma]\sim_H[\gamma']$ to mean $\gamma(1) = \gamma'(1)$ and $[\gamma\ast\overline{\gamma'}]\in H$. This is obviously an equivalence relation. Let $X_H$ denote the quotient space $X/\sim_H$ with $q:\wt X\to X_H$ the quotient map. Consider now the map $p: X_H\to X$ which is induced as shown in the following diagram. 
+    \begin{equation*}
+        \xymatrix {
+            \wt X \ar@{->>}[r]^\pi\ar@{->>}[d]_q & X\\
+            X_H\ar@{.>}[ru]_{\exists! p}
+        }
+    \end{equation*}
 
-If $p_1: (\widetilde X_1,\widetilde x_1)\to(X,x_0)$ and $p_2:(\widetilde X_2,\widetilde x_2)\to(X,x_0)$ are covering spaces, then an \textit{isomorphism between} them is a homeomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ such that $p_1 = p_2\circ f$.
+    Let $U\subseteq X$ be an open neighborhood. Then, $p^{-1}(U)$ is a disjoint union $\bigsqcup U_{[\gamma]}$ where $[\gamma]$ is an equivalence class of paths with $\gamma(1)\in U$. Note that $[\gamma]\sim_H[\gamma']$ if and only if $[\gamma\ast\eta]\sim_H[\gamma'\ast\eta]$. Hence, if any two points in distinct neighborhoods $U_{[\gamma]}$ and $U_{[\gamma']}$ are identified, then so are the entire neighborhoods. Hence, $p: X_H\to X$ is a covering map.
+
+    Choose the basepoint $\wt x_0\in X_H$ the equivalence class under $\sim_H$ containing the point $[e_{x_0}]$ where $e_{x_0}$ is the constant path at $x_0$. Let $\gamma$ be a loop in $X$ based at $x_0$. This lifts to a path from $[e_{x_0}]$ to $[\gamma]$ in $\wt X$. This lift maps to a loop in $X_H$ if and only if $[e_{x_0}]\sim_H[\gamma]$ or equivalently, $[\gamma]\in H$. In particular, this means that $p_\ast(\pi_1(X_H, \wt x_0)) = H$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    If $p_1: (\widetilde X_1,\widetilde x_1)\to(X,x_0)$ and $p_2:(\widetilde X_2,\widetilde x_2)\to(X,x_0)$ are covering spaces, then an \textit{isomorphism between} them is a homeomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ such that $p_1 = p_2\circ f$.
+\end{definition}
 
 \begin{theorem}\thlabel{thm:isomorphism-iff-image-equal}
     Let $(X, x_0)$ be \ul{path connected and locally path connected} and $p_1:\widetilde X_1\to X$ and $p_2:\widetilde X_2\to X$ be covering spaces. Then, for $\widetilde x_1\in p_1^{-1}(x_0)$ and $\widetilde x_2\in p_2^{-1}(x_0)$, there is an isomorphism $f: (\widetilde X_1,\widetilde x_1)\to(\widetilde X_2,\widetilde x_2)$ if and only if $p_{1*}(\pi_1(\widetilde X_1,\widetilde x_1)) = p_{2*}(\pi_1(\widetilde{X}_2, \widetilde x_2))$.
@@ -202,8 +217,20 @@ In conclusion, we have proved the following classification theorem.
     On the other hand, if basepoints are ignored, then there is a bijecion between the isomorphism classes of covering spaces of $X$ and conjugacy classes of subgroups of $\pi_1(X,x_0)$.
 \end{theorem}
 
-\subsection{\texorpdfstring{$n$}{n}-sheeted coverings}
-\todo{n sheeted coverings}
+\subsection{Action of \texorpdfstring{$\pi_1$}{fg} on a fiber}
+
+Let $p:\wt X\to X$ be a covering map and $x_0\in X$. We shall first define an action of the group $\pi_1(X,x_0)$ on $p^{-1}(x_0)$. For a loop $\gamma$ based at $x_0$, define the function $L_\gamma: p^{-1}(x_0)\to p^{-1}(x_0)$ as follows: Choose some $\wt x_0\in p^{-1}(x_0)$ and let $\wt\gamma$ denote the \emph{unique} lift of $\gamma$ to a path in $\wt X$ that begins at $\wt x_0$. Define $L_\gamma(\wt x_0) := \wt\gamma(1)$.
+
+First, note that $L_\gamma$ is a bijection since it has an inverse given by $L_{\overline\gamma}$. Now, suppose $\gamma$ and $\gamma'$ are path homotopic loops, that is, $[\gamma] = [\gamma']$. Choose some $\wt x_0\in p^{-1}(x_0)$. Then, due to \thref{corr:path-homotopy-lifting}, the lifts $\wt\gamma$ and $\wt{\gamma'}$ are path homotopic too, whence $\wt\gamma(1) = \wt{\gamma'}(1)$ and thus $L_{\gamma} = L_{\gamma'}$.
+
+Finally, suppose $\gamma$ and $\eta$ are two loops based at $x_0$ and $\wt x_0\in p^{-1}(x_0)$. Let $\wt x_1 = \wt\gamma(1)$ and $\wt\eta$ be the unique lift of $\eta$ to a path in $\wt X$ beginning at $\wt x_1$. Then, $\wt\gamma\ast\wt\eta$ is the \emph{unique} lift of $\gamma\ast\eta$ to $\wt X$ whence, $L_{\gamma\ast\eta} = L_\eta\circ L_\gamma$. 
+
+Consider now the map $\Phi:\pi_1(X,x_0)\to\mathfrak S\left(p^{-1}(x_0)\right)$ given by $[\gamma]\mapsto L_{\overline\gamma} = L_\gamma^{-1}$. Then, 
+\begin{equation*}
+    \Phi([\gamma]\ast[\eta]) = L_{\overline{\gamma\ast\eta}} = L_{\overline\eta\ast\overline\gamma} = L_{\overline\gamma}\circ L_{\overline\eta} = \Phi([\gamma])\circ\Phi([\eta]),
+\end{equation*}
+whence $\Phi$ is a group homomorphism and defines an \emph{action of $\pi_1(X,x_0)$ on the fiber $p^{-1}(x_0)$.}
+
 
 \section{Deck Transformations and Covering Space Actions}
 
@@ -256,12 +283,12 @@ We may rephrase the definition of a covering space action as:
     A \textit{covering space action} of $G$ on $Y$ is a group action such that for each $y\in Y$, there is a neighborhood $U$ of $y$ such that for all $g\in G$, $U\cap gU\ne\emptyset$ if and only if $g = 1_G$.
 \end{quote}
 
-\begin{proposition}
-    The group action of the group of deck transformations, $G(\wt X)$, of a covering space $p:\wt X\to X$ is a covering space action.
-\end{proposition}
-\begin{proof}
-    \todo{deck transformations are covering space actions}
-\end{proof}
+% \begin{proposition}
+%     The group action of the group of deck transformations, $G(\wt X)$, of a covering space $p:\wt X\to X$ is a covering space action.
+% \end{proposition}
+% \begin{proof}
+%     \todo{deck transformations are covering space actions}
+% \end{proof}
 
 \begin{theorem}
     Let $G$ act on $Y$ through a covering space action.
@@ -282,6 +309,17 @@ We may rephrase the definition of a covering space action as:
     \item This follows from \thref{thm:ftgt-covering-spaces}.\qedhere
 \end{enumerate}
 \end{proof}
+
+\begin{example}[Fundamental group of $S^1$]
+    Let the additive group $\Z$ act on $\R$ by translations. Then, $\R/\Z$ is homeomorphic to the circle $S^1$. The action of $\Z$ is properly discontinuous and $\R$ is simply connected and thus 
+    \begin{equation*}
+        \Z\cong\pi_1(S^1, s_0)/p_\ast(\pi_1(\R, x_0))\cong\pi_1(S^1, s_0).
+    \end{equation*}
+\end{example}
+
+\begin{remark}
+    Similarly, one can obtain the fundamental group of the torus $S^1\times S^1$ by considering the additive action of $\Z\times\Z$ on $\bbC$ which is also properly discontinuous. Note that this also gives the torus the structure of a Riemann surface.
+\end{remark}
 
 \begin{example}[Fundamental group of $\RP^n$]
     Let $n\ge 2$. Consider the action of $\Z/2\Z$ on $S^n$ wherein the nontrivial action is given by $x\mapsto -x$. Obviously this is a covering space action, whereby 

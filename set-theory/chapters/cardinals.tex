@@ -178,3 +178,67 @@ If we were to work in \textsf{ZFC} then we could just well order $\mathscr P(\al
     \end{equation*}
     which can be constructed using Replacement. Let $g: Y\to S$ be given by $g(y) = f^{-1}(y)$ and $F$ be a choice function on $S$. Then, the composition $F\circ g$ is an injective function from $Y$ to $X$, implying the desired conclusion.
 \end{proof}
+
+\begin{definition}[Cardinal Exponentiation]
+    For sets $A$ and $B$, define 
+    \begin{equation*}
+        A^B := {}^BA := \{f\subseteq\mathscr P(B\times A)\mid f \text{ is a function}\}.
+    \end{equation*}
+    For cardinals $\kappa$ and $\lambda$, define $\kappa^\lambda := |{}^\lambda\kappa|$.
+\end{definition}
+
+\begin{theorem}
+    Let $2\le\kappa\le\lambda$ and $\lambda$ an infinite cardinal. Then, $\kappa^\lambda = 2^\lambda$.
+\end{theorem}
+\begin{proof}
+    Obviously, ${}^\lambda 2\approx\mathscr P(\lambda)$ which can be seen by looking at the characteristic function of each subset of $\lambda$. Then, we have 
+    \begin{equation*}
+        {}^\lambda k\preceq{}^\lambda\lambda\preceq\mathscr P(\lambda\times\lambda)\preceq\mathscr P(\lambda)\preceq{}^\lambda 2.
+    \end{equation*}
+    The conclusion follows from \thref{thm:cantor-schroder-bernstein}.
+\end{proof}
+
+\begin{theorem}
+    Let $\mathscr B(\R)$ denote the Borel $\sigma$-algebra on $\R$ with the standard topology. Then, $|\mathscr B(\R)| = 2^{\aleph_0}$, the cardinality of the continuum.
+\end{theorem}
+\begin{proof}
+    That $\mathscr B(\R)$ has cardinality at least that of the continuum is straightforward since it contains all singletons. Showing the reverse direction is a bit involved and requires transfinite recursion.
+
+    First, note that $\R$ is second countable and thus has a countable abse for its topology, denote this by $S_0$. For an ordinal $\alpha < \omega_1$, let $S_{\alpha + 1}$ denote the collection of all unions of the form 
+    \begin{equation*}
+        \bigcup_{i} A_i\cup\bigcup_{j}(\R\backslash B_j)
+    \end{equation*}
+    where $A_i$ and $B_j$ are chosen from $S_\alpha$. Note that if $|S_\alpha|\le 2^{\aleph_0}$, then the number of these unions that can be formed is at most $(2^{\aleph_0})^{\aleph_0} = 2^{\aleph_0}$ since there is a surjection from the set of all functions $\aleph_0\to S_\alpha$ onto $S_{\alpha + 1}$. 
+
+    On the other hand, if $\alpha$ is a limit ordinal, define 
+    \begin{equation*}
+        S_{\alpha} = \bigcup_{\lambda < \alpha} S_\lambda.
+    \end{equation*}
+
+    We contend that $S = \bigcup_{\alpha < \omega_1}S_\alpha$ is a $\sigma$-algebra. Obviously, $S$ contains $\emptyset$ and $\R$, and is closed under complementation. Let $\{A_n\}_{n = 1}^\infty$ be a sequence in $S$. For each positive integer $n$, let $\alpha(n)$ denote the minimal ordinal $\lambda$ such that $A_n\in S_{\lambda}$. Note that for each $n$, the cardinality $|\alpha(n)|\le\omega$. Hence, if $\beta = \sup_{n < \omega}\alpha(n)$, then $|\beta|\le\omega$, consequently, $\beta < \omega_1$ and $\{A_n\mid n < \omega\}\subseteq S_{\beta}$ implying that $\bigcup_{n = 1}^\infty A_n\in S_{\beta + 1}\subseteq S$. 
+
+    As a result, $S$ contains $\mathscr B(\R)$ but the cardinality of $S$ is at most 
+    \begin{equation*}
+        |\omega_1|\otimes 2^{\aleph_0} = \aleph_1\otimes 2^{\aleph_0}\le 2^{\aleph_0}\otimes 2^{\aleph_0} = 2^{\aleph_0}.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}[Mazurkiewicz, 1914]
+    There is a subset $A\subseteq\R^2$ which meets \emph{every} line in the plane at \emph{exactly} $2$ points.
+\end{theorem}
+\begin{proof}
+    Let $\mathscr L$ denote the set of all possible lines in the plane. The cardinality of $\mathscr L$ is at least $2^{\aleph_0}$ and atmost $2^{\aleph_0}\otimes 2^{\aleph_0} = 2^{\aleph_0}$. Since this is in bijection with $2^{\aleph_0}$, it has an induced well ordering, which we denote by $\mathscr L = \{L_\alpha\mid\alpha < 2^{\aleph_0}\}$.
+
+    We shall, using transfinite recursion construct a chain $X_\alpha$ of subsets of $\R^2$ for $\alpha < 2^{\aleph_0}$ such that $|X_\alpha| < 2^{\aleph_0}$ and $|X_\alpha\cap L_\beta|\le 2$ for each $\beta < 2^{\aleph_0}$. 
+
+    Begin with $X_0 = \{x_0\}$ for any $x_0\in \R^2$. Suppose now that the sequence has been constructed for each $\beta < \alpha$ where $\alpha > 0$. Let $Y_\alpha := \bigcup_{\beta < \alpha} X_\beta$. Let $S_\alpha$ denote the set of all lines between two points in $Y_\alpha$. Note that the cardinality of $S_\alpha$ is strictly smaller than $2^{\aleph_0}$. 
+
+    Let $\gamma$ be the smallest ordinal such that $|L_\gamma\cap Y_\alpha|\le 1$. If no such ordinal exists, then $Y_\alpha$ is the desired set. Suppose such a $\gamma$ does exist. Then, the set 
+    \begin{equation*}
+        L_\gamma\backslash\underbrace{\left(\bigcup_{L\in S_\alpha}L\cup\bigcup_{\beta < \gamma} L_\beta\cup Y_\alpha\right)}_{T}
+    \end{equation*}
+    which is non empty, since the intersection of $L_\gamma$ with $T$ has cardinality strictly smaller than $2^{\aleph_0}$. Let $x_\alpha$ be one such element in the above set and define $X_\alpha = Y_\alpha\cup\{x_\alpha\}$.
+
+    It is not hard to see that $X_\alpha$ satisfies the desired properties and thus we may continue this procedure and obtain $\{X_\alpha\mid\alpha < 2^{\aleph_0}\}$. Let $X = \bigcup_{\alpha < 2{^\aleph_0}} X_\alpha$. This is the required set.
+\end{proof}

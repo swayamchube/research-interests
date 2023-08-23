@@ -1,0 +1,145 @@
+\begin{definition}[Locally Finite]
+    Let $X$ be a topological space. A collection $\mathscr A$ of subsets of $X$ Is said to be \emph{locally finite} in $X$ if every point of $X$ has a neighborhood that intersects only finitely many elements of $\mathscr A$.
+\end{definition}
+
+\begin{definition}[Countably Locally Finite]
+    A collection $\B$ of subsets of $X$ is said to be countably locally finite if $\B$ can be written as the countable union of collections $\B_n$, each of which is locally finite.
+\end{definition}
+
+\section{Paracompactness}
+
+\begin{definition}[Paracompact]
+    A topological space $X$ is said to be \emph{paracompact} if every open covering has a locally finite open refinement.
+\end{definition}
+
+\begin{proposition}
+    A paracompact Hausdorff space is regular.
+\end{proposition}
+\begin{proof}
+    Let $A\subseteq X$ be a closed set and $x\notin A$. Then due to Hausdorff-ness, for each $a\in A$, there is an open neighborhood $U_a$ of $a$ whose closure does not contain $x$. Consider the indexed set $\{U_a\}_{a\in A}\cup\{X\backslash A\}$, which is an open cover of $X$ whence has a locally finite open refinement, say $\mathscr U$. Let 
+    \begin{equation*}
+        \mathscr V = \{U\in\mathscr U\mid U\subseteq U_a\text{ for some } a\in A\}.
+    \end{equation*}
+    Then, $\mathscr V$ is an open cover for $A$ and for any $V\in\mathscr V$, there is some $U_a$ such that $V\subseteq U_a$, whence $\overline V\subseteq\overline{U_a}$ and thus does not contain $x$. 
+
+    Now, let 
+    \begin{equation*}
+        \wt V = \bigcup_{V\in\mathscr V}V\qquad\wt U = \underbrace{X\backslash\left(\overline{\bigcup_{V\in\mathscr V}V}\right) = X\backslash\left(\bigcup_{V\in\mathscr V}\overline V\right)}_{\text{since } \mathscr{V}\text{ is locally finite}}.
+    \end{equation*}
+    It is not hard to see that $\wt U$ and $\wt V$ form an open separation of $x$ and $A$.
+\end{proof}
+
+\begin{proposition}
+    A paracompact Hausdorff space is normal.
+\end{proposition}
+\begin{proof}
+    Proceed as above with a little tweaking.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:regular-paracompact-lemma}
+    Let $X$ be regular. Then the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item Every open cover of $X$ has a countably locally finite open refinement which is a cover.
+        \item Every open cover of $X$ has a locally finite refinement which is a cover.
+        \item Every open cover of $X$ has a locally finite closed refinement which is a cover.
+        \item Every open cover of $X$ has a locally finite open refinement which is a cover.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    $(a)\implies(b)$. Let $\scrA$  be an open cover of $X$.
+
+    $(c)\implies(d)$. This is the hardest part of the proof. Let $\scrA$ be an open cover of $X$ and let $\scrB$ be a closed refinement of $\scrA$ which is also a cover. Define 
+    \begin{equation*}
+        \mathscr{U} := \{U\subseteq_{\text{open}} X\mid U \text{ intersects finitely many elements in }B\}.
+    \end{equation*}
+    Then $\mathscr U$ is also an open cover of $X$ whence has a locally finite closed refinement $\mathscr C$ which is also a cover. Now, for each $B\in\scrB$, let 
+    \begin{equation*}
+        \mathscr C(B) := \{C\mid C\in\mathscr C\text{ and } C\cap B = \emptyset\}.
+    \end{equation*}
+    and let 
+    \begin{equation*}
+        E(B) := X\backslash\bigcup_{C\in\mathscr C(B)}C.
+    \end{equation*}
+    Then $E(B)$ is an open\footnote{Since $C(B)$ is locally finite.} set containing $B$. For each $B\in\mathscr{B}$, pick $F(B)\in\scrA$ containing $B$ and finally define 
+    \begin{equation*}
+        \mathscr D := \{E(B)\cap F(B)\mid B\in\mathscr B\}.
+    \end{equation*}
+    That this is an open refinement of $\mathscr A$ covering $X$ is trivial. It remains to show that $\mathscr D$ is locally finite. Let $x\in X$. Then, there is a neighborhood $W$ of $x$ that intersects finitely elements in $\mathscr C$, say $C_1,\dots,C_k$ and since $\mathscr C$ forms a cover, $W\subseteq C_1\cup\dots\cup C_k$. 
+    
+    Note that if $C\in\mathscr C$ intersecting $E(B)\cap F(B)$ for some $B\in\scrB$, then $C$ intersects $E(B)$ whence $C$ intersects $B$ by definition. Owing to the local finiteness of $\scrB$, $C$ intersects $B$ and hence $C$ can intersect only finitely many elements of $\mathscr D$.
+
+    Whence $W$ can intersect only finitely many elements of $\mathscr D$ implying the desired conclusion.
+
+    $(d)\implies(a)$. Trivial. This completes the proof. 
+\end{proof}
+
+\begin{proposition}[A. H. Stone]
+    Every metrizable space is paracompact.
+\end{proposition}
+The machinery and proof is due to M. E. Rudin.
+\begin{proof}
+    
+\end{proof}
+
+\begin{proposition}
+    A regular Lindel\"of space is paracompact.
+\end{proposition}
+\begin{proof}
+    Let $\mathscr A$ be an open cover of a regular Lindel\"of space $X$. Then, there is a countable subcollection that covers $X$. Since we have a countably locally finite refinement of $\mathscr A$ which is a cover, due to \thref{lem:regular-paracompact-lemma}, the space is paracompact.
+\end{proof}
+
+
+\subsection{Partitions of Unity}
+
+\begin{definition}[Partition of Unity]
+    Let $\{U_\alpha\}_{\alpha\in J}$ be an indexed open covering of $X$. An indexed family of continuous functions $\phi_\alpha: X\to[0,1]$ is said to be a \emph{partition of unity} on $X$ \emph{dominated by} $\{U_\alpha\}_{\alpha\in J}$ if 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\Supp\phi_\alpha\subseteq U_\alpha$ for each $\alpha\in J$.
+        \item $\{\Supp\phi_\alpha\}_{\alpha\in J}$ is locally finite. 
+        \item $\displaystyle\sum_{\alpha\in J}\phi_\alpha(x) = 1$ for each $x\in X$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}[Shrinking Lemma]\thlabel{lem:shrinking-lemma}
+    Let $X$ be a paracompact Hausdorff space and $\{U_\alpha\}_{\alpha\in J}$ be an indexed open cover of $X$. Then there is a locally finite indexed open cover $\{V_\alpha\}_{\alpha\in J}$ of $X$ such that $\overline{V_\alpha}\subseteq U_\alpha$ for each $\alpha\in J$.
+\end{lemma}
+\begin{proof}
+    Let $\scrA$ denote the collection of all open sets $U$ in $X$ such that $\overline U$ is contained in some $U_\alpha$. We first contend that $\scrA$ is an forms an open cover of $X$. Indeed, every $x\in X$ is contained in some $U_\alpha$ and since $X$ is regular, there is a neighborhood $V$ of $x$ such that $x\in V\subseteq\overline V\subseteq U_\alpha$ whence $x$ is covered by $\scrA$.
+
+    Since $X$ is paracompact, the open cover $\scrA$ has a locally finite open refinement $\scrB$. For each $\alpha\in J$, define 
+    \begin{equation*}
+        V_\alpha = \bigcup_{\substack{B\in\scrB\\ B\subseteq U_\alpha}}B\subseteq U_\alpha
+    \end{equation*}
+    Since the set $\{B\in\scrB\mid B\subseteq U_\alpha\}\subseteq\scrB$ is locally finite, we have 
+    \begin{equation*}
+        \overline{V_\alpha} = \bigcup_{\substack{B\in\scrB\\ B\subseteq U_\alpha}}\overline B\subseteq U_\alpha.
+    \end{equation*}
+    Further, using the fact that $X$ is regular, it is not hard to see that if $x\in U_\alpha$, then $x\in V_\alpha$ and thus the collection $\{V_\alpha\}_{\alpha\in J}$ forms an open cover for $X$ and is an open refinement of $\{U_\alpha\}_{\alpha\in J}$.
+
+    Lastly, we must show that $\{V_\alpha\}$ is locally finite. Let $x\in X$. Since $\{U_\alpha\}$ was locally finite, there is a neighborhood $U$ of $x$ which intersects finitely many of the $U_\alpha$'s whence it intersects finitely many of the $V_\alpha$'s. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{lem:partition-of-unity-exists}
+    Let $X$ be a paracompact Hausdorff space and $\{U_\alpha\}_{\alpha\in J}$ an indexed open cover of $X$. Then there is a partition of unity on $X$ dominated by $\{U_\alpha\}_{\alpha\in J}$.
+\end{theorem}
+\begin{proof}
+    First, by repeated application of \thref{lem:shrinking-lemma}, there are successive locally finite precise open refinements $\{W_\alpha\}_{\alpha\in J}$ and $\{V_\alpha\}_{\alpha\in J}$ such that for each $\alpha\in J$,
+    \begin{equation*}
+        \overline{W_\alpha}\subseteq V_\alpha\quad\text{and}\quad\overline{V_\alpha}\subseteq U_\alpha.
+    \end{equation*}
+    Using \thref{lem:urysohn}, there is a continuous function $\phi_\alpha: X\to[0,1]$, such that $\phi_\alpha(\overline{W_\alpha}) = 1$ and $\phi_\alpha(X\backslash V_\alpha) = 0$. It is not hard to see that 
+    \begin{equation*}
+        \Supp\phi_\alpha\subseteq\overline{V_\alpha}\subseteq U_\alpha.
+    \end{equation*}
+    Consider the function $\Phi: X\to\R$ given by 
+    \begin{equation*}
+        \Phi(x) = \sum_{\alpha\in J}\phi_\alpha(x).
+    \end{equation*}
+    Let $x\in X$. Due to local finiteness, there is an open neighborhood $U$ of $x$ such that $U$ intersects only finitely many of the $V_\alpha's$ whence $U\subseteq X\backslash V_\alpha$ for all but finitely many $\alpha\in J$, whence the sum makes sense because it is essentially finite.
+
+    Moreover, since $\{\overline{W_\alpha}\}$ is an open cover of $X$, every $x\in X$ belongs to at least one $\overline{W_\alpha}$ and thus $\Phi(x)$ is positive for all $x\in X$. It is not hard to see now that the collection 
+    \begin{equation*}
+        \left\{\frac{\phi_\alpha}{\Phi}\right\}_{\alpha\in J}
+    \end{equation*}
+    is a partition of unity dominated by $\{U_\alpha\}$.
+\end{proof}

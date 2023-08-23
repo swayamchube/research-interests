@@ -7,7 +7,8 @@
 \lhead{Swayam Chube}
 \cfoot{\thepage}
 
-\newcommand{\nice}{\ul{\emph{unfathomably based}}\xspace}
+\newcommand{\nice}{\ul{\emph{nice}}\xspace}
+\newcommand{\catCh}{\mathbf{Ch}}
 
 \title{Algebraic Topology}
 \author{Swayam Chube}
@@ -16,6 +17,14 @@
 \begin{document}
 \maketitle
 \tableofcontents
+
+\setcounter{chapter}{-1}
+
+\chapter{Homological Algebra}
+\input{chapters/cat-homo.tex}
+
+\chapter{Topological Preliminaries}
+\input{chapters/topo.tex}
 
 \chapter{The Fundamental Group}
 \input{chapters/fundamental-group.tex}

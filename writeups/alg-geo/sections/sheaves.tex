@@ -1,0 +1,52 @@
+\subsection{The germ of a smooth function}
+
+Let $X$ be a topological space and $p\in X$. We shall consider elements of $C(X)$, the set (ring) of continuous functions from $X$ to $\R$. Define the relation $\sim$ on $C(X)$ by $f\sim g$ if and only if there is a neighborhood $U$ of $p$ on which $f = g$. That this relation is an equivalence relation is not hard to show. The set of equivalence classes is denoted by $\mathscr O_p$. It is not hard to see that this has the structure of a ring with pointwise addition and multiplication, which is also well defined.
+
+We contend that the ring $\mathscr{O}_p$ is local. Indeed, consider the ideal $\frakm_p$ of all germs that vanish at $p$ (that this is an ideal is trivial to check). Further, if $f\in\mathscr O_p\backslash\frakm_p$, then there is a neighborhood $U$ of $p$ on which $f$ is nonzero, whereby $f$ is a unit in $\mathscr O_p$, implying the desired conclusion. The quotient ring is a field, $\R$.
+
+\subsection{Presheaves}
+
+\begin{definition}[Presheaf]
+    Let $X$ be a topological space and $\mathfrak{Top}(X)$ denote the poset category of all open sets in $X$ along with inclusion maps. A \emph{presheaf} on $X$ is a contravariant functor $\mathscr{F}$ from $\mathfrak{Top}(X)$ to $\catCRing$. 
+\end{definition}
+
+\begin{definition}[Stalk]
+    Define the \emph{stalk} of a presheaf $\mathscr F$ at a point $p\in X$ to be the colimit of the diagram induced by $\mathscr F$. The index category in this case, $\mathfrak{Top}^\op(X)$ is a filtered category since given any two open sets, there is an open set contained in both.
+
+    If $p\in U$ and $f\in\mathscr F(U)$, then the image of $f$ in $\mathscr F_p$ is called the \emph{germ of $f$ at $p$}.
+\end{definition}
+
+\begin{definition}[Sheaf]
+    A presehaf $\mathscr F$ is a \emph{sheaf} if it satisfies the following two axioms. 
+    \begin{description}
+        \item[Gluability axiom.] If $\{U_i\}_{i\in I}$ is an open cover of $U$, then given $f_i\in\mathscr F(U_i)$ for all $i\in I$ such that $f_i|_{U_i\cap U_j} = f_j|_{U_i\cap U_j}$ for all $i,j\in I$, then there is some $f\in\mathscr F(U)$ such that $\rho_{U,U_i}(f) = f_i$ for all $i\in I$.
+        \item[Identity axiom.] If $\{U_i\}_{i\in I}$ is an open cover of $U$ and $f_1,f_2\in\mathscr F(U)$, and $f_1|_{U_i} = f_2|_{U_i}$ for all $i\in I$, then $f_1 = f_2$. 
+    \end{description}
+    A presheaf satisfying the identity axiom is called a \emph{separated presheaf}.
+\end{definition}
+
+\begin{definition}[Morphisms]
+    A \emph{morphism of presheaves} $\mathscr F,\mathscr G:\mathfrak{Top}(X)^\op\to\catCRing$ is a natural transformation between the functors $\mathscr F$ and $\mathscr G$, that is, a collection $\{\phi(U)\}$ of maps for each $U\in\mathfrak{Top}(X)$ such that for each $U\into V$, the diagram 
+    \begin{equation*}
+        \xymatrix {
+            \mathscr F(V)\ar[r]^-{\rho_{V,U}}\ar[d]_{\phi(V)} & \mathscr F(U)\ar[d]^{\phi(U)}\\
+            \mathscr G(V)\ar[r]_-{\rho_{V,U}} & \mathscr G(U)
+        }
+    \end{equation*}
+    commutes. Similarly, a \emph{morphism of sheaves} is simply a morphism of presheaves between sheaves, since the category of sheaves on $X$ is a full subcategory of the category of presheaves on $X$.
+\end{definition}
+
+\begin{proposition}
+    Let $\pi: X\to Y$ be a continuous map and $\mathscr F$ a presheaf on $X$. Define $\pi_*\scrF$ by 
+    \begin{equation*}
+        \pi_*\scrF(V) = \scrF(\pi^{-1}(V))
+    \end{equation*}
+    where $V\in\Top(Y)$. Then, $\pi_\ast\scrF$ is a presheaf on $X$.
+\end{proposition}
+\begin{proof}
+    Straightforward, since $\pi^{-1}$ is itself a functor from $\Top(Y)$ to $\Top(X)$ and the composition of a contravariant functor and a covariant functor is a contravariant functor.
+\end{proof}
+
+\begin{definition}
+    Let $\pi: X\to Y$ be a continuous map of topological spaces and $\scrF$ be a presheaf on $X$. Then, $\pi_\ast\scrF$ is called the \emph{pushforward of $\scrF$ by $\pi$} and is a presheaf on $Y$.
+\end{definition}

@@ -1,0 +1,67 @@
+We have defined alternating tensors and the alternation operator in the chapter on tensors. From our identification, if $V$ is a finite dimensional vector space, then $\Lambda^k(V^*)$ is simply the set of all alternating covariant $k$-tensors on $V$.
+
+Given a positive integer $k$, an ordered $k$-tuple $I = (i_1,\dots,i_k)$ of positive integers is called a \emph{multi-index of length $k$}. If $\varepsilon^1,\dots,\varepsilon^n$ is a basis or $V^*$, for each multi-index $I = (i_1,\dots,i_k)$ of length $k$ with $1\le i_1,\dots,i_k\le n$, define a covariant $k$-tensor $\varepsilon^I$ by 
+\begin{equation*}
+    \varepsilon^I(v_1,\dots,v_k) := \det
+    \begin{pmatrix}
+        \varepsilon^{i_1}(v_1) & \cdots & \varepsilon^{i_1}(v_k)\\
+        \vdots & \ddots & \vdots\\ 
+        \varepsilon^{i_k}(v_1) & \cdots & \varepsilon^{i_k}(v_k)
+    \end{pmatrix}.
+\end{equation*}
+
+Since $\det: \R^k\times\dots\times\R^k\to\R$ is an alternating function, so is $\varepsilon^I$.
+
+\begin{proposition}
+    Let $V$ be an $n$-dimensional vector space. If $(\varepsilon^i)$ is a basis for $V^*$, then for each positive integer $k\le n$, the collection of $k$-covectors 
+    \begin{equation*}
+        \mathscr E := \{\varepsilon^I\mid I\text{ isa n increasing multi-index of length }k\}
+    \end{equation*}
+    is a basis for $\Lambda^k(V^*)$. Therefore, 
+    \begin{equation*}
+        \dim\Lambda^k(V^*) = \binom{n}{k}.
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\begin{definition}[Wedge Product]
+    Let $V$ be a finite dimensional vector space and $\omega\in\Lambda^k(V^*), \eta\in\Lambda^l(V^*)$. Define their \emph{wedge product} or \emph{exterior product} to be 
+    \begin{equation*}
+        \omega\wedge\eta := \frac{(k + l)!}{k!l!}\Alt(\omega\otimes\eta)\in\Lambda^{k + l}(V^*).
+    \end{equation*}
+    Consequently, 
+    \begin{equation*}
+        \Lambda(V^*) := \bigoplus_{k = 0}^\infty\Lambda^k(V^*)
+    \end{equation*}
+    forms a graded algebra under the wedge product.
+\end{definition}
+
+\begin{proposition}
+    Let $V$ be an $n$-dimensional vector space and $(\varepsilon^1,\dots,\varepsilon^n)$ be a basis for $V^*$. For any multi-indices $I = (i_1,\dots,i_k)$ and $J = (j_1,\dots,j_l)$, 
+    \begin{equation*}
+        \varepsilon^I\wedge\varepsilon^J = \varepsilon^{IJ}
+    \end{equation*}
+    where $IJ = (i_1,\dots,i_k,j_1,\dots,j_l)$, their concatenation.
+\end{proposition}
+
+\section{Differential Forms on Manifolds}
+
+Let $M$ be a smooth $n$-manifold with or without boundary. Define 
+\begin{equation*}
+    \Lambda^k(T^*M) := \coprod_{p\in M}\Lambda^k(T_p^*M).
+\end{equation*}
+
+Note that $\Lambda^k(T^*M)\subseteq T^k(T^*M)$.
+
+\begin{proposition}
+    $\Lambda^k(T^*M)$ is a smooth subbundle of $T^k(T^*M)$ and therefore is a smooth vector bundle of rank $\binom{n}{k}$ over $M$.
+\end{proposition}
+\begin{proof}
+    \todo{Add in later}
+\end{proof}
+
+\begin{definition}
+    Let $M$ be a smooth $n$-manifold with or without boundary. A section of $\Lambda^k(T^*M)$ is called a \emph{differential $k$-form} or just a \emph{$k$-form}. The integer $k$ is called the \emph{degree of the form}. The vector space of smooth $k$-forms on $M$ is denoted by $\Omega^k(M)$.
+\end{definition}

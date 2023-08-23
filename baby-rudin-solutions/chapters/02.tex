@@ -1,0 +1,184 @@
+\begin{enumerate}
+\setItemnumber{6}
+\item Let $x$ be a limit point of $E'$. Let $U$ be an open set containing $x$. By our assumption, there is $e'\in E$ such that $e'\in U$. Therefore, there is an open set $V$ contained in $U$, containing $e'$. Since $e'$ is a limit point of $E$, $V\cap E\ne\emptyset$, therefore, $U\cap E\ne\emptyset$ and $x$ is a limit point of $E$, as a result, $x\in E'$. Hence, $E'$ is closed.
+
+We have shown above that for any open set $U$, 
+\begin{equation*}
+    U\cap E'\ne\emptyset~\Longrightarrow~U\cap E\ne\emptyset
+\end{equation*}
+This immediately implies that $\overline{E}'\subseteq E'$. But since $E\subseteq\overline{E}$, we must have that $E' = \overline{E}'$.
+
+\item Let $(X,d)$ be the metric space
+\begin{enumerate}
+    \item Obviously, if $x\in A_i'$ for some $i$, it must be an element of $B_n'$. Conversely, let $x\in B_n'$, if $x\notin\overline{A}_i$ for all $i$, then there are open sets $U_i$ for $1\le i\le n$ such that $x\in U_i$ and $U_i\cap A_i = \emptyset$. Let $U = \bigcap_{i = 1}^nU_i$, which is open and is disjoint from $\bigcup_{i = 1}^nA_i = B_n$, a contradiction. \textcolor{red}{This argument works for any topological space, since we never used that $X$ was metrizable.}
+
+    \item The containment is trivial. Let $A_i = \left(\frac{1}{n}, 1\right)$. Then $B = (0,1)$ and $1\in\overline{B}$ while $1\notin\overline{A}_i$ for all $i\in\N$.
+\end{enumerate}
+
+\item Yes. Let $x\in E$, then, there is $\delta\in\R^+$ such that $B(x,\delta)\subseteq E$. Let $U$ be an open set containing $x$, then $U\cap B(x,\delta)$ is an open set, therefore, there is $0 < \varepsilon < \delta$ such that $B(x,\varepsilon)\subseteq U\cap B(x,\delta)$, and thus, there is $e\in B(x,\varepsilon)$ with $e\ne x$, implying that $x\in E'$.
+
+No, the statement does not hold for closed sets. Take $E = \{(0,0)\}$, which is obviously closed but does not have a limit point.
+
+\item Let $(X,\T_X)$ be a topological space.
+\begin{enumerate}[label=(\alph*)]
+    \item Let $x\in E^\circ$, then there is a neighborhood $U_x\in\T_X$ of $x$ such that $x\in U_x\subseteq E$. Further, for any $y\in U_x$, it is clear that $y\in E^\circ$, since $U_x$ is also a neighborhood for $y$. As a result, $U_x\subseteq E^\circ$. Finally, since we may write 
+    \begin{equation*}
+        E^\circ = \bigcup_{x\in E^\circ}U_x
+    \end{equation*}
+    we must have that $E^\circ$ is open.
+
+    \item If $E$ is open, then for all $x\in E$, there is a neighborhood $U_x\in\T_X$ with $x\in U_x\subseteq E$, therefore $x\in E^\circ$, implying that $E^\circ = E$. The converse follows immediately from $(a)$.
+
+    \item Straightforward.
+
+    \item  Let $x\in (E^\circ)^c$. If $x\notin E$, then trivially, $x\in \overline{(E^c)}$. On the other hand, if $x\in E\backslash E^\circ$, for every neighborhood $U$ of $x$, $U\cap E^c\ne\emptyset$, therefore, $x\in\overline{(E^c)}$. This implies $(E^\circ)^c\subseteq\overline{(E^c)}$.
+    
+    Conversely, if $x\in\overline{(E^c)}$, then for all neighborhoods $U$ of $x$, $U\cap E^c\ne\emptyset$, hence, $U\subsetneq E$ and $x\notin E^\circ$. This completes the proof.
+
+    \item No. Take $\Q\subseteq\R$ with the Euclidean topology. Then, $\Q^\circ = \emptyset$, while $(\overline{\Q})^\circ = \R^\circ = \R$.
+
+    \item No. Take $\Q\subseteq\R$ with the Euclidean topology. Then, $\overline{\Q} = \R$ while $\overline{(\Q^\circ)} = \overline{\emptyset} = \emptyset$.
+\end{enumerate}
+
+\item That the given function is a metric is straightforward. We have 
+\begin{equation*}
+    B(x,\delta) = 
+    \begin{cases}
+        \{x\} & \delta\le 1\\
+        X & \delta > 1
+    \end{cases}
+\end{equation*}
+Consequently, every subset of $X$ is open, and as a result, every subset of $X$ is also closed. 
+
+We shall show that only finite subsets of $X$ are compact. Obviously, all finite subsets of $X$ are compact. Let $A = \{x_1,\ldots,\}$ be an infinite subset of $X$. Then, $\mathscr{A} = \{B(x_i, 1)\mid x_i\in A\}$ is an open cover for $A$ with no finite subcover.
+
+\item 
+\begin{enumerate}[label=(\roman*)]
+    \item No. Take $x = 0$, $y = a > 0$ and $z = a/2$. Then, $d_1(x,y) = a^2 > a^2/2 = d_1(x,z) + d_1(z,y)$.
+    \item Yes. For any $x,y,z\in\R$, we have 
+    \begin{equation*}
+        \sqrt{|x - y|} \le\sqrt{|x - z| + |y - z|}\le\sqrt{|x - z|} + \sqrt{|y - z|}
+    \end{equation*}
+
+    \item No. Since $d_3(x, -x) = 0$ for all $x\in\R$
+
+    \item No. Since $d_4(2,1) = 0$
+
+    \item Yes. For $x,y,z\in\R$, we have 
+    \begin{align*}
+        \frac{|x - z|}{1 + |x - z|} + \frac{|y - z|}{1 + |y - z|} &\ge\frac{|x - z|}{1 + |x - z| + |y - z|} + \frac{|y - z|}{1 + |x - z| + |y - z|}\\
+        &= \frac{|x - z| + |y - z|}{1 + |x - z| + |y - z|}\\
+        &\ge\frac{|x - y|}{1 + |x - y|}
+    \end{align*}
+    Note that $|x - y|$ can be replaced by any valid metric.
+\end{enumerate}
+
+\item Let $\mathscr A$ be an open cover for $K$. There is $U\in\mathscr A$ such that $0\in U$. Let $B(0,\delta)$ be an open ball contained in $U$. Then, there is $N\in\N$ such that for all $n\ge N$, $\frac{1}{n}\in U$. Consequently, only finitely many elements from $\mathscr A$ are required to cover $K$.
+
+\item Consider $K = \{\frac{1}{n}\mid n\in\N\}\cup\{0\}$. It is obviously compact and $K'= \{0\}$.
+
+\item Let $\mathscr A = \{(\frac{1}{n}, 1)\mid n\in\N\}$. This obviously has no finite subcover.
+
+\item 
+\begin{itemize}
+    \item \underline{Closed:} Consider the collection of closed sets $\{A_\alpha\}_{\alpha\in\R}$ given by $A_\alpha = \{x\le\alpha\mid\alpha\in\R\}$. It obviously has the finite intersection property, but $\bigcap_{\alpha\in\R}A_\alpha = \emptyset$.
+
+    \item \underline{Bounded:} Consider the collection of bounded sets $\{A_n\}$ where $A_n = \left(0,\frac{1}{n}\right)$. The collection obviously has the finite intersection property but $\bigcap_{i = 1}^nA_n = \emptyset$.
+\end{itemize}
+
+\item That $E$ is bounded is self-evident. Let $q\in E^c$, then $q^2 < 2$ or $q^2 > 3$, where the inequalities are strict since $q$ is rational. It is now obvious that there is a neighborhood of $q$ that is contained in $E^c$, as a result, $E^c$ is open and $E$ is closed. Finally, one also notes that $E$ is open through a similar argument.
+
+Consider the open cover $\{A_n\}_{n\in\mathbb{N}}$, where 
+\begin{equation*}
+    A_n = \left\{2 + \frac{1}{n + 1} < p^2 < 3\mid p\in\Q\right\}
+\end{equation*}
+This obviously does not have a finite subcover and $E$ is not compact.
+
+\item Note that I assume the author is referring to an infinite decimal expansion. That $E$ is not countable follows from a simple diagonalization argument. 
+
+$E$ is not dense in $[0,1]$ since there is a neighborhood of $0.5$ that does not contain any point in $E$.
+
+Next, we shall show that $E$ is closed. Define the sequence of sets $\{S_k\}_{k\in\N_0}$ inductively. $S_0 = [0,1]$ and $S_{k + 1}$ to be those points of $S_k$ such that when 
+\begin{equation*}
+    x = \sum_{n = 1}^\infty\frac{d_n}{10^n}
+\end{equation*}
+we have $d_n\in\{4,7\}$ for all $1\le n\le k + 1$.
+
+Obviously, each $S_k$ is closed and therefore, so is the intersection $E = \bigcap_{n = 1}^\infty S_n$. Since $E$ is closed in the compact set $[0,1]$, we must have that $E$ is compact.
+
+Finally, we shall show that $E$ is perfect. For this it suffices to show that every point of $E$ is a limit point. Let $x\in E$ and $r > 0$. We shall show that $B(x,r)\cap(E\backslash\{x\})\ne\emptyset$. Choose $N\in\N$ so large that $\frac{3}{10^N} < r$. Let
+\begin{equation*}
+    x = \sum_{n = 1}^\infty\frac{d_n}{10^n}
+\end{equation*}
+choose $y = \overline{0.b_1b_2\cdots}$ such that $b_n = d_n$ for all $1\le n\le N$ and $b_n\in\{4,7\}\backslash\{d_n\}$ for all $n\ge N + 1$. As a result, we have 
+\begin{equation*}
+    |x - y|\le\frac{3}{10^N}\left|\sum_{i = 1}^\infty\frac{1}{10^N}\right| < \frac{3}{10^N} < r
+\end{equation*}
+implying that $y\in B(x,r)$ and $x\in E'$.
+
+\item Let $S$ be the set of all irrational numbers $\theta = [a_0,a_1,\ldots]$ such that $a_0 = 0$ and $a_i\in\{1,2\}$ for all $i\in\N$. It is obvious that $S\subseteq\R\backslash\Q$.
+
+Let $x\in S$ be given by $[0,a_1,\ldots]$ and $\left\{\frac{p_n}{q_n}\right\}_{n\in\N_0}$ be its convergents. Let $r > 0$. Choose $N\in\N$ such that $\frac{2}{q_N^2} < r$. Define $y = [0,b_1,\ldots]$ such that $a_i = b_i$ for all $1\le i\le N$, then $\frac{p_N}{q_N}$ is the $N$-th convergent of $y$. We now have 
+\begin{equation*}
+    |x - y|\le\left|x - \frac{p_N}{q_N}\right| + \left|y - \frac{p_N}{q_N}\right| < \frac{2}{q_N^2} < r
+\end{equation*}
+which implies that $x\in S'$ and $S\subseteq S'$. It now suffices to show that $S$ is closed. It suffices to verify this for $x\in(0,1)\backslash S$. \textcolor{red}{TODO: Not able to show that $S$ is closed} 
+
+\item 
+\begin{enumerate}
+    \item Trivial, since $\overline{A} = A$ and $\overline{B} = B$.
+    \item Suppose $\overline{A}\cap B\ne\emptyset$. Let $x\in\overline{A}\cap B$, therefore, $x\notin A$. There is a neighborhood $U$ of $x$ such that $U\subseteq B$ and thus, $U\cap A = \emptyset$, contradicting the fact that $x\in\overline{A}$.
+    \item Follows from the previous assertion.
+    \item Let $p,q\in X$ be any two distinct points. Due to part (c), we know that there must exist $r_\delta\in X$ for all $0 < \delta < d(p,q)$ such that $d(r_\delta, p) = \delta$. This implies the desired conclusion.
+\end{enumerate}
+
+\item 
+\begin{itemize}
+    \item \underline{Closure:} We shall show that the closure of a connected set is indeed connected. Let $S\subseteq X$ be a connected set, where $X$ is any topological space. Suppose $\overline{S}$ were not connected, then $\overline{S} = A\cup B$ for open sets $A$ and $B$ such that $\overline{A}\cap B = A\cap\overline{B} = \emptyset$. Define $A' = S\cap A$ and $B' = S\cap B$, which are open in the relative topology. Furthermore, $\overline{A'}\subseteq\overline{A}$ and it is now obvious that $\overline{A'}\cap B' = \emptyset$. This completes the proof.
+    \item \underline{Interior:} Consider $([0,1]\times[0,1])\cup([1,2]\times[1,2])$.
+\end{itemize}
+
+\item 
+\begin{enumerate}
+    \item Suppose, without loss of generality that $\overline{A}_0\cap B_0 = \emptyset$. If $x\in\overline{A}_0\cap B_0$, then it is not hard to see that $p(x)\in A'$ and $p(x)\in B$, contradicting that $A$ and $B$ are separated.
+
+    \item Since $A_0$ and $B_0$ are separated, they cannot cover $(0,1)$ since it is connected. As a result, there is $t_0\in (0,1)$ such that $t_0\notin A_0\cup B_0$, equivalently, $p(t_0)\notin A\cup B$.
+
+    \item Straightforward.
+\end{enumerate}
+\textcolor{blue}{It follows from the above problem that the only clopen subsets of $\R^k$ are $\emptyset$ and $\R^k$.}
+
+\item Easy to see that $\overline{\Q^k} = \R^k$.
+
+\item Let $\Q^+ = \{r_1,r_2,\ldots\}$ and $Y = \{y_1,y_2,\ldots\}$ be a countabe dense subset of $X$. We shall show that the collection $\{B(y_i,r_j)\}_{(i,j)\in\N\times\N}$ is a basis for the topology on $(X,d)$. Let $x\in U\in\T_X$, then there is an open ball $B(x,r)\subseteq U$ for some $r > 0$. Since $Y$ is dense in $X$, there is $y\in Y\cap B(x,r)$. Let $q$ be a rational number such that $0 < q < r - d(x,y)$. We shall show that $B(y, q)\subseteq B(x,r)$. Indeed, for all $z\in B(y, r - d(x,y))$, we have 
+\begin{equation*}
+    d(x,z)\le d(x,y) + d(y,z) < d(x,y) + r - d(x,y) = r
+\end{equation*}
+This completes the proof.
+
+\item Suppose not, then we would have an infinite sequence $\{x_i\}_{i = 1}^\infty$ such that $d(x_i, x_{i + 1})\ge\delta$, which is an immediate contradiction to the fact that the aforementioned sequence has a limit point.
+
+This obviously implies that $X$ can be covered by finitely many neighborhoods of radius $\delta$, for any $\delta > 0$.
+
+
+\item Fix some $n\in\N$. Then, the collection $\{B(x,\frac{1}{n})\}_{x\in X}$ is an open cover of $X$ and owing to compactness, has a finite subcover $\{B(x_i,\frac{1}{n})\}_{i = 1}^{N_n}$. It is not hard to see that 
+\begin{equation*}
+    \bigcup_{n = 1}^\infty\left\{B(x_i,\frac{1}{n})\right\}_{i = 1}^{N_n}
+\end{equation*}
+is a countable basis for the topology on the metric $(X,d)$.
+
+\item Using $(24)$, we know that $X$ is separable and due to $(23)$, it must have a countable basis. Let $\mathscr A$ be an open cover for $X$. Since $X$ is second-countable, it must be Lindel\"of. Let $\{A_n\}_{n\in\N}$ be a countable subcover of $\mathscr A$. Define 
+\begin{equation*}
+    F_n = \bigcap_{i = 1}^n A_i^c
+\end{equation*}
+
+Obviously, $F_1\supseteq F_2\supseteq\cdots$, further, note that each $F_i$ is closed. Suppose $\{A_n\}_{n\in\N}$ has no finite subcover. Then, $\bigcap_{i = 1}^\infty F_n = \emptyset$. Let $S$ be a sequence of points $\{x_n\}_{n\in\N}$ with $x_n\in F_n$. By our hypothesis, the above sequence has a limit point, say $x\in X$.
+
+Now, we shall show that $x\in F_n$ for each $n\in\N$. Suppose not, say $x\notin F_n$ for some $n$. Then, due to the chain condition, $x\notin F_m$ for all $m\ge n$. Choose $r\in\R$ such that 
+\begin{equation*}
+    0 < r < \min_{1\le i\le n}d(x,x_i)
+\end{equation*}
+Then, $B(x, r)\cap F_i = \emptyset$ for all $i\in\N$, a contradiction to the fact that $x$ is a limit point of $S$.
+
+As a result, $\bigcap_{n = 1}^\infty F_n\ne\emptyset$ which is again a contradiction to our initial assumption. Therefore, $\mathscr A$ has a finite subcover and $X$ is compact.
+\end{enumerate}

@@ -44,9 +44,18 @@ by $(f_1\otimes\dots\otimes f_k)(v_1,\dots,v_k) = f_1(v_1)\cdots f_k(v_k)$. This
 \subsection{Covariant and Contravariant Tensors}
 
 \begin{definition}[Covariant, Contravariant Tensor]
-    Let $V$ be a finite dimensional vector space. If $k$ is a positive integer, a \emph{covariant $k$-tensor on $V$} is an element of the $k$-fold tensor product $T^k(V^*) = \underbrace{V^*\otimes\dots\otimes V^*}_{k-\text{times}}$. The number $k$ is called the \emph{rank} of the aforementioned covariant tensor.
+    Let $V$ be a finite dimensional vector space. If $k$ is a positive integer, a \emph{covariant $k$-tensor on $V$} is an element of the $k$-fold tensor product 
+    $$T^k(V^*) := \underbrace{V^*\otimes\dots\otimes V^*}_{k\text{-times}}.$$ 
+    The number $k$ is called the \emph{rank} of the aforementioned covariant tensor.
 
-    Similarly, a \emph{contravariant $k$-tensor on $V$} is an element of the $k$-fold tensor product $T^k(V) = \underbrace{V\otimes\cdots\otimes V}_{k-\text{times}}$. Again, the number $k$ is called the \emph{rank} of the contravariant tensor.
+    Similarly, a \emph{contravariant $k$-tensor on $V$} is an element of the $k$-fold tensor product 
+    $$T^k(V) := \underbrace{V\otimes\cdots\otimes V}_{k\text{-times}}.$$ 
+    Again, the number $k$ is called the \emph{rank} of the contravariant tensor.
+
+    There are also the \emph{mixed tensors on $V$ of type $(k,l)$} which are elements of 
+    \begin{equation*}
+        T^{(k,l)}(V) := \underbrace{V\otimes\dots\otimes V}_{k\text{-times}}\otimes\underbrace{V^*\otimes\dots\otimes V^*}_{l\text{-times}}.
+    \end{equation*}
 \end{definition}
 
 Due to the natural isomorphism of \thref{thm:tensor-dual-multilinear}, we may identify a covariant $k$-tensor as a multilinear map $V_1\times\dots\times V_k\to\R$ and similarly, we may identify a contravariant $k$-tensor as a multilinear map $V_1^*\times\dots\times V_k^*\to\R$. We shall switch between these identifications to suit our needs.
@@ -54,7 +63,7 @@ Due to the natural isomorphism of \thref{thm:tensor-dual-multilinear}, we may id
 \subsection{Symmetric and Alternating Tensors}
 
 \begin{definition}[Symmetric, Alternating Tensor]
-    Let $V$ be a finite dimensional vector space. A covariant $k$-tensor $\alpha$ on $V$ is said to be \emph{symmetric} if for every $\sigma\in\mathscr S_k$,
+    Let $V$ be a finite dimensional vector space. A covariant $k$-tensor $\alpha$ on $V$ is said to be \emph{symmetric} if for every $\sigma\in\mathfrak S_k$,
     \begin{equation*}
         \alpha(v_1,\dots,v_k) = \alpha(v_{\sigma(1)},\dots,v_{\sigma(k)}).
     \end{equation*}
@@ -63,7 +72,39 @@ Due to the natural isomorphism of \thref{thm:tensor-dual-multilinear}, we may id
     \begin{equation*}
         \alpha(v_1,\dots,v_k) = \sgn(\sigma)\alpha(v_{\sigma(1)},\dots,v_{\sigma(k)}).
     \end{equation*}
+    The vector space of all alternating covariant $k$-tensors on $V$ is denoted by $\Lambda^k(V^*)$.
 \end{definition}
+
+Next, we define the symmetrization and alternation operators. Indeed, if $\alpha$ is a covariant $k$-tensor on $V$, then define 
+\begin{align*}
+    \Sym(\alpha)(v_1,\dots,v_k) := \frac{1}{k!}\sum_{\sigma\in\mathfrak S_k}\alpha(v_{\sigma(1)},\dots,v_{\sigma(k)})\\
+    \Alt(\alpha)(v_1,\dots,v_k) := \frac{1}{k!}\sum_{\sigma\in\mathfrak S_k}\sgn(\sigma)\alpha(v_{\sigma(1)},\dots,v_{\sigma(k)}).
+\end{align*}
+
+Then, it is not hard to argue that $\Sym(\alpha)$ is a symmetric covariant $k$-tensor on $V$ while $\Alt(\alpha)$ is an alternating covariant $k$-tensor on $V$.
 
 \subsection{Tensor Fields on a Manifold}
 
+\begin{definition}
+    Let $M$ be a smooth manifold with or without boundary. Define the \emph{bundle of covariant $k$-tensors on $M$} by 
+    \begin{equation*}
+        T^k\left(T^*M\right) := \coprod_{p\in M}T^k(T_p^*M).
+    \end{equation*}
+    Analogously, define the \emph{bundle of contravariant $k$-tensors on $M$} by 
+    \begin{equation*}
+        T^k\left(TM\right) := \coprod_{p\in M}T^k(T_pM)
+    \end{equation*}
+    and finally, the \emph{bundle of mixed tensors of type $(k,l)$ on $M$} by 
+    \begin{equation*}
+        T^{(k,l)}\left(TM\right) := \coprod_{p\in M} T^{(k,l)}(T_pM).
+    \end{equation*}
+
+    Any one of these bundles is called a \emph{tensor bundle over $M$}.
+\end{definition}
+
+\begin{theorem}
+    Let $k$ and $l$ be nonnegative integers and $M$ a smooth $n$-manifold with or without boundary. Then, $T^k(T^*M)$, $T^k(TM)$ and $T^{(k,l)}(TM)$ have natural structures as smooth vector bundles over $M$.
+\end{theorem}
+\begin{proof}
+    We shall provide a proof of the statement only for $T^k(TM)$. We contend that $T^k(TM)$ is a smooth vector bundle of rank $n^k$ over $M$. \todo{use \thref{lem:vector-bundle-chart}}
+\end{proof}

@@ -1,0 +1,29 @@
+\begin{example}
+    Let $\sigma\in\operatorname{Sym}(\{1,\ldots,n\})$, and let $\varepsilon(\sigma) = 1$ if $\sigma$ is even and $-1$ otherwise. Let $f(\sigma)$ be the number of fixed points of $\sigma$. Prove that 
+    \begin{equation*}
+        \sum_\sigma\frac{\varepsilon(\sigma)}{1 + f(\sigma)} = (-1)^{n + 1}\frac{n}{n + 1}
+    \end{equation*}
+\end{example}
+\begin{proof}
+    Let $A_{n\times n}$ be the matrix such that 
+    \begin{equation*}
+        a_{ij} = \begin{cases}
+            x & i = j\\
+            1 & \text{otherwise}
+        \end{cases}
+    \end{equation*}
+    We see that 
+    \begin{equation*}
+        \det(A) = \sum_{\sigma}\varepsilon(\sigma)x^{f(\sigma)}
+    \end{equation*}
+    but we know that $\det(A) = (x - 1)^{n - 1}(x + n - 1)$. Then, we may write 
+    \begin{align*}
+        \int_0^1\sum_{\sigma}\varepsilon(\sigma)x^{f(\sigma)}~\text{d}x &= \int_0^1(x - 1)^{n - 1}(x + n - 1)~\text{d}x\\
+        \sum_\sigma\frac{\varepsilon(\sigma)}{1 + f(\sigma)} &= (-1)^{n + 1}\frac{n}{n + 1}
+    \end{align*}
+    This finishes the proof.
+\end{proof}
+
+\begin{example}[Putnam 2016/B4]
+   	Let $A$ be a $2n\times 2n$ matrix, with entries chosen independently at random. Every entry is chosen to be $0$ or $1$, each with probability $1/2$. Find the expected value of $\det(A-A^T)$ (as a function of $n$), where $A^T$ is the transpose of $A.$ 
+\end{example}

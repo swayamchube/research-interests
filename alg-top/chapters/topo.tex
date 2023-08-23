@@ -1,0 +1,70 @@
+\section{Cell Complexes}
+
+\begin{definition}[Cell Complex]
+    Cell complexes are constructed using an inductive procedure. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Begin with a discrete set $X^0$, whose points are regarded as $0$-cells.
+        \item Inductively, form the \emph{$n$-skeleton} $X^n$ from $X^{n - 1}$ by attaching $n$-cells $e_\alpha^{n}$ via maps $\varphi_\alpha: S^{n - 1} = \partial e_\alpha^n\to X^{n - 1}$. 
+        \item This inductive process can either be stopped at a finite stage or continued indefinitely, setting $X = \bigcup_{n = 1}^\infty X^n$. In the latter case, $X$ is given the \emph{weak topology}.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}[Real Projective Space $\RP^n$]
+    Recall that $\RP^n$ is defined as the quotient space of $\R^{n + 1}\backslash\{0\}$ under the identification $x\sim\lambda x$. This can equivalently be thought of as the hemisphere $D^n$ with the identification $x\sim -x$ for $\partial D^n = S^{n - 1}$. Under this identification, $S^{n - 1}$ quotients to $\RP^{n - 1}$ whereby, $\RP^n$ is obtained by simply attaching an $n$-cell to $\RP^{n - 1}$ through the quotient map $\varphi: S^{n - 1} = \partial D^n\to\RP^{n - 1}$. Thus, the cell complex structure of $\RP^n$ is $e^0\cup e^1\cup\dots\cup e^{n}$, i.e. one cell in each dimension $0\le i\le n$.
+\end{example}
+
+\begin{example}[Complex Projective Plane $\CP^n$]
+    
+\end{example}
+
+\begin{definition}
+    A \emph{subcomplex} of a cell complex $X$ is a closed subspace $A\subseteq X$ that is a union of cells of $x$. A pair $(X,A)$ consisting of a cell complex $X$ and a subcomplex $A$ is called a \emph{CW pair}.
+\end{definition}
+
+\begin{remark}
+    The property of $A$ being a subcomplex depends on the CW structure of $X$. For example, $S^{n - 1}$ is not a subcomplex of $S^n$ with the natural CW structure obtained by gluing two $D^n$'s. But, we may choose a different CW structure for $S^n$ wherein we begin with the equitorial $S^{n - 1}$ and attach two $D^n$'s to it, via the obvious boundary map. In this case, $S^{n - 1}$ is indeed a subcomplex of $S^n$.
+\end{remark}
+
+\section{Homotopy Extension Property}
+
+\begin{definition}[Homotopy Extension Property]
+    A pair $(X,A)$ with $A\subseteq X$ is said to have the \emph{homotopy extension property} if for any topological space $Y$, a map $f_0: X\to Y$ and a homotopy $H: A\times I\to Y$ such that $H|_{A\times\{0\}} = f_0|_A$, there is an extension of $H$, $\wt H: X\times I\to Y$ with $H|_{X\times\{0\}} = f_0$.
+\end{definition}
+
+\begin{proposition}
+    A pair $(X,A)$ with $A$ closed\footnote{This is superfluous} in $X$ has the homotopy extension property if and only if $X\times\{0\}\cup A\times I$ is a \emph{retract} of $X\times I$.
+\end{proposition}
+\begin{proof}
+    Suppose $(X,A)$ has the homotopy extension property. Consider the identity map $\id: X\times\{0\}\cup A\times I\to X\times\{0\}\cup A\times I$. This may be extended to a map $f: X\times I\to X\times\{0\}\cup A\times I$ which restricts to the identity map on $X\times\{0\}\cup A\times I$. This shows that the latter is a retract of the former.
+\end{proof}
+
+\begin{proposition}
+    If $(X,A)$ is a CW-pair, then $X\times\{0\}\cup A\times I$ is a deformation retract of $X\times I$ whereby $(X,A)$ has the homotopy extension property.
+\end{proposition}
+\begin{proof}
+    \todo{$(X,A)$ CW-pair has homotopy ext property}
+\end{proof}
+
+\begin{proposition}
+    If the pair $(X,A)$ has the homotopy extension property and $A$ is contractible, then the quotient map $q: X\to X/A$ is a homotopy equivalence.
+\end{proposition}
+\begin{proof}
+    Since $A$ is contractible, there is a homotopy between the inclusion $A\into X$ and the constant map on $A$. Due to the homotopy extension property, this can be extended to a homotopy $F: X\times I\to X$ such that $F|_{X\times\{0\}} = \id_X$. Let $q: X\onto X/A$ denote the quotient map and $\wt q: X\times I\to X/A\times I$ denote the quotient map with the obvious identification.
+
+    Consider the composition $q\circ F$. Then, for $a,a'\in A$, $q\circ F(a,t) = q\circ F(a',t)$ for all $t$ whereby this induces a continuous map $\wt F: X/A\times I\to X/A$. Let $f_1 := F|_{X\times\{1\}}$ and $\wt f_1 = \wt F|_{X\times\{1\}}$. Then, $f_1$ maps all of $A$ to a single point whence it induces a map $g: X/A\to X$ such that $f_1 = g\circ q$.
+
+    We contend that $\wt f_1 = q\circ g$. Indeed, for any $\overline x\in X/A$, there is $x\in X$ such that 
+    \begin{equation*}
+        q\circ g(\overline x) = q\circ g\circ q(x) = q\circ f_1(x) = \wt f_1\circ q(x) = \wt f_1(\overline x).
+    \end{equation*}
+
+    This shows that $g\circ q = f_1\simeq\id_X$ through $F$ while $q\circ g = \wt f_1\simeq\id_{X/A}$ through $\wt F$ whence the conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    If $(X,A)$ is a CW-pair with $A$ contractible, then the quotient map $q: X\to A/A$ is a homotopy equivalence.
+\end{corollary}
+
+\begin{example}
+    
+\end{example}

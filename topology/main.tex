@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[oneside]{report}
 \usepackage{../swayam}
 
 \pagestyle{fancy}
@@ -8,6 +8,13 @@
 \cfoot{\thepage}
 \renewcommand{\footrulewidth}{\headrulewidth}
 \setlength{\headheight}{15pt}
+
+
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+\renewcommand{\S}{\mathcal{S}}
+\newcommand{\e}{\epsilon}
+\newcommand{\diam}{\operatorname{diam}}
 
 \title{General Topology}
 \author{Swayam Chube}
@@ -25,8 +32,14 @@
 	\chapter{Countability and Separation Axioms}
 	\input{chapters/count-sep}
 
+	\chapter{Nets and Filters}
+	\input{chapters/nets-filters.tex}
+
 	\chapter{The Tychonoff Theorem}
 	\input{chapters/tychonoff.tex}
+
+	\chapter{Metrization and Paracompactness}
+	\input{chapters/paracompactness.tex}
 
 	\chapter{Complete Metric Spaces and Function Spaces}
 	\input{chapters/complete-function.tex}
