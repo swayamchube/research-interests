@@ -91,3 +91,106 @@ That the aforementioned set forms a field is trivial.
 \begin{proof}
     That $KF/F$ and $K/K\cap F$ are Galois follow from \thref{thm:normal-properties} and \thref{thm:sep-distinguished-class}. Let $\chi: H\to G$ denote the restriction map. Note that $\ker\chi$ contains all $\sigma\in H$ such that $\sigma$ fixes $K$. But since $\sigma$ implicitly fixes $F$, it must also fix $KF$ and is therefore the unique identity automorphism. As a result, $\ker\chi$ is trivial and $\chi$ is injective. Let $H' = \chi(H)\subseteq G$. We shall show that $K^{H'} = K\cap F$. Indeed, if $\alpha\in K^{H'}$, then $\alpha$ is also fixed by all elements of $H$, since $\chi$ is only the restriction map. As a result, $\alpha\in F$, consequently $\alpha\in K\cap F$. We are now done due to \thref{thm:ftgt}.
 \end{proof}
+
+\section{Normal Basis Theorem}
+
+\begin{definition}[Normal Element]
+    Let $K/k$ be a finite Galois extension with $\Gal(K/k) = \{\sigma_1,\dots,\sigma_n\}$. An element $\alpha\in K$ is said to be a \emph{normal element} if $\{\sigma_1(\alpha),\dots,\sigma_n(\alpha)\}$ forms a $k$-basis of $K$.
+\end{definition}
+
+\begin{theorem}[Normal Basis Theorem]
+    If $K/k$ is a finite Galois extension, then it has a normal element.
+\end{theorem}
+\begin{proof}
+    Let $G = \Gal(K/k) = \{\sigma_1,\dots,\sigma_n\}$. We shall divide the proof into two cases.
+\begin{description}
+    \item[Case 1.] $G$ is cyclic.
+
+    Let $G = \langle\sigma\rangle$ for some $\sigma\in G$. Let $m_\sigma(x)\in k[x]$ denote the minimal polynomial of $\sigma$. Since $\sigma$ is a root of $x^n - 1\in k[x]$, we must have $m_\sigma(x)\mid x^n - 1$. If $\deg(m_\sigma) = m < n$, then there are $a_0,\dots,a_m\in k$ such that 
+    \begin{equation*}
+        m_\sigma(x) = a_mx^m + \dots + a_0.
+    \end{equation*}
+    In particular, $a_m\sigma^m + \dots + a_0\id = 0$, but this is a contradiction to Dedekind's Lemma on the independence of characters. Therefore, $m_\sigma(x) = x^n - 1$, consequently, $m_\sigma(x)$ must also be the characteristic polynomial of $\sigma$ due to a degree argument. Since the minimal polynomial and the characteristic polynomial are the same, there is a $\sigma$-cyclic vector for the extension $K/k$, which is the desired normal element.
+
+    \item[Case 2.] $k$ is infinite. Note that the previous case subsumes the case with $k$ finite.
+
+    Due to \thref{thm:primitive-element-theorem}, $K = k(\alpha)$ for some $\alpha\in K$. Suppose without loss of generality that $\sigma_1 = \id$. Let $\alpha_i = \sigma_i(\alpha)$, which are all pairwise distinct, and define
+    \begin{equation*}
+        g_i(x) = \frac{\prod_{j\ne i}(x - \alpha_j)}{\prod_{j\ne i}(\alpha_i - \alpha_j)}.
+    \end{equation*}
+    Denote $g_1$ by simply $g$, then, $g_i = \sigma_i(g)$.
+
+    The polynomial 
+    \begin{equation*}
+        g_1(x) + \dots + g_n(x)
+    \end{equation*}
+    attains the value $1$ for $\alpha_1,\dots,\alpha_n$ but since it has degree at most $n - 1$, it must be identically equal to $1$. Further, for $i\ne j$, $f\mid g_ig_j$ and $g_i^2 - g_i$ vanishes at $\alpha_1,\dots,\alpha_n$ whence $f\mid g_i^2 - g_i$.
+
+    Define the matrix 
+    \begin{equation*}
+        A(x) = 
+        \begin{bmatrix}
+            \sigma_1\sigma_1(g) & \sigma_1\sigma_2(g) & \dots & \sigma_1\sigma_n(g)\\
+            \vdots & \vdots & \ddots & \vdots\\
+            \sigma_n\sigma_1(g) & \sigma_n\sigma_2(g) & \dots & \sigma_n\sigma_n(g)
+        \end{bmatrix}.
+    \end{equation*}
+
+    We contend that $\det A(x)$ is a nonzero polynomial. Suppose not. Consider $M(x) = A(x)^TA(x)$. The $(i,j)$-th entry is given by 
+    \begin{equation*}
+        \sum_{\sigma\in G}\sigma\sigma_i(g)\sigma\sigma_j(g) = \sum_{\sigma\in G}\sigma(g_ig_j).
+    \end{equation*}
+    If $i\ne j$, note that $f\mid\sigma(g_ig_j)$ for all $\sigma\in G$. Therefore, $f$ divides all non-diagonal entries of $M(x)$ while the diagonal entries of $M(x)$ are given by 
+    \begin{equation*}
+        \sum_{\sigma\in G}\sigma(g_i)^2\equiv\sum_{\sigma\in G}\sigma(g_i)\pmod{f}\equiv\sum_{i = 1}^n g_i\pmod{f}\equiv 1\pmod{f}.
+    \end{equation*}
+    Hence, $\det M(x) = 1$ in $K[x]/(f(x))$, in particular, it is nonzero in $K[x]$, therefore, $\det A(x)\ne 0$ in $K[x]$.
+
+    Since $K$ is infinite, there is some $\theta\in K$ such that $\det A(\theta)\ne 0$. Let $\beta = g(\theta)$. We claim that $\beta$ is the desired normal element. To do so, it suffices to show that $\{\sigma_1(\beta),\dots,\sigma_n(\beta)\}$ is linearly independent over $k$.
+
+    Indeed, suppose there is a linear combination 
+    \begin{equation*}
+        c_1\sigma_1(\beta) + \dots + c_n\sigma_n(\beta) = 0\iff c_1\sigma_1(g(\theta)) + \dots + c_n\sigma_n(g(\theta)) = 0.
+    \end{equation*}
+    Applying $\sigma_i$ to the above equation for $1\le i\le n$, we obtain a system of linear equations given by 
+    \begin{equation*}
+        A(\theta)
+        \begin{pmatrix}
+            c_1\\\vdots\\c_n
+        \end{pmatrix}
+        = 0,
+    \end{equation*}
+    whence $c_1 = \dots = c_n = 0$, since $A(\theta)$ is invertible. This completes the proof.\qedhere
+\end{description}
+\end{proof}
+
+Once we have a normal element, we can easily find the primitive (and sometimes normal) elements of all intermediate fields.
+
+\begin{theorem}
+    Let $K/k$ be a finite Galois extension with $G = \Gal(K/k)$ and $\alpha\in K$ be a normal element.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $H\le G$, then $\beta_H := \Tr^K_{K^H}(\alpha)$ is a primitive element of $K^H/k$. 
+        \item If $H\unlhd G$, then $\beta_H$ is a normal element of $K^H/k$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Obviously, $\beta_H\in K^H$. We shall show that $\Gal(K/k(\beta_H))\subseteq H$, which would imply $K^H\subseteq k(\beta_H)$ and the conclusion would follow.
+
+    Let $\tau\in G\backslash H$. Then, 
+    \begin{equation*}
+        \tau(\beta_H) = \sum_{\sigma\in \tau H}\sigma(\alpha).
+    \end{equation*}
+    Since $\tau H$ is a coset distinct from $H$, they are disjoint and since the collection $\{\sigma(\alpha)\mid\sigma\in G\}$ is a linearly independent set, we cannot have $\tau(\beta_H) = \beta_H$, consequently, $\Gal(K/k(\beta_H))\subseteq H$.
+
+    \item Let $\tau_1,\dots,\tau_m$ be elements of $G$ whose images under the canonical projection $G\onto G/H$ are all the elements of $G/H$. Note that this projection map is simply the restriction map from $\Gal(K/k)$ to $\Gal(k(\beta_H)/k)$. Suppose 
+    \begin{equation*}
+        c_1\tau_1(\beta_H) + \dots + c_m\tau_m(\beta_H) = 0,
+    \end{equation*}
+    then, 
+    \begin{equation*}
+        0 = \sum_{i = 1}^mc_i\left(\sum_{\sigma\in \tau_i H}\sigma(\alpha)\right).
+    \end{equation*}
+    By our choice of $\tau_i$'s, the cosets $\tau_i H$ and $\tau_j H$ are pairwise distinct, consequently, the sum written above is essentially of linearly independent elements, $\sigma(\alpha)$ where $\sigma$ ranges over $G$. Therefore, $c_1 = \dots = c_m = 0$. This completes the proof.\qedhere
+\end{enumerate}
+\end{proof}
