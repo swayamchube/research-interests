@@ -171,11 +171,54 @@ On the other hand, any element in $S^{-1}\overline M$ is of the form $(m_{i_1} +
 \begin{corollary}
     For every multiplicative subset $S\subseteq A$, $S^{-1}A$ is a flat $A$-module.
 \end{corollary}
+\begin{corollary}
+    Let $\{M_i\}_{i\in I}$ be a collection of $A$-modules. If $S\subseteq A$ is a multiplicative subset, then 
+    \begin{equation*}
+        S^{-1}\left(\bigoplus_{i\in I} M_i\right)\cong\bigoplus_{i\in I} S^{-1}M_i
+    \end{equation*}
+    as $S^{-1}A$-modules. As a result, 
+    \begin{equation*}
+        S^{-1}\left(\sum_{i\in I} M_i\right)\cong\sum_{i\in I} S^{-1}M_i
+    \end{equation*}
+    as $S^{-1}A$-modules.
+\end{corollary}
+\begin{proof}
+    The first assertion follows from the fact that the tensor product commutes with direct sums. As for the second assertion, consider the exact sequence 
+    \begin{equation*}
+        \bigoplus_{i\in I} M_i\longrightarrow\sum_{i\in I} M_i\longrightarrow 0
+    \end{equation*}
+    and localize.
+\end{proof}
 
 \begin{proposition}
     Let $S\subseteq A$ be a multiplicative subset. Then, there is a natural isomorphism $S^{-1}(M\otimes_A N) = S^{-1}M\otimes_{S^{-1}A}S^{-1}N$.
 \end{proposition}
 \begin{proof}
+    Define the map 
+    \begin{equation*}
+        \Phi: S^{-1}M\times S^{-1}N\to S^{-1}(M\otimes_A N) 
+    \end{equation*}
+    given by 
+    \begin{equation*}
+        \Phi\left(\frac{m}{s}, \frac{n}{t}\right) = \frac{m\otimes n}{st}.
+    \end{equation*}
+    This is obviously $S^{-1}A$-linear and thus induces a map 
+    \begin{equation*}
+        \Psi: S^{-1}M\otimes_{S^{-1}A} S^{-1}N\to S^{-1}(M\otimes_A N) 
+    \end{equation*}
+    given by 
+    \begin{equation*}
+        \Psi\left(\frac{m}{s}\otimes\frac{n}{t}\right) = \frac{m\otimes n}{st}.
+    \end{equation*}
+    We contend that this is an isomorphism of vector spaces. Define the map 
+    \begin{equation*}
+        \Gamma: S^{-1}(M\otimes_A N)\to S^{-1}M\otimes_{S^{-1}A} S^{-1}N
+    \end{equation*}
+    by 
+    \begin{equation*}
+        \Gamma\left(\frac{m\otimes n}{s}\right) = \frac{m}{s}\otimes\frac{n}{1}.
+    \end{equation*}
+    It is not hard to see that $\Gamma\circ\Psi$ and $\Psi\circ\Gamma$ are the identity maps whence they are isomorphisms.
 \end{proof}
 
 \section{Local Properties}
@@ -211,6 +254,18 @@ A property $P$ defined on the class of modules is said to be local if for every 
         0\longrightarrow(\ker\phi)_\frakm\longrightarrow M_\frakm\longrightarrow N_\frakm\longrightarrow(\coker\phi)_\frakm\longrightarrow 0
     \end{equation*}
     Since we have $\phi_\frakm$ is injective (surjective), we have $(\ker\phi)_\frakm$ ($(\coker\phi)_\frakm$) is zero for all maximal ideals $\frakm$, whence we are done using  to the previous proposition.
+\end{proof}
+
+\begin{proposition}
+    Flatness is a local property. That is, the following are equivalent.
+    \begin{enumerate}[label=(\alph*)]
+        \item $M$ is a flat $A$-module. 
+        \item $M_\frakp$ is a flat $A_\frakp$-module for every $\frakp\in\spec(A)$. 
+        \item $M_\frakm$ is a flat $A_\frakm$-module for every $\frakm\in\mspec(A)$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(a)\implies(b)$ follows from the exactness of localization and $(b)\implies(c)$ is obvious. We shall show $(c)\implies(a)$.\todo{show that c=>a}
 \end{proof}
 
 \begin{proposition}
@@ -295,6 +350,60 @@ From the above proposition, we see that ``$\frakN(A) = (0)$'' is a local propert
 \begin{proof}
     Induction on the number of generators. Sort of straightforward. Use the fact that 
     \begin{equation*}
-        \Ann(N_1 + N_2) = \Ann(N_1)\cap\Ann(N_2)
+        \Ann(N_1 + N_2) = \Ann(N_1)\cap\Ann(N_2)\qedhere
     \end{equation*}
+\end{proof}
+
+\hrulefill 
+
+\begin{theorem}
+    $A$ is absolutely flat if and only if $A_\frakm$ is a field for every $m\in\mspec(A)$.
+\end{theorem}
+\begin{proof}
+    The forward direction is obvious. We shall show the converse. Let $M$ be an $A$-module. Then, $M_\frakm$ is an $A_\frakm$-vector space and thus a flat $A_\frakm$-module. Since flatness is a local property, we see that $M$ must be a flat $A$-module.
+\end{proof}
+
+\section{Support of a Module}
+
+\begin{definition}
+    For an $A$-module $M$, the support of a module $\Supp(M)$ is defined to be the set of all prime ideals $\frakp\in\spec(A)$ such that $M_\frakp\ne 0$.
+\end{definition}
+
+\begin{theorem}
+    For an $A$-module $M$ and an ideal $\fraka\unlhd A$, the following are true. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $M\ne 0$, then $\Supp(M)\ne\emptyset$. 
+        \item $\Supp(A/\fraka) = V(\fraka)$.
+        \item If $0\to M'\to M\to M''\to 0$ is a short exact sequence, then $\Supp(M) = \Supp(M')\cup\Supp(M'')$. 
+        \item If $M = \sum_{i\in I} M_i$, then $\Supp(M) = \bigcup_{i\in I}\Supp(M_i)$. 
+        \item If $M$ is finitely generated, then $\Supp(M) = V(\Ann_A(M))$. 
+        \item If $M$ and $N$ are finitely generated, then $\Supp(M\otimes_A N) = \Supp(M)\cap\Supp(N)$. 
+        \item If $M$ is finitely generated, then $\Supp(M/\fraka M) = V(\fraka + \Ann_A(M))$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Follows from the fact that being zero is a local property. 
+    \item Note that $(A/\fraka)_\frakp = A_\frakp/\fraka_\frakp$ and $\fraka_\frakp\subsetneq A_\frakp$ if and only if $\fraka\subseteq\frakp$.
+    \item Consider the localized short exact sequence 
+    \begin{equation*}
+        0\longrightarrow M'_\frakp\longrightarrow M_\frakp\longrightarrow M''_\frakp\longrightarrow 0.
+    \end{equation*}
+    If $\frakp\in\Supp(M)$, then it must lie in either $\Supp(M')$ or $\Supp(M'')$. On the other hand, if $\frakp\notin\Supp(M)$, then the above sequence is 
+    \begin{equation*}
+        0\longrightarrow M'_\frakp\longrightarrow 0\longrightarrow M''_\frakp\longrightarrow 0
+    \end{equation*}
+    whence $\frakp\notin\Supp(M')\cup\Supp(M'')$. 
+    \item Follows from the fact that localization commutes with arbitrary sums.
+    \item First suppose $M = (x_1)$. Then, $\frakp\in\Supp(M)$ if and only if $\Ann_A(x_1)\subseteq\frakp$. Thus the assertion holds for cyclic modules. Then, using the previous assertion,
+    \begin{equation*}
+        \Supp((x_1,\dots,x_n)) = \bigcup_{i = 1}^n V(\Ann_A(x_i)) = V\left(\bigcap_{i = 1}^n\Ann_A(x_i)\right) = V(\Ann_A(M)).
+    \end{equation*}
+    \item Suppose $\frakp\notin\Supp(M\otimes_A N)$, then $M_\frakp\otimes_{A_\frakp}N_\frakp = 0$ and $M_\frakp, N_\frakp$ are finitely generated $A_\frakp$-modules. Due to \thref{prop:tensor-over-local-zero}, $M_\frakp = 0$ or $N_\frakp = 0$, whence $\frakp\notin\Supp(M)\cap\Supp(N)$, that is, $\Supp(M)\cap\Supp(N)\subseteq\Supp(M\otimes_A N)$. On the other hand, if $\frakp\notin\Supp(M)\cap\Supp(N)$, then $M_\frakp\otimes_{A_\frakp} N_\frakp = 0$ and the conclusion follows.
+
+    \item We have, due to the previous assertion, 
+    \begin{equation*}
+        \Supp(A/\fraka\otimes_A M) = \Supp(A/\fraka)\cap\Supp(M) = V(\fraka)\cap V(\Ann_A(M)) = V(\fraka + \Ann_A(M)).\qedhere
+    \end{equation*}
+\end{enumerate}
 \end{proof}

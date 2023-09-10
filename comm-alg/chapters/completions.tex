@@ -251,7 +251,7 @@ We shall now construct the completion of a group using Cauchy sequences.
 Let $M$ be a filtered module with filtration $(M_n)_{n\ge 0}$ over a filtered ring $A$ with filtration $(A_n)_{n\ge 0}$. In accordance with \thref{prop:filtration-induces-topology}, both $M$ and $A$ have the structure of abelian topological groups.
 
 \begin{proposition}
-    Under the aforementioned induced topology, $A$ is a topological ring and $M$ is a topological module.
+    Under the aforementioned induced topology, $A$ is a topological ring and $M$ is a topological module. This topology is called the \textbf{topology induced by the filtration}.
 \end{proposition}
 \begin{proof}
 \end{proof}
@@ -272,7 +272,11 @@ Thus $\wh M$ is also an $A$-module. \textcolor{red}{Note that we haven't yet def
     We shall define a map $\displaystyle\alpha: \wt M:=\limit_{n}M/M_n\to\wh M$. Let $(y_n)\in\wt M$ be a coherent sequence. For each $n\ge 0$, pick any $x_n\in M_n$ such that $\pi_n(x_n) = y_n$ where $\pi_n: M\to M/M_n$ is the natural projection. First, note that \todo{complete this}
 \end{proof}
 
-Now, let $A$ be a filtered ring, which can be regarded as a filtered module over itself. Then, $\wh A$ is an $A$-module. There is a natural product on this module, which can be seen easily using coherent sequences. Thus, $\wh A$ is an $A$-algebra, in particular, a ring in its own right.
+Now, let $A$ be a filtered ring, which can be regarded as a filtered module over itself. Then, $\wh A$ is an $A$-module. There is a natural product on this module, which can be seen easily using coherent sequences. That is, 
+\begin{equation*}
+    [(x_n)_{n\ge 0}]\cdot[(y_n)_{n\ge 0}] = [(x_ny_n)_{n\ge 0}].
+\end{equation*}
+Thus, $\wh A$ is an $A$-algebra, in particular, a ring in its own right.
 
 \begin{definition}
     Given inverse systems $(M_n,\theta_n)$ and $(M_n',\theta_n')$, a \emph{morphism of inverse systems} $f: (M_n')_n\to (M_n)_n$ is a family of maps $f_n: M_n'\to M_n$ for $n\ge 0$ such that the diagram 

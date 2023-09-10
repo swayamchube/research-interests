@@ -164,6 +164,13 @@ A submodule of a finitely generated module need not be finitely generated, let $
     Let $B$ denote the matrix $(\phi\delta_{ij} - a_{ij})_{1\le i,j\le n}$. Then, multiplying by $\operatorname{adj}(B)$, we see that $\det(B)(x_j) = 0$ for all $1\le j\le n$ where $\det(B)$ is viewed as an element in $\End(M)$ and thus, is the zero map in $\End(M)$. It is not hard to see that $\det(B)$ is in the required form.
 \end{proof}
 
+\begin{corollary}\thlabel{corr:stronger-nakayama}
+    Let $M$ be a finitely generated $A$-module and $\fraka$ an ideal of $A$ such that $\fraka M\subseteq M$, then there is $a\in\fraka$ such that $(1 + a)M = 0$.
+\end{corollary}
+\begin{proof}
+    Substitute $\phi = \id$ in the above proposition.
+\end{proof}
+
 \begin{lemma}[Nakayama]\thlabel{lem:nakayama}
     Let $M$ be a finitely generated module and $\mathfrak a\subseteq\mathfrak R$ be an ideal such that $M = \mathfrak aM$. Then, $M = 0$. 
 \end{lemma}
@@ -176,6 +183,18 @@ A submodule of a finitely generated module need not be finitely generated, let $
 \end{corollary}
 \begin{proof}
     We have $M/N = \mathfrak aM/N$, consequently, $M/N = 0$ and $M = N$ due to \thref{lem:nakayama}.
+\end{proof}
+
+A surprising application of Nakayama is the following. 
+\begin{proposition}
+    Let $M$ be a finitely generated $A$-module and $\varphi: M\to M$ a surjective homomorphism. Then, $\varphi$ is an isomorphism.
+\end{proposition}
+\begin{proof}
+    Notice that $M$ also has the structure of an $A[x]$-module where the action of $x$ is given by 
+    \begin{equation*}
+        x\cdot m = \varphi(m).
+    \end{equation*}
+    Further, note that $M$ is still finitely generated as an $A[x]$ module. Due to the surjectivity of $\varphi$, we have $(x)M = M$. Due to \thref{corr:stronger-nakayama}, there is some $f(x)\in A[x]$ such that $(1 + xf(x))M = 0$, that is, for each $m\in M$, $(1 + xf(x))m = 0$. If $m\in\ker\varphi$, then it is immediate that $0 = m + f(\varphi)(\varphi(m)) = m$ and thus $\varphi$ is injective. This completes the proof.
 \end{proof}
 
 \begin{lemma}
@@ -199,11 +218,25 @@ For $R$-modules $M,N$, we denote the set of all $R$-module homomorphisms from $M
 \begin{proposition}
     Let $\{M_\lambda\}_{\lambda\in\Lambda}$ be a collection of $A$-modules. Then, for any $A$-module $N$, we have a natural isomorphism
     \begin{equation*}
-        \Hom_A\left(\bigoplus_{\lambda\in\Lambda}M_\lambda, N\right) = \prod_{\lambda\in\Lambda}\Hom_A(M_\lambda,N)
+        \Hom_A\left(\bigoplus_{\lambda\in\Lambda}M_\lambda, N\right)\cong\prod_{\lambda\in\Lambda}\Hom_A(M_\lambda,N)
     \end{equation*}
 \end{proposition}
 \begin{proof}
     Since the direct sum is the coproduct in $A-\mathbf{Mod}$, the conclusion follows from the universal property.
+\end{proof}
+
+\begin{proposition}
+    If $M$ is a finitely generated $A$-module and $\{N_i\}_{i\in I}$ is a collection of $A$-modules, then there is a natural isomorphism
+    \begin{equation*}
+        \Hom_A\left(M, \bigoplus_{i\in I}N_i\right)\cong\bigoplus_{i\in I}\Hom_A(M, N_i)
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Consider the map 
+    \begin{equation*}
+        \Phi:\Hom_A\left(M, \bigoplus_{i\in I}N_i\right)\to\bigoplus_{i\in I}\Hom_A(M, N_i)
+    \end{equation*}
+    given by $\Phi(f) = (\pi_i\circ f)_{i\in I}$. That this map is well-defined follows from the fact that $M$ is a finitely generated $A$-module. The rest is a routine verification of injectivity and surjectivity.
 \end{proof}
 
 \begin{theorem}
@@ -526,6 +559,67 @@ Note that
 
 Therefore, the sequence cannot be exact.
 
+\begin{theorem}
+    There is a natural isomorphism 
+    \begin{equation*}
+        (M\otimes_A B)\otimes_B(M'\otimes_A B)\cong (M\otimes_A M')\otimes_A B.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Note that the functor $(-\otimes_A B)\otimes_B(M'\otimes_A B)$ is right exact, since it is a composition of tensor products. First, note that the isomorphism is obvious when $M$ is a free module. Now suppose $M$ were arbitrary. Then, we have an exact sequence 
+    \begin{equation*}
+        \bigoplus_{j\in J}A\longrightarrow\bigoplus_{j\in J}A\longrightarrow M\longrightarrow 0.
+    \end{equation*}
+    Denote by $F' =\bigoplus_{j\in J} A$ and $F = \bigoplus_{i\in I} A$. Let
+    \begin{equation*}
+        \theta_M: (M\otimes_A B)\otimes_B(M'\otimes_A B)\to (M\otimes_A M')\otimes_A B.
+    \end{equation*}
+    We have shown above that $\theta_M$ is an isomorphism whenever $M$ is a free module. In particular, we have a commutative diagram with exact rows.
+    \begin{equation*}
+        \xymatrix {
+            (F'\otimes_A B)\otimes_B(M'\otimes_A B)\ar[r]\ar[d]_{\cong} & (F\otimes_A B)\otimes_B(M'\otimes_A B)\ar[r]\ar[d]_{\cong} & (M\otimes_A B)\otimes_B(M'\otimes_A B)\ar[r]\ar[d]_{\theta_M} & 0\ar@{=}[d]\\
+            (F'\otimes_A M')\otimes_A B\ar[r] & (F\otimes_A M')\otimes_A B\ar[r] & (M\otimes_A M')\otimes_A B\ar[r] & 0
+        }
+    \end{equation*}
+    Conclude using the five lemma.
+\end{proof}
+
+\begin{theorem}
+    Let $\phi: A\to B$ be a ring homomorphism. Let $M$ be an $A$-module and $N$ a $B$-module. Note that $N$ is also an $A$-module owing to the restriction of scalars. Then, there is a natural isomorphism 
+    \begin{equation*}
+        (M\otimes_A B)\otimes_B N\stackrel{\sim}{\longrightarrow} M\otimes_A N
+    \end{equation*}
+    of $B$-modules.
+\end{theorem}
+\begin{proof}
+    Easy proof using universal properties.
+\end{proof}
+
+More generally, the following is true. 
+
+\begin{theorem}
+    Let $M$ be an $A$-module, $P$ a $B$-module and $N$ an $(A, B)$-bimodule. Then, $M\otimes_A N$ is naturally a $B$-module, $N\otimes_B P$ an $A$-module and there is an natural isomorphism of $(A,B)$-bimodules: 
+    \begin{equation*}
+        (M\otimes_A N)\otimes_B P\cong M\otimes_A (N\otimes_B P).
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+As an application, we have the following.
+\begin{proposition}\thlabel{prop:tensor-over-local-zero}
+    Let $A$ be a local ring and $M, N$ finitely generated $A$-modules. Then, $M\otimes_A N = 0$ if and only if $M = 0$ or $N = 0$.
+\end{proposition}
+\begin{proof}
+    Let $k$ denote the residue field of $A$. Then, 
+    \begin{gather*}
+        (M\otimes_A k)\otimes_k(k\otimes_A N)\cong((M\otimes_A k)\otimes_k k)\otimes_A N\cong (M\otimes_A(k\otimes_k k))\otimes_A N\cong(M\otimes_A k)\otimes_A N\\
+        \cong (k\otimes_A M)\otimes_A N\cong k\otimes_A(M\otimes_A N) = 0.
+    \end{gather*}
+    But a tensor product of vector spaces is $0$ if and only if one of the two vector spaces is $0$. Hence, either $M\otimes_A k = 0$ or $N\otimes_A k = 0$, whence, it follows from \thref{lem:nakayama}, that $M = 0$ or $N = 0$.
+\end{proof}
+
 \section{Flat Modules}
 
 \begin{definition}[Flat Module]
@@ -574,6 +668,161 @@ We know that $-\otimes_AN$ is right exact, hence, it suffices to show that the f
 \begin{proof}
     Obviously, $A$ is a flat $A$-module, therefore, $\bigoplus_{\lambda\in\Lambda}A$ is free for every indexing set $\Lambda$.
 \end{proof}
+
+\begin{proposition}
+    Let $B$ be an $A$-algebra and $M$ a flat $A$-module. Then, $M\otimes_A B$ is a flat $B$-module.
+\end{proposition}
+\begin{proof}
+    Follows from the natural isomorphism $(M\otimes_A B)\otimes_B N\cong M\otimes_A N$.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:flat-and-tor}
+    The following are equivalent.
+    \begin{enumerate}[label=(\alph*)]
+        \item $M$ is flat. 
+        \item $\Tor_i^A(N, M) = 0$ for all $i > 0$ and all $A$-modules $N$. Equivalently, $\Tor_i^A(M, N) = 0$ for all $i > 0$ and all $A$-modules $N$.
+        \item $\Tor^A_1(N, M) = 0$ for all $A$-modules $N$. Equivalently, $\Tor_1^A(M, N) = 0$ for all $A$-modules $N$.
+        \item $\Tor^A_1(N, M) = 0$ for all finitely generated $A$-modules $N$. Equivalently, $\Tor^A_1(M, N) = 0$ for all finitely generated $A$-modules $N$.
+    \end{enumerate}
+
+    The equivalent statements follow from the balancing property of $\Tor$.
+\end{lemma}
+\begin{proof}
+    $(a)\implies(b)$ is immediate from the definition of $\Tor$ while $(b)\implies(c)$ and $(c)\implies(d)$ is something a third grader could figure out. It remains to show that $(c)\implies(a)$. Let $N$ and $N'$ be finitely generated $A$-modules and $f: N'\to N$ an injective homomorphism. Then, there is a short exact sequence 
+    \begin{equation*}
+        0\into N'\stackrel{f}{\longrightarrow}N\longrightarrow \coker f\onto 0.
+    \end{equation*}
+    This sequence gives rise to a $\Tor$ long exact sequence 
+    \begin{equation*}
+        \Tor^A_1(N', M)\to\Tor^A_1(N, M)\to\Tor^A_1(\coker f, M)\to N'\otimes_A M\to N\otimes_A M\to \coker f\otimes_A M\to 0.
+    \end{equation*}
+    Since $N$ and $N'$ are finitely generated, so is $\coker f$, whence we have a an exact sequence 
+    \begin{equation*}
+        0\to N'\otimes_A M\to N\otimes_A M\to \coker f\otimes_A M\to 0.
+    \end{equation*}
+    In particular, this means that $N'\otimes_A M\to N\otimes_A M$ is injective and $M$ is flat.
+\end{proof}
+
+\begin{lemma}
+    If $0\to M'\to M\to M''\to 0$ be a short exact sequence of $A$-modules with $M''$ flat, then $M'$ is flat if and only if $M$ is flat.
+\end{lemma}
+\begin{proof}
+    Again, using the $\Tor$ long exact sequence, we have 
+    \begin{equation*}
+        \cdots\to\Tor_n^A(N', M)\to\Tor_n^A(N, M)\to 0\to\Tor_{n - 1}^A(N', M)\to\Tor_{n - 1}^A(N, M)\to 0\to\cdots.
+    \end{equation*}
+    The conclusion is now obvious.
+\end{proof}
+
+\begin{lemma}
+    $M$ is flat if and only if $\Tor_1^A(N, M) = 0$ for every cyclic $A$-module $N$, equivalently, $\Tor^A_1(M, N) = 0$ for every cyclic $A$-module $N$.
+\end{lemma}
+\begin{proof}
+    The forward direction is clear. We shall prove the converse. Let $N$ be a finitely generated $A$-module, say generated by $\{x_1,\dots,x_n\}$. Let $N_i$ denote the submodule generated by $\{x_1,\dots, x_i\}$ for $1\le i\le n$. We have a short exact sequence 
+    \begin{equation*}
+        0\longrightarrow N_i\longrightarrow N_{i + 1}\longrightarrow N_{i + 1}/N_i\longrightarrow 0.
+    \end{equation*}
+    Note that $N_1$ is cyclic and thus, $\Tor^A_1(N_1, M) = 0$. We shall inductively show that $\Tor^A_1(N_i, M) = 0$. The induction step follows from the $\Tor$ long exact sequence, since 
+    \begin{equation*}
+        \xymatrix {
+            \Tor^A_1(N_i, M)\ar[r]\ar@{=}[d] & \Tor^A_1(N_{i + 1}, M)\ar[r] & \Tor^A_1(N_{i + 1}/N_i, M)\ar@{=}[d]\\
+            0\ar[r] & ?\ar[r] & 0
+        }
+    \end{equation*}
+    and thus $\Tor^A_1(N_{i + 1}, M) = 0$. In particular,
+    \begin{equation*}
+        \Tor^A_1(N, M) = \Tor^A_1(N_n, M) = 0.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+\begin{corollary}
+    $M$ is flat if and only if $\Tor^A_1(A/\fraka, M) = 0$ for every ideal $\fraka\unlhd A$. Equivalently, $\Tor^A_1(M,A/\fraka) = 0$ for every ideal $\fraka\unlhd A$.
+\end{corollary}
+\begin{proof}
+    Every cyclic $A$-module is isomorphic to $A/\fraka$ as $A$-modules for some ideal $\fraka\unlhd A$.
+\end{proof}
+
+\begin{lemma}
+    $M$ is flat if and only if $\Tor^A_1(A/\fraka, M) = 0$ for every finitely generated ideal $\fraka\unlhd A$. Equivalently, $\Tor^A_1(M,A/\fraka) = 0$ for every finitely genrated ideal $\fraka\unlhd A$.
+\end{lemma}
+\begin{proof}
+    We shall show that for any $A$-module $M$, $\Tor^A_1(A/\fraka, M) = 0$ for every finitely generated ideal $\fraka$ is equivalent to $\Tor^A_1(A/\fraka, M) = 0$ for every ideal $\fraka$.
+
+    To see this, note that $\Tor^A_1(A/\fraka, M) = 0$ if and only if the sequence 
+    \begin{equation*}
+        0\longrightarrow\fraka\otimes_A M\longrightarrow A\otimes_A M
+    \end{equation*}
+    is exact, where this equivalence follows from the $\Tor$ long exact sequence. \todo{complete this}.
+\end{proof}
+
+\begin{proposition}
+    Suppose $M''$ is a flat $A$-module and
+    \begin{equation*}
+        0\longrightarrow M'\stackrel{f}{\longrightarrow} M\stackrel{g}{\longrightarrow}M''\longrightarrow 0
+    \end{equation*}
+    is a short exact sequence. If $N$ is any $A$-module, then 
+    \begin{equation*}
+        0\longrightarrow M'\otimes_A N\stackrel{f\otimes 1}{\longrightarrow} M\otimes_A N\stackrel{g\otimes 1}{\longrightarrow} M''\otimes_A N\longrightarrow 0
+    \end{equation*}
+    is exact.
+\end{proposition}
+\begin{proof}[Proof 1]
+    The short proof is to consider the tail of the $\Tor$ long exact sequence.
+    \begin{equation*}
+        \cdots\to\Tor^A_1(M'', N)\to M'\otimes_A N\to M\otimes_A N\to M''\otimes_A N\to 0.
+    \end{equation*}
+    Since $M''$ is flat, $\Tor^A_1(M'', N) = 0$ and the conclusion follows.
+\end{proof}
+\begin{proof}[Proof 2]
+    This is a beautiful proof using the Snake Lemma. Let $F$ be a free module that surjects onto $N$ with kernel $N'$. Then, we have a short exact sequence 
+    \begin{equation*}
+        0\longrightarrow N'\longrightarrow F\longrightarrow N\longrightarrow 0.
+    \end{equation*}
+    We can now construct the following commutative diagram 
+    \begin{equation*}
+    \xymatrix {
+        & M'\otimes_A N'\ar[r]\ar[d] & M\otimes_A N'\ar[r]\ar[d] & M''\otimes_A N'\ar[r]\ar[d] & 0\\
+        0\ar[r] & M'\otimes_A F\ar[r] & M\otimes_A F\ar[r] & M''\otimes_A F\ar[r] & 0
+    }
+    \end{equation*}
+    The snake lemma gives an exact sequence 
+\end{proof}
+
+\begin{definition}
+    A ring $A$ is said to be \emph{von Neumann regular} or \emph{absolutely flat} if every $A$-module is flat.
+\end{definition}
+
+\begin{theorem}
+    The following are equivalent
+    \begin{enumerate}[label=(\alph*)]
+        \item $A$ is absolutely flat. 
+        \item Every principal ideal in $A$ is idempotent. 
+        \item Every finitely generated ideal in $A$ is a direct summand of $A$ as $A$-modules.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\begin{proposition}
+    A local ring is absolutely flat if and only if it is a field.
+\end{proposition}
+\begin{proof}
+    Let $(A,\frakm, k)$ be local and absolutely flat. Then, there is a short exact sequence 
+    \begin{equation*}
+        0\to\frakm\to A\to A/\frakm\to 0.
+    \end{equation*}
+    Since $A/\frakm$ is a flat $A$-module, we may tensor to obtain the short exact sequence 
+    \begin{equation*}
+        0\to\frakm\otimes_A A/\frakm\to A\otimes_A A/\frakm\to A/\frakm\otimes_A A/\frakm\to 0.
+    \end{equation*}
+    Note that $A/\frakm\otimes_A A/\frakm = A/\frakm$ as $A$-modules and hence, 
+    \begin{equation*}
+        0\to m\otimes_A A/\frakm\to A/\frakm\to A/\frakm\to 0
+    \end{equation*}
+    is exact whence $m\otimes_A A/\frakm = 0$, consequently, $m = 0$ due to \thref{lem:nakayama}.
+\end{proof}
+
 
 \section{Projective Modules}
 
@@ -724,6 +973,29 @@ We contend that $(D\otimes_A D,+,\cdot,0\otimes 0, 1\otimes 1)$ is a ring. To do
     &= bb'\otimes cc' + bb''\otimes cc''
 \end{align*}
 
+Let $i: B\to B\otimes_A C$ be the map $b\mapsto b\otimes 1$ and $j: C\to B\otimes_A C$ be the map $c\mapsto 1\otimes c$. Then the square in the following diagram commutes.
+\begin{equation*}
+    \xymatrix {
+        A\ar[r]^f\ar[d]_g & B\ar[d]^-i\ar@/^1.5pc/[rdd]^p\\
+        C\ar@/_1.5pc/[drr]_q\ar[r]_-{j} & B\otimes_A C\ar@{.>}[rd]_{\exists!r}\\
+        & & T
+    }
+\end{equation*} 
+
+Let $T$ be an $A$-algebra with $A$-algebra morphisms $p: B\to T$ and $q: C\to T$. We contend that there is a unique $A$-algebra morphism $r: B\otimes_A C\to T$ making the above diagram commute. 
+
+To construct the map $r$, consider the multilinear map $\Phi: B\times C\to T$ given by $\Phi(b, c) = p(b)q(c)$. This induces a map $r: B\otimes_A C\to T$ given by 
+\begin{equation*}
+    r(b\otimes c) = p(b)q(c).
+\end{equation*}
+This map obviously makes the diagram commute. It remains to show that $r$ is indeed an $A$-algebra morphism, for which, it suffices to show that it is a ring homomorphism. Indeed, 
+\begin{equation*}
+    r((b\otimes c)(b'\otimes c')) = r(bb'\otimes cc') = p(bb')q(cc') = p(b)q(c)p(b')q(c') = r(b\otimes c)r(b'\otimes c').
+\end{equation*}
+
+\textbf{Hence, the tensor tensor product is a \emph{coproduct} in the category of $A$-algebras.}
+
+
 \section{Structure Theorem for Modules over a PID}
 Throughout this section, let $R$ be a PID.
 
@@ -731,7 +1003,18 @@ Throughout this section, let $R$ be a PID.
     A finitely generated torsion free $R$-module is free.
 \end{lemma}
 \begin{proof}
+    Let $M$ be a finitely generated torsion free $R$-module. Let $\{x_1,\dots,x_m\}$ be a set of generators. Pick a maximal linearly independent subset $\{v_1,\dots,v_n\}$ of $\{x_1,\dots, x_m\}$. Then, for each $x_i$, there is a linear combination 
+    \begin{equation*}
+        a_ix_i + b_1v_1 + \dots + b_nv_n = 0
+    \end{equation*}
+    with $a_i\ne 0$ due to the maximality of $\{v_1,\dots,v_n\}$. Therefore, $a_ix_i\in (v_1,\dots,v_n) = (v_1)\oplus\dots\oplus(v_n)$. Let $a = a_1\cdots a_m$. Then, the map $\phi: M\to (v_1,\dots, v_n)$ given by $\phi(m) = am$ is an injective map. Thus, $M$ is isomorphic to a submodule of $(v_1,\dots,v_n)$. But note that 
+    \begin{equation*}
+        (v_1,\dots,v_n) = (v_1)\oplus\dots\oplus(v_n)
+    \end{equation*}
+    is a free module and hence so is $M$.
 \end{proof}
+
+The statement is no longer true upon dropping the finitely generated condition, for example, $\Q$ as a $\Z$-module is not free but is torsion free.
 
 \begin{definition}
     Let $E$ be an $R$-module. For $x\in E$, an element $r\in R$ such that $\Ann_R(x) = (r)$ is said to be a \textit{period} of $x$. An element $c\in R$ is said to be an \textit{exponent} for $E$ (resp. for $x$) if $cE = 0$ (resp. $cx = 0$). The elements $x_1,\ldots,x_n\in E$ are said to be \textit{independent} if 
@@ -816,8 +1099,31 @@ Obviously, every finitely presented module is finitely generated. Further, if $A
     Since $M$ is finitely presented, we have an exact sequence $A^m\rightarrow A^n\rightarrow M\rightarrow 0$ for some positive integers $m$ and $n$. We have a commutative diagram. 
     \begin{equation*}
         \xymatrix{
-            0\ar[r]\ar[d] & S^{-1}\Hom_A(M,N)\ar[r]\ar[d] & S^{-1}\Hom_A(A^n, N)\ar[r]\ar[d]_\sim & S^{-1}\Hom_A(A^m,N)\ar[d]_\sim\\
+            0\ar[r]\ar@{=}[d] & S^{-1}\Hom_A(M,N)\ar[r]\ar[d] & S^{-1}\Hom_A(A^n, N)\ar[r]\ar[d]_\sim & S^{-1}\Hom_A(A^m,N)\ar[d]_\sim\\
             0\ar[r] & \Hom_{S^{-1}A}(S^{-1}M,S^{-1}N)\ar[r] & \Hom_{S^{-1}A}(S^{-1}A^n, S^{-1}N)\ar[r] & \Hom_{S^{-1}A}(S^{-1}A^m,S^{-1}N)\\
         }
     \end{equation*}
+    and the conclusion follows from the five lemma (just add another column of zeros to the left).
+\end{proof}
+
+\begin{proposition}
+    Let $N$ be finitely generated and $M$ a finitely presented $A$-module. If $f: N\onto M$ is a surjection, then $\ker f$ is finitely generated.
+\end{proposition}
+\begin{proof}
+    Let $A^m\to A^n\to M\to 0$ be an exact sequence. Then, there is a commutative diagram
+    \begin{equation*}
+        \xymatrix {
+            & A^m\ar[r]\ar@{.>}[d]_{\exists h} & A^n\ar[r]\ar@{.>}[d]_{\exists g} & M\ar[r]\ar@{=}[d]^{\id_M} & 0\\
+            0\ar[r] & \ker f\ar[r] & N\ar[r]_f & M\ar[r] & 0
+        }
+    \end{equation*}
+    with exact rows. Since $A^m$ and $A^n$ are projective $A$-modules, the map $\id_M$ can be lifted to maps $g: A^n\to N$ and $h: A^m\to\ker f$. Due to the Snake Lemma, there is an exact sequence 
+    \begin{equation*}
+        0 = \ker\id_M\to\coker h\to\coker g\to\coker\id_M = 0
+    \end{equation*}
+    whence $\coker h\cong\coker g$. But since $N$ is finitely generated, so is $\coker g$ and hence so is $\coker h$. Finally, we have an exact sequence 
+    \begin{equation*}
+        A^m\to\ker f\to\coker h
+    \end{equation*}
+    where $A^m$ and $\coker h$ are finitely generated. Thus, $\ker f$ is finitely generated.\todo{cite 2 out of 3 lemma}
 \end{proof}

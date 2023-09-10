@@ -231,6 +231,17 @@ An analogous result does \textbf{not} hold for Artinian modules (rings). Conside
     Since $C$ is a finitely generated $B_0$-module it is noetherian and thus $B$, being a $B_0$-submodule, is a finitely generated $B_0$-module and consequently, a $B_0$-algebra of finite type. Thus, $B$ is an $A$-algebra of finite type.
 \end{proof}
 
+\begin{corollary}[Noether]
+    Let $A$ be a noethering and $R$ an $A$-algebra (commutative) of finite type and $G$ a finite group of $A$-algebra automorphisms of $R$. Let 
+    \begin{equation*}
+        R^G := \{r\in R\mid g\cdot r = r,~\forall g\in G\}.
+    \end{equation*}
+    Then, $R^G$ is a finitely generated $A$-algebra, in particular, is a noethering.
+\end{corollary}
+\begin{proof}
+    That $R^G$ is indeed an $A$-algebra is easy to see. Further, it is well known that $R/R^G$ is an integral extension. But since $R$ is integral over $R^G$ and is also a finitely generated $R^G$-algebra, due to \thref{prop:integral-finite-type}, $R$ is a finitely generated $R^G$-module. Finally from \thref{lem:artin-tate}, $R^G$ is an $A$-algebra of finite type.
+\end{proof}
+
 \begin{lemma}[Cohen]
     $A$ is a noethering if and only if every prime ideal in $A$ is finitely generated.
 \end{lemma}
