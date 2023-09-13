@@ -755,7 +755,7 @@ We know that $-\otimes_AN$ is right exact, hence, it suffices to show that the f
     is exact, where this equivalence follows from the $\Tor$ long exact sequence. \todo{complete this}.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:flatness-bourbaki}
     Suppose $M''$ is a flat $A$-module and
     \begin{equation*}
         0\longrightarrow M'\stackrel{f}{\longrightarrow} M\stackrel{g}{\longrightarrow}M''\longrightarrow 0
@@ -786,6 +786,21 @@ We know that $-\otimes_AN$ is right exact, hence, it suffices to show that the f
     }
     \end{equation*}
     The snake lemma gives an exact sequence 
+\end{proof}
+
+\begin{lemma}\thlabel{prop:fp-flat-local-free}
+    A finitely presented flat module over a local ring is free.
+\end{lemma}
+\begin{proof}
+    Let $M$ be a finitely presented (and therefeore, finitely generated) flat module over a local ring $(A,\frakm, k)$. Let $x_1,\dots,x_n\in M$ be such that $\overline x_1,\dots,\overline x_n\in M/\frakm M$ form a basis as a $k$-vector space. As we have seen earlier, $x_1,\dots,x_n$ then generate $M$ as an $A$-module. Let $F = A^{\oplus n}$ and $\varphi: F\onto M$ denote the surjection that maps the $i$-th basis element of $F$ to $x_i$. Then, $\ker\varphi$ is finitely generated due to \thref{prop:ker-fg-fp}. We have a short exact sequence 
+    \begin{equation*}
+        0\longrightarrow\ker\varphi\longrightarrow F\stackrel{\varphi}{\longrightarrow}M\longrightarrow 0.
+    \end{equation*}
+    Tensoring with $k$ and invoking \thref{prop:flatness-bourbaki}, we have 
+    \begin{equation*}
+        0\longrightarrow\ker\varphi\otimes_A k\longrightarrow F\otimes_A k\longrightarrow M\otimes_A k\longrightarrow 0
+    \end{equation*}
+    is exact. But note that $F\otimes_A k\longrightarrow M\otimes_A k$ is a surjection of vector spaces of the same dimension. Therefore, an isomorphism of $k$-vector spaces, consequently, also an isomorphism of $A$-modules. In particular, this means that $\ker\varphi\otimes_A k = 0$. Finally, due to \thref{lem:nakayama}, $\ker\varphi = 0$ and $F\cong M$. This completes the proof.
 \end{proof}
 
 \begin{definition}
@@ -1106,7 +1121,7 @@ Obviously, every finitely presented module is finitely generated. Further, if $A
     and the conclusion follows from the five lemma (just add another column of zeros to the left).
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:ker-fg-fp}
     Let $N$ be finitely generated and $M$ a finitely presented $A$-module. If $f: N\onto M$ is a surjection, then $\ker f$ is finitely generated.
 \end{proposition}
 \begin{proof}

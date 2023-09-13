@@ -22,17 +22,34 @@
     \begin{equation*}
         (\alpha^n + a_{n - 1}\alpha^{n - 1} + \cdots + a_0)\cdot m = 0
     \end{equation*}
-    for each $m\in M$. But since $M$ is a faithful $A[\alpha]$-module, we must have $\alpha^{n} + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0$, whereby $\alpha$ is integral over $A$.
+    for each $m\in M$. But since $M$ is a faithful $A[\alpha]$-module, we must have $\alpha^{n} + a_{n - 1}\alpha^{n - 1} + \cdots + a_0 = 0$, whereby $\alpha$ is integral over $A$.\qedhere
 \end{description}
 \end{proof}
 
-In particular, from \thref{thm:equivalence-integral-extension}(c), we note that any element in a finite $A$-algebra is integral over $A$.
+\begin{corollary}
+    If $B$ is a finite $A$-algebra, then $B/A$ is an integral extension. In particular, every element of $B$ is integral over $A$.
+\end{corollary}
 
-\begin{proposition}\thlabel{prop:integral-finite-type}
-    Let $\{\alpha_i\}_{i = 1}^n$ be elements of $B$, each integral over $A$. Then the ring $A[\alpha_1,\ldots,\alpha_n]$ is a finitely generated $A$-module.
+\begin{proposition}
+    Let $G$ be a finite group of ring automorphisms of $A$ and let 
+    \begin{equation*}
+        A^G := \{a\in A\mid g\cdot a = a,~\forall g\in G\}.
+    \end{equation*}
+    Then, $A/A^G$ is an integral extension.
 \end{proposition}
 \begin{proof}
-    Denote by $A_k$ the subring $A[x_1,\ldots,x_k]$. We have that $A_{k + 1}$ is a finitely generated $A_k$-algebra, whereby $A_n$ is a finitely generated $A$-algebra, thereby completing the proof.
+    It is easy to see that $A^G$ is a subring of $A$. For any $a\in A$, consider the monic polynomial 
+    \begin{equation*}
+        f(x) = \prod_{\sigma\in G}(x - \sigma(a)).
+    \end{equation*}
+    This is obviously a polynomial with coefficients in $A^G$ and has $x$ as a root. Thus, $x$ is integral over $A^G$.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:integral-finite-type}
+    Let $\{\alpha_i\}_{i = 1}^n$ be elements of $B$, each integral over $A$. Then the ring $A[\alpha_1,\ldots,\alpha_n]$ is a finitely generated $A$-module, equivalently, a finite $A$-algebra.
+\end{proposition}
+\begin{proof}
+    Let $A_k$ denote the subring $A[\alpha_1,\dots,\alpha_k]$ for $k\ge 1$. We shall induct on $k$ with the convention $A_0 = A$. Obviously $A_0$ is a finite $A$-algebra. We have $A_{k + 1} = A_k[\alpha_{k + 1}]$ and thus is a finite $A_k$-algebra. But since $A_k$ is a finite $A$-algebra, so is $A_{k + 1}$, thereby completing the proof.
 \end{proof}
 
 \begin{corollary}
@@ -100,6 +117,21 @@ The set $C$ as defined above is called the \textit{integral closure of $A$ in $B
     Let $A\subseteq B$ be an integral extension of integral domains. Then $A$ is a field if and only if $B$ is a field.
 \end{proposition}
 \begin{proof}
+    $\implies$ If $x\in B\backslash\{0\}$ is integral over $A$, then 
+    \begin{equation*}
+        x^n + a_{n - 1}x^{n - 1} + \dots + a_0 = 0
+    \end{equation*}
+    for some $a_i\in A$. Then, $x(x^{n - 1} + a_{n - 1}x^{n - 2} + \dots + a_1) = -a_0$, in particular, $x$ is a unit in $B$.
+
+    $\impliedby$ Let $x\in A\backslash\{0\}$. Then, $x^{-1}\in B$ is integral over $A$ and satisfies an equation of the form 
+    \begin{equation*}
+        x^{-n} + a_{n - 1}x^{-(n - 1)} + \dots + a_0 = 0.
+    \end{equation*}
+    Multiplying this equation by $x^{n - 1}$, we have 
+    \begin{equation*}
+        x^{-1} = -(a_{n - 1} + a_{n - 2}x + \dots + a_0x^{n - 1})\in A,
+    \end{equation*}
+    whence $A$ is a field.
 \end{proof}
 
 \begin{proposition}\thlabel{prop:q-max-iff-p-max}
@@ -166,7 +198,7 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
 
 \begin{proposition}
     Let $A$ be an integral domain. Then, the following are equivalent: 
-    \begin{enumerate}
+    \begin{enumerate}[label=(\alph*)]
         \item $A$ is normal 
         \item $A_\frakp$ is normal for all $\frakp\in\spec A$ 
         \item $A_\frakm$ is normal for all $\frakm\in\mspec A$
@@ -179,19 +211,52 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
 \begin{lemma}
     Let $C$ be the integral closure of $A$ in $B$ and let $\fraka\subseteq A$ be an ideal. Then, the integral closure of $\fraka$ in $B$ is $\sqrt{\fraka^e}$ where the extension is taken through the inclusion $A\hookrightarrow C$.
 \end{lemma}
+\begin{proof}
+    If $x\in C$ is integral over $\fraka$, then $x$ satisfies an equationo the form 
+    \begin{equation*}
+        x^r + a_{r - 1}x^{r - 1} + \dots + a_0
+    \end{equation*}
+    with $a_i\in\fraka$. Thus, $x^r\in\fraka^e$ whence $x\in\sqrt{\fraka^e}$.
+
+    Conversely, suppose $x\in\sqrt{a^e}$, then there is a positive integer $n$ such that $x^n\in\fraka^e$. Then, $x^n = a_1x_1 + \dots + a_mx_m$ where each $a_i\in\fraka$ and $x_i\in C$. Let $M = A[x_1,\dots,x_m]$. Since each $x_i$ is integral over $A$, $M$ is a finitely generated $A$-module. Let $\phi: M\to M$ be the homomorphism given by $\phi(y) = x^ny$. Then, $\phi(M)\subseteq\fraka M$. Thus, $\phi$ satisfies and equation of the form 
+    \begin{equation*}
+        \phi^r + a_{r - 1}\phi^{r - 1} + \dots + a_0\id = 0
+    \end{equation*}
+    whre $a_i\in\fraka$. Thus, $x$ is integral over $\fraka$.
+\end{proof}
 
 \begin{proposition}
-    Let $A\subseteq B$ be integral domains with $A$ integrally closed. Let $\alpha\in B$ be integral over an ideal $\fraka$ of $A$. Then $\alpha$, viewed as an element of $Q(B)\supseteq Q(A)$ is algebraic over the field of fractions $K$ of $A$. Further, if the minimal polynomial of $\alpha$ over $K$ is given by $x^n + a_{n - 1}x^{n - 1} + \cdots + a_0$, then each $a_i$ is an element of $\sqrt{\fraka}$.
+    Let $A\subseteq B$ be integral domains with $A$ integrally closed. Let $\alpha\in B$ be integral over an ideal $\fraka$ of $A$. Then $\alpha$, viewed as an element of $L := Q(B)\supseteq Q(A) =: K$ is algebraic over the field of fractions $K$ of $A$. Further, if the minimal polynomial of $\alpha$ over $K$ is given by $x^n + a_{n - 1}x^{n - 1} + \cdots + a_0$, then each $a_i$ is an element of $\sqrt{\fraka}$.
 \end{proposition}
 \begin{proof}
-    
+    Let $\alpha_1,\dots,\alpha_k$ be the distinct conjugates of $\alpha$ in $\overline K$, an algebraic closure of $K$ containing $L$. Then, each $\alpha_i$ is integral over $\fraka$. The irreducible polynomial of $\alpha$ over $K$ is given by 
+    \begin{equation*}
+        \prod_{i = 1}^k \left(x - \alpha_i\right)^{e}
+    \end{equation*}
+    for some exponent $e$. In particular, the coefficients of the non-leading terms are polynomials in th $\alpha_i$'s whence are integral over $\fraka$ and also lie in $A$, whence are elements of $\sqrt{\fraka}$. This completes the proof.
 \end{proof}
 
 \begin{theorem}[Going Down Theorem]
     Let $A\subseteq B$ be an integral extension of integral domains with $A$ integrally closed. Suppose $\frakp_1\supseteq\dots\supseteq\frakp_n$ are prime ideals in $A$ and correspondingly $\frakq_1\supseteq\dots\supseteq\frakq_m$ are prime ideals in $B$ with $m < n$ and $\frakq_i\cap A = \frakp_i$ for $1\le i\le m$, then there are prime ideals $\frakq_{m + 1}\supseteq\frakq_{n}$ with $\frakq_m\supseteq\frakq_{m + 1}$ such that $\frakq_i\cap A = \frakp_i$ for $m < i\le n$.
 \end{theorem}
 \begin{proof}
-    It suffices to prove this in the case $m = 1$ and $n = 2$. Let $\iota: A\into B$ denote the inclusion map, $S$ denote the set $B\backslash\frakq_1$ and $\varphi: B\to B_{\frakq_1}$ denote the localization map. Let $\frakP$ denote the ideal $S^{-1}(B\frakp_2)$. First, we shall show that $\iota^{-1}(\varphi^{-1}(\frakP)) = \frakp_2$.
+    We shall prove this in the case $m = 1$ and $n = 2$. This obviously suffices to prove the theorem in its full generality. Consider the composition of maps 
+    \begin{equation*}
+        A\longrightarrow B\longrightarrow B_{\frakq_1}
+    \end{equation*}
+    where the composition shall be denoted by $f: A\to B_{\frakq_1}$. It suffices to show that there is a prime in $B_{\frakq_1}$ contracting to $\frakp_2$. Due to \thref{thm:prime-is-contraction}, it suffices to show that $\frakp^{ec} = \frakp$ where the extension and contraction is taken with respect to $f$.
+
+    Let $x\in\frakp_2 B_{\frakq_1}$. Then, $x = y/s$ for some $y\in B\frakp_2$ and $s\in S$. Note that $s$ is integral over the ideal $(1)$ in $A$ and thus its minimal polynomial over $K$ is of the form 
+    \begin{equation*}
+        t^r + a_{r - 1}t^{r - 1} + \dots + a_0
+    \end{equation*}
+    where $a_i\in A$. 
+    
+    Now, $y\in B$ and lies in $\frakp_2B\subseteq\sqrt{\frakp_2B}$ whence is integral over $\frakp_2$ and hence its minimal polynomial over $K$ is of the form 
+    \begin{equation*}
+        t^{r'} + b_{r' - 1}t^{r' - 1} + \dots + b_0
+    \end{equation*}
+    with $b_i\in\sqrt{\frakp_2} = \frakp_2$. Since $s = y/x$ in $Q(B)$, the minimal polynomials of $s$ and $y$ over $K$ must have the same degree, that is, $r = r'$ and $b_i = x^{r - i}a_i$ for $0\le i\le r - 1$. If $x\notin\frakp_2$, then $a_i\in\frakp_2$ for $0\le i\le r - 1$, which would imply $s^r\in\frakp_2B\subseteq\frakp_1B\subseteq\frakq_1$, i.e. $s\in\frakq_1$, which is absurd. Thus, $x\in\frakp_2$ whence $\frakp_2^{ec}\subseteq\frakp_2$, which completes the proof.
 \end{proof}
 
 \section{Noether's Normalization Lemma}

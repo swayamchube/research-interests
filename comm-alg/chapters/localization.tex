@@ -268,7 +268,7 @@ A property $P$ defined on the class of modules is said to be local if for every 
     $(a)\implies(b)$ follows from the exactness of localization and $(b)\implies(c)$ is obvious. We shall show $(c)\implies(a)$.\todo{show that c=>a}
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:fp-projective-locally-free}
     Let $M$ be a finitely presented $A$-module. Then, the following are equivalent: 
     \begin{enumerate}[label=(\alph*)]
         \item $M$ is projective
@@ -280,6 +280,14 @@ A property $P$ defined on the class of modules is said to be local if for every 
     $(a)\implies(b)$. If $M$ is projective, there is a positive integer $n$ and an $A$-module $N$ such that $M\oplus N\cong A^n$. As a result, $M_\frakp\oplus M_\frakp\cong A_\frakp^{\oplus n}$ and is projective. 
 
     $(c)\implies(a)$. 
+\end{proof}
+
+A surprising consequence of the previous proposition is the following. 
+\begin{proposition}
+    A finitely presented flat $A$-module is projective.
+\end{proposition}
+\begin{proof}
+    Follows from \thref{prop:fp-projective-locally-free} and \thref{prop:fp-flat-local-free}.
 \end{proof}
 
 \begin{proposition}
@@ -352,6 +360,13 @@ From the above proposition, we see that ``$\frakN(A) = (0)$'' is a local propert
     \begin{equation*}
         \Ann(N_1 + N_2) = \Ann(N_1)\cap\Ann(N_2)\qedhere
     \end{equation*}
+\end{proof}
+
+\begin{theorem}\thlabel{thm:prime-is-contraction}
+    Let $f: A\to B$ be ring homomorphism. Then, $\frakp\in\spec(A)$ is a contraction of a prime ideal in $B$ if and only if $\frakp^{ec} = \frakp$.
+\end{theorem}
+\begin{proof}
+    We shall prove only the converse, since the other direction is trivial. Suppose $\frakp^{ec} = \frakp$. Let $S = f(A\backslash\frakp)$, which is obviously a multiplicatively closed subset of $B$. Obviously, $\frakp^e\cap S = \emptyset$ whence $S^{-1}\frakp^e$ is a proper ideal in $S^{-1}B$. Let $\frakm\subseteq S^{-1}B$ be a maximal ideal containing $S^{-1}\frakp^e$. Let $\frakq$ be the contraction of $\frakm$ in $B$. This is a prime ideal containing $\frakp^e$ and $\frakq\cap S = \emptyset$, whence, $\frakq^c$ must be contained in $\frakp$ but it also contains $\frakp$ therefore, is equal to $\frakp$. This completes the proof.
 \end{proof}
 
 \hrulefill 

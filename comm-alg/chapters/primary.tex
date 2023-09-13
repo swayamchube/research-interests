@@ -1,3 +1,5 @@
+\section{Primary Decomposition of Ideals}
+
 A primary ideal is a generalization of the ideals $p^n\Z$ in $\Z$, as is evident from the following definition.
 
 \begin{definition}[Primary Ideals]
@@ -111,7 +113,7 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
 \end{proof}
 
 \begin{proposition}
-    Let $S$ be a multiiplicatively closed subset of $A$ and $\frakq$ be a $\frakp$-primary ideal. 
+    Let $S$ be a multiiplcatively closed subset of $A$ and $\frakq$ be a $\frakp$-primary ideal. 
     \begin{enumerate}[label=(\alph*)]
         \item If $S\cap\frakp\ne\emptyset$, then $S^{-1}\frakq = S^{-1}A$. 
         \item If $S\cap\frakp = \emptyset$, then $S^{-1}\frakq$ is $S^{-1}\frakp$-primary and its contraction in $A$ is $\frakq$.
@@ -152,3 +154,106 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
 \begin{corollary}
     In particular, the primary ideals which correspond to the minimal primes associated to $\fraka$ are uniquely determined.
 \end{corollary}
+
+\section{Associated Primes of Modules}
+
+\begin{definition}
+    Let $a\in A$ and $M$ and $A$-module. The homomorphism $a_M: M\to M$ given by $x\mapsto ax$ for all $x\in M$ is called the \emph{principal homomorphism}. We say that $a_M$ is \emph{locally nilpotent} if for each $x\in M$, there is an integer $n\in\N$ such that $a^n x = 0$.
+\end{definition}
+
+\begin{remark}
+    If $M$ is finitely generated, then $a_M$ is locally nilpotent if and only if it is nilpotent.
+\end{remark}
+
+\begin{proposition}
+    Let $a\in A$ and $M$ an $A$-module. Then $a_M$ is locally nilpotent if and only if $a\in\frakp$ for each $\frakp\in\Supp(M)$.
+\end{proposition}
+\begin{proof}
+    Suppose $a_M$ is locally nilpotent and $\frakp\in\Supp(M)$. Then, there is some $x\in M$ such that $x/1\ne 0$ in $M_\frakp$, that is, $\fraka = \Ann_A(x)\subseteq\frakp$. Since $a_M$ is locally nilpotent, there is a positive integer $n$ such that $a^n\in\fraka$ whence $a\in\frakp$. 
+
+    Conversely, suppose $a_M$ is not locally nilpotent whence there is some $x\in M$ such that $a^nx\ne0$ for all $n\in\N$. Let $\frakp$ be a prime ideal not intersecting $\{1,a,a^2,\dots\}$ and containing $\Ann_A(x)$\footnote{That we can do this is an easy application of Zorn's Lemma}. Then, $x/1\ne 0$ in $M_\frakp$ whence $M_\frakp\ne 0$ and $\frakp\in\Supp(M)$, but $a\notin\frakp$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    For an $A$-module $M$, a prime $\frakp\in\spec(A)$ is said to be \emph{associated} with $M$ if there is $x\in M$ such that $\frakp = \Ann_A(x)$. The set of all associated primes of a module $M$ is denoted by $\Ass(M)$.
+\end{definition}
+
+\begin{proposition}
+    If the poset 
+    \begin{equation*}
+        \Sigma = \{\Ann_A(x)\mid x\in M\backslash\{0\}\}
+    \end{equation*}
+    has a maximal element, then it is prime.
+\end{proposition}
+\begin{proof}
+    Let $\frakp$ be a maximal element of $\Sigma$ under inclusion. Let $a,b\in A$ with $ab\in\frakp$. If either $a$ or $b$ is zero, then, trivially, $a\in\frakp$ or $b\in\frakp$. Suppose now that both $a,b$ are nonzero. Let $x\in M$ be such that $\frakp = \Ann_A(x)$ and suppose $b\notin\frakp$. Then, $\frakp\subseteq\Ann_A(bx)\ne(1)$ and due to maximality, we must have $\frakp = \Ann_A(bx)$, and thus $a\in\frakp$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Modules over noetherings have associated primes.
+\end{corollary}
+
+\begin{lemma}
+    Let $A$ be a noethering and $M$ an $A$-module with $a\in A$. Then, $a_M$ is injective if and only if $a$ does not lie in any of the associated primes of $M$.
+\end{lemma}
+\begin{proof}
+    If $a_M$ is injective, then $a$ is not in the annihilator of any nonzero element, therefore, not an element of any associated prime. On the other hand, suppose $a_M$ is not injective. Then, there is some nonzero $x\in M$ such that $a\in\Ann_A(x)$. Consider the poset of all proper annihilators containing $\Ann_A(x)$. Since $A$ is a noethering, this has a maximal element, say $\frakp$. Note that $\frakp$ is also maximal in the poset of all proper annihilators whence is prime and hence $a$ is contained in an associated prime. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a noethering and $M$ and $A$-module. Then, every $\frakp\in\Supp(M)$ contains an associated prime.
+\end{lemma}
+\begin{proof}
+    If $\frakp\in\Supp(M)$, then there is some $x\in M$ such that $(Ax)_\frakp\ne0$, consequently, $(Ax)_\frakp$ has an associated prime, say $\frakq$. First, we contend that $\frakq\subseteq\frakp$. Suppose not, then there is some $a\in\frakq\backslash\frakp$. Since $\frakq$ is an associated prime, there is some $0\ne y/s\in (Ax)_\frakp$ such that $\frakq = \Ann_{A_\frakp}(y/s)$. In particular, $by/s = 0$. But $b/1$ is invertible in $A_\frakp$ whence $y/s = 0$, a contradiction. Thus $\frakq\subseteq\frakp$.
+
+    Next, we shall show that $\frakq$ is an associated prime of $M$. Since $A$ is a noethering, $\frakq$ is finitely generated, say by $b_1,\dots,b_n$. Then, $b_iy/s = 0$ for each $i$, consequently, there is some $s_i\notin\frakp$ such that $s_ib_iy = 0$. Let $t = s_1\cdots s_n\notin\frakp$. We contend that $\frakq = \Ann_A(ty)$. Obviously, $\frakq\subseteq\Ann_A(ty)$. On the other hand, if $b\in\Ann_A(ty)$, then $bty = 0$ whereby $by/s = 0$ and $b\in\frakq$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be a noethering and $M$ an $A$-module with $a\in A$. The following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $a_M$ is locally nilpotent. 
+        \item for each $\frakp\in\Ass(M)$, $a\in\frakp$.
+        \item for each $\frakp\in\Supp(M)$, $a\in\frakp$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    $(a)\implies(b)$ is immediate from the definition while $(c)\implies(a)$ has been proven. Both these implications do not require the noethering hypothesis. The implication $(b)\implies(c)$ has been proven above and requires the noethering hypothesis.
+\end{proof}
+
+\begin{lemma}
+    Let $N$ be a submodule of $M$. Then, 
+    \begin{equation*}
+        \Ass(N)\subseteq\Ass(M)\subseteq\Ass(N)\cup\Ass(M/N).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    It is obvious that $\Ass(N)\subseteq\Ass(M)$. Now, let $\frakp\in\Ass(M)$. Then, there is some $x\in M$ such that $\frakp = \Ann_A(x)$. If $x\in N$, then we are done. If not, then consider $Ax\cap N$. If $Ax\cap N = 0$, then, $Ax$ is isomorphic to the image of $Ax$ under the projection $M/N$. Therefore, $\frakp$ is an associated prime of some submodule of $M/N$. On the other hand, if $Ax\cap N\ne 0$, then there is some $y = ax\in N$ for some $a\in A$. 
+
+    Obviously $\frakp$ annihilates $y$. If $b\in A$ annihilates $y$, then $bax = 0$ whence $ba\in\frakp$. But since $y\ne 0$, $a\notin\frakp$ and thus $b\in\frakp$. This completes the proof.
+\end{proof}
+
+\section{Primary Decomposition of Modules}
+
+\begin{definition}
+    Let $M$ be an $A$-module. A submodule $Q$ of $M$ is said to be \emph{primary} if $Q\ne M$ and for each $a\in A$, the homomorphism $a_{M/Q}$ is either injective or nilpotent.
+\end{definition}
+
+Equivalently, the above definition implies that if $a_{M/Q}$ is a zero-divisor, then it is nilpotent.
+
+\begin{proposition}
+    Let $Q$ be a primary submodule of $M$. Then, 
+    \begin{equation*}
+        \frakp := \{a\in A\mid a_{M/Q}\text{ is nilpotent}\}
+    \end{equation*}
+    is a prime ideal. This is called the \textbf{prime belonging to} $Q$ and we say that $Q$ is \textbf{$\frakp$-primary}.
+\end{proposition}
+\begin{proof}
+    Let $ab\in\frakp$, that is, $(ab)_{M/Q}$ is nilpotent. If $a\notin\frakp$, then $a_{M/Q}$ is injective and thus $b_{M/Q}$ is nilpotent, i.e. $b\in\frakp$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    If $Q_1,\dots,Q_r$ are $\frakp$-primary submodules of $M$, then so is $Q_1\cap\dots\cap Q_r$.
+\end{proposition}
+\begin{proof}
+\end{proof}
