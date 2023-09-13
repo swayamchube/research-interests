@@ -1,4 +1,4 @@
-Throughout this chapter, we shall work in $\mathsf{ZF}^-$, which is $\mathsf{ZF}$ without the axiom of foundation.
+\textbf{\textcolor{red}{Throughout this chapter, we shall work in $\mathsf{ZF}^-$, which is $\mathsf{ZF}$ without the axiom of foundation.}}
 \begin{definition}
     By transfinite recursion, deifne $R(\alpha)$ for each $\alpha\in\ON$ by 
     \begin{enumerate}[label=(\alph*)]
@@ -102,3 +102,174 @@ Throughout this chapter, we shall work in $\mathsf{ZF}^-$, which is $\mathsf{ZF}
 \end{proof}
 
 \section{Well Founded Relations}
+
+\begin{definition}
+    A relation $R$ is \emph{well-founded} on a set $A$ if 
+    \begin{equation*}
+        \forall X\subseteq A\left[X\ne\emptyset\implies\exists y\in X\left(\neg\exists z\in X\left(z R y\right)\right)\right].
+    \end{equation*}
+\end{definition}
+
+For example, if $\langle A, R\rangle$ is a well-ordering, then $R$ is well-founded on $A$.
+
+\begin{lemma}
+    If $A\in\WF$, then $\in$ is well-founded on $A$.
+\end{lemma}
+\begin{proof}
+    Let $X\subseteq A$ be nonempty and $\alpha = \min\{\rank(y)\mid y\in X\}$. Choose some $y\in X$ with $\rank(y) = \alpha$. Then $y$ is $\in$-minimal in $X$.
+\end{proof}
+
+\begin{lemma}
+    If $A$ is transitive and $\in$ is well-founded on $A$, then $A\in\WF$.
+\end{lemma}
+\begin{proof}
+    Suppose not. Then equivalently, $A\not\subseteq\WF$, whence $A\backslash\WF$ is nonempty. Let $y\in A\backslash\WF$ be the $\in$-least element of $A\backslash\WF$. If $z\in y$, then $z\in A$ due to the transitivity of $A$ but on the other hand, $z\notin A\backslash\WF$ lest one contradicts the minimality of $y$. Therefore, $z\in\WF$. Consequently, $y\subseteq\WF$ whence $y\in\WF$, a contradiction.
+\end{proof}
+
+\begin{definition}
+    Let 
+    \begin{equation*}
+        \bigcup^0 A = A,
+    \end{equation*}
+    and for each $0 < n < \omega$, define, recursively, 
+    \begin{equation*}
+        \bigcup^{n + 1} A = \bigcup\left(\bigcup^n A\right).
+    \end{equation*}
+    Finally, set 
+    \begin{equation*}
+        \trcl(A) := \bigcup\left\{\bigcup^n A\mid n\in\omega\right\}.
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    Let $A$ be a set. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $A\subseteq\trcl(A)$.
+        \item $\trcl(A)$ is transitive. 
+        \item If $A\subseteq T$, and $T$ is transitive, then $\trcl(A)\subseteq T$. 
+        \item If $A$ is transitive, then $\trcl(A) = A$. 
+        \item $\trcl(A) = A\cup\bigcup\{\trcl(x)\mid x\in A\}$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Trivial. 
+    \item If $x\in\trcl(A)$, then there is some $n$ such that $x\in\bigcup^n A$, therefore $x\subseteq\bigcup^{n + 1}A$, whence $x\subseteq\trcl(A)$. Thus $\trcl(A)$ is transitive.
+    \item We shall show by induction on $n$ that $\bigcup^n A\subseteq T$. The base case is given to begin with. Suppose $\bigcup^n A\subseteq T$. Then, due to transitivity, $\bigcup^{n + 1}A = \bigcup\left(\bigcup^n A\right)\subseteq T$. The conclusion follows.
+    \item Follows from (a) and (c) by taking $T = A$.
+    \item First, note that if $x\in A$, then $x\in\trcl(A)$ and due to transitivity $x\subseteq\trcl(A)$. From (c), we have $\trcl(x)\subseteq\trcl(A)$. Let 
+    \begin{equation*}
+        T = A \cup\bigcup\{\trcl(x)\mid x\in A\}.
+    \end{equation*}
+    Then, it is easy to see that $T$ must be transitive and from what we concluded earlier, $T\subseteq\trcl(A)$ but since $A\subseteq T$, from (c), we must have $\trcl(A)\subseteq T$ whence $\trcl(A) = T$.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    For any set $A$, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $A\in\WF$.
+        \item $\trcl(A)\in\WF$.
+        \item $\in$ is well-founded on $\trcl(A)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\section{The Axiom of foundation}
+
+Recall the axiom of foundation 
+\begin{equation*}
+    \forall x\left(x\ne\emptyset\implies\exists y\left(y\in x\wedge\neg\exists z\left(z\in x\wedge z\in y\right)\right)\right).
+\end{equation*}
+or equivalently, 
+\begin{equation*}
+    \forall x\left(x\ne\emptyset\implies\exists y\left(y\in x\wedge y\cap x = \emptyset\right)\right).
+\end{equation*}
+
+\begin{theorem}
+    The following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item the Axiom of Foundation. 
+        \item $\forall A(\in\text{ is well-founded on }A)$
+        \item $\V = \WF$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    That (a) and (b) are equivalent is immediate from the definition of well-foundedness. Let $A\in\V$. Then, $\in$ is well founded on $A$ and thus on $\trcl(A)$, consequently, $A\in\WF$ and thus $\V = \WF$. The converse is trivial.
+\end{proof}
+
+\todo{Add picture of the universe}
+
+\section{Induction and Recursion on Well-Founded Relations}
+
+We extend the notion of well-foundedness to classes as follows. 
+\begin{definition}
+    $\mathbf R$ is well founded on $\mathbf A$ if and only if 
+    \begin{equation*}
+        \forall X\subseteq\mathbf A\left[X\ne\emptyset\implies\exists y\in X\left(\neg\exists z\in X(z\mathbf R y)\right)\right].
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    $\mathbf R$ is \emph{set-like} on $\mathbf A$ if for all $x\in\mathbf A$, $\{y\in \mathbf A\mid y\mathbf R x\}$ is a set. If $\mathbf R$ is set-like on $\mathbf A$, then 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\pred(\mathbf A, x,\mathbf R) = \{y\in\mathbf A\mid y\mathbf R x\}$. 
+        \item $\pred^0(\mathbf A, x,\mathbf R) = \pred(\mathbf A, x, \mathbf R)$. 
+        \item $\pred^{n + 1}(\mathbf A, x,\mathbf R) = \bigcup\{\pred(\mathbf A, y, \mathbf R)\mid y\in\pred^n(\mathbf A, x, \mathbf R)\}$. 
+        \item $\operatorname{cl}(\mathbf A, x,\mathbf R) = \bigcup\{\pred^n(\mathbf A, x,\mathbf R)\mid n\in\omega\}$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    If $\mathbf R$ is set-like on $A$ and $x\in\mathbf A$, then for each $y\in\Cl(\mathbf A, x,\mathbf R)$, $\pred(\mathbf A, y, \mathbf R)\subseteq\Cl(\mathbf A, x,\mathbf R)$.
+\end{lemma}
+\begin{proof}
+    There is some nonnegative integer $n$ such that $y\in\pred^n(\mathbf A, y,\mathbf R)$. Then, $$\pred(\mathbf A, y, \mathbf R)\subseteq\pred^{n + 1}(\mathbf A, x,\mathbf R).$$ The conclusion follows.
+\end{proof}
+
+\begin{theorem}
+    If $\mathbf R$ is well-founded and set-like on $\mathbf A$, then every non-empty subclass $\mathbf X$ of $\mathbf A$ has an $\mathbf R$-minimal element.
+\end{theorem}
+\begin{proof}
+    Pick some $x\in\mathbf X$. If this $\mathbf R$-minimal, then we are done. If not, then consider $\mathbf X\cap\Cl(\mathbf A, x,\mathbf R)$ is a nonempty \emph{subset} of $A$, since $\Cl(\mathbf A, x, \mathbf R)$ is a set. This means that it has an $\mathbf R$-minimal element, say $y$. From the previous lemma, $y$ must be $\mathbf R$-minimal in $\mathbf X$.
+\end{proof}
+
+\begin{remark}
+    Notice the similarity of the above with \thref{thm:transfinite-induction}. This in particular means that we can apply transfinite induction on well-founded set-like relations.
+\end{remark}
+
+\begin{theorem}[Well-Founded Transfinite Recursion]
+    Assume $\mathbf R$ is well-founded and set-like on $\mathbf A$. If $\mathbf F: \mathbf A\times\mathbf V\to\mathbf V$, then there is a unique $\mathbf G:\mathbf A\to\mathbf V$ such that 
+    \begin{equation*}
+        \forall x\in\mathbf A\left[\mathbf G(x) = \mathbf F\left(x, \mathbf G\restrict\pred(\mathbf A, x,\mathbf R)\right)\right].
+    \end{equation*}
+\end{theorem}
+
+\begin{definition}
+    If $\mathbf R$ is well-founded and set-like on $\mathbf A$, define 
+    \begin{equation*}
+        \rank(x,\mathbf A,\mathbf R) = \sup\{\rank(y,\mathbf A,\mathbf R) + 1\mid y\mathbf R x\wedge y\in\mathbf A\}.
+    \end{equation*}
+\end{definition}
+
+\begin{definition}\thlabel{def:mostowski-collapsing-function}
+    Let $\mathbf R$ be well-founded and set-like on $\mathbf A$. Define the \emph{Mostowski collapsing function}, $\mathbf G$ of $\mathbf A, \mathbf R$ by 
+    \begin{equation*}
+        \mathbf G(x) = \{\mathbf G(y)\mid y\in\mathbf A\wedge y\mathbf R x\}.
+    \end{equation*}
+    The \emph{Mostowski collapse}, $\mathbf M$ of $\mathbf A,\mathbf R$ is defined to be the range of $\mathbf G$.
+\end{definition}
+
+\begin{definition}
+    $\mathbf R$ is said to be \emph{extensional} on $\mathbf A$ if 
+    \begin{equation*}
+        \forall x,y\in\mathbf A\left(\forall z\in\mathbf A\left(z\mathbf R x\iff z\mathbf R y\right)\implies x = y\right).
+    \end{equation*}
+    Informally, this is equivalent to saying that the Axiom of Extensionality is true in $\mathbf A$ if $\in$ is interpreted as $\mathbf R$.
+\end{definition}
+
+\begin{theorem}[Mostowski Collapsing Theorem]\thlabel{thm:mostowski-collapsing}
+    Suppose $\mathbf R$ is well-founded, set-like, and extensional on $\mathbf A$, then there is a transitive class $\mathbf M$ and a bijective map $\mathbf G: \mathbf A\to\mathbf R$ such that $\mathbf G$ is an isomorphism between $(\mathbf A,\mathbf R)$ and $(\mathbf M,\in)$. Furthermore, $\mathbf M$ and $\mathbf G$ are unique.
+\end{theorem}
