@@ -141,7 +141,7 @@ The set $C$ as defined above is called the \textit{integral closure of $A$ in $B
     Due to \thref{prop:int-ext-localization}, $B/\frakq$ is integral over a copy of $A/\frakp$. The conclusion now follows from the above proposition.
 \end{proof}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:unique-prime-lying-over}
     Let $A\subseteq B$ be an integral extension. Let $\frakq,\frakq'\subseteq B$ be prime ideals of $B$ such that $\frakq\subseteq\frakq'$. If $\frakq\cap A = \frakq'\cap A = \frakp$, then $\frakq = \frakq'$.
 \end{proposition}
 \begin{proof}
@@ -258,6 +258,52 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
     \end{equation*}
     with $b_i\in\sqrt{\frakp_2} = \frakp_2$. Since $s = y/x$ in $Q(B)$, the minimal polynomials of $s$ and $y$ over $K$ must have the same degree, that is, $r = r'$ and $b_i = x^{r - i}a_i$ for $0\le i\le r - 1$. If $x\notin\frakp_2$, then $a_i\in\frakp_2$ for $0\le i\le r - 1$, which would imply $s^r\in\frakp_2B\subseteq\frakp_1B\subseteq\frakq_1$, i.e. $s\in\frakq_1$, which is absurd. Thus, $x\in\frakp_2$ whence $\frakp_2^{ec}\subseteq\frakp_2$, which completes the proof.
 \end{proof}
+
+\section{Field Theory Arguments}
+
+\begin{definition}
+    Let $V$ be a finite dimensional vector space over a field $k$. A \emph{bilinear form} on $V$ is a $k$-bilinear map $\psi: V\times V\to k$. The form $\psi$ is said to be \emph{non-degenerate} if the \emph{left kernel},
+    \begin{equation*}
+        \{v\in V\mid\psi(v, x) = 0\text{ for all }x\in V\} = 0.
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    If $e_1,\dots,e_n$ is a basis for $V$ and $\psi$ a non-degenerate bilinear form, then there is a basis $f_1,\dots,f_n$ of $V$ such that $\psi(f_i, e_j) = \delta_{ij}$. We shall call this the dual basis of $\{e_i\}$ with respect to $\psi$.
+\end{lemma}
+\begin{proof}
+    Consider the map $\Phi: V\to V^\vee$ given by 
+    \begin{equation*}
+        \Phi(v) = \psi(v,\cdot).
+    \end{equation*}
+    This is an injective map since $\psi$ is non-degenerate and thus, an isomorphism. Let $\phi_i: V\to k$ be the map defined on basis elements by $\phi_i(e_j) = \delta_{ij}$. Due to surjectivity, there is some $f_i\in V$ such that $\Phi(f_i) = \phi_i$. The $f_i$'s must be linearly independent since the $\phi_i$'s are linearly independent as elements of $V^\vee$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be an integrally closed integral domain with field of fractions $K$, $L/K$ a separable extension of degree $m$ and $B$ the integral closure of $A$ in $L$ Then, there are free $A$-submodules $M$ and $M'$ of $L$ such that 
+    \begin{equation*}
+        M\subseteq B\subseteq M'.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    It is quite obvious that there is an integral basis for $L$ over $K$, i.e. a $K$-basis $\{\beta_1,\dots,\beta_m\}$ with $\beta_i\in B$ for $1\le i\le m$. Let $M = A\beta_1 + \dots + A\beta_m\subseteq B$. Consider the bilinear form $\langle\cdot,\cdot\rangle: L\times L\to K$ given by 
+    \begin{equation*}
+        \langle x,y\rangle = \Tr^L_K(xy),
+    \end{equation*}
+    which is a non-degenerate bilinear form and thus admits a dual basis of $\{\beta_i\}$ with respect to $\langle\cdot,\cdot\rangle$, say $\{\beta_i'\}$. Let $M' = A\beta_1' + \dots + A\beta_m'$. We shall show that $B\subseteq M'$. For any $b\in B$, there are $b_i$'s such that 
+    \begin{equation}
+        b = b_1\beta_1' + \dots + b_m\beta_m'.
+    \end{equation}
+    Then, 
+    \begin{equation*}
+        b_i = \langle b, \beta_i\rangle = \Tr^L_K(b\beta_i)\in A,
+    \end{equation*}
+    since $b\beta_i$ is integral over $A$ and $A$ is integrally closed. This completes the proof.
+\end{proof}
+
+\begin{corollary}\thlabel{corr:noetherian-pid-free}
+    With the above setup, if $A$ is noetherian, then so is $B$. On the other hand, if $A$ is a PID, then $B$ is a free $A$-module.
+\end{corollary}
 
 \section{Noether's Normalization Lemma}
 
