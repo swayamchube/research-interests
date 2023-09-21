@@ -1,3 +1,5 @@
+\section{Hilbert's Theorems}
+
 \begin{definition}
     A Galois extension $K/k$ is said to be \emph{cyclic} if $\Gal(K/k)$ is a cyclic group. Similarly, it is said to be \emph{abelian} if $\Gal(K/k)$ is abelian.
 \end{definition}
@@ -52,6 +54,24 @@
     this completes the proof.
 \end{proof}
 
+\begin{lemma}\thlabel{lem:cyclic-primitive-eigenvalue}
+    Let $K/k$ be a cyclic extension of degree $n$ with $\Gal(K/k) = \langle\sigma\rangle$ and suppose $k$ contains a primitive $n$-th root of unity, $\zeta$. Then, $\zeta$ is an eigenvalue of $\sigma$.
+\end{lemma}
+\begin{proof}
+    Note that $N^K_k(\zeta^{-1}) = 1$. Due to \thref{thm:hilbert-90} there is $\alpha\in K$ such that $\alpha/\sigma(\alpha) = \zeta^{-1}$ and the conclusion follows.
+\end{proof}
+
+\begin{theorem}[Structure of Cyclic Extensions]\thlabel{thm:structure-cyclic-extension}
+    Let $K/k$ be a cyclic extension of degree $n$ and suppose $k$ contains a primitive $n$-th root of unity. Then, $K = k(\alpha)$ for some $\alpha\in K$ such that $\alpha^n\in k$.
+\end{theorem}
+\begin{proof}
+    Let $\Gal(K/k) =\langle\sigma\rangle$. Due to \thref{lem:cyclic-primitive-eigenvalue}, there is $\alpha\in K$ such that $\sigma(\alpha) = \zeta\alpha$. Then, $\alpha$ has $n$-distinct conjugates in $K$ whence $K = k(\alpha)$. Now, 
+    \begin{equation*}
+        \sigma(\alpha^n) = \sigma(\alpha)^n = \alpha^n.
+    \end{equation*}
+    Thus, $\alpha^n$ is fixed under the action of $\Gal(K/k)$, that is, $\alpha^n\in k$. This completes the proof.
+\end{proof}
+
 \begin{theorem}[Additive Hilbert's Theorem 90]
     Let $K/k$ be a cyclic Galois extension with $\Gal(K/k) = \langle\sigma\rangle$ and $\beta\in K$. Then $\Tr^K_k(\beta) = 0$ iff there is $\alpha\in K$ such that $\beta = \alpha - \sigma(\alpha)$.
 \end{theorem}
@@ -75,7 +95,7 @@
     \begin{enumerate}[label=(\alph*)]
         \item Let $K/k$ be a cyclic extension of degree $p$. Then there is $\alpha\in K$ such that $K = k(\alpha)$ and $\alpha$ is a root of $f(x) = x^p - x - a$ for some $a\in k$. Further, $K$ is the splitting field of $f(x)$ over $k$.
 
-        \item 
+        \item Conversely, if $a\ne b^p - b$ for some $b\in k$, and $K$ is the splitting field of $f(x) = x^p - x - a\in k[x]$, then $f(x)$ is irreducible and $K/k$ is cyclic of degree $p$.
     \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -92,6 +112,156 @@
     \end{equation*}
     Thus, $p\le [k(\alpha):k]_s\le[k(\alpha):k]\le[K:k] = p$ whence $[k(\alpha):k] = p$ and $K = k(\alpha)$.
 
-    \item \qedhere
+    \item Let $\alpha\in K$ be a root of $f(x)$. Then, so is $\alpha + 1$. Hence, all the roots of $f(x)$ in $K$ are given by 
+    \begin{equation*}
+        \{\alpha,\alpha + 1,\dots,\alpha + p - 1\},
+    \end{equation*}
+    whence $K = k(\alpha)$. Suppose $f(x) = g_1(x)\cdots g_r(x)$ where $g_1,\dots,g_r\in k[x]$ are irreducible polynomials. If $r$ is a root of some $g_i$, then $r$ is a root of $f$ and thus $K = k(r)$. In particular, $\deg g_i = [K:k]$. This gives us $r\deg g_1 = p$ and since $f(x)$ does not have a root in $k$, we must have $r = 1$ and $\deg g_1 = p$. That is, $f(x)$ is irreducible.
+
+    Finally, $\Gal(K/k) = \langle\sigma\rangle$ where $\sigma(\alpha) = \alpha + 1$. This completes the proof.\qedhere
 \end{enumerate}
+\end{proof}
+
+\subsection{Lagrange Resolvents}
+
+Let $p > 0$ be a prime number and $k$ a field such that $\chr k = 0$ or $\gcd(\chr k, p) = 1$. Suppose further, that $\mu_p\subseteq k$, that is, $k$ contains a primitive $p$-th root of unity. Now let $K/k$ be a cyclic extension of order $p$. Using \thref{thm:structure-cyclic-extension}, there is some $a\in k$ such that $K = k(\sqrt[p]{a})$. We shall explicitly find such an $a\in k$.
+
+Let $\alpha\in K$ be primitive for the extension $K/k$ and $\Gal(K/k) = \langle\sigma\rangle$. If $m_\alpha(x)$ is the minimum polynomial of $\alpha$ over $k$, then the roots of $m_\alpha$ are given by $\{\alpha,\sigma(\alpha),\dots,\sigma^{p - 1}(\alpha)\}$ and of course, are distinct. Let $\mu_p = \{z_1,\dots,z_p\}\subseteq k$. Define 
+\begin{equation*}
+    (z_i, \alpha) := \sum_{j = 0}^{p - 1}\sigma^j(\alpha)z_i^{j}.
+\end{equation*}
+These are called the \emph{Lagrange Resolvents}.
+
+Then, 
+\begin{equation*}
+    \begin{bmatrix}
+        (z_1,\alpha)\\\vdots\\(z_p,\alpha)
+    \end{bmatrix}
+    = 
+    \underbrace{
+    \begin{bmatrix}
+        1 & z_1 & \dots & z_1^{p - 1}\\
+        \vdots & \vdots & \ddots & \vdots \\
+        1 & z_p & \dots & z_p^{p - 1}
+    \end{bmatrix}
+    }_{V(z_1,\dots,z_p)}
+    \begin{bmatrix}
+        \alpha\\\vdots\\\sigma^{p - 1}(\alpha)
+    \end{bmatrix}.
+\end{equation*}
+The Vandermonde determinant, $\det V(z_1,\dots,z_p)$ is nonzero and hence, the matrix is invertible. Note that 
+\begin{equation*}
+    \sigma((z_i,\alpha)) = z_i^{-1} (z_i,\alpha),
+\end{equation*}
+whence $(z_i,\alpha)$ is an eigenvector corresponding to the eigenvalue $z_i^{-1}$. In particular, $(z_i,\alpha)^p$ is invariant under $\sigma$ and thus lies in the base field $k$. This shows that $K = k((z_i,\alpha))$.
+
+\section{Solvability by Radicals}
+
+\begin{definition}
+    An extension $K/k$ is said to be \emph{radical} if there is a tower 
+    \begin{equation*}
+        k = F_0\subseteq F_1\subseteq\cdots\subseteq F_n = K
+    \end{equation*}
+    where $F_{i + 1}/F_i$ is obtained by adjoining an $n_i$-th root of an element in $F_i$. Each $F_{i + 1}/F_i$ is called a \emph{simple radical extension}.
+\end{definition}
+
+\begin{definition}
+    A polynomial $f(x)\in k[x]$ is said to be \emph{solvable by radicals} if any splitting field $K$ of $f$ over $k$ is contained in a radical extension of $k$.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:radical-in-galois-radical}
+    Let $E/k$ be a finite separable radical extension. Then, the normal closure, $K$ of $E$ is a radical Galois extension.
+\end{lemma}
+\begin{proof}
+    Fix some algebraically closed field $k^a$ containing $k$ and let 
+    \begin{equation*}
+        k = F_0\subseteq F_1\subseteq\dots\subseteq F_m = E
+    \end{equation*}
+    be a tower of simple radical extensions. Let $\{\id = \sigma_1,\dots,\sigma_n\}$ be the distinct $k$-embeddings of $E/k$ into $k^a$. Then, note that $\sigma_j(F_{i + 1})/\sigma_j(F_i)$ is also a simple radical extension. Thus, we have a tower of successive simple radical extensions
+    \begin{equation*}
+        k = \sigma_1(F_0)\subseteq\dots\subseteq\sigma_1(F_m)\subseteq\sigma_1(F_m)\sigma_1(F_0)\subseteq\dots\subseteq\sigma_1(F_m)\dots\sigma_n(F_m) = K.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}[Galois]
+    Let $\chr k = 0$ and $f(x)\in k[x]$. Then, $f(x)$ is solvable by radicals over $k$ if and only if $G_f$ is a solvable group.
+\end{theorem}
+\begin{proof}
+    $\implies$ Let $K$ be the splitting field of $f$ over $k$, which is contained in a radical extension $E$. Due to \thref{lem:radical-in-galois-radical}, we may suppose that $E/k$ is Galois. There is a tower of extensions 
+    \begin{equation*}
+        k = F_0\subseteq\dots\subseteq F_r = E.
+    \end{equation*}
+    with $F_{i + 1} = F_i\left(\sqrt[n_{i + 1}]{a_{i + 1}}\right)$. Let $n = n_1\cdots n_{r}$ and $\zeta$ a primitive $n$-th root of unity. Note that $E(\zeta) = E\cdot k(\zeta)$, a compositium of two Galois extensions over $k$ whence is a Galois extension of $k$. Denote by $M_i = F_i(\zeta)$. Then, we have 
+    \begin{equation*}
+        k \subseteq M_0\subseteq\dots\subseteq M_r = E(\zeta).
+    \end{equation*}
+    Note that $M_i$ contains a primitive $n_{i + 1}$-th root of unity (which is a suitable power of $\zeta$) whence $\Gal(M_{i + 1}/M_i)$ is cyclic. Consider the chain of subgroups 
+    \begin{equation*}
+        \Gal(M_r/k)\supseteq\Gal(M_r/M_0)\supseteq\dots\supseteq\Gal(M_r/M_{r - 1})\supseteq\{1\}.
+    \end{equation*}
+    Each successive quotient is 
+    \begin{equation*}
+        \Gal(M_r/M_i)/\Gal(M_r/M_{i + 1})\cong\Gal(M_{i + 1}/M_i)\quad\text{ and }\quad\Gal(M_r/k)/\Gal(M_r/M_0)\cong\Gal(M_0/k),
+    \end{equation*}
+    all of which are abelian. Thus, $\Gal(M_r/k)$ is solvable, consequently, 
+    \begin{equation*}
+        G_f = \Gal(K/k)\cong\Gal(M_r/k)/\Gal(M_r/K),
+    \end{equation*}
+    is solvable.
+
+    $\impliedby$ Let $|G_f| = n$ and $\zeta$ a primitive $n$-th root of unity in $k^a$. Let $L = K(\zeta)$ and $E = k(\zeta)$. Then, $L/E$ is a Galois extension with Galois group isomorphic to a subgroup of $\Gal(K/k)$, in particular, $\Gal(L/E)$ is solvable. Thus, there is a series 
+    \begin{equation*}
+        \Gal(L/E) = H_0 \supseteq H_1\supseteq\cdots\supseteq H_m = \{1\}
+    \end{equation*}
+    with $H_{i}/H_{i + 1}$ abelian. Let $F_i = L^{H_i}$. This gives a filtration 
+    \begin{equation*}
+        E = F_0\subseteq F_1\subseteq\dots\subseteq F_m = L
+    \end{equation*}
+    wherein each extension $F_{i + 1}/F_i$ is abelian with degree $n_i$ dividing $n$. Let $\Gal(F_{i + 1}/F_i) = P$, an abelian group whence, due to the structure theorem, admits a filtration 
+    \begin{equation*}
+        P = Q_0\supseteq Q_1\supseteq\dots\supseteq Q_r = \{1\}.
+    \end{equation*}
+    such that $Q_i/Q_{i + 1}$ is cyclic. Let $S_i = P^{Q_i}$. Then, we have a filtration 
+    \begin{equation*}
+        F_i = S_0\subseteq S_1\subseteq\dots\subseteq S_r = F_{i + 1}
+    \end{equation*}
+    where each extension $S_{j + 1}/S_j$ is cyclic with order dividing $n$. But since $S_j$ contains a primitive $n$-th root of unity, the extension $S_{j + 1}/S_j$ must be a simple radical extension. In particular, $F_{i + 1}/F_i$ is a radical extension. Consequently, $L/E$ is a radical extension. Finally, $E/k$ itself is a simple radical extension and hence, $L/k$ is a radical extension containing $K/k$. This completes the proof.
+\end{proof}
+
+\section{Kummer Extensions}
+
+\begin{definition}
+    A finite algebraic extension $K/k$ is said to be a \emph{Kummer extension} if $\mu_n\subseteq F$, there is $n\in\N$ and $a_i\in k$ for $1\le i\le m$ such that $K = k(\sqrt[n]{a_1},\dots,\sqrt[n]{a_m})$. A Kummer extension is said to be a \emph{simle Kummer extension} if $m = 1$.
+\end{definition}
+
+\begin{theorem}
+    Let $\mu_n\subseteq k$ and $a\in k^\times$. Let $b\in k^a$ such that $b^n = a$. Then, $\Gal(k(b)/k)$ is cyclic of order $|\overline a|$ where $\overline a$ is the coset of $a$ in $k^\times/(k^\times)^n$.
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+
+\begin{remark}
+    Due to \thref{thm:structure-cyclic-extension}, every simple Kummer extension $K/k$ with $[K:k] = m$ can be obtained by adjoining th $m$-th root of some element in $k$. This makes our analysis a lot easier.
+\end{remark}
+
+\begin{lemma}
+    Let $\mu_n\subseteq k$ and $a,b\in k^\times$ such that $[k(\sqrt[n]{a}): k] = [k(\sqrt[n]{b}) : k] = n$. Then, these extensions are $k$-isomorphic if and only if $\langle\overline a\rangle = \langle\overline b\rangle$ in $k^\times/(k^\times)^n$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    Let $K/k$ be a finite abelian extension and suppose that $\mu_n\subseteq k$. Then, $\Gal(K/k)$ has exponent $n$ if and only if there are $b_1,\dots,b_m\in k^\times$ such that $K = k(\sqrt[n]{b_1},\dots,\sqrt[n]{b_m})$.
+\end{theorem}
+\begin{proof}
+    $\implies$ Due to the structure thoerem, $\Gal(K/k)\cong\Z/n_1\Z\oplus\dots\oplus\Z/n_r\Z$ where $n_i\mid n$. Let $H_i$ denote the subgroup corresponding to 
+    \begin{equation*}
+        \Z/n_1\Z\oplus\dots\oplus\widehat{\Z/n_i\Z}\oplus\dots\oplus\Z/n_r\Z
+    \end{equation*}
+    and $F_i = K^{H_i}$. Then, $\bigcap_{i = 1}^r H_i = \{1\}$ and $\Gal(F_i/k)\cong\Z/n_i\Z$. Due to \thref{thm:structure-cyclic-extension}, there is some $b_i\in k^\times$ such that $F_i = k(\sqrt[n]{b_i})$. Finally, since $K = F_1\cdots F_r$, the conclusion follows.
+
+    $\impliedby$ Let $F_i = k(\sqrt[n]{b_i})$. Then, $\Gal(F_i/k)$ is cyclic of exponent $n$. Let $\rho_i: \Gal(K/k)\onto\Gal(F_i/k)$ denote the restriction map. It is not hard to see that the map $\Phi:\Gal(K/k)\to\prod_{i = 1}^m\Gal(F_i/k)$ given by $\Phi = \rho_1\times\dots\times\rho_m$ is an injection and thus $\Gal(K/k)$ is abelian of exponent $n$. This completes the proof.
 \end{proof}

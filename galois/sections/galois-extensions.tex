@@ -86,10 +86,12 @@ That the aforementioned set forms a field is trivial.
 \end{definition}
 
 \begin{theorem}
-    Let $K/k$ be finite Galois and $F/k$ an arbitrary extension. Suppose $K, F$ are subfields of some larger field. Then $KF$ is Galois over $F$, and $K$ is Galois over $K\cap F$. Let $H = \Gal(KF/F)$ and $G = \Gal(K/k)$. For all $\sigma\in H$, the restriction of $\sigma$ to $K$ is in $G$ and the restriction map $\sigma\mapsto\sigma\mid_K$ gives an isomorphism of $H$ on $\Gal(K/K\cap F)$.
+    Let $K/k$ be finite Galois and $F/k$ an arbitrary extension. Suppose $K, F$ are subfields of some larger field. Then $KF$ is Galois over $F$, and $K$ is Galois over $K\cap F$. Let $H = \Gal(KF/F)$ and $G = \Gal(K/k)$. For all $\sigma\in H$, the restriction of $\sigma$ to $K$ is in $G$ and the restriction map $\sigma\mapsto\sigma\mid_K$ gives an isomorphism of $H$ on $\Gal(K/K\cap F)$. Finally, if $F/k$ is Galois, then so are $KF/k$ and $K\cap F/k$.
 \end{theorem}
 \begin{proof}
-    That $KF/F$ and $K/K\cap F$ are Galois follow from \thref{thm:normal-properties} and \thref{thm:sep-distinguished-class}. Let $\chi: H\to G$ denote the restriction map. Note that $\ker\chi$ contains all $\sigma\in H$ such that $\sigma$ fixes $K$. But since $\sigma$ implicitly fixes $F$, it must also fix $KF$ and is therefore the unique identity automorphism. As a result, $\ker\chi$ is trivial and $\chi$ is injective. Let $H' = \chi(H)\subseteq G$. We shall show that $K^{H'} = K\cap F$. Indeed, if $\alpha\in K^{H'}$, then $\alpha$ is also fixed by all elements of $H$, since $\chi$ is only the restriction map. As a result, $\alpha\in F$, consequently $\alpha\in K\cap F$. We are now done due to \thref{thm:ftgt}.
+    That $KF/F$ and $K/K\cap F$ are Galois follow from \thref{thm:normal-properties} and \thref{thm:sep-distinguished-class}. Let $\chi: H\to G$ denote the restriction map. Note that $\ker\chi$ contains all $\sigma\in H$ such that $\sigma$ fixes $K$. But since $\sigma$ implicitly fixes $F$, it must also fix $KF$ and is therefore the unique identity automorphism. As a result, $\ker\chi$ is trivial and $\chi$ is injective. Let $H' = \chi(H)\subseteq G$. We shall show that $K^{H'} = K\cap F$. Indeed, if $\alpha\in K^{H'}$, then $\alpha$ is also fixed by all elements of $H$, since $\chi$ is only the restriction map. As a result, $\alpha\in F$, consequently $\alpha\in K\cap F$. The conclusion follows from \thref{thm:ftgt}.
+
+    Now, suppose $F/k$ is Galois. Then, due to \thref{thm:normal-properties}, both $KF$ and $K\cap F$ are normal over $k$ whence are Galois.
 \end{proof}
 
 \section{Normal Basis Theorem}
@@ -193,4 +195,38 @@ Once we have a normal element, we can easily find the primitive (and sometimes n
     \end{equation*}
     By our choice of $\tau_i$'s, the cosets $\tau_i H$ and $\tau_j H$ are pairwise distinct, consequently, the sum written above is essentially of linearly independent elements, $\sigma(\alpha)$ where $\sigma$ ranges over $G$. Therefore, $c_1 = \dots = c_m = 0$. This completes the proof.\qedhere
 \end{enumerate}
+\end{proof}
+
+\section{Galois Groups of Polynomials}
+
+\begin{definition}
+    Let $f(x)\in k[x]$ be a polynomial and $k^a$ an algebraic closure containing $k$. Let $f$ have roots $r_1,\dots,r_n\in k^a$. Define the discriminant of $f$ as 
+    \begin{equation*}
+        \disc(f) := \left(\prod_{i < j}(r_i - r_j)\right)^2.
+    \end{equation*}
+    The Galois group of $f$, denoted $G_f$ is defined as $\Gal(k(r_1,\dots,r_n)/k)$.
+\end{definition}
+
+The group $G_f$ permutes $\{r_1,\dots,r_n\}$ whence it can be embedded in $\mathfrak S_n$. Henceforth, we shall identify $G_f$ with its image under this embedding.
+
+\begin{proposition}
+    $\disc(f)\in k$.
+\end{proposition}
+\begin{proof}
+    Since the Galois group permutes $\{r_i\mid 1\le i\le n\}$, $\disc(f)$ is the fixed field of the action of the entire Galois group on $k(r_1,\dots,r_n)$ which is $k$.
+\end{proof}
+
+\begin{theorem}
+    Let $\chr k\ne 2$ and $f(x)\in k[x]$ a separable polynomial. Then, $G_f\subseteq\mathfrak A_n$ if and only if $\disc(f)$ is a perfect square in $k$.
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        \delta = \prod_{i < j}(r_i - r_j).
+    \end{equation*}
+    Then, for each $\sigma\in G_f$, $\sigma(\delta) = \sgn(\sigma)\delta$. Thus, 
+    \begin{equation*}
+        G_f\subseteq\mathfrak A_n\iff \sigma(\delta) = \delta\quad\forall\sigma\in G_f\iff \delta\in k.
+    \end{equation*}
+    This completes the proof.
 \end{proof}
