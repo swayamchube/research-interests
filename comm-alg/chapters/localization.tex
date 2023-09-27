@@ -422,3 +422,42 @@ From the above proposition, we see that ``$\frakN(A) = (0)$'' is a local propert
     \end{equation*}
 \end{enumerate}
 \end{proof}
+
+\subsection*{Place This Somewhere}
+
+\begin{lemma}
+    Let $M$ be a finitely generated $A$-module. Let $\fraka\unlhd A$ be an ideal and $x_1,\dots,x_n\in M$ generate $M/\fraka M$. Then, there is $f\in 1 + \fraka$ such that $x_1/1,\dots,x_n/1$ generate $M_f$ as an $A_f$-module.
+\end{lemma}
+\begin{proof}
+    Consider the map $\phi: A^n\to M$ mapping $e_i$ to $x_i$. Note that $\coker \phi\otimes_A A/\fraka = 0$ and thus, due to \thref{corr:stronger-nakayama}, there is some $f\in 1 + \fraka$ such that $f\coker\phi = 0$. The conclusion now follows.
+\end{proof}
+
+\begin{lemma}
+    Let $M$ be a finitely generated $A$-module. Then, the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item $M$ is projective. 
+        \item $M$ is strongly locally free. 
+        \item For every $\frakp\in\spec(A)$, the module $M_\frakp$ is free and has locally constant dimension with respect to the Zariski topology.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+$(a)\implies(b)$.
+
+$(b)\implies(a)$. \todo{simplify this}
+
+$(b)\implies(c)$ Trivial.
+
+$(c)\implies(b)$ Let $\frakm\subseteq A$ be a maximal ideal and let $x_1,\dots,x_r\in M$ map to an $A/\frakm$-basis of $M/\frakm M$. Then, due to the previous lemma, there is some $f\in 1 + \frakm$ such that $x_1/1,\dots,x_r/1$ generate $M_f$ over $A_f$.
+
+Since $\rho_M$ is locally constant, it is equal to $r$ on an open set containing $\frakm\in\spec(A)$. Choose a basic open set $D(g)$ with $g\notin\frakm$ on which $\rho_M$ is constant and equal to $r$. Define the map $\Psi: A_{fg}^r\to M_{fg}$ given by 
+\begin{equation*}
+    \Phi\left(a_1,\dots, a_r\right) = \sum_{i = 1}^r a_i\frac{x_i}{1}.
+\end{equation*}
+We contend that this is an isomorphism. Note the primes in $A_{fg}$ are precisely the extensions of the primes in $D(fg)$. Let $\frakp\in D_{fg}$. Then, the localization $\Psi_{\frakp}$, at the extension of $\frakp$ in $A_{fg}$ is the map 
+\begin{equation*}
+    \Psi_{\frakp}: A_{\frakp}^r\to M_\frakp\qquad\Psi\left(a_1,\dots,a_r\right) = \sum_{i = 1}^r a_i\frac{x_i}{1}.
+\end{equation*}
+Note that $\frakp\in D(fg)\subseteq D(f)$ and thus, $\Psi_\frakp$ is surjective since $x_1/1,\dots,x_r/1$ generate $M_f$ over $A_f$. Further, since $M_\frakp$ is finitely generated and isomorphic to $A_\frakp^r$, the surjection $\Psi_\frakp$ must be an isomorphism whence $\Psi$ is an isomorphism. 
+
+Hence, for each maximal $\frakm$, we have found some $h\notin\frakm$ such that $M_h$ is a free $A_h$-module. The set of all such $h$'s must generate $(1)$ else they would be contained in a maximal ideal. This proves (b).
+\end{proof}
