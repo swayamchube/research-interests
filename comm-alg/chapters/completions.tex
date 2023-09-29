@@ -558,3 +558,28 @@ whence completion is a functor from the category of filtered $A$-modules to the 
 \begin{corollary}
     If $(A,\frakm,k)$ is a noetherian local ring, then $\wh R$ is a local ring with unique maximal ideal, $\wh{\frakm}$.
 \end{corollary}
+
+\begin{theorem}[Krull's Intersection Theorem]\thlabel{thm:krull-intersection}
+    Let $A$ be a noethering, $M$ a finitely generated $A$-module and $\fraka\unlhd A$ an ideal. Let $\wh M$ be the $\fraka$-adic completion of $M$. Then, the kernel of the canonical map $M\to\wh M$ consists of precisely those elements of $M$ that are annihilated by some element of $1 + \fraka$. That is, 
+    \begin{equation*}
+        \bigcap_{n = 0}^\infty\fraka^n M = \left\{x\in M\mid\exists a\in\fraka,~(1 + a)x = 0\right\}.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Note that the kernel of the map is precisely equal to $\bigcap_{n = 0}^\infty\fraka^n M$. First, if $x\in M$ is annihilated by $1 + a$ for some $a\in\fraka$, then 
+    \begin{equation*}
+        x = -ax = a^2x = -a^3x = \cdots\in\bigcap_{n = 0}^\infty\fraka^n M.
+    \end{equation*}
+    Conversely, let $N = \bigcap_{n = 0}^\infty\fraka^n M$. Then, due to \thref{lem:artin-rees}, there is a positive integer $n$ such that 
+    \begin{equation*}
+        \fraka^k N = \fraka^{k}(N\cap\fraka^n M) = N\cap\fraka^{n + k}M = N
+    \end{equation*}
+    for all $k\ge 0$. Choosing $k = 1$ and applying \thref{corr:stronger-nakayama}, the desired conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    If $A$ is a noetherian domain and $\fraka\lhd A$ is a proper ideal, then $\bigcap_{n = 0}^\infty\fraka^n = (0)$.
+\end{corollary}
+\begin{proof}
+    Every element of $1 + \fraka$ is nonzero and thus cannot annihilate any other nonzero element.
+\end{proof}
