@@ -183,47 +183,6 @@ Substituting $m = 0$ in the last condition, we obtain $AM_n\subseteq M_n$ for al
     for all $n\ge 0$.
 \end{definition}
 
-\subsection{Associated Graded Stuff}
-
-\begin{definition}[Associated Graded Ring]
-    Let $A$ be a filtered ring with filtration $(A_n)_{n\ge0}$. Define 
-    \begin{equation*}
-        \gr_n(A) := A_n/A_{n + 1}\quad\text{ and }\quad\gr(A) := \bigoplus_{n\ge 0}\gr_n(A).
-    \end{equation*}
-    This has a natural multiplication structure given by $(a + A_{n + 1})(b + A_{m + 1}) = ab + A_{m + n + 1}$, where $a\in A_n$ and $b\in A_m$. This gives $\gr(A)$ the structure of a graded ring and is known as the \emph{associated graded ring} of $A$.
-\end{definition}
-
-To see that the multiplication is well defined, suppose $a'\in A_n$ and $b'\in A_m$ such that $a + A_{n + 1} = a' + A_{n + 1}$ and $b + A_{m + 1} = b' + A_{m + 1}$. Then, 
-\begin{equation*}
-    ab - a'b' = (a - a')b + a'(b - b')\in A_{m + n + 1}.
-\end{equation*}
-
-\begin{definition}[Associated Graded Module]
-    Let $A$ be a filtered ring with filtration $(A_n)_{n\ge 0}$ and $M$ a filtered $A$-module with filtration $(M_n)_{n\ge 0}$. Define 
-    \begin{equation*}
-        \gr_n(M) := M_n/M_{n + 1}\quad\text{ and }\quad\gr(M) := \bigoplus_{n\ge 0}\gr_n(M).
-    \end{equation*}
-    This has a natural $\gr(A)$-module structure given by 
-    \begin{equation*}
-        (a + A_{m + 1})(x + M_{n + 1}) = ax + M_{m + n + 1}
-    \end{equation*}
-    for $a\in A_m$ and $x\in M_n$. This is called the \emph{associated graded module} of $M$.
-\end{definition}
-
-To see that the multiplication is well defined, suppose $a'\in A_m$ and $x'\in M_n$ such that $a + A_{m + 1} = a' + A_{m + 1}$ and $x + M_{n + 1} = x' + M_{n + 1}$. Then, 
-\begin{equation*}
-    ax - a'x' = (a - a')x + (x - x')a'\in M_{m + n + 1}.
-\end{equation*}
-
-\begin{definition}[Functoriality of $\gr$]
-    Let $A$ be a filtered ring with filtration $(A_n)_{n\ge 0}$ and $M, N$ filtered $A$-modules with filtrations $(M_n)_{n\ge 0}$ and $(N_n)_{n\ge 0}$ respectively. Let $f: M\to N$ be a homomorphism of filtered $A$-modules. 
-
-    Define $\gr(f):\gr(M)\to\gr(N)$ on homogeneous elements by 
-    \begin{equation*}
-        \gr(f)(x + M_{n + 1}) = f(x) + N_{n + 1}.
-    \end{equation*}
-    This is a homomorphism of graded $\gr(A)$-modules. Further, it is functorial, which is not hard to verify.
-\end{definition}
 
 \section{Completion}
 
@@ -531,7 +490,7 @@ whence completion is a functor from the category of filtered $A$-modules to the 
     In particular, $\wh A$ is a flat $A$-module when $A$ is noetherian.
 \end{corollary}
 
-\begin{proposition}
+\begin{proposition}\thlabel{prop:a-adic-completion}
     Let $A$ be a noethering, $\frakb\unlhd A$ an ideal in $A$, and $\wh A$ the $\fraka$-adic completion for an ideal $\fraka\unlhd A$. Then, 
     \begin{enumerate}[label=(\alph*)]
         \item $\wh\frakb = \frakb\wh A$. 
@@ -582,4 +541,130 @@ whence completion is a functor from the category of filtered $A$-modules to the 
 \end{corollary}
 \begin{proof}
     Every element of $1 + \fraka$ is nonzero and thus cannot annihilate any other nonzero element.
+\end{proof}
+
+\subsection{Associated Graded Stuff}
+
+\begin{definition}[Associated Graded Ring]
+    Let $A$ be a filtered ring with filtration $(A_n)_{n\ge0}$. Define 
+    \begin{equation*}
+        G_n(A) := A_n/A_{n + 1}\quad\text{ and }\quad G(A) := \bigoplus_{n\ge 0}G_n(A).
+    \end{equation*}
+    This has a natural multiplication structure given by $(a + A_{n + 1})(b + A_{m + 1}) = ab + A_{m + n + 1}$, where $a\in A_n$ and $b\in A_m$. This gives $G(A)$ the structure of a graded ring and is known as the \emph{associated graded ring} of $A$.
+\end{definition}
+
+To see that the multiplication is well defined, suppose $a'\in A_n$ and $b'\in A_m$ such that $a + A_{n + 1} = a' + A_{n + 1}$ and $b + A_{m + 1} = b' + A_{m + 1}$. Then, 
+\begin{equation*}
+    ab - a'b' = (a - a')b + a'(b - b')\in A_{m + n + 1}.
+\end{equation*}
+
+\begin{remark}
+    If $A$ has the $\fraka$-adic filtration for an ideal $\fraka\unlhd A$, then we denote $G(A)$ by $G_\fraka(A)$ to be explicit.
+\end{remark}
+
+\begin{definition}[Associated Graded Module]
+    Let $A$ be a filtered ring with filtration $(A_n)_{n\ge 0}$ and $M$ a filtered $A$-module with filtration $(M_n)_{n\ge 0}$. Define 
+    \begin{equation*}
+        G_n(M) := M_n/M_{n + 1}\quad\text{ and }\quad G(M) := \bigoplus_{n\ge 0}G_n(M).
+    \end{equation*}
+    This has a natural $G(A)$-module structure given by 
+    \begin{equation*}
+        (a + A_{m + 1})(x + M_{n + 1}) = ax + M_{m + n + 1}
+    \end{equation*}
+    for $a\in A_m$ and $x\in M_n$. This is called the \emph{associated graded module} of $M$.
+\end{definition}
+
+To see that the multiplication is well defined, suppose $a'\in A_m$ and $x'\in M_n$ such that $a + A_{m + 1} = a' + A_{m + 1}$ and $x + M_{n + 1} = x' + M_{n + 1}$. Then, 
+\begin{equation*}
+    ax - a'x' = (a - a')x + (x - x')a'\in M_{m + n + 1}.
+\end{equation*}
+
+\begin{definition}[Functoriality of $G$]
+    Let $A$ be a filtered ring with filtration $(A_n)_{n\ge 0}$ and $M, N$ filtered $A$-modules with filtrations $(M_n)_{n\ge 0}$ and $(N_n)_{n\ge 0}$ respectively. Let $f: M\to N$ be a homomorphism of filtered $A$-modules. 
+
+    Define $G(f):G(M)\to G(N)$ on homogeneous elements by 
+    \begin{equation*}
+        G(f)(x + M_{n + 1}) = f(x) + N_{n + 1}.
+    \end{equation*}
+    This is a homomorphism of graded $G(A)$-modules. Further, it is functorial, which is not hard to verify.
+\end{definition}
+
+
+\begin{theorem}\thlabel{thm:properties-of-G}
+    Let $A$ be a noethering and $\fraka\unlhd A$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $G_\fraka(A)$ is a noethering. 
+        \item $G_\fraka(A)$ and $G_{\wh\fraka}(\wh A)$ are isomorphic as graded rings. 
+        \item if $M$ is a finitely generated $A$-module, and $(M_n)_{n\ge 0}$ is a stable $\fraka$-filtration of $M$, then $G(M)$ is a finitely generated $G_\fraka(A)$-module.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\fraka = (x_1,\dots,x_s)$ as an $A$-module and let $\overline x_i$ denote the image of $x_i$ under the projection $A\onto A/\fraka$. It is obvious that $G_\fraka(A)\cong A/\fraka[\overline x_1,\dots,\overline x_s]$. Therefore, $G_\fraka(A)$ is a nothering.
+
+    \item Follows from \thref{prop:a-adic-completion}.
+
+    \item There is an $n_0\ge 0$ such that $M_{n_0 + r} = \fraka^r M_{n_0}$ for all $r\ge 0$. We contend that $G(M)$ is generated by $\bigoplus_{n = 0}^{n_0} G_n(M)$ as a $G_\fraka(A)$-module. Indeed, consider some homogeneous element $\overline x\in M_{n_0 + r}/M_{n_0 + r + 1}$, and $x\in M_{n_0 + r}$ such that $\overline x = x + M_{n_0 + r + 1}$. Then, there is some $y\in M_{n_0}$ and $a\in\fraka^r$ such that $ay = x$. It now follows that $\overline a\overline y = \overline x$ where $\overline y\in G_{n_0}(M)$ and $\overline a$ is the image of $a$ in $\fraka^r/\fraka^{r + 1}$.
+
+    Finally, note that each $G_n(M)$ is a finitely generated $A/\fraka$-module for $n\le n_0$. Whence, $G(M)$ is a finitely generated $G_\fraka(A)$-module.\qedhere
+\end{enumerate} 
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a filtered ring and $M,N$ filtered $A$-modules. Let $\wh\phi$ and $G(\phi)$ denote the induced maps between the associated graded modules and completed modules respectively. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item if $G(\phi)$ is injective, then $\wh\phi$ is injective.
+        \item if $G(\phi)$ is surjective, then $\wh\phi$ is surjective.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    The map $\phi$ induces maps $\alpha_n: M/M_n\to N/N_n$, which is not hard to see from the universal property of the quotient. This gives us a commutative diagram 
+    \begin{equation*}
+        \xymatrix {
+            0\ar[r] & M_n/M_{n + 1}\ar[d]_{G_n(\phi)}\ar[r] & M/M_{n + 1}\ar[d]_{\alpha_{n + 1}}\ar[r] & M/M_{n}\ar[d]_{\alpha_n}\ar[r] & 0\\
+            0\ar[r] & N_n/N_{n + 1}\ar[r] & N/N_{n + 1}\ar[r] & N/N_{n}\ar[r] & 0
+        }.
+    \end{equation*}
+    Due to the Snake Lemma, we have the following exact seqence 
+    \begin{equation*}
+        0\rightarrow\ker G_n(\phi)\rightarrow\ker\alpha_{n + 1}\rightarrow\ker\alpha_n\rightarrow\coker G_n(\phi)\rightarrow\coker\alpha_{n + 1}\rightarrow\coker\alpha_n\rightarrow 0.
+    \end{equation*}
+    Suppose $G(\phi)$ is injective. Then, each $G_n(\phi)$ is injective, whence we can inductively argue that $\ker\alpha_n = 0$ for every $n\ge 0$ since the base case $\ker\alpha_0 = 0$ is trivial.
+
+    Consequently, $\alpha: \{M/M_n\}\to\{N/N_n\}$ is an injective map of surjective systems. Consequently, under the inverse limit, it induces an injective map $\wh\phi:\wh M\to\wh N$. Similarly, one can handle the case when $G(\phi)$ is surjective. This completes the proof.
+\end{proof}
+
+\begin{lemma}\thlabel{lem:complicated-lemma}
+    Let $\fraka\unlhd A$ such that $A$ is complete in the $\fraka$-topology and $M$ an $A$-module with $(M_n)_{n\ge 0}$ an $\fraka$-filtration of $M$ in which $M$ is Hausdorff. If $G(M)$ is a finitely generated $G(A)$-module, then $M$ is a finitely generated $A$-module.
+\end{lemma}
+\begin{proof}
+    Suppose $G(M)$ is generated by the homogeneous elements $y_i$ for $1\le i\le s$ with homogeneous degree of $y_i$ being $n(i)\ge 0$. There is a corresponding $x_i\in M_{n(i)}$ whose image in $G_{n(i)}(M)$ is $y_i$. Let $F^{(i)}$ denote the $A$-module $A$ with $\fraka$-filtration given by $F^{(i)}_k = \fraka^{n(i) + k}$. Finally, let $F = \bigoplus_{i = 1}^s F^{(i)}$. Let $\phi^{(i)}: F^{(i)}\to M$ denote the map sending $1\in F^{(i)}$ to $x_i\in M$. This induces a homomorphism of filtered $A$-modules $\phi: F\to M$. This map in turn, induces a $G(A)$-module homomorphism $G(\phi): G(F)\to G(M)$.
+
+    According to the way we had chosen the $x_i$'s, the map $G(\phi)$ is surjective and thus, $\wh\phi:\wh F\to\wh M$ is surjective. Let $\alpha: F\to\wh F$ and $\beta: M\to\wh M$ denote the canonical maps. The following diagram commutes.
+    \begin{equation*}
+        \xymatrix {
+            F\ar[r]^{\phi}\ar[d]_\alpha & M\ar[d]^\beta\\
+            \wh F\ar[r]_{\wh\phi} & \wh M
+        }
+    \end{equation*}
+    Since $A$ is complete in the $\fraka$-adic topology we see that $A\cong\wh A$ and since $F$ is a free $A$-module, the map $\alpha$ must be an isomorphism. Further, since $M$ is Hausdorff in its chosen filtration, the map $\beta$ is an injection. Since the map $\wh\phi\circ\alpha$ is a surjection, it must be the case that $\phi$ is a surjection, consequently, $M$ is finitely generated.
+\end{proof}
+
+\begin{corollary}\thlabel{corr:complicated-lemma}
+    With the hypotheses of \thref{lem:complicated-lemma}, if $G(M)$ is a noetherian $G(A)$-module, then $M$ is a noetherian $A$-module.
+\end{corollary}
+\begin{proof}
+    Let $M'\subseteq M$ be a submodule. We shall show that $M'$ is finitely generated. If $(M_n)_{n\ge 0}$ is the filtration of $M$, then the induced filtration $(M'\cap M_n)_{n\ge 0}$ is also an $\fraka$-filtration, which we denote by $(M_n')_{n\ge 0}$. Note that the inclusion $M_n'\into M_n$ induces an injective homomorphism $M_n'/M_{n + 1}'\into M_n/M_{n + 1}$. Thus, the inclusion map $M'\into M$ which is also a map of filtered modules, induces an injective map $G(M')\into G(M)$. Since $G(M)$ is noetherian, $G(M')$ must be a finitely generated $G_\fraka(A)$-module. Finally, we also have 
+    \begin{equation*}
+        \{0\}\subseteq\bigcap_{n = 0}^\infty M_n'\subseteq\bigcap_{n = 0}^\infty M_n = \{0\}.
+    \end{equation*}
+    Now, we can complete using \thref{lem:complicated-lemma}.
+\end{proof}
+
+
+\begin{theorem}
+    If $A$ is a noethering and $\fraka\unlhd A$, then the $\fraka$-adic completion $\wh A$ of $A$ is a noethering.
+\end{theorem}
+\begin{proof}
+    Due to \thref{thm:properties-of-G}, $G_\fraka(A)\cong G_{\wh\fraka}(\wh A)$ and $G_{\fraka}(A)$ is a noethering. Apply \thref{corr:complicated-lemma} to the complete ring $\wh A$ and take $M = \wh A$ with the filtration $(\wh\fraka^n)_{n\ge 0}$. Note that this filtration induces a Hausdorff topology since $\wh a$ is contained in the Jacobson radical of $\wh A$. This completes the proof.
 \end{proof}
