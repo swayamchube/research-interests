@@ -305,6 +305,13 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
     With the above setup, if $A$ is noetherian, then so is $B$. On the other hand, if $A$ is a PID, then $B$ is a free $A$-module.
 \end{corollary}
 
+\begin{theorem}[Extension Lemma for Rings]
+    Let $\Omega$ be an algebraically closed field and $B/A$ an integral extension of rings. If $\sigma: A\to\Omega$ is a ring homomorphism, then it can be extended to $\wt\sigma: B\to\Omega$.
+\end{theorem}
+\begin{proof}
+    Let $\frakp = \ker\sigma$, which is a prime ideal and let $\frakq$ be a prime ideal in $B$ lying over $\frakp$. Due to the First Isomorphism Theorem, there is an induced map $\phi: A/\frakp\to\Omega$. Using the universal property of the fraction field, there is an induced map $\psi: Q(A/\frakp)\to\Omega$. Note that $A/\frakp\subseteq B/\frakq$ and thus $Q(A/\frakp)\subseteq Q(B/\frakq)$. Now, using the extension lemma for fields, there is an induced map $\wt\psi: Q(B/\frakq)\to\Omega$ extending $\psi$. Composing this map with the inclusion $B/\frakq\into Q(B/\frakq)$, we obtain a map $\wt\phi: B/\frakq\to\Omega$ extending $\phi$. Finally, composing this map with the surjection $B\onto B/\frakq$, we obtain a map $\wt\sigma: B\to\Omega$ extending $\sigma$. This completes the proof.
+\end{proof}
+
 \section{Noether's Normalization Lemma}
 
 \begin{lemma}\thlabel{lem:towards-noether-normalization}
@@ -440,4 +447,48 @@ The following proof is due to Rabinowitsch.
         f^N = h_1(x_1,\dots,x_n)f_1 + \dots + h_m(x_1,\dots,x_n)f_m
     \end{equation*}
     whereby $f^N\in\fraka$ for some positive integer $N$ and equivalently, $f\in\sqrt{\fraka}$. This completes the proof.
+\end{proof}
+
+\hrulefill 
+
+\begin{lemma}
+    Let $A\subseteq C\subseteq B$ be an extension of rings such that $C$ is the integral closure of $A$ in $B$. Suppose $f,g\in B[x]$ such that $fg\in C[x]$. Then, $f,g\in C[x]$.
+\end{lemma}
+\begin{proof}
+    We first begin with an auxiliary result. 
+
+    \noindent\textbf{Claim.} There is a ring $D$ containing $B$ in which $f(x)$ splits into linear factors. 
+
+    \noindent\textit{Proof.} It suffices to show that there is a ring $D$ in which $f(x)$ has a root. Let $R$ denote the ring $B[T]/(f(T))$. This comes equipped with a natural injection $B\into R$ and hence, we may suppose that $B\subseteq R$. Note that $\overline T\in R$ is a root of $f(x)$ which proves the claim. $\square$
+
+    Using the above claim, let $D$ be a ring containing $B$ in which both $f$ and $g$ split. Let 
+    \begin{equation*}
+        f(x) = \prod(x - \alpha_i) \qquad g(x) = \prod(x - \beta_j).
+    \end{equation*}
+    Then, each $\alpha_i,\beta_j$ is a root of $fg\in C[x]$, whence is integral over $C$. Since integral elements form a ring, the coefficients of $f$ and $g$, being polynomials in the $\alpha_i$'s and $\beta_j$'s respectively, are integral over $C$ and lie in $B$, hence, they lie in $C$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $A\subseteq C\subseteq B$ be an extension of rings such that $C$ is the integral closure of $A$ in $B$. Then, $C[x]$ is the integral closure of $A[x]$ in $B[x]$.
+\end{theorem}
+\begin{proof}
+    First, we shall show that the integral closure of $A[x]$ in $B[x]$ is contained in $C[x]$. Suppose $f(x)\in B[x]$ is integral over $A[x]$. Then, 
+    \begin{equation*}
+        f^m + g_{m - 1}f^{m - 1} + \dots + g_0 = 0
+    \end{equation*}
+    for some $g_i\in A[x]$. Let $r$ be a positive integer greater than the degree of each $g_i$ and $f$. Let $f_1(x) = f(x) - x^r\in A[x]$. Then, 
+    \begin{equation*}
+        (f_1 + x^r)^m + g_{m - 1}(f + x^r)^{m - 1} + \dots + g_0 = 0,
+    \end{equation*}
+    which is a monic polynomial in $x$. Expanding it out, we have an equation of the form 
+    \begin{equation*}
+        f_1^m + h_{m - 1}f_1^{m - 1} + \dots + h_0 = 0,
+    \end{equation*}
+    for some $h_i\in A[x]$. Note that $f_1$ is a monic polynomial and thus, so is 
+    \begin{equation*}
+        f_1^{m - 1} + h_{m - 1}f_1^{m - 2} + \dots + h_1.
+    \end{equation*}
+    Using the preceeding lemma, we see that $f_1\in C[x]$, whence $f\in C[x]$.
+
+    We must now show the converse. Let $f(x)\in C[x]$ where $f(x) = c_mx^m + \dots + c_0$. Then, $f(x)\subseteq A[x][c_0,\dots,c_m]$, which is a finitely generated $A[x]$-module (since $A[c_0,\dots,c_m]$ is a finitely generated $A$-module), whence $f(x)$ is integral over $A[x]$. This completes the proof.
 \end{proof}

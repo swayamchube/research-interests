@@ -1124,6 +1124,15 @@ Let $\Ann(E) = (\alpha)$ where $\alpha = up_1^{t_1}\cdots p_r^{t_r}$ where $u\in
         E\cong\bigoplus_{i = 1}^r E[p_i]
     \end{equation*}
 \end{lemma}
+\begin{proof}
+    Let $q_i = \alpha/p_i^{t_i}$. Then, $(q_1,\dots,q_r) = 1$ and hence, there are $\gamma_1,\dots,\gamma_r\in R$ such that $\gamma_1q_1 + \dots + \gamma_rq_r = 1$. For any $x\in E$, we have 
+    \begin{equation*}
+        x = \gamma_1q_1 x + \dots + \gamma_rq_rx
+    \end{equation*}
+    where $\gamma_iq_ix\in E[p_i]$ for each $i$. Thus, $E = \sum_{i = 1}^rE[p_i]$.
+
+    We shall now show that this sum is direct. Indeed, suppose $x_i\in E[p_i]$ such that $x_1 + \dots + x_r = 0$. Multiplying this equation by $q_i$, we have $q_ix_i = 0$, consequently, $\Ann(x_i)\supseteq(p_i^{t_i}, q_i) = (1)$, that is, $x_i = 0$ for each $i$. This completes the proof.
+\end{proof}
 
 Since $E[p]$ is finitely generated, we may let $E = E[p]$ henceforth. Since $E[p]$ is finitely generated, take a generating set $\{x_1,\ldots,x_n\}$. Since $(p^m)\subseteq\Ann(x_i)$ for some $m\in\N$, we must have $\Ann(x_i) = (p^{n_i})$ for some $n_i$. As a result, 
 \begin{equation*}
