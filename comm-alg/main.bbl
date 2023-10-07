@@ -1,9 +1,14 @@
-\begin{thebibliography}{Lan02}
+\begin{thebibliography}{Gop84}
 
 \bibitem[AM69]{AM69}
 Michael Atiyah and Ian MacDonald.
 \newblock {\em Introduction to Commutative Algebra}.
 \newblock CRC Press, 1969.
+
+\bibitem[Gop84]{gopalakrishnan-ca}
+N.S. Gopalakrishnan.
+\newblock {\em Commutative Algebra}.
+\newblock Oxonian Press, 1984.
 
 \bibitem[Lan02]{Lan02}
 Serge Lang.
@@ -14,5 +19,10 @@ Serge Lang.
 J.~S. Milne.
 \newblock {\em Algebraic Number Theory}.
 \newblock 2020.
+
+\bibitem[Ser12]{serre-local-algebra}
+Jean-Pierre Serre.
+\newblock {\em Local Algebra}.
+\newblock Springer Science \& Business Media, 2012.
 
 \end{thebibliography}

@@ -1,0 +1,202 @@
+\section{Hilbert-Samuel Polynomial}
+
+\begin{proposition}\thlabel{prop:q-stable-filtration-polynomial}
+    Let $(A,\frakm)$ be a noetherian local ring with $\frakq$ an $\frakm$-primary ideal, $M$ a finitely generated $A$-module and $(M_n)_{n\ge 0}$ a $\frakq$-stable filtration. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $M/M_n$ is of finite length for every $n\ge 0$.
+        \item for all sufficiently large $n$, this length is a polynomial $g(n)$ of degree $\le s$ where $s$ is the least number of generators of $\frakq$.
+        \item the degree and leading coefficient of $g(n)$ is independent of the chosen filtration.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Note that $M_i/M_{i + 1}$ is naturally an $A/\frakq$-module, which has finite length, since $A/\frakq$ is Artin local. Using the additivity of length, we have 
+    \begin{equation*}
+        l(M/M_n) = \sum_{i = 1}^n (M_{i - 1}/M_i),
+    \end{equation*}
+    which is finite.
+
+    \item \todo{add in the previous propositions}
+
+    \item Let $(\wt M_n)_{n\ge 0}$ be another $\frakq$-stable filtration of $M$. Then, these two are equivalent filtrations, that is, there is $n_0 > 0$ such that $M_{n + n_0}\subseteq\wt M_n$ and $\wt M_{n + n_0}\subseteq M_n$ for all $n\ge0$. Thus, $\wt g(n + n_0)\ge g(n)$ and $g(n + n_0)\ge\wt g(n)$. Consequently, $\lim_{n\to\infty} g(n)/\wt g(n) = 1$. This completes the proof.\qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Hilbert-Samuel Polynomial]
+    With the notation of \thref{prop:q-stable-filtration-polynomial}, the polynomial $g(n)$ corresponding to the filtration $(\frakq^n)_{n\ge 0}$ is denoted by $\chi_\frakq^M(n)$ and is called the \emph{Hilbert-Samuel polynomial}. For sufficiently large $n$, we have 
+    \begin{equation*}
+        \chi_\frakq^M(n) = l(M/\frakq^n M).
+    \end{equation*}
+    If $M = A$, we write $\chi_\frakq(n)$ for $\chi_\frakq^A(n)$ and call it the \emph{characteristic polynomial} of the $\frakm$-primary ideal $\frakq$.
+\end{definition}
+
+\begin{corollary}
+    Let $(A,\frakm)$ be a noetherian local ring and $\frakq$ an $\frakm$-primary ideal in $A$. Then, the length $l(A/\frakq^n)$ is a polynomial $\chi_\frakq(n)$ of degree $\le s$ for sufficiently large $n$, where $s$ is the least number of generators of $\frakq$.
+\end{corollary}
+
+\begin{proposition}\thlabel{prop:deg-equal-primary-maximal}
+    Let $(A,\frakm)$ be a noetherian local ring and $\frakq$ an $\frakm$-primary ideal in $A$. Then, 
+    \begin{equation*}
+        \deg\chi_\frakq(n) = \deg\chi_\frakm(n).
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    There is a positive integer $r > 0$ such that $\frakm^r\subseteq\frakq\subseteq\frakm$. Then, for sufficiently large $n$, we have 
+    \begin{equation*}
+        \chi_\frakm(n)\le\chi_\frakq(n)\le\chi_\frakm(rn).
+    \end{equation*}
+    Since the $\chi_\frakm$ and $\chi_\frakq$ are polynomials for sufficiently large $n$, it must be th case that $\deg\chi_\frakm = \deg\chi_\frakq$. This completes the proof.
+\end{proof}
+
+\begin{definition}
+    With the notation of \thref{prop:deg-equal-primary-maximal}, let $d(A)$ denote the degree of $\chi_\frakm$.
+\end{definition}
+
+\section{Noetherian Local Rings}
+
+Throughout this section, let $(A,\frakm)$ be a noetherian local ring with maximal ideal $\frakm$. Denote by $\delta(A)$, the least number of generators of an $\frakm$-primary ideal of $A$. From the last section, we already know that $\delta(A)\ge d(A)$.
+
+\begin{lemma}
+    Let $M$ be a finitely-generated $A$-module, $x\in A$ not a zero-divisor in $M$, and $M' = M/xM$. Then, 
+    \begin{equation*}
+        \deg\chi_\frakq^{M'}\le\chi_\frakq^{M} - 1.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $N = xM$, and $N_n = N\cap\frakq^n M$. Then, due to \thref{lem:artin-rees}, $(N_n)_{n\ge 0}$ is a $\frakq$-stable filtration of $N$. \todo{complete this}
+\end{proof}
+
+\begin{corollary}
+    If $x$ is not a zero-divisor in $A$, then $d(A/(x))\le d(A) - 1$.
+\end{corollary}
+
+\begin{proposition}
+    $d(A)\ge\dim A$.
+\end{proposition}
+\begin{proof}
+    We shall induct on $d(A)$. If $d(A) = 0$, then $l(A/\frakm^n)$ is eventually constant. Therefore, $\frakm^n = \frakm^{n + 1}$ for sufficiently large $n$, whence $\frakm = 0$, i.e. $A$ is artinian and $\dim A = 0$.
+
+    Suppose now that $d = 0$ and let $\frakp_0\subsetneq\frakp_1\subsetneq\dots\subsetneq\frakp_r$ be any chain of prime ideals in $A$. If $r = 0$, then there is nothing more to prove. If $r > 0$, then let $x\in\frakp_1\backslash\frakp_0$ and let $A' = A/\frakp_0$ with $x'$ denoting the image of $x$ in $A'$.
+
+    Let $\frakm'$ denote the image of $\frakm$ under the surjection $A\onto A'$. Then, $(A',\frakm')$ is a local ring with an induced surjection $A/\frakm^n\onto A'/\frakm'^n$ through the following commutative diagram. 
+    \begin{equation*}
+        \xymatrix {
+            A\ar@{->>}[r]\ar@{->>}[d] & A'\ar@{->>}[r] & A'/\frakm'^n\\
+            A/\frakm^n\ar@{.>>}[rru]_{\exists}
+        }
+    \end{equation*}
+    Consequently, $l(A/\frakm^n)\ge l(A'/\frakm'^n)$. Therefore, $d(A)\ge d(A')$, due to the standard polynomial argument. 
+
+    Now, $d(A'/(x'))\le d(A') - 1\le d(A) - 1$ and hence, the induction hypothesis applies to $A'/(x')$, that is, $d(A'/(x'))\ge\dim A'/(x')$. Note that the image of the strictly ascending chain $\frakp_1\subsetneq\dots\subsetneq\frakp_r$ in $A'/(x')$ is a strictly ascending chain of prime ideals of length $r - 1$ whence 
+    \begin{equation*}
+        r - 1 \le\dim A'/(x')\le d(A'/(x'))\le d(A) - 1\implies r\le d(A)
+    \end{equation*}
+    which completes the proof.
+\end{proof}
+
+\begin{corollary}
+    If $A$ is a noetherian local ring, then $\dim A$ is finite.
+\end{corollary}
+
+\begin{corollary}
+    A prime ideal in a noethering has finte height. Therefore, the set of primes in a noethering satisfies the descending chain condition.
+\end{corollary}
+
+\begin{proposition}
+    Let $\dim A = d$. Then, there exists an $\frakm$-primary ideal in $A$ generated by $d$ elements. Therefore, $\dim A\ge\delta(A)$.
+\end{proposition}
+\begin{proof}
+    We shall inductively construct a sequence $x_1,\dots,x_d$ of elements in $A$ such that the ideal $(x_1,\dots,x_i)$ has height at least $i$.\todo{complete this argument}
+\end{proof}
+
+Putting everything together, we have the following theorem:
+
+\begin{theorem}[Dimension Theorem]
+    For any notherian local ring $A$, the following integers are equal: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\dim A$. 
+        \item the degree of the characteristic polynomial $\chi_\frakm$.
+        \item the least number of generators of an $\frakm$-primary ideal of $A$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+    $\dim A\le\dim_k(\frakm/\frakm^2)$ where $k = A/\frakm$ is the residue field.
+\end{corollary}
+\begin{proof}
+    There are $x_1,\dots,x_s\in\frakm$ generating it such that their images in $\frakm/\frakm^2$ form a $k$-basis. Thus, 
+    \begin{equation*}
+        \dim A = \delta(A)\le s = \dim_k(\frakm/\frakm^2).\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{corollary}\thlabel{corr:stronger-hauptidealsatz}
+    Let $A$ be a noethering and $\frakp\unlhd A$ a prime ideal. Then, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\hght(\frakp)\le n$. 
+        \item There is an ideal $\fraka\unlhd A$, generated by $n$ elements, such that $\frakp$ is a minimal prime belonging to $\fraka$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    $\impliedby$ Let $\fraka = (x_1,\dots,x_n)$. In $A_\frakp$, the ideal $\fraka A_\frakp$ is $\frakp A_\frakp$-primary, since its radical is $\frakp A_\frakp$, which is a maximal ideal. 
+
+    $\implies$ We have $\dim A_\frakp\le n$ and thus, there is a $\frakp A_\frakp$-primary ideal $\frakb$ of $A_\frakp$ generated by $n$ elements. Let $\fraka$ denote the contraction of $\frakb$ in $A$. Then, $\fraka$ is generated by $n$ elements and is contained in $\frakp$. Moreover, $\frakp$ must be the minimal prime containing $\fraka$ due to the order preserving bijection between the primes contained in $\frakp$ and $\spec(A_\frakp)$. This completes the proof.\qedhere
+\end{proof}
+
+\section{Dimension Theory of Polynomial Algebras}
+
+This section has been taken from \cite{serre-local-algebra}.
+
+\begin{lemma}\thlabel{lem:lying-over-polynomial}
+    Let $B = A[x]$, $\frakp\subseteq A$ a prime ideal and $\frakq\subseteq\frakq'$ two prime ideals in $B$ lying over $A$ such that $\frakq\subsetneq\frakq'$. Then, $\frakq = \frakp B$.
+\end{lemma}
+\begin{proof}
+    Note that $B/\frakp B\cong (A/\frakp)[x]$, and both the primes $\frakq$ and $\frakq'$ must contain $\frakp B$. Therefore, upon quotienting out by $\frakp B$, we have reduced to the case of $A$ being an integral domain and $\frakp = (0)$.
+
+    Now, localize at $S = A\backslash\{0\}$ to reduce to the case of $A$ being a field and $\frakp = (0)$. Note that $\frakq'\cap S = \emptyset$ therefore, they extend to prime ideals in $S^{-1}B\cong (S^{-1}A)[x]$. But this is obvious, since any non-zero prime ideal in $A[x]$ is maximal, owing to it being a PID. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    If $B = A[x]$, then 
+    \begin{equation*}
+        \dim A + 1\le \dim B\le 2\dim A + 1.
+    \end{equation*}
+\end{theorem}
+
+\begin{lemma}\thlabel{lem:minimal-remains-minimal-polynomial}
+    Let $B = A[x]$ and $\fraka\unlhd A$. Let $\frakp\unlhd A$ be a minimal prime ideal containing $\fraka$. Then, $\frakp B$ is a minimal prime ideal containing $\fraka B$ in $B$.
+\end{lemma}
+\begin{proof}
+    Suppose $\frakp B$ were not minimal among the primes containing $\fraka B$. Then, there is some prime $\frakq$ with $\fraka B\subseteq\frakq\subsetneq\frakp B$. Note that $\frakq\cap A$ is a prime ideal in $A$ containing $\fraka$ and is contained in $\frakp$, therefore, $\frakq\cap A = \frakp$. Consequently, due to \thref{lem:lying-over-polynomial}, $\frakq = \frakp B$, a contradiction.
+\end{proof}
+
+\begin{proposition}\thlabel{prop:height-polynomial-extension}
+    Let $A$ be a noethering and $\frakp\unlhd A$ a prime ideal. If $B = A[x]$, then $\hght(\frakp) = \hght(\frakp B)$.
+\end{proposition}
+\begin{proof}
+    Let $n = \hght(\frakp)$. Then, there is a strictly ascending chain $\frakp_0\subsetneq\frakp_1\subsetneq\dots\subsetneq\frakp_n$ of prime ideals in $A$. Then, $\frakp_0 B\subseteq\frakp_1B\subsetneq\dots\subsetneq\frakp_nB$ is a strictly ascending chain of prime ideals in $B$. Hence, $\hght(\frakp B)\ge n$.
+
+    Conversely, there is an ideal $\fraka$ generated by $n$ elements, contained in $\frakp$ such that $\frakp$ is minimal among the primes containing $\fraka$. Then, $\fraka B\subseteq\frakp B$, $\fraka B$ is generated by $n$ elements and due to \thref{lem:minimal-remains-minimal-polynomial} and \thref{corr:stronger-hauptidealsatz}, $\hght(\frakp B)\le n$.
+\end{proof}
+
+\begin{theorem}
+    Let $A$ be a noethering. Then, 
+    \begin{equation*}
+        \dim(A[x_1,\dots,x_n]) = \dim A + n.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    It suffices to prove the theorem for $n = 1$. Let $B = A[x]$. We know that $\dim(B)\ge\dim A + 1$. We shall show that $\dim(B)\le\dim A + 1$. Let $\frakq_0\subsetneq\dots\subsetneq\frakq_r$ be a strictly ascending chain of prime ideals in $B$. Define $\frakp_i = \frakq_i\cap A$ for $0\le i\le r$. If all the $\frakp_i$'s are distinct, then $r\le\dim A$.
+
+    Suppose now that the $\frakp_i$'s are not distinct. Let $j$ be the maximum index such that $\frakp_j = \frakp_{j + 1}$. Then, $\frakq_j = \frakp_j B$. Due to \thref{prop:height-polynomial-extension}, $\hght(\frakp_j) = \hght(\frakp_j B) = \hght(\frakq_j)$. Now, note that $\frakp_{j + 1}\subsetneq\dots\subsetneq\frakp_{r}$. Hence, 
+    \begin{equation*}
+        \dim A\ge r - (j + 1) + \hght(\frakp_j) = r - (j + 1) + \hght(\frakq_j)\ge r - 1 \implies r\le\dim A + 1.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $k$ be a field. Then, $\dim(k[x_1,\dots,x_n]) = n$.
+\end{corollary}
+
+\section{Dimension of a Variety}

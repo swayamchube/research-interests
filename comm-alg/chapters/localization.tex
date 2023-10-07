@@ -291,16 +291,10 @@ A surprising consequence of the previous proposition is the following.
 \end{proof}
 
 \begin{proposition}
-    ``Being an integral domain'' is \underline{not} a local property. Similarly, ``being noetherian'' is \underline{not} a local property.
+    ``Being an integral domain'' is \underline{not} a local property. 
 \end{proposition}
 \begin{proof}
     Let $A$ be a nonzero integral domain and consider the ring $R = A\times A$. This is not an integral domain. Due to \thref{prop:localization-of-product}, every localization of $R$ is isomorphic to $A_{\frakp}$ for some $\frakp\in\spec A$, consequently, is an integral domain. 
-
-    As for the second assertion, consider the ring $R = k\times k\times\cdots$ where $k$ is a nonzero field. This is obviously not noetherian due to the following ascending chain of ideals: 
-    \begin{equation*}
-        (0)\times(0)\times\cdots\subsetneq k\times(0)\times\cdots\subsetneq\cdots
-    \end{equation*}
-    But due to \thref{prop:localization-of-product}, every localization is isomorphic to $k$, consequently, is noetherian.
 \end{proof}
 
 \section{Extension and Contraction of Ideals}

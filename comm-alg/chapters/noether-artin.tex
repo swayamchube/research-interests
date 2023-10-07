@@ -94,6 +94,17 @@ Since $M$ is artinian, there is an index $n$ such that $\im\phi^n = \im\phi^{n +
 \end{enumerate}
 \end{proof}
 
+\begin{lemma}
+    ``Noetherian-ness'' is not a local property.
+\end{lemma}
+\begin{proof}
+    Let $A = \F_2\times\F_2\times\cdots$ and $\frakp\in\spec(A)$. Note that every element in $A$ is an idempotent. Therefore, every element in $A_\frakp$ is also an idempotent. Consequently, for all $x\in A_\frakp$, $x(1 - x) = 0$. Note that either $x$ or $1 - x$ must be a unit lest $1 = x + (1 - x)$ be a non-unit. Thus, either $x = 0$ or $1 - x = 0$, equivalently, $x = 1$. Thus, $A_\frakp\cong\F_2$.
+\end{proof}
+
+\begin{remark}
+    Instead of choosing $A = \F_2\times\F_2\times\cdots$, any product of fields works but the proof in the general case requires a bit more machinery. Indeed, if $A$ is an infinite product of fields, then $A$ is absolutely flat, consequently, every localization of $A$ at a prime ideal is a local absolutely flat ring, whence a field, which is noetherian.
+\end{remark}
+
 \begin{lemma}\thlabel{lem:noether-iff-artin}
     Supose there is a sequence of maximal ideals $\frakm_1,\ldots,\frakm_n$ in $A$ such that $(0) = \frakm_1\cdots\frakm_n$. Then, $A$ is a noethering if and only if it is artinian.
 \end{lemma}
