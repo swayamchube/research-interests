@@ -1,0 +1,252 @@
+\begin{definition}[Algebraically Independent]
+    Let $K/k$ be any extension. Elements $a_1,\dots,a_n\in K$ are said to be \emph{algebraically independent over $k$} if there is no non-zero polynomial $f(x_1,\dots,x_n)\in k[x_1,\dots,x_n]$ such that $f(a_1,\dots,a_n) = 0$. A set $A\subseteq K$ is said to be algebraically independent over $k$ if every finite subset of $A$ is algebraically independent over $k$.
+\end{definition}
+
+\begin{lemma}
+    Let $K/k$ be any extension $a\in K$ and $A\subseteq K$. The following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $a\in K$ is algebraic over $k(A)$.
+        \item There are $\beta_0,\dots,\beta_{n - 1}\in K(A)$ such that $a^n + \beta_{n - 1}a^{n - 1} + \dots + \beta_0 = 0$. 
+        \item There are $\beta_0,\dots,\beta_n\in k[A]$ such that $\beta_na^n + \dots  + \beta_0= 0$.
+        \item There is a non-zero polynomial $f(x_1,\dots,x_m, y)\in k[x_1,\dots,x_m, y]$ such that there are $b_1,\dots,b_m\in A$ with $f(b_1,\dots,b_m, y)\ne 0$ in $K[y]$ but $f(b_1,\dots,b_m, a) = 0$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{lemma}[Exchange Lemma]\thlabel{lem:exchange-lemma}
+    Let $K/k$ be any extension and $b\in K$ be algebraically dependent on $\{a_1,\dots,a_m\}\subseteq K$ but not on $\{a_1,\dots,a_{m - 1}\}$. Then, $a_m$ is algebraically dependent on $\{a_1,\dots,a_{m - 1}, b\}$.
+\end{lemma}
+\begin{proof}
+    Since $b$ is algebraically dependent on $\{a_1,\dots,a_m\}$, there is a non-zero polynomial $f(x_1,\dots,x_m,y)\in k[x]$ such that $f(a_1,\dots,a_m, b) = 0$. Then, we may write 
+    \begin{equation*}
+        f(x_1,\dots,x_m,y) = \sum_i f_i(x_1,\dots,x_{m - 1}, y)x_m^i.
+    \end{equation*}
+    Since $b$ is not algebraically dependent on $\{a_1,\dots,a_{m - 1}\}$, one of the $f_i$'s must be non-zero, say $f_j$. Thus, $a_m$ is algebraically dependent over $\{a_1,\dots,a_{m - 1},b\}$.
+\end{proof}
+
+\begin{definition}
+    Let $K/k$ be any extension. An algebraically independent subset $A\subseteq K$ is said to be a \emph{transcendence basis} if $K/k(A)$ is algebraic.
+\end{definition}
+
+\begin{theorem}
+    Let $K/k$ be any field extension and $A, B\subseteq K$ be two transcendence bases. Then, $|A| = |B|$.
+\end{theorem}
+\begin{proof}
+    First, suppose $A$ is finite. Let $A = \{a_1,\dots,a_n\}$. Then, for every $a_i\in A$, there is a finite subset $B_i$ of $B$ such that $a_i$ is algebraically dependent on $k(B_i)$. Therefore, $K$ is algebraic over $k(B_1\cup\dots\cup B_n)$. Hence, $B$ must be finite. Say $B = \{b_1,\dots,b_m\}$. 
+
+    Let $l = |A\cap B|$ and without loss of generality, say $A\cap B = \{a_1,\dots,a_l\}$, thus, $B = \{a_1,\dots,a_l,b_{l + 1},\dots,b_n\}$. If $l = n$, then $A\subseteq B$ and we have $n\le m$. Suppose not, that is, $l < n$. 
+
+    Now, $a_{l + 1}$ is algebraic over $B$ but algebraic independent over $\{a_1,\dots,a_l\}$. Let $j$ be the smallest index such that $a_{l + 1}$ is algebraically dependent over $\{a_1,\dots,a_l,b_{l + 1},\dots,b_j\}$. Due to \thref{lem:exchange-lemma}, we see that $b_j$ is algebraically dependent over 
+    $$B_1 = \{a_1,\dots,a_l,a_{l + 1},b_{l + 1},\dots,b_{j - 1}, b_{j + 1},\dots,b_m\}.$$
+    Note that $B_1$ is algebraically independent, for if not, then we must have $a_{l + 1}$ algebraically dependent over $B_1\backslash\{a_{l + 1}\}$. But this would mean that $B_1\backslash\{a_{l + 1}\}$ is a transcendence basis of $K/k$, which is absurd. Hence, $B_1$ is algebraically independent and thus, a transcendence basis of $K/k$. Now, $|A\cap B_1| = l + 1$.
+
+    We may continue this process and at each step increase the size of the intersection $|A\cap B_i|$. The process terminates when $A\backslash B_i = \emptyset$, in other words, $A\subseteq B_i$ whence $n = |A|\le |B_i| = m$. Arguing in the other direction, one can show that $m\le n$, whence $m = n$. This proves the theorem in the finite case. 
+
+    Now, suppose both $A$ and $B$ are infinite. Then, for each $a\in A$, there is a corresponding finite subset $B_a\subseteq B$ such that $a$ is algebraically dependent on $B_a$. Therefore, every element of $A$ is algebraically dependent over $C = \bigcup_{a\in A}B_a\subseteq B$. This means that $K$ is algebraic over $k(C)$ and hence, $C = B$. Consequently, 
+    \begin{equation*}
+        |B| = |C| = \left|\bigcup_{a\in A}B_a\right|\le\left|A\times\N\right| = |A|.
+    \end{equation*}
+    A similar argument in the other direction would give $|A|\le |B|$. This completes the proof.
+\end{proof}
+
+\begin{definition}[Transcendence Degree]
+    Let $K/k$ be any extension. The \emph{transcendence degree} of $K/k$, denoted $\trdeg(K/k)$ is the cardinality of a transcendence basis of $K/k$.
+\end{definition}
+
+\begin{remark}
+    Let $K/k$ be any extension and $A\subseteq K$ be an algebraically independent subset of $K$. Let $\Sigma$ be the poset of all algebraically independent subsets of $K$ that contain $A$. Using a standard Zorn argument, one can show that $\Sigma$ contains a maximal element, which obviously must be a transcendence basis.
+\end{remark}
+
+\begin{theorem}[Additivity of $\trdeg$]
+    Let $k\subseteq E\subseteq K$ be a tower of field extensions with $\trdeg(K/E)$ and $\trdeg(E/k)$ finite. Then, $\trdeg(K/k) = \trdeg(K/E) + \trdeg(E/k)$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\section{L\"uroth's Theorem}
+
+\begin{lemma}
+    Let $x$ be an indeterminate over a field $k$ and $r(x)\in k(x)$. Then, $[k(x):k(r(x))] = \deg(r(x))$.
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{theorem}
+    $\Aut(k(x)/k)\cong\operatorname{PGL}_2(k)$.
+\end{theorem}
+\begin{proof}
+    If $\theta: k(x)\to k(x)$ is a $k$-automorphism, then $\deg(\theta(x)) = 1$ and hence, must be of the form $\frac{ax + b}{cx + d}$ where $\begin{pmatrix}a & b\\c & d\end{pmatrix}\in\operatorname{GL}_2(k)$. The conclusion now follows from an application of the First Isomorphism Theorem.
+\end{proof}
+
+\begin{theorem}[L\"uroth's Theorem]
+    Let $k(x)/k$ be a purely transcendental extension. Then, any intermediate field strictly containing $k$ is of the form $k(r(x))$ where $r(x)\in k(x)$ is a rational function. Further, $[k(x):k(r(x))] = \deg(r(x))$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\section{Linear Disjointness}
+
+\begin{definition}[Linearly Disjoint]
+    Let $K$ and $L$ be two field extensions of $k$ contained in a larger field $\Omega$. Then, $K$ and $L$ are said to be \emph{linearly disjoint} if every $k$-linearly independent subset of $K$ is $L$-linearly independent as elements of $\Omega$.
+\end{definition}
+
+\begin{proposition}
+    $K$ and $L$ are linearly disjoint over $k$ if and only if $L$ and $K$ are linearly disjoint over $k$.
+\end{proposition}
+\begin{proof}
+    Suppose $K$ and $L$ are linearly disjoint but not $L$ and $K$. Then, there is a $k$-linearly independent subset $\{y_1,\dots,y_n\}$ of $L$ that is not $K$-linearly independent. Hence, there are $x_i\in K$, not all zero, such that $\sum_{i = 1}^n x_iy_i = 0$. The vector space generated by the $x_i$'s is a finite dimensional one over $k$ and admits a finite basis, $u_1,\dots,u_m$. We may write 
+    \begin{equation*}
+        x_i = \sum_{j = 1}^m a_{ij}u_j
+    \end{equation*}
+    with $a_{ij}\in k$ and hence, 
+    \begin{equation*}
+        0 = \sum_{i = 1}^n x_iy_i = \sum_{i = 1}^n\sum_{j = 1}^m a_{ij}y_iu_j = \sum_{j = 1}^m\left(\sum_{i = 1}^n a_{ij}y_i\right)u_j.
+    \end{equation*}
+    Using the linear disjointness of $K$ and $L$, we must have $\sum_{i = 1}^n a_{ij}y_i = 0$ for all $j$. But since the $y_i$'s are linearly independent over $k$, we must have $a_{ij} = 0$ for all $i,j$. A contradiction.
+\end{proof}
+
+Henceforth, we shall tacitly assume that all pairs of field extensions are contained in a larger field extension $\Omega/k$.
+
+\begin{proposition}
+    Let $k\subseteq R$ be a domain with $K = Q(R)$ and $\{u_\alpha\}\subseteq R$ be a $k$-basis of $R$. If $\{u_\alpha\}$ is $L$-linearly independent, then $K$ and $L$ are linearly disjoint.
+\end{proposition}
+\begin{proof}
+    Suppose not, then there are $x_1,\dots,x_n\in K$ that are $k$-linearly independent but not $L$-linearly independent. Hence, there is a linear combination $\sum_{i = 1}^n z_ix_i = 0$ where $z_i\in L$. There is an $r\in R$ such that $rx_i\in R$ for each $1\le i\le n$. Note that the $rx_i$'s still remain $k$-linearly independent. Thus, we may suppose that every $x_i\in R$.
+
+    The $k$-vector subspace of $R$ generated by the $x_i$'s is contained in a $k$-vector space $V$ generated by finitely many $\{u_j\}_{j = 1}^m\subseteq\{u_\alpha\}$. Obviously, $n < m$. Hence, the set $\{x_i\}_{i = 1}^n$ can be completed to a basis of $V$, $\{x_1,\dots,x_n, x_{n + 1},\dots,x_m\}$. 
+
+    Let $W$ denote the $L$-vector space generated by $\{u_i\}_{i = 1}^m$. We have $\dim W = m$ and that $\{x_1,\dots,x_m\}$ is a generating set for $W$ and hence, forms a basis. Consequently, $x_1,\dots,x_n$ is linearly independent over $L$. This completes the proof.
+\end{proof}
+
+\begin{theorem}[Transitivity of Linear Disjointness]\thlabel{thm:transitivity-linear-disjoint}
+    Consider the following lattice of fields.
+    \begin{equation*}
+    \xymatrix {
+        & KL\ar@{-}[ldd]\ar@{-}[d]\ar@{-}[rd] & \\
+        & KE\ar@{-}[ld]\ar@{-}[rd] & L\ar@{-}[d]\\
+        K\ar@{-}[rd] & & E\ar@{-}[ld]\\
+        & k &
+    }
+    \end{equation*}
+    Then, $K, L$ are linearly disjoint over $k$ if and only if $K, E$ are linearly disjoint over $k$ and $KE, L$ are linearly disjoint over $E$.
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\begin{proposition}
+    Suppose $K/k$ is separable and $L/k$ is purely inseparable with $\chr k = p > 0$. Then, $K$ and $L$ are linearly disjoint over $k$.
+\end{proposition}
+\begin{proof}
+    Suppose not, then there is a finite $k$-linearly independent subset $X$ of $K$ that is not $L$-linearly independent. We may now replace $K$ by $K(X)$ and suppose that $K/k$ is a finite separable extension and hence, admits a primitive element, $K = k(\alpha)$. A basis for $K/k$ is then given by $\{1,\alpha,\dots,\alpha^{n - 1}\}$. Let $f(x)$ be the irreducible polynomial of $\alpha$ over $k$. We contend that $f(x)$ is the irreducible polynomial of $\alpha$ over $L$. 
+
+    Let $g(x)\in L[x]$ be the irreduible polynomial of $k$. Then, there is a non-negative integer $m$ such that $g(x)^{p^m}\in k[x]$. Since $\alpha$ is a root of $g(x)$ and $f(x)$, there is a positive integer $r$ such that $f(x) = g(x)^rh(x)$ for some $h(x)\in L[x]$ such that $\gcd(g,h) = 1$. But since $f$ is separable, we must have $r = 1$ and $f(x) = g(x)h(x)$. Further, $g(x)^{p^m} = f(x)q(x)$ for some $q(x)\in k[x]$ and hence, $g(x)^{p^m - 1} = h(x)q(x)$. Since $\gcd(g,h) = 1$, we must have $h(x) = 1$, consequently, $g(x) = f(x)$.
+
+    This shows that $\{1,\alpha,\dots,\alpha^{n - 1}\}$ is linearly independent over $L$ and hence, $K$ and $L$ are linearly disjoint.
+\end{proof}
+
+\begin{proposition}
+    Let $K/k$ be purely transcendental and $L/k$ purely inseparable with $\chr k = p > 0$. Then, $K$ and $L$ are linearly disjoint.
+\end{proposition}
+\begin{proof}
+    Let $K = k(X)$ where $X$ is a set of $k$-algebraically independent elements. Let $R = k[X]$ and note that the monomials formed from $X$ form a $k$-basis for $R$ and it suffices to show that these are linearly independent over $L$. Suppose there were a relation $\sum_{i} a_i X^{\alpha_i} = 0$ where $a_i\in L$. Since this is a finite sum, there is a positive integer $m$ such that $a_i^{p^m}\in k$ for all $i$. 
+
+    Raising the aforementioned relation to the power $p^m$, we have 
+    \begin{equation*}
+        \sum_{i} a_i^{p^m} X^{p^m\cdot\alpha_i} = 0.
+    \end{equation*}
+    Thus, $a_i^{p^m} = 0$ for all $i$. And the conclusion follows.
+\end{proof}
+
+\begin{definition}[Separably Generated]
+    An extension $K/k$ is said to be \emph{separably generated} if it has a transcendence bais $S\subseteq K$ such that $K/k(S)$ is separable. Such a transcendence basis is called a \emph{separating transcendence basis}.
+\end{definition}
+
+\begin{remark}
+    If $K/k$ is separably generated, it is not necessary that every transcendence basis is a separating transcendence basis. For example, consider the extension $\F_p(x)/\F_p$. This has a separating transcendence basis $\{x\}$. Also, $\{x^p\}$ is a transcendence basis but $\F_p(x)/\F_p(x^p)$ is purely inseparable.
+\end{remark}
+
+\begin{theorem}[McLane]\thlabel{thm:mclane}
+    Let $\chr k = p > 0$ and $K/k$ any extension. Then, the following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $K$ is linearly disjoint from $k^{p^{-\infty}}$. 
+        \item $K$ is linearly disjoint from $k^{p^{-n}}$ for some positive integer $n$. 
+        \item $K$ is linearly disjoint from $k^{p^{-1}}$. 
+        \item Any finitely generated subfield of $K/k$ is separably generated.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(a)\implies(b)\implies(c)$ is clear.
+
+    $(c)\implies(d)$ Let $A = \{a_1,\dots, a_n\}\subseteq K$ and $E = k(A)\subseteq K$. If $A$ is algebraically independent over $k$, then we are done by taking $A$ to be a transcendence basis. 
+
+    Suppose $A$ is not algebraically independent and choose $0\ne f\in k[x_1,\dots,x_n]$ to be of smallest degree such that $f(a_1,\dots,a_n) = 0$. Suppose that every monomial in $f$ is a power of $p$. Then, there are monomials $m_\alpha(x)\in k[x_1,\dots,x_n]$ such that 
+    \begin{equation*}
+        f(X) = \sum_{\alpha} a_\alpha m_\alpha(X)^p,
+    \end{equation*}
+    where not all $a_\alpha$'s are zero. Hence, there is a $g(X)\in k^{p^{-1}}[x_1,\dots,x_n]$ such that $f(X) = g(X)^p$. Denote 
+    \begin{equation*}
+        g(X) = \sum_{\alpha} a_\alpha^{1/p} m_\alpha(\vec a).
+    \end{equation*}
+    The elements $m_\alpha(\vec a)$ are linearly dependent over $k^{p^{-1}}$ and hence, are linearly dependent over $k$. Consequently, there exist $b_\alpha\in k$ such that 
+    \begin{equation*}
+        \sum_{\alpha} b_\alpha m_\alpha(\vec a) = 0.
+    \end{equation*}
+    Set $h(X) = \sum_\alpha b_\alpha m_\alpha(X)\in k[X]$. Then, $h(\vec a) = 0$, which contradicts the minimality of the degree of $f$.
+
+    Hence, in $f$, there is a monomial that is not a power of $p$. Without loss of generality, suppose that monomial contains $x_1$ whose exponent is not a power of $p$. Then, consider the polynomial $f_0(x_1)\in k[a_2,\dots,a_n][x_1]$ given by 
+    \begin{equation*}
+        f_0(x_1) = f(x_1,a_2,\dots,a_n).
+    \end{equation*}
+    Note that $f_0(a_1) = 0$ and $f_0'(x_1)$ is a non-zero polynomial which cannot have $a_1$ as a root, lest we contradict the minimality of the degree of $f$. Hence, $a_1$ is separable over $k[a_2,\dots,a_n]$. Now, induct downwards.
+
+    $(d)\implies(a)$ Let $a_1,\dots,a_n\in K$ be $k$-linearly independent and set $E = k(a_1,\dots,a_n)$. This is a finitely generated subfield of $K/k$ and hence, has a separating transcendence basis $S\subseteq k(a_1,\dots,a_n)$. Since $k(S)$ is purely transcendental and $k^{p^{-\infty}}$ is purely inseparable, they are linearly disjoint over $k$. 
+
+    \begin{equation*}
+    \xymatrix {
+        K\ar@{-}[d] & \\
+        E\ar@{-}[d]_{\text{sep}} & k^{p^{-\infty}}(S)\ar@{-}[d]\\
+        k(S)\ar@{-}[d]_{\text{p. trans}}\ar@{-}[ru]_{\text{p. ins}} & k^{p^{-\infty}}\\
+        k\ar@{-}[ru]_{\text{p. ins}}
+    }
+    \end{equation*}
+
+    Next, since $k^{p^{-\infty}}(S)/k(S)$ is purely inseparable and $E/k(S)$ is separable, they are linearly disjoint over $k(S)$. Thus, due to \thref{thm:transitivity-linear-disjoint}, $E$ and $k^{p^{-\infty}}$ are linearly disjoint over $k$. 
+
+    Since every finitely generated subfield of $K$ is linearly disjoint from $k^{p^{-\infty}}$ over $k$, we must have that $K$ is linearly disjoint from $k^{p^{-\infty}}$ over $k$. This completes the proof.
+
+\end{proof}
+
+\begin{definition}[Separable]
+    An extension $K/k$ that satisfies the equivalent statements of \thref{thm:mclane} is said to be \emph{separable}.
+\end{definition}
+
+\begin{theorem}
+    Let $\chr k = p$ and $k\subseteq E\subseteq K$ be a tower of fields. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $K/k$ is separable, then $E/k$ is separable. 
+        \item If $K/E$ and $E/k$ are separable, then $K/k$ is separable. 
+        \item If $k$ is perfect, then any extension of $k$ is separable. 
+        \item If $K/k$ is separable and $E/k$ is algebraic, then $K/E$ is separable.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(a)$ follows from the fact that any finitely generated subextension of $E$ is a finitely generated subextension of $K$.
+
+    $(b)$ We have the following lattice of fields. 
+    \begin{equation*}
+        \xymatrix {
+            K & E^{p^{-\infty}}\ar@{-}[d]\\
+            E\ar@{-}[u]\ar@{-}[ru] & k^{p^{-\infty}}\\
+            k\ar@{-}[ru]\ar@{-}[u] & 
+        }
+    \end{equation*}
+    According to the hypothesis, $K$ and $E^{p^{-\infty}}$ are linearly disjoint over $E$ and $E$ and $k^{p^{-\infty}}$ are linearly disjoint over $k$. Note that the compositum $Ek^{p^{-\infty}}$ is contained in $E^{p^{-\infty}}$ whence $K$ and $Ek^{p^{-\infty}}$ are linearly disjoint over $k$. From \thref{thm:transitivity-linear-disjoint}, we have that $K$ and $k^{p^{-\infty}}$ are linearly disjoint over $k$.
+
+    $(c)$ Clear.
+
+    $(d)$ Let $F = E(a_1,\dots,a_n)\subseteq K$ be a finitely generated subextension of $K/E$ and set $L = k(a_1,\dots,a_n)$. This has a separating transcendence basis $S\subseteq L$. Then, $F/E(S)$ is separable. Hence, it suffices to show that $S$ is algebraically independent over $E$. 
+
+    Since $F/E(S)$ is algebraic and $E(S)/k(S)$ is algebraic, we have $\trdeg(F/k) = |S|$. Hence, $\trdeg(F/E) = \trdeg(F/k) - \trdeg(E/k) = |S|$. Hence, $S$ must be a transcendence basis of $F/E$. This completes the proof.
+\end{proof}
