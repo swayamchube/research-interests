@@ -81,9 +81,10 @@
 \end{proof}
 
 \begin{theorem}[L\"uroth's Theorem]
-    Let $k(x)/k$ be a purely transcendental extension. Then, any intermediate field strictly containing $k$ is of the form $k(r(x))$ where $r(x)\in k(x)$ is a rational function. Further, $[k(x):k(r(x))] = \deg(r(x))$.
+    Let $k(t)/k$ be a purely transcendental extension. Then, any intermediate field strictly containing $k$ is of the form $k(r(t))$ where $r(t)\in k(t)$ is a rational function. Further, $[k(t):k(r(t))] = \deg(r(t))$.
 \end{theorem}
 \begin{proof}
+    
 \end{proof}
 
 \section{Linear Disjointness}
@@ -249,4 +250,54 @@ Henceforth, we shall tacitly assume that all pairs of field extensions are conta
     $(d)$ Let $F = E(a_1,\dots,a_n)\subseteq K$ be a finitely generated subextension of $K/E$ and set $L = k(a_1,\dots,a_n)$. This has a separating transcendence basis $S\subseteq L$. Then, $F/E(S)$ is separable. Hence, it suffices to show that $S$ is algebraically independent over $E$. 
 
     Since $F/E(S)$ is algebraic and $E(S)/k(S)$ is algebraic, we have $\trdeg(F/k) = |S|$. Hence, $\trdeg(F/E) = \trdeg(F/k) - \trdeg(E/k) = |S|$. Hence, $S$ must be a transcendence basis of $F/E$. This completes the proof.
+\end{proof}
+
+\begin{definition}[Free]
+    The pair of extensions $(K/k, L/k)$ is said to be \emph{free} if every $k$-algebraically independent subset of $K$ is $L$-algebraically independent.
+\end{definition}
+
+\begin{proposition}
+    If $(K/k, L/k)$ is free, then so is $(L/k, K/k)$.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+
+\section{A Brief Treatment of Varieties}
+
+\textcolor{red}{\textbf{Throughout this section, $k$ is an arbitrary field and $K$, an algebraic closure of $k$.}}
+
+\subsection{Parametrization}
+
+\begin{definition}
+    An irreducible $k$-variety $V$ is called \emph{rational} if the function field $k(V)$ is a purely transcendental extension of $k$.
+\end{definition}
+
+\begin{definition}
+    A \emph{curve} is an irreducible $k$-variety that has dimension $1$. Equivalently, $\dim k[V] = 1$. We say that $V$ can be \emph{parametrized} by rational functions in $k(t)$ if there are rational functions $f_1,\dots,f_n\in k(t)$ such that 
+    \begin{equation*}
+        \{(f_1(t),\dots,f_n(t))\mid t\in K\},
+    \end{equation*}
+    wherever defined, is a dense subset of $V$ in the $k$-Zariski topology.
+\end{definition}
+
+\begin{theorem}
+    Let $V$ be an irreducible curve defined over a field $k$. Then, $V$ can be parametrized by rational functions in $k(t)$ if and only if there is an $k$-isomorphism $k(V)\cong k(t)$.
+\end{theorem}
+\begin{proof}
+    $(\implies)$ Suppose we have a parametrization given by $(f_1(t),\dots,f_n(t))$ where $f_i(t)\in k(t)$. Let 
+    \begin{equation*}
+        U = \{(f_1(a),\dots, f_n(a))\mid a\in K\}.
+    \end{equation*}
+    Then, $\overline U = V$ in the $k$-Zariski topology. Consier the ring homomorphism $\varphi: k[X]\to k(t)$ given by $\varphi(X_i) = f_i(t)$. Note that 
+    \begin{equation*}
+        \ker\varphi = \{h\in k[X]\mid h(f_1(t),\dots,f_n(t)) = 0\}.
+    \end{equation*}
+    If $h\in\ker\varphi$, then $h(f_1(a),\dots,f_n(a)) = 0$ for all $a\in K$. Hence, $U\subseteq Z(h)$, consequently, $V = \overline U\subseteq Z(h)$. In particular, $h\in\scrI(V)$. Conversely, if $g\in\scrI(V)$, then for all but finitely many elements of $K$, $g(f_1(a),\dots,f_n(a)) = 0$. Hence, $g(f_1(t),\dots, f_n(t)) = 0$, that is, $g\in\ker\varphi$ and this gives, $\ker\varphi = \scrI(V)$. And hence, $\varphi$ induces a map $\varphi': k[V]\to k(t)$, which in turn induces $\psi: k(V)\to k(t)$. Finally, from L\"uroth's Theorem, $k(V)\cong k(t)$.
+
+    $(\impliedby)$ Let $\varphi: k(V)\to k(t)$ be a $k$-automorphism. Let $x_i$ denote the image of $X_i$ in $k[V]\subseteq k(V)$ and let $f_i(t) = \varphi(x_i)$ and $\varphi^{-1}(t) = g(x_1,\dots,x_n)/h(x_1,\dots,x_n)$. Note that $x_i = \varphi^{-1}(\varphi(x_i)) = \varphi^{-1}(f_i(t)) = f_i(g/h)$. 
+
+    Now, given any $p\in V$ such that $h(p)\ne 0$, with $p = (p_1,\dots,p_n)$, then $p_i = f_i(g(p)/h(p))$ and hence, $p = (f_1(a),\dots,f_n(a))$ where $a = g(p)/h(p)$. Hence, all but finitely many points in $V$ can be expressed as $(f_1(a),\dots,f_n(a))$ for some $a\in K$. On the other hand, if $a\in K$ such that each $f_i(a)$ is defined, then setting $p = (f_1(a),\dots,f_n(a))$, we have $u(p) = 0$ for every $u\in\scrI(V)$. This means, $p\in Z(\scrI(V)) = V$.
+
+    In conclusion, we have that the set $\{(f_1(a),\dots,f_n(a))\mid a\in K\}$ misses finitely many points of $V$ and hence, is dense in $V$.
 \end{proof}
