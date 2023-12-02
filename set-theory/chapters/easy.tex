@@ -1,0 +1,232 @@
+\section{Relativization}
+
+\newcommand{\M}{\mathbf{M}}
+\newcommand{\Con}{\operatorname{Con}}
+
+\begin{definition}
+    Let $\mathbf M$ be any class. For any formula $\phi$, define $\phi^{\M}$, the \emph{relativization} of $\phi$ to $\M$ by induction on $\phi$, by 
+    \begin{enumerate}[label=(\alph*)]
+        \item $(x = y)^{\M}$ is $x = y$. 
+        \item $(x\in y)^{\M}$ is $x\in y$. 
+        \item $(\phi\wedge\psi)^{\M}$ is $\phi^{\M}\wedge\psi^\M$.
+        \item $(\neg\phi)^\M$ is $\neg\phi^\M$ 
+        \item $(\exists\phi)^\M$ is $\exists x(x\in\M\wedge\phi^\M)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    Let $S$ and $T$ be two sets of sentences in the language of set theory under consideration, and suppose for some class $\M$, we can prove from $T$ that $\M\ne 0$ and $\M$ is a model for $S$. Then, $\Con(T)\implies\Con(S)$.
+\end{lemma}
+\begin{proof}
+    Quite straightforward. Suppose $S$ were inconsistent. Then, there is a sentence $\chi$ such that we could prove $\chi\wedge\neg\chi$ from $S$. Then, we could begin a formal proof from $T$ and prove that $S$ is true in $\M$ and hence, $\chi^\M\wedge\neg\chi^\M$, a contradiction. Thus, $T$ is inconsistent.
+\end{proof}
+
+Recall the Axiom of Extensionality, 
+\begin{equation*}
+    \forall x,y\left(\forall z(z\in x\iff z\in y)\implies x = y\right).
+\end{equation*}
+Relativized to $\M$, it looks like 
+\begin{equation*}
+    \forall x,y\in\M\left(\forall z\in\M(z\in x\iff z\in y)\implies x = y\right).
+\end{equation*}
+
+\begin{lemma}
+    If $\M$ is transitive, the Axiom of Extensionality is true in $M$.
+\end{lemma}
+\begin{proof}
+    We have seen this in the previous chapter.
+\end{proof}
+
+\begin{lemma}
+    If for each formula $\phi(x,z,w_1,\dots,w_n)$ with only the displayed variables free, 
+    \begin{equation*}
+        \forall z,w_1,\dots,w_n\in\M\left(\{x\in z\mid \phi^\M(x,z,w_1,\dots,w_n)\in\M\}\right),
+    \end{equation*}
+    then the Axiom of Comprehension is true in $\M$.
+\end{lemma}
+\begin{proof}
+    Since the relativized instance of Comprehension is given by 
+    \begin{equation*}
+        \forall z,w_1,\dots,w_n\in\M\exists y\in\M\left(x\in y\iff x\in z\wedge\phi^\M(x,z,w_1,\dots,w_n)\right).
+    \end{equation*}
+    The conclusion is now obvious from the hypothesis.
+\end{proof}
+\begin{remark}
+    In particular, if $\forall z\in\M(\mathscr P(z)\subseteq\M)$, then the Comprehension Axiom is true in $\M$. This shall turn out to be useful later on.
+\end{remark}
+
+\begin{theorem}
+    Assume the consistency of $\mathsf{ZF}^-$. If $\M = \{0\}$, then Extensionality + Comprehension + $\forall y(y = 0)$ is consistent.
+\end{theorem}
+\begin{proof}
+    Extensionality is true in $\M$ since it is transitive while Comprehension is true in $\M$ from the preceeding remark. 
+\end{proof}
+
+The above can be written as 
+\begin{equation*}
+    \Con(\mathsf{ZF}^-)\implies\Con\left(\mathsf{Extensionality} + \mathsf{Comprehension} + \forall y(y = 0)\right).
+\end{equation*}
+
+Let us now look at the Power Set Axiom. Recall that this is 
+\begin{equation*}
+    \forall x\exists y\forall z(z\subseteq x\implies z\in y).
+\end{equation*}
+We shall first see what $z\subseteq x$ becomes upon relativizing to $\M$. Note that $z\subseteq x$ is shorthand for $\forall w(w\in z\implies w\in x)$. This relativized to $\M$ is $\forall w\in\M(w\in z\implies w\in x)$ which is equivalent to writing $z\cap\M\subseteq x$. We may now write down the relativized Power Set Axiom as 
+\begin{equation*}
+    \forall x\in\M\exists y\in\M\forall z\in\M(z\cap\M\subseteq x\implies z\in y).
+\end{equation*}
+
+Suppose $\M$ is transitive. Then, $z\in\M$ implies $z\subseteq\M$ whence $z\cap\M = z$ nad hence, the Power Set Axiom holds in $\M$ if and only if 
+\begin{equation*}
+    \forall x\in\M\exists y\in\M\forall z\in\M(z\subseteq x\implies z\in y).
+\end{equation*}
+
+In particular, we have the following. 
+\begin{lemma}
+    If $\M$ is transitive, the Power Set Axiom holds in $\M$ if and only if 
+    \begin{equation*}
+        \forall x\in\M\exists y\in\M(\mathscr P(x)\cap\M\subseteq y).
+    \end{equation*}
+\end{lemma}
+
+\begin{lemma}
+    If 
+    \begin{equation*}
+        \forall x,y\in\M\exists z\in\M(x\in z\wedge y\in z),\quad\text{and}\quad\forall x\in\M\exists z\in\M(\bigcup x\subseteq z),
+    \end{equation*}
+    then the Pairing and Union Axioms are true in $\M$.
+\end{lemma}
+\begin{proof}
+    Obvious.
+\end{proof}
+
+In particular, the Pairing and Union Axioms are true in $R(\omega)$ and $\WF$, which is trivial to see. 
+
+Next, we shall show that Replacement is also true in $R(\omega)$ and $\WF$. First, a lemma.
+\begin{lemma}
+    Suppose for each formula $\phi(x,y,A,w_1,\dots,w_n)$ and each $A,w_1,\dots,w_n\in\M$, if 
+    \begin{equation*}
+        \forall x\in A\exists! y\in\M~\phi^{\M}(x,y,A,w_1,\dots,w_n),
+    \end{equation*}
+    then 
+    \begin{equation*}
+        \exists Y\in\M\left(\{y\mid\exists x\in A~\phi^{\M}(x,y, A, w_1,\dots,w_n)\}\subseteq Y\right).
+    \end{equation*}
+    Then the Replacement Scheme is true in $\M$.
+\end{lemma}
+\begin{proof}
+    Again, obvious.
+\end{proof}
+
+Consider now the case $\M = R(\omega)$ or $\WF$ and let $Y$ be as defined in the lemma above. If $\M = \WF$, $Y\subseteq\WF$ and thus, $Y\in\WF$. On the other hand, if $\M = R(\omega)$, then $|Y|$ is finte and hence, $Y\subseteq R(n)$ for some $n$, whence $Y\in R(n + 1)$. This shows that replacement is true. 
+
+We now move onto foundation. The relativization of foundation to $\M$ is 
+\begin{equation*}
+    \forall x\in\M\left(\exists y\in\M(y\in x)\implies\exists y\in\M(y\in x\wedge\ne\exists z\in\M(z\in x\wedge z\in y))\right).
+\end{equation*}
+
+Now, if $\M\subseteq\WF$ and $x\in\M$, pick $y\in\M\cap x$ with the smallest rank. It is routine to show that this satisfies the statement of the relativized axiom. This shows that Foundation is true in any $\M\subseteq\WF$. We now have the following. 
+
+\begin{theorem}
+    $\WF$ and $R(\omega)$ are models of $\mathsf{ZF} - \mathsf{Inf}$.
+\end{theorem}
+
+\section{Absoluteness}
+
+\begin{definition}
+    Let $\phi$ be a formula with $x_1,\dots,x_n$ free. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\M\subseteq\mathbf N$, then $\phi$ is \emph{absolute} for $\mathbf M$, $\mathbf N$ if and only if 
+        \begin{equation*}
+            \forall x_1,\dots,x_n\in\mathbf M\left(\phi^\M(x_1,\dots,x_n)\iff\phi^{\mathbf N}(x_1,\dots,x_n)\right).
+        \end{equation*}
+        \item $\phi$ is said to be \emph{absolute} for $\M$ if it is absolute for $\mathbf M, \mathbf V$.
+    \end{enumerate}
+    Obviously, if $\phi$ is absolute for $\M$ and $\mathbf N$, and if $\mathbf M\subseteq\mathbf N$, then $\phi$ is absolute for $\M,\mathbf N$.
+\end{definition}
+
+\begin{remark}
+    If $\M\subseteq\mathbf N$ and $\phi,\psi$ are both absolute for $\mathbf M, \mathbf N$, so are $\neg\phi$ and $\phi\wedge\psi$. This is trivial to prove. Further, note that $x = y$ and $x\in y$ are absolute for all $\mathbf M$, and any formula without quantifiers is built using the aforementioned atomic formulae and $\neg$ and $\wedge$. Therefore, a quantifier-free formula is absolute for any $\mathbf M$.
+\end{remark}
+
+\begin{lemma}
+    If $\M\subseteq\mathbf N$ are both transitive and $\phi$ is absolute for $\M,\mathbf N$, then so is $\exists x\in y\phi$.
+\end{lemma}
+\begin{proof}
+    Trivial.
+\end{proof}
+
+\begin{definition}
+    The collection $\Delta_0$ of formulas are those built up inductively by: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $x\in y$ and $x = y$ are $\Delta_0$.
+        \item If $\phi,\psi$ are $\Delta_0$, so are $\neg\phi$ and $\phi\wedge\psi$. 
+        \item If $\phi$ is $\Delta_0$, so is $\exists x(x\in y \wedge\phi)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{corollary}
+    If $\M$ is transitive and $\phi$ is $\Delta_0$, then $\phi$ is absolute for $\M$.
+\end{corollary}
+\begin{proof}
+    This follows from the previous lemma applied to $\M, \V$ and the above definition.
+\end{proof}
+
+\begin{lemma}
+    Suppose $\M\subseteq\mathbf N$ are models for a set of sentences $S$, such that 
+    \begin{equation*}
+        S\vdash\forall x_1,\dots,x_n\left(\phi(x_1,\dots,x_n)\iff\psi(x_1,\dots,x_n)\right)
+    \end{equation*}
+    then $\phi$ is absolute for $\M,\mathbf N$ if and only if $\psi$ is.
+\end{lemma}
+\begin{proof}
+    Follows immediately from the definition of absoluteness.
+\end{proof}
+
+Note that a function $F(x_1,\dots,x_n)$ can be defined through a formula in $\M$ if the following is true: 
+\begin{equation*}
+    \forall x_1,\dots,x_n\exists! y~\phi(x_1,\dots,x_n,y).
+\end{equation*}
+
+\begin{definition}
+    If $\M\subseteq\mathbf N$ and $F(x_1,\dots,x_n)$ is a defined function, we say that $F$ is \emph{absolute} for $\M,\mathbf N$ if $\phi$ is.
+\end{definition}
+
+\begin{remark}
+    There is now a tedious verification that almost all the operations that we use in set theory are absolute for a transitive model $\M$ that is a model for $\mathsf{ZF}^- - \mathsf P - \mathsf{Inf}$.
+\end{remark}
+
+\begin{lemma}
+    Let $\M$ be a transitive model for $\mathsf{ZF}^- - \mathsf P - \mathsf{Inf}$. If $\omega\in\M$, then the Axiom of Infinity is true in $\M$. 
+\end{lemma}
+\begin{proof}
+    Due to the remark above, $0$ and $S$ are absolute in $\M$. The Axiom of Infinity relativized to $\M$ now looks like 
+    \begin{equation*}
+        \exists x\in\M(0\in x\wedge\forall y\in x(S(y)\in x)),
+    \end{equation*}
+    which is seen to be true by taking $x = \omega$.
+\end{proof}
+
+The same argument yields that the Axiom of Infinity is false in $R(\omega)$, since any $x\in\WF$ containing $0$ and closed under $S$ has infinite rank. Thus, we have:
+
+\begin{theorem}
+    $R(\omega)$ is a model of $\mathsf{ZFC} - \mathsf{Inf} + (\neg\mathsf{Inf})$.
+\end{theorem}
+\begin{proof}
+    It only remains to check that AC holds, for which we need to come up with a well-ordering for any $A\in R(\omega)$. But $A$ is finite and thus can be well ordered. Le $R\subseteq A\times A$ be a well-order. Then, $R$ must lie in $R(\omega)$ due to transitivity. The proof is complete due to the following lemma.
+\end{proof}
+
+\begin{lemma}
+    Suppose $\M$ is a transitive model of $\mathsf{ZF}^- - \mathsf P - \mathsf{Inf}$. Let $A, R\in\M$ and suppose that $R$ well-orders $A$. Then $(R\text{ well-orders }A)^\M$.
+\end{lemma}
+
+\section{\texorpdfstring{$H(\kappa)$}{H(k)}}
+
+\begin{definition}
+    For an infinite cardinal $\kappa$, $H(\kappa) = \{x\mid|\trcl(x)| < \kappa\}$. Note that choice is not required for this definition, since we implicitly assume that $|y| < \kappa$ means that $y$ is well-orderable and $|y| < \kappa$.
+\end{definition}
+
+That each $H(\kappa)$ is a set and not a proper class follows from the following: 
+\begin{theorem}
+    For any infinite $\kappa$, $H(\kappa)\subseteq R(\kappa)$.
+\end{theorem}

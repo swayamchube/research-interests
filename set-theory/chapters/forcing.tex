@@ -1,0 +1,268 @@
+\section{Some Infinitary Combinatorics}
+
+\begin{definition}[Cofinal]
+    If $f:\alpha\to\beta$, then $f$ maps $\alpha$ \emph{cofinally} if and only if $\ran(f)$ is unbounded in $\beta$. The \emph{cofinality} of $\beta$ is the least $\alpha$ that can be cofinally mapped into $\beta$.
+\end{definition}
+
+\begin{lemma}
+    There is a cofinal map $f:\cf(\beta)\to\beta$ which is strictly increasing.
+\end{lemma}
+\begin{proof}
+    Let $\alpha = \cf(\beta)$ and $f: \alpha\to\beta$ be a cofinal map. Define the map $g:\alpha\to\beta$ by 
+    \begin{equation*}
+        g(\eta) = max\{f(\eta), \sup\{f(\xi) + 1\colon \xi < \eta\}\}.
+    \end{equation*}
+    It is not hard to argue that $g:\alpha\to\beta$ is cofinal.
+\end{proof}
+
+\begin{lemma}
+    If $\alpha$ is a limit ordinal and $f:\alpha\to\beta$ is a strictly increasing cofinal map, then $\cf(\alpha) = \cf(\beta)$.
+\end{lemma}
+\begin{proof}
+    Upon composing $f$ with a strictly increasing cofinal map $\cf(\alpha)\to\alpha$, we see that $\cf(\beta)\le\cf(\alpha)$. Next, we would like to show that $\cf(\alpha)\le\cf(\beta)$. Let $g:\cf(\beta)\to\beta$ be a strictly increasing cofinal map. Define $h:\cf(\beta)\to\alpha$ by 
+    \begin{equation*}
+        h(\eta) = \inf_{\xi\in\alpha} f(\xi) > g(\eta).
+    \end{equation*}
+    It is not hard to see that $h$ is a cofinal map. Therefore, $\cf(\alpha)\le\cf(\beta)$ and this completes the proof.
+\end{proof}
+
+\begin{definition}
+    $\beta$ is said to be \emph{regular} if $\beta$ is a limit ordinal and $\cf(\beta) = \beta$.
+\end{definition}
+
+\begin{lemma}
+    If $\beta$ is regular, then $\beta$ is a cardinal.
+\end{lemma}
+\begin{proof}
+    Cofinality is a cardinal.
+\end{proof}
+
+\begin{lemma}
+    All successor cardinals are regular.
+\end{lemma}
+\begin{proof}
+    Suppose there is a strictly increasing cofinal map $f:\kappa\to\kappa^+$. For each $\alpha\in\kappa$, note that $|f(\alpha)|\le\kappa$ and due to cofinality, $\kappa^+ = \bigcup_{\alpha\in\kappa} f(\alpha)$. This is a cardinality contradiction.
+\end{proof}
+
+\begin{lemma}[$\Delta$-system Lemma]
+    Let $\mathscr A$ be an uncountable collection of finite sets. Then, there is an uncountable subcollection $\mathscr B$ of $\mathscr A$ and a set $r$ such that for all $x,y\in\mathscr B$ with $x\ne y$, $x\cap y = r$.
+\end{lemma}
+\begin{proof}
+    There is a minimum cardinal $n < \omega$ such that there are uncountably many elements of $\mathscr A$ with cardinality $n$. Let $\mathscr A'$ denote the subcollection of these elements. We shall induct on the aforementioned unique $n$ for $\mathscr A$. 
+    
+    If $n = 1$, then there is nothing to prove since the elements of $\mathscr A'$ are disjoint. Now, suppose $n > 1$. If there is some $a$ that is in uncountably many elements of $\mathscr A'$, then consider $\mathscr A'' = \{x\backslash\{a\}\colon a\in x\in\mathscr A'\}$. We may now apply the induction hypothesis to find a subcollection $\mathscr B''$ of $\mathscr A''$ with the required property. Consider then the collection $\mathscr B = \{x\cup\{a\}\colon x\in\mathscr B''\}$.
+
+    On the other hand, suppose there is no such $a$ that is in uncountably many elements of $\mathscr A'$. Begin with any $x_0\in\mathscr A'$. Let $\alpha < \omega_1$ be an ordinal and suppose the sequence $(x_i)_{i < \alpha}$ has been constructed. The union $x = \bigcup_{i < \alpha} x_i$ is a countable set (being the countable union of finite sets). Now, every element of $x$ is in countably many elements of $\mathscr A'$, consequently, there are uncountably many elements of $\mathscr A'$ that are disjoint from $x$. Define $x_\alpha$ to be any one of these and continue this process. 
+
+    The sequence $(x_i)_{i < \omega_1}$ is now an uncountable collection of pairwise disjoint elements of $\mathscr A'$ and is our desired $\mathscr B$ with $r = \emptyset$.
+\end{proof}
+
+\begin{definition}
+    Let $(\bbP, \le)$ be a partial order. Elements $p,q\in\bbP$ are said to be \emph{compatible} if there is an $r$ with $r\le p$ and $r\le q$. An \emph{antichain} is a collection of pairwise incompatible elements in $\bbP$.
+\end{definition}
+
+\section{Some Technicalities about Forcing}
+
+Throughout this section, let $\bbP$ be a poset in $M$, a countable transitive model for $\mathsf{ZFC}$.
+
+
+\begin{definition}[Forcing]
+    Let $p\in\bbP$ and $\tau_1,\dots,\tau_n\in M^\bbP$. Let $\phi(x_1,\dots,x_n)$ be a formula with all free variables shown. Then, we write $p\Vdash\phi(\tau_1,\dots,\tau_n)$ if 
+    \begin{equation*}
+        \forall G\subseteq\bbP\left((G\text{ is generic}\wedge p\in G)\implies\phi^{M[G]}(\val(\tau_1, G),\dots,\val(\tau_n, G))\right).
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    If $E\subseteq\bbP$ and $p\in\bbP$, then $E$ is said to be \emph{dense below} $p$ if $\forall q\le p\left(\exists r\in E(r\le q)\right)$.
+\end{definition}
+
+We now come to the ugliest definition of this article.
+
+\begin{definition}
+    Let $\phi(x_1,\dots,x_n)$ be a formula with all free variables shown, $p\in\bbP$ and $\tau_1,\dots,\tau_n\in V^\bbP$.
+    \begin{itemize}
+        \item $p\Vdash^*\tau_1 = \tau_2$ if and only if for all $\langle\pi_1,s_1\rangle\in\tau_1$,
+        \begin{equation*}
+            \{q\le p\colon q\le s_1\implies\exists\langle\pi_2,s_2\rangle\in\tau_2\left(q\le s_2\wedge q\Vdash^*\pi_1 = \pi_2\right)\}
+        \end{equation*}
+        is dense below $p$. And for all $\langle\pi_2,s_2\rangle\in\tau_2$, 
+        \begin{equation*}
+            \{q\le p\colon q\le s_2\implies\exists\langle\pi_1,s_1\rangle\in\tau_1\left(q\le s_1\wedge q\Vdash^*\pi_1 = \pi_2\right)\}
+        \end{equation*}
+        is dense below $p$.
+
+        \item $p\Vdash^*\tau_1\in\tau_2$ if and only if 
+        \begin{equation*}
+            \{q\colon\exists\langle\pi,s\rangle\in\tau_2\left(q\le s\wedge q\Vdash^*\pi = \tau_1\right)\}
+        \end{equation*}
+        is dense below $p$.
+
+        \item $p\Vdash^*\left(\phi(\tau_1,\dots,\tau_n)\wedge\psi(\tau_1,\dots,\tau_n)\right)$ if and only if 
+        \begin{equation*}
+            p\Vdash^*\phi(\tau_1,\dots,\tau_n)\text{ and }p\Vdash^*\psi(\tau_1,\dots,\tau_n).
+        \end{equation*}
+
+        \item $p\Vdash^*\neg\phi(\tau_1,\dots,\tau_n)$ if and only if there is no $q\le p$ such that $q\Vdash^*\phi(\tau_1,\dots,\tau_n)$.
+
+        \item $p\Vdash^*\exists x\phi(x,\tau_1,\dots,\tau_n)$ if and only if 
+        \begin{equation*}
+            \{r\colon\exists\sigma\in V^\bbP\left(r\Vdash^*\phi(\sigma,\tau_1,\dots,\tau_n)\right)\}
+        \end{equation*}
+        is dense below $p$.
+    \end{itemize}
+\end{definition}
+
+\begin{lemma}
+    Let $phi(x_1,\dots,x_n)$ be a formula with all free variables shown and $\tau_1,\dots,\tau_n\in M^\bbP$. 
+    \begin{enumerate}
+        \item If $p\in G$ and $(p\Vdash^*\phi(\tau_1,\dots,\tau_n))^{M}$, then $\left(\phi(\val(\tau_1, G),\dots,\val(\tau_n, G))\right)^{M[G]}$.
+        
+        \item If $\phi(\val(\tau_1, G),\dots,\val(\tau_n, G))^{M[G]}$, then $\exists p\in G(p\Vdash^*\phi(\tau_1,\dots,\tau_n))^{M}$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Omitted due to length.
+\end{proof}
+
+\begin{theorem}
+    Let $\phi(x_1,\dots,x_n)$ be a formula with all free variables shown and $\tau_1,\dots,\tau_n\in M^\bbP$. Then, 
+    \begin{enumerate}
+        \item for all $p\in\bbP$, 
+        \begin{equation*}
+            p\Vdash\phi(\tau_1,\dots,\tau_n)\iff\left(p\Vdash^*\phi(\tau_1,\dots,\tau_n)\right)^M.
+        \end{equation*}
+
+        \item for all $G$ that are $\bbP$-generic over $M$,
+        \begin{equation*}
+            \phi(\val(\tau_1, G),\dots,\val(\tau_n, G))^{M[G]}\iff\exists p\in G\left(p\Vdash\phi(\tau_1,\dots,\tau_n)\right).
+        \end{equation*}
+    \end{enumerate}
+\end{theorem}
+
+\section{Breaking $\mathsf{CH}$}
+
+Throughout this section, let $M$ be a countable transitive model of $\mathsf{ZFC}$.
+
+\begin{definition}
+    Let $I, J\in M$. Define 
+    \begin{equation*}
+        \Fn(I, J) = \{p\colon p\text{ is a function }\wedge |p| < \omega\wedge\dom(p)\subseteq I\wedge\ran(p)\subseteq J\}.
+    \end{equation*}
+    Order $\Fn(I, J)$ by $p\le q$ if and only if $p\supseteq q$. Then, $\Fn(I, J)$ has a maximum element, $0$, the empty function.
+\end{definition}
+
+\begin{lemma}
+    If $I, J\in M$ and $I$ is infinite, $J\ne\emptyset$, and $G$ is $\Fn(I, J)$-generic over $M$, then $\bigcup G$ is a surjective function $I\to J$.
+\end{lemma}
+\begin{proof}
+    That $\bigcup G$ is a function is trivial. For $i\in I$, let 
+    \begin{equation*}
+        D_i := \{p\in\Fn(I, J)\colon i\in\dom(p)\}.
+    \end{equation*}
+    This is a dense set in $\Fn(I, J)$ and hence, intersects $G$. Thus, $i\in\dom\left(\bigcup G\right)$ and hence, $I = \dom\left(\bigcup G\right)$.
+
+    Let $j\in J$ and consider the set 
+    \begin{equation*}
+        D_j := \{p\in\Fn(I, J)\colon j\in\ran(p)\}.
+    \end{equation*}
+    This is dense in $\Fn(I, J)$ and hence, intersects $G$. Consequently, $J = \ran\left(\bigcup G\right)$.
+\end{proof}
+
+\begin{lemma}
+    If $\kappa\in M$ is a cardinal and $G$ is $\Fn(\kappa\times\omega, 2)$-generic over $M$, then $(2^\omega\ge|\kappa|)^{M[G]}$. 
+
+    Note that we must use $|\kappa|$ instead of $\kappa$ since the extension may not preserve cardinals.
+\end{lemma}
+\begin{proof}
+    Let $\bbP = \Fn(\kappa\times\omega, 2)$. Then, $f = \bigcup G$ is a function $\kappa\times\omega\to 2$. Define for any $\alpha,\beta\in\kappa$,
+    \begin{equation*}
+        D_{\alpha,\beta} = \{p\in\bbP\colon \exists n\in\omega\left(\langle\alpha, n\rangle\in\dom(p)\wedge\langle\beta, n\rangle\in\dom(p)\wedge p(\alpha, n)\ne\dom(\beta, n)\right)\}.
+    \end{equation*}
+    This is dense in $\bbP$ and hence, $G\cap D_{\alpha,\beta}$ is non empty. 
+
+    Now, let $g_\alpha:\omega\to 2$ by $g_\alpha(n) = f(\alpha, n)$. Due to the above argument, $g_\alpha\ne g_\beta$ whenever $\alpha\ne\beta$. Note that all the $g_\alpha$'s are elements of $M[G]$. Consequently, there are at least $\kappa$ many distinct functions from $\omega\to 2$ in $M[G]$. The conclusion follows.
+\end{proof}
+
+\begin{lemma}
+    If $I$ is any set and $J$ is countable, then $\Fn(I, J)$ has the countable chain condition.
+\end{lemma}
+\begin{proof}
+    Let $\{p_\alpha\}$ be a collection in $\Fn(I, J)$. Let $a_\alpha = \dom(p_\alpha)$. Using the $\Delta$-system lemma, there is a subcollection $X\subseteq\omega_1$ such that $a_\alpha\cap a_\beta = r$ for every $\alpha\ne\beta$ in $X$. Note that $r$ must be a finite set. 
+
+    Note that $J^r$ is countable and hence, there is an uncountable subcollection $Y\subseteq X$ such that for all $\alpha\in Y$, $p_\alpha\upharpoonright r$ is the same. In particular, this meanas that all the $p_\alpha$s for $\alpha\in Y$ are compatible. Thus, we cannot have an uncountable antichain in $\Fn(I, J)$.
+\end{proof}
+
+
+\begin{lemma}
+    Let $\bbP\in M$, $(\bbP\text{ has c.c.c})^M$, and $A, B\in M$. Let $G$ be $\bbP$-generic over $M$ and let $f: A\to B$ be in $M[G]$. Then there is a map $F: A\to\mathscr P(B)$ with $F\in M$ such that 
+    \begin{equation*}
+        \forall a\in A(f(a)\in F(a))\quad\text{and}\quad\forall a\in A\left(|F(a)|\le\omega\right)^M.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $\tau$ be a $\bbP$-name in $M^{\bbP}$ such that $f = \tau_G$. Note that ``$\tau$ is a function from $\hat A\to\hat B$'' is a true statement in $M[G]$. Therefore, there is a $p\in G$ that forces the above statement. Define 
+    \begin{equation*}
+        F(a) := \{b\in B\colon\exists q\le p\left(q\Vdash\tau(\hat a) = \hat b\right)\}.
+    \end{equation*}
+    Since $\Vdash$ is definable, $F\in M$.
+
+    Let $a\in A$ and $b = f(a)$. Then, there is $r\in G$ such that $r\Vdash \tau(\hat a) = \hat b$. Since $G$ is a filter, there is a $q\in G$ with $q\le r$ and $q\le p$. Consequently, $q\Vdash\tau(\hat a) = \hat b$, so $b\in F(a)$.
+
+    Lastly, we must show that $\left(|F(a)|\le\omega\right)^M$.
+\end{proof}
+
+\begin{definition}
+    If $\bbP\in M$, then $\bbP$ \emph{preserves cardinals} if whenever $G$ is $\bbP$-generic over $M$ 
+    \begin{equation*}
+        \forall\beta\in o(M)\left((\beta\text{ is a cardinal})^M\iff(\beta\text{ is a cardinal})^{M[G]}\right).
+    \end{equation*}
+
+    Note that $\omega$ is absolute and hence, we need only worry about preservation of cardinals $\beta > \omega$.
+\end{definition}
+
+\begin{corollary}
+    If $\bbP\in M$ and $(\bbP\text{ has c.c.c})^M$, then $\bbP$ preserves cardinals.
+\end{corollary}
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    If $\bbP\in M$, then $\bbP$ \emph{preserves cofinalities} if whenever $G$ is $\bbP$-generic over $M$ and $\gamma$ is a limit ordinal in $M$, 
+    \begin{equation*}
+        \cf(\gamma)^M = \cf(\gamma)^{M[G]}.
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    If $\bbP\in M$ and preserves cofinalities, then it preserves cardinals.
+\end{lemma}
+\begin{proof}
+    If $\alpha\ge\omega$ is a regular cardinal of $M$, then 
+    \begin{equation*}
+        \cf(\alpha)^{M[G]} = \cf(\alpha)^M = \alpha,
+    \end{equation*}
+    whence $\alpha$ is a regular cardinal (in particular, a cardinal) of $M[G]$.
+
+    Now, suppose $\beta$ is a limit cardinal in $M$. Then, every successor cardinal smaller than $\beta$ is a regular cardinal and hence, remains a regular cardinal in $M[G]$. Consequently, $\beta$ is also a limit cardinal in $M[G]$. This completes the proof. 
+\end{proof}
+
+\begin{lemma}
+    Let $\bbP\in M$. Suppose whenever $G$ is $\bbP$-generic over $M$ and $\kappa$ is a regular uncountable cardinal of $M$, $(\kappa\text{ is regular})^{M[G]}$. Then $\bbP$ preserves cofinalities.
+\end{lemma}
+\begin{proof}
+    Let $\gamma$ be a limit ordinal in $M$, and let $(\kappa = \cf(\gamma))^M$. Then, there is an $f:\kappa\to\gamma$ in $M$ that is cofinal and strictly increasing. If $(\kappa = \omega)^M$, then it is absolute and hence $(\kappa = \omega)^{M[G]}$. On the other hand, if $\kappa > \omega$, then $(\kappa\text{ is regular})^{M[G]}$ according to the given hypothesis. Since $f\in M[G]$, we have $(\kappa = \cf(\gamma))^{M[G]}$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    If $\bbP\in M$ and $(\bbP\text{ has c.c.c})^M$, then $\bbP$ preserves cofinalities.
+\end{theorem}
+\begin{proof}
+    If not, then due to the previous lemma, there is a $\kappa\in M$ with $\kappa > \omega$, that is regular in $M$ but not $M[G]$. Hence, there is an $\alpha < \kappa$ and a map $f\in M[G]$ $f:\alpha\to\kappa$ that is cofinal. Hence, there is a map $F:\alpha\to\mathscr P(\kappa)$ such that for all $\xi < \alpha$, $f(\xi)\in F(\xi)$ and $|F(\xi)|\le\omega$ in $M$. 
+
+    Define $S = \bigcup_{\xi < \alpha} F(\xi)$. Then, $S\in M$ and is unbounded subset of $\kappa$, further, has cardinality $|\alpha|$. This is a contradiction to $\kappa$ being regular in $M$.
+\end{proof}
+
+\subsection{\texorpdfstring{$\mathsf{ZFC} + \neg\mathsf{CH}$}{} is consistent}
+
+Let $\bbP = \Fn(\kappa\times\omega, 2)$, then $\bbP$ has c.c.c in $M$ and thus preserves cardinals. As we have seen earlier, if $G$ is $\bbP$-generic, then $(2^\omega\ge\omega_2)^{M[G]}$ due to all the absoluteness results we have shown above.

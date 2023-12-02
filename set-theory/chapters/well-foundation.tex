@@ -200,8 +200,6 @@ or equivalently,
     That (a) and (b) are equivalent is immediate from the definition of well-foundedness. Let $A\in\V$. Then, $\in$ is well founded on $A$ and thus on $\trcl(A)$, consequently, $A\in\WF$ and thus $\V = \WF$. The converse is trivial.
 \end{proof}
 
-\todo{Add picture of the universe}
-
 \section{Induction and Recursion on Well-Founded Relations}
 
 We extend the notion of well-foundedness to classes as follows. 
@@ -254,6 +252,17 @@ We extend the notion of well-foundedness to classes as follows.
     \end{equation*}
 \end{definition}
 
+\begin{lemma}
+    If $\mathbf A$ is transitive and $\in$ is well-founded on $\mathbf A$, then $\mathbf A\subseteq\WF$ and $\rank(x,\mathbf A, \in) = \rank(x)$ for all $x\in A$.
+\end{lemma}
+\begin{proof}
+    We have already seen the proof of the first half. Now, consider an $\in$-minimal element of $\{x\in\mathbf A\mid\rank(x,\mathbf A,\mathbf R)\ne\rank(x)\}$. This would give an immediate contradiction since we have shown 
+    \begin{equation*}
+        \rank(y) = \sup\{\rank(x) + 1\mid x\in y\}.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
 \begin{definition}\thlabel{def:mostowski-collapsing-function}
     Let $\mathbf R$ be well-founded and set-like on $\mathbf A$. Define the \emph{Mostowski collapsing function}, $\mathbf G$ of $\mathbf A, \mathbf R$ by 
     \begin{equation*}
@@ -261,6 +270,25 @@ We extend the notion of well-foundedness to classes as follows.
     \end{equation*}
     The \emph{Mostowski collapse}, $\mathbf M$ of $\mathbf A,\mathbf R$ is defined to be the range of $\mathbf G$.
 \end{definition}
+
+\begin{lemma}
+    With notation from the above definition. 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\forall x,y\in\mathbf A(x\mathbf R y\implies\mathbf G(x)\in\mathbf G(y))$. 
+        \item $\mathbf M$ is transitive.
+        \item $\mathbf M\subseteq\mathbf{WF}$.
+        \item If $x\in\mathbf A$, then $\rank(x,\mathbf A,\mathbf R) = \rank(\mathbf G(x))$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Both (a) and (b) are obvious. For (c), we contend that $\forall x\in\mathbf A(\mathbf G(x)\in\WF)$. Consider the set $S = \{x\in\mathbf A\mid\mathbf G(x)\in\WF\}$. Suppose $S$ is nonempty, then it has a $\mathbf R$-minimal element, say $z$. For every $y\in\mathbf A$ such that $y\mathbf R x$, $\mathbf G(y)\in\WF$, consequently, $\mathbf G(z)\subseteq\WF$ whence $\mathbf G(z)\in\WF$, a contradiction. 
+
+    For (d), first note that 
+    \begin{equation*}
+        \rank(\mathbf G(x)) = \sup\{\rank(v) + 1\mid v\in\mathbf G(x)\} = \sup\{\rank(\mathbf G(y)) + 1\mid y\mathbf R x\}.
+    \end{equation*}
+    Using well-founded induction on $x$, one can now conclude. 
+\end{proof}
 
 \begin{definition}
     $\mathbf R$ is said to be \emph{extensional} on $\mathbf A$ if 
@@ -273,3 +301,15 @@ We extend the notion of well-foundedness to classes as follows.
 \begin{theorem}[Mostowski Collapsing Theorem]\thlabel{thm:mostowski-collapsing}
     Suppose $\mathbf R$ is well-founded, set-like, and extensional on $\mathbf A$, then there is a transitive class $\mathbf M$ and a bijective map $\mathbf G: \mathbf A\to\mathbf R$ such that $\mathbf G$ is an isomorphism between $(\mathbf A,\mathbf R)$ and $(\mathbf M,\in)$. Furthermore, $\mathbf M$ and $\mathbf G$ are unique.
 \end{theorem}
+\begin{proof}
+    First, we shall show that $\mathbf G$ is injective. Suppose not. Let $x$ be the $\mathbf R$-minimal element of 
+    \begin{equation*}
+        \{x\in\mathbf A\mid \exists y\in\mathbf A(x\ne y\wedge \mathbf G(x) = \mathbf G(y))\}.
+    \end{equation*}
+    Then, there is some $y\in\mathbf A$ with $x\ne y$ and $\mathbf G(x) = \mathbf G(y)$. Recall that $\mathbf R$ is extensional. 
+
+    Suppose first that there is some $z\in\mathbf A$ with $z\mathbf R x$ but $\neg(z\mathbf R y)$. Since $\mathbf G(z)\in\mathbf G(x) = \mathbf G(y)$, there is some $w\mathbf R y$ such that $\mathbf G(w) = \mathbf G(z)$ and $z\ne w$. This contradicts the minimality of $x$. A similar argument works for the other case. Thus, $\mathbf G$ is injective. 
+
+    That $\mathbf G$ is an isomorphism now follows from the fact that it is a surjection and maps $\mathbf R$ to $\in$. Lastly, we must show uniqueness of $\mathbf G$ and $\mathbf M$. This follows from a simple well-founded induction on $x$ to show that $\mathbf G(x) = \mathbf G'(x)$ for any other isomorphism $\mathbf G'$.
+\end{proof}
+
