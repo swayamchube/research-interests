@@ -1,0 +1,343 @@
+\section{Sheaves}
+
+Throughout this section, we shall work with sheaves of abelian groups. The definitions carry over to any abelian category with pretty much the same proofs.
+
+\begin{definition}[Presheaf]
+    Let $X$ be a topological space. A \emph{presheaf of abelian groups on $X$} is a contravariant functor $\scrF: \mathfrak{Top}(X)\to\catAbGrp$ where $\mathfrak{Top}(X)$ denotes the poset category of open sets in $X$ ordered by inclusion.
+
+    For an open set $U\subseteq X$, we refer to $\scrF(U)$ as the \emph{sections} of the presheaf $\scrF$ over the open set $U$. Sometimes, we use the notation $\Gamma(U,\scrF)$ to denote $\scrF(U)$.
+\end{definition}
+
+\begin{definition}[Sheaf]
+    A presheaf $\scrF$ on a topological space $X$ is a \emph{sheaf} if it satisfies the following additional conditions,
+    \begin{description}
+        \item[Identity Axiom:] if $U$ is an open set, $\{V_i\}$ an open cover of $U$, and if $s\in\scrF(U)$ is an element such that $s|_{V_i} = 0$ for all $i$, then $s = 0$.
+        \item[Gluability Axiom:] if $U$ is an open set, $\{V_i\}$ an open cover of $U$, and if there are elements $s_i\in\scrF(V_i)$ for each $i$, such that for each pair $i, j$, $s_i|_{V_i\cap V_j} = s_j|_{V_i\cap V_j}$, then there is an $s\in\scrF(U)$ such that $s|_{V_i} = s_i$ for each $i$.
+    \end{description}
+\end{definition}
+
+\begin{definition}[Direct Limit]
+    Let $\scrC$ be a category, $(I, \le)$ a directed set and a collection $\langle\{A_i\}, \{f_{ij}: A_i\to A_j\}_{i\le j}\rangle$ with the following properties: 
+    \begin{enumerate}[label=(\alph*)]
+        \item $f_{ii}$ is the identity on $A_i$, and 
+        \item $f_{ik} = f_{jk}\circ f_{ij}$ for all $i\le j\le k$.
+    \end{enumerate}
+
+    The \emph{direct limit} of the above direct system (if it exists), denoted $\colimit A_i$ is an object $\langle X, \{\phi_i\}\rangle$ where $\phi_i: A_i\to X$ are morphisms that satisfy, for all $i\le j$, $\phi_i = \phi_j\circ f_{ij}$. This object is universal in the sense that if $\langle Y, \{\psi_i\}\rangle$ is another object with morphisms such that $\psi_i = \psi_j\circ f_{ij}$ then there is a unique morphism $u: X\to Y$ satisfying $\psi_i = u\circ\phi_i$ for all $i$.
+\end{definition}
+
+\begin{remark}
+    Now suppose $\scrC$ is the category of abelian groups. We show that this category always admits a direct limit. Indeed, suppose $\langle\{A_i\},\{f_{ij}\}\rangle$ is a direct system. Let
+    \begin{equation*}
+        X = \bigsqcup_{i\in I} A_i\big/\sim
+    \end{equation*}
+    where $\langle i, a_i\rangle\sim\langle j, a_j\rangle$ if and only if there is some $k\ge i, j$ such that $f_{ik}(a_i) = f_{jk}(a_j)$. The group operation is defined as, $[\langle i, a_i\rangle]\cdot[\langle j, a_j\rangle] = [\langle k, a_k\rangle]$ where $k\ge i,j$ and $a_k = f_{ik}(a_i)f_{jk}(a_j)$. 
+
+    First, note that the group operation is well defined. Indeed, suppose $[\langle i, a_i\rangle] = [\langle p, a_p\rangle]$, $[\langle j, a_j\rangle] = [\langle q, a_q\rangle]$ and suppose that we chose $[\langle r, a_r\rangle]$ to be $[\langle p, a_p\rangle]\cdot[\langle q, a_q\rangle]$. There is an index $l\ge k, r$ sufficiently ``large'' such that $f_{il}(a_i) = f_{pl}(a_p)$ and $f_{jl}(a_j) = f_{ql}(a_q)$. The conclusion now follows.
+
+    Consider maps $\phi_i: A_i\to X$ given by $\phi_i(a_i) = [\langle i, a_i\rangle]$. This is obviously a morphism and $\phi_j\circ f_{ij} = \phi_i$ for all $i\le j$. Now, suppose $\langle Y, \{\psi_i\}\rangle$ is another such object. Define $u: X\to Y$ by
+    \begin{equation*}
+        u([\langle i, a_i\rangle]) = \psi_i(a_i).
+    \end{equation*}
+    Again, it is not hard to see that this map is well defined and is the unique map making everything commute.
+\end{remark}
+
+\begin{definition}[Stalk of a Presheaf]
+    Let $\scrF$ be a presheaf on a topological space $X$ and $P\in X$. Consider the directed set of neighborhoods of $P$ in $X$ ordered by \emph{reverse inclusion}. The direct limit $\colimit\scrF(U)$ over this directed system is called the \emph{stalk of $\scrF$ at $P$}, denoted $\scrF_P$.
+\end{definition}
+
+\begin{definition}[Morphism of Presheaves/Sheaves]
+    Let $\scrF$ and $\scrG$ be presheaves on $X$. A \emph{morphism} $\varphi:\scrF\to\scrG$ is a \emph{natural transformation} between these two functors. In other words, it is a collection of maps $\{\varphi(U)\}_{U\in\mathfrak{Top}(X)}$ making the following diagram commute
+    \begin{equation*}
+        \xymatrix {
+            \scrF(U)\ar[r]^{\varphi(U)}\ar[d] & \scrG(U)\ar[d]\\
+            \scrF(V)\ar[r]_{\varphi(V)} & \scrG(V)
+        }
+    \end{equation*}
+    for all $U,V\in\mathfrak{Top}(X)$. A morphism of presheaves is an \emph{isomorphism} if and only if it admits an inverse.
+\end{definition}
+
+\begin{proposition}
+    Let $\scrF,\scrG$ be presheaves on $X$ and $\varphi:\scrF\to\scrG$ a morphism. Then, for each $P\in X$, there is an induced map $\varphi:\scrF_P\to\scrG_P$ given by
+    \begin{equation*}
+        \varphi_P([\langle U, s\rangle]) = [\langle U, \varphi_U(s)\rangle].
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    Straightforward.
+\end{proof}
+
+\begin{proposition}
+    Let $\scrF\xrightarrow{\varphi}\scrG\xrightarrow{\psi}\scrH$ be morphisms of presheaves. Then, $(\psi\circ\varphi)_P = \psi_P\circ\varphi_P$.
+\end{proposition}
+\begin{proof}
+    Let $[\langle U, s\rangle]\in\scrF_P$. Then, 
+    \begin{equation*}
+        \psi_P\circ\varphi_P([\langle U, s\rangle]) = [\langle U, \psi_U(\varphi_U(s))\rangle] = [\langle U, (\psi\circ\varphi)_U(s)\rangle].
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Let $\varphi:\scrF\to\scrG$ be a morphism of sheaves on a topological space $X$. Then, $\varphi$ is an isomorphism if and only if the induced map on the stalk $\varphi_P:\scrF_P\to\scrG_P$ is an isomorphism for every $P\in X$.
+\end{theorem}
+\begin{proof}
+    The forward direction is trivial and we shall show the converse, for which it suffices to show that $\varphi_U$ is an isomorphism for every $U\in\mathfrak{Top}(X)$. 
+
+    First, we show injectivity. Let $s\in\scrF(U)$ that maps to $0$ in $\scrG(U)$. Let $P\in U$. Then, $\varphi_P([\langle U, s\rangle]) = [\langle U, \varphi_U(s)\rangle] = 0$ whence $[\langle U, s\rangle] = 0$ in $\scrF_P$. Hence, there is a neighborhood $V_P$ of $P$ in $U$ on which $s$ restricts to $0$. Note that the $V_P$'s form an open cover of $U$ and due to the identity axiom, $s = 0$ on $U$, from which injectivity follows. 
+
+    Next, we show surjectivity. Let $t\in\scrG(U)$ and $P\in U$. Since $\varphi_P$ is surjective, there is some $[\langle V_P, s_P\rangle]$ with $V_P\subseteq U$ in $\scrF_P$ that maps to $[\langle U, t\rangle]$ in $\scrG_P$. Thus, 
+    \begin{equation*}
+        [\langle V_P, \varphi_{V_P}(s_P)\rangle] = [\langle U, t\rangle].
+    \end{equation*}
+    Thus, we may shrink $V_P$ such that $\varphi_{V_P}(s_P) = t|_{V_P}$, where we have redefined $s_P$ to be its restriction to the shrinked $V_P$.
+
+    Now, let $P, Q$ be points in $U$. We have 
+    \begin{equation*}
+        \varphi_{V_P\cap V_Q}(s_P|_{V_P\cap V_Q}) = \varphi_{V_P}(s_P)|_{V_P\cap V_Q} = t|_{V_P\cap V_Q}.
+    \end{equation*}
+    Similarly, we have $\varphi_{V_P\cap V_Q}(s_Q|_{V_P\cap V_Q}) = t|_{V_P\cap V_Q}$. Using the injectivity of $\varphi_{V_P\cap V_Q}$ that we proved in the earlier paragraph, we have $s_P|_{V_P\cap V_Q} = s_Q|_{V_P\cap V_Q}$. Using the gluability axiom, we have an $s\in\scrF(U)$ that restricts to $s_P$ on $V_P$ for every $P$.
+
+    Finally, we verify that $\varphi_U(s) = t$. Indeed, $\{V_P\}$ is a cover of $U$ and $t|_{V_P} = \varphi_{U}(s)|_{V_P}$. From the identity axiom, it follows that $t = \varphi_U(s)$. This completes the proof.
+\end{proof}
+
+\begin{definition}[Sheafification]
+    Let $\scrF$ be a presheaf on $X$. Then, there is a sheaf $\scrF^+$ and a morphism of presheaves $\theta:\scrF\to\scrF^+$ with the property that for any other sheaf $\scrG$ and morphism of presheaves $\varphi:\scrF\to\scrG$, there is a unique morphism of sheaves $\psi: \scrF^+\to\scrG$ making the following diagram commute: 
+    \begin{equation*}
+        \xymatrix {
+            \scrF\ar[r]^\varphi\ar[d]_\theta & \scrG\\
+            \scrF^+\ar@{.>}[ru]_{\exists!\psi}
+        }.
+    \end{equation*}
+\end{definition}
+
+We have not yet constructed the sheafification map. In order to do so, we introduce another construction first.
+
+\begin{definition}[Espace \'etal\'e]
+    Let $\scrF$ be a presheaf on $X$. We define a topological space $\Spe(\scrF)$ known as the \emph{espace \'etal\'e} of the presheaf. The underlying set is 
+    \begin{equation*}
+        \Spe(\scrF) = \bigsqcup_{P\in X}\scrF_P.
+    \end{equation*}
+    Let $\pi:\Spe(\scrF)\to X$ be the map that sends $s\in\scrF_P$ to $P$. For every $U\in\mathfrak{Top}(X)$ and $s\in\scrF(U)$, there is an induced map $\overline s: U\to\Spe(\scrF)$ that sends $P\mapsto s_P := [\langle U, s\rangle]\in\scrF_P$. Note that $\pi\circ\overline s = \id _{U}$.
+
+    The topology on $\Spe(\scrF)$ is the finest topology such that for every $U$ and every $s\in\scrF(U)$, the map $\overline s$ is continuous.
+\end{definition}
+
+\begin{proposition}
+    A basis for the topology on $\Spe(\scrF)$ is given by the collection of sets of the form 
+    \begin{equation*}
+        \{(P, s_P)\mid P\in U\},
+    \end{equation*}
+    where $U$ ranges over the open sets in $X$ and $s\in\scrF(U)$.
+\end{proposition}
+\begin{proof}
+    Call the above collection of sets $\scrB$. First, we verify that this is a basis for a topology. Indeed, consider the intersection 
+    \begin{equation*}
+        \{(P, s_P)\mid P\in U\}\cap\{(Q, t_Q)\mid Q\in V\}.
+    \end{equation*}
+    If $(p, \sigma)$ lies in the above intersection, then there is a neighborhood $W$ of $p$ contained in $U\cap V$ such that $s|_W = t|_W$. Then, for any $q\in W$, we must have $s_q = t_q$. As a result, 
+    \begin{equation*}
+        \{(q, s_q)\mid q\in W\}\subseteq \{(P, s_P)\mid P\in U\}\cap\{(Q, t_Q)\mid Q\in V\}.
+    \end{equation*}
+    This establishes that the collection is indeed a basis.
+
+    Similarly, it is not hard to see that if $\Spe(\scrF)$ is endowed with the topology generated by the above basis, then every map $\overline s$ is continuous for every section $s\in\scrF(U)$. Hence, the topology on $\Spe(\scrF)$ is finer than the topology generated by the above basis.
+
+    Let $V\subseteq\Spe(\scrF)$ be an open set and let it contain a germ $(P, s_P)$ where $s\in\scrF(U)$ and $U$ is a neighborhood of $P$. Let $W = \overline s^{-1}(V)$, which is a neighborhood of $P$. For every $Q\in U\cap W$, $\overline s(Q)\in V$, and hence, $(Q, s_Q)\in V$. In particular,
+    \begin{equation*}
+        \{(Q, s_Q)\mid Q\in U\cap W\}\subseteq V.
+    \end{equation*}
+    The conclusion follows.
+\end{proof}
+
+\begin{corollary}
+    Let $U$ be an open set in $X$. Then, $\Gamma(U,\Spe(\scrF))$, the set of continuous sections, has the structure of an abelian group.
+\end{corollary}
+\begin{proof}
+    Let $f,g: U\to\Spe(\scrF)$ be continuous maps. Define $(f + g)(P) = f(P) + g(P)\in\scrF_P$. Consider the basic open set $B = \{(P, s_P)\mid P\in W\}$ where $W\subseteq U$ is open and $s\in\scrF(W)$. 
+
+    Now, let $P\in (f + g)^{-1}(B)$. Thus, $f(P) + g(P) = s_P\in\scrF_P$. Suppose $f(P) = (P, t_P)$ and $g(P) = (P, r_P)$, where both $t$ and $r$ lie in $\scrF(V)$ for a sufficiently small neighborhood $V$ of $P$ in $U$. Thus, $t + r$ agrees with $s$ on some neighborhood of $P$ contained in $V$, whence, $(f + g)^{-1}(B)$ contains a neighborhood around $P$. Thus, is open. This completes the proof.
+\end{proof}
+
+\begin{remark}
+    From the above proof, we we note that if $f\in\Gamma(U, \Spe(\scrF))$ and $P\in U$, then there is a neighborhood $V$ of $P$ contained in $V$ and $t\in\scrF(V)$ such that $f(Q) = t_Q$ for every $Q\in V$. That is, every continuous section locally looks like the germs of a section in the presheaf.
+\end{remark}
+
+\begin{proposition}
+    The sheafification map $\theta:\scrF\to\scrF^+$ exists and is unique up to a unique isomorphism.
+\end{proposition}
+\begin{proof}
+    Let $\scrF^+(U) = \Gamma(U, \Spe(\scrF))$, the collection of all continuous sections $U\to\Spe(\scrF)$. If $V\subseteq U$, then there is an obvious map $\Gamma(V,\Spe(\scrF))\to\Gamma(U,\Spe(\scrF))$ which restricts a section on $V$ to that on $U$. It follows that $\scrF^+$ is a presheaf. That the sheaf axioms are satisfied is trivial to check.
+
+    Define the map $\theta:\scrF\to\scrF^+$ by defining $\theta_U: \scrF(U)\to\scrF^+(U)$ as $s\mapsto\overline s$, with the standard notation used previously. It is straightforward to check that this is indeed a morphism of presheaves. 
+
+    It remains to verify that $\theta$ has the universal property of sheafification. Let $\varphi:\scrF\to\scrG$ be a morphism of presheaves where $\scrG$ is a sheaf. Let $U$ be open in $X$ and $f\in\scrF^+(U) = \Gamma(U,\Spe(\scrF))$. We must define $\psi_U(f)\in\scrG(U)$. We use the gluing axiom to do so.
+
+    For every point $P\in U$, there is a neighborhood $V_P$ of $P$ in $U$ and a corresponding $t^P\in\scrF(V_P)$ such that $(t^P)_{x} = f(x)$ for all $x\in V_P$. Let $Q\in U$. Then, on $W = V_P\cap V_Q$, we see that $\varphi_W(t^P) = \varphi_W(t^Q)$. Hence, the gluing property applies and there is a $t\in\scrG(U)$ such that $t|_{V_P} = \varphi_{V_P}(t^P)$. This defines a map of sheaves $\psi:\scrF^+\to\scrG$.
+\end{proof}
+
+\begin{proposition}
+    For all $P\in X$, there is an isomorphism $\scrF_P\cong\scrF^+_P$. That is, sheafification preserves stalks.
+\end{proposition}
+\begin{proof}
+    Define the map $\alpha:\scrF_P\to\scrF^+_P$ that sends a germ $[\langle U, s\rangle]\in\scrF_P$ to $[\langle U, \overline s\rangle]\in\scrF^+_P$. We first show that this is well defined. If $[\langle U, s\rangle] = [\langle V, t\rangle]$, then there is a neighborhood $W$ of $P$ contained in $U\cap V$ such that $s|_W = t|_W$. Note that $\overline s = \overline t$ on $W$ and hence, $[\langle W, \overline s\rangle] = [\langle W, \overline t\rangle]$.
+
+    This map is obviously injective. To see surjectivity, simply recall that any section in $\Gamma(U,\Spe(\scrF))$ locally looks like $\overline s$ on some neighborhood of $P$ contained in $U$. This completes the proof.
+\end{proof}
+
+\begin{definition}[Subsheaf]
+    A sheaf $\scrG$ is said to be a \emph{subsheaf} of a sheaf $\scrF$ if for every open $U\subseteq X$, $\scrG(U)\subseteq\scrF(U)$ and the restriction maps of $\scrG$ are induced by the restriction maps of $\scrF$.
+\end{definition}
+
+\begin{proposition}[Kernel Sheaf]
+    Let $\varphi:\scrF\to\scrG$ be a morphism of sheaves. Define the map $\scrF':\mathfrak{Top}(X)\to\catAbGrp$ by $\scrF'(U) = \ker\varphi_U\subseteq\scrF(U)$. Then, $\scrF'$ is a subsheaf of $\scrF$ and is called the \textbf{kernel} of $\varphi$ and is denoted by $\ker\varphi$.
+\end{proposition}
+\begin{proof}
+    Obviously, $\scrF'$ is a presheaf with the restriction maps as those induced by $\scrF$. It remains to verify the sheaf axioms. The identity axiom is trivial to verify. Suppose now that $\{V_i\}$ is an open cover of $U$ and $s_i\in\scrF'(V_i)$ such that $s_i|_{V_i\cap V_j} = s_j|_{V_i\cap V_j}$. Then, there is an $s\in\scrF(U)$ such that $s|_{V_i} = s_i$. Note that $\varphi_U(s)|_{V_i} = 0$ for every $i$ and hence, $\varphi_U(s) = 0$ from the identity axiom and it follows that $s\in\scrF'(U)$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    $\ker\varphi_P\cong(\ker\varphi)_P$ for all $P\in X$. Therefore, $\varphi$ is injective if and only if $\varphi_P$ is injective for all $P\in X$.
+\end{proposition}
+\begin{proof}
+\end{proof}
+
+\begin{definition}[Image Sheaf]
+    Let $\varphi:\scrF\to\scrG$ be a morphism of sheaves. Then, the map $\scrG':\mathfrak{Top}(X)\to\catAbGrp$ given by $\scrG'(U) = \im\varphi_U$ is a presheaf on $X$. The \emph{image sheaf} of $\varphi$ is defined to be the sheafification of $\scrG'$ and is denoted by $\im\varphi$.
+\end{definition}
+
+\begin{definition}[Injective/Surjective Morphisms]
+    A morphism $\varphi:\scrF\to\scrG$ of sheaves is said to be \emph{injective} if $\ker\varphi = 0$ and surjective if $\im\varphi = \scrG$.
+\end{definition}
+
+\begin{lemma}\thlabel{lem:sheafification-preserves-injectivity}
+    Let $\scrF, \scrG$ be presheaves on $X$ and $\varphi:\scrF\to\scrG$ a morphism such that $\varphi_U$ is injective for every open subset $U$ of $X$. Then, $\varphi^+: \scrF^+\to\scrG^+$ is also injective.
+    \begin{equation*}
+        \xymatrix {
+            \scrF\ar[r]\ar[d]\ar@{-->}[rd] & \scrG\ar[d]\\
+            \scrF^+\ar@{.>}[r]_{\exists!} & \scrG^+
+        }
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    It suffices to check this at the level of stalks where it follows from the fact that sheafification preserves stalks.
+\end{proof}
+
+\begin{remark}
+    From \thref{lem:sheafification-preserves-injectivity}, we know that the map $\im\varphi\to\scrG$ is an injective morphism of sheaves and hence, $\im\varphi$ can be identified with a subsheaf of $\scrG$. Henceforth, we shall treat $\im\varphi$ as a subsheaf of $\scrG$.
+\end{remark}
+
+\begin{definition}[Exact Sequence]
+    A sequence of morphisms 
+    \begin{equation*}
+        \scrF'\xrightarrow{\varphi}\scrF\xrightarrow{\psi}\scrF''
+    \end{equation*}
+    of sheaves is said to be \emph{exact} at $\scrF$ if $\im\varphi = \ker\psi$. In general, a sequence of morphisms 
+    \begin{equation*}
+        \cdots\rightarrow\scrF_{i - 1}\rightarrow\scrF_{i}\rightarrow\scrF_{i + 1}\rightarrow\cdots
+    \end{equation*}
+    is said to be \emph{exact} if it is exact at every $\scrF_i$.
+\end{definition}
+
+\begin{proposition}
+    $\im\varphi_P = (\im\varphi)_P$ for every $P\in X$. Therefore, $\varphi$ is surjective if and only if $\varphi_P$ is surjective for all $P\in X$.
+\end{proposition}
+\begin{proof}
+    Let $\scrH$ denote the image presheaf of $\varphi$ in $\scrG$. It is known that sheafification preserves stalks and thus, $(\im\varphi)_P = \scrH_P$. It suffices to show that $\scrH_P = \im\varphi_P$, which is obvious. Since any germ in $\scrH_P$ is of the form $[\langle U, t\rangle]$ where $t$ is in the image of $\varphi_U$. On the other hand, an element in the image of $\varphi_P$ is of the form $[\langle U, \varphi_U(s)\rangle]$. This completes the proof.
+\end{proof}
+
+\begin{theorem}\thlabel{thm:exactness-checked-stalks}
+    A sequence of morphisms $\scrF'\xrightarrow{\varphi}\scrF\xrightarrow{\psi}\scrF''$ is exact if and only if for every $P\in X$, the induced sequence of abelian groups $\scrF'_P\xrightarrow{\varphi_P}\scrF_P\xrightarrow{\psi_P}\scrF''_P$ is exact. That is, exactness can be checked at stalks.
+\end{theorem}
+\begin{proof}
+    The forward direction is obvious. Consider the converse. We have $(\psi\circ\varphi)_P = \psi_P\circ\varphi_P = 0$ for every $P\in X$. Consequently, $\im\varphi_P\subseteq\ker\psi_P$ for all $P\in X$ and hence, $\im\varphi\subseteq\ker\psi$. Finally, note that since equality holds at each stalk, we must have $\ker\psi = \im\varphi$ and the sequence is exact. 
+\end{proof}
+
+\begin{lemma}\thlabel{lem:characterization-surjective-morphism}
+    A morphism $\varphi:\scrF\to\scrG$ of sheaves is surjective if and only if for all $U\subseteq X$ open and $s\in\scrG(U)$, there is a covering $\{U_i\}$ of $U$, and there are elements $t_i\in\scrF(U_i)$ such that $\varphi_{U_i}(t_i) = s|_{U_i}$ for all $i$.
+\end{lemma}
+\begin{proof}
+    From \thref{thm:exactness-checked-stalks}, $\varphi$ is surjective if and only if $\varphi_P$ is surjective for all $P\in X$. Suppose $\varphi$ is surjective. Let $s\in\scrF(U)$. Then, for every $P\in U$, there is a neighborhood $U_P$ of $P$ contained in $U$ and $t^P\in\scrF(U_P)$ such that $\varphi_{U_P}(t^P) = s|_{U_P}$ (this follows from surjectivity of the stalk map).
+
+    Conversely, the given condition, precisely implies that the map $\varphi_P$ is surjective at the level of stalks for all $P\in X$. This completes the proof.
+\end{proof}
+
+\begin{example}
+    The following example shows that a surjective morphism $\varphi:\scrF\to\scrG$ of sheaves need not give rise to a surjective morphism $\varphi_U:\scrF(U)\to\scrG(U)$ of abelian groups for all open $U\subseteq X$.
+
+    Let $X = \bbC\backslash\{0\}$, and for an open $U\subseteq X$, let $\scrO(U)$ denote the additive group of holomorphic functions on $X$ and $\scrO^\ast(X)$ the multiplicative group of nowhere vanishing holomorphic functions on $X$. Consider the map $\exp:\scrO\to\scrO^\ast$ given by $\exp_U(f) = e^{2\pi if}\in\scrO^\ast(U)$. 
+
+    Note that the map on stalks $\exp_P:\scrO_P\to\scrO^\ast_P$ is surjective since there is always a branch of the logarithm locally. Thus, $\exp$ is a surjective morphism of sheaves. But note that setting $U = X$ and taking $\id_X\in\scrO^\ast(X)$, there is no function $f\in\scrO(X)$ that maps to $\id_X$ under $\exp_X$. 
+\end{example}
+
+
+\begin{definition}[Sheaf $\sHom$]
+    Let $\scrF, \scrG$ be sheaves on $X$. The map $U\mapsto\Hom(\scrF|_U,\scrG|_U)$ is a sheaf on $X$ known as the \emph{sheaf of local morphisms of $\scrF$ to $\scrG$}, or ``sheaf Hom'' for short and is denoted by $\sHom(\scrF,\scrG)$.
+\end{definition}
+\begin{remark}
+    We haven't explicitly mentioned this but the restriction of a sheaf to an open subset is still a sheaf (the axioms can be verified easily).
+\end{remark}
+
+\begin{proposition}
+    $\sHom(\scrF, \scrG)$ is indeed a sheaf.
+\end{proposition}
+\begin{proof}
+    Obviously, $\Hom(\scrF|_U,\scrG|_U)$ is an abelian group.\todo{Complete this}
+\end{proof}
+
+\begin{definition}[Pushforward]
+    Let $\scrF$ be a sheaf on $X$ and $f: X\to Y$ be a continuous function. Define the map $f_\ast\scrF:\mathfrak{Top}(Y)\to\catAbGrp$ by $V\mapsto\scrF(f^{-1}V)$.
+\end{definition}
+
+\begin{proposition}
+    The pushforward is indeed a sheaf.
+\end{proposition}
+\begin{proof}
+    The pushforward is obviously a presheaf. Let $\{V_i\}$ be an open cover of $V$ and $s\in f_\ast\scrF(V)$ such that $s|_{V_i} = 0$ for every $i$. Note that $s\in\scrF(f^{-1}V)$ and $s|_{f^{-1}V_i} = 0$, consequently, $s = 0$. Now suppose $s_i\in f_\ast\scrF(V_i)$ such that $s_i|_{V_i\cap V_j} = s_j|_{V_i\cap V_j}$. Note that $\{f^{-1}V_i\}$ forms an open cover of $f^{-1}V$ and hence, there is $s\in\scrF(f^{-1}V)$ such that $s|_{f^{-1}V_i} = s_i$. Hence, $s\in f_\ast\scrF(V)$ such that $s|_{V_i} = s_i$. This completes the proof.
+\end{proof}
+
+\begin{definition}[Section Functor]
+    Let $U\subseteq X$ be an open set. Then, the map $\scrF\mapsto\scrF(U)$ is functorial and is denoted by $\Gamma(U,-)$. This is the \emph{section functor on $U$}.
+\end{definition}
+
+\begin{proposition}\thlabel{prop:sections-left-exact}
+    Let $0\rightarrow\scrF'\rightarrow\scrF\rightarrow\scrF''\rightarrow 0$ be a short exact sequence of sheaves. Then, the induced map 
+    \begin{equation*}
+        0\rightarrow\scrF'(U)\rightarrow\scrF(U)\rightarrow\scrF''(U)
+    \end{equation*}
+    is exact. That is, $\Gamma(U, -)$ is a left exact functor.
+\end{proposition}
+\begin{proof}
+    The injectivity of $\scrF'(U)\to\scrF(U)$ is immediate from the definition. Further, note that $\varphi(\scrF')$ is already a subsheaf of $\scrF$ since the map is injective. Therefore, exactness at $\scrF(U)$ follows. This completes the proof.
+\end{proof}
+
+\begin{definition}[Flasque Sheaves]
+    A sheaf $\scrF$ is said to be \emph{flasque} if whenever $V\subseteq U$, the restriction map $\scrF(U)\to\scrF(V)$ is surjective.
+\end{definition}
+
+\begin{theorem}
+    Let $\scrF,\scrF',\scrF''$ be sheaves on $X$ and $0\rightarrow\scrF'\rightarrow\scrF\rightarrow\scrF''\rightarrow 0$ an exact sequence of sheaves.
+    \begin{enumerate}[label=(\alph*)]
+        \item If $\scrF'$ is flasque, then for any open $U\subseteq X$, the sequence $0\rightarrow\scrF'(U)\rightarrow\scrF(U)\rightarrow\scrF''(U)\rightarrow 0$ is exact.
+        \item If $\scrF'$ and $\scrF$ are flasque, then so is $\scrF''$.
+        \item If $f: X\to Y$ is a continuous map and $\scrF$ is flasque, then $f_\ast\scrF$ is a flasque sheaf on $Y$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item First, note that the section functor $\Gamma(U, -)$ is left exact and hence it suffices to show the surjectivity of the induced map $\scrF(U)\to\scrF''(U)$. Let $s\in\scrF''(U)$. Then, due to \thref{lem:characterization-surjective-morphism}, there is an open cover $\{U_i\}_{i\in I}$ of $U$ and $t_i\in\scrF(U_i)$ such that $\psi_{U_i}(t_i) = s|_{U_i}$. Consider the collection of all pairs $\{(J, t_J)\}$ where $J\subseteq I$ and $t_J\in\scrF\left(\bigcup_{j\in J}U_j\right)$ such that $t_J|_{U_j} = t_j$ for every $j\in J$. This has the structure of a poset with $(J, t_J)\leqq(J', t_{J'})$ if $J\subseteq J'$ and $t_{J'}$ restricted to $\bigcup_{j\in J}U_j$ is equal to $t_J$.
+
+    Using the gluability axiom, it follows that every chain in the aforementioned poset has a maximal element, say $(K, t_K)$. Let $V = \bigcup_{k\in K} U_k$. We contend that $V = U$. Suppose not, then there is a $U_i$ that is not contained in $V$. Let $W = V\cap U_i$. The images under $\psi_{W}$ of $t_K|_{W}$ and $t_i|_W$ are the same. Therefore, $t_K|_W - t_i|_W\in\ker g_W = \scrF'(W)$. Since $\scrF'$ is flasque, there is a $z\in\scrF'(U_i)$ such that $\varphi_{U_i}(z)|_W = t_K|_W - t_i|_W$. Set $y = \varphi_{U_i}(z)$ and $t_i' = t_i + y\in\scrF(U_i)$, then, $t_i'|_W = t_K|_W$ and hence, there is a corresponding $t^\ast\in\scrF(V\cup U_i)$ that restricts to $t_K$ and $t_i'$ on $V$ and $U_i$ respectively. Therefore, $(K\cup\{i\}, t^\ast)\ge(K, t_K)$ thereby contradicting the maximality of $(K, t_K)$ and hence, $V = U$ and the conclusion follows.
+
+    \item Let $U\subseteq V$ be open subsets of $X$. Then, there is a commutative diagram 
+    \begin{equation*}
+        \xymatrix{
+            0\ar[r] & \scrF'(V)\ar[r]\ar[d] & \scrF(V)\ar[r]\ar[d] & \scrF''(V)\ar[r]\ar[d] & 0\\
+            0\ar[r] & \scrF'(U)\ar[r] & \scrF(U)\ar[r] & \scrF''(U)\ar[r] & 0
+        }
+    \end{equation*}
+    where the first two vertical maps are surjective. It follows from the Snake Lemma that so is the third.
+
+    \item Obvious.\qedhere
+\end{enumerate}
+\end{proof}
