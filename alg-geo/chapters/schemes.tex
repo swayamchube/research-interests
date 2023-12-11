@@ -341,3 +341,82 @@ We have not yet constructed the sheafification map. In order to do so, we introd
     \item Obvious.\qedhere
 \end{enumerate}
 \end{proof}
+
+% \subsection{Sheaves on a Base}
+
+\section{Schemes}
+
+\subsection{Spectrum of a Ring}
+
+\begin{definition}[Spectrum of a Ring]
+    Define 
+    \begin{equation*}
+        \Spec(A) := \{\frakp\subseteq A\mid\frakp\text{ is a prime ideal}\}.
+    \end{equation*}
+    This is equipped with the \emph{Zariski Topology} in which the closed sets are given by 
+    \begin{equation*}
+        V(\fraka) := \{\frakp\in\Spec(A)\mid\fraka\subseteq\frakp\}.
+    \end{equation*}
+    The basic open sets for this topology are given by 
+    \begin{equation*}
+        D(f) := \{\frakp\in\Spec(A)\mid f\notin\frakp\} = \Spec(A)\backslash V(f).
+    \end{equation*}
+
+    For a subset $S\subseteq\Spec(A)$, let 
+    \begin{equation*}
+        \scrI(S) := \bigcap_{\frakp\in S}\frakp\subseteq A.
+    \end{equation*}
+    Note that $\scrI(S)$ is always a radical ideal.
+\end{definition}
+
+\begin{proposition}
+    Let $S\subseteq\Spec(A)$ and $\fraka\unlhd A$ be a prime ideal.
+    \begin{enumerate}[label=(\alph*)]
+        \item $V(\scrI(S)) = \overline S$.
+        \item $\scrI(V(\fraka)) = \sqrt{\fraka}$. This gives an inclusion-reversing bijection between the closed subsets of $\Spec(A)$ and radical ideals of $A$.
+        \item Under the aforementioned bijection, closed irreducible subsets correspond to prime ideals.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Straightforward.
+    \item Follows from the fact that 
+    \begin{equation*}
+        \sqrt{\fraka} = \bigcap_{\frakp\supseteq\fraka}\frakp.
+    \end{equation*}
+    \item Suppose $S\subseteq\Spec(A)$ is closed and irreducible. Let $\fraka = \scrI(S)$, which is a radical ideal. Suppose $f,g\in A\backslash\fraka$ with $fg\in\fraka$. Then, $fg\in\frakp$ for every $\frakp\in S$. Then, $D(fg)\cap S = \emptyset$ while $D(f)\cap S$ and $D(g)\cap S$ are not empty, a contradiction, since $S$ is irreducible. Thus, $\fraka$ is prime.
+
+    Conversely, suppose $S = V(\frakp)$, where $\frakp$ is a prime ideal and $S = S_1\cup S_2$ where $S_1 = V(\fraka)$ and $S_2 = V(\frakb)$ where $\fraka,\frakb\supseteq\frakp$. The equality gives us $\fraka\frakb = \frakp$, implying that $\frakp$ contains either $\fraka$ or $\frakb$ whence $S = S_1$ or $S = S_2$, whereby $S$ is irreducible.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    Let $f,g\in A$. Then, $D(f)\subseteq D(g)$ if and only if $f^n\in(g)$, if and only if $g$ is invertible in $A_f$.
+\end{lemma}
+\begin{proof}
+    Suppose $D(f)\subseteq D(g)$. Then, $V(f)\supseteq V(g)$. Now, 
+    \begin{equation*}
+        \sqrt{(g)} = \bigcap_{\frakp\in V(g)}\frakp\ni f.
+    \end{equation*}
+    The converse is trivial. This proves the equivalence of the first two statements. The equivalence of the second and third statements is obvious.
+\end{proof}
+
+\begin{definition}[Irreducible Component]
+    An \emph{irreducible component} of a topological space is a maximal irreducible subset. These are obviously closed subspaces of the ambient topological space.
+\end{definition}
+
+\begin{proposition}
+    Every point $p\in X$ is contained in an irreducible component of $X$.
+\end{proposition}
+\begin{proof}
+    Standard application of Zorn's Lemma.
+\end{proof}
+
+\begin{proposition}
+    The irreducible components of $\Spec(A)$ are in bijection with the minimal primes of $A$.
+\end{proposition}
+\begin{proof}
+    There is an inclusion-reversing bijection between the closed irreducible subsets of $\Spec(A)$ and the prime ideals of $A$. It is then obvious that the irreducible components of $\Spec(A)$ correspond to the minimal primes of $A$.
+\end{proof}
+
+\subsection{The Structure Sheaf}
