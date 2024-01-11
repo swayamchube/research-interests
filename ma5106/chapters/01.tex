@@ -1,0 +1,62 @@
+The origins of Fourier analysis lie in solving the heat equation:
+\begin{equation*}
+    \Delta u = \partial_t u
+\end{equation*}
+where $\Delta$ denotes the Laplacian.
+
+In order to solve this, Fourier believed for a long time that one could expand a function as a series 
+\begin{equation*}
+    f\sim \sum_k a_k\sin kx + \sum b_k\cos kx.
+\end{equation*}
+
+This is not true. In 1876, Paul Du Bois-Reymond gave an example of a continuous function whose Fourier series does not converge. But in 1966, Carleson showed that given an $L^2$ function on $[0,1]$, the points at which the Fourier series does not converge has measure $0$.
+
+There are many applications to PDEs, in solving the 
+\begin{description}
+    \item[Laplace Equation:] $\Delta u = 0$,
+    \item[Heat Equation:] $\partial_t u = \Delta u$,
+    \item[Wave Equation:] $\partial_{tt} u = \Delta u$.
+\end{description}
+
+
+\begin{definition}[Fourier Series]
+    Given $f\in L^1[a, b]$, its $k$-th \emph{Fourier coefficient} is defined as 
+    \begin{equation*}
+        \wh f(k) := \frac{1}{L}\int_a^b f(x)\exp\left(-\frac{2\pi i k}{L}x\right)~dx.
+    \end{equation*}
+    where $L = b - a$.
+
+    The \emph{Fourier series} of $f$ is given formally by 
+    \begin{equation*}
+        f\sim\sum_{k\in\Z}\wh f(k)\exp\left(\frac{2\pi i k}{L}x\right).
+    \end{equation*}
+\end{definition}
+
+The question is whether 
+\begin{equation*}
+    \lim_{n\to\infty}\sum_{k= -n}^n \wh f(k)\exp\left(\frac{2\pi ik}{L}x\right) = f(x)
+\end{equation*}
+in the following cases: 
+\begin{itemize}
+    \item if $f\in L^1[a,b]$. Here we cannot expect pointwise convergence because one can just change the value of $f$ at a single point without affecting its Fourier series.
+    \item if $f\in C[a,b]$. This is not true because of an example by Paul Du Bois-Reymond.
+    \item if $f\in C^1[a,b]$ then this is true.
+    \item if $f\in L^2[a,b]$, then there may not be pointwise convergence but there is convergence in the $L^2$-norm.
+\end{itemize}
+
+There are notions of convergence other than pointwise and uniform. For example Ces\`aro and Abel. Fej\'er had proved that for continuous functions, the Ces\`aro sums converge uniformly to the function, whatever that means.
+
+\begin{example}
+    Consider the function $f:[-\pi,\pi]\to\R$ given by $f(x) = x$. Then, 
+    \begin{equation*}
+        \wh f(k) = \frac{1}{2\pi}\int_{-\pi}^\pi x\exp(-ikx)~dx = 
+        \begin{cases}
+            0 & k = 0\\
+            \frac{(-1)^ki}{k} & k\ne 0.
+        \end{cases}
+    \end{equation*}
+    The Fourier series is then given by 
+    \begin{equation*}
+        \sum_{k\in\Z\backslash\{0\}}(-1)^{k + 1}\frac{\sin kx}{k}.
+    \end{equation*}
+\end{example}
