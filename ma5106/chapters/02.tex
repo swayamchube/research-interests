@@ -1,0 +1,79 @@
+\section{Functions on the Unit Circle}
+Denote
+\begin{equation*}
+    S^1 := \{z\in\bbC\colon|z| = 1\},
+\end{equation*}
+the unit circle. We parametrize points on the circle as $e^{i\theta}$. 
+
+Given a function $F: S^1\to\bbC$, using the above remark, we can define a function $f: [-\pi\to\pi]\to\bbC$ by 
+\begin{equation*}
+    f(\theta) = F(e^{i\theta}).
+\end{equation*}
+The continuity and differentiability properties of $F$ correspond to those of $f$.
+
+Conversely, given a function on an interval on the real line that agree on the endpoints, we can simply push it to the unit circle using something similar. Indeed, if $f:\R\to\bbC$ is a periodic function on $\R$ of period $T$, we define a function $F: S^1\to\bbC$ by 
+\begin{equation*}
+    F\left(\exp\left(\frac{2\pi i}{T}\theta\right)\right) = f(\theta).
+\end{equation*}
+
+\begin{example}[Dirichlet Kernel]
+    We define 
+    \begin{equation*}
+        D_N(x) := \sum_{n = -N}^N e^{ikx}
+    \end{equation*}
+    in $[-\pi\to\pi]$. Simple manipulation shows 
+    \begin{equation*}
+        D_N(x) = 
+        \begin{cases}
+            2N + 1 & x = 0\\
+            \frac{\sin\left(N + \frac{1}{2}\right)x}{\sin\left(\frac{x}{2}\right)} & x\ne 0.
+        \end{cases}
+    \end{equation*}
+    This is obviously a smooth function on $[-\pi,\pi]$ and represents a smooth function on the circle because it is a trigonometric polynomial.
+\end{example}
+
+\begin{example}[Poisson Kernel]
+    We define 
+    \begin{equation*}
+        P(r,\theta) = \sum_{n = -\infty}^\infty r^{|n|}e^{in\theta}
+    \end{equation*}
+    where $0\le r < 1$ and $-\pi\le\theta\le\pi$. This obviously converges due to the comparison test. A closed form for this is 
+    \begin{equation*}
+        P(r,\theta) = \frac{1 - r^2}{1 - 2r\cos\theta + r^2}.
+    \end{equation*}
+
+    This is handy in solving the Dirichlet Problem on the unit disk as is seen in a complex analysis course.
+\end{example}
+
+\section{Convergence of Fourier Series I}
+
+Let $f\in L^1(S^1)$. Define 
+\begin{equation*}
+    S_N(f)(\theta) = \sum_{k = -N}^N\wh f(k)e^{-ik\theta},
+\end{equation*}
+the partial sums of the Fourier series.
+
+\begin{theorem}[Uniqueness of Fourier Series]
+    Suppose $f\in L^1(S^1)$ and $\wh f(k) = 0$ for all $k\in\Z$. Then, $f(\omega) = 0$ for all points of continuity $\omega$.
+\end{theorem}
+\begin{proof}
+    Without loss of generality, suppose that $\omega = 0$, $f$ is a real valued function on $[-\pi,\pi]$ and $f(0) > 0$. Since $\cos^k(x)$ is a polynomial in $e^{imx}$'s, the integral $\int_{-\pi}^\pi f(x)\cos^mx~dx = 0$ for all $m\ge 0$.
+    \todo{Will complete this in the next class.}
+\end{proof}
+
+\begin{proposition}
+    Let $f\in C(S^1)$. Suppose $\displaystyle\sum_{k\in\Z}|\wh f(k)|$ converges. Then the Fourier series of $f$ converges uniformly to $f$. That is, $S_n(f)\rightrightarrows f$.
+\end{proposition}
+\begin{proof}
+    Using the triangle inequality, we have 
+    \begin{equation*}
+        |S_n(f)(\theta) - S_m(f)(\theta)|\le\sum_{m < |k|\le n}|\wh f(k)|,
+    \end{equation*}
+    whence, $\{S_n(f)\}$ is a Cauchy sequence in $C(S^1)$ and hence, the partial sums converge to some continuous function $F$ on the circle.
+
+    It remains to show that $F = f$. Note that the Fourier coefficients of $F$ and $f$ are the same. Indeed, due to uniform convergence, 
+    \begin{equation*}
+        \frac{1}{2\pi}\int_{-\pi}^\pi F(\theta)e^{-ik\theta}~d\theta = \lim_{n\to\infty}\frac{1}{2\pi}\int_{-\pi}^\pi S_n(f)(\theta)e^{-ik\theta}~d\theta = \wh f(k).
+    \end{equation*}
+    The conclusion follows from the fact that if a continuous function has all Fourier coefficients as $0$, then it must be the zero function.
+\end{proof}
