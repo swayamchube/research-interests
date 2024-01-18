@@ -37,6 +37,13 @@ On the other hand, consider the ring $A = k[x,y,z]/(xy - z^2)$ and the prime ide
     Let $\frakm = \sqrt{\fraka}$ and $\phi: A\to A/\fraka$ denote the natural map. Then, $\phi(\sqrt{\fraka})$ is the maximal ideal in $A/\fraka$ and is also the nilradical of $A/\fraka$, consequently, $A/\fraka$ is local and every non-unit is nilpotent. Hence, $\fraka$ is primary.
 \end{proof}
 
+\begin{proposition}
+    Let $\phi: A\to B$ be a ring homomorphism. If $\frakq\unlhd B$ is a primary ideal in $B$, then $\frakq^c$ is a primary ideal in $A$.
+\end{proposition}
+\begin{proof}
+    There is an injection $A/\frakq^c\into B/\frakq$. If $(0)$ is primary in $B/\frakq$ then it is primary in $A/\frakq^c$.
+\end{proof}
+
 \begin{lemma}\thlabel{lem:intersection-p-primary}
     If $\{\frakq_i\}_{i = 1}^n$ are $\frakp$-primary, then so is $\frakq=\bigcap_{i = 1}^n\frakq_i$.
 \end{lemma}
@@ -155,6 +162,36 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
     In particular, the primary ideals which correspond to the minimal primes associated to $\fraka$ are uniquely determined.
 \end{corollary}
 
+\begin{proposition}
+    Let $X$ be an infinite compact Hausdorff space. Then, $(0)$ is not decomposable in $C(X)$, the ring of continuous functions on $X$.
+\end{proposition}
+\begin{proof}
+    Suppose $(0) = \bigcap_{i = 1}^n\frakq_i$. Recall that the maximal ideals in $X$ are in bijection with the points of $X$. Denote the maximal ideal corresponding to a point $x\in X$ by $\frakm_x$. 
+
+    For each $\frakq_i$, choose a maximal ideal $\frakm_{x_i}$ containing it. Choose some $x\in X\backslash\{x_1,\dots,x_n\}$. Choose an open set $V$ containing $\{x_1,\dots,x_n\}$ and an open set $U$ containing $x$ such that $U\cap V = \emptyset$. 
+
+    Using Urysohn's Lemma, choose continuous functions $f,g: X\to[0,1]$ such that $f(x) = 1$ and $\Supp(f)\subseteq U$ and $g(x_i) = 1$ for every $i$ and $\Supp(g)\subseteq V$. By our choice of $g$, note that $g^m\notin\frakq_i$ for every $1\le i\le n$ and every positive integer $m$. Since $fg = 0$, we must have $f\in\frakq_i$ for every $1\le i\le n$, implying that $f = 0$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{definition}[Symbolic Power]
+    Let $\frakp\in\Spec A$. The \emph{$n$-th symbolic power of $\frakp$} is defined to be the contraction of the ideal $\frakp^nA_\frakp$ in $A$, denoted $\frakp^{(n)}$.
+\end{definition}
+
+Being the contraction of a primary ideal in $A_\frakp$, the symbolic power is always a primary ideal. Moreover, $\sqrt{\frakp^{(n)}} = \frakp$ whence, it is $\frakp$-primary.
+
+\begin{proposition}
+    With notation as above, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\frakp^{(n)}$ is a $\frakp$-primary ideal. 
+        \item if $\frakp^n$ has a primary decomposition, then $\frakp^{(n)}$ is its $\frakp$-primary component.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(a)$ follows from the fact that the contraction of primary ideals is primary. 
+
+    $(b)$ Note that $\frakp^n$ obviously would have a $\frakp$-primary component and that would be given by the contraction of $S^{-1}\frakp^n$ where $S = A\backslash\frakp$. The conclusion follows.
+\end{proof}
+
 \section{Associated Primes of Modules}
 
 \begin{definition}
@@ -166,7 +203,7 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
 \end{remark}
 
 \begin{proposition}
-    Let $a\in A$ and $M$ an $A$-module. Then $a_M$ is locally nilpotent if and only if $a\in\frakp$ for each $\frakp\in\Supp(M)$.
+    Let $a\in A$ and $M$ an $A$-module. Then $a_M$ is locally nilpotent if and only if $a\in\frakp$ for each $\frakp\in\Supp_A(M)$, that is, $a\in\bigcap\limits_{\frakp\in\Supp_A(M)}\frakp$.
 \end{proposition}
 \begin{proof}
     Suppose $a_M$ is locally nilpotent and $\frakp\in\Supp(M)$. Then, there is some $x\in M$ such that $x/1\ne 0$ in $M_\frakp$, that is, $\fraka = \Ann_A(x)\subseteq\frakp$. Since $a_M$ is locally nilpotent, there is a positive integer $n$ such that $a^n\in\fraka$ whence $a\in\frakp$. 
@@ -174,8 +211,10 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
     Conversely, suppose $a_M$ is not locally nilpotent whence there is some $x\in M$ such that $a^nx\ne0$ for all $n\in\N$. Let $\frakp$ be a prime ideal not intersecting $\{1,a,a^2,\dots\}$ and containing $\Ann_A(x)$\footnote{That we can do this is an easy application of Zorn's Lemma}. Then, $x/1\ne 0$ in $M_\frakp$ whence $M_\frakp\ne 0$ and $\frakp\in\Supp(M)$, but $a\notin\frakp$. This completes the proof.
 \end{proof}
 
-\begin{definition}
+\begin{definition}[Associated Primes]
     For an $A$-module $M$, a prime $\frakp\in\spec(A)$ is said to be \emph{associated} with $M$ if there is $x\in M$ such that $\frakp = \Ann_A(x)$. The set of all associated primes of a module $M$ is denoted by $\Ass(M)$.
+
+    Equivalently, a prime $\frakp$ is an associated prime of $M$ if there is an injection of $A$-modules, $A/\frakp\into M$.
 \end{definition}
 
 \begin{proposition}
@@ -209,6 +248,7 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
     Next, we shall show that $\frakq$ is an associated prime of $M$. Since $A$ is a noethering, $\frakq$ is finitely generated, say by $b_1,\dots,b_n$. Then, $b_iy/s = 0$ for each $i$, consequently, there is some $s_i\notin\frakp$ such that $s_ib_iy = 0$. Let $t = s_1\cdots s_n\notin\frakp$. We contend that $\frakq = \Ann_A(ty)$. Obviously, $\frakq\subseteq\Ann_A(ty)$. On the other hand, if $b\in\Ann_A(ty)$, then $bty = 0$ whereby $by/s = 0$ and $b\in\frakq$. This completes the proof.
 \end{proof}
 
+
 \begin{corollary}
     Let $A$ be a noethering and $M$ an $A$-module with $a\in A$. The following are equivalent: 
     \begin{enumerate}[label=(\alph*)]
@@ -233,27 +273,133 @@ Using \thref{lem:intersection-p-primary}, it is not hard to see that every decom
     Obviously $\frakp$ annihilates $y$. If $b\in A$ annihilates $y$, then $bax = 0$ whence $ba\in\frakp$. But since $y\ne 0$, $a\notin\frakp$ and thus $b\in\frakp$. This completes the proof.
 \end{proof}
 
+\begin{lemma}
+    Let $S\subseteq A$ be a multiplicative subset and $N$ an $S^{-1}A$-module. Then, 
+    \begin{equation*}
+        \Ass_{S^{-1} A}(N) = S^{-1}\Ass_A(N)\backslash\{S^{-1}A\},
+    \end{equation*}
+    where 
+    \begin{equation*}
+        S^{-1}\Ass_A(N) := \{S^{-1}\frakp\mid\frakp\in\Ass_A(N)\}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a noethering, $M$ a non-zero $A$-module and $S$ a multiplicative subset of $A$. Then, 
+    \begin{equation*}
+        \Ass_{S^{-1}A}(S^{-1}M) = S^{-1}\Ass_A(M)\backslash\{S^{-1}A\}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{corollary}
+    Let $A$ be a noethering. Then, 
+    \begin{equation*}
+        \frakp\in\Ass_A(M)\iff \frakp A_\frakp\in\Ass_{A_\frakp}(M_\frakp).
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    Take $S = A\backslash\frakp$ and the conclusion follows from the above lemma.
+\end{proof}
+
+\begin{proposition}
+    Let $A$ be a noethering and $M\ne 0$ a finitely generated (and hence, noetherian) $A$-module. Then, there is a filtration 
+    \begin{equation*}
+        M = M_0\supsetneq M_1\supsetneq\dots\supsetneq M_n = 0
+    \end{equation*}
+    such that $M_i/M_{i + 1}\cong A/\frakp_i$ for some $\frakp_i\in\Spec(A)$.
+\end{proposition}
+\begin{proof}
+    Since $A$ is a noethering, $\Ass_A(M)$ is non-empty. Pick a prime $\frakp_0\in\Ass_A(M)$. Then, there is an injection $A/\frakp_0\into M$. Then, there is a submodule $N_0$ of $M$ that is isomorphic to $A/\frakp_0$. If $M = N_0$, then we are done. If not, then consider $M/N_0$. This also has an associated prime $\frakp_1$ and hence, there is a submodle $N_1$ of $M$ containing $N_0$ such that $M/N_1\cong A/\frakp_1$. Continuing this way, we obtain a sequence (the finiteness of this sequence requires $M$ to be noetherian):
+    \begin{equation*}
+        N_0\subsetneq N_1\subsetneq\dots\subsetneq N_n = M
+    \end{equation*}
+    where $M/N_i\cong A/\frakp_i$ for some $\frakp_i\in\Spec(A)$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a noethering. Then, the set of all zero divisors on $M$ is given by 
+    \begin{equation*}
+        \bigcup_{\frakp\in\Ass_A(M)}\frakp.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    If $a\in A$ is a zero divisor on $M$, then, the set 
+    \begin{equation*}
+        \{\fraka\unlhd A\mid a\in\fraka\text{ and }\fraka = \Ann_A(x)\text{ for some }x\in M\}
+    \end{equation*}
+    admits a maximal element (due to noetherian-ness), say $\frakp$. This is an associated prime and contains $a$. The converse is trivial.
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a noethering and $M$ a finitely generated (equivalently, noetherian) $A$-module. Then, $\Ass_A(M)$ is finite.
+\end{lemma}
+\begin{proof}
+    As we have seen earlier, $M$ admits a filtration 
+    \begin{equation*}
+        M = M_0\supsetneq M_1\supsetneq\dots\supsetneq M_n = 0
+    \end{equation*}
+    where $M_i/M_{i + 1}\cong A/\frakp_i$ for some $\frakp_i\in\Spec(A)$. We have short exact sequences 
+    \begin{equation*}
+        0\longrightarrow M_{i + 1}\longrightarrow M_i\longrightarrow M_i/M_{i + 1}\longrightarrow 0.
+    \end{equation*}
+    Then, 
+    \begin{equation*}
+        \Ass_A(M_i)\subseteq\Ass_A(M_{i + 1})\cup\Ass_A(M_i/M_{i + 1}) = \Ass_A(M_{i + 1})\cup\{\frakp_i\}.
+    \end{equation*}
+    Inductively, we see that 
+    \begin{equation*}
+        \Ass_A(M)\subseteq\{\frakp_0,\dots,\frakp_{n - 1}\}.\qedhere
+    \end{equation*}
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be any ring. Then,
+    \begin{equation*}
+        \Ass_A(M)\subseteq\Supp_A(M).
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    Let $\frakp\in\Ass_A(M)$. Then, there is an injection $A/\frakp\into M$. Localizing at $\frakp$, we have an injection $Q(A/\frakp)\into M_\frakp$. Thus, $M_\frakp\ne 0$ and $\frakp\in\Supp_A(M)$.
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a noethering. The minimal elements of $\Ass_A(M)$ and $\Supp_A(M)$ are the same.
+\end{lemma}
+\begin{proof}
+    Let $\frakp\in\Ass_A(M)$ be minimal. We have seen that $\frakp\in\Supp_A(M)$. Suppose $\frakq\in\Supp_A(M)$ with $\frakq\subseteq\frakp$. Note that 
+    \begin{equation*}
+        \Ass_{A_\frakq}(M_\frakq) = \left(\Ass_A(M)\right)_{\frakq}\backslash\{A_\frakq\} = \emptyset.
+    \end{equation*}
+    Therefore, $M_\frakq = 0$ and $\frakq\notin\Supp_A(M)$. This shows that the minimal primes of $\Ass_A(M)$ are a subset of the minimal primes of $\Supp_A(M)$.
+
+    Conversely, suppose $\frakp\in\Supp_A(M)$ is minimal. Then, 
+    \begin{equation*}
+        \emptyset\ne\Ass_{A_\frakp}(M_\frakp) = \left(\Ass_A(M)\right)_\frakp\backslash\{A_\frakp\},
+    \end{equation*}
+    where the first ``equality'' follows from the fact that $M_\frakp\ne 0$. Hence, there is a prime ideal $\frakq\subseteq\frakp$ that is an associated prime of $M$ and hence, also lies in the support of $M$. It follows that $\frakq = \frakp$ whence $\frakp\in\Ass_A(M)$. This completes the proof.
+\end{proof}
+
+
 \section{Primary Decomposition of Modules}
 
 \begin{definition}
     Let $M$ be an $A$-module. A submodule $Q$ of $M$ is said to be \emph{primary} if $Q\ne M$ and for each $a\in A$, the homomorphism $a_{M/Q}$ is either injective or nilpotent.
+
+    Equivalently, the above definition implies that if $a_{M/Q}$ is a zero-divisor, then it is nilpotent.
 \end{definition}
 
-Equivalently, the above definition implies that if $a_{M/Q}$ is a zero-divisor, then it is nilpotent.
 
 \begin{proposition}
     Let $Q$ be a primary submodule of $M$. Then, 
     \begin{equation*}
         \frakp := \{a\in A\mid a_{M/Q}\text{ is nilpotent}\}
     \end{equation*}
-    is a prime ideal. This is called the \textbf{prime belonging to} $Q$ and we say that $Q$ is \textbf{$\frakp$-primary}.
+    is a prime ideal.
 \end{proposition}
 \begin{proof}
     Let $ab\in\frakp$, that is, $(ab)_{M/Q}$ is nilpotent. If $a\notin\frakp$, then $a_{M/Q}$ is injective and thus $b_{M/Q}$ is nilpotent, i.e. $b\in\frakp$. This completes the proof.
-\end{proof}
-
-\begin{proposition}
-    If $Q_1,\dots,Q_r$ are $\frakp$-primary submodules of $M$, then so is $Q_1\cap\dots\cap Q_r$.
-\end{proposition}
-\begin{proof}
 \end{proof}

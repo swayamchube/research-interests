@@ -259,6 +259,51 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
     with $b_i\in\sqrt{\frakp_2} = \frakp_2$. Since $s = y/x$ in $Q(B)$, the minimal polynomials of $s$ and $y$ over $K$ must have the same degree, that is, $r = r'$ and $b_i = x^{r - i}a_i$ for $0\le i\le r - 1$. If $x\notin\frakp_2$, then $a_i\in\frakp_2$ for $0\le i\le r - 1$, which would imply $s^r\in\frakp_2B\subseteq\frakp_1B\subseteq\frakq_1$, i.e. $s\in\frakq_1$, which is absurd. Thus, $x\in\frakp_2$ whence $\frakp_2^{ec}\subseteq\frakp_2$, which completes the proof.
 \end{proof}
 
+\subsection{Another Proof of the Going Down Theorem}
+\begin{lemma}
+    Let $A\subseteq B$ be an integral extension of integral domains. If $S = A\backslash\{0\}$, then $S^{-1}B = Q(B)$, the field of fractions of $B$ and the extension $Q(B)/Q(A)$ is algebraic.
+\end{lemma}
+\begin{proof}
+    Note that $Q(A)\subseteq S^{-1}B$ is an integral extension of integral domains and hence, $S^{-1}B$ is a field that is contained in $Q(B)$, whence, is equal to $Q(B)$. The assertion about algebraic extensions follows from the integrality of the extension.
+\end{proof}
+
+\begin{lemma}
+    Let $L/K$ be a normal extension of fields with $G = \Aut(L/K)$. Let $A$ be an integrally closed subring of $K = Q(A)$, $B$ the integral closure of $A$ in $L$. Then, for any prime $\frakp\in\spec(A)$, $G$ acts transitively on the fiber of $\frakp$ in $\spec(B)$.
+\end{lemma}
+That $G$ acts on each fiber is trivial to see. Only the transitivity of the action must be demonstrated.
+\begin{proof}
+    First, suppose $L/K$ is a Galois extension. That the statement is true for finite Galois extensions is common knowledge. We know that 
+    \begin{equation*}
+        \Gal(L/K) = \limit_{E}\Gal(E/K)
+    \end{equation*}
+    where $E$ ranges over all finite Galois extensions of $K$. Let $\frakq,\frakq'$ be primes lying over $\frakp$. For every finite Galois subextension $E$ of $L/K$, let $C_E$ denote the integral closure of $A$ in $E$ and $\frakp_E,\frakp_E'$ the respective contractions of $\frakq,\frakq'$. We know that there is a collection $\{\sigma_E\}\in\Gal(E/K)$ such that $\sigma_E(\frakp_E) = \frakp_E'$. Note that the inverse image of this set in $\Gal(L/K)$ is a closed (and hence compact) set, which we shall denote by $S_E$.
+
+    If $E_1,\dots,E_n$ are finite Galois subextensions of $L$, then their compositum $F = E_1\cdots E_n$ is a finite Galois subextension and hence, 
+    \begin{equation*}
+        \emptyset\ne S_F\subseteq\bigcap_{i = 1}^n S_{E_i},
+    \end{equation*}
+    that is, $\{S_E\}$ has the finite intersection property and there is a $\sigma\in\bigcap S_E$, which is the required automorphism taking $\frakq$ to $\frakq'$. 
+
+    Now, suppose $L/K$ is normal and $F = L^G$. Then, $L/F$ is Galois and $F/K$ is purely inseparable. Let $C$ denote the integral closure of $A$ in $F$. We claim that there is precisely one prime in $C$ lying over $\frakp\in\spec(A)$. Indeed, consider 
+    \begin{equation*}
+        \frakq = \{x\in C\mid\exists~n > 0,~x^{p^n}\in\frakp\}.
+    \end{equation*}
+    It is not hard to show that $\frakq$ is a prime ideal in $C$ and lies over $\frakp$. Further, any prime ideal $\frakq'$ lying over $\frakp$ must contain $\frakq$, consequently, must be equal to $\frakq$.
+\end{proof}
+
+\begin{theorem}[Going Down Theorem]
+    Let $A\subseteq B$ be an integral extension of integral domains with $A$ integrally closed. Suppose $\frakp_1\supseteq\dots\supseteq\frakp_n$ are prime ideals in $A$ and correspondingly $\frakq_1\supseteq\dots\supseteq\frakq_m$ are prime ideals in $B$ with $m < n$ and $\frakq_i\cap A = \frakp_i$ for $1\le i\le m$, then there are prime ideals $\frakq_{m + 1}\supseteq\frakq_{n}$ with $\frakq_m\supseteq\frakq_{m + 1}$ such that $\frakq_i\cap A = \frakp_i$ for $m < i\le n$.
+\end{theorem}
+\begin{proof}
+    We shall prove this in the case $m = 1$ and $n = 2$, which obviously suffices to prove the theorem in its full generality. Let $K$ denote the fraction field of $A$ and $L$ that of $B$. Let $L'$ denote the normal closure of $L$ in $\overline L$, the algebraic closure containing $L$ and $C$ the integral closure of $A$ in $L'$. Let $\frakP_1$ denote a prime in $C$ lying over $\frakq_1$ (hence, over $\frakp_1$) and $\frakP$ a prime in $C$ lying over $\frakp_2$. Due to the Going Up Theorem, there is a prime $\frakP'\supseteq\frakP$ in $C$ lying over $\frakp_1$. Since $\Aut(L'/K)$ acts transitively on the fiber of any prime, there is an automorphism $\sigma\in\Aut(L'/K)$ such that $\sigma(\frakP') = \frakP_1$. Then, $\frakP_2 = \sigma(\frakP)$ is a prime in $C$ lying over $\frakp_2$ that is contained in $\frakP_1$.
+
+    Let $\frakq_2 = \frakP_2\cap B$. Then, $\frakq_2$ is a prime in $B$ lying over $\frakp_2$ that is contained in $\frakq_1$. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    Let $A\subseteq B$ be an integral extension of integral domains with $A$ integrally closed. If $\frakq\in B$ is a prime and $\frakp = \frakq\cap B$, then $\hght(\frakq) = \hght(\frakp)$.
+\end{corollary}
+
 \section{Field Theory Arguments}
 
 \begin{definition}
@@ -310,6 +355,15 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
 \end{theorem}
 \begin{proof}
     Let $\frakp = \ker\sigma$, which is a prime ideal and let $\frakq$ be a prime ideal in $B$ lying over $\frakp$. Due to the First Isomorphism Theorem, there is an induced map $\phi: A/\frakp\to\Omega$. Using the universal property of the fraction field, there is an induced map $\psi: Q(A/\frakp)\to\Omega$. Note that $A/\frakp\subseteq B/\frakq$ and thus $Q(A/\frakp)\subseteq Q(B/\frakq)$. Now, using the extension lemma for fields, there is an induced map $\wt\psi: Q(B/\frakq)\to\Omega$ extending $\psi$. Composing this map with the inclusion $B/\frakq\into Q(B/\frakq)$, we obtain a map $\wt\phi: B/\frakq\to\Omega$ extending $\phi$. Finally, composing this map with the surjection $B\onto B/\frakq$, we obtain a map $\wt\sigma: B\to\Omega$ extending $\sigma$. This completes the proof.
+\end{proof}
+
+\begin{lemma}
+    Let $A$ be a subring of a field $K$ and $x\in K^\times$. Let $\varphi: A\to\Omega$ be a ring homomorphism into an algebraically closed field $\Omega$. Then $\varphi$ has an extension to a homomorphism of either $A[x]$ or $A[x^{-1}]$ into $\Omega$.
+\end{lemma}
+\begin{proof}
+    First, let $\frakp = \ker\varphi$. As we have seen earlier, we may extend $\varphi$ to a ring homomorphism $\varphi: A_\frakp\to\Omega$. Hence, we may suppose that $A$ is local with maximal ideal $\frakm$. 
+
+    Suppose first that \todo{proof in lang seems fishy}
 \end{proof}
 
 \section{Noether's Normalization Lemma}
@@ -380,6 +434,21 @@ For example, $\Z$ is integrally closed since the only algebraic integers in $\Q$
     and thus, $x_n$ is algebraic over $B = k[x_1,\dots,x_{n - 1}]$. Due to the induction hypothesis, there are algebraically independent $z_1,\dots,z_m\in B$ such that $B$ is integral over $k[z_1,\dots,z_m]$. 
 
     We have shown that $x_n$ is integral over $B$ and thus $B\subseteq A$ is an integral extension whence $k[z_1,\dots,z_m]\subseteq A$ is an integral extension. This completes the proof.
+\end{proof}
+
+\subsection{Stronger NNL}
+
+\begin{theorem}
+    Let $A$ be a finitely generated $k$-algebra and let $\fraka_1\subseteq\dots\subseteq\fraka_p$ be an increasing chain of ideals in $A$, with $\fraka_p\ne (1)$. Then, there is an integer $n > 0$ and algebraically independent $x_1,\dots,x_n\in A$, such that 
+    \begin{enumerate}[label=(\alph*)]
+        \item $A$ is integral over $B = k[x_1,\dots,x_n]$
+        \item for each $1\le i\le p$, there is an integer $h(i)\ge 0$ such that $\fraka_i\cap B$ is generated by $(x_1,\dots,x_{h(i)})$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Note that it suffices to prove the theorem when $A$ is a polynomial algebra $A' = k[Y_1,\dots,Y_m]$, for we can write $A$ as a quotient of such a polynomial algebra and replace each $\fraka_i$ by its preimage in $A'$, say $\fraka_i'$. If $\{x_1',\dots,x_n'\}$ are in $A'$ satisfying the statement of the theorem, then the images $\{x_1,\dots,x_n\}$ in $A$ satisfy the statement of the theorem for $A$. Henceforth, we suppose that $A = k[Y_1,\dots,Y_m]$ and argue by induction on $p$.
+
+    Suppose $p = 1$. \todo{complete NNL}
 \end{proof}
 
 \subsection{Various Forms of the Nullstellensatz}
@@ -492,3 +561,29 @@ The following proof is due to Rabinowitsch.
 
     We must now show the converse. Let $f(x)\in C[x]$ where $f(x) = c_mx^m + \dots + c_0$. Then, $f(x)\subseteq A[x][c_0,\dots,c_m]$, which is a finitely generated $A[x]$-module (since $A[c_0,\dots,c_m]$ is a finitely generated $A$-module), whence $f(x)$ is integral over $A[x]$. This completes the proof.
 \end{proof}
+
+\section{Jacobson Rings}
+
+\begin{theorem}\thlabel{thm:jacobson-rings-equivalent}
+    The following are equivalent: 
+    \begin{enumerate}[label=(\alph*)]
+        \item Every prime ideal in $A$ is an intersection of maximal ideals. 
+        \item In every homomorphic image of $A$, the nilradical is equal to the Jacobson radical. 
+        \item Every prime ideal in $A$ which is not maximal is equal to the intersection of the prime ideals strictly containing it.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $(a)\implies(b)$ Any homomorphic image of $A$ can be treated as $A/\fraka$ where $\fraka$ is an ideal in $A$. If $\fraka = A$, then there is nothing to prove. Suppose now that $\fraka$ is a proper ideal. Note that $\frakR(A/\fraka)$ is the intersection of all maximal ideals in $A/\fraka$, which is the image of the intersection of all maximal ideals containing $\fraka$ in $A$, due to the ideal correspondence. But the intersection of all maximal ideals containing $\fraka$ is the same as the intersection of all prime ideals containing $\fraka$ which is the contraction of the nilradical of $A/\fraka$. Thus, $\frakN(A/\fraka) = \frakR(A/\fraka)$.
+
+    $(b)\implies(c)$ Let $\frakp$ be a prime ideal in $A$. Then, $\sqrt{\frakp}$ is the intersection of all maximal ideals containing it whence $\frakp$ is the intersection of all prime ideals strictly containing it.
+
+    $(c)\implies(a)$ Suppose there is a prime ideal $\frakp$ in $A$ which is not an intersection of maximal ideals. Consider some 
+    \begin{equation*}
+        f\in \frakp\backslash\bigcap_{\frakm\supseteq\frakp}\frakm.
+    \end{equation*}
+    The poset $\Sigma = \{\fraka\unlhd A\mid f\notin\fraka\}$ is nonempty (since it contains $\frakp$) and has a maximal element, say $\frakq$, which is also prime. Due to maximality, any prime containing $\frakq$ must contain $f$ and hence, $\frakq$ cannot be the intersection of the primes strictly containing it.
+\end{proof}
+
+\begin{definition}[Jacobson Ring]
+    The ring $A$ is said to be \emph{Jacobson} if it satisfies the equivalent conditions of \thref{thm:jacobson-rings-equivalent}.
+\end{definition}

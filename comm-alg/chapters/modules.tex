@@ -991,6 +991,37 @@ In particular, from \thref{thm:pojective-module-equivalence}(c), we see that eve
     Conversely, if $M$ is divisible, then given any map $f: (a)\to M$, if $f(a) = x$, then there is $y\in M$ such that $ay = M$. Now, the map $\wt f: A\to M$ given by $f(1) = y$ extends $f$ whereby $M$ is injective. This completes the proof.
 \end{proof}
 
+\section{Essential Extensions and Injective Hull}
+
+I'll add the theory later. First, an application. \todo{Add theory about essential extensions}
+
+\begin{theorem}[Schr\"oder-Bernstein for Injective Modules]
+    Let $R$ be a possibly non-commutative ring and $M, N$ injective $R$-modules. If there are $R$-linear injections $f: M\into N$ and $g: N\into M$, then $M\cong N$.
+\end{theorem}
+\begin{proof}
+    We may treat $N$ as a submodule of $M$. Using injectivity of $N$, there is a submodule $X$ of $M$ such that $M = N\oplus X$. Let $X_n$ denote the set $f^n(X)$ and $L = \bigoplus_{n = 0}^\infty X_n$. Consider the map $\Phi: L\to M$ given by 
+    \begin{equation*}
+        \Phi(x_0,x_1,\dots) = \sum_{i = 0}^\infty x_i.
+    \end{equation*}
+    We contend that $\Phi$ is injective. Indeed, suppose $(x_i)\in\ker\Phi$. Then, there is some positive integer $n$ such that $x_j = 0$ for all $j > n$ and 
+    \begin{equation*}
+        x_0 + f(x_1) + \dots + f^{n}(x_n) = 0.
+    \end{equation*}
+    Therefore, $x_0\in\im(f)\subseteq N$ whence $x_0 = 0$, consequently, $x_1 + f(x_2) + \dots + f^{n - 1}(x_n) = 0$, since $f$ is an injection. Working inductively, we see that $x_i = 0$ for all $i$ and $\Phi$ is injective.
+
+    We may now suppose that $L$ is embedded inside $M$ through the injection $\Phi$. Since $f(L)\subseteq N$, there is an injective hull $E$ of $f(L)$ that is contained inside $N$. Since $E$ is injective, there is a submodule $Y$ of $N$ such that $N = E\oplus Y$.
+
+    We have 
+    \begin{equation*}
+        E(L)\cong E(X\oplus f(L))\cong E(X)\oplus E(f(L))\cong X\oplus E.
+    \end{equation*}
+    Recall that $f$ is an injection and thus, $E(L)\cong E(f(L))\cong E$. Henc, $E\cong X\oplus E$. This gives us 
+    \begin{equation*}
+        M\cong N\oplus X\cong Y\oplus E\oplus X\cong Y\oplus E\cong N.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
 \section{Algebras}
 
 \begin{definition}

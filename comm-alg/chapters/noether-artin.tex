@@ -105,6 +105,9 @@ Since $M$ is artinian, there is an index $n$ such that $\im\phi^n = \im\phi^{n +
     Instead of choosing $A = \F_2\times\F_2\times\cdots$, any product of fields works but the proof in the general case requires a bit more machinery. Indeed, if $A$ is an infinite product of fields, then $A$ is absolutely flat, consequently, every localization of $A$ at a prime ideal is a local absolutely flat ring, whence a field, which is noetherian.
 \end{remark}
 
+\section{Length of Modules}
+
+
 \begin{lemma}\thlabel{lem:noether-iff-artin}
     Supose there is a sequence of maximal ideals $\frakm_1,\ldots,\frakm_n$ in $A$ such that $(0) = \frakm_1\cdots\frakm_n$. Then, $A$ is a noethering if and only if it is artinian.
 \end{lemma}
@@ -118,6 +121,19 @@ Since $M$ is artinian, there is an index $n$ such that $\im\phi^n = \im\phi^{n +
         0\longrightarrow\frakm_1\cdots\frakm_{i + 1}\longrightarrow\frakm_1\cdots\frakm_i\longrightarrow\frakm_1\cdots\frakm_{i + 1}/\frakm_1\cdots\frakm_i\longrightarrow 0
     \end{equation*}
     Inducting downwards from $\frakm_1\cdots\frakm_n = (0)$ (which is clearly artinian) with the repeated usage of \thref{lem:2-3-noether-artin}, we are done.
+\end{proof}
+
+\begin{lemma}[Fitting]
+    Let $R$ be any ring and $M$ a finite-length module. If $f\in\End_R(M)$, then for any sufficiently large $n$, $M\cong\im(f^n)\oplus\ker(f^n)$.
+\end{lemma}
+\begin{proof}
+    We have the sequences 
+    \begin{equation*}
+        \im(f)\supseteq\im(f^2)\supseteq\cdots\qquad\ker(f)\subseteq\ker(f^2)\subseteq\cdots.
+    \end{equation*}
+    Hence, for sufficiently large $n$, $\ker(f^n) = \ker(f^{n + 1}) = \cdots$ and $\im(f^n) = \im(f^{n+ 1}) = \cdots$. Choose any $x\in M$. Then, there is some $y\in M$ such that $f^n(x) = f^{2n}(y)$, consequently, $x - f^n(y)\in\ker(f^{n})$, whence $M = \ker(f^n) + \im(f^n)$.
+
+    On the other hand, if $x\in\ker(f^n)\cap\im(f^n)$, then there is some $y\in M$ such that $f^n(y) = x$. Consequently, $f^{2n}(y) = 0$, whence $y\in\ker(f^{2n}) = \ker(f^n)$, thus, $x = f^n(y) = 0$. This shows that $M\cong\ker(f^n)\oplus\im(f^n)$.
 \end{proof}
 
 \section{Noetherian Rings}
@@ -373,6 +389,45 @@ An analogous result does \textbf{not} hold for Artinian modules (rings). Conside
     On the other hand, suppose $\fraka = \frakq_1\cdots\frakq_n$ where $\frakp_i = \sqrt{\frakq_i}$ are distinct. Since $\dim A = 1$, the ideals $\frakp_i$ are maximal whence $\frakq_i$ are comaximal. Invoking \thref{thm:chinese-remainder}, we see that $\fraka = \bigcap_{i = 1}^n\frakq_i$ is a primary decomposition. Further, since $\frakp_i$ are also the minimal primes associated with $\fraka$, due to \thref{thm:second-uniqueness-theorem}, the $\frakq_i$'s are unique.
 \end{proof}
 
+\begin{theorem}[Krull's Intersection Theorem]
+    Let $A$ be a noetherian ring and $\fraka\unlhd A$ an ideal. Set 
+    \begin{equation*}
+        \frakb = \bigcap_{n = 1}^\infty\fraka^n.
+    \end{equation*}
+    Then, $\fraka\frakb = \frakb$.
+\end{theorem}
+\begin{proof}
+    Since $\fraka$ is a proper ideal, so is $\frakb$ and $\fraka\frakb$. Hence, it admits a primary decomposition 
+    \begin{equation*}
+        \fraka\frakb = \frakq_1\cap\dots\cap\frakq_n.
+    \end{equation*}
+    We contend that $\frakb\subseteq\frakq_i$ for every $1\le i\le n$. Suppose not, then there is some index $i$ and $b_i\in\frakb\backslash\frakq_i$. Note that $b_i\fraka\subseteq\fraka\frakb\subseteq\frakq_i$ and hence, $\fraka\subseteq\frakp_i$. Now, there is a positive integer $r > 0$ such that $\frakp_i^r\subseteq\frakq_i$ whence, $\fraka^r\subseteq\frakq_i$, consequently, $\frakb\subseteq\frakq_i$, a contradiction. This completes the proof.
+\end{proof}
+
+There's an analogue of the above theorem for modules as well. 
+
+\begin{theorem}[Krull's Intersection Theorem]
+    Let $A$ be a noethering, $M$ a finitely generated $A$-module and $\fraka\unlhd A$ an ideal. Set 
+    \begin{equation*}
+        N = \bigcap_{n = 1}^\infty\fraka^n M.
+    \end{equation*}
+    Then, $\fraka N = N$.
+\end{theorem}
+\begin{proof}
+    If $\fraka = (1)$ or $N = M$, there is nothing to prove. Now suppose $N\subsetneq M$, then, it admits a primary decomposition 
+    \begin{equation*}
+        N = Q_1\cap\dots\cap Q_n
+    \end{equation*}
+    where each $Q_i$ is $\frakp_i$-primary and hence, $\frakp_i = \sqrt{\Ann_A(M/Q_i)}$. We contend that $N$ is contained in every $Q_i$. Suppose not, then there is an index $i$ and $x\in N\backslash Q_i$. Notet hat $\fraka x$ is a submodule of $\fraka N$ which is contained in $Q_i$. But since $x$ is not contained in $Q_i$, we must have $\fraka\subseteq\frakp_i$. As a result, there is a positive integer $r > 0$ such that $\fraka^r\subseteq\Ann_A(M/Q_i)$. Hence, $N\subseteq\frakQ_i$, a contradiction. This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    With the notation of the above result, 
+    \begin{equation*}
+        N = \{x\in M\mid\exists a\in\fraka,~(1 + a)x = 0\}.
+    \end{equation*}
+\end{corollary}
+
 \subsection{Nagata's Monster}
 
 \begin{lemma}\thlabel{lem:noetherian-local-property}
@@ -424,6 +479,41 @@ The proof of the above theorem relies on the following claims.
 \begin{proof}[Proof of \thref{thm:nagata-krull-noether}]
     Note that $R_{S^{-1}\frakp_i}\cong A_{\frakp_i}$, which is noetherian, further, every element in $S^{-1}A$ is contained in finitely many of the $S^{-1}\frakp_i$'s whence, due to \thref{lem:noetherian-local-property}, $R$ is noetherian. Finally, note that the height of $S^{-1}\frakp_i$ is at least $m_{i + 1} - m_i$, consequently, $\dim R = \infty$. This completes the proof.
 \end{proof}
+
+\subsection{Eakin-Nagata Theorem}
+
+\begin{lemma}[Formanek]\thlabel{lem:formanek}
+    Let $M$ be a finitely generated faithful $A$-module such that the poset 
+    \begin{equation*}
+        \{\fraka M\mid \fraka \text{ is an ideal in }A\}
+    \end{equation*}
+    has the ascending chain condition. Then, $A$ is a noethering.
+\end{lemma}
+\begin{proof}
+    Suppose not. Consider the poset 
+    \begin{equation*}
+        \Sigma = \{\fraka\unlhd A\mid M/\fraka M\text{ is not a noetherian $A$-module}\}.
+    \end{equation*}
+    This is non-empty and hence, contains a maximal element, say $\fraka_0$. Let $M' = M/\fraka_0 M$ and $A' = A/\Ann_A(M')$. Then, $M'$ is a non-noetherian faithful $A'$-module. Further, if $\frakb\unlhd A'$ is a non-zero ideal, then $M'/\frakb M'$ is isomorphic to $M/\fraka' M$ where $\fraka'$ strictly contains $\fraka_0$ and hence, is a noetherian $A$-module, consequently, a noetherian $A'$-module.
+
+    Consider the poset 
+    \begin{equation*}
+        \Gamma = \{N\le M'\mid M'/N\text{ is a faithful $A'$-module}\}.
+    \end{equation*}
+    Note that $N\in\Gamma$ if and only if for all $a\in A'\backslash\{0\}$, $aM'\not\subseteq N$. It is now easy to see that every chain in $\Gamma$ admits an upper bound in $\Gamma$ and hence, $\Gamma$ contains a maximal element, say $N_0\le M'$. Let $M'' = M'/N_0$. 
+
+    First, note that $M''$ cannot be noetherian since this would force $A'$ to be a noethering, which, in turn would force $A$ to be a noethering. Hence, there is a (non-zero) submodule $N$ of $M''$ that is not finitely generated as an $A'$-module. The module $M''/N$ is isomorphic to $M'/N'$ where $N'$ is a submodule of $M'$ that strictly contains $N_0$ and hence, $M'/N'$ is not a faithful $A'$-module. That is, there is an $a\in A'\backslash\{0\}$ such that $aM''\subseteq N$. Note that $M''/aM''$ is isomorphic to $M'/aM'$, which must be a noetherian $A'$-module due to our construction of $M'$. 
+    
+    Hence, $N/aM''$, being a submodule of $M''/aM''$ is a noetherian $A'$-module, in particular, it is finitely generated. Finally, since $aM''$ is a finitely generated $A'$-module, we must have that $N$ is a finitely generated $A'$-module, a contradiction.
+\end{proof}
+
+\begin{theorem}[Eakin-Nagata]\thlabel{thm:eakin-nagata}
+    Let $A\subseteq B$ be an extension of rings such that $B$ is a noethering and a finitely generated $A$-module. Then, $A$ is a noethering.
+\end{theorem}
+\begin{proof}
+    Follows from \thref{lem:formanek} by taking $M = B$.
+\end{proof}
+
 
 \section{Artinian Rings}
 
