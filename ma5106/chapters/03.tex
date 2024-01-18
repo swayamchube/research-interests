@@ -1,0 +1,64 @@
+\begin{proposition}
+    Let $f\in C^2(S^1)$. Then, there is a constant $C > 0$ such that 
+    \begin{equation*}
+        |\wh f(n)|\le\frac{C}{n^2}
+    \end{equation*}
+    for all $n\in\Z\backslash\{0\}$.
+\end{proposition}
+\begin{proof}
+    This is a standard integration by parts application. Indeed, 
+    \begin{align*}
+        2\pi\wh f(n) &= \int_{-\pi}^{\pi}f(\theta)e^{-in\theta}~d\theta\\
+        &= -(-in)^{-1}\int_{-\pi}^{\pi}f'(\theta)e^{-in\theta}~d\theta\\
+        &= (-in)^{-2}\int_{-\pi}^{\pi}f''(\theta)e^{-in\theta}~d\theta.
+    \end{align*}
+    We know that $f''$ is bounded by $M$ on $[-\pi, \pi]$ (owing to it being continuous). Then, 
+    \begin{equation*}
+        2\pi|\wh f(n)|\le \frac{1}{n^2}\times 2\pi\times M.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+\begin{corollary}
+    If $f\in C^2(S^1)$, the Fourier series of $f$ converges uniformly to $f$.
+\end{corollary}
+
+\begin{definition}
+    A function $f$ on the circle is said to be H\"older continuous of class $\alpha > 0$. if there is a $K > 0$ such that $|f(x) - f(y)|\le K|x - y|^\alpha$ for all $x,y\in S^1$. This is denoted by $f\in C^{0,\alpha}(S^1)$.
+\end{definition}
+
+\begin{remark}
+    The uniform convergence of $S_Nf$ to $f$ holds for $f\in C^{0,\alpha}(S^1)$ where $\alpha > 1/2$. This is due to Bernstein.
+\end{remark}
+
+\section{Convolutions}
+
+We have 
+\begin{align*}
+    S_Nf(x) &= \sum_{k = -N}^N \wh f(k)e^{ikx}\\
+    &= \sum_{k = -N}^N \frac{1}{2\pi}\int_{-\pi}^\pi f(y)e^{ik(x - y)}~dy\\
+    &= \frac{1}{2\pi}\int_{-\pi}^{\pi}f(y)\sum_{k = -N}^Ne^{ik(x - y)~dy}\\
+    &= \frac{1}{2\pi}\int_{-\pi}^{\pi}f(y)D_N(x - y)~dy\\
+    &= (f\ast D_N)(x).
+\end{align*}
+This is called a convolution.
+
+\begin{definition}
+    Given $f,g\in L^1(S^1)$, define 
+    \begin{equation*}
+        (f\ast g)(x) = \frac{1}{2\pi}\int_{-\pi}^{\pi}f(y)g(x - y)~dy.
+    \end{equation*}
+    It is not hard to argue that $f\ast g\in L^1(S^1)$ using Fubini's Theorem.
+\end{definition}
+
+\begin{proposition}
+    Let $u,v,w\in L^1(S^1)$. Then, 
+    \begin{enumerate}[label=(\alph*)]
+        \item $u\ast v = v\ast u$.
+        \item $u\ast (v\ast w) = (u\ast v)\ast w$.
+        \item $(\lambda u)\ast v = \lambda(u\ast v)$.
+        \item $u\ast(v + w) = u\ast v + u\ast w$.
+        \item $\wh{u\ast v}(k) = \wh u(k)\wh v(k)$.
+        \item $u\ast v$ is continuous.
+    \end{enumerate}
+\end{proposition}

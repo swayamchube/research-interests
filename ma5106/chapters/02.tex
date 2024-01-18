@@ -58,7 +58,28 @@ the partial sums of the Fourier series.
 \end{theorem}
 \begin{proof}
     Without loss of generality, suppose that $\omega = 0$, $f$ is a real valued function on $[-\pi,\pi]$ and $f(0) > 0$. Since $\cos^k(x)$ is a polynomial in $e^{imx}$'s, the integral $\int_{-\pi}^\pi f(x)\cos^mx~dx = 0$ for all $m\ge 0$.
-    \todo{Will complete this in the next class.}
+
+    Since $f$ is continuous at $0$, we can pick a $\pi/2 > \delta > 0$ such that $f(x)\ge f(0)/2$ in $[-\delta, \delta]$. Let $\varepsilon > 0$ be such that $\cos\delta = 1 - 2\varepsilon$. Then, $|\varepsilon + \cos\theta|\le 1 - \varepsilon$ on $[-\pi, \pi]\backslash[-\delta,\delta]$. Now, choose $\eta < \delta$ such that $\varepsilon + \cos\theta\ge 1 + \varepsilon/2$ on $[-\eta,\eta]$. Let $p(\theta) = \varepsilon + \cos\theta$ on $[-\pi, \pi]$. 
+
+    We have 
+    \begin{equation*}
+        0 = \int_{-\pi}^\pi f(\theta) p(\theta)^n~d\theta = \int_{|\theta|\le\delta} f(\theta)p(\theta)^n~d\theta + \int_{\delta\le|\theta|\le\pi}f(\theta)p(\theta)^n~d\theta,
+    \end{equation*}
+    whence 
+    \begin{equation*}
+        \left|\int_{\delta\le |\theta|\le\pi}f(\theta)p(\theta)^n~d\theta\right| = \left|\int_{|\theta|\le\delta}f(\theta)p(\theta)^n~d\theta\right|.
+    \end{equation*}
+    The left hand side is bounded above by 
+    \begin{equation*}
+        2\pi M(1 - \varepsilon)^n
+    \end{equation*}
+    while the right hand side is bounded below by 
+    \begin{equation*}
+        \delta f(0)\left(1 + \frac{\varepsilon}{2}\right)^n.
+    \end{equation*}
+    It is not hard to see that this is not possible for sufficiently large $n$.
+
+    Next, we must argue this for complex valued functions $f$. Indeed, one can capture the real and complex parts as $(f + \overline f)/2$ and $(f - \overline f)/2i$, and the conclusion would follow.
 \end{proof}
 
 \begin{proposition}
