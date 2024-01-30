@@ -1,0 +1,51 @@
+\begin{definition}
+    A sequence of continuous functions $K_n: S^1\to\bbC$ are said to be \emph{a family of good kernels} if:
+    \begin{enumerate}[label=(\alph*)]
+        \item $$\frac{1}{2\pi}\int_{-\pi}^\pi K_n(x)~dx = 1$$ for all $n\in\N$.
+        \item There is a positive real number $M > 0$ such that 
+        \begin{equation*}
+            \int_{-\pi}^\pi |K_n(x)|~dx\le M
+        \end{equation*}
+        for all $n\in\N$.
+        \item For every $\delta > 0$, 
+        \begin{equation*}
+            \lim_{n\to\infty}\int_{|x|\ge\delta}|K_n(x)|~dx  = 0
+        \end{equation*}
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Suppose $\{K_m\}_{m\ge 1}$ is a family of good kernels and $f\in L^1(S^1)\cap L^\infty(S^1)$. Then, 
+    \begin{equation*}
+        (f\ast K_m)(x)\to f(x)\quad\text{ as } m\to\infty
+    \end{equation*}
+    at all points of continuity of $f$. Moreover, if $f\in C(S^1)$, then the convergence is uniform.
+\end{theorem}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \left|(f\ast K_n)(x) - f(x)\right| = \frac{1}{2\pi}\left|\int_{-\pi}^\pi (f(x - y) - f(x))K_n(y)~dy\right|.
+    \end{equation*}
+    Using continuity of $f$ at $x$, one can pick a small enough $\delta$ such that $f(x - y) - f(x)$ is small for all $y\in [-\delta,\delta]$. Then break the integral into two parts and use part (c) of the definition of a good kernel.
+\end{proof}
+
+\begin{proposition}
+    The Dirichlet kernel is not a good kernel.
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        \int_{-\pi}^\pi |D_N(x)|~dx = \int_{-\pi}^\pi\left|\frac{\sin\left( N + \frac{1}{2}\right)x}{\sin\frac{x}{2}}\right|~dx.
+    \end{equation*}
+    The integral on the right can be broken down into segments $\left[\frac{k\pi}{N + \frac{1}{2}}, \frac{(k + 1)\pi}{N + \frac{1}{2}}\right]$. Integrate over each of them and find a $\Omega(\log N)$ bound on the integral. This shows that it diverges.
+\end{proof}
+
+Recall that $L^2$ is a Hilbert space with the inner product given by 
+\begin{equation*}
+    \langle f, g\rangle = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)\overline{g(x)}~dx.
+\end{equation*}
+
+There is the H\"older Inequality 
+\begin{equation*}
+    |\langle f, g\rangle|\le\|f\|_2\|g\|_2.
+\end{equation*}

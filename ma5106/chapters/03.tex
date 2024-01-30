@@ -55,10 +55,25 @@ This is called a convolution.
     Let $u,v,w\in L^1(S^1)$. Then, 
     \begin{enumerate}[label=(\alph*)]
         \item $u\ast v = v\ast u$.
-        \item $u\ast (v\ast w) = (u\ast v)\ast w$.
-        \item $(\lambda u)\ast v = \lambda(u\ast v)$.
         \item $u\ast(v + w) = u\ast v + u\ast w$.
+        \item $(\lambda u)\ast v = \lambda(u\ast v)$.
+        \item $u\ast (v\ast w) = (u\ast v)\ast w$.
         \item $\wh{u\ast v}(k) = \wh u(k)\wh v(k)$.
-        \item $u\ast v$ is continuous.
+        \item $u\ast v$ is continuous if $u,v\in L^1(S^1)$ and bounded.
     \end{enumerate}
 \end{proposition}
+\begin{proof}
+    We have 
+    \begin{align*}
+        2\pi (v\ast u)(x) = \int_{-\pi}^\pi v(y)u(x - y)~dy = \int_{-\pi + x}^{\pi + x} v(x - z)u(z)~dz = \int_{-\pi}^\pi v(x - z)u(z)~dz = 2\pi(u\ast v)(x).
+    \end{align*}
+
+    For (e), 
+    \begin{align*}
+        \wh{u\ast v}(k) &= \frac{1}{2\pi}\int_{-\pi}^\pi(u\ast v)(x)e^{-ikx}~dx\\
+        &= \frac{1}{(2\pi)^2}\int_{-\pi}^\pi \int_{-\pi}^\pi u(y)v(x - y)e^{-ikx}~dy dx\\
+        &= \frac{1}{(2\pi)^2}\int_{-\pi}^\pi\int_{-\pi}^\pi u(y)e^{-iky}v(x - y)e^{-ik(x - y)}~dydx\\
+        &= \frac{1}{2\pi}\int_{-\pi}^\pi\wh u(k)v(x -y)e^{-ik(x - y)}~dx\\
+        &= \wh u(k)\wh v(k).
+    \end{align*}
+\end{proof}

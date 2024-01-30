@@ -1,0 +1,46 @@
+Let $f\in L^2(-\pi, \pi)$ and denote $e_k = e^{ik\theta}$ which is a function on the unit circle. The $n$-th Fourier coefficient of $f$ is given by 
+\begin{equation*}
+    \wh f(k) = \langle f, e_k\rangle\qquad\forall k\in\Z.
+\end{equation*}
+
+We would show that the $\{e_k\}$'s form an orthonormal basis for $L^2(S^1)$.
+
+\begin{theorem}
+    Given $f\in L^2(S^1)$, we have
+    \begin{enumerate}
+        \item $S_n(f)\to f$ in the $L^2$-norm.
+        \item $\|f\|_2^2 = \sum_{k\in\Z} |\wh f(k)|^2$.
+        \item $\wh f(k)\to 0$ as $|k|\to\infty$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+\end{proof}
+
+\begin{theorem}
+    Let $f$ be a Lipschitz function on $S^1$. Then, $S_n(f)$ converges pointwise to $f$.
+\end{theorem}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        S_N(f)(\omega) - f(\omega) = \frac{1}{2\pi}\int_{-\pi}^\pi\left[f(\omega - t) - f(\omega)\right]D_N(t)~dt = \frac{1}{2\pi}\int_{-\pi}^\pi \frac{f(\omega - t) - f(\omega)}{t}\frac{t\sin\left(N + \frac{1}{2}\right)t}{\sin\frac{t}{2}}~dt.
+    \end{equation*}
+    Note that 
+    \begin{equation*}
+        \sin\left(N + \frac{1}{2}\right)t = \sin(Nt)\cos\left(\frac{t}{2}\right) + \cos(Nt)\sin\left(\frac{t}{2}\right).
+    \end{equation*}
+    Let 
+    \begin{equation*}
+        F(t) = \frac{f(\omega - t) - f(t)}{t},
+    \end{equation*}
+    whence $|F(t)|\le M$ on $S^1$, as a result, $F\in L^2$.
+
+    Then, 
+    \begin{align*}
+        S_N(f)(\omega) - f(\omega) = \frac{1}{2\pi}\int_{-\pi}^\pi\frac{F(t)t\cos(t/2)}{\sin(t/2)}\sin(Nt) + F(t)t\cos(Nt)~dt.
+    \end{align*}
+    Note that $\frac{t\cos(t/2)}{\sin(t/2)}$ is continuous and hence, $F(t)\frac{t\cos(t/2)}{\sin(t/2)}$ is again in $L^2$. Also, $tF(t)$ is in $L^2$. Invoking the Riemann Lebesgue Lemma, we have the desired conclusion.
+\end{proof}
+
+\begin{remark}
+    If $f\in C^{0,1}(S^1)$, then $\wh f(k) = \calO(1/|k|)$.
+\end{remark}
