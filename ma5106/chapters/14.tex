@@ -1,0 +1,91 @@
+Fix a compact set $K$. Let $\varphi, \psi$ be elements of $D(\R^n)$. Then, we define 
+\begin{equation*}
+    d_K(\varphi, \psi) = \max_{i\in\N}\frac{1}{2^i}\frac{\|\varphi - \psi\|_{K, i}}{1 + \|\varphi - \psi\|_{K, i}}.
+\end{equation*}
+where 
+\begin{equation*}
+    \|\varphi\|_{K, i} = \sum_{j = 0}^{i} \|\varphi^{(j)}\|_K.
+\end{equation*}
+In this metric, $D(K)$ is a complete metric space. This is called a Fr\'echet space.
+
+A local base for this topology is $\|\varphi\|_{K, l}\le\frac{1}{l}$ for all $l\in\N$. Therefore, $D(K)$ forms a locally convex topological vector space.
+
+\hrulefill 
+
+Take an exhaustion of $\R^n$, the natural choice is closed balls of integer radius. Let us denote this sequence by $\{K_n\}$ which are compact sets in $\R^n$. Further, $K_n\subseteq\mathrm{int}~K_{n + 1}$ and $\bigcup K_n = \R^n$.
+
+\begin{equation*}
+    p_{l, a}(\varphi) = \sup_{m\ge 1}\sup_{\R\backslash K_m}\frac{1}{a_m}\sum_{|\alpha| < l_m}|\partial^\alpha\varphi|
+\end{equation*}
+where $a_m\to 0$ and $l_m\to\infty$. Note that $l$ and $a$ are sequences. This gives a family of seminorms. These generate a topology on $D(\R^n)$, with which this is a complete metric space.
+
+\hrulefill 
+
+Distributions are dual of $D(\R^n)$ with the weak-$\ast$ topology. $T\in D'(\R^n)$ is a linear functional such that 
+\begin{enumerate}
+    \item $T$ is continuous.
+    \item If $\varphi_m\to\varphi$ in $D(\R^n)$ then $T(\varphi_m)\to T(\varphi)$.
+    \item For every compact $K\subseteq\R^n$, there is a positive integer $i_K > 0$ and a constant $C_K$ such that 
+    \begin{equation*}
+        |T(\varphi)|\le C_K\sum_{|\alpha|\le i_K}|\partial^\alpha\varphi|.
+    \end{equation*}
+    For every $\varphi$ such that $\Supp\varphi\subseteq K$. 
+\end{enumerate}
+
+\begin{example}
+    The Dirac Delta is an example of a distribution, $\delta_\xi$ where $\xi\in\R^n$. The action is given by $\delta_\xi(\varphi) = \varphi(\xi)$. It is not hard to see that this is indeed a distribution.
+\end{example}
+
+\begin{example}
+    Take $f\in L^1_{loc}(\R^n)$, then $f$ generates a distribution $T_f\in D'(\R^n)$ whose action is defined as 
+    \begin{equation*}
+        T_f(\varphi) = \int_{\R^n} \varphi f.
+    \end{equation*}
+    This is also a zeroth order distribution, that is $i_K = 0$ works.
+\end{example}
+
+\begin{example}
+    Fix $\xi\in\R$. Then, $T$ defined as 
+    \begin{equation*}
+        T(\varphi) = \varphi''(\xi)
+    \end{equation*}
+    Show that $T\in D'(\R)$, that is, it is a distribution.
+\end{example}
+
+\hrulefill 
+
+Now, we define the derivative of a distribution. The idea is to pass the derivative on the action.
+
+\begin{theorem}[Also a Definition]
+    Let $T\in D'(\R^n)$. We define the distributional derivative $\partial^\alpha T$ of order $|\alpha|$ of $T$ as 
+    \begin{equation*}
+        (\partial^\alpha T)(\varphi) = (-1)^\alpha T(\partial^\alpha\varphi).
+    \end{equation*}
+\end{theorem}
+This is obviously a linear functional on $D(\R^n)$. Also, the local boundedness thing is quite obvious.
+
+\hrulefill 
+
+We have $C_c^\infty(\R^n)\subseteq\mathscr S(\R^n)\subseteq C^\infty(\R^n)$ where all the inclusions are strict. We care about the dual of the middle object. The dual of the Schwarz space is the space of Tempered Distributions.
+
+Taking duals, we have 
+\begin{equation*}
+    \mathcal E'(\R^n)\subseteq\mathscr S'(\R^n)\subseteq\mathcal D'(\R^n).
+\end{equation*}
+The first class is called the space of distributions with compact support.
+
+Let $\Omega\subseteq\R^n$ be open. Then, we say that $T$ vanishes on $\Omega$ if $T(\varphi) = 0$ for all $\varphi\in D(\Omega)$. 
+
+We define the support of $T$ to be $\R^n\backslash\bigcup\Omega$ where the union is taken over all open sets on which $T$ vanishes. A compactly supported distribution is one whose support is a compact set (quite obvious).
+
+Note that if $T$ has support $K$ and $\psi\in D(\R^n)$, we can define 
+\begin{equation*}
+    \langle\psi T, \varphi\rangle = T(\varphi\psi).
+\end{equation*}
+
+\begin{theorem}
+    Let $T\in D'(\R^n)$. Then for any multi-index $\alpha$, there are continuous functions $g_\alpha\in C(\R^n)$ such that any compact set $K$ intersects the suport of $g_\alpha$'s. 
+    \begin{equation*}
+        \langle T, \varphi\rangle = \sum_{\alpha} (-1)^\alpha\int_{\R^n} g_\alpha\partial^\alpha\varphi.
+    \end{equation*}
+\end{theorem}

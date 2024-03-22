@@ -1,0 +1,90 @@
+\begin{remark}
+    If $\alpha > 1/2$ and $f\in C^{0,\alpha}(S^1)$, then $S_N(f)(x)\to f(x)$ for all $x\in S^1$.
+\end{remark}
+
+
+\begin{definition}
+    Define the Ces\`aro Sums to be 
+    \begin{equation*}
+        \sigma_N(f)(x) := \frac{S_0(f)(x) + \dots + S_{N - 1}(f)(x)}{N}.
+    \end{equation*}
+    Convergence in the sense of Ces\'aro means $\sigma_N(f)(x)\to f(x)$.
+\end{definition}
+
+\begin{example}
+    Consider the series $\sum_{k = 0}^\infty(-1)^k$. This obviously does not converge, as the individual terms do not tend to $0$. The partial sums are given by 
+    \begin{equation*}
+        s_n = 
+        \begin{cases}
+            1 & k \text{ is even}\\
+            0 & k \text{ is odd}.
+        \end{cases}
+    \end{equation*}
+    The $n$-th Ces\`aro sum is 
+    \begin{equation*}
+        \sigma_n = \frac{s_0 + \dots + s_{n - 1}}{n} = \frac{1}{n}\left\lfloor\frac{n + 1}{2}\right\rfloor.
+    \end{equation*}
+    Consequently, $\sigma_n\to 1/2$ as $n\to\infty$.
+\end{example}
+
+\begin{proposition}
+    If $\sum c_k = s$ then $\sigma_n\to s$.
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{equation*}
+        s - \sigma_n = \frac{(s - s_0) + \dots + (s - s_{n - 1})}{n}.
+    \end{equation*}
+    Let $\varepsilon > 0$ be given. Then, there is a sufficiently large $N > 0$ such that for all $n\ge N$, $|s - s_n| < \varepsilon/2$. Now, for $M > N$,
+    \begin{equation*}
+        |s - \sigma_M|\le\sum_{n = 0}^{N - 1}\frac{|s - s_n|}{M} + \sum_{n = N}^{M - 1}\frac{|s - s_n|}{M}.
+    \end{equation*}
+    For sufficiently large $M$, the first sum on the right can be made smaller than $\varepsilon/2$. The conclusion would follow.
+\end{proof}
+
+\begin{example}
+    Suppose $c_k = o\left(1/k\right)$ as $k\to\infty$. Then, if $\sum c_k$ is Ces\`aro summable, then the series converges.
+\end{example}
+
+We can now compute the $n$-th Ces\`aro means of the Fourier series. These would be given by convolution with the Ces\`aro means of the Dirichlet kernel, 
+\begin{equation*}
+    \frac{\sum_{n = 0}^{N - 1}D_n(x)}{N} = \frac{1}{N}\sum_{n = 0}^{N - 1}\frac{\sin\left(N + \frac{1}{2}\right)x}{\sin\frac{x}{2}} = \frac{1}{N}\sum_{n = 0}^{N - 1}\frac{\cos nx - \cos (n + 1)x}{2\sin^2\frac{x}{2}} = \frac{1}{N}\frac{1 - \cos Nx}{2\sin^2\frac{x}{2}}.
+\end{equation*}
+This is called the Fej\'er Kernel, 
+\begin{equation*}
+    F_N(x) = \frac{1}{N}\frac{\sin^2\frac{N}{2}x}{\sin^2\frac{x}{2}}.
+\end{equation*}
+
+We contend that the Fej\'er kernel is a good kernel. In which case, we only need to show that 
+\begin{equation*}
+    \lim_{N\to\infty}\int_{|x|\ge\delta}F_N(x)~dx\to 0
+\end{equation*}
+as $N\to\infty$. To see this, note that 
+\begin{equation*}
+    \int_{|x|\ge\delta}F_N(x)~dx\le 2\pi\times\frac{1}{N}\times\frac{1}{\sin^2\frac{\delta}{2}}.
+\end{equation*}
+The conclusion follows. We immediately obtain the following:
+
+\begin{theorem}
+    If $f\in C(S^1)$, then the Fourier series of $f$ converges to it uniformly in the sense of Ces\`aro. 
+\end{theorem}
+
+\begin{definition}
+    A series $\sum c_k$ is said to be Abel summable if 
+    \begin{equation*}
+        \lim_{r\to 1^-}\sum_{k = 0}^\infty c_k r^k 
+    \end{equation*}
+    exists.
+\end{definition}
+
+It is a theorem due to Abel that a convergent series is Abel summable. The converse is obviously not true.
+
+\begin{definition}
+    A Fourier series is said to be Abel summable if $\sum_{k\in\Z}\wh f(k)e^{-ikx}$ converges in the sense of Abel.
+\end{definition}
+
+This gives a kernel 
+\begin{equation*}
+    \sum_{k\in\Z}r^{|k|}e^{ik\theta} = \frac{1 - r^2}{1 - 2r\cos\theta + r^2},
+\end{equation*}
+which is just the Poisson kernel.

@@ -1,0 +1,696 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{amsmath, amsthm, amssymb, xcolor, geometry, hyperref, enumitem, todonotes}
+
+\title{MA5106: Mid-Sem Examination}
+\author{Swayam Chube (200050141)}
+
+\newcommand{\half}{\frac{1}{2}}
+
+\geometry{
+	margin=1in
+}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+%  Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak a} % ideal
+\newcommand{\frakb}{\mathfrak b} % ideal
+\newcommand{\frakc}{\mathfrak c} % ideal
+\newcommand{\frakf}{\mathfrak f} % face map
+\newcommand{\frakm}{\mathfrak m} % maximal ideal
+\newcommand{\frakp}{\mathfrak p} % prime ideal
+\newcommand{\frakq}{\mathfrak q} % qrime ideal
+\newcommand{\frakN}{\mathfrak N} % nilradical 
+\newcommand{\frakP}{\mathfrak P} % nilradical 
+\newcommand{\frakR}{\mathfrak R} % jacobson radical
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calO}{\mathcal{O}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+
+\begin{document}
+\maketitle
+
+\section*{Problem 1}
+\begin{enumerate}[label=(\alph*)]
+\item This is Littlewood's Tauberian Theorem. I present the proof from Titchmarsh's Theory of Functions (pg. 233). The proof involves a usage of the Hardy-Littlewood Tauberian Theorem.
+
+I use $a_n$ to denote the series instead of $c_n$. We may suppose without loss of generality that the limit $s = 0$, which is justified by replacing $a_0$ by $a_0 - s$ if necessary.
+
+In order to prove this theorem, we need to first prove Tauber's Theorem and then another lemma.
+
+\begin{lemma}[Kronecker]
+	If $b_n\to 0$ as $n\to\infty$, then 
+	\begin{equation*}
+		\frac{\sum_{k = 0}^n b_n}{n + 1}\to 0
+	\end{equation*}
+	as $n\to\infty$.
+\end{lemma}
+\begin{proof}
+	Let $\varepsilon > 0$ be arbitrary. Since the series is convergent, there is a positive constant $M > 0$ such that $|b_n| < K$ for all $n\ge 0$. Also, there is $N > 0$ such that for all $n > N$, $|b_n| < \varepsilon/2$. Then, for any $M > N$,
+	\begin{align*}
+		\left|\frac{\sum_{n = 0}^M b_n}{M + 1}\right|&\le\left|\frac{\sum_{n = 0}^N b_n}{M + 1}\right| + \left|\frac{\sum_{n = N + 1}^M b_n}{M + 1}\right|\\
+		&\le\frac{(N + 1)K}{M + 1} + \frac{\sum_{n = N + 1}^M |b_n|}{M + 1}\\
+		&\le\frac{(N + 1)K}{M + 1} + \frac{\varepsilon}{2}.
+	\end{align*}
+	One can choose $M$ large enough so that the right hand side is smaller than $\varepsilon$ and the conclusion follows.
+\end{proof}
+
+\begin{theorem}[Tauber]
+	Let $\sum_{n = 0}^\infty a_n$ be Able summable to a limit $s$ and suppose $a_n = o(1/n)$. Then, $\sum_{n = 0}^\infty a_n$ converges to $s$.
+\end{theorem}
+\begin{proof}
+	Throughout this proof, $x\in (0, 1)$. Let $N > 0$. Then
+	\begin{equation*}
+		\sum_{n = 0}^\infty a_nx^n - \sum_{n = 0}^N a_n = \underbrace{\sum_{n = N + 1}^\infty a_nx^n}_{S_1} - \underbrace{\sum_{n = 0}^N a_n(1 - x^n)}_{S_2}.
+	\end{equation*}
+
+	Note that 
+	\begin{equation*}
+		|S_2|\le (1 - x)\sum_{n = 0}^N n|a_n|,
+	\end{equation*}
+	since $1 + x + \dots + x^{n - 1}\le n$. Let $\varepsilon > 0$ be arbitrary. Then, there is a sufficiently large $N$ such that $|na_n| < \varepsilon$ for all $n > N$. Therefore, 
+	\begin{equation*}
+		|S_1| = \left|\sum_{n = N + 1}^\infty na_n\frac{x^n}{n}\right|\le\varepsilon\sum_{n = N + 1}\frac{x^n}{n}\le\varepsilon\sum_{n = N + 1}^\infty\frac{x^n}{N + 1} = \frac{\varepsilon x^{N + 1}}{(N + 1)(1 - x)} < \frac{\varepsilon}{(N + 1)(1 - x)}.
+	\end{equation*}
+
+	Hence, 
+	\begin{equation*}
+		\left|\sum_{n = 0}^\infty a_nx^n - \sum_{n = 0}^N a_n\right| < (1 - x)\sum_{n = 0}^N n|a_n| + \frac{\varepsilon}{(N + 1)(1 - x)}.
+	\end{equation*}
+
+	Now, for $1 - 1/(N + 1) > x > 1 - 1/N$, we see that the right hand side is bounded above by 
+	\begin{equation*}
+		\frac{1}{N}\sum_{n = 0}^N n|a_n| + \varepsilon.
+	\end{equation*}
+	Again, we may choose $N$ larger so that the first term is smaller than $\varepsilon$. This is guaranteed by the previous lemma. Hence, for all sufficiently large $N$ and $1 - 1/(N + 1) > x > 1 - 1/N$, we have that the left hand side is smaller than $2\varepsilon$.
+
+	Next, 
+	\begin{align*}
+		\left|s - \sum_{n = 0}^N a_n\right| \le \left|s - \sum_{n = 0}^\infty a_nx^n\right| + \left|\sum_{n = 0}^\infty a_nx^n - \sum_{n = 0}^N a_n\right|.
+	\end{align*}
+	Let $\varepsilon > 0$ be given and let $N$ be large enough so that for all $x > 1 - 1/N$, the first term is smaller than $\varepsilon$ and the second term is smaller than $2\varepsilon$ for all $1 - 1/N < x < 1 - 1/(N + 1)$, which can be done due to the discussion above. As a result, for sufficiently large $N$, the left hand side of the above inequality is smaller than $3\varepsilon$. Since $\varepsilon$ was arbitrary positive, we see that $\sum_{n = 0}^\infty a_n = s$. This completes the proof.
+\end{proof}
+
+Next, we prove Hardy-Littlewood. 
+
+\begin{lemma}[Karamata]
+	Let $g: [0,1]\to\R$ and $0 < c < 1$. Suppose the restrictions of $g$ to $[0, c)$ and $[c, 1]$ are continuous and that 
+	\begin{equation*}
+		\lim_{x\to c^-}g(x)\le g(c).
+	\end{equation*}
+	For every $\varepsilon > 0$, there are polynomials $p(x)$ and $P(x)$ such that $p(x)\le g(x)\le P(x)$ for $0\le x\le 1$ and 
+	\begin{equation*}
+		\|g - p\|_1\le\varepsilon,\quad\|g- P\|_1\le\varepsilon.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	Using the definition of a limit, there is a $\delta > 0$ such that whenever $c - \delta\le x < c$, we have 
+	\begin{equation*}
+		g(c^-) - \varepsilon/2\le g(x)\le g(c^-) + \varepsilon/2.
+	\end{equation*}
+	Choose $\delta$ samll enough so that 
+	\begin{equation*}
+		\delta < \frac{\varepsilon}{g(c) - g(c^-)}\qquad\text{ and }\qquad\delta < \frac{1}{2}.
+	\end{equation*}
+
+	Take $L$ to be the linear function with 
+	\begin{equation*}
+		L(c - \delta) = g(c - \delta) + \varepsilon/2\qquad L(c) = g(c) + \varepsilon/2.
+	\end{equation*}
+	
+	For $c - \delta\le x < c$, we have 
+	\begin{align*}
+		L(x) - g(x) &= L(x) - g(c - \delta) + g(c - \delta) - g(c^-) + g(c^-) - g(c)\\
+		&= L(x) - L(c - \delta) + \varepsilon/2 + g(c - \delta) - g(c^-) + g(c^-) - g(x)\\
+		&\le L(c) - L(c - \delta) + \varepsilon/2 + \varepsilon/2 + \varepsilon/2\\
+		&= g(c) - g(c - \delta) + 3\varepsilon/2\\
+		&= g(c) - g(c^-) + g(c^-) - g(c - \delta)\\
+		&< \varepsilon/\delta + 2\varepsilon < 2\varepsilon/\delta.
+	\end{align*}
+
+	Define $\Phi: [0,1]\to\R$ by 
+	\begin{equation*}
+		\Phi(x) = 
+		\begin{cases}
+			g(x) + \varepsilon/2 & 0\le x < c - \delta\\
+			\max\{L(x), g(x) + \varepsilon/2\} & c - \delta\le x\le c\\
+			g(x) + \varepsilon/2 & c < x\le 1.
+		\end{cases}
+	\end{equation*}
+
+	Then, 
+	\begin{align*}
+		\|g - \Phi\|_1 & \int_0^1 \Phi(x) - g(x)~dx\\
+		&= \int_0^{c - \delta}\varepsilon/2~dx + \int_{c - \delta}^c \Phi(x) - g(x)~dx + \int_c^1 \varepsilon/2\\
+		&\le\varepsilon/2 + \int_{c - \delta}^c \Phi(x) - g(x)~dx\\
+		&<\varepsilon/2 + \delta\cdot\frac{2\varepsilon}{\delta} = \frac{5\varepsilon}{2}.
+	\end{align*}
+
+	Since $\Phi$ is continuous, there is a polynomial $P$ such that $\|\Phi - P\|_\infty < \varepsilon/2$. Consequently, $g(x)\le P(x)$, since $\Phi(x) - g(x)\ge \varepsilon/2$. This also gives that $\|\Phi - P\|_1\le\varepsilon/2$ and hence, using the triangle inequality, $\|g - P\|\le 3\varepsilon$.
+
+
+	Similar to the previous analysis, define the linear function $l$, taking the values $l(c - \delta) = g(c - \delta) - \varepsilon/2$ and $l(c) = g(c) - \varepsilon/2$. Again, it is not hard to see that $g(x) - l(x) < 2\varepsilon/\delta$.
+
+	Now, define the function $\phi: [0,1]\to\R$ by 
+	\begin{equation*}
+		\phi(x) =
+		\begin{cases}
+			g(x) - \varepsilon/2 & 0\le x < c - \delta\\
+			\min\{l(x), g(x) - \varepsilon/2\} & c - \delta\le x\le c\\
+			g(x) - \varepsilon/2 & c < x\le 1.
+		\end{cases}
+	\end{equation*}
+
+	Using an argument similar to the previous case, there is a polynomial $p$ such that $p\le g$ and $\|g - p\|_1\le 3\varepsilon$. Replacing $\varepsilon$ by $\varepsilon/3$, we have the desired conclusion.
+\end{proof}
+
+
+\begin{theorem}[Hardy-Littlewood]
+	If $a_n\ge 0$ for all $n\ge 0$ and 
+	\begin{equation*}
+		\sum_{n = 0}^\infty a_nx^n\sim\frac{1}{1 - x},
+	\end{equation*}
+	then 
+	\begin{equation*}
+		s_n = \sum_{k = 0}^n a_k\sim n.
+	\end{equation*}
+\end{theorem}
+\begin{proof}
+	For any $k\ge 0$, we have 
+	\begin{align*}
+		(1 - x)\sum_{n = 0}^\infty a_n x^n (x^k)^n &= \frac{1 - x}{1 - x^{k + 1}}(1 - x^{k + 1})\sum_{n = 0}^\infty a_n (x^{k + 1})^n\\
+		&= \frac{1}{1 + x + \dots + x^k}(1 - x^{k + 1})\sum_{n = 0}^\infty a_n (x^{k + 1})^n.
+	\end{align*}
+	The term on the right tends to $1/(k + 1)$ as $x\to 1^-$, which is also equal to $\int_0^1 t^k~dt$. Using linearity of integrals, we may conclude that given any polynomial, then 
+	\begin{equation*}
+		\lim_{x\to 1^-}(1 - x)\sum_{n = 0}^\infty a_nx^nP(x^n) = \int_0^1 P(t)~dt.
+	\end{equation*}
+
+	Now, define $g: [0,1]\to\R$ by 
+	\begin{equation*}
+		g(t) = 
+		\begin{cases}
+			0 & 0\le t < e^{-1}\\
+			t^{-1} & e^{-1}\le t\le 1.
+		\end{cases}
+	\end{equation*}
+	Let $\varepsilon > 0$. Using Karamata's Lemma, there are polynomials $p(x)$ and $P(x)$ such that $p(x)\le g(x)\le P(x)$ on $[0, 1]$ and $\|g - p\|_1 \le\varepsilon$ and $\|g - P\|_1\le\varepsilon$.
+
+	We now have 
+	\begin{align*}
+		\limsup_{x\to 1^-} (1 - x)\sum_{n = 0}^\infty a_nx^ng(x^n) &\le\limsup_{x\to 1^-}\sum_{n = 0}^\infty a_nx^n P(x^n)\\
+		&= \int_0^1 P(t)~dt < \int_0^1 g(t)~dt + \varepsilon.
+	\end{align*}
+	Similarly, we may argue that 
+	\begin{equation*}
+		\liminf_{x\to 1^-} (1 - x)\sum_{n = 0}^\infty a_nx^ng(x^n) > \int_0^1 g(t)~dt - \varepsilon.
+	\end{equation*}
+	Taking $\varepsilon\to 0$, we see that 
+	\begin{equation*}
+		1 = \int_0^1 g(t)~dt = \lim_{x\to 1^-}(1 - x)\sum_{n = 0}^\infty a_nx^ng(x^n).
+	\end{equation*}
+
+	For any positive integer $N$, the evaluation at $x = e^{-1/N}$ is 
+	\begin{equation*}
+		\sum_{n = 0}^\infty a_nx^ng(x^n) = \sum_{n = 0}^\infty a_n e^{-n/N}g(e^{-n/N}) = \sum_{n = 0}^N a_n e^{-n/N}e^{n/N} = s_N.
+	\end{equation*}
+
+	We have obtained that 
+	\begin{equation*}
+		1 = \lim_{N\to\infty} (1 - e^{-1/N})s_N
+	\end{equation*}
+	and hence, 
+	\begin{equation*}
+		s_N\sim\frac{1}{1 - e^{-1/N}},
+	\end{equation*}
+	and the conclusion follows since 
+	\begin{equation*}
+		\lim_{N\to\infty} N\left(1 - e^{-1/N}\right) = 1.\qedhere
+	\end{equation*}
+\end{proof}
+
+\begin{lemma}
+	If $f(x)$ is a $C^2$ function on $(0, 1)$ and $\lim_{x\to 1} f(x) = 0$ and there is $C > 0$ such that $|(1 - x)^2f''(x)|\le C$ on $(0, 1)$, then 
+	\begin{equation*}
+		\lim_{x\to 1} (1 - x)f'(x) = 0.
+	\end{equation*}
+\end{lemma}
+\begin{proof}
+	Let $x' = x + \delta(1 - x)$ where $0 < \delta < 1/2$. Then, using Taylor's Theorem, 
+	\begin{equation*}
+		f(x') = f(x) + \delta(1 - x)f'(x) + \frac{1}{2}\delta^2(1 - x)^2f''(\xi)
+	\end{equation*}
+	for some $\xi\in(x, x')$. Hence, 
+	\begin{equation*}
+		(1 - x)f'(x) = \frac{f(x') - f(x)}{\delta} - \frac{\delta}{2}(1 - x)^2f''(\xi) = (1 - x)f'(\zeta) - \frac{\delta}{2}(1 - x)^2f''(\xi)
+	\end{equation*}
+	for some $\zeta\in(x, x')$, due to the Mean Value Theorem. Due to the conditions in the statement of the lemma, it is not hard to see that the right hand side is $O(\delta)$ and hence, the conclusion of the theorem follows by taking $\delta$ as small as desired.
+\end{proof}
+
+Let 
+\begin{equation*}
+	f(x) = \sum_{n = 0}^\infty a_nx^n
+\end{equation*}
+on $(-1, 1)$. According to the condition, we have $\lim_{x\to 1^-} f(x) = 0$. Further, 
+\begin{equation*}
+	f''(x) = \sum_{n = 2}^\infty n(n - 1)a_nx^{n - 2} = O\left(\sum_{n = 2}^\infty (n - 1)x^{n - 2}\right) = O\left(\frac{1}{(1 - x)^2}\right).
+\end{equation*}
+
+Hence, due to the Lemma, $f'(x)$ is $o\left(\frac{1}{1 - x}\right)$. Let $c > 0$ be a positive constant such that $|na_n|\le c$ for all $n\ge 0$. Then, 
+\begin{equation*}
+	\sum_{n = 1}^\infty\left(1 - \frac{na_n}{c}\right) = \frac{1}{1 - x} - \frac{f'(x)}{c}\sim\frac{1}{1 - x}.
+\end{equation*}
+
+Due to Hardy-Littlewood, we must have 
+\begin{equation*}
+	\sum_{k = 1}^n 1 - \frac{ka_k}{c}\sim n,
+\end{equation*}
+whence 
+\begin{equation*}
+	\sum_{k = 1}^n ka_k = o(n).
+\end{equation*}
+
+Let $w_n$ denote the left hand side of the above. Then, 
+\begin{align*}
+	f(x) - a_0 &= \sum_{n = 1}^\infty\frac{w_n - w_{n - 1}}{n}x^n = \sum_{n = 1}^\infty w_n\left(\frac{x^n}{n} - \frac{x^{n + 1}}{n + 1}\right)\\
+	&= \sum_{n = 1}^\infty w_n\left(\frac{x^n - x^{n + 1}}{n + 1} + \frac{x^n}{n(n + 1)}\right)\\
+	&= (1 - x)\sum_{n = 1}^\infty\frac{w_n}{n + 1}x^n + \sum_{n = 1}^\infty\frac{w_n}{n(n + 1)}x^n.
+\end{align*}
+
+Since $w_n = o(n)$, the first term on the right goes to $0$ as $x\to 1$. But since $f(x)\to 0$ as $x\to 1$, we must have 
+\begin{equation*}
+	\sum_{n = 1}^\infty\frac{w_n}{n(n + 1)}x^n\to -a_0
+\end{equation*}
+as $x\to 1$. Now, note that $\frac{w_n}{n(n + 1)} = o(1/n)$. Therefore, due to Tauber's Theorem, 
+\begin{equation*}
+	\sum_{n = 1}^\infty\frac{w_n}{n(n + 1)} = -a_0.
+\end{equation*}
+
+We get 
+\begin{align*}
+	\lim_{N\to\infty}\sum_{n = 1}^\infty\frac{w_n}{n(n + 1)} &= \lim_{N\to\infty}\sum_{n = 1}^N w_n\left(\frac{1}{n} - \frac{1}{n + 1}\right)\\ 
+	&= \lim_{N\to\infty} \sum_{n = 1}^N\frac{w_n - w_{n - 1}}{n} - \frac{w_N}{N + 1}\\
+	&= \lim_{N\to\infty}\sum_{n = 1}^N a_n - \lim_{N\to\infty}\frac{w_N}{N + 1}\\
+	&= \sum_{n = 1}^N a_n.
+\end{align*}
+This shows that $\sum_{n = 0}^\infty a_n = 0$ thereby completing the proof.
+
+\item This follows from (a). To see this, we shall show that if a sequence if Ces\`aro summable to $s$, then it is Abel summable to $s$. We may without loss of generality suppose that $s = 0$, this can be done by simply replacing $c_0$ by $c_0 - s$.
+
+Let $s_N := \sum_{n = 0}^N c_n$ and $\sigma_N := \frac{1}{N}\sum_{n = 0}^{N - 1} s_n$. For the sake of simplicity, set $s_{-1} = 0$ and $\sigma_0 = 0$.
+
+We have 
+\begin{equation*}
+	\sum_{n = 0}^N c_n x^n = \sum_{n = 0}^{N} (s_n - s_{n - 1})x^n = s_Nx^N + \sum_{n = 0}^{N - 1}(x^n - x^{n + 1})s_n = s_Nx^N + (1 - x)\sum_{n = 0}^{N - 1}s_nx^n.
+\end{equation*}
+
+Now, note that $s_n = (n + 1)\sigma_{n + 1} - n\sigma_n$. Therefore, 
+\begin{equation*}
+	\lim_{n\to\infty} s_nx^n = \lim_{n\to\infty}(n + 1)\sigma_{n + 1}x^n - n\sigma_nx^n = 0
+\end{equation*}
+since Ces\`aro summability implies that $\sigma_n$'s are bounded and $nx^n\to 0$ as $n\to\infty$ when $|x| < 1$. Hence, 
+\begin{equation*}
+	\sum_{n = 0}^\infty c_nx^n = (1 - x)\sum_{n = 0}^\infty s_nx^n.
+\end{equation*}
+
+Let $t_n = \sum_{k = 0}^n s_n$ with the convention that $t_{-1} = 0$. Then, 
+\begin{equation*}
+	\sum_{n = 0}^N s_nx^n = t_Nx^N + \sum_{n = 0}^{N - 1}t_n(x^n - x^{n + 1}) = t_Nx^N + (1 - x)\sum_{n = 0}^{N - 1}t_nx^n.
+\end{equation*}
+
+Note that $t_n = (n + 1)\sigma_{n + 1}$ and hence, $t_nx^n = (n + 1)\sigma_{n + 1}x^n$, which goes to $0$ as $n\to\infty$ since $\sigma_n$'s form a bounded sequence and $(n + 1)x^n\to 0$ as $n\to\infty$. As a consequence, 
+\begin{equation*}
+	\sum_{n = 0}^\infty s_nx^n = (1 - x)\sum_{n = 0}^\infty t_n x^n = (1 - x)\sum_{n = 0}^\infty (n + 1)\sigma_{n + 1}x^n.
+\end{equation*}
+Consequently,
+\begin{equation*}
+	\sum_{n = 0}^\infty c_nx^n = (1 - x)^2\sum_{n = 0}^\infty (n + 1)\sigma_{n + 1}x^n.
+\end{equation*}
+
+Let $M > 0$ be such that $|\sigma_n|\le M$ for all $n\ge 0$. Let $M > \varepsilon > 0$ be arbitrary. Then, there is an $N > 0$ such that for all $n > N$, $|\sigma_n| < \varepsilon$. Hence, for $x > 0$,
+\begin{align*}
+	\left|\sum_{n = 0}^\infty c_nx^n\right| &\le (1 - x)^2\left|\sum_{n = 0}^N (n + 1)\sigma_{n + 1}x^n\right| + (1 - x)^2\left|\sum_{n = N + 1}^\infty (n + 1)\sigma_{n + 1}x^n\right|\\
+	&\le (1-x)^2M\left|\sum_{n = 0}^N(n + 1)x^n\right| + (1 - x)^2\varepsilon\left|\sum_{n = N + 1}^\infty(n + 1)x^n\right|\\
+	&\le (1 - x)^2(M - \varepsilon)\sum_{n = 0}^N(n + 1)x^n + (1 - x)^2\varepsilon\sum_{n = 0}^\infty (n + 1)x^n\\
+	&= (1 - x)^2(M - \varepsilon)\sum_{n = 0}^N (n + 1)x^n + \varepsilon.
+\end{align*}
+Note that in the limit $x\to 1^-$, the right hand side tends to $\varepsilon^+$. Hence, we may choose $\delta > 0$ such that for all $1 - \delta < x < 1$, the first term on the right hand side is smaller than $\varepsilon$ whence the left hand side is smaller than $2\varepsilon$. This shows that the series is Abel summable to $0$, which is what we intended to prove.
+
+To finish (b), we simply invoke (a).
+\end{enumerate}
+
+\section*{Problem 2}
+
+Note that 
+\begin{align*}
+	|\wh f(k) - \wh{f_m}(k)| &= \frac{1}{2\pi}\left|\int_{-\pi}^\pi \left(f(x) - f_m(x)\right)e^{-ikx}~dx\right|\\
+	&\le\frac{1}{2\pi}\int_{-\pi}^\pi |f(x) - f_m(x)|~dx = \|f - f_m\|_1.
+\end{align*}
+But since $f_m\to f$ in $L^1$, we see that the right hand side goes to $0$ as $m\to\infty$. Therefore,
+\begin{equation*}
+	\lim_{m\to\infty} \wh{f_m}(k) = f(k)
+\end{equation*}
+for all $k\ge 1$.
+
+\section*{Problem 3}
+
+\begin{enumerate}[label=(\alph*)]
+	\item From Homework 1, we know 
+	\begin{equation*}
+		\wh f(n) = \frac{1}{4\pi}\int_{-\pi}^\pi \left[f(x) - f(x + \pi/n)\right]e^{-inx}~dx.
+	\end{equation*}
+	Using H\"older continuity, there is $M > 0$ such that 
+	\begin{equation*}
+		|f(x) - f(x + \pi/n)|\le\frac{M\pi^\alpha}{|n|^\alpha},
+	\end{equation*}
+	for all $x\in\R$. Hence, 
+	\begin{equation*}
+		|\wh f(n)|\le\frac{1}{4\pi}\int_{-\pi}^\pi\frac{M\pi^\alpha}{|n|^\alpha}~dx = \calO\left(\frac{1}{|n|^\alpha}\right).
+	\end{equation*}
+
+	\item Since $\sum_{m = 0}^\infty 2^{-m\alpha}$ converges, due to the Weierstrass $M$-test, the series for $f(x)$ converges absolutely on $\R$. Therefore, the Fourier coefficients can be computed by 
+	\begin{align*}
+		\wh f(n) &= \sum_{m = 0}^\infty 2^{-m\alpha}\frac{1}{2\pi}\int_{-\pi}^{\pi}e^{i(2^m - n)x}~dx\\
+		&= 
+		\begin{cases}
+			2^{-m\alpha} (= n^{-\alpha}) & n = 2^{m}\\
+			0 & \text{otherwise}.
+		\end{cases}
+	\end{align*}
+
+	Let $h\in\R$. Then,
+	\begin{align*}
+		|f(x + h) - f(x)| &= \left|\sum_{m = 0}^\infty 2^{-m\alpha}\left(e^{i2^m(x + h)} - e^{i2^m}\right)\right|\\
+		&\le\sum_{m = 0}^\infty 2^{-m\alpha} |e^{i2^m(x + h)} - e^{i2^m}|\\
+		&\le\sum_{2^m\le 1/|h|} 2^{-m\alpha} |e^{i2^m(x + h)} - e^{i2^m}| + \sum_{2^m > 1/|h|} 2^{-m\alpha} |e^{i2^m(x + h)} - e^{i2^m}|.
+	\end{align*}
+	Trivially note that $|e^{i\theta} - 1|\le\theta$ and $|e^{i\theta} - e^{i\varphi}|\le 2$. Using the first inequality for the first term in the above sum and the second inequality for the second, we have 
+	\begin{align*}
+		|f(x + h) - f(x)| &\le \sum_{2^m\le 1/|h|} 2^{-m\alpha}\cdot 2^m|h| + \sum_{2^m > 1/|h|} 2^{-m\alpha}\cdot 2.
+	\end{align*}
+
+	Let $N$ be the smallest non-negative integer such that $2^N > 1/|h|$. Then, the second term in the above sum is 
+	\begin{equation*}
+		\frac{2^{-N\alpha}}{1 - 2^{-\alpha}} = \calO(|h|^\alpha).
+	\end{equation*}
+
+	If $|h| > 1$, then the first term is zero. Hence, suppose $|h|\le 1$. The first term is 
+	\begin{equation*}
+		\sum_{m = 0}^{N - 1} \left(2^m|h|\right)^{1 - \alpha}|h|^\alpha\le |h|^\alpha\sum_{m = 0}^{N - 1} \left(2^{m - N + 1}\right)^{1 - \alpha} = |h|^\alpha\sum_{m = 0}^{N - 1} 2^{-m(1 - \alpha)}\le\frac{|h|^\alpha}{1 - 2^{\alpha - 1}},
+	\end{equation*}
+	which shows that the first term is also $\calO(|h|^\alpha)$ thereby showing that $f$ is of class $C^{0,\alpha}(S^1)$.
+
+	\item I will essentially prove Bernstein's Theorem, that if $f\in C^{0,\alpha}(S^1)$ with $\alpha > 1/2$, then the Fourier series of $f$ converges to $f$ absolutely.  First, note that there is $K > 0$ such that $|f(x) - f(y)|\le K|x - y|^\alpha$ for all $x,y\in\R$.
+
+	Let $h\in\R$. Consider the function $g_h:\R\to\R$ given by $g_h(x) = f(x + h) - f(x - h)$. Note that 
+	\begin{align*}
+		\wh{g_h}(n) &= \frac{1}{2\pi}\int_{-\pi}^\pi f(x + h)e^{-inx}~dx - \frac{1}{2\pi}\int_{-\pi}^\pi f(x - h)e^{-inx}~dx\\
+		&= (e^{inh} - e^{-inh})\wh f(n) = 2i\sin(nh)\wh f(n).
+	\end{align*}
+
+	Using Parseval's Theorem, 
+	\begin{equation*}
+		\frac{1}{2\pi}\int_{-\pi}^\pi |g_h(x)|^2 = \sum_{n\in\Z} 4\sin^2(nh)|\wh f(n)|^2.
+	\end{equation*}
+	But note that $|g_h(x)|\le K(2h)^\alpha$. Hence, 
+	\begin{equation*}
+		\sum_{n\in\Z}\sin^2(nh)|\wh f(n)|^2\le\frac{K^2 (2h)^{2\alpha}}{4}.
+	\end{equation*}
+
+	Let $p$ be a positive integer and choose $h = \pi/2^{p + 1}$. Then, for all $2^{p - 1} < |n|\le 2^p$, we have $|\sin(nh)| > 1/\sqrt{2}$. Hence, 
+	\begin{equation*}
+		\frac{1}{2}\sum_{2^{p - 1} < |n|\le 2^p}|\wh f(n)|^2\le\sum_{n\in\Z}\sin^2(nh)|\wh f(n)|^2\le \frac{K^2 (\pi/2^p)^{2\alpha}}{4}\le\frac{K^2\pi^{2\alpha}}{2^{2 + 2\alpha p}},
+	\end{equation*}
+	that is, 
+	\begin{equation*}
+		\sum_{2^{p - 1} < |n|\le 2^p}|\wh f(n)|^2\le\frac{K^2\pi^{2\alpha}}{2^{2\alpha p + 1}}.
+	\end{equation*}
+	Using the Cauchy Schwarz Inequality, we have 
+	\begin{equation*}
+		\frac{1}{2^{p - 1}}\left(\sum_{2^{p - 1} < |n|\le 2^p}|\wh f(n)|\right)^2\le\sum_{2^{p - 1} < |n|\le 2^p}|\wh f(n)|^2\le\frac{K^2\pi^{2\alpha}}{2^{2\alpha p + 1}},
+	\end{equation*}
+	whence 
+	\begin{equation*}
+		\sum_{2^{p - 1} < |n|\le 2^p}|\wh f(n)|\le\frac{K\pi^\alpha}{2^{(\alpha - 1/2)p + 1}}
+	\end{equation*}
+	Hence, 
+	\begin{equation*}
+		\sum_{n\in\Z} |\wh f(n)|\le|\wh f(0)| + \sum_{p = 1}^\infty\frac{K\pi^\alpha}{2^{(\alpha - 1/2)p + 1}},
+	\end{equation*}
+	which converges since $\alpha > 1/2$. As a result, the Fourier series of $f$ converges to $f$ absolutely (we have seen this in class).
+\end{enumerate}
+
+\section*{Problem 4}
+
+Consider the function $f:(-\pi,\pi]\to\bbC$ given by
+
+\begin{equation*}
+	f(x) = 
+	\begin{cases}
+		e^{i\alpha x} & x\in (-\pi, \pi)\\
+		0 & \text{otherwise}.
+	\end{cases}
+\end{equation*}
+
+The Fourier coefficients are 
+\begin{align*}
+	a_n &= \frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}~dx = \frac{1}{2\pi}\int_{-\pi}^\pi e^{i(\alpha - n)x}~dx = \frac{1}{2\pi i(\alpha - n)}\left(e^{i(\alpha - n)x} - e^{-i(\alpha - n)x}\right)\\
+	&= \frac{\sin\left((\alpha - n)\pi\right)}{\pi(\alpha - n)} = (-1)^n\frac{\sin(\alpha\pi)}{\pi(\alpha - n)}.
+\end{align*}
+
+Note that $f$ has a jump discontinuity at $\pi\sim -\pi$ on the circle, where 
+\begin{equation*}
+	\lim_{x\to\pi^-}f(x) = e^{i\alpha\pi}\quad\text{and}\quad\lim_{x\to-\pi^+} f(x) = e^{-i\alpha\pi}.
+\end{equation*}
+Therefore, the Fourier series of $f$ at $\pi$ converges to 
+\begin{equation*}
+	\frac{1}{2}\left(f(\pi^-) + f(-\pi^+)\right) = \cos(\pi\alpha).
+\end{equation*}
+
+This means 
+\begin{equation*}
+	\cos(\pi\alpha) = \sum_{n = -\infty}^\infty\frac{(-1)^ne^{in\pi}\sin(\pi\alpha)}{\pi(\alpha - n)} = \sum_{n = -\infty}^\infty\frac{\sin(\pi\alpha)}{\pi(\alpha - n)}. 
+\end{equation*}
+Therefore, 
+\begin{align*}
+	\frac{\pi}{\tan(\pi\alpha)} = \frac{1}{\alpha} + \sum_{n = 1}^\infty\left(\frac{1}{\alpha - n} + \frac{1}{\alpha + n}\right) = \frac{1}{\alpha} + \sum_{n = 1}^\infty\frac{2\alpha}{\alpha^2 - n^2}.
+\end{align*}
+Thus, 
+\begin{equation*}
+	\frac{1}{2\alpha^2} - \sum_{n = 1}^\infty\frac{1}{n^2 - \alpha^2} = \frac{\pi}{2\alpha(\tan(\pi\alpha))}.
+\end{equation*}
+This proves (a).
+
+To see (b), we evaluate the Fourier series at $0$. Note that the function is differentiable in a neighborhood around $0$ and hence, 
+\begin{align*}
+	1 = f(0) &= \sum_{n = -\infty}^\infty (-1)^n\frac{\sin(\pi\alpha)}{\pi(\alpha - n)}\\
+	&= \frac{\sin(\pi\alpha)}{\pi}\left[\frac{1}{\alpha} + \sum_{n = 1}^\infty (-1)^n\left(\frac{1}{\alpha - n} + \frac{1}{\alpha + n}\right)\right]\\
+	&= \frac{\sin(\pi\alpha)}{\pi}\left[\frac{1}{\alpha} + \sum_{n = 1}^\infty (-1)^{n - 1}\frac{2\alpha}{n^2 - \alpha^2}\right]\\
+	&= \frac{2\alpha\sin(\pi\alpha)}{\pi}\left[\frac{1}{2\alpha^2} + \sum_{n = 1}^\infty\frac{(-1)^{n - 1}}{n^2 - \alpha^2}\right].
+\end{align*}
+This proves (b).
+
+
+Finally, we move on to (c). We have 
+\begin{align*}
+	\int_{0}^\infty\frac{t^{\alpha - 1}}{1 + t}~dt &= \int_0^1\frac{t^{\alpha - 1}}{1 + t}~dt + \int_{1}^\infty\frac{t^{\alpha - 1}}{1 + t}~dt\\
+	&= \int_0^1\frac{t^{\alpha - 1}}{1 + t}~dt + \int_0^1\frac{u^{-\alpha}}{1 + u}~du
+\end{align*}
+where we have performed the substitution $t = 1/u$ in the second integral. We shall evaluate both integrals using the power series expansion of $1/(1 + t)$. To justify this, we invoke the dominated convergence theorem. For $0 < r < 1$, note that the series 
+\begin{equation}
+	\sum_{n = 0}^\infty (-1)^n t^n
+\end{equation}
+converges absolutely on $[0,r]$. Define 
+\begin{equation*}
+	A(r) := \int_0^r\frac{t^{\alpha - 1}}{1 + t}~dt + \int_0^r\frac{t^{-\alpha}}{1 + t}~dt.
+\end{equation*}
+Using absolute convergence, we may interchange the integral and the summation to obtain 
+\begin{equation*}
+	A(r) = \sum_{n = 0}^\infty (-1)^n\frac{1}{\alpha + n}r^{\alpha + n} + \sum_{n = 0}^\infty (-1)^n\frac{1}{n + 1 - \alpha}r^{n + 1 - \alpha}.
+\end{equation*}
+
+Using Abel's Theorem, 
+\begin{align*}
+	A(1) &= \sum_{n = 0}^\infty\frac{(-1)^n}{\alpha + n} + \sum_{n = 0}^\infty\frac{(-1)^n}{n + 1 - \alpha}\\
+	&= \frac{1}{\alpha} + \sum_{n = 1}^\infty(-1)^{n - 1}\left(\frac{1}{n - \alpha} - \frac{1}{n + \alpha}\right)\\
+	&= \frac{1}{\alpha} + \sum_{n = 1}^\infty\frac{(-1)^{n - 1}(2\alpha)}{n^2 - \alpha^2}\\
+	&= \frac{\pi}{\sin(\pi\alpha)}.
+\end{align*}
+This completes the proof of (c).
+
+\section*{Problem 5}
+
+First, suppose $m\ge n\ge 1$. Then, using integration by parts,
+\begin{align*}
+	\int_{-1}^1 \calL_n(x)\calL_m(x)~dx &= \left[\calL_n(x)\frac{d^{m - 1}}{dx^{m - 1}}(x^2 - 1)^m\right]_{-1}^1 - \int_{-1}^1\frac{d^{n + 1}}{dx^{n + 1}}(x^2 - 1)^n\frac{d^{m - 1}}{dx^{m - 1}}(x^2 - 1)^m~dx.
+\end{align*}
+
+Note that $\dfrac{d^{m - 1}}{dx^{m - 1}}(x^2 - 1)^m$ vanishes at $-1$ and $1$, since $x^2 - 1$ has multiplicity $m$ at both $-1$ and $1$. Hence, the first term in the above equation vanishes and we are left with 
+\begin{equation*}
+	\int_{-1}^1\calL_n(x)\calL_m(x)~dx = -\int_{-1}^1 \frac{d^{n + 1}}{dx^{n + 1}}(x^2 - 1)^n\frac{d^{m - 1}}{dx^{m - 1}}(x^2 - 1)^m~dx.
+\end{equation*}
+We may keep repeating the step above to obtain 
+\begin{equation*}
+	\int_{-1}^1\calL_n(x)\calL_m(x)~dx = (-1)^l\int_{-1}^1\frac{d^{n + l}}{dx^{n + l}}(x^2 - 1)^n\frac{d^{m - l}}{dx^{m - l}}(x^2 - 1)^m~dx.
+\end{equation*}
+for all $0\le l\le n$.
+
+Choosing $l = n$, we obtain 
+\begin{equation*}
+	\langle\calL_n,\calL_m\rangle = (-1)^n \int_{-1}^1\frac{d^{2n}}{dx^{2n}}(x^2 - 1)^n\frac{d^{m - n}}{dx^{m - n}}(x^2 - 1)^m~dx.
+\end{equation*}
+But $(x^2 - 1)^n$ is a $2n$-degree monic polynomial in $x$. Hence, 
+\begin{equation*}
+	\frac{d^{2n}}{dx^{2n}}(x^2 - 1)^n = (2n)!.
+\end{equation*}
+We get 
+\begin{equation*}
+	\langle\calL_n,\calL_m\rangle = (-1)^n\int_{-1}^1 (2n)!\frac{d^{m - n}}{dx^{m - n}}(x^2 - 1)^m~dx.
+\end{equation*}
+If $m > n$, then 
+\begin{equation*}
+	\langle\calL_n,\calL_m\rangle = (-1)^n(2n)!\left[\frac{d^{m - n - 1}}{dx^{m - n - 1}}(x^2 - 1)^m\right]_{-1}^1 = 0,
+\end{equation*}
+since $(x^2 - 1)$ has multiplicity $m$ at $-1$ and $1$.
+
+Now, suppose $m = n$. Then, 
+\begin{equation*}
+	\langle\calL_n,\calL_n\rangle = (-1)^n (2n)!\int_{-1}^1 (x^2 - 1)^n~dx = (2n)!\int_{-1}^1 (1 - x^2)^n~dx.
+\end{equation*}
+It remains to compute 
+\begin{align*}
+	\int_{-1}^1 (1 - x^2)^n~dx &= 2\int_{0}^1 (1 - x^2)^n~dx\\
+	&= 2\int_{0}^1 (1 - (1 - y)^2)^n~dy\\
+	&= 2\int_0^1 (2y - y^2)^n~dy\\
+	&= 2\int_0^1 y^n(2 - y)^n~dy\\
+	&= \int_0^1 y^n(2 - y)^n~dy + \int_1^2 y^n(2 - y)^n~dy\\
+	&= \int_0^2 y^n(2 - y)^n~dy.
+\end{align*}
+Make the substitution $y = 2z$ to obtain 
+\begin{equation*}
+	\int_{-1}^1 (1 - x^2)^n~dx = \int_0^2 2^{2n + 1}z^n(1 - z)^n~dz = 2^{2n + 1}B(n + 1, n + 1) = 2^{2n + 1}\frac{n!n!}{(2n + 1)!}
+\end{equation*}
+where we have used the standard value of the Beta Function. This gives us 
+\begin{equation*}
+	\langle\calL_n,\calL_n\rangle = \frac{(n!)^22^{2n + 1}}{2n + 1}.
+\end{equation*}
+
+It remains to deal with the case $m\ge n = 0$. Note that $\calL_0(x) = 1$, the constant function. Therefore, 
+\begin{equation*}
+	\langle\calL_0,\calL_m\rangle = \int_{-1}^1\calL_m(x)~dx.
+\end{equation*}
+If $m = 0$, the right hand side is $2$. If $m > 0$, then the right hand side is 
+\begin{equation*}
+	\int_{-1}^1\calL_m(x)~dx = \left[\frac{d^{m - 1}}{dx^{m - 1}}(x^2 - 1)^m\right]_{-1}^1 = 0,
+\end{equation*}
+since $(x^2 - 1)^m$ has multiplicity $m$ at $-1$ and $1$. This proves (a) and (b).
+
+Finally, we come to (c). First, we contend that the Lagrange polynomials are linearly independent (in the $\bbC$-vector space $\bbC[x]$). Indeed, if 
+\begin{equation*}
+	\sum_{i = 0}^\infty a_i\calL_i = 0
+\end{equation*}
+where $a_i = 0$ almost everywhere. Then, 
+\begin{equation*}
+	0 = \langle 0, \calL_i\rangle = a_i\|\calL_i\|_2^2,
+\end{equation*}
+whence each $a_i = 0$.
+
+Further, note that $\deg\calL_n = n$ and the $\bbC$ vector space spanned by $\{\calL_0,\dots,\calL_n\}$ is a subspace of the vector space of polynomials of degree $\le n$. But the latter has $\bbC$-dimension $n + 1$ and hence, $\{\calL_0,\dots,\calL_n\}$ spans the latter. That is, every polynomial in $\bbC[x]$ can be uniquely written as a linear combination of the $\calL_i$'s.
+
+Let $S_N(f)$ denote the partial sum 
+\begin{equation*}
+	S_N(f) := \sum_{n = 0}^N \frac{\langle f,\calL_n\rangle}{\|\calL_n\|_2^2}
+\end{equation*}
+
+Let $\varepsilon > 0$ be given. By Weierstrass' Approximation Theorem, there is a polynomial $p(x)\in\bbC[x]$ such that $\|f - p\|_\infty < \varepsilon$. Let $N = \deg p$ and let $c_0,\dots,c_N\in\bbC$ be such that 
+\begin{equation*}
+	p = \sum_{n = 0}^N c_n\calL_n.
+\end{equation*}
+and set $c_n = 0$ for all $n > N$. Further, let $a_n = \frac{\langle f,\calL_n\rangle}{\|\calL_n\|_2^2}$. Now, for any $M\ge N$, we have 
+
+\begin{equation*}
+	f - \sum_{n = 0}^M c_n\calL_n = (f - S_M(f)) + \sum_{n = 0}^M b_n\calL_n
+\end{equation*}
+where $b_n = a_n - c_n$. Using Pythagoras' Theorem, 
+\begin{equation*}
+	\varepsilon^2\ge\|f - \sum_{n = 0}^M c_n\calL_n\|_2^2 = \|f - S_M(f)\|_2^2 + \left\|\sum_{n = 0}^M b_n\calL_n\right\|_2^2\ge\|f - S_M(f)\|_2^2
+\end{equation*}
+This shows that $S_M(f)\to f$ in $L^2[-1, 1]$, thereby completing the proof. 
+\end{document}

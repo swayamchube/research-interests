@@ -1,0 +1,293 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{amsmath, amsthm, amssymb, xcolor, geometry, hyperref, enumitem, todonotes}
+
+\title{MA5106: Homework 1}
+\author{Swayam Chube (200050141)}
+
+\newcommand{\half}{\frac{1}{2}}
+
+%  Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak a} % ideal
+\newcommand{\frakb}{\mathfrak b} % ideal
+\newcommand{\frakc}{\mathfrak c} % ideal
+\newcommand{\frakf}{\mathfrak f} % face map
+\newcommand{\frakm}{\mathfrak m} % maximal ideal
+\newcommand{\frakp}{\mathfrak p} % prime ideal
+\newcommand{\frakq}{\mathfrak q} % qrime ideal
+\newcommand{\frakN}{\mathfrak N} % nilradical 
+\newcommand{\frakP}{\mathfrak P} % nilradical 
+\newcommand{\frakR}{\mathfrak R} % jacobson radical
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+
+\begin{document}
+\maketitle 
+
+\section{Problem 1}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Let $n\in\Z$ be non-zero. The $n$-th Fourier coefficient is given by 
+    \begin{align*}
+        a_n = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}~dx &= \frac{1}{2\pi}\int_{-\pi}^\pi |x|e^{-inx}~dx\\
+        &= \frac{1}{2\pi}\left(\int_{-\pi}^0 (-x)e^{-inx}~dx + \int_{0}^\pi xe^{-inx}~dx\right)\\
+        &= \frac{1}{2\pi}\left(\int_{0}^\pi xe^{inx}~dx + \int_{0}^\pi xe^{-inx}~dx\right)\\
+        &= \frac{1}{2\pi}\int_{0}^\pi x\left(e^{inx} + e^{-inx}\right)~dx\\
+        &= \frac{1}{2\pi}\int_0^\pi 2x\cos(nx)~dx = \frac{1}{\pi}\int_{0}^\pi x\cos(nx)~dx\\
+        &= \frac{1}{\pi}\left[\frac{nx\sin(nx) + \cos(nx)}{n^2}\right]_0^{\pi}\\
+        &= \frac{(-1)^n - 1}{n^2\pi} = 
+        \begin{cases}
+            0 & \text{$n$ is even}\\
+            \frac{-2}{n^2\pi} & \text{$n$ is odd}.
+        \end{cases}
+    \end{align*}
+
+    On the other hand, if $n = 0$, then 
+    \begin{equation*}
+        a_0 = \frac{1}{2\pi}\int_{-\pi}^\pi |x|~dx = \frac{\pi}{2}.
+    \end{equation*}
+
+    \item Let $n\in\Z$ be non-zero. The $n$-th Fourier coefficient is given by 
+    \begin{align*}
+        a_n &= \frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}~dx\\
+        &= \frac{1}{2\pi}\int_{-\pi}^0 f(x)e^{-inx}~dx + \frac{1}{2\pi}\int_{0}^\pi f(x)e^{-inx}~dx.
+    \end{align*}
+    Note that $f$ is an odd function on $[-\pi, \pi]$, that is, $f(-x) = -f(x)$. Making the substitution $x = -y$ in the first integral, we have 
+    \begin{align*}
+        a_n &= \frac{1}{2\pi}\int_{0}^\pi f(-y)e^{iny}~dy + \frac{1}{2\pi}\int_{0}^\pi f(x)e^{-inx}~dx\\
+        &= \frac{1}{2\pi}\int_{0}^{\pi}-f(y)e^{iny}~dy + \frac{1}{2\pi}\int_{0}^{\pi} f(x)e^{-inx}~dx\\
+        &= \frac{1}{2\pi}\int_{0}^\pi \frac{\pi - x}{2}\left(e^{-inx} - e^{inx}\right)~dx.
+    \end{align*}
+    Perform the substitution $y = \pi - x$ to get 
+    \begin{align*}
+        a_n &= \frac{1}{4\pi}\int_{0}^\pi y\left(e^{-in(\pi - y)} - e^{in(\pi - y)}\right)~dy\\
+        &= \frac{(-1)^n}{4\pi}\int_0^\pi y(e^{iny} - e^{-iny})~dy\\
+        &= \frac{(-1)^n 2i}{4\pi}\int_{0}^\pi y\sin(ny)~dy\\
+        &= \frac{(-1)^ni}{2\pi}\left[\frac{\sin(ny) - ny\cos(ny)}{n^2}\right]_0^\pi\\
+        &= \frac{(-1)^ni}{2\pi}\frac{(-n\pi)\cdot(-1)^n}{n^2} = \frac{-i}{2n}.
+    \end{align*}
+
+    As for $n = 0$, we have 
+    \begin{equation*}
+        f(0) = \frac{1}{2\pi}\int_{-\pi}^{\pi} f(x)~dx = 0,
+    \end{equation*}
+    since $f$ is an odd function.
+\end{enumerate}
+
+\section*{Problem 2}
+
+Note that 
+\begin{equation*}
+    f(x) = e^{i(\pi - x)/2} = e^{i\pi/2}e^{-ix/2} = ie^{-ix/2}.
+\end{equation*}
+
+First, we obtain the Fourier coefficients, that is, 
+\begin{align*}
+    a_n &= \frac{1}{2\pi}\int_{0}^{2\pi} ie^{-ix/2}e^{-inx}~dx\\
+    &= \frac{i}{2\pi}\int_{0}^{2\pi} e^{-i\left(n + \frac{1}{2}\right)x}~dx\\
+    &= \frac{i}{2\pi}\frac{1}{(-i)\left(n + \frac{1}{2}\right)}\left[e^{-i\left(n + \frac{1}{2}\right)x}\right]_0^{2\pi}\\
+    &= \frac{i}{2\pi}\frac{-2}{(-i)\left(n + \frac{1}{2}\right)} = \frac{2}{(2n + 1)\pi}
+\end{align*}
+
+Using Parseval's Formula, we have 
+\begin{equation*}
+    \sum_{n\in\Z}|a_n|^2 = \frac{1}{2\pi}\int_{0}^{2\pi}\left|e^{-i\frac{\pi - x}{2}}\right|^2~dx = 1.
+\end{equation*}
+
+Therefore, 
+\begin{equation*}
+    1 = \frac{4}{\pi^2}\sum_{n\in\Z}\frac{1}{(2n + 1)^2} = \frac{8}{\pi^2}\sum_{n = 0}^\infty\frac{1}{(2n + 1)^2}.
+\end{equation*}
+
+This gives,
+\begin{equation*}
+    \sum_{n = 0}^\infty\frac{1}{(2n + 1)^2} = \frac{\pi^2}{8}.
+\end{equation*}
+
+\section*{Problem 3}
+
+\begin{enumerate}[label=(\alph*)]
+    \item This is an exercise in change of variables. Set $y = x + \xi$ to obtain 
+    \begin{equation*}
+        \int_{-\pi}^\pi f(x + \xi)~dx = \int_{-\pi + \xi}^{\pi + \xi}f(y)~dy.
+    \end{equation*}
+
+    Note that 
+    \begin{equation*}
+        \int_{-\pi + \xi}^{\pi + \xi}f(y)~dy + \int_{-\pi}^{-\pi + \xi} f(y)~dy = \int_{-\pi}^{\pi + \xi} f(y)~dy = \int_{-\pi}^{\pi}f(y)~dy + \int_{\pi}^{\pi + \xi}f(y)~dy.
+    \end{equation*}
+    But, using the periodicity of $f$, we have, using the substitution $y = z + 2\pi$,
+    \begin{equation*}
+        \int_{\pi}^{\pi + \xi}f(y)~dy = \int_{-\pi}^{-\pi + \xi}f(z + 2\pi)~dz = \int_{-\pi}^{-\pi + \xi} f(z)~dz.
+    \end{equation*}
+
+    Hence, 
+    \begin{equation*}
+        \int_{-\pi + \xi}^{\pi + \xi}f(y)~dy = \int_{-\pi}^{\pi} f(y)~dy.
+    \end{equation*}
+
+    \item We have 
+    \begin{equation*}
+        \wh f(n) = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)e^{-inx}~dx
+    \end{equation*}
+    Invoke the substitution $y = x - \frac{\pi}{n}$. Then, 
+    \begin{equation*}
+        \wh f(n) = \frac{1}{2\pi}\int_{-\pi - \frac{\pi}{n}}^{\pi - \frac{\pi}{n}}f\left(y + \frac{\pi}{n}\right)e^{-in\left(y + \frac{\pi}{n}\right)}~dy = \frac{-1}{2\pi}\int_{-\pi}^{\pi}f\left(y + \frac{\pi}{n}\right)e^{-iny}~dy,
+    \end{equation*}
+    where the last equality follows from part (a). Now, simply add the two equivalent formulations of $\wh f(n)$ and divide by $2$. This would give 
+    \begin{equation*}
+        \wh f(n) = \frac{1}{4\pi}\int_{-\pi}^\pi\left[f(y) - f\left(y + \frac{\pi}{n}\right)\right]e^{-iny}~dy.
+    \end{equation*}
+\end{enumerate}
+
+\section*{Problem 4}
+
+I shall prove (b), from which (a) would follow. Using integration by parts, we have 
+\begin{equation*}
+    \int_{-\pi}^\pi f(x)e^{-inx}~dx = \left[f(x)\frac{e^{-inx}}{-in}\right]_{-\pi}^\pi + \int_{-\pi}^\pi f'(x)\frac{e^{-inx}}{in}~dx = \frac{1}{in}\wh{f'}(n).
+\end{equation*}
+
+Iterating this $k$-times, we obtain 
+\begin{equation*}
+    \wh f(n) = \frac{1}{(in)^k}\wh{f^{(k)}}(n).
+\end{equation*}
+
+Therefore, 
+\begin{equation*}
+    \lim_{|n|\to\infty}|n^k\wh f(n)| = \lim_{|n|\to\infty} \wh{f^{(k)}}(n) = 0
+\end{equation*}
+from the Riemann-Lebesgue lemma. The conclusion follows.
+
+\section*{Problem 5}
+
+\begin{enumerate}[label=(\alph*)]
+    \item Let $\omega$ denote $e^{ix}$. We are computing 
+    \begin{align*}
+        \sum_{n = -N}^N \omega^n &= \omega^{-N}\sum_{n = 0}^{2N}\omega^n\\ 
+        &= \omega^{-N}\frac{\omega^{2N + 1} - 1}{\omega - 1}\\
+        &= \frac{\omega^{N + 1} - \omega^{-N}}{\omega - 1}\\
+        &= \frac{\omega^{N + 1/2} - \omega^{-(N + 1/2)}}{\omega^{1/2} - \omega^{-1/2}}\\
+        &= \frac{2i\sin\left(N + \frac{1}{2}\right)x}{2i\sin\left(\frac{x}{2}\right)} = \frac{\sin\left(N + 1/2\right)x}{\sin(x/2)}.
+    \end{align*}
+
+    \item We have 
+    \begin{align*}
+        \frac{1}{N}\sum_{n = 0}^{N - 1}D_n(x) &= \frac{1}{N}\sum_{n = 0}^{N - 1}\frac{2\sin(x/2)\sin(n + 1/2)x}{2\sin^2(x/2)}\\
+        &= \frac{1}{N}\sum_{n = 0}^{N - 1}\frac{\cos(nx) - \cos(n + 1)x}{2\sin^2(x/2)}\\
+        &= \frac{1}{N}\frac{1 - \cos(Nx)}{2\sin^2(x/2)} = \frac{\sin^2(Nx/2)}{N\sin^2(x/2)}.
+    \end{align*}
+
+    \item We may suppose that $N > 1$ since $\log 1 = 0$. Note that $D_N$ is an even function and hence, 
+    \begin{align*}
+        \int_{-\pi}^{\pi}|D_N(x)|~dx &= 2\int_{0}^{\pi} |D_N(x)|~dx\\
+        &\ge\sum_{n = 0}^{N - 1}\int_{\frac{n\pi}{N + \frac{1}{2}}}^{\frac{(n + 1)\pi}{N + \half}}\left|\frac{\sin(N + 1/2)x}{\sin(x/2)}\right|~dx
+    \end{align*}
+    Therefore, it suffices to show that $\int_{0}^{\pi}|D_N(x)|\ge c\log N$ for some constant $c > 0$. On the interval $\left[\frac{n\pi}{N + \half}, \frac{(n + 1)\pi}{N + \half}\right]$, 
+    \begin{equation*}
+        \sin(x/2)\le\sin\left(\frac{(n + 1)\pi}{2N + 1}\right)\le\frac{(n + 1)\pi}{2N + 1}
+    \end{equation*}
+    since $\sin(x/2)$ is an increasing function on $[0,\pi]$ and $\sin x\le x$ on $[0,\infty)$. Hence, 
+    \begin{align*}
+        \int_{\frac{n\pi}{N + \frac{1}{2}}}^{\frac{(n + 1)\pi}{N + \half}}\left|\frac{\sin(N + 1/2)x}{\sin(x/2)}\right|~dx &\ge\frac{2N + 1}{(n + 1)\pi}\int_{\frac{n\pi}{N + \frac{1}{2}}}^{\frac{(n + 1)\pi}{N + \half}}\left|{\sin(N + 1/2)x}\right|~dx\\
+        &= \frac{2 N + 1}{(n + 1)\pi}\frac{1}{N + \frac{1}{2}}\int_{n\pi}^{(n + 1)\pi}|\sin(y)|~dy\\
+        &= \frac{2}{(n + 1)\pi}\times 2 = \frac{4}{(n + 1)\pi}.
+    \end{align*}
+
+    Consequently, 
+    \begin{equation*}
+        \int_{0}^{\pi} |D_N(x)|~dx\ge\frac{4}{\pi}\sum_{n = 0}^{N - 1}\frac{1}{n + 1} = \frac{4}{\pi}H_N,
+    \end{equation*}
+    where $H_N$ is the $N$-th Harmonic number. For $N\ge 2$, it is well known that 
+    \begin{equation*}
+        H_N\ge\int_{1}^{N + 1}\frac{1}{x}~dx = \log(N + 1)\ge\log N.
+    \end{equation*}
+    This completes the proof.
+
+    \item This is immediate, since 
+    \begin{equation*}
+        \int_{-\pi}^{\pi}D_N(x)~dx = \sum_{n = -N}^{N}\int_{-\pi}^{\pi}e^{inx}~dx.
+    \end{equation*}
+    But for non-zero $n$, we have 
+    \begin{equation*}
+        \int_{-\pi}^{\pi}e^{inx}~dx = \frac{1}{in}\left[e^{inx}\right]_{-\pi}^{\pi} = 0
+    \end{equation*}
+    and for $n = 0$, we have $\int_{-\pi}^{\pi}1~dx = 2\pi$. Therefore, 
+    \begin{equation*}
+        \int_{-\pi}^{\pi}D_N(x)~dx = 2\pi.
+    \end{equation*}
+\end{enumerate}
+\end{document}

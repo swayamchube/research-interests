@@ -1,0 +1,88 @@
+\begin{theorem}[Parseval's Identity]
+    If $u,v\in\mathscr S$, then $\langle u, v\rangle_{L^2} = \langle\wh u,\wh v\rangle_{L^2}$.
+\end{theorem}
+
+\begin{theorem}[Plancherel's Formula]
+    $\|u\|_{L^2} = \|\wh u\|_{L^2}$.
+\end{theorem}
+
+Note that the Schwarz space is dense in $L^2$ and hence, one can extend the Fourier transform to all of $L^2$. This would give that the Fourier transform is an isometry from $L^2$ to $L^2$ and is also a bijection.
+
+\section*{Distributions and Weak Derivatives}
+
+We work with locally integrable functions. A function $f$ is said to be locally integrable if $f\in L^1(K)$ for all compact $K\subseteq\R^n$. This class of functions is denoted by $L^1_{loc}$.
+
+\subsection*{Weak Derivative}
+
+\begin{definition}
+    If $f\in L^1_{loc}(\R^n)$. We say that $f$ is weakly differentiable with respect $x_i$ if there exists $g_i\in L^1_{loc}$ such that for any ``test function'' $\varphi\in C_c^{\infty}(\R^n)$, 
+    \begin{equation*}
+        \int_{\R^n} f\partial_i\varphi = -\int_{\R^n} g_i\varphi.
+    \end{equation*}
+
+    The function $g_i$ is the $i$-th weak partial derivative of $f$.
+\end{definition}
+
+\begin{definition}
+    Let $\alpha$ be a multiindex and $f\in L^1_{loc}(\R^n)$. We say that $f$ has weak derivative of order $|\alpha|$ if there is a function $g\in L^1_{loc}(\R^n)$ such that 
+    \begin{equation*}
+        \int_{\R^n} f\partial^{\alpha}\varphi = (-1)^{|\alpha|}\int_{\R^n} g\varphi.
+    \end{equation*}
+    For all $\varphi\in C_c^\infty(\R^n)$.
+\end{definition}
+
+Note that the weak derivative is unique up to measure $0$ sets. One can also show that mixed weak derivatives are equal upto measure $0$ sets. 
+
+\begin{example}
+    \begin{equation*}
+        f(x) = 
+        \begin{cases}
+            x & x > 0\\
+            0 & x\le 0.
+        \end{cases}
+    \end{equation*}
+
+    Consider 
+    \begin{equation*}
+        g(x) = \begin{cases}
+            1 & x\ge 0\\
+            0 & x < 0.
+        \end{cases}
+    \end{equation*}
+
+    We contend that $g$ is the weak derivative of $f$. Note that $f$ is differentiable on $(0,\infty)$ and hence, we can use integration by parts to conclude that $g$ is the required function. I guess this can be used to prove a similar statement for piecewise smooth functions.
+\end{example}
+
+\begin{example}
+    The function $f = \chi_{[0,\infty)}$ is not weakly differentiable. If it were, then there would exist $g\in L^1_{loc}(\R)$ such that 
+    \begin{equation*}
+        \int_{0}^\infty\varphi' = -\int_{\R} g\varphi,
+    \end{equation*}
+    for every test function $\varphi$ on $\R$. The left hand side is $-\varphi(0)$.
+
+    Therefore, 
+    \begin{equation*}
+        \int_{\R}g\varphi = \varphi(0)
+    \end{equation*}
+    for all test functions $\varphi$. A standard argument shows that this is not possible. Ezpz nimbu squeezy.
+\end{example}
+
+\subsection*{Distributions}
+
+Let $T$ be a linear functional on $C_c^{\infty}(\R^n)$. Let $D(\R^n)$ be the same space with the inductive limit topology. This is also called the space of ``test functions''.
+
+$D(\R^n)$ is a complete metric space consisting of $C_c^\infty$-functions. 
+
+\begin{definition}
+    In $D(\R^n)$, $\varphi_m\to\varphi$ if $\Supp\varphi_m\subseteq K$, compact in $\R^n$. And $\Supp(\varphi)\subseteq K$. On this compact set, $\varphi^{(n)}_m\to \varphi^{(n)}$ for all $n\ge 0$ in the sup norm.
+\end{definition}
+
+\begin{definition}[Distributions]
+    Let $T\in D'(\R^n)$, where $D'(\R^n)$ is the dual of $D(\R^n)$. We write $T(\varphi)$.
+\end{definition}
+
+It suffices to check 
+\begin{equation*}
+    |\langle T, \varphi\rangle|\le C_K\sum_{|\alpha|\le i_K}\sup_{K}|\partial^\alpha\varphi|
+\end{equation*}
+for every compact $K$ and for all $\varphi$ such that $\Supp(\varphi)\subseteq K$ and $i_K < \infty$.

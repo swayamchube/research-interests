@@ -1,0 +1,59 @@
+\section*{Heat equation}
+
+$u: [0,\infty)\times\R^n\to\R$ which satisfies 
+\begin{equation*}
+    \begin{cases}
+        \partial_t u = \Delta u = \sum_{i = 1}^n \partial_{ii}u\\
+        u(0,\cdot) = u_0(\cdot).
+    \end{cases}
+\end{equation*}
+
+The heat equation has a regularization effect, that is, even if $u_0$ is a terrible function, the solution $u$ for positive time will be smooth. It is not symmetric with respect to time. 
+
+\section{Fourier Transform}
+
+\begin{definition}
+    Let $f\in L^1(\R^n)$, define, for $\xi\in\R^n$,
+    \begin{equation*}
+        \wh f(\xi) = \frac{1}{(2\pi)^{n/2}}\int_{\R^n}e^{-i\xi\cdot x}f(x)~dx.
+    \end{equation*}
+    This yields a function $\wh f:\R^n\to\R$.
+\end{definition}
+
+Note that we shall restrict our attention to Schwarz Space instead of $L^1$.
+
+\begin{equation*}
+    \mathscr S(\R^n) = \{f\in C^\infty(\R^n)\colon \lim_{x\to\infty}(1 + |x|^2)^{m/2}|\partial^\alpha f(x)| = 0,~\forall m\in\N\}
+\end{equation*}
+
+Obviously, $C_c^\infty(\R^n)\subseteq\mathscr S(\R^n)$. Note that the Schwartz class is equivalent to the class of rapidly decreasing functions 
+\begin{equation*}
+    \lim_{|x|\to\infty}|x|^m|\partial^\alpha f| = 0
+\end{equation*}
+
+\begin{example}
+    $f(x) = e^{-|x|^2}\in\mathscr S(\R^n)$. Note that the partial derivatives of this function are of the form $p(x)f(x)$ where $p$ is a multivariate polynomial. Therefore, it suffices to show that $|p(x)f(x)|\to 0$ as $x\to\infty$ for all polynomials $p$, whence, it suffices to do this for monomials. Consider a monomial $x_1^{m_1}\dots x_r^{m_n}$. Then, 
+    \begin{equation*}
+        |x_1^{m_1}\dots x_n^{m_n}e^{-|x|^2}| = \prod_{i = 1}^n |x_ie^{-x_i^2}|.
+    \end{equation*}
+    This completes the proof.
+\end{example}
+
+We now contend that the Fourier Transform of a function in the Schwartz space lies in the Schwatz space.
+
+First, we show that $\mathscr S(\R^n)\subseteq L^1(\R^n)$. Indeed, note that there is a positive constant $M > 0$ such that 
+\begin{equation*}
+    |f(x)|\le\frac{M}{(1 + |x|^2)^n}\le\frac{M}{x_1^2\dots x_n^2}
+\end{equation*}
+Choose some $R > 0$ and let $A$ denote the closed cube of length $R$ centered at the origin. Then,
+\begin{equation*}
+    \int_{\R^n}|f(x)|~dx = \int_A |f(x)|~dx + \int_{\R^n\backslash A}f(x)~dx.
+\end{equation*}
+The first term is bounded. For the second, use Fubini's theorem and integrate $M/x_1^2\dots x_n^2$ instead. Another way to see this is to integrate over the product manifold $(1,\infty)\times S^{n - 1}$, which is diffeomorphic to $\R^n\backslash\overline B(0, 1)$ and invoke Fubini's Theorem for differential forms.
+
+Now, we examine the differentiation properties of the fourier transform.
+
+\begin{align*}
+    \wh{\partial_j f}(\xi) = i\xi_j\wh f(\xi)\qquad 1\le j\le n\\
+    \partial_j\wh f(\xi) = -i\wh{x_j f}(\xi)\qquad 1\le j\le n
+\end{align*}

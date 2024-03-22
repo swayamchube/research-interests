@@ -1,0 +1,25 @@
+We have seen in the previous class that the fourier trnasform is a linear operator on the schwartz space and also derived the various properties under differentiation.
+
+Translation, we have 
+\begin{equation*}
+    \wh{f(x - x_0)}(\xi) = e^{-i\langle x_0, \xi\rangle}\wh f(\xi).
+\end{equation*}
+
+Upon scaling, we have 
+\begin{equation*}
+    \wh{f(\lambda x)}(\xi) = \lambda^{-n}\wh f(\xi/\lambda).
+\end{equation*}
+
+\begin{proposition}
+    If $f, g$ are in the Schwartz space, then 
+    \begin{equation*}
+        \wh{f\ast g}(\xi) = (2\pi)^{n/2}\wh f(\xi)\wh g(\xi).
+    \end{equation*}
+\end{proposition}
+
+We now compute the Fourier Transform of the Gaussian $f(x) = e^{-|x|^2}$. We have 
+\begin{equation*}
+    \frac{1}{(2\pi)^{n/2}}\int_{\R} e^{-\left(\sum_{i} x_i^2 + \sum_{i} x_i\xi_i\right)} = \frac{1}{2^{n/2}}\exp\left(-\frac{1}{4}\|\xi\|^2\right).
+\end{equation*}
+
+Therefore, $G(x) = \exp(-\|x\|^2/2)$ is invariant under the Fourier Transform.

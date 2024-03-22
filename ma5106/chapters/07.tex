@@ -1,0 +1,62 @@
+The Abel sums for a Fourier series are given by 
+\begin{equation*}
+    A(r, f)(\theta) = \sum_{k\in\Z} r^{|k|}\wh f(k)e^{ik\theta} = \frac{1}{2\pi}\int_{-\pi}^\pi f(\omega)P_r(\theta - \omega)~d\omega.
+\end{equation*}
+
+\begin{theorem}
+    Let $f\in C^1(S^1)$. Then, 
+    \begin{equation*}
+        \lim_{r\to 1^-} A(r, \theta) = f(\theta)
+    \end{equation*}
+    uniformly on $S^1$.
+\end{theorem}
+
+To see this, first note that 
+\begin{equation*}
+    \frac{1}{2\pi}\int_{-\pi}^\pi P_r(\theta)~d\theta = 1,
+\end{equation*}
+using the series expansion of $P_r(\theta)$ and the fact that it is uniformly convergent as a function of $\theta$ when $r$ is fixed.
+
+\begin{align*}
+    |A(r,\theta) - f(\theta)| &= \left|\frac{1}{2\pi}\int_{-\pi}^\pi \left(f(\theta - \omega) - f(\theta)\right)P_r(\omega)~d\omega\right|\\
+    &\le\frac{1}{2\pi}\int_{-\pi}^\pi|f(\theta - \omega) - f(\theta)| P_r(\omega)~d\omega.
+\end{align*}
+Let $\varepsilon > 0$ be given. Using the fact that $f$ is uniformly continuous on $S^1$, choose $\delta$ small enough such that $|f(\theta - \omega) - f(\theta)| < \varepsilon/2$ for $|\omega| < \delta$.
+
+Now, break the integral into two parts 
+\begin{align*}
+    \le\frac{1}{2\pi}\int_{|\omega|\le\delta}|f(\theta - \omega) - f(\theta)| P_r(\omega)~d\omega + \frac{1}{2\pi}\int_{\pi\ge |\omega| > \delta}|f(\theta - \omega) - f(\theta)|P_r(\omega)~d\omega.
+\end{align*}
+
+The first half is smaller than $\varepsilon/2$. The second one is bounded above by $\frac{M}{\pi}\int_{\delta\le |\omega|\le \pi}P_r(\omega)~d\omega$. Now using the property of good kernels, this can be made small enough. This completes the proof. $\blacksquare$
+
+\begin{theorem}[A Tauberian Theorem]
+    Suppose $\sum c_n$ is Ces\`aro summable and $c_n = o(1/n)$, then $\sum c_n$ is summable.
+\end{theorem}
+\begin{proof}
+    Let $s_n$ for $n\ge 0$ denote the partial sums and 
+    \begin{equation*}
+        \sigma_n = \frac{s_0 + \dots + s_{n - 1}}{n} = \frac{nc_0 + (n - 1)c_1 + \dots + c_{n - 1}}{n}.
+    \end{equation*}
+    As a result, 
+    \begin{equation*}
+        s_n - \sigma_n = \frac{1}{n}\left(\sum_{k = 0}^n kc_k\right).
+    \end{equation*}
+    As a result, 
+    \begin{equation*}
+        |s_n - \sigma_n|\le\frac{1}{n}\sum_{k = 0}^n |kc_k|.
+    \end{equation*}
+    Since $kc_k\to 0$, there is an $N >> 0$ such that $|kc_k| < \varepsilon/2$ whenever $k\ge N$. Let $M >> 0$ be such that 
+    \begin{equation*}
+        \frac{1}{M}\sum_{k = 0}^{N - 1}|kc_k| < \varepsilon/2.
+    \end{equation*}
+    Then, one can conclude that for all $m\ge M$, $|s_m - \sigma_m| < \varepsilon$. This completes the proof.
+\end{proof}
+
+\begin{example}
+    Consider $\sum_{n = 0}^\infty (-1)^n(n + 1)$. This is obviously not convergent and is not Ces\`aro summable either. On the other hand, the abel sums are 
+    \begin{equation*}
+        A(r) = \sum_{n = 0}^\infty (-1)^n (n + 1)r^{n}~dr = \frac{1}{(1 + r)^2}.
+    \end{equation*}
+    Therefore, this series is Abel convergent.
+\end{example}

@@ -1,0 +1,32 @@
+\begin{theorem}[Banach-Steinhaus Theorem]
+    Let $X$ be a Banach space and $Y$ a normed linear space and $\{\Lambda_\alpha\}$ is a collection of bounded linear transformations. Then, either there is $M < \infty$ such that $\|\Lambda_\alpha\|\le M$ for all $\alpha$ or there is a dense $G_\delta$ set subset $G$ of $X$ such that $\sup_{\alpha}\|\Lambda_\alpha x\| = \infty$ for all $x\in G$.
+\end{theorem}
+\begin{proof}
+    See Rudin's RCA.
+\end{proof}
+
+\begin{theorem}
+    The set of function $f\in C(S^1)$ whose Fourier series diverges at $0$ forms a dense $G_\delta$ subset of $C(S^1)$.
+\end{theorem}
+\begin{proof}
+For any $f\in L^1$, we have 
+\begin{equation*}
+    S_N(f)(0) = \frac{1}{2\pi}\int_{-\pi}^\pi f(\omega)D(\omega)~d\omega.
+\end{equation*}
+Note that $D_N(-\omega) = D_N(\omega)$ for all $\omega\in S^1$. The operator $T_N: C(S^1)\to\bbC$ given by $T_N(f) = S_N(f)(0)$. This is a bounded linear functional (not hard to argue). 
+
+Fix some $N$. Define the function $g:[-\pi,\pi]\to\bbC$ by 
+\begin{equation*}
+    g(x) = 
+    \begin{cases}
+        1 & D_N(x) > 0\\
+        -1 & D_N(x) < 0\\
+        0 & D_N(x) = 0.
+    \end{cases}
+\end{equation*}
+Then, $g_ND_N = |D_N|$. Define the functions $f_n:[-\pi,\pi]\to\bbC$ given by 
+\begin{equation*}
+    f_n(x) = \max\{\min\{nD_N(x), 1\}, -1\}.
+\end{equation*}
+Then, $f_n$ converges pointwise to $g$ and $|f_n|$ is dominated by the constant function $1$ on $[-\pi, \pi]$. Further, $\|f_n\| = 1$ for all $n\in\N$. As a result, $\|T_N\|\ge |T_N(f_n)|$ for all $n$. In the limit $n\to\infty$, we have $\|T_N\|\ge\|D_N\|_{1}$. But the right hand side diverges as $N\to\infty$. Therefore, from the Banach Steinhaus Theorem, the conclusion follows.
+\end{proof}

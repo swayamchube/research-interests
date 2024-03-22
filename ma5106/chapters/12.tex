@@ -1,0 +1,22 @@
+\begin{theorem}
+    Let $f\in\mathscr S$. Then, 
+    \begin{equation*}
+        f(x) = \frac{1}{(2\pi)^{n/2}}\int_{\R^n}e^{i\langle x,\xi\rangle}\wh f(\xi)~d\xi.
+    \end{equation*}
+\end{theorem}
+\begin{proof}
+    Let 
+    \begin{equation*}
+        K_t(z) = \frac{1}{(2\pi)^{n/2}}\int_{\R^n}e^{i\langle z,\xi\rangle} e^{-t|\xi|^2}~d\xi.
+    \end{equation*}
+    Now, 
+    \begin{equation*}
+        \int_{\R^n}\int_{\R^n}e^{i\langle x - y, \xi\rangle}e^{-t|\xi|^2}f(y)~dyd\xi = (f\ast K_t)(x).
+    \end{equation*}
+
+    Note that 
+    \begin{equation*}
+        K_t(z) = \frac{1}{(4\pi t)^{n/2}}\exp(-\frac{|z|^2}{4t}).
+    \end{equation*}
+    This is the Heat Kernel. Of course, we are assuming $t > 0$.
+\end{proof}

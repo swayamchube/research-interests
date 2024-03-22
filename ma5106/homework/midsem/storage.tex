@@ -1,0 +1,70 @@
+\item It suffices to prove (a) since (a)$\implies$(b). This is Littlewood's Tauberian Theorem and the following proof is due to S. Izumi. We may suppose without loss of generality that $s = 0$, which is justified by replacing $a_0$ by $a_0 - s$.
+
+Define now the function $a: [0,\infty)\to\bbC$ given by $a(t) = a_n$ when $n\le t < n + 1$. Let $S(t) = \int_0^t a(u)~du$. Next, let 
+\begin{equation*}
+	f(s) = \int_0^\infty a(t)e^{-st}~dt = \sum_{n = 0}^\infty a_n e^{-sn}\int_0^1 e^{-st}~dt.
+\end{equation*}
+
+The conditions we are given are that $a(t) = O(1/t)$ and $\lim_{s\to 0} f(s) = 0$. Set 
+\begin{equation*}
+	P_u(t) := e^{-ut}\sum_{m < u}\frac{(ut)^m}{m!}.
+\end{equation*}
+Finally, let $\chi$ denote the characteristic function of the interval $[0,1]$. Note that $P_u < 1$ on $(0,\infty)$. We have 
+\begin{align*}
+	S(T) &= \int_0^T a(t)~dt = T\int_0^1 a(Tt)~dt = T\int_0^\infty a(Tt)g(t)~dt\\
+	&= \underbrace{T\int_0^\infty a(Tt)(\chi(t) - P_u(t))~dt}_{S_1(T)} + \underbrace{T\int_0^\infty a(Tt)P_u(t)~dt}_{S_2(T)}.
+\end{align*}
+
+Let $A > 0$ be such that $a(t)\le A/t$ on $(0,\infty)$. Then, 
+\begin{align*}
+	|S_1(T)|&\le A\int_0^\infty\frac{1}{t}|\chi(t) - P_u(t)|~dt\\
+	&= A\underbrace{\int_0^1\frac{1}{t}|1 - P_u(t)|~dt}_{S_{11}} + A\underbrace{\int_1^\infty\frac{1}{t}P_u(t)}_{S_{12}}.
+\end{align*}
+
+We have 
+\begin{align*}
+	S_{11} &= \int_0^1 \frac{e^{-ut}}{t}\sum_{m > u}\frac{(ut)^m}{m!}~dt\\
+	&= \sum_{m > u}\frac{1}{m!}\int_0^1 (ut)^{m - 1} e^{-ut}u~dt\\
+	&=\sum_{m > u}\frac{1}{m!}\int_0^u t^{m - 1}e^{t}~dt\\
+	&= \underbrace{\sum_{u < m\le au}\frac{1}{m!}\int_0^u t^{m - 1}e^{t}~dt}_{S_{111}} + \underbrace{\sum_{m > au}\frac{1}{m!}\int_0^u t^{m - 1}e^{t}~dt}_{S_{112}}
+\end{align*}
+for any $a > 1$, integer.
+
+Note that 
+\begin{equation*}
+	\frac{1}{(m + 1)!}\int_0^u t^m e^{-t}~dt < \frac{u}{m + 1}\frac{1}{m!}\int_0^u t^{m - 1}e^{-t}~dt.
+\end{equation*}
+
+Hence, 
+\begin{align*}
+	S_{112}&\le\frac{1}{(au)!}\left(1 + \frac{u}{au + 1} + \frac{u^2}{(au + 1)(au + 2)} + \dots\right)\int_0^u t^{au - 1}e^{-t}~dt\\
+	&\le\frac{(au - 1)!}{(au)!}\frac{1}{1 - 1/a}\le\frac{1}{(a - 1)u}.
+\end{align*}
+
+And, 
+\begin{equation*}
+	S_{111}\le\sum_{u < m\le au}\frac{1}{m}\le\log a\le a - 1.
+\end{equation*}
+
+Hence, 
+\begin{equation*}
+	S_{11}\le (a - 1) + \frac{1}{(a - 1)u}.
+\end{equation*}
+Hence, for $a > 1 + 1/\sqrt u$, we have $S_{11}\le 2/\sqrt u$. 
+
+Next, 
+\begin{align*}
+	S_{12} &=\sum_{m < u}\frac{1}{m!}\int_0^\infty(ut)^{m - 1}e^{-ut}u~dt = \sum_{m < u}\frac{1}{m!}\int_u^\infty t^{m - 1}e^{-t}~dt\\
+	&= \int_u^\infty e^{-t}\sum_{m < u}\frac{t^{m - 1}}{m!}~dt,
+	% &= \underbrace{\int_u^{(1 + \varepsilon)u}e^{-t}\sum_{m < u}\frac{t^{m - 1}}{m!}~dt}_{S_{121}} + \underbrace{\int_{(1 + \varepsilon)u}^\infty e^{-t}\sum_{m < u}\frac{t^{m - 1}}{m!}~dt}_{S_{122}}
+\end{align*}
+which can be seen to go to $0$ as $u\to\infty$.
+
+Therefore, $S_1(T)\to 0$ as $u\to\infty$. Now, we examine $S_2(T)$. Note that 
+\begin{align*}
+	S_2(T) &= T\int_0^\infty a(Tt)P_u(t)~dt = \int_0^\infty a(t)P_u(t/T)~dt\\
+	&= \sum_{m < u}\frac{u^m}{m!}\int_0^\infty a(t)\frac{t^m}{T^m}e^{-ut/T}~dt\\
+	&= \sum_{m < u}\frac{1}{m!}\left(\frac{u}{T}\right)^m f^{(m)}\left(\frac{u}{T}\right).
+\end{align*}
+
+Note that $f(s) = o(1)$ as given and $f^{(m)}(s) = O(s^{-m})$, and hence, due to a theorem of Littlewood (omitted due to space), $f^{(m)}(s) = o(s^{-m})$. In conclusion, we get that $S_2(T) = o(u)$. Putting all this together, we get the desired conclusion.
