@@ -1,0 +1,392 @@
+\documentclass[12pt]{amsart}
+
+\usepackage{amsmath, amsthm, amssymb, xcolor, geometry, hyperref, enumitem, todonotes, enumitem}
+
+\title{MA5106: Homework 2}
+\author{Swayam Chube (200050141)}
+
+\newtheorem*{lemma}{Lemma}
+
+\newcommand{\half}{\frac{1}{2}}
+
+%  Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak a} % ideal
+\newcommand{\frakb}{\mathfrak b} % ideal
+\newcommand{\frakc}{\mathfrak c} % ideal
+\newcommand{\frakf}{\mathfrak f} % face map
+\newcommand{\frakm}{\mathfrak m} % maximal ideal
+\newcommand{\frakp}{\mathfrak p} % prime ideal
+\newcommand{\frakq}{\mathfrak q} % qrime ideal
+\newcommand{\frakN}{\mathfrak N} % nilradical 
+\newcommand{\frakP}{\mathfrak P} % nilradical 
+\newcommand{\frakR}{\mathfrak R} % jacobson radical
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+
+\begin{document}
+\maketitle 
+
+\section*{Problem 1}
+
+\begin{enumerate}[label=(\alph*)]
+    \item For any $m\ge 0$, we have 
+    \begin{equation*}
+        \lim_{|x|\to\infty}(1 + |x|^2)^{m/2} |x|^2e^{-|x|^2}\le\lim_{|x|\to\infty}(1 + |x|^2)^{(m + 2)/2}e^{-|x|^2}\le\lim_{|x|\to\infty}(1 + |x|^2)^{n}e^{-|x|^2}
+    \end{equation*}
+    where $n$ is a positive integer greater than or equal to $(m + 2)/2$. We shall show that the right-most limit is $0$. Expanding $(1 + |x|^2)^n$ using the binomial theorem, we see that it suffices to show that 
+    \begin{equation*}
+        \lim_{|x|\to\infty} |x|^r e^{-|x|^2} = 0.
+    \end{equation*}
+    Using the power series expansion of the exponential function, we have 
+    \begin{equation*}
+        e^{|x|^2}\ge 1 + |x|^2 + \dots + \frac{1}{r!}|x|^{2r}.
+    \end{equation*}
+    Hence,
+    \begin{equation*}
+        \lim_{|x|\to\infty}|x|^r e^{-|x|^2}\le\lim_{|x|\to\infty}\frac{|x|^r}{1 + |x|^2 + \dots + \frac{1}{r!}|x|^{2r}} = 0.
+    \end{equation*}
+
+    This completes the proof.
+
+    \item This is immediate, because 
+    \begin{equation*}
+        \lim_{|x|\to\infty} (1 + |x|^2)^3\frac{1}{1 + |x|^4}\le\lim_{|x|\to\infty}\frac{|x|^6}{1 + |x|^4},
+    \end{equation*}
+    which is infinity. Therefore, the function $1/(1 + |x|^4)$ does not lie in $\mathcal S(\R^n)$.
+
+    \item Let $f\in\mathcal S(\R^n)$. Since $f$ is a continuous function, it is measurable. Note that there is a positive constant $M$ such that 
+    \begin{equation*}
+        (1 + |x|^2)^{n + 1} |f(x)|\le M
+    \end{equation*}
+    on $\R^n$. Let $B$ denote the unit ball in $\R^n$. Then,
+    \begin{equation*}
+        \int_{\R^n} |f| = \int_B |f| + \int_{\R^n\backslash B} |f|.
+    \end{equation*}
+    The first integral is obviously finite, since $f$ is bounded on $\overline B$ and $B$ has finite measure in $\R^n$.
+
+    As for the second one, note that 
+    \begin{equation*}
+        \int_{\R^n\backslash B} |f|\le\int_{\R^n\backslash B}\frac{M}{(1 + |x|^2)^{n + 1}}~dx.
+    \end{equation*}
+    The integrand on the right hand side is a radial function and $\R^n\backslash B$ can be identified with $S^{n - 1}\times[1,\infty)$. Hence, using Fubini's Theorem, 
+    \begin{equation*}
+        \int_{\R^n\backslash B}\frac{M}{(1 + |x|^2)^{n + 1}}~dx = \int_{1}^\infty\int_{S^{n - 1}}\frac{Mr^{n - 1}}{(1 + r^2)^{n + 1}}~d\sigma dr
+    \end{equation*}
+    where $\sigma$ parametrizes the sphere and $r$ the interval $[1,\infty)$. Note that $(1 + r^2)^{n + 1}\ge r^{2n + 2}$ and hence, the integral on the right is bounded above by
+    \begin{equation*}
+        \int_{1}^\infty\frac{M\omega_{n - 1}}{r^{n + 3}}~dr < \infty.
+    \end{equation*}
+    This shows that $f\in L^1(\R^n)$.
+\end{enumerate}
+
+\section*{Problem 2}
+
+We shall first show that the Fourier Transform of an $L^1$ function is continuous. Let $f\in L^1(\R^n)$, $\xi\in\R^n$ and $\xi_m\to\xi$ in $\R^n$ as $m\to\infty$. Then, 
+
+\begin{align*}
+    \wh f(\xi_m) - \wh f(\xi) &= \frac{1}{(2\pi)^{n/2}}\int_{\R^n}f(x)\left(\exp(-i\xi_m\cdot x) - \exp(-i\xi\cdot x)\right)~dx
+\end{align*}
+
+Note that $|\exp(-i\xi_m\cdot x) - \exp(-i\xi\cdot x)|\le 2$ due to the triangle inequality. Consequently, the integrand on the right is dominated by $2|f(x)|$, which is in $L^1$. Hence, the Dominated Convergence Theorem applies and we have 
+\begin{equation*}
+    \lim_{m\to\infty}\wh f(\xi_n) - \wh f(\xi) = 0,
+\end{equation*}
+since as $m\to\infty$, the integrand on the right tends to $0$ pointwise. Hence, $\wh f: \R^n\to\R$ is continuous.
+
+To see that the Fourier Transform is a bounded linear functional, note that for any $f\in L^1(\R^n)$ and $\xi\in\R^n$, we have 
+\begin{equation*}
+    \left|\wh f(\xi)\right|\le\frac{1}{(2\pi)^{n/2}}\int_{\R^n}|f(x)||\exp(-i\xi\cdot x)|~dx = \frac{1}{(2\pi)^{n/2}}\|f\|_1.
+\end{equation*}
+
+That is, 
+\begin{equation*}
+    \|\wh f\|_{\infty}\le\frac{1}{(2\pi)^{n/2}}\|f\|_1.
+\end{equation*}
+This completes the proof.
+
+\section*{Problem 3}
+
+For $x,y\in\R^n$, we have the inequality, 
+\begin{align*}
+    1 + |x|\le 1 + |x - y| + |y|\le (1 + |x - y|)(1 + |y|).
+\end{align*}
+
+Therefore, 
+\begin{align*}
+    (1 + |x|)^N |f\ast g(x)| &\le\int_{\R^n}(1 + |x - y|)^N(1 + |y|)^N |f(y)| |g(x - y)|~dy\\
+    &\le\int_{\R^n}\left((1 + |y|)^{N + n + 1} |f(y)|\right)\left((1 + |x - y|)^{N}g(x - y)\right)\cdot\frac{1}{(1 + |y|)^{n + 1}}~dy.
+\end{align*}
+
+Note that there are constants $C_N, C_{n + N + 1} > 0$ such that 
+\begin{equation*}
+    (1 + |x - y|)^N |g(x - y)|\le C_N\qquad\text{ and } (1 + |y|)^{N + n + 1}|f(y)|\le C_{N + n + 1}
+\end{equation*}
+for all $x,y\in\R^n$. Therefore, 
+\begin{align*}
+    (1 + |x|)^N|f\ast g(x)|\le C_N C_{N + n + 1}\int_{\R^n}\frac{1}{(1 + |y|)^{n + 1}}~dy < \infty.
+\end{align*}
+
+In conclusion, we have shown that if $f, g\in \mathcal S(\R^n)$, then $(1 + |x|)^N(f\ast g)(x)$ is bounded on $\R^n$. We shall use this result to show that $f\ast g$ lies in $\mathcal S(\R^n)$. 
+
+Let us first compute $\partial_i (f\ast g)(x)$. This is given by 
+\begin{equation*}
+    \lim_{h\to 0}\frac{(f\ast g)(x + h_i) - (f\ast g)(x)}{h_i} = \lim_{h\to 0}\int_{\R^n}f(y)\frac{g(x + he_i - y) - g(x - y)}{h}~dy.
+\end{equation*}
+
+Using the Mean Value Theorem, there is some $c\in (0, h)$ such that 
+\begin{equation*}
+    \frac{g(x + he_i - y) - g(x - y)}{h} = \partial_i g(x + ce_i - y).
+\end{equation*}
+Note that $\partial_i g\in\mathcal S(\R^n)$ and hence is bounded in absolute value by some $M > 0$ on $\R^n$. Consequently, 
+\begin{equation*}
+    \left|f(y)\frac{g(x + he_i - y) - g(x - y)}{h}\right|\le M|f(y)|
+\end{equation*}
+for all $x,y\in\R^n$. 
+
+Take any sequence $h_n\to 0$ in $\R^n$. Because of what we discussed above, the Dominated Convergence Theorem applies. The integrand converges pointwise to $f(y)\partial_i g(x - y)$ and hence, 
+\begin{equation*}
+    \lim_{n\to\infty}\frac{(f\ast g)(x + h_ne_i) - (f\ast g)(x)}{h_n} = \int_{\R^n} f(y)\partial_i g(x - y)~dy = (f\ast\partial_i g)(x).
+\end{equation*}
+
+Hence, it follows that 
+\begin{equation*}
+    \partial_\alpha (f\ast g) = f\ast\partial_\alpha g
+\end{equation*}
+for every multi-index $\alpha$. This shows, in particular that $f\ast g$ is in $C^\infty(\R^n)$.
+
+Hence, using what we proved at the start of this proof, 
+\begin{equation*}
+    (1 + |x|)^N\partial_\alpha(f\ast g)(x) = (1 + |x|)^N (f\ast\partial_\alpha g)(x)
+\end{equation*}
+is bounded on $\R^n$, which completes the proof.
+
+\section*{Problem 4}
+
+This is straightforward 
+\begin{align*}
+    (f\ast g)(x) = \int_{\R^n} f(y)g(x - y)~dy = \int_{\R^n} f(y)~dy.
+\end{align*}
+Thus, $f\ast g$ is a constant function taking the value $\int_{\R^n}f$.
+
+\section*{Problem 5}
+
+We have,
+\begin{equation*}
+    \int_{\R^n} (f\ast g)(x)~dx = \int_{\R^n}\int_{\R^n} f(y)g(x - y)~dydx.
+\end{equation*}
+
+We contend that the function $F(x,y) = f(y)g(x - y)$ is in $L^1(\R^n\times\R^n)$. Indeed, using Fubini's Theorem, 
+\begin{align*}
+    \int_{\R^n\times\R^n}|F(x,y)| = \int_{\R^n}|f(y)|\int_{\R^n}|g(x - y)|~dxdy = \|f\|_1\|g\|_1,
+\end{align*}
+where the last equality follows from the translation invariance of the Lebesgue measure.
+
+Using this, we can invoke Fubini's Theorem to evaluate the previous integral:
+\begin{align*}
+    \int_{\R^n}\int_{\R^n} f(y)g(x - y)~dydx = \int_{\R^n}\int_{\R^n}f(y)g(x - y)~dxdy = \int_{\R^n} f(y)~dy\int_{\R^n} g(x)~dx,
+\end{align*}
+where the last equality follows from the translation invariance of the Lebesgue measure.
+
+\section*{Problem 6}
+
+For a function $f:\R^n\to\R$ and $t\in\R^n$, let $f_t:\R^n\to\R$ be given by $f_t(x) = f(x - t)$. 
+
+\begin{lemma}
+    Let $f\in L^2(\R^n)$. For every $\varepsilon > 0$, there is a $\delta > 0$ such that whenever $|t| < \delta$, $\|f - f_t\|_2 < \varepsilon$.
+\end{lemma}
+\begin{proof}
+    It is known that $C_c(\R^n)\subseteq L^2(\R^n)$ is dense with respect to the $L^2$-norm. Therefore, there is a $g\in C_c(\R^n)$ such that $\|f - g\|_{2} < \varepsilon/3$. Consequently, $\|f_t - g_t\|_2 < \varepsilon/3$ for every $t\in\R^n$. We shall find a $\delta$ such that $\|g - g_t\| < \varepsilon/3$. Since $g$ has compact support, there is a $N > 0$ such that $\Supp(g)\subseteq\overline B(0, N)$. Further, since $g$ has compact support, it is uniformly continuous whence, there is a $1 > \delta > 0$ such that $|g(x) - g(x - t)| < \sqrt{\dfrac{\varepsilon}{\mu(B(0, N + 1))}}$ for all $x\in\R^n$ and $|t| < \delta$, where $\mu$ denotes the Lebesgue measure on $\R^n$. Note that the support of $g - g_t$ is contained in $\overline B(0, N + \delta)\subseteq\overline B(0, N + 1)$. 
+
+    For $|t| < \delta$, we have 
+    \begin{equation*}
+        \|g - g_t\|_2^2 = \int_{\R^n} |g(x) - g_t(x)|^2~dx\le\frac{\varepsilon}{\mu(B(0, N + 1))}\mu(B(0, N + 1)) = \varepsilon.
+    \end{equation*}
+    This completes the proof.
+\end{proof}
+
+To see that $f\ast g$ is bounded, simply invoke H\"older's inequality: 
+\begin{align*}
+    |(f\ast g)(x)| &= \left|\int_{\R^n}f(y)g(x - y)~dy\right|\\
+    &\le\|f\cdot g(x - \cdot)\|_1\le\|f\|_2\|g\|_2.
+\end{align*}
+
+Note that 
+\begin{align*}
+    |(f\ast g)(x + h) - (f\ast g)(x)| &= \left|\int_{\R^n} f(y)\left(g(x + h - y) - g(x - y)\right)~dy\right|.
+\end{align*}
+
+Let $p:\R^n\to\R$ be given by $p(y) = g(x - y)$. Then, $g(x + h - y) = p(y - h) = p_h(y)$. As a result of H\"older's inequality, we obtain
+\begin{align*}
+    |(f\ast g)(x + h) - (f\ast g)(x)|\le\|f\cdot (p_h - p)\|\le\|f\|_2\|p_h - p\|_2,
+\end{align*}
+which goes to $0$ as $h\to 0$ due to the preceeding Lemma, implying the desired conclusion.
+
+\section*{Problem 7}
+
+There are multiple ways to skin a cat. I chose the quickest one. We have seen in class that $\wh\varphi(\xi) = \varphi(\xi)$. Therefore, 
+\begin{equation*}
+    \wh{\varphi\ast\varphi}(\xi) = (2\pi)^{n/2}\wh\varphi(\xi)\wh\varphi(\xi) = (2\pi)^{n/2}\exp(-|\xi|^2).
+\end{equation*}
+
+Let $\psi(x) = \exp(-|x|^2)$. Taking Fourier transform again and recalling that $\wh{\wh{f}}(x) = f(-x)$, we have 
+\begin{equation*}
+    (\varphi\ast\varphi)(-x) = (2\pi)^{n/2}\wh\psi(x) = (2\pi)^{n/2}\frac{1}{2^{n/2}}\wh\varphi\left(\frac{x}{\sqrt 2}\right)
+\end{equation*}
+
+Where we use the fact that 
+\begin{equation*}
+    \wh{f(\lambda x)}(\xi) = \frac{1}{\lambda^{n}}\wh f\left(\frac{\xi}{\lambda}\right)
+\end{equation*}
+coupled with the fact that 
+\begin{equation*}
+    \psi(x) = \varphi(\sqrt 2 x)
+\end{equation*}
+and that $\wh\varphi = \varphi$.
+
+Hence, 
+\begin{equation*}
+    (\varphi\ast\varphi)(x) = \pi^{n/2}\exp\left(-\frac{|x|^2}{4}\right)
+\end{equation*}
+and we are done.
+
+\section*{Problem 8}
+
+\begin{enumerate}[label=(\alph*)]
+    \item From the definition, we have, for any test function $\varphi$,
+    \begin{equation*}
+        \langle\wh 1,\varphi\rangle = \langle 1,\wh\varphi\rangle = \int_{\R^n}\wh\varphi = (2\pi)^{n/2}\varphi(0),
+    \end{equation*}
+    where the last equality follows from the Fourier Inversion Formula, 
+    \begin{equation*}
+        \varphi(x) = \frac{1}{(2\pi)^{n/2}}\int_{\R^n}\wh\varphi(\xi)\exp(i\xi\cdot x)~d\xi.
+    \end{equation*}
+
+    Therefore, $\wh 1 = (2\pi)^{n/2}\delta_0$.
+
+    \item For any test function $\varphi$, we have 
+    \begin{equation*}
+        \langle\wh\delta_0,\varphi\rangle = \langle\delta_0,\wh\varphi\rangle = \wh\varphi(0).
+    \end{equation*}
+    But note that 
+    \begin{equation*}
+        \wh\varphi(0) = \frac{1}{(2\pi)^{n/2}}\int_{\R^n}\varphi(x)~dx.
+    \end{equation*}
+
+    Hence, $\wh\delta_0 = \frac{1}{(2\pi)^{n/2}}$, the distribution induced by the constant function $1/(2\pi)^{n/2}$.
+
+    \item For a test function $\varphi$, we have 
+    \begin{equation*}
+        \langle\wh{x^{\alpha}},\varphi\rangle = \langle x^{\alpha},\wh\varphi\rangle = \int_{\R^n} x^\alpha\wh\varphi(x)~dx.
+    \end{equation*}
+
+    Due to Fourier Inversion, we know 
+    \begin{equation*}
+        \varphi(\xi) = \frac{1}{(2\pi)^{n/2}}\int_{\R^n}\wh\varphi(x)\exp(i\xi\cdot x)~dx.
+    \end{equation*}
+    Taking the partial derivative $\partial^\alpha/\partial\xi^\alpha$, we have 
+    \begin{equation*}
+        \partial_\alpha\varphi(\xi) = \frac{1}{(2\pi)^{n/2}} i^\alpha\int_{\R^n}x^\alpha\wh\varphi(x)\exp(i\xi\cdot x)~dx.
+    \end{equation*}
+    Set $\xi = 0$ to obtain 
+    \begin{equation*}
+        (-i)^\alpha\partial_\alpha\varphi(0) = \frac{1}{(2\pi)^{n/2}}\int_{\R^n} x^\alpha\wh\varphi(x)~dx.
+    \end{equation*}
+
+    We have 
+    \begin{align*}
+        \langle \wh{x^\alpha}, \varphi\rangle &= \langle\delta_0, (-i)^\alpha\partial_\alpha(2\pi)^{n/2}\varphi\rangle\\
+        &= (-1)^\alpha\langle\delta_0, i^\alpha(2\pi)^{n/2}\varphi\rangle\\
+        &= \langle\partial_\alpha\delta_0, i^\alpha(2\pi)^{n/2}\varphi\rangle.
+    \end{align*}
+    Thus, 
+    \begin{equation*}
+        \wh{x^\alpha} = (2\pi)^{n/2}i^\alpha\partial_\alpha\delta_0.
+    \end{equation*}
+
+    \item For any test function $\varphi$, we have 
+    \begin{align*}
+        \langle\wh{\cos x}, \varphi\rangle &= \langle \cos x,\wh\varphi\rangle = \left\langle\frac{e^{ix} + e^{-ix}}{2},\wh\varphi\right\rangle\\
+        &= \frac{1}{2}\int_{\R^n}(e^{ix} + e^{-ix})\wh\varphi(x)~dx\\
+        &= \frac{1}{2}(2\pi)^{n/2}(\varphi(1) + \varphi(-1)),
+    \end{align*}
+    where the last equality follows from the Fourier Inversion Formula. Using this, we have 
+    \begin{equation*}
+        \wh{\cos x} = \frac{1}{2}(2\pi)^{n/2}(\delta_1 + \delta_{-1})
+    \end{equation*}
+    and we are done.
+\end{enumerate}
+\end{document}

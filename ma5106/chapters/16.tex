@@ -1,0 +1,78 @@
+Consider the heat equation 
+
+\begin{equation*}
+    \begin{cases}
+        \partial_t u - \Delta u = 0 & \text{ on } (0,\infty)\times\R^n\\
+        u = u_0 & t = 0,~x\in\R^n.
+    \end{cases}
+\end{equation*}
+
+Take the Fourier transform in the $x$-variable to get 
+\begin{equation*}
+    \partial_t\wh u(\xi, t) = -\left(\sum_{j = 1}^n\xi_j^2\right)\wh u(\xi, t).
+\end{equation*}
+
+This is an ordinary differential equation with solution 
+\begin{equation*}
+    \wh u(\xi, t) = A(\xi)\exp\left(-\|\xi\|^2 t\right)
+\end{equation*}
+with initial conditions $\wh u = \wh u_0$ for $t = 0$. This gives 
+\begin{equation*}
+    A(\xi) = \wh u_0(\xi).
+\end{equation*}
+
+Therefore, 
+\begin{equation*}
+    \wh u(\xi, t) = \wh u_0(\xi)\exp\left(-\|\xi\|^2t\right).
+\end{equation*}
+
+Being the product of two Fourier transforms, the inverse fourier transform of the above function is the convolution of the individual inverse fourier transforms. 
+
+The Inverse Fourier Transform of the second term is what we have already calculated, 
+\begin{equation*}
+    K_t(x) = \frac{1}{(4\pi t)^{n/2}}\exp\left(-\frac{|x|^2}{4t}\right),
+\end{equation*}
+which is called the Heat Kernel.
+
+Therefore, 
+\begin{equation*}
+    u(x, t) = u_0(x)\ast K_t(x).
+\end{equation*}
+
+That is, 
+\begin{equation*}
+    u(x, t) = \frac{1}{(4\pi t)^{n/2}}\int_{\R^n}\exp\left(-\frac{|x - y|^2}{4t}\right)u_0(y)~dy
+\end{equation*}
+for $t > 0$ and $x\in\R^n$.
+
+\section*{Properties of the Heat Kernel}
+
+\begin{enumerate}
+    \item $K_t(x)$ is smooth on $(0, \infty)\times\R^n$.
+    \item $K_t(x) > 0$ for all $(x,t)\in\R^n\times(0,\infty)$.
+    \item $(\partial_t - \Delta)K_t = 0$ for all $(x,t)\in\R^n\times(0,\infty)$. Take this as an exercise.
+    \item $\int_{\R^n} K_t(x)~dx = 1$ for all $t > 0$.
+    \item For all $\delta > 0$, we have that 
+    \begin{equation*}
+        \lim_{t\to 0}\int_{|x|\ge\delta}K_t(x)~dx = 0.
+    \end{equation*}
+\end{enumerate}
+
+\begin{theorem}
+    Let $f\in C(\R^n)\cap L^\infty(\R^n)$. Then, 
+    \begin{equation*}
+        u(x, t) := K_t\ast f = \frac{1}{(4\pi t)^{n/2}}\int_{\R^n}\exp\left(-\frac{|x - y|^2}{4t}\right)f(y)~dy
+    \end{equation*}
+    satisfies the heat equation.
+\end{theorem}
+\begin{proof}
+    It is easy to see that $u$ satisfies the differential equation. It remains to show continuity. Indeed, 
+    \begin{equation*}
+        u(x, t) - f(x) = \int_{\R^n} K_t(x - y)\left(f(y) - f(x)\right)~dy.
+    \end{equation*}
+    Pick $\varepsilon > 0$. There is a $\delta > 0$ such that $|f(y) - f(x)| < \varepsilon$ whenever $|x - y| < \delta$. Then, we have 
+    \begin{equation*}
+        |u(x, t) - f(x)|\le\int_{|x - y| < \delta} + \int_{|x - y|\ge\delta}.
+    \end{equation*}
+    The first quantity is bounded above by $\varepsilon$ while the second tends to $0$ as $t\to\infty$. Conclude.
+\end{proof}

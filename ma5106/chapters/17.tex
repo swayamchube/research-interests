@@ -1,0 +1,83 @@
+\section*{The Gamma Function}
+
+\begin{equation*}
+    \Gamma(x) = \int_{0}^\infty t^{x - 1}e^{-t}~dt.
+\end{equation*}
+
+Using integration by parts, we get 
+\begin{equation*}
+    \Gamma(x + 1) = x\Gamma(x).
+\end{equation*}
+
+Using this characterization, one can extend $\Gamma$ on $\R\backslash\{0, -1, -2,\dots\}$. It also follows that $\Gamma(n) = n!$.
+
+\begin{theorem}
+    Consider the $(n - 1)$-dimensional unit sphere, $S^{n - 1}$. The surface area of it is given by 
+    \begin{equation*}
+        |S^{n - 1}| = \frac{2\pi^{n/2}}{\Gamma(n/2)}
+    \end{equation*}
+    and we denote this by $\omega_{n - 1}$.
+\end{theorem}
+\begin{proof}
+    Recall that we had 
+    \begin{equation*}
+        \int_{\R^n}e^{-|x|^2}~dx = \pi^{n/2}.
+    \end{equation*}
+
+    Shifting to polar coordinates, we have 
+    \begin{equation*}
+        \int_{r = 0}^\infty r^{n - 1}\int_{S^{n - 1}}f(r\sigma)d\sigma dr.
+    \end{equation*}
+    Since $f$ is a radial function, 
+    \begin{equation*}
+        \pi^{n/2} = \int_{r = 0}^\infty r^{n - 1}f(r)\int_{S^{n - 1}}d\sigma dr = \omega_{n - 1}\int_{r = 0}^\infty r^{n - 1}e^{-r^2}~dr.
+    \end{equation*}
+    Let $s = r^2$. Then, the integral on the right becomes $\frac{1}{2}\Gamma(n/2)$. This completes the proof.
+\end{proof}
+
+\section*{Laplace equation and Newtonian Potential}
+
+\begin{equation*}
+    -\Delta u = f \qquad\text{ in } \R^n.
+\end{equation*}
+
+Taking Fourier transforms, we have 
+\begin{equation*}
+    |\xi|^2\wh u(\xi) = \wh f(\xi).
+\end{equation*}
+
+Using the Plancherel formula, we have 
+\begin{equation*}
+    \langle-\Delta\varphi,\varphi\rangle = \langle -\wh{\Delta\varphi},\wh\varphi\rangle = \langle|\xi|^2\wh\varphi(\xi), \wh\varphi(\xi)\rangle\ge 0.
+\end{equation*}
+
+Define 
+\begin{align*}
+    (-\Delta)^{-1}f &:= \int_0^\infty (K_t\ast f)(x, t)~dt\\
+    &= \int_{0}^\infty\int_{\R^n} K_t(x - y)f(y)~dydt\\
+\end{align*}
+
+We shall calculate 
+\begin{equation*}
+    \int_{0}^\infty K_t(x)~dt = \int_0^\infty \frac{1}{(4\pi t)^{n/2}}e^{-|x|^2/4t}~dt.
+\end{equation*}
+
+Make the substitution $s = 1/t$ to get 
+\begin{equation*}
+    \frac{1}{(4\pi)^{n/2}}\int_0^\infty s^{(n - 4)/2}e^{-|x|^2s/4}~ds.
+\end{equation*}
+
+Now set $r = |x|^2s/4$. Then, we have 
+\begin{equation*}
+    \frac{|x|^{2 - n}}{(4\pi)^{n/2}}\int_0^\infty e^{-r}r^{(n - 2)/2 - 1}~dr = \frac{|x|^{2 - n}}{4\pi^{n/2}}\Gamma\left(\frac{n - 2}{2}\right)
+\end{equation*}
+for $n\ge 2$.
+
+Then, 
+\begin{equation*}
+    (-\Delta)^{-1}f = \int_{\R^n}\frac{d_n}{|x - y|^{n - 2}}f(y)~dy.
+\end{equation*}
+where 
+\begin{equation*}
+    d_n = \frac{\Gamma\left(\frac{n}{2} - 1\right)}{4\pi^{n/2}} = \frac{1}{4\pi^{n/2}}\frac{\Gamma(n/2)}{n/2 - 1} = \frac{1}{n - 2}\frac{1}{\omega_{n - 1}}.
+\end{equation*}
