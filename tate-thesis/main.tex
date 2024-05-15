@@ -1,0 +1,353 @@
+\documentclass[12pt]{article}
+
+\usepackage{./arxiv}
+
+\title{Tate's Thesis\\VSRP Notes}
+\author{Swayam Chube}
+\date{\today}
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{theoremref}
+\usepackage{enumitem}
+\usepackage{mathpazo}
+\usepackage{euler}
+\usepackage{mathrsfs}
+\usepackage{todonotes}
+\usepackage{stmaryrd}
+\usepackage[all,cmtip]{xy} % For diagrams, praise the Freyd–Mitchell theorem 
+\usepackage{marvosym}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% Uncomment to override  the `A preprint' in the header
+\renewcommand{\headeright}{}
+\renewcommand{\undertitle}{}
+\renewcommand{\shorttitle}{}
+
+\hypersetup{
+    pdfauthor={Lots of People},
+    colorlinks=true,
+}
+
+\newtheoremstyle{thmstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                             % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\newtheoremstyle{defstyle}%               % Name
+  {}%                                     % Space above
+  {}%                                     % Space below
+  {}%                                     % Body font
+  {}%                                     % Indent amount
+  {\bfseries}%                            % Theorem head font
+  {.}%                                    % Punctuation after theorem head
+  { }%                                    % Space after theorem head, ' ', or \newline
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}%                                     % Theorem head spec (can be left empty, meaning `normal')
+
+\theoremstyle{thmstyle}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{defstyle}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+% Common Algebraic Structures
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\frakM}{\mathfrak{M}}
+
+% Categories
+\newcommand{\catTopp}{\mathbf{Top}_*}
+\newcommand{\catGrp}{\mathbf{Grp}}
+\newcommand{\catTopGrp}{\mathbf{TopGrp}}
+\newcommand{\catSet}{\mathbf{Set}}
+\newcommand{\catTop}{\mathbf{Top}}
+\newcommand{\catRing}{\mathbf{Ring}}
+\newcommand{\catCRing}{\mathbf{CRing}} % comm. rings
+\newcommand{\catMod}{\mathbf{Mod}}
+\newcommand{\catMon}{\mathbf{Mon}}
+\newcommand{\catMan}{\mathbf{Man}} % manifolds
+\newcommand{\catDiff}{\mathbf{Diff}} % smooth manifolds
+\newcommand{\catAlg}{\mathbf{Alg}}
+\newcommand{\catRep}{\mathbf{Rep}} % representations 
+\newcommand{\catVec}{\mathbf{Vec}}
+
+% Group and Representation Theory
+\newcommand{\chr}{\operatorname{char}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{id}}
+\newcommand{\cl}{\mathbf{cl}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Alt}{\operatorname{Alt}}
+
+% Commutative and Homological Algebra
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\mspec}{\operatorname{m-spec}}
+\newcommand{\Tor}{\operatorname{Tor}}
+\newcommand{\tor}{\operatorname{tor}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\limit}{\varprojlim}
+\newcommand{\colimit}{%
+  \mathop{\mathpalette\colimit@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
+
+
+\newcommand{\fraka}{\mathfrak a} % ideal
+\newcommand{\frakb}{\mathfrak b} % ideal
+\newcommand{\frakc}{\mathfrak c} % ideal
+\newcommand{\frakf}{\mathfrak f} % face map
+\newcommand{\frakm}{\mathfrak m} % maximal ideal
+\newcommand{\frakp}{\mathfrak p} % prime ideal
+\newcommand{\frakq}{\mathfrak q} % qrime ideal
+\newcommand{\frakN}{\mathfrak N} % nilradical 
+\newcommand{\frakP}{\mathfrak P} % nilradical 
+\newcommand{\frakR}{\mathfrak R} % jacobson radical
+
+% General/Differential/Algebraic Topology 
+\newcommand{\scrA}{\mathscr A}
+\newcommand{\scrB}{\mathscr B}
+\newcommand{\scrP}{\mathscr P}
+\newcommand{\scrS}{\mathscr S}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\psimeq}{\simeq_p}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\RP}{\mathbb{R}\text{P}}
+\newcommand{\CP}{\mathbb{C}\text{P}}
+
+% Miscellaneous
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\ev}{\operatorname{ev}}
+
+\begin{document}
+\maketitle
+
+\section{Haar Measure}
+
+The main reference for this section is \cite{deitmar}.
+
+\begin{definition}
+    A \emph{Radon measure} on a topological space $X$ is a Borel measure $\mu:\scrB\to [0,\infty]$ that is 
+    \begin{description}
+        \item[locally finite:] every $x\in X$ has an open neighborhood $U$ such that $\mu(U) < \infty$.
+        \item[outer regular:] every $S\in\scrB$ satisfies: 
+        \begin{equation*}
+            \mu(S) = \inf\left\{\mu(U)\mid S\subseteq U\text{ open}\right\}.
+        \end{equation*}
+        \item[inner regular on open sets:] every open $U\subseteq X$ satisfies 
+        \begin{equation*}
+            \mu(U) = \sup\left\{\mu(K)\mid U\supseteq K\text{ compact}\right\}.
+        \end{equation*}
+    \end{description}
+\end{definition}
+
+We work under the assumption that all topological groups are Hausdorff.
+
+\begin{definition}
+    A \emph{left Haar measure} on a topological group $G$ is a nonzero left-invariant Radon measure $\mu$ on $G$. That is, for each Borel set $E$, and $g\in G$,
+    \begin{equation*}
+        \mu(E) = \mu(gE).
+    \end{equation*}
+
+    Analogously one defines a \emph{right Haar measure}. 
+\end{definition}
+
+\begin{theorem}[Existence and Uniqueness of Haar measure]
+    Let $G$ be a locally compact topological group. 
+    \begin{enumerate}[label=(\alph*)]
+        \item There is a left invariant Haar measure $\mu$ on $G$.
+        \item Any other left Haar measure on $G$ is a scalar multiple of the above.
+    \end{enumerate}
+
+    An analogous statement holds for the right Haar measure. One must note that the left and right Haar measures need not coincide. Indeed, if $\mu_L$ is a left Haar measure, then $\mu_R$ given by $\mu_R(E) = \mu_L(E^{-1})$ is a right Haar measure.
+\end{theorem}
+
+\begin{proposition}
+    Let $G$ be a locally compact topological group and $\mu$ a left Haar measure on $G$. $G$ is compact if and only if $\mu(G) < \infty$. In this case, $\mu_L = \mu_R$.
+\end{proposition}
+\begin{proof}
+    Suppose $G$ were compact. Then, there is a neighborhood $U$ of $e$ having finite measure. Note that $\{gU\}_{g\in G}$ forms an open cover of $G$ that admits a finite subcover, whence it follows that $\mu(G) < \infty$.
+    
+    Suppose $G$ were not compact. Using local compactness, there is a neighborhood of the origin with compact closure. Call this closure $K$. Then, $0 < \mu(K) < \infty$. Set $s_1 = e$. We inductively construct a sequence $\{s_n\}$ such that the $s_nK$'s are pairwise disjoint. Note that $\bigcup_{i = 1}^n s_i KK^{-1}$ is a finite union of compact sets and hence, is compact. Since $G$ isn't compact, there is an $s_{n + 1}$ in $G$ but not in the aforementioned union. 
+
+    Finally, note that 
+    \begin{equation*}
+        \mu(G) > \mu\left(\bigcup_{i = 1}^n s_iK\right) = n\mu(K).
+    \end{equation*}
+    The conclusion follows.
+
+    For the second part, we introduce the \emph{modular function}. For each $x\in G$, define the measure $\mu_x:\scrB\to[0,\infty]$ by $\mu_x(E) = \mu(Ex)$. This is a left Haar measure and hence, $\mu_x = \Delta(x)\mu$. One can show that $\Delta$ is a continuous group homomorphism $G\to\R^+$. Therefore, the image of $\Delta$ must be a compact subgroup of $\R^+$. The only such subgroup is $\{1\}$. This completes the proof.
+\end{proof}
+
+\begin{proposition}
+    Let $G$ be a locally compact group and $H$ a closed subgroup. Then, $G/H$ is a locally compact Hausdorff space.
+\end{proposition}
+
+\begin{theorem}[Quotient Integration Theorem]
+    Let $G$ be a locally compact topological group and $H$ a closed subgroup. Then, there is an invariant Radon measure $\nu\ne 0$ on $G/H$ if and only if the modular functions $\Delta_G$ and $\Delta_H$ agree on $H$. 
+
+    In this case, the measure $\nu$ is unique up to scaling. In particular, given Haar measures on $G$ and $H$, there is a unique choice for $\nu$. Finally, for ay $f\in L^1(G)$, 
+    \begin{equation*}
+        \int_G f(x)~dx = \int_{G/H} \int_H f(xh)~dh~dx.
+    \end{equation*}
+\end{theorem}
+
+\section{Pontryagin Duality}
+\begin{center}
+    \boxed{\textbf{\textcolor{red}{Henceforth, $G$ is a locally compact abelian topological group.}}}
+\end{center}
+
+\begin{definition}
+    A \emph{character} of $G$ is a continuous group homomorphism $\chi: G\to\bbC^\times$. A \emph{unitary character} of $G$ is a continuous group homomorphism $\chi: G\to S^1$.
+
+    We note that the nomenclature is not uniform. Some authors call these quasi-characters and characters, respectively.
+\end{definition}
+
+\begin{proposition}
+    If $G$ is compact, then every character of $G$ is unitary.
+\end{proposition}
+\begin{proof}
+    \begin{equation*}
+        \xymatrix {
+            G\ar[r]^{\chi}\ar[rd]_{\varphi} & \bbC^\times\ar[d]^{|\cdot|}\\
+            & \R^+
+        }
+    \end{equation*}
+    Then, $\varphi$ is a continuous group homomorphism. The image must be compact and hence, $\{1\}$.
+\end{proof}
+
+\begin{definition}[Compact-Open Topology]
+    Let $X$ and $Y$ be topological spaces. The \emph{compact-open topology} on $C(X, Y)$, the set of continuous functions from $X$ to $Y$ is defined to be the topology generated by sets of the form 
+    \begin{equation*}
+        \{f\in C(X, Y)\mid f(K)\subseteq U\},
+    \end{equation*}
+    where $K\subseteq X$ is compact and $U\subseteq Y$ is open.
+\end{definition}
+
+\begin{definition}[Pontryagin Dual]
+    The \emph{Pontryagin dual} of $G$ is the group 
+    \begin{equation*}
+        \wh G := \Hom_{cts}(G, S^1),
+    \end{equation*}
+    which is the group of unitary characters of $G$ under pointwise multiplication. We equip $\wh G$ with the \emph{compact-open topology}.
+\end{definition}
+
+\begin{proposition}
+    Let $G$ be an abelian topological group. 
+    \begin{enumerate}[label=(\alph*)]
+        \item If $G$ is discrete, then $\wh G$ is compact.
+        \item If $G$ is compact, then $\wh G$ is discrete. 
+        \item If $G$ is locally compact, then $\wh G$ is locally compact.
+    \end{enumerate}
+\end{proposition}
+
+\begin{example}
+    We compute the Pontryagin dual of $\R$. Let $\chi: \R\to S^1$ be a continuous homomorphism. Since $\R$ is simply connected, this factors through the universal cover $\R\to S^1$ given by $x\mapsto\exp(2\pi i x)$. This gives us 
+    \begin{equation*}
+        \xymatrix {
+            & \R\ar[d]\\
+            \R\ar[r]_{\chi}\ar@{-->}[ru]^{\wt\chi} & S^1
+        }
+    \end{equation*}
+    where $\wt\chi$ is a continuous additive group homomorphism $\R\to\R$ and hence, is linear. Thus, $\wh R\cong\R$.
+\end{example}
+
+The Pontryagin dual is a contravariant functor from the category of locally compact abelian groups to itself. 
+
+\begin{theorem}[Exactness of Pontryagin Dual]
+    If $0\to A\to B\to C\to 0$ is a short exact sequence of locally compact abelian groups, then so is $0\to\wh C\to\wh B\to\wh A\to 0$.
+\end{theorem}
+
+For each $g\in G$, there is the evaluation map $\ev_g: \wh G\to S^1$ given by $\chi\mapsto \chi(g)$. This is a continuous group homomorphism and hence, an element of $\wh{\wh G}$.
+
+\begin{theorem}[Pontryagin Duality]
+    The canonical map $G\to\wh{\wh G}$ given by $g\mapsto\ev_g$ is an isomorphism of locally compact abelian groups.
+\end{theorem}
+
+\begin{definition}[Fourier Transform]
+    If $f\in L^1(G)$, define the \emph{Fourier Transform} $\wh f:\wh G\to\bbC$ by 
+    \begin{equation*}
+        \wh f(\chi) = \int_G f(g)\overline{\chi(g)}~dg.
+    \end{equation*}
+\end{definition}
+
+\begin{proposition}
+    If $f\in L^1(G)$, then $\wh f\in C_0(\wh G)$.
+\end{proposition}
+
+\begin{theorem}[Fourier Inversion]
+    Let $G$ be a locally compact abelian group and $dg$ a Haar measure on $G$. Then, there is a unique Haar measure $d\chi$ on $\wh G$ called the \emph{dual measure} such that if $f\in L^1(G)$ is such that $\wh f\in L^1(G)$, then 
+    \begin{equation*}
+        f(g) = \int_{\wh G}\wh f(\chi)\ev_g(\chi)~d\chi = \int_{\wh G}\wh f(\chi)\chi(g)~d\chi
+    \end{equation*}
+    almost everywhere on $G$.
+\end{theorem}
+
+\begin{remark}
+    The measure $d\chi$ defined above on $\wh G$ is called the \emph{dual measure}.
+\end{remark}
+
+\begin{theorem}[Plancherel]
+    Let $dg$ and $d\chi$ be dual measures on $G$ and $\wh G$ respectively. For every $f\in L^1(G)\cap L^2(G)$, $\wh f\in L^2(\wh G)$ and $\|f\|_2 = \|\wh f\|_2$.
+
+    Therefore, the Fourier transform extends uniquely to an isometric automorphism of $L^2(G)$.
+\end{theorem}
+
+\section{Restricted Direct Product}
+
+\begin{definition}
+    Let $\{(G_\alpha, H_\alpha)\}_{\alpha\in A}$ be a collection of topological groups where $H_\alpha$ is a subgroup of $G_\alpha$. Define the restricted direct product 
+    \begin{equation*}
+        \wt\prod_{\alpha\in A} G_\alpha := \left\{(x_\alpha)\mid x_\alpha\in G_\alpha,~x_\alpha\in H_\alpha \text{ almost everywhere}\right\}.
+    \end{equation*}
+    This obviously forms a group under pointwise multiplication.
+\end{definition}
+
+\newpage
+\bibliographystyle{alpha}
+\bibliography{references}
+\end{document}
